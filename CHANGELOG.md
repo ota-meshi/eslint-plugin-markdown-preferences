@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.3.1
+
+### Patch Changes
+
+- [#8](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/8) [`b926faf`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/b926faf6ff2fe6f6faab87f34eed40011e2ee955) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix(no-trailing-spaces): false positives for comments
+
 ## 0.3.0
 
 ### Minor Changes
