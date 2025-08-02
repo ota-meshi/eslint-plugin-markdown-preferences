@@ -1,0 +1,10 @@
+{
+  "options": [
+    {
+      "words": {
+        "eslint-plugin-markdown-preferences": "https://ota-meshi.github.io/eslint-plugin-markdown-preferences/",
+        "markdown-preferences/prefer-linked-words": "https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html"
+      }
+    }
+  ]
+}

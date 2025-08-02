@@ -17,80 +17,13 @@ ESLint plugin that enforces our markdown preferences.
 
 You can check on the [Online DEMO](https://eslint-online-playground.netlify.app/#eslint-plugin-markdown-preferences).
 
-<!--DOCS_IGNORE_START-->
-
-## 📖 Documentation
-
-See [documents](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/).
-
-## 💿 Installation
-
-```bash
-npm install --save-dev eslint eslint-plugin-markdown-preferences
-```
-
-<!--DOCS_IGNORE_END-->
-
 ## 📖 Usage
 
-<!--USAGE_SECTION_START-->
-<!--USAGE_GUIDE_START-->
-
-### Configuration
-
-#### New Config (`eslint.config.js`)
-
-Use `eslint.config.js` file to configure rules. See also: <https://eslint.org/docs/latest/use/configure/configuration-files-new>.
-
-Example **eslint.config.js**:
-
-```js
-import { defineConfig } from "eslint/config";
-// import markdown from "@eslint/markdown";
-import markdownPreferences from 'eslint-plugin-markdown-preferences';
-export default [
-  // add more generic rule sets here, such as:
-  // markdown.configs.recommended,
-  markdownPreferences.configs.recommended,
-  {
-    rules: {
-      // override/add rules settings here, such as:
-      // 'markdown-preferences/prefer-linked-words': 'error'
-    }
-  }
-];
-```
-
-This plugin provides configs:
-
-- `*.configs.recommended` ... Recommended config provided by the plugin.
-
-See [the rule list](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/) to get the `rules` that this plugin provides.
-
-#### Legacy Config (`.eslintrc`)
-
-Is not supported.
-
-<!--USAGE_GUIDE_END-->
-<!--USAGE_SECTION_END-->
+See [User Guide](./user-guide/index.md).
 
 ## ✅ Rules
 
-<!--RULES_SECTION_START-->
-
-The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) automatically fixes problems reported by rules which have a wrench 🔧 below.  
-The rules with the following star ⭐ are included in the configs.
-
-<!--RULES_TABLE_START-->
-
-### Markdown Rules
-
-| Rule ID | Description | Fixable | RECOMMENDED |
-|:--------|:------------|:-------:|:-----------:|
-| [markdown-preferences/prefer-linked-words](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html) | enforce the specified word to be a link. | 🔧 |  |
-
-<!--RULES_TABLE_END-->
-<!--RULES_SECTION_END-->
+See [Available Rules](./rules/index.md).
 <!--DOCS_IGNORE_START-->
 
 ## 🍻 Contributing
@@ -106,4 +39,4 @@ Please use GitHub's Issues/PRs.
 
 ## 🔒 License
 
-See the [LICENSE](LICENSE) file for license rights and limitations (MIT).
+See the [LICENSE](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/LICENSE) file for license rights and limitations (MIT).
