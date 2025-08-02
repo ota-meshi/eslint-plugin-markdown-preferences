@@ -1,0 +1,9 @@
+{
+  "options": [
+    {
+      "words": {
+        "self-input": "./tests/fixtures/rules/prefer-linked-words/valid/self/self-input.md"
+      }
+    }
+  ]
+}

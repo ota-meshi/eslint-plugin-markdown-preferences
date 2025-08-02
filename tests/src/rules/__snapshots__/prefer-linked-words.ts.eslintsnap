@@ -1,0 +1,39 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: prefer-linked-words >> invalid
+Filename: tests/fixtures/rules/prefer-linked-words/invalid/test01-input.md
+Language: markdown/gfm
+Options:
+  - words:
+      eslint-plugin-markdown-preferences: https://ota-meshi.github.io/eslint-plugin-markdown-preferences/
+      markdown-preferences/prefer-linked-words: https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | # eslint-plugin-markdown-preferences
+  3 |
+  4 | eslint-plugin-markdown-preferences is an ESLint plugin that provides rules for Markdown files to enforce preferences.
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  5 |
+  6 | ## Rules
+  7 |
+  8 | - `markdown-preferences/prefer-linked-words` ... Enforce the specified word to be a link.
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  9 |
+
+Output:
+  1 |
+  2 | # eslint-plugin-markdown-preferences
+  3 |
+  4 | [eslint-plugin-markdown-preferences](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/) is an ESLint plugin that provides rules for Markdown files to enforce preferences.
+  5 |
+  6 | ## Rules
+  7 |
+  8 | - [`markdown-preferences/prefer-linked-words`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html) ... Enforce the specified word to be a link.
+  9 |
+
+[1] The word "eslint-plugin-markdown-preferences" should be a link.
+[2] The word "markdown-preferences/prefer-linked-words" should be a link.
+---

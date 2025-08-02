@@ -1,0 +1,8 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "@eslint/markdown": "latest",
+    "eslint": "latest",
+    "eslint-plugin-markdown-preferences": "latest"
+  }
+}
