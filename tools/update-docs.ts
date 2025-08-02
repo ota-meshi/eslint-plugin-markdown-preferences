@@ -35,8 +35,9 @@ function pickSince(content: string): string | null | Promise<string> {
   }
   // eslint-disable-next-line no-process-env -- ignore
   if (process.env.IN_VERSION_SCRIPT) {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports -- ignore
-    return `v${require("../package.json").version}`;
+    return import("../package.json", { with: { type: "json" } }).then((pkg) => {
+      return `v${pkg.default.version}`;
+    });
   }
   return null;
 }
