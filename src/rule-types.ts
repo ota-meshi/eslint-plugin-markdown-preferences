@@ -24,7 +24,7 @@ export interface RuleOptions {
 // ----- markdown-preferences/prefer-linked-words -----
 type MarkdownPreferencesPreferLinkedWords = []|[{
   words: ({
-    [k: string]: string
+    [k: string]: (string | null)
   } | string[])
   [k: string]: unknown | undefined
 }]

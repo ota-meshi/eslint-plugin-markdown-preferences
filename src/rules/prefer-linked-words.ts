@@ -1,7 +1,8 @@
 import { createRule } from "../utils/index.js";
 import type { Link, LinkReference, Heading } from "mdast";
+import path from "node:path";
 
-type WordsObject = Record<string, string | undefined>;
+type WordsObject = Record<string, string | null>;
 type Words = WordsObject | string[];
 export default createRule<[{ words?: Words }?]>("prefer-linked-words", {
   meta: {
@@ -22,7 +23,7 @@ export default createRule<[{ words?: Words }?]>("prefer-linked-words", {
                 type: "object",
                 patternProperties: {
                   "^[\\s\\S]+$": {
-                    type: "string",
+                    type: ["string", "null"],
                   },
                 },
               },
@@ -45,9 +46,20 @@ export default createRule<[{ words?: Words }?]>("prefer-linked-words", {
   create(context) {
     const sourceCode = context.sourceCode;
     const words = context.options[0]?.words || {};
-    const objectWords: WordsObject = Array.isArray(words)
-      ? Object.fromEntries(words.map((word) => [word, undefined]))
-      : words;
+    const wordEntries: [string, string | undefined][] = (
+      Array.isArray(words)
+        ? words.map((word) => [word, undefined] as [string, undefined])
+        : Object.entries(words)
+    )
+      .map(
+        ([word, link]) =>
+          [word, link ? adjustLink(link) : undefined] as [
+            string,
+            string | undefined,
+          ],
+      )
+      .filter(([, link]) => link !== `./${path.basename(context.filename)}`);
+
     type IgnoreNode = Link | LinkReference | Heading;
     let ignore: IgnoreNode | null = null;
     return {
@@ -60,7 +72,7 @@ export default createRule<[{ words?: Words }?]>("prefer-linked-words", {
       },
       text(node) {
         if (ignore) return;
-        for (const [word, link] of Object.entries(objectWords)) {
+        for (const [word, link] of wordEntries) {
           let startPosition = 0;
           while (true) {
             const index = node.value.indexOf(word, startPosition);
@@ -106,7 +118,7 @@ export default createRule<[{ words?: Words }?]>("prefer-linked-words", {
       },
       inlineCode(node) {
         if (ignore) return;
-        for (const [word, link] of Object.entries(objectWords)) {
+        for (const [word, link] of wordEntries) {
           if (node.value === word) {
             context.report({
               node,
@@ -124,5 +136,22 @@ export default createRule<[{ words?: Words }?]>("prefer-linked-words", {
         }
       },
     };
+
+    /**
+     * Adjust link to be relative to the file.
+     */
+    function adjustLink(link: string): string {
+      if (/^\w+:/.test(link)) {
+        return link;
+      }
+      if (link.startsWith("#")) {
+        return link;
+      }
+
+      const absoluteLink = path.isAbsolute(link)
+        ? link
+        : path.join(context.cwd, link);
+      return `./${path.relative(path.dirname(context.filename), absoluteLink)}`;
+    }
   },
 });

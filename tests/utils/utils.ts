@@ -184,7 +184,7 @@ async function adjustConfig(
       ...result.plugins,
     };
     if (!result.language) {
-      result.language = "markdown/commonmark";
+      result.language = "markdown/gfm";
     }
   }
   return result;
