@@ -14,6 +14,11 @@ declare module 'eslint' {
 
 export interface RuleOptions {
   /**
+   * enforce consistent hard linebreak style.
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/hard-linebreak-style.html
+   */
+  'markdown-preferences/hard-linebreak-style'?: Linter.RuleEntry<MarkdownPreferencesHardLinebreakStyle>
+  /**
    * enforce the specified word to be a link.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html
    */
@@ -21,6 +26,10 @@ export interface RuleOptions {
 }
 
 /* ======= Declarations ======= */
+// ----- markdown-preferences/hard-linebreak-style -----
+type MarkdownPreferencesHardLinebreakStyle = []|[{
+  style?: ("backslash" | "spaces")
+}]
 // ----- markdown-preferences/prefer-linked-words -----
 type MarkdownPreferencesPreferLinkedWords = []|[{
   words: ({
