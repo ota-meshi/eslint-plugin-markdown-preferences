@@ -14,5 +14,5 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
 | [markdown-preferences/hard-linebreak-style](./hard-linebreak-style.md) | enforce consistent hard linebreak style. | 🔧 | ⭐ |
-| [markdown-preferences/no-text-backslash-linebreak](./no-text-backslash-linebreak.md) | disallow text backslash at the end of a line |  | ⭐ |
+| [markdown-preferences/no-text-backslash-linebreak](./no-text-backslash-linebreak.md) | disallow text backslash at the end of a line. |  | ⭐ |
 | [markdown-preferences/prefer-linked-words](./prefer-linked-words.md) | enforce the specified word to be a link. | 🔧 |  |
