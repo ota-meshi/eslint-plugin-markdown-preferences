@@ -2,6 +2,93 @@
 
 
 Test: prefer-linked-words >> invalid
+Filename: tests/fixtures/rules/prefer-linked-words/invalid/array/test-input.md
+Language: markdown/gfm
+Options:
+  - words:
+      - foo
+Plugins: unable to serialize
+
+Code:
+  1 | # Title
+  2 |
+  3 | - `foo`
+    |   ^~~~~ [1]
+  4 | - foo
+    |   ^~~ [2]
+  5 |   foo
+    |   ^~~ [3]
+  6 |
+
+Output: unchanged
+
+[1] The word "foo" should be a link.
+[2] The word "foo" should be a link.
+[3] The word "foo" should be a link.
+---
+
+
+Test: prefer-linked-words >> invalid
+Filename: tests/fixtures/rules/prefer-linked-words/invalid/array-example/example-input.md
+Language: markdown/gfm
+Options:
+  - words:
+      - TODO
+      - FIXME
+      - NOTE
+Plugins: unable to serialize
+
+Code:
+  1 | # Example
+  2 |
+  3 | <!-- ✓ GOOD - Will be reported but not auto-fixed -->
+  4 | [TODO]: Review this section
+  5 |
+  6 | <!-- ✗ BAD - Will be reported -->
+  7 | TODO: Review this section
+    | ^~~~ [1]
+  8 |
+
+Output: unchanged
+
+[1] The word "TODO" should be a link.
+---
+
+
+Test: prefer-linked-words >> invalid >>> "# Title\n\n- `foo`\n- foo\n  foo\n 2"
+Filename: tests/fixtures/rules/prefer-linked-words/invalid/file/test-input.md
+Language: markdown/gfm
+Options:
+  - words:
+      foo: ./tests/fixtures/rules/prefer-linked-words/invalid/self/foo.md
+Plugins: unable to serialize
+
+Code:
+  1 | # Title
+  2 |
+  3 | - `foo`
+    |   ^~~~~ [1]
+  4 | - foo
+    |   ^~~ [2]
+  5 |   foo
+    |   ^~~ [3]
+  6 |
+
+Output:
+  1 | # Title
+  2 |
+  3 | - [`foo`](./../self/foo.md)
+  4 | - [foo](./../self/foo.md)
+  5 |   [foo](./../self/foo.md)
+  6 |
+
+[1] The word "foo" should be a link.
+[2] The word "foo" should be a link.
+[3] The word "foo" should be a link.
+---
+
+
+Test: prefer-linked-words >> invalid
 Filename: tests/fixtures/rules/prefer-linked-words/invalid/test01-input.md
 Language: markdown/gfm
 Options:

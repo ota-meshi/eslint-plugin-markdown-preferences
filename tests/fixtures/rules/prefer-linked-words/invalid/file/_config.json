@@ -1,0 +1,9 @@
+{
+  "options": [
+    {
+      "words": {
+        "foo": "./tests/fixtures/rules/prefer-linked-words/invalid/self/foo.md"
+      }
+    }
+  ]
+}

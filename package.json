@@ -30,7 +30,7 @@
     "docs:watch": "vitepress dev docs --open",
     "docs:build": "vitepress build docs",
     "ts": "node --import=tsx",
-    "mocha": "npm run ts ./node_modules/mocha/bin/mocha.js",
+    "mocha": "npm run ts -- ./node_modules/mocha/bin/mocha.js",
     "generate:version": "env-cmd -e version npm run update && npm run lint -- --fix",
     "changeset:version": "changeset version && npm run generate:version && git add --all",
     "changeset:publish": "npm run build && changeset publish"

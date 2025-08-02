@@ -1,6 +1,6 @@
-# Introduction
+# eslint-plugin-markdown-preferences
 
-[eslint-plugin-markdown-preferences](https://www.npmjs.com/package/eslint-plugin-markdown-preferences) is ESLint plugin that enforces our markdown preferences.
+A specialized ESLint plugin that helps enforce consistent writing style and formatting conventions in Markdown files. Perfect for documentation projects, blog posts, and any Markdown content where consistency matters.
 
 [![NPM license](https://img.shields.io/npm/l/eslint-plugin-markdown-preferences.svg)](https://www.npmjs.com/package/eslint-plugin-markdown-preferences)
 [![NPM version](https://img.shields.io/npm/v/eslint-plugin-markdown-preferences.svg)](https://www.npmjs.com/package/eslint-plugin-markdown-preferences)
@@ -13,15 +13,18 @@
 
 ## 📛 Features
 
-ESLint plugin that enforces our markdown preferences.
+- **🔧 Auto-fixable rules** - Automatically format your Markdown files to match your style preferences
+- **📝 Line break consistency** - Enforce consistent hard line break styles (backslash `\` vs trailing spaces)
+- **🔗 Link enforcement** - Ensure specific words or terms are properly linked to their documentation
+- **🎯 Customizable** - Configure rules to match your team's specific requirements
 
-You can check on the [Online DEMO](https://eslint-online-playground.netlify.app/#eslint-plugin-markdown-preferences).
+**Try it live:** Check out the [Online Demo](https://eslint-online-playground.netlify.app/#eslint-plugin-markdown-preferences) to see the plugin in action!
 
 <!--DOCS_IGNORE_START-->
 
 ## 📖 Documentation
 
-See [documents](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/).
+For detailed usage instructions, rule configurations, and examples, visit our comprehensive [documentation site](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/).
 
 ## 💿 Installation
 
