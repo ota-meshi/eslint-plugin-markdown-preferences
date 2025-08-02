@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.1.1
+
+### Patch Changes
+
+- [#3](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/3) [`00e2e20`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/00e2e20906e805e96bb1e07a9c2a00d5bdf4abc2) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix(prefer-linked-words): some bugs
+
 ## 0.1.0
 
 ### Minor Changes
