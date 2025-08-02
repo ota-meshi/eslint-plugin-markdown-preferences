@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.2.0
+
+### Minor Changes
+
+- [#5](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/5) [`07932ad`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/07932adf0f50199017cc16078c5e4b27db53a597) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add `markdown-preferences/no-text-backslash-linebreak` rule
+
 ## 0.1.1
 
 ### Patch Changes

@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/no-text-backslash-linebreak"
 description: "disallow text backslash at the end of a line."
+since: "v0.2.0"
 ---
 
 # markdown-preferences/no-text-backslash-linebreak
 
 > disallow text backslash at the end of a line.
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - ⚙️ This rule is included in `plugin.configs.recommended`.
 - 💡 Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
@@ -63,6 +63,10 @@ This rule has no configuration options.
 ## 👫 Related rules
 
 - [`hard-linebreak-style`](./hard-linebreak-style.md) - enforce hard line break style
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.2.0
 
 ## 🔍 Implementation
 
