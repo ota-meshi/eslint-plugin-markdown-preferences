@@ -16,9 +16,9 @@
     "node": "^20.19.0 || ^22.12.0 || >=24.0.0"
   },
   "scripts": {
-    "build": "npm run build:meta && npm run build:tsup",
+    "build": "npm run build:meta && npm run build:tsdown",
     "build:meta": "npm run ts -- ./tools/update-meta.ts",
-    "build:tsup": "tsup",
+    "build:tsdown": "tsdown",
     "lint": "eslint .",
     "tsc": "tsc --project tsconfig.build.json",
     "eslint-fix": "eslint . --fix",
@@ -54,10 +54,9 @@
     "url": "https://github.com/ota-meshi/eslint-plugin-markdown-preferences/issues"
   },
   "homepage": "https://ota-meshi.github.io/eslint-plugin-markdown-preferences/",
-  "dependencies": {},
   "peerDependencies": {
-    "eslint": ">=9.0.0",
-    "@eslint/markdown": "^7.1.0"
+    "@eslint/markdown": "^7.1.0",
+    "eslint": ">=9.0.0"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.1",
@@ -107,7 +106,7 @@
     "stylelint-config-recommended-vue": "^1.6.0",
     "stylelint-config-standard": "^39.0.0",
     "stylelint-config-standard-vue": "^1.0.0",
-    "tsup": "^8.4.0",
+    "tsdown": "^0.13.1",
     "tsx": "^4.19.3",
     "twoslash-eslint": "^0.3.1",
     "type-fest": "^4.37.0",

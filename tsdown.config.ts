@@ -1,6 +1,6 @@
-import type { Options } from "tsup";
+import { defineConfig } from "tsdown";
 
-export default [
+export default defineConfig([
   {
     clean: true,
     dts: true,
@@ -9,4 +9,4 @@ export default [
     format: ["esm"],
     treeshake: true,
   },
-] satisfies Options[];
+]);
