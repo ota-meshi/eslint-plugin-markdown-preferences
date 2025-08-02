@@ -1,32 +1,22 @@
-import type {
-  RuleContext as CoreRuleContext,
-  RuleDefinition as CoreRuleDefinition,
-} from "@eslint/core";
+import type { RuleContext as CoreRuleContext } from "@eslint/core";
 import type { MarkdownSourceCode } from "@eslint/markdown";
 import type {
   MarkdownLanguageOptions,
+  MarkdownRuleDefinition,
   MarkdownRuleVisitor,
 } from "@eslint/markdown/types";
 import type { JSONSchema4 } from "json-schema";
+import type { Node } from "mdast";
 
 export type RuleContext<O extends any[]> = CoreRuleContext<{
   LangOptions: MarkdownLanguageOptions;
   Code: MarkdownSourceCode;
   RuleOptions: O;
-  Node: unknown;
+  Node: Node;
   MessageIds: string;
 }>;
 
-export interface RuleModule
-  extends CoreRuleDefinition<{
-    LangOptions: MarkdownLanguageOptions;
-    Code: MarkdownSourceCode;
-    RuleOptions: unknown[];
-    Node: unknown;
-    MessageIds: string;
-    Visitor: MarkdownRuleVisitor;
-    ExtRuleDocs: unknown;
-  }> {
+export interface RuleModule extends MarkdownRuleDefinition {
   meta: RuleMetaData;
   create(context: RuleContext<unknown[]>): MarkdownRuleVisitor;
 }
