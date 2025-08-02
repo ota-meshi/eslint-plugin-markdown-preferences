@@ -3,7 +3,7 @@ import { createRule } from "../utils/index.js";
 import type { Break, Code, Html, InlineCode, Text, Yaml } from "mdast";
 import type { Json, Toml } from "@eslint/markdown/types";
 
-const htmlComment = /<!--.*?-->/gsu;
+const htmlComment = /<!--.*?-->/su;
 
 export default createRule("no-trailing-spaces", {
   meta: {
