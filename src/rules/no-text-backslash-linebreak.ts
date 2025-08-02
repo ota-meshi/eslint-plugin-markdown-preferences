@@ -7,7 +7,7 @@ export default createRule("no-text-backslash-linebreak", {
       description: "disallow text backslash at the end of a line",
       categories: ["recommended"],
     },
-    fixable: null,
+    fixable: undefined,
     hasSuggestions: true,
     schema: [],
     messages: {
