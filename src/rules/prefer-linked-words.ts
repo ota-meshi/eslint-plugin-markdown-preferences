@@ -1,5 +1,5 @@
 import { createRule } from "../utils/index.js";
-import type { Link, LinkReference, Heading } from "mdast";
+import type { Link, LinkReference, Heading, FootnoteDefinition } from "mdast";
 import path from "node:path";
 
 type WordsObject = Record<string, string | null>;
@@ -63,14 +63,16 @@ export default createRule<[{ words?: Words }?]>("prefer-linked-words", {
       )
       .filter(([, link]) => link !== `./${path.basename(context.filename)}`);
 
-    type IgnoreNode = Link | LinkReference | Heading;
+    type IgnoreNode = Link | LinkReference | Heading | FootnoteDefinition;
     let ignore: IgnoreNode | null = null;
     return {
-      "link, linkReference, heading"(node: IgnoreNode) {
+      "link, linkReference, heading, footnoteDefinition"(node: IgnoreNode) {
         if (ignore) return;
         ignore = node;
       },
-      "link, linkReference, heading:exit"(node: IgnoreNode) {
+      "link, linkReference, heading, footnoteDefinition:exit"(
+        node: IgnoreNode,
+      ) {
         if (ignore === node) ignore = null;
       },
       text(node) {
