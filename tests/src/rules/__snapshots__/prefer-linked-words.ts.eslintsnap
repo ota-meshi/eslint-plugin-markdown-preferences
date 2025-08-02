@@ -124,3 +124,33 @@ Output:
 [1] The word "eslint-plugin-markdown-preferences" should be a link.
 [2] The word "markdown-preferences/prefer-linked-words" should be a link.
 ---
+
+
+Test: prefer-linked-words >> invalid
+Filename: tests/fixtures/rules/prefer-linked-words/invalid/test02-input.md
+Language: markdown/gfm
+Options:
+  - words:
+      eslint-plugin-markdown-preferences: https://ota-meshi.github.io/eslint-plugin-markdown-preferences/
+      markdown-preferences/prefer-linked-words: https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | # Test
+  3 |
+  4 | - `eslint-plugin-markdown-preferences is an ESLint plugin`
+  5 | - **eslint-plugin-markdown-preferences**
+    |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  6 |
+
+Output:
+  1 |
+  2 | # Test
+  3 |
+  4 | - `eslint-plugin-markdown-preferences is an ESLint plugin`
+  5 | - **[eslint-plugin-markdown-preferences](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/)**
+  6 |
+
+[1] The word "eslint-plugin-markdown-preferences" should be a link.
+---
