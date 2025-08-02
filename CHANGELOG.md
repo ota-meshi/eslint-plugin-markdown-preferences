@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.3.2
+
+### Patch Changes
+
+- [#10](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/10) [`7b41319`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/7b41319ae75013e6c413f99a2ca4764c090cc25a) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix(prefer-linked-words): false positive for footnoteDefinition
+
 ## 0.3.1
 
 ### Patch Changes
