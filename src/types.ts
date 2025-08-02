@@ -61,7 +61,7 @@ export interface PartialRuleMetaData {
     default?: "error" | "warn";
   };
   messages: { [messageId: string]: string };
-  fixable?: "code" | "whitespace";
+  fixable?: "code" | "whitespace" | null;
   hasSuggestions?: boolean;
   schema: JSONSchema4 | JSONSchema4[];
   deprecated?: boolean;

@@ -17,4 +17,5 @@ export const plugins = {
 export const rules: Linter.RulesRecord = {
   // eslint-plugin-markdown-preferences rules
   "markdown-preferences/hard-linebreak-style": "error",
+  "markdown-preferences/no-text-backslash-linebreak": "error",
 };
