@@ -18,7 +18,7 @@ since: "v0.1.0"
 This rule enforces a consistent hard linebreak style in Markdown files. In Markdown, there are two ways to create hard line breaks:
 
 1. **Backslash style** (`\`): A backslash at the end of a line
-2. **Spaces style** (`  `): Two or more spaces at the end of a line
+2. **Spaces style**: Two or more spaces at the end of a line
 
 Both styles are valid in CommonMark, but using one consistently improves readability and maintainability.
 
