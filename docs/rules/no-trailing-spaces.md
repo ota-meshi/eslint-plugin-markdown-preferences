@@ -14,27 +14,102 @@ since: "v0.3.0"
 
 ## 📖 Rule Details
 
-This rule reports trailing spaces at the end of lines in Markdown files.
+This rule disallows trailing whitespace (spaces and tabs) at the end of lines in Markdown files.
+
+While trailing spaces in Markdown can be used to create hard line breaks (when followed by a line break), they are often unintentional and can cause formatting inconsistencies. This rule helps maintain clean, consistent Markdown files by removing unnecessary trailing whitespace.
+
+**Note**: This rule preserves intentional hard line breaks created with two trailing spaces followed by a line break.
 
 <!-- eslint-skip -->
 
 ```md
 <!-- eslint markdown-preferences/no-trailing-spaces: 'error' -->
 
-<!-- ✓ GOOD -->
+<!-- ✓ GOOD: Two spaces for hard line break -->
 foo  
 bar
 
-<!-- ✗ BAD -->
+<!-- ✓ GOOD: No trailing spaces -->
+foo
+bar
+
+<!-- ✗ BAD: Trailing spaces on empty line -->
 foo  
 
+bar
+
+<!-- ✗ BAD: Trailing spaces not followed by content -->
 foo  
 bar  
+
+<!--EOF-->
 ```
 
 ## 🔧 Options
 
-Nothing.
+```json
+{
+  "markdown-preferences/no-trailing-spaces": ["error", {
+    "skipBlankLines": false,
+    "ignoreComments": false
+  }]
+}
+```
+
+### `skipBlankLines` (default: `false`)
+
+When `true`, the rule ignores trailing spaces on empty lines.
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/no-trailing-spaces: ['error', { "skipBlankLines": false }] -->
+<!-- ✗ BAD -->
+   
+
+<!--EOF-->
+```
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/no-trailing-spaces: ['error', { "skipBlankLines": true }] -->
+<!-- ✓ GOOD -->
+   
+
+<!--EOF-->
+```
+
+### `ignoreComments` (default: `false`)
+
+When `true`, the rule ignores trailing spaces in HTML comment lines.
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/no-trailing-spaces: ['error', { "ignoreComments": false }] -->
+<!-- ✗ BAD -->
+<!--
+  This is a comment 
+-->
+```
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/no-trailing-spaces: ['error', { "ignoreComments": true }] -->
+<!-- ✓ GOOD -->
+<!--
+  This is a comment 
+-->
+```
+
+## 💡 When to use this rule
+
+Use this rule when you want to:
+
+- Maintain consistent whitespace formatting in Markdown files
+- Keep your version control diffs clean (trailing spaces often show up as noise)
+- Ensure consistent code style across your team
 
 ## 🚀 Version
 
