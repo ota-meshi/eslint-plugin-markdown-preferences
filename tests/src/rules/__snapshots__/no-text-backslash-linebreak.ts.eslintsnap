@@ -24,7 +24,7 @@ Code:
 
 [1] Text backslash at the end of a line is not allowed.
     Suggestions:
-      - Remove the backslash
+      - Remove the backslash.
         Output:
           1 | # Test
           2 |
@@ -40,7 +40,7 @@ Code:
          12 | foo\
 [2] Text backslash at the end of a line is not allowed.
     Suggestions:
-      - Remove the backslash
+      - Remove the backslash.
         Output:
           1 | # Test
           2 |
@@ -75,7 +75,7 @@ Code:
 
 [1] Text backslash at the end of a line is not allowed.
     Suggestions:
-      - Remove the backslash
+      - Remove the backslash.
         Output:
           1 | # Test
           2 |
@@ -86,7 +86,7 @@ Code:
           7 | bar\
 [2] Text backslash at the end of a line is not allowed.
     Suggestions:
-      - Remove the backslash
+      - Remove the backslash.
         Output:
           1 | # Test
           2 |

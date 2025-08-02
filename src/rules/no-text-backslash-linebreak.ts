@@ -13,7 +13,7 @@ export default createRule("no-text-backslash-linebreak", {
     messages: {
       textBackslashWithLinebreak:
         "Text backslash at the end of a line is not allowed.",
-      removeBackslash: "Remove the backslash",
+      removeBackslash: "Remove the backslash.",
     },
   },
   create(context) {
