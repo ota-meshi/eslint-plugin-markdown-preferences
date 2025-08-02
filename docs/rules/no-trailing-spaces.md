@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/no-trailing-spaces"
 description: "trailing whitespace at the end of lines in Markdown files."
+since: "v0.3.0"
 ---
 
 # markdown-preferences/no-trailing-spaces
 
 > trailing whitespace at the end of lines in Markdown files.
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -35,6 +35,10 @@ bar
 ## 🔧 Options
 
 Nothing.
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.3.0
 
 ## 🔍 Implementation
 

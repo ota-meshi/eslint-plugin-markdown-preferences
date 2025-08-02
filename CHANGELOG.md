@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.3.0
+
+### Minor Changes
+
+- [`36c802f`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/36c802f7831b592972f9af2d9fddc69fdff0aa8b) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add `markdown-preferences/no-trailing-spaces` rule
+
 ## 0.2.0
 
 ### Minor Changes

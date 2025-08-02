@@ -24,6 +24,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/no-text-backslash-linebreak'?: Linter.RuleEntry<[]>
   /**
+   * trailing whitespace at the end of lines in Markdown files.
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-trailing-spaces.html
+   */
+  'markdown-preferences/no-trailing-spaces'?: Linter.RuleEntry<MarkdownPreferencesNoTrailingSpaces>
+  /**
    * enforce the specified word to be a link.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html
    */
@@ -34,6 +39,11 @@ export interface RuleOptions {
 // ----- markdown-preferences/hard-linebreak-style -----
 type MarkdownPreferencesHardLinebreakStyle = []|[{
   style?: ("backslash" | "spaces")
+}]
+// ----- markdown-preferences/no-trailing-spaces -----
+type MarkdownPreferencesNoTrailingSpaces = []|[{
+  skipBlankLines?: boolean
+  ignoreComments?: boolean
 }]
 // ----- markdown-preferences/prefer-linked-words -----
 type MarkdownPreferencesPreferLinkedWords = []|[{
