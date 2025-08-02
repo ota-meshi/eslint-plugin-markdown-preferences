@@ -19,6 +19,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/hard-linebreak-style'?: Linter.RuleEntry<MarkdownPreferencesHardLinebreakStyle>
   /**
+   * disallow text backslash at the end of a line.
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-text-backslash-linebreak.html
+   */
+  'markdown-preferences/no-text-backslash-linebreak'?: Linter.RuleEntry<[]>
+  /**
    * enforce the specified word to be a link.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html
    */
