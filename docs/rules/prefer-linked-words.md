@@ -14,21 +14,88 @@ since: "v0.1.0"
 
 ## 📖 Rule Details
 
-This rule aims to enforce words that you always want to be links.
+This rule enforces that specific words or phrases are always converted to links when they appear in Markdown text. This is useful for:
+
+- Automatically linking project names to their repositories or documentation
+- Ensuring technical terms link to their definitions
+- Maintaining consistent reference linking across documentation
+- Converting inline code references to their documentation pages
+
+### Examples
+
+#### Basic Object Configuration
 
 <!-- eslint-skip -->
 
 ```md
-<!-- eslint markdown-preferences/prefer-linked-words: ["error", { "words": { "foo": "https://example.com/foo" } }] -->
+<!-- eslint markdown-preferences/prefer-linked-words: ["error", { "words": { "ESLint": "https://eslint.org/" } }] -->
 
 <!-- ✓ GOOD -->
-- [foo](https://example.com/foo)
+[ESLint](https://eslint.org/) is a great linting tool.
+
+Check out the [ESLint](https://eslint.org/) documentation.
 
 <!-- ✗ BAD -->
-- foo
+ESLint is a great linting tool.
+
+Check out the ESLint documentation.
 ```
 
+#### Multiple Words Configuration
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/prefer-linked-words: ["error", { "words": { "TypeScript": "https://www.typescriptlang.org/", "Vite": "https://vitejs.dev/", "Prettier": "https://prettier.io/" } }] -->
+
+<!-- ✓ GOOD -->
+[TypeScript](https://www.typescriptlang.org/), [Vite](https://vitejs.dev/), and [Prettier](https://prettier.io/) are popular development tools.
+
+<!-- ✗ BAD -->
+TypeScript, Vite, and Prettier are popular development tools.
+```
+
+#### Code References
+
+The rule also works with inline code:
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/prefer-linked-words: ["error", { "words": { "console.log": "https://developer.mozilla.org/en-US/docs/Web/API/Console/log" } }] -->
+
+<!-- ✓ GOOD -->
+Use the [`console.log`](https://developer.mozilla.org/en-US/docs/Web/API/Console/log) method for debugging.
+
+<!-- ✗ BAD -->
+Use the `console.log` method for debugging.
+```
+
+#### Array Configuration (Detection Only)
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/prefer-linked-words: ["error", { "words": ["TODO", "FIXME", "NOTE"] }] -->
+
+<!-- ✓ GOOD - Will be reported but not auto-fixed -->
+[TODO]: Review this section
+
+<!-- ✗ BAD - Will be reported -->
+TODO: Review this section
+```
+
+### When Not to Use
+
+- If you prefer manual link management
+- If you're working with content where certain words should intentionally not be links
+- If you're using a documentation system that handles linking automatically
+
 ## 🔧 Options
+
+The rule accepts a single object with a `words` property that can be configured in two ways:
+
+### Object Configuration (Recommended)
 
 ```json
 {
@@ -36,21 +103,39 @@ This rule aims to enforce words that you always want to be links.
     "error",
     {
       "words": {
-        "foo": "https://example.com/foo",
-        "bar": "https://example.com/bar"
+        "ESLint": "https://eslint.org/",
+        "Markdown": "https://daringfireball.net/projects/markdown/",
+        "TypeScript": "https://www.typescriptlang.org/"
       }
     }
   ]
 }
 ```
 
-- `words`
-  - Object style: An object where the keys are the words you want to link, and the values are the URLs to link to.
-  - Array style: An array of words that should always be made into links. Auto-fix is not available.
+With object configuration:
 
-## 🚀 Version
+- **Keys**: The words or phrases to detect (case-sensitive)
+- **Values**: The URLs to link to
+- **Auto-fix**: ✅ Available - words will be automatically converted to links
 
-This rule was introduced in eslint-plugin-markdown-preferences v0.1.0
+### Array Configuration
+
+```json
+{
+  "markdown-preferences/prefer-linked-words": [
+    "error",
+    {
+      "words": ["TODO", "FIXME", "NOTE", "WARNING"]
+    }
+  ]
+}
+```
+
+With array configuration:
+
+- **Items**: The words or phrases to detect
+- **Auto-fix**: ❌ Not available - only reports violations
+- **Use case**: Good for identifying words that should be links but don't have predetermined URLs
 
 ## 🔍 Implementation
 

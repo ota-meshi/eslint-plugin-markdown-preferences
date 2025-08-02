@@ -15,7 +15,16 @@ since: "v0.1.0"
 
 ## 📖 Rule Details
 
-This rule enforces a consistent hard linebreak style in Markdown files.
+This rule enforces a consistent hard linebreak style in Markdown files. In Markdown, there are two ways to create hard line breaks:
+
+1. **Backslash style** (`\`): A backslash at the end of a line
+2. **Spaces style** (`  `): Two or more spaces at the end of a line
+
+Both styles are valid in CommonMark, but using one consistently improves readability and maintainability.
+
+### Examples
+
+#### Default Configuration (`"backslash"`)
 
 <!-- eslint-skip -->
 
@@ -23,13 +32,46 @@ This rule enforces a consistent hard linebreak style in Markdown files.
 <!-- eslint markdown-preferences/hard-linebreak-style: 'error' -->
 
 <!-- ✓ GOOD -->
-foo\
-baz
+This line ends with a backslash\
+and continues here.
+
+Another example with\
+multiple line breaks.
 
 <!-- ✗ BAD -->
-foo  
-baz
+This line ends with spaces  
+and continues here.
+
+<!-- ✗ BAD -->
+Mixed styles are not allowed\
+this line uses spaces  
+inconsistently.
 ```
+
+#### With `"spaces"` Configuration
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/hard-linebreak-style: ['error', { style: 'spaces' }] -->
+
+<!-- ✓ GOOD -->
+This line ends with spaces  
+and continues here.
+
+Another example with  
+multiple line breaks.
+
+<!-- ✗ BAD -->
+This line ends with backslash\
+and continues here.
+```
+
+### When Not to Use
+
+- If you don't need consistent hard linebreak styles in your project
+- If you're working with existing content that deliberately uses mixed styles
+- If you're using a different Markdown processor that has specific requirements
 
 ## 🔧 Options
 
@@ -38,19 +80,26 @@ baz
   "markdown-preferences/hard-linebreak-style": [
     "error",
     {
-      "style": "backslash" // or "space"
+      "style": "backslash" // or "spaces"
     }
   ]
 }
 ```
 
-- `style`: The style of hard linebreak to enforce. Can be either `"backslash"` or `"space"`. Defaults to `"backslash"`.
-  - `"backslash"`: Enforces the use of backslashes (`\`) for hard linebreaks.
-  - `"space"`: Enforces the use of two spaces for hard linebreaks.
+### `style` (string)
+
+The style of hard linebreak to enforce.
+
+**Available Options:**
+
+- `"backslash"` (default): Enforces the use of backslashes (`\`) for hard linebreaks.
+- `"spaces"`: Enforces the use of two or more spaces for hard linebreaks.
 
 ## 📚 Further reading
 
 - [CommonMark Spec: Hard Line Breaks](https://spec.commonmark.org/0.31.2/#hard-line-breaks)
+- [Markdown Guide: Line Breaks](https://www.markdownguide.org/basic-syntax/#line-breaks)
+- [GitHub Flavored Markdown: Hard Line Breaks](https://github.github.com/gfm/#hard-line-breaks)
 
 ## 🚀 Version
 
