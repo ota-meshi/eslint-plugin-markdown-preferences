@@ -4,6 +4,9 @@ import path from "node:path";
 
 type WordsObject = Record<string, string | null>;
 type Words = WordsObject | string[];
+
+const RE_PUNCTUATOR = /^[\s,:]*$/u;
+
 export default createRule<[{ words?: Words }?]>("prefer-linked-words", {
   meta: {
     type: "suggestion",
@@ -72,22 +75,23 @@ export default createRule<[{ words?: Words }?]>("prefer-linked-words", {
       },
       text(node) {
         if (ignore) return;
+        const text = sourceCode.getText(node);
         for (const [word, link] of wordEntries) {
           let startPosition = 0;
           while (true) {
-            const index = node.value.indexOf(word, startPosition);
+            const index = text.indexOf(word, startPosition);
             if (index < 0) break;
             startPosition = index + word.length;
             if (
-              (node.value[index - 1] || "").trim() ||
-              (node.value[index + word.length] || "").trim()
+              !RE_PUNCTUATOR.test(text[index - 1] || "") ||
+              !RE_PUNCTUATOR.test(text[index + word.length] || "")
             ) {
               // not a whole word
               continue;
             }
 
             const loc = sourceCode.getLoc(node);
-            const beforeLines = node.value.slice(0, index).split(/\n/u);
+            const beforeLines = text.slice(0, index).split(/\n/u);
             const line = loc.start.line + beforeLines.length - 1;
             const column =
               (beforeLines.length === 1 ? loc.start.column : 1) +
@@ -148,9 +152,10 @@ export default createRule<[{ words?: Words }?]>("prefer-linked-words", {
         return link;
       }
 
-      const absoluteLink = path.isAbsolute(link)
-        ? link
-        : path.join(context.cwd, link);
+      const absoluteLink =
+        path.isAbsolute(link) || path.posix.isAbsolute(link)
+          ? link
+          : path.join(context.cwd, link);
       return `./${path.relative(path.dirname(context.filename), absoluteLink)}`;
     }
   },

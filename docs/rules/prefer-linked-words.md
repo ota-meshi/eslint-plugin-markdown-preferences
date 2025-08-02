@@ -95,7 +95,7 @@ TODO: Review this section
 
 The rule accepts a single object with a `words` property that can be configured in two ways:
 
-### Object Configuration (Recommended)
+### Object Configuration
 
 ```json
 {
@@ -118,6 +118,13 @@ With object configuration:
 - **Values**: The URLs to link to
 - **Auto-fix**: ✅ Available - words will be automatically converted to links
 
+#### Value Format
+
+- **URL**: A valid URL string
+- **File Path**: A path to a local file. If the path points to a file being checked, the word is excluded from checking. When auto-fix, resolve to relative paths.
+  - **Absolute**: A full path to a local file (e.g., `/Users/user/docs/guide.md`)
+  - **Relative**: A path to a local file (e.g., `./docs/guide.md`). Relative paths are resolved relative to the `cwd`.
+
 ### Array Configuration
 
 ```json
@@ -136,6 +143,10 @@ With array configuration:
 - **Items**: The words or phrases to detect
 - **Auto-fix**: ❌ Not available - only reports violations
 - **Use case**: Good for identifying words that should be links but don't have predetermined URLs
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.1.0
 
 ## 🔍 Implementation
 
