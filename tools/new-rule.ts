@@ -42,6 +42,7 @@ const logger = console;
 
 export default createRule("${ruleId}", {
     meta: {
+        type: "",
         docs: {
             description: "...",
             categories: ["..."],
@@ -50,7 +51,6 @@ export default createRule("${ruleId}", {
         hasSuggestions: null,
         schema: [],
         messages: {},
-        type: "",
     },
     create(context) {
       const sourceCode = context.sourceCode

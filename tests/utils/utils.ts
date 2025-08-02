@@ -128,8 +128,8 @@ function* itrListupInput(rootDir: string): IterableIterator<string> {
 
 async function getConfig(inputFile: string) {
   const filename = path.relative(process.cwd(), inputFile);
-  const code0 = fs.readFileSync(inputFile, "utf8");
-  let code, config;
+  let code = fs.readFileSync(inputFile, "utf8");
+  let config;
   let configFile: string = inputFile.replace(
     /input\.(?:[cm]?[jt]s|vue|md)$/u,
     "config.json",
@@ -141,15 +141,16 @@ async function getConfig(inputFile: string) {
     config = JSON.parse(fs.readFileSync(configFile, "utf8"));
   }
   if (config && typeof config === "object") {
-    code = `/* ${filename} */\n${code0}`;
-    return { ...(await adjustConfig(config, inputFile)), code, filename };
+    return {
+      ...(await adjustConfig(config, inputFile)),
+      code,
+      filename,
+    };
   }
   // inline config
-  const configStr = /^\/\*(.*?)\*\//u.exec(code0);
-  if (!configStr) {
-    throw new Error("missing config");
-  } else {
-    code = code0.replace(/^\/\*(.*?)\*\//u, `/*${filename}*/`);
+  const configStr = /^<!--(.*?)-->/u.exec(code);
+  if (configStr) {
+    code = code.replace(/^<!--(.*?)-->/u, `<!--${filename}-->`);
     try {
       config = configStr ? JSON.parse(configStr[1]) : {};
     } catch (e: any) {

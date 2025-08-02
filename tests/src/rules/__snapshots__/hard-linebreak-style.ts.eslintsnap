@@ -1,0 +1,102 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: hard-linebreak-style >> invalid
+Filename: tests/fixtures/rules/hard-linebreak-style/invalid/backslash/test01-input.md
+Language: markdown/gfm
+Options:
+  - style: backslash
+Plugins: unable to serialize
+
+Code:
+  1 | # Test
+  2 |
+  3 | foo\
+  4 | baz
+  5 |
+  6 | foo  
+    |    ^~\ [1]
+  7 | baz
+    | ~ [1]
+  8 |
+
+Output:
+  1 | # Test
+  2 |
+  3 | foo\
+  4 | baz
+  5 |
+  6 | foo\
+  7 | baz
+  8 |
+
+[1] Expected a backslash linebreak.
+---
+
+
+Test: hard-linebreak-style >> invalid
+Filename: tests/fixtures/rules/hard-linebreak-style/invalid/example-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | # Test
+  2 |
+  3 | <!-- ✓ GOOD -->
+  4 | foo\
+  5 | baz
+  6 |
+  7 | <!-- ✗ BAD -->
+  8 | foo  
+    |    ^~\ [1]
+  9 | baz
+    | ~ [1]
+ 10 |
+
+Output:
+  1 | # Test
+  2 |
+  3 | <!-- ✓ GOOD -->
+  4 | foo\
+  5 | baz
+  6 |
+  7 | <!-- ✗ BAD -->
+  8 | foo\
+  9 | baz
+ 10 |
+
+[1] Expected a backslash linebreak.
+---
+
+
+Test: hard-linebreak-style >> invalid >>> "# Test\n\nfoo\\\nbaz\n\nfoo  \nbaz\n 2"
+Filename: tests/fixtures/rules/hard-linebreak-style/invalid/spaces/test01-input.md
+Language: markdown/gfm
+Options:
+  - style: spaces
+Plugins: unable to serialize
+
+Code:
+  1 | # Test
+  2 |
+  3 | foo\
+    |    ^\ [1]
+  4 | baz
+    | ~ [1]
+  5 |
+  6 | foo  
+  7 | baz
+  8 |
+
+Output:
+  1 | # Test
+  2 |
+  3 | foo  
+  4 | baz
+  5 |
+  6 | foo  
+  7 | baz
+  8 |
+
+[1] Expected a space linebreak.
+---
