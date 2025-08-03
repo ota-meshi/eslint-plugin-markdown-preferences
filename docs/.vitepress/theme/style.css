@@ -1,3 +1,7 @@
 a > img {
   display: inline-block;
 }
+
+a.title {
+  white-space: pre-wrap;
+}
