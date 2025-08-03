@@ -46,13 +46,63 @@ This rule requires configuration of the words that should be wrapped in inline c
   "markdown-preferences/prefer-inline-code-words": [
     "error",
     {
-      "words": ["ESLint", "TypeScript", "JavaScript", "Prettier", "npm", "yarn"]
+      "words": ["ESLint", "TypeScript", "JavaScript", "Prettier", "npm", "yarn"],
+      "ignores": [
+        {
+          "words": ["ESLint", "TypeScript", "JavaScript"],
+          "node": { "type": "heading", "depth": 1 }
+        }
+      ]
     }
   ]
 }
 ```
 
 - `words` (required): An array of strings representing the words that should always be wrapped in inline code when they appear in Markdown text.
+- `ignores` (optional): An array of objects that specify conditions under which the rule should not apply. Each object can have:
+  - `words`: An array or string of words to ignore. If not specified, all words will be ignored.
+  - `node`: An object specifying conditions for ignoring nodes.
+
+### `ignores`
+
+You can use the `ignores` option to exclude the rule application under specific conditions. Each ignore condition is an object with the following properties:
+
+- `words` (optional): Specifies the words to ignore. Can be specified as an array or string. If not specified, all words will be targeted.
+- `node` (optional): Specifies the ignore conditions by node type or properties. Excludes nodes where the specified properties match. For example, to exclude all heading levels (`h1` to `h6`), specify `{"type": "heading"}`, and to exclude only level 1 headings (`h1`), specify `{"type": "heading", "depth": 1}`.
+
+#### Usage Examples
+
+```json
+{
+  "markdown-preferences/prefer-inline-code-words": [
+    "error",
+    {
+      "words": ["ESLint", "TypeScript", "JavaScript"],
+      "ignores": [
+        {
+          "words": ["ESLint", "TypeScript"],
+          "node": { "type": "heading", "depth": 1 }
+        },
+        {
+          "words": "JavaScript",
+          "node": { "type": "link" }
+        },
+      ]
+    }
+  ]
+}
+```
+
+In this configuration:
+
+- "ESLint" and "TypeScript" in level 1 headings will be ignored
+- "JavaScript" in links will be ignored
+
+#### Node Types and Properties
+
+Please refer to the [mdast](https://github.com/syntax-tree/mdast) documentation for detailed properties of each node.
+
+## 📚 Further reading
 
 ## 📚 Further reading
 

@@ -1,0 +1,19 @@
+{
+  "options": [
+    {
+      "words": ["ESLint", "TypeScript", "JavaScript"],
+      "ignores": [
+        {
+          "node": { "type": "heading", "depth": 1 }
+        },
+        {
+          "words": ["ESLint", "TypeScript"],
+          "node": { "type": "listItem" }
+        },
+        {
+          "node": { "type": "footnoteDefinition" }
+        }
+      ]
+    }
+  ]
+}

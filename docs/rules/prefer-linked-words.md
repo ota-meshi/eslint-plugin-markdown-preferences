@@ -93,9 +93,37 @@ TODO: Review this section
 
 ## 🔧 Options
 
+```json
+{
+  "markdown-preferences/prefer-linked-words": [
+    "error",
+    {
+      "words": {
+        "ESLint": "https://eslint.org/",
+        "Markdown": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Howto/Markdown_in_MDN",
+        "TypeScript": "https://www.typescriptlang.org/"
+      },
+      "ignores": [
+        {
+          "words": null, // Ignore all words
+          "node": { "type": "listItem" }
+        }
+      ]
+    }
+  ]
+}
+```
+
+- `words` (required): An object or array of words that should be linked. If an object, keys are the words and values are the URLs.
+- `ignores` (optional): An array of objects that specify conditions under which the rule should not apply. Each object can have:
+  - `words`: An array or string of words to ignore. If not specified, all words will be ignored.
+  - `node`: An object specifying conditions for ignoring nodes.
+
+### `words`
+
 The rule accepts a single object with a `words` property that can be configured in two ways:
 
-### Object Configuration
+#### Object Configuration
 
 ```json
 {
@@ -118,14 +146,14 @@ With object configuration:
 - **Values**: The URLs to link to
 - **Auto-fix**: ✅ Available - words will be automatically converted to links
 
-#### Value Format
+##### Value Format
 
 - **URL**: A valid URL string
 - **File Path**: A path to a local file. If the path points to a file being checked, the word is excluded from checking. When auto-fix, resolve to relative paths.
   - **Absolute**: A full path to a local file (e.g., `/Users/user/docs/guide.md`)
   - **Relative**: A path to a local file (e.g., `./docs/guide.md`). Relative paths are resolved relative to the `cwd`.
 
-### Array Configuration
+#### Array Configuration
 
 ```json
 {
@@ -143,6 +171,48 @@ With array configuration:
 - **Items**: The words or phrases to detect
 - **Auto-fix**: ❌ Not available - only reports violations
 - **Use case**: Good for identifying words that should be links but don't have predetermined URLs
+
+### `ignores`
+
+You can use the `ignores` option to exclude the rule application under specific conditions. Each ignore condition is an object with the following properties:
+
+- `words` (optional): Specifies the words to ignore. Can be specified as an array or string. If not specified, all words will be targeted.
+- `node` (optional): Specifies the ignore conditions by node type or properties. Excludes nodes where the specified properties match. For example, to exclude all heading levels (`h1` to `h6`), specify `{"type": "heading"}`, and to exclude only level 1 headings (`h1`), specify `{"type": "heading", "depth": 1}`.
+
+#### Usage Examples
+
+```json
+{
+  "markdown-preferences/prefer-linked-words": [
+    "error",
+    {
+      "words": {
+        "ESLint": "https://eslint.org/",
+        "TypeScript": "https://www.typescriptlang.org/",
+        "JavaScript": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+      },
+      "ignores": [
+        {
+          "words": ["ESLint", "TypeScript"], 
+          "node": { "type": "listItem" }
+        },
+        {
+          "node": { "type": "footnoteDefinition" }
+        }
+      ]
+    }
+  ]
+}
+```
+
+In this configuration:
+
+- "ESLint" and "TypeScript" in list items will be ignored
+- All words in all footnotes will be ignored
+
+#### Node Types and Properties
+
+Please refer to the [mdast](https://github.com/syntax-tree/mdast) documentation for detailed properties of each node.
 
 ## 📚 Further reading
 

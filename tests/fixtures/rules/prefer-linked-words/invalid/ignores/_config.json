@@ -1,0 +1,20 @@
+{
+  "options": [
+    {
+      "words": {
+        "ESLint": "https://eslint.org/",
+        "TypeScript": "https://www.typescriptlang.org/",
+        "JavaScript": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+      },
+      "ignores": [
+        {
+          "words": ["ESLint", "TypeScript"],
+          "node": { "type": "listItem" }
+        },
+        {
+          "node": { "type": "footnoteDefinition" }
+        }
+      ]
+    }
+  ]
+}
