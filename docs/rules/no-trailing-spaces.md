@@ -2,13 +2,13 @@
 pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/no-trailing-spaces"
-description: "trailing whitespace at the end of lines in Markdown files."
+description: "disallow trailing whitespace at the end of lines in Markdown files."
 since: "v0.3.0"
 ---
 
 # markdown-preferences/no-trailing-spaces
 
-> trailing whitespace at the end of lines in Markdown files.
+> disallow trailing whitespace at the end of lines in Markdown files.
 
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
