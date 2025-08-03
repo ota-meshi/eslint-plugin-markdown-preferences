@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.3.3
+
+### Patch Changes
+
+- [#13](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/13) [`cfa1d96`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/cfa1d968cd04632028ba51af66edafe5205504b9) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix(prefer-linked-words): false positive with CJK characters
+
 ## 0.3.2
 
 ### Patch Changes
