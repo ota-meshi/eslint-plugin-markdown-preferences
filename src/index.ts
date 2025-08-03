@@ -1,4 +1,4 @@
-export * from "./rule-types.js";
+import "./rule-types.js";
 import type { RuleModule } from "./types.js";
 import { rules as ruleList } from "./utils/rules.js";
 import * as recommended from "./configs/recommended.js";
