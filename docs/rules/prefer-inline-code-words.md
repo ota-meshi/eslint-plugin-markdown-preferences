@@ -57,13 +57,13 @@ This rule requires configuration of the words that should be wrapped in inline c
 ## 📚 Further reading
 
 - [CommonMark Spec: Code spans](https://spec.commonmark.org/0.31.2/#code-spans)
-- [GitHub Flavored Markdown - Code spans](https://github.github.com/gfm/#code-spans)
+- [GitHub Flavored Markdown: Code spans](https://github.github.com/gfm/#code-spans)
 
 ## 👫 Related rules
 
-- [prefer-linked-words]
+- [markdown-preferences/prefer-linked-words]
 
-[prefer-linked-words]: ./prefer-linked-words.md
+[markdown-preferences/prefer-linked-words]: ./prefer-linked-words.md
 
 ## 🔍 Implementation
 

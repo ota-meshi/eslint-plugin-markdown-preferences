@@ -62,7 +62,7 @@ This rule has no configuration options.
 
 ## 👫 Related rules
 
-- [`hard-linebreak-style`](./hard-linebreak-style.md) - enforce hard line break style
+- [markdown-preferences/hard-linebreak-style](./hard-linebreak-style.md)
 
 ## 🚀 Version
 
