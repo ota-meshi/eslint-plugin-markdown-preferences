@@ -29,6 +29,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/no-trailing-spaces'?: Linter.RuleEntry<MarkdownPreferencesNoTrailingSpaces>
   /**
+   * enforce the use of inline code for specific words.
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-inline-code-words.html
+   */
+  'markdown-preferences/prefer-inline-code-words'?: Linter.RuleEntry<MarkdownPreferencesPreferInlineCodeWords>
+  /**
    * enforce the specified word to be a link.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html
    */
@@ -44,6 +49,11 @@ type MarkdownPreferencesHardLinebreakStyle = []|[{
 type MarkdownPreferencesNoTrailingSpaces = []|[{
   skipBlankLines?: boolean
   ignoreComments?: boolean
+}]
+// ----- markdown-preferences/prefer-inline-code-words -----
+type MarkdownPreferencesPreferInlineCodeWords = []|[{
+  words: string[]
+  [k: string]: unknown | undefined
 }]
 // ----- markdown-preferences/prefer-linked-words -----
 type MarkdownPreferencesPreferLinkedWords = []|[{
