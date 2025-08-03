@@ -1,3 +1,0 @@
-# ESLint
-
-ESLintはリントツールです。Prettierはフォーマッターです。

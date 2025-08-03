@@ -1,7 +1,7 @@
 
 # eslint-plugin-markdown-preferences
 
-[eslint-plugin-markdown-preferences](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/) is an [ESLint](https://eslint.org) plugin that provides rules for Markdown files to enforce preferences.
+[eslint-plugin-markdown-preferences](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/) is an ESLint plugin that provides rules for Markdown files to enforce preferences.
 
 ## Rules
 
