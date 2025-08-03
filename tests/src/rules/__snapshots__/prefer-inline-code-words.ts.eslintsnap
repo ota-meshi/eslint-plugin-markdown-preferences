@@ -1,0 +1,203 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: prefer-inline-code-words >> invalid
+Filename: tests/fixtures/rules/prefer-inline-code-words/invalid/link-input.md
+Language: markdown/gfm
+Options:
+  - words:
+      - ESLint
+      - TypeScript
+      - JavaScript
+      - Node.js
+      - npm
+Plugins: unable to serialize
+
+Code:
+  1 | # Link Reference Test
+  2 |
+  3 | - [ESLint] is a popular linting tool for `JavaScript`.
+    |    ^~~~~~ [1]
+  4 | - [ESLint][ESLint] is flexible and can be configured for various environments.
+    |    ^~~~~~ [2]
+  5 | - [ESLint](https://eslint.org) is often used in conjunction with `TypeScript` for better type checking.
+    |    ^~~~~~ [3]
+  6 |
+  7 | [ESLint]: https://eslint.org
+  8 |
+  9 | ![ESLint icon]
+ 10 | ![ESLint icon][ESLint icon]
+ 11 | ![ESLint icon](https://eslint.org/icon.svg)
+ 12 |
+ 13 | [ESLint icon]: https://eslint.org/icon.svg
+ 14 |
+
+Output:
+  1 | # Link Reference Test
+  2 |
+  3 | - [`ESLint`][ESLint] is a popular linting tool for `JavaScript`.
+  4 | - [`ESLint`][ESLint] is flexible and can be configured for various environments.
+  5 | - [`ESLint`](https://eslint.org) is often used in conjunction with `TypeScript` for better type checking.
+  6 |
+  7 | [ESLint]: https://eslint.org
+  8 |
+  9 | ![ESLint icon]
+ 10 | ![ESLint icon][ESLint icon]
+ 11 | ![ESLint icon](https://eslint.org/icon.svg)
+ 12 |
+ 13 | [ESLint icon]: https://eslint.org/icon.svg
+ 14 |
+
+[1] The word "ESLint" should be in inline code.
+[2] The word "ESLint" should be in inline code.
+[3] The word "ESLint" should be in inline code.
+---
+
+
+Test: prefer-inline-code-words >> invalid
+Filename: tests/fixtures/rules/prefer-inline-code-words/invalid/multiple-words-input.md
+Language: markdown/gfm
+Options:
+  - words:
+      - ESLint
+      - TypeScript
+      - JavaScript
+      - Node.js
+      - npm
+Plugins: unable to serialize
+
+Code:
+  1 | # Programming Tools
+  2 |
+  3 | This guide covers various programming tools and technologies.
+  4 |
+  5 | ## Static Analysis
+  6 |
+  7 | ESLint is a popular linting tool for JavaScript and TypeScript.
+    | ^~~~~~ [1]                           ^~~~~~~~~~ [2] ^~~~~~~~~~ [3]
+  8 |
+  9 | ## Package Management
+ 10 |
+ 11 | You can use npm to manage your Node.js dependencies.
+    |             ^~~ [4]            ^~~~~~~ [5]
+ 12 |
+ 13 | ## Multiple Words
+ 14 |
+ 15 | Both ESLint and TypeScript are essential tools for modern JavaScript development.
+    |      ^~~~~~ [6] ^~~~~~~~~~ [7]                            ^~~~~~~~~~ [8]
+ 16 |
+
+Output:
+  1 | # Programming Tools
+  2 |
+  3 | This guide covers various programming tools and technologies.
+  4 |
+  5 | ## Static Analysis
+  6 |
+  7 | `ESLint` is a popular linting tool for `JavaScript` and `TypeScript`.
+  8 |
+  9 | ## Package Management
+ 10 |
+ 11 | You can use `npm` to manage your `Node.js` dependencies.
+ 12 |
+ 13 | ## Multiple Words
+ 14 |
+ 15 | Both `ESLint` and `TypeScript` are essential tools for modern `JavaScript` development.
+ 16 |
+
+[1] The word "ESLint" should be in inline code.
+[2] The word "JavaScript" should be in inline code.
+[3] The word "TypeScript" should be in inline code.
+[4] The word "npm" should be in inline code.
+[5] The word "Node.js" should be in inline code.
+[6] The word "ESLint" should be in inline code.
+[7] The word "TypeScript" should be in inline code.
+[8] The word "JavaScript" should be in inline code.
+---
+
+
+Test: prefer-inline-code-words >> invalid
+Filename: tests/fixtures/rules/prefer-inline-code-words/invalid/test01-input.md
+Language: markdown/gfm
+Options:
+  - words:
+      - ESLint
+      - TypeScript
+      - JavaScript
+      - Node.js
+      - npm
+Plugins: unable to serialize
+
+Code:
+  1 | # ESLint Configuration
+    |   ^~~~~~ [1]
+  2 |
+  3 | This document explains how to configure ESLint for your TypeScript project.
+    |                                         ^~~~~~ [2]      ^~~~~~~~~~ [3]
+  4 |
+  5 | ## Installation
+  6 |
+  7 | You can install ESLint using npm:
+    |                 ^~~~~~ [4]   ^~~ [5]
+  8 |
+  9 | ```bash
+ 10 | npm install eslint --save-dev
+ 11 | ```
+ 12 |
+ 13 | ## Configuration
+ 14 |
+ 15 | ESLint can be configured using a configuration file. For TypeScript projects, you'll need to install additional packages.
+    | ^~~~~~ [6]                                               ^~~~~~~~~~ [7]
+ 16 |
+ 17 | ### JavaScript Projects
+    |     ^~~~~~~~~~ [8]
+ 18 |
+ 19 | For JavaScript projects, the basic ESLint configuration should be sufficient.
+    |     ^~~~~~~~~~ [9]                 ^~~~~~ [10]
+ 20 |
+ 21 | ### Node.js Applications
+    |     ^~~~~~~ [11]
+ 22 |
+ 23 | When working with Node.js applications, make sure to set the appropriate environment.
+    |                   ^~~~~~~ [12]
+ 24 |
+
+Output:
+  1 | # `ESLint` Configuration
+  2 |
+  3 | This document explains how to configure `ESLint` for your `TypeScript` project.
+  4 |
+  5 | ## Installation
+  6 |
+  7 | You can install `ESLint` using `npm`:
+  8 |
+  9 | ```bash
+ 10 | npm install eslint --save-dev
+ 11 | ```
+ 12 |
+ 13 | ## Configuration
+ 14 |
+ 15 | `ESLint` can be configured using a configuration file. For `TypeScript` projects, you'll need to install additional packages.
+ 16 |
+ 17 | ### `JavaScript` Projects
+ 18 |
+ 19 | For `JavaScript` projects, the basic `ESLint` configuration should be sufficient.
+ 20 |
+ 21 | ### `Node.js` Applications
+ 22 |
+ 23 | When working with `Node.js` applications, make sure to set the appropriate environment.
+ 24 |
+
+[1] The word "ESLint" should be in inline code.
+[2] The word "ESLint" should be in inline code.
+[3] The word "TypeScript" should be in inline code.
+[4] The word "ESLint" should be in inline code.
+[5] The word "npm" should be in inline code.
+[6] The word "ESLint" should be in inline code.
+[7] The word "TypeScript" should be in inline code.
+[8] The word "JavaScript" should be in inline code.
+[9] The word "JavaScript" should be in inline code.
+[10] The word "ESLint" should be in inline code.
+[11] The word "Node.js" should be in inline code.
+[12] The word "Node.js" should be in inline code.
+---

@@ -1,7 +1,7 @@
 import { defineConfig } from "eslint/config";
 // import markdown from "@eslint/markdown";
 import markdownPreferences from "eslint-plugin-markdown-preferences";
-export default [
+export default defineConfig([
   // add more generic rule sets here, such as:
   // markdown.configs.recommended,
   markdownPreferences.configs.recommended,
@@ -21,4 +21,4 @@ export default [
       ],
     },
   },
-];
+]);

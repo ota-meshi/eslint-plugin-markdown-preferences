@@ -144,6 +144,15 @@ With array configuration:
 - **Auto-fix**: ❌ Not available - only reports violations
 - **Use case**: Good for identifying words that should be links but don't have predetermined URLs
 
+## 📚 Further reading
+
+- [CommonMark Spec: Links](https://spec.commonmark.org/0.31.2/#links)
+- [GitHub Flavored Markdown: Links](https://github.github.com/gfm/#links)
+
+## 👫 Related rules
+
+- [markdown-preferences/prefer-inline-code-words](prefer-inline-code-words.md)
+
 ## 🚀 Version
 
 This rule was introduced in eslint-plugin-markdown-preferences v0.1.0

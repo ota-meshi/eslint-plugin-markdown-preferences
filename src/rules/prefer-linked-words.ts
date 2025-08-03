@@ -1,12 +1,10 @@
 import { createRule } from "../utils/index.js";
 import type { Link, LinkReference, Heading, FootnoteDefinition } from "mdast";
 import path from "node:path";
+import { iterateSearchWords } from "../utils/search-words.js";
 
 type WordsObject = Record<string, string | null>;
 type Words = WordsObject | string[];
-
-const RE_BOUNDARY =
-  /^[\s\p{Letter_Number}\p{Modifier_Letter}\p{Modifier_Symbol}\p{Nonspacing_Mark}\p{Other_Letter}\p{Other_Symbol}\p{Script=Han}!"#$%&'(),./:;<=>?\\{|}~\u{2ffc}-\u{303d}\u{30a0}-\u{30fb}\u{3192}-\u{32bf}\u{fe10}-\u{fe1f}\u{fe30}-\u{fe6f}\u{ff00}-\u{ffef}\u{2ebf0}-\u{2ee5d}]*$/u;
 
 export default createRule<[{ words?: Words }?]>("prefer-linked-words", {
   meta: {
@@ -49,20 +47,23 @@ export default createRule<[{ words?: Words }?]>("prefer-linked-words", {
   },
   create(context) {
     const sourceCode = context.sourceCode;
-    const words = context.options[0]?.words || {};
-    const wordEntries: [string, string | undefined][] = (
-      Array.isArray(words)
-        ? words.map((word) => [word, undefined] as [string, undefined])
-        : Object.entries(words)
-    )
-      .map(
-        ([word, link]) =>
-          [word, link ? adjustLink(link) : undefined] as [
-            string,
-            string | undefined,
-          ],
-      )
-      .filter(([, link]) => link !== `./${path.basename(context.filename)}`);
+    const wordsOption = context.options[0]?.words || {};
+    const links: Record<string, string | undefined> = Object.create(null);
+    const words: string[] = [];
+    if (Array.isArray(wordsOption)) {
+      words.push(...wordsOption);
+    } else {
+      for (const [word, link] of Object.entries(wordsOption)) {
+        if (link) {
+          const adjustedLink = adjustLink(link);
+          if (adjustedLink === `./${path.basename(context.filename)}`) {
+            continue;
+          }
+          links[word] = adjustedLink;
+        }
+        words.push(word);
+      }
+    }
 
     type IgnoreNode = Link | LinkReference | Heading | FootnoteDefinition;
     let ignore: IgnoreNode | null = null;
@@ -78,55 +79,32 @@ export default createRule<[{ words?: Words }?]>("prefer-linked-words", {
       },
       text(node) {
         if (ignore) return;
-        const text = sourceCode.getText(node);
-        for (const [word, link] of wordEntries) {
-          let startPosition = 0;
-          while (true) {
-            const index = text.indexOf(word, startPosition);
-            if (index < 0) break;
-            startPosition = index + word.length;
-            if (
-              !RE_BOUNDARY.test(text[index - 1] || "") ||
-              !RE_BOUNDARY.test(text[index + word.length] || "")
-            ) {
-              // not a whole word
-              continue;
-            }
-
-            const loc = sourceCode.getLoc(node);
-            const beforeLines = text.slice(0, index).split(/\n/u);
-            const line = loc.start.line + beforeLines.length - 1;
-            const column =
-              (beforeLines.length === 1 ? loc.start.column : 1) +
-              (beforeLines.at(-1) || "").length;
-
-            context.report({
-              node,
-              loc: {
-                start: { line, column },
-                end: { line, column: column + word.length },
-              },
-              messageId: "requireLink",
-              data: {
-                name: word,
-              },
-              fix: link
-                ? (fixer) => {
-                    const [start] = sourceCode.getRange(node);
-                    return fixer.replaceTextRange(
-                      [start + index, start + index + word.length],
-                      `[${word}](${link})`,
-                    );
-                  }
-                : null,
-            });
-          }
+        for (const { word, loc, range } of iterateSearchWords(
+          sourceCode,
+          node,
+          words,
+        )) {
+          const link = links[word];
+          context.report({
+            node,
+            loc,
+            messageId: "requireLink",
+            data: {
+              name: word,
+            },
+            fix: link
+              ? (fixer) => {
+                  return fixer.replaceTextRange(range, `[${word}](${link})`);
+                }
+              : null,
+          });
         }
       },
       inlineCode(node) {
         if (ignore) return;
-        for (const [word, link] of wordEntries) {
+        for (const word of words) {
           if (node.value === word) {
+            const link = links[word];
             context.report({
               node,
               messageId: "requireLink",
