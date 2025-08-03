@@ -5,7 +5,8 @@ import path from "node:path";
 type WordsObject = Record<string, string | null>;
 type Words = WordsObject | string[];
 
-const RE_PUNCTUATOR = /^[\s,:]*$/u;
+const RE_BOUNDARY =
+  /^[\s\p{Letter_Number}\p{Modifier_Letter}\p{Modifier_Symbol}\p{Nonspacing_Mark}\p{Other_Letter}\p{Other_Symbol}\p{Script=Han}!"#$%&'(),./:;<=>?\\{|}~\u{2ffc}-\u{303d}\u{30a0}-\u{30fb}\u{3192}-\u{32bf}\u{fe10}-\u{fe1f}\u{fe30}-\u{fe6f}\u{ff00}-\u{ffef}\u{2ebf0}-\u{2ee5d}]*$/u;
 
 export default createRule<[{ words?: Words }?]>("prefer-linked-words", {
   meta: {
@@ -85,8 +86,8 @@ export default createRule<[{ words?: Words }?]>("prefer-linked-words", {
             if (index < 0) break;
             startPosition = index + word.length;
             if (
-              !RE_PUNCTUATOR.test(text[index - 1] || "") ||
-              !RE_PUNCTUATOR.test(text[index + word.length] || "")
+              !RE_BOUNDARY.test(text[index - 1] || "") ||
+              !RE_BOUNDARY.test(text[index + word.length] || "")
             ) {
               // not a whole word
               continue;
