@@ -1,5 +1,19 @@
 # eslint-plugin-markdown-preferences
 
+## 0.5.0
+
+### Minor Changes
+
+- [#20](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/20) [`7c8678e`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/7c8678e3d01adf31554ed87ac23ad2508c378600) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat(prefer-linked-words): add ignores option
+
+- [#24](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/24) [`5c1fdf9`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/5c1fdf9b24082c62a8dac921222081ea3cd2efc1) Thanks [@ota-meshi](https://github.com/ota-meshi)! - **BREAKING!**(prefer-linked-words): change the rule to not ignore headings and footnotes by default
+
+- [#20](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/20) [`7c8678e`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/7c8678e3d01adf31554ed87ac23ad2508c378600) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat(prefer-inline-code-words): add ignores option
+
+### Patch Changes
+
+- [#23](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/23) [`ffba446`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/ffba44605fae9c91ac86138d7d992465f69ef543) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix: export rule config types
+
 ## 0.4.0
 
 ### Minor Changes
