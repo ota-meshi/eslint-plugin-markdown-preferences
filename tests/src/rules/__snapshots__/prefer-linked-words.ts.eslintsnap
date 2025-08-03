@@ -68,19 +68,21 @@ Plugins: unable to serialize
 
 Code:
   1 | # ESLint
+    |   ^~~~~~ [1]
   2 |
   3 | ESLintはリントツールです。Prettierはフォーマッターです。
-    | ^~~~~~ [1]      ^~~~~~~~ [2]
+    | ^~~~~~ [2]      ^~~~~~~~ [3]
   4 |
 
 Output:
-  1 | # ESLint
+  1 | # [ESLint](https://eslint.org)
   2 |
   3 | [ESLint](https://eslint.org)はリントツールです。[Prettier](https://prettier.io)はフォーマッターです。
   4 |
 
 [1] The word "ESLint" should be a link.
-[2] The word "Prettier" should be a link.
+[2] The word "ESLint" should be a link.
+[3] The word "Prettier" should be a link.
 ---
 
 
@@ -118,6 +120,54 @@ Output:
 
 
 Test: prefer-linked-words >> invalid
+Filename: tests/fixtures/rules/prefer-linked-words/invalid/ignore-example-input.md
+Language: markdown/gfm
+Options:
+  - words:
+      eslint-plugin-markdown-preferences: https://ota-meshi.github.io/eslint-plugin-markdown-preferences/
+      markdown-preferences/prefer-linked-words: https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html
+      ESLint: https://eslint.org
+      Prettier: https://prettier.io
+Plugins: unable to serialize
+
+Code:
+  1 | # Ignore Test
+  2 |
+  3 | ESLint is a popular linting tool for JavaScript and TypeScript.
+    | ^~~~~~ [1]
+  4 |
+  5 | - ESLint[^a]
+    |   ^~~~~~ [2]
+  6 | - TypeScript[^b]
+  7 | - JavaScript[^c]
+  8 |
+  9 | [^a]: ESLint is a static code analysis tool for identifying problematic patterns in JavaScript code.
+    |       ^~~~~~ [3]
+ 10 | [^b]: TypeScript is a superset of JavaScript that adds static types.
+ 11 | [^c]: JavaScript is a programming language that conforms to the ECMAScript specification.
+ 12 |
+
+Output:
+  1 | # Ignore Test
+  2 |
+  3 | [ESLint](https://eslint.org) is a popular linting tool for JavaScript and TypeScript.
+  4 |
+  5 | - [ESLint](https://eslint.org)[^a]
+  6 | - TypeScript[^b]
+  7 | - JavaScript[^c]
+  8 |
+  9 | [^a]: [ESLint](https://eslint.org) is a static code analysis tool for identifying problematic patterns in JavaScript code.
+ 10 | [^b]: TypeScript is a superset of JavaScript that adds static types.
+ 11 | [^c]: JavaScript is a programming language that conforms to the ECMAScript specification.
+ 12 |
+
+[1] The word "ESLint" should be a link.
+[2] The word "ESLint" should be a link.
+[3] The word "ESLint" should be a link.
+---
+
+
+Test: prefer-linked-words >> invalid >>> "# Ignore Test\n\nESLint is a popular linting tool for JavaScript and TypeScript.\n\n- ESLint[^a]\n- TypeScript[^b]\n- JavaScript[^c]\n\n[^a]: ESLint is a static code analysis tool for identifying problematic patterns in JavaScript code.\n[^b]: TypeScript is a superset of JavaScript that adds static types.\n[^c]: JavaScript is a programming language that conforms to the ECMAScript specification.\n 2"
 Filename: tests/fixtures/rules/prefer-linked-words/invalid/ignores/example-input.md
 Language: markdown/gfm
 Options:
@@ -186,19 +236,20 @@ Plugins: unable to serialize
 Code:
   1 |
   2 | # eslint-plugin-markdown-preferences
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   3 |
   4 | eslint-plugin-markdown-preferences is an ESLint plugin that provides rules for Markdown files to enforce preferences.
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]   ^~~~~~ [2]
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]   ^~~~~~ [3]
   5 |
   6 | ## Rules
   7 |
   8 | - `markdown-preferences/prefer-linked-words` ... Enforce the specified word to be a link.
-    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
   9 |
 
 Output:
   1 |
-  2 | # eslint-plugin-markdown-preferences
+  2 | # [eslint-plugin-markdown-preferences](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/)
   3 |
   4 | [eslint-plugin-markdown-preferences](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/) is an [ESLint](https://eslint.org) plugin that provides rules for Markdown files to enforce preferences.
   5 |
@@ -208,8 +259,9 @@ Output:
   9 |
 
 [1] The word "eslint-plugin-markdown-preferences" should be a link.
-[2] The word "ESLint" should be a link.
-[3] The word "markdown-preferences/prefer-linked-words" should be a link.
+[2] The word "eslint-plugin-markdown-preferences" should be a link.
+[3] The word "ESLint" should be a link.
+[4] The word "markdown-preferences/prefer-linked-words" should be a link.
 ---
 
 
