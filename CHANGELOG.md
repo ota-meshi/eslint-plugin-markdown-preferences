@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.4.0
+
+### Minor Changes
+
+- [#16](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/16) [`1bd0fc1`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/1bd0fc111b21442ec9f974fa6f935e9616331647) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add `markdown-preferences/prefer-inline-code-words` rule
+
 ## 0.3.3
 
 ### Patch Changes

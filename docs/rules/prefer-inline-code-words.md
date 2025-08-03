@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/prefer-inline-code-words"
 description: "enforce the use of inline code for specific words."
+since: "v0.4.0"
 ---
 
 # markdown-preferences/prefer-inline-code-words
 
 > enforce the use of inline code for specific words.
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -64,6 +64,10 @@ This rule requires configuration of the words that should be wrapped in inline c
 - [markdown-preferences/prefer-linked-words]
 
 [markdown-preferences/prefer-linked-words]: ./prefer-linked-words.md
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.4.0
 
 ## 🔍 Implementation
 
