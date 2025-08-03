@@ -105,8 +105,10 @@ TODO: Review this section
       },
       "ignores": [
         {
-          "words": null, // Ignore all words
-          "node": { "type": "listItem" }
+          "node": { "type": "heading" }
+        },
+        {
+          "node": { "type": "footnoteDefinition" }
         }
       ]
     }
@@ -193,6 +195,10 @@ You can use the `ignores` option to exclude the rule application under specific 
       },
       "ignores": [
         {
+          "words": "ESLint",
+          "node": { "type": "heading", "depth": 1 }
+        },
+        {
           "words": ["ESLint", "TypeScript"], 
           "node": { "type": "listItem" }
         },
@@ -207,6 +213,7 @@ You can use the `ignores` option to exclude the rule application under specific 
 
 In this configuration:
 
+- "ESLint" in level 1 headings will be ignored
 - "ESLint" and "TypeScript" in list items will be ignored
 - All words in all footnotes will be ignored
 

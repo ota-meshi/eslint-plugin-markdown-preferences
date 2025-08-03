@@ -1,5 +1,5 @@
 import { createRule } from "../utils/index.js";
-import type { Link, LinkReference, Heading, FootnoteDefinition } from "mdast";
+import type { Link, LinkReference } from "mdast";
 import path from "node:path";
 import type { Ignores } from "../utils/search-words.js";
 import {
@@ -77,8 +77,8 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
         }
       }
 
-      type IgnoreNode = Link | LinkReference | Heading | FootnoteDefinition;
-      let ignoreNode: IgnoreNode | null = null;
+      type LinkedNode = Link | LinkReference;
+      let linkedNode: LinkedNode | null = null;
       return {
         "*"(node) {
           ignores.enter(node);
@@ -86,17 +86,15 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
         "*:exit"(node) {
           ignores.exit(node);
         },
-        "link, linkReference, heading, footnoteDefinition"(node: IgnoreNode) {
-          if (ignoreNode) return;
-          ignoreNode = node;
+        "link, linkReference"(node: LinkedNode) {
+          if (linkedNode) return;
+          linkedNode = node;
         },
-        "link, linkReference, heading, footnoteDefinition:exit"(
-          node: IgnoreNode,
-        ) {
-          if (ignoreNode === node) ignoreNode = null;
+        "link, linkReference:exit"(node: LinkedNode) {
+          if (linkedNode === node) linkedNode = null;
         },
         text(node) {
-          if (ignoreNode) return;
+          if (linkedNode) return;
           for (const { word, loc, range } of iterateSearchWords({
             sourceCode,
             node,
@@ -120,7 +118,7 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
           }
         },
         inlineCode(node) {
-          if (ignoreNode) return;
+          if (linkedNode) return;
           for (const word of words) {
             if (ignores.ignore(word)) continue;
             if (node.value === word) {

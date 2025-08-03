@@ -53,6 +53,13 @@ type MarkdownPreferencesNoTrailingSpaces = []|[{
 // ----- markdown-preferences/prefer-inline-code-words -----
 type MarkdownPreferencesPreferInlineCodeWords = []|[{
   words: string[]
+  ignores?: {
+    words?: (string | string[])
+    node?: {
+      [k: string]: unknown | undefined
+    }
+    [k: string]: unknown | undefined
+  }[]
   [k: string]: unknown | undefined
 }]
 // ----- markdown-preferences/prefer-linked-words -----
@@ -60,5 +67,12 @@ type MarkdownPreferencesPreferLinkedWords = []|[{
   words: ({
     [k: string]: (string | null)
   } | string[])
+  ignores?: {
+    words?: (string | string[])
+    node?: {
+      [k: string]: unknown | undefined
+    }
+    [k: string]: unknown | undefined
+  }[]
   [k: string]: unknown | undefined
 }]
