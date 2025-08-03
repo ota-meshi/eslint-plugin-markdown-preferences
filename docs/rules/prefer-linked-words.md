@@ -104,7 +104,7 @@ The rule accepts a single object with a `words` property that can be configured 
     {
       "words": {
         "ESLint": "https://eslint.org/",
-        "Markdown": "https://daringfireball.net/projects/markdown/",
+        "Markdown": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Howto/Markdown_in_MDN",
         "TypeScript": "https://www.typescriptlang.org/"
       }
     }
