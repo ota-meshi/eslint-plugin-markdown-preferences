@@ -118,6 +118,61 @@ Output:
 
 
 Test: prefer-linked-words >> invalid
+Filename: tests/fixtures/rules/prefer-linked-words/invalid/ignores/example-input.md
+Language: markdown/gfm
+Options:
+  - words:
+      ESLint: https://eslint.org/
+      TypeScript: https://www.typescriptlang.org/
+      JavaScript: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+    ignores:
+      - words:
+          - ESLint
+          - TypeScript
+        node:
+          type: listItem
+      - node:
+          type: footnoteDefinition
+Plugins: unable to serialize
+
+Code:
+  1 | # Ignore Test
+  2 |
+  3 | ESLint is a popular linting tool for JavaScript and TypeScript.
+    | ^~~~~~ [1]                           ^~~~~~~~~~ [2] ^~~~~~~~~~ [3]
+  4 |
+  5 | - ESLint[^a]
+  6 | - TypeScript[^b]
+  7 | - JavaScript[^c]
+    |   ^~~~~~~~~~ [4]
+  8 |
+  9 | [^a]: ESLint is a static code analysis tool for identifying problematic patterns in JavaScript code.
+ 10 | [^b]: TypeScript is a superset of JavaScript that adds static types.
+ 11 | [^c]: JavaScript is a programming language that conforms to the ECMAScript specification.
+ 12 |
+
+Output:
+  1 | # Ignore Test
+  2 |
+  3 | [ESLint](https://eslint.org/) is a popular linting tool for [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) and [TypeScript](https://www.typescriptlang.org/).
+  4 |
+  5 | - ESLint[^a]
+  6 | - TypeScript[^b]
+  7 | - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)[^c]
+  8 |
+  9 | [^a]: ESLint is a static code analysis tool for identifying problematic patterns in JavaScript code.
+ 10 | [^b]: TypeScript is a superset of JavaScript that adds static types.
+ 11 | [^c]: JavaScript is a programming language that conforms to the ECMAScript specification.
+ 12 |
+
+[1] The word "ESLint" should be a link.
+[2] The word "JavaScript" should be a link.
+[3] The word "TypeScript" should be a link.
+[4] The word "JavaScript" should be a link.
+---
+
+
+Test: prefer-linked-words >> invalid
 Filename: tests/fixtures/rules/prefer-linked-words/invalid/test01-input.md
 Language: markdown/gfm
 Options:

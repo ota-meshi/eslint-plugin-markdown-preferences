@@ -2,6 +2,80 @@
 
 
 Test: prefer-inline-code-words >> invalid
+Filename: tests/fixtures/rules/prefer-inline-code-words/invalid/ignores/example-input.md
+Language: markdown/gfm
+Options:
+  - words:
+      - ESLint
+      - TypeScript
+      - JavaScript
+    ignores:
+      - node:
+          type: heading
+          depth: 1
+      - words:
+          - ESLint
+          - TypeScript
+        node:
+          type: listItem
+      - node:
+          type: footnoteDefinition
+Plugins: unable to serialize
+
+Code:
+  1 | # ESLint
+  2 |
+  3 | ## Ignore Test
+  4 |
+  5 | ESLint is a popular linting tool for JavaScript and TypeScript.
+    | ^~~~~~ [1]                           ^~~~~~~~~~ [2] ^~~~~~~~~~ [3]
+  6 |
+  7 | - ESLint[^a]
+  8 | - TypeScript[^b]
+  9 | - JavaScript[^c]
+    |   ^~~~~~~~~~ [4]
+ 10 |
+ 11 | [^a]: ESLint is a static code analysis tool for identifying problematic patterns in JavaScript code.
+ 12 | [^b]: TypeScript is a superset of JavaScript that adds static types.
+ 13 | [^c]: JavaScript is a programming language that conforms to the ECMAScript specification.
+ 14 |
+ 15 | ## JavaScript
+    |    ^~~~~~~~~~ [5]
+ 16 |
+ 17 | ## TypeScript
+    |    ^~~~~~~~~~ [6]
+ 18 |
+
+Output:
+  1 | # ESLint
+  2 |
+  3 | ## Ignore Test
+  4 |
+  5 | `ESLint` is a popular linting tool for `JavaScript` and `TypeScript`.
+  6 |
+  7 | - ESLint[^a]
+  8 | - TypeScript[^b]
+  9 | - `JavaScript`[^c]
+ 10 |
+ 11 | [^a]: ESLint is a static code analysis tool for identifying problematic patterns in JavaScript code.
+ 12 | [^b]: TypeScript is a superset of JavaScript that adds static types.
+ 13 | [^c]: JavaScript is a programming language that conforms to the ECMAScript specification.
+ 14 |
+ 15 | ## `JavaScript`
+ 16 |
+ 17 | ## `TypeScript`
+ 18 |
+
+[1] The word "ESLint" should be in inline code.
+[2] The word "JavaScript" should be in inline code.
+[3] The word "TypeScript" should be in inline code.
+[4] The word "JavaScript" should be in inline code.
+[5] The word "JavaScript" should be in inline code.
+[6] The word "TypeScript" should be in inline code.
+---
+
+
+Test: prefer-inline-code-words >> invalid
 Filename: tests/fixtures/rules/prefer-inline-code-words/invalid/link-input.md
 Language: markdown/gfm
 Options:
