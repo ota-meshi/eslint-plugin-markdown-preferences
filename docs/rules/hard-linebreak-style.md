@@ -98,7 +98,6 @@ The style of hard linebreak to enforce.
 ## 📚 Further reading
 
 - [CommonMark Spec: Hard Line Breaks](https://spec.commonmark.org/0.31.2/#hard-line-breaks)
-- [Markdown Guide: Line Breaks](https://www.markdownguide.org/basic-syntax/#line-breaks)
 - [GitHub Flavored Markdown: Hard Line Breaks](https://github.github.com/gfm/#hard-line-breaks)
 
 ## 🚀 Version
