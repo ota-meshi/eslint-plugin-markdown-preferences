@@ -4,7 +4,7 @@ import type { JSONSchema4 } from "json-schema";
 import type { Text } from "mdast";
 
 export const RE_BOUNDARY =
-  /^[\s\p{Letter_Number}\p{Modifier_Letter}\p{Modifier_Symbol}\p{Nonspacing_Mark}\p{Other_Letter}\p{Other_Symbol}\p{Script=Han}!"#$%&'(),./:;<=>?\\{|}~\u{2ffc}-\u{303d}\u{30a0}-\u{30fb}\u{3192}-\u{32bf}\u{fe10}-\u{fe1f}\u{fe30}-\u{fe6f}\u{ff00}-\u{ffef}\u{2ebf0}-\u{2ee5d}]*$/u;
+  /^[\s\p{Letter_Number}\p{Modifier_Letter}\p{Modifier_Symbol}\p{Nonspacing_Mark}\p{Other_Letter}\p{Other_Symbol}\p{Script=Han}!"#$%&'()*+,./:;<=>?\\{|}~\u{2ffc}-\u{303d}\u{30a0}-\u{30fb}\u{3192}-\u{32bf}\u{fe10}-\u{fe1f}\u{fe30}-\u{fe6f}\u{ff00}-\u{ffef}\u{2ebf0}-\u{2ee5d}]*$/u;
 
 /**
  * Iterate through words in a text node that match the specified words.

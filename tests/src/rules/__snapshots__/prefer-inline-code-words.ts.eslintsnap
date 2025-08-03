@@ -275,3 +275,37 @@ Output:
 [11] The word "Node.js" should be in inline code.
 [12] The word "Node.js" should be in inline code.
 ---
+
+
+Test: prefer-inline-code-words >> invalid
+Filename: tests/fixtures/rules/prefer-inline-code-words/invalid/test02-input.md
+Language: markdown/gfm
+Options:
+  - words:
+      - ESLint
+      - TypeScript
+      - JavaScript
+      - Node.js
+      - npm
+Plugins: unable to serialize
+
+Code:
+  1 | # **JavaScript and TypeScript**
+    |     ^~~~~~~~~~ [1] ^~~~~~~~~~ [2]
+  2 |
+  3 | JavaScript+TypeScript
+    | ^~~~~~~~~~ ^~~~~~~~~~
+    | [3]        [4]
+  4 |
+
+Output:
+  1 | # **`JavaScript` and `TypeScript`**
+  2 |
+  3 | `JavaScript`+`TypeScript`
+  4 |
+
+[1] The word "JavaScript" should be in inline code.
+[2] The word "TypeScript" should be in inline code.
+[3] The word "JavaScript" should be in inline code.
+[4] The word "TypeScript" should be in inline code.
+---
