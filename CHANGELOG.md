@@ -1,5 +1,15 @@
 # eslint-plugin-markdown-preferences
 
+## 0.6.0
+
+### Minor Changes
+
+- [#25](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/25) [`7f45288`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/7f4528823517f8282bb4218f49b28c2bec4467d9) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat(prefer-inline-code-words): improve word detection
+
+- [#25](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/25) [`7f45288`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/7f4528823517f8282bb4218f49b28c2bec4467d9) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat(prefer-linked-words): improve word detection
+
+- [#27](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/27) [`1d67c5b`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/1d67c5b4501b630ab1293f018dd8db2ef979e93c) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add `markdown-preferences/prefer-link-reference-definitions` rule
+
 ## 0.5.0
 
 ### Minor Changes

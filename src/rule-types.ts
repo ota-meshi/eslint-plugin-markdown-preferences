@@ -34,6 +34,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/prefer-inline-code-words'?: Linter.RuleEntry<MarkdownPreferencesPreferInlineCodeWords>
   /**
+   * enforce using link reference definitions instead of inline links
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-link-reference-definitions.html
+   */
+  'markdown-preferences/prefer-link-reference-definitions'?: Linter.RuleEntry<MarkdownPreferencesPreferLinkReferenceDefinitions>
+  /**
    * enforce the specified word to be a link.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html
    */
@@ -61,6 +66,11 @@ type MarkdownPreferencesPreferInlineCodeWords = []|[{
     [k: string]: unknown | undefined
   }[]
   [k: string]: unknown | undefined
+}]
+// ----- markdown-preferences/prefer-link-reference-definitions -----
+type MarkdownPreferencesPreferLinkReferenceDefinitions = []|[{
+  
+  minLinks?: number
 }]
 // ----- markdown-preferences/prefer-linked-words -----
 type MarkdownPreferencesPreferLinkedWords = []|[{
