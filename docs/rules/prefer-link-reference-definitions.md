@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/prefer-link-reference-definitions"
 description: "enforce using link reference definitions instead of inline links"
+since: "v0.6.0"
 ---
 
 # markdown-preferences/prefer-link-reference-definitions
 
 > enforce using link reference definitions instead of inline links
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -62,6 +62,10 @@ The minimum number of links with the same URL to trigger the rule. Default is `2
 ## 📚 Further reading
 
 - [CommonMark Spec: Reference Links](https://spec.commonmark.org/0.31.2/#link-reference-definitions)
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.6.0
 
 ## 🔍 Implementation
 
