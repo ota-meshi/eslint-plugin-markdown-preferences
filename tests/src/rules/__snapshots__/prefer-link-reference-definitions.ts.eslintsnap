@@ -1,0 +1,114 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/test01-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | # Test
+  2 |
+  3 | ## Linters
+  4 |
+  5 | - [ESLint](https://eslint.org) is a JavaScript linter.
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  6 | - [ESLint](https://eslint.org) helps maintain code quality.
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  7 |
+  8 | ## Formatters
+  9 |
+ 10 | - [Prettier](https://prettier.io) formats your code.
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+ 11 | - [Prettier](https://prettier.io) supports many languages.
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+ 12 | ## Tools
+
+Output:
+  1 | # Test
+  2 |
+  3 | ## Linters
+  4 |
+  5 | - [ESLint] is a JavaScript linter.
+  6 | - [ESLint] helps maintain code quality.
+  7 |
+  8 | [ESLint]: https://eslint.org
+  9 |
+ 10 | ## Formatters
+ 11 |
+ 12 | - [Prettier] formats your code.
+ 13 | - [Prettier] supports many languages.
+ 14 |
+ 15 | [Prettier]: https://prettier.io
+ 16 |
+ 17 | ## Tools
+
+[1] Use link reference definitions instead of inline links.
+[2] Use link reference definitions instead of inline links.
+[3] Use link reference definitions instead of inline links.
+[4] Use link reference definitions instead of inline links.
+---
+
+
+Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/test02-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | # Test
+  2 |
+  3 | ## Linters
+  4 |
+  5 | - [ESLint](https://eslint.org) is a JavaScript linter.
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  6 | - [ESLint](https://eslint.org) helps maintain code quality.
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  7 |
+
+Output:
+  1 | # Test
+  2 |
+  3 | ## Linters
+  4 |
+  5 | - [ESLint] is a JavaScript linter.
+  6 | - [ESLint] helps maintain code quality.
+  7 |
+  8 | [ESLint]: https://eslint.org
+  9 |
+
+[1] Use link reference definitions instead of inline links.
+[2] Use link reference definitions instead of inline links.
+---
+
+
+Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/test03-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | # Test
+  2 |
+  3 | ## Linters
+  4 |
+  5 | - [ESLint](https://eslint.org) is a JavaScript linter.
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  6 | - [ESLint] helps maintain code quality.
+  7 |
+  8 | [ESLint]: https://eslint.org
+  9 |
+
+Output:
+  1 | # Test
+  2 |
+  3 | ## Linters
+  4 |
+  5 | - [ESLint] is a JavaScript linter.
+  6 | - [ESLint] helps maintain code quality.
+  7 |
+  8 | [ESLint]: https://eslint.org
+  9 |
+
+[1] Use link reference definitions instead of inline links.
+---
