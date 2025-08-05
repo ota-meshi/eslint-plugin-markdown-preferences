@@ -2,6 +2,98 @@
 
 
 Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/image-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | # Test Images
+  2 |
+  3 | ## Screenshots
+  4 |
+  5 | ![ESLint Logo](https://eslint.org/img/logo.svg)
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  6 | ![ESLint Logo](https://eslint.org/img/logo.svg)
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  7 |
+  8 | ## Icons
+  9 |
+ 10 | ![GitHub](https://github.com/favicon.ico)
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+ 11 | ![GitHub](https://github.com/favicon.ico)
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+ 12 |
+
+Output:
+  1 | # Test Images
+  2 |
+  3 | ## Screenshots
+  4 |
+  5 | [ESLint Logo]
+  6 | [ESLint Logo]
+  7 |
+  8 | [ESLint Logo]: https://eslint.org/img/logo.svg
+  9 |
+ 10 | ## Icons
+ 11 |
+ 12 | [GitHub]
+ 13 | [GitHub]
+ 14 |
+ 15 | [GitHub]: https://github.com/favicon.ico
+ 16 |
+
+[1] Use link reference definitions instead of inline links.
+[2] Use link reference definitions instead of inline links.
+[3] Use link reference definitions instead of inline links.
+[4] Use link reference definitions instead of inline links.
+---
+
+
+Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/mixed-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | # Mixed Links and Images
+  2 |
+  3 | ## Documentation
+  4 |
+  5 | Check out [ESLint](https://eslint.org) for linting.
+    |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  6 | ![ESLint Logo](https://eslint.org/img/logo.svg)
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  7 |
+  8 | Visit [ESLint](https://eslint.org) homepage.
+    |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+  9 | ![ESLint Logo](https://eslint.org/img/logo.svg)
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+ 10 |
+
+Output:
+  1 | # Mixed Links and Images
+  2 |
+  3 | ## Documentation
+  4 |
+  5 | Check out [ESLint] for linting.
+  6 | [ESLint Logo]
+  7 |
+  8 | Visit [ESLint] homepage.
+  9 | [ESLint Logo]
+ 10 |
+ 11 | [ESLint]: https://eslint.org
+ 12 |
+ 13 | [ESLint Logo]: https://eslint.org/img/logo.svg
+ 14 |
+
+[1] Use link reference definitions instead of inline links.
+[2] Use link reference definitions instead of inline links.
+[3] Use link reference definitions instead of inline links.
+[4] Use link reference definitions instead of inline links.
+---
+
+
+Test: prefer-link-reference-definitions >> invalid
 Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/test01-input.md
 Language: markdown/gfm
 Plugins: unable to serialize

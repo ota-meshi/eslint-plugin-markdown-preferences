@@ -1,4 +1,12 @@
-import type { Definition, Heading, Link, LinkReference, Resource } from "mdast";
+import type {
+  Definition,
+  Heading,
+  Image,
+  ImageReference,
+  Link,
+  LinkReference,
+  Resource,
+} from "mdast";
 import { createRule } from "../utils/index.ts";
 
 export default createRule<[{ minLinks?: number }?]>(
@@ -40,8 +48,8 @@ export default createRule<[{ minLinks?: number }?]>(
       const minLinks = options.minLinks ?? 2;
 
       const definitions: Definition[] = [];
-      const links: Link[] = [];
-      const linkReferences: LinkReference[] = [];
+      const links: (Link | Image)[] = [];
+      const references: (LinkReference | ImageReference)[] = [];
       const headings: Heading[] = [];
 
       /**
@@ -49,8 +57,8 @@ export default createRule<[{ minLinks?: number }?]>(
        */
       function verify() {
         type ResourceNodes = {
-          links: Link[];
-          linkReferences: LinkReference[];
+          links: (Link | Image)[];
+          references: (LinkReference | ImageReference)[];
           definitions: Definition[];
         };
 
@@ -61,12 +69,12 @@ export default createRule<[{ minLinks?: number }?]>(
         for (const link of links) {
           getResourceNodes(link).links.push(link);
         }
-        for (const linkReference of linkReferences) {
+        for (const reference of references) {
           const definition = definitions.find(
-            (def) => def.identifier === linkReference.identifier,
+            (def) => def.identifier === reference.identifier,
           );
           if (definition) {
-            getResourceNodes(definition).linkReferences.push(linkReference);
+            getResourceNodes(definition).references.push(reference);
           }
         }
         for (const definition of definitions) {
@@ -77,7 +85,7 @@ export default createRule<[{ minLinks?: number }?]>(
           for (const nodes of map.values()) {
             if (
               nodes.links.length === 0 ||
-              nodes.links.length + nodes.linkReferences.length < minLinks
+              nodes.links.length + nodes.references.length < minLinks
             )
               continue;
 
@@ -98,11 +106,24 @@ export default createRule<[{ minLinks?: number }?]>(
                     identifier = definition.label ?? definition.identifier;
                   } else {
                     identifier = linkInfo.label.replaceAll(/[[\]]/gu, "-");
+                    if (
+                      definitions.some((def) => def.identifier === identifier)
+                    ) {
+                      let seq = 1;
+                      const original = identifier;
+                      identifier = `${original}-${seq}`;
+                      while (
+                        // eslint-disable-next-line no-loop-func -- OK
+                        definitions.some((def) => def.identifier === identifier)
+                      ) {
+                        identifier = `${original}-${++seq}`;
+                      }
+                    }
                   }
 
                   yield fixer.replaceText(
                     link,
-                    `${sourceCode.text.slice(...linkInfo.labelRange)}${identifier === linkInfo.label ? "" : `[${identifier}]`}`,
+                    `${sourceCode.text.slice(...linkInfo.bracketsRange)}${identifier === linkInfo.label ? "" : `[${identifier}]`}`,
                   );
 
                   if (!definition) {
@@ -157,7 +178,7 @@ export default createRule<[{ minLinks?: number }?]>(
           if (!nodes) {
             nodes = {
               links: [],
-              linkReferences: [],
+              references: [],
               definitions: [],
             };
             map.set(title, nodes);
@@ -168,10 +189,16 @@ export default createRule<[{ minLinks?: number }?]>(
 
       return {
         link(node) {
+          if (sourceCode.getText(node).startsWith("[")) {
+            // Ignore <link> and url links
+            links.push(node);
+          }
+        },
+        image(node) {
           links.push(node);
         },
-        linkReference(node) {
-          linkReferences.push(node);
+        "linkReference, imageReference"(node) {
+          references.push(node);
         },
         definition(node) {
           definitions.push(node);
@@ -187,34 +214,53 @@ export default createRule<[{ minLinks?: number }?]>(
       /**
        * Get the range of the link label.
        */
-      function getLinkInfo(link: Link) {
+      function getLinkInfo(link: Link | Image) {
         const range = sourceCode.getRange(link);
-        const linkLabelRange = getLinkLabelRange();
-        const linkLabelWithBracketsText = sourceCode.text.slice(
-          ...linkLabelRange,
-        );
-        const linkLabelText = linkLabelWithBracketsText.slice(1, -1).trim();
-        const urlStartIndex = sourceCode.text.indexOf("(", linkLabelRange[1]);
+        if (link.type === "link") {
+          const bracketsRange = getLinkBracketsRange(link);
+          const linkBracketsText = sourceCode.text.slice(...bracketsRange);
+          const linkLabelText = linkBracketsText.slice(1, -1).trim();
+          const urlStartIndex = sourceCode.text.indexOf("(", bracketsRange[1]);
+          return {
+            label: linkLabelText,
+            bracketsRange,
+            urlAndTitleRange: [urlStartIndex, range[1]] as [number, number],
+          };
+        }
+        const bracketsRange = getImageBracketsRange(link);
+        const linkBracketsText = sourceCode.text.slice(...bracketsRange);
+        const linkLabelText = linkBracketsText.slice(1, -1).trim();
+        const urlStartIndex = sourceCode.text.indexOf("(", bracketsRange[1]);
         return {
           label: linkLabelText,
-          labelRange: linkLabelRange,
+          bracketsRange,
           urlAndTitleRange: [urlStartIndex, range[1]] as [number, number],
         };
+      }
 
-        /**
-         * Get the range of the link label.
-         */
-        function getLinkLabelRange(): [number, number] {
-          if (link.children.length === 0) {
-            const index = sourceCode.text.indexOf("]", range[0] + 1);
-            return [range[0], index + 1];
-          }
-          const lastRange = sourceCode.getRange(
-            link.children[link.children.length - 1],
-          );
-          const index = sourceCode.text.indexOf("]", lastRange[1]);
+      /**
+       * Get the range of the link label.
+       */
+      function getLinkBracketsRange(link: Link): [number, number] {
+        const range = sourceCode.getRange(link);
+        if (link.children.length === 0) {
+          const index = sourceCode.text.indexOf("]", range[0] + 1);
           return [range[0], index + 1];
         }
+        const lastRange = sourceCode.getRange(
+          link.children[link.children.length - 1],
+        );
+        const index = sourceCode.text.indexOf("]", lastRange[1]);
+        return [range[0], index + 1];
+      }
+
+      /**
+       * Get the range of the image label.
+       */
+      function getImageBracketsRange(image: Image): [number, number] {
+        const range = sourceCode.getRange(image);
+        const index = sourceCode.text.indexOf("]", range[0] + 2);
+        return [range[0] + 1, index + 1];
       }
     },
   },
