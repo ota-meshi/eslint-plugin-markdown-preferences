@@ -18,6 +18,7 @@
     "outDir": "lib",
     "resolveJsonModule": true,
     "noEmit": true,
+    "allowImportingTsExtensions": true,
 
     "skipLibCheck": true
   },

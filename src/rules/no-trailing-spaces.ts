@@ -1,5 +1,5 @@
 import type { SourceLocation } from "@eslint/core";
-import { createRule } from "../utils/index.js";
+import { createRule } from "../utils/index.ts";
 import type { Break, Code, Html, InlineCode, Text, Yaml } from "mdast";
 import type { Json, Toml } from "@eslint/markdown/types";
 

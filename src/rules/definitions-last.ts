@@ -1,5 +1,5 @@
 import type { Definition, FootnoteDefinition } from "mdast";
-import { createRule } from "../utils/index.js";
+import { createRule } from "../utils/index.ts";
 
 export default createRule("definitions-last", {
   meta: {

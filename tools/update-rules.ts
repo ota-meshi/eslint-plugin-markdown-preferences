@@ -21,13 +21,13 @@ let content = `/*
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-import type { RuleModule } from "../types.js"
+import type { RuleModule } from "../types.ts"
 ${rules
   .map(
     (rule) =>
       `import ${camelCase(rule.meta.docs.ruleName)} from "../rules/${
         rule.meta.docs.ruleName
-      }.js"`,
+      }.ts"`,
   )
   .join("\n")}
 

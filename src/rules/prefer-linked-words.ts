@@ -1,12 +1,12 @@
-import { createRule } from "../utils/index.js";
+import { createRule } from "../utils/index.ts";
 import type { Link, LinkReference } from "mdast";
 import path from "node:path";
-import type { Ignores } from "../utils/search-words.js";
+import type { Ignores } from "../utils/search-words.ts";
 import {
   createSearchWordsIgnoreContext,
   IGNORES_SCHEMA,
   iterateSearchWords,
-} from "../utils/search-words.js";
+} from "../utils/search-words.ts";
 
 type WordsObject = Record<string, string | null>;
 type Words = WordsObject | string[];

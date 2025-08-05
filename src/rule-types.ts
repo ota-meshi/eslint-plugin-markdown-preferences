@@ -14,6 +14,11 @@ declare module 'eslint' {
 
 export interface RuleOptions {
   /**
+   * require link definitions and footnote definitions to be placed at the end of the document
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/definitions-last.html
+   */
+  'markdown-preferences/definitions-last'?: Linter.RuleEntry<[]>
+  /**
    * enforce consistent hard linebreak style.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/hard-linebreak-style.html
    */

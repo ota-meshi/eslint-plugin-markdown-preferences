@@ -1,11 +1,11 @@
 import type { LinkReference } from "mdast";
-import { createRule } from "../utils/index.js";
-import type { Ignores } from "../utils/search-words.js";
+import { createRule } from "../utils/index.ts";
+import type { Ignores } from "../utils/search-words.ts";
 import {
   createSearchWordsIgnoreContext,
   IGNORES_SCHEMA,
   iterateSearchWords,
-} from "../utils/search-words.js";
+} from "../utils/search-words.ts";
 
 type Words = string[];
 

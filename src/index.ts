@@ -1,8 +1,8 @@
-export * from "./rule-types.js";
-import type { RuleModule } from "./types.js";
-import { rules as ruleList } from "./utils/rules.js";
-import * as recommended from "./configs/recommended.js";
-import * as meta from "./meta.js";
+export * from "./rule-types.ts";
+import type { RuleModule } from "./types.ts";
+import { rules as ruleList } from "./utils/rules.ts";
+import * as recommended from "./configs/recommended.ts";
+import * as meta from "./meta.ts";
 import type { Linter } from "eslint";
 import type { RuleDefinition } from "@eslint/core";
 

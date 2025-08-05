@@ -16,10 +16,10 @@ for (const rec of ["recommended"] as const) {
  * in order to update its content execute "npm run update"
  */
 import type { ESLint, Linter } from "eslint";
-import plugin from "../index.js";
+import plugin from "../index.ts";
 import markdown from "@eslint/markdown";
 export const name = "markdown-preferences/recommended";
-export const files = ["**/*.md"];
+export const files = ["*.md", "**/*.md"];
 export const language = "markdown/commonmark";
 export const plugins = {
   markdown,
