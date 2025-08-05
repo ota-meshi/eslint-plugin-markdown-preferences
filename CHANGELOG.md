@@ -1,11 +1,5 @@
 # eslint-plugin-markdown-preferences
 
-## 0.7.0
-
-### Minor Changes
-
-- [#28](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/28) [`911207f`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/911207f8e454b5d79157564365d9a841ba4f8b65) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/definitions-last`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/definitions-last.html) rule
-
 ## 0.6.0
 
 ### Minor Changes
