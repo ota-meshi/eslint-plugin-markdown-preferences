@@ -13,10 +13,10 @@ A specialized ESLint plugin that helps enforce consistent writing style and form
 
 ## 📛 Features
 
-- **🔧 Auto-fixable rules** - Automatically format your Markdown files to match your style preferences
-- **📝 Line break consistency** - Enforce consistent hard line break styles (backslash `\` vs trailing spaces)
-- **🔗 Link enforcement** - Ensure specific words or terms are properly linked to their documentation
-- **🎯 Customizable** - Configure rules to match your team's specific requirements
+- **⚡ Effortless automation** - Transform your Markdown with auto-fixing that handles formatting, linking, and style consistency automatically
+- **📖 Professional documentation** - Enforce consistent line breaks, clean up trailing spaces, and organize link definitions for enterprise-ready documentation
+- **🎯 Smart terminology management** - Automatically convert specified words into inline code or clickable links based on your configuration
+- **⚙️ Highly customizable configuration** - Fine-tune every aspect with granular rule options, word lists, ignore patterns, and flexible thresholds to match your exact requirements
 
 **Try it live:** Check out the [Online Demo](https://eslint-online-playground.netlify.app/#eslint-plugin-markdown-preferences) to see the plugin in action!
 
