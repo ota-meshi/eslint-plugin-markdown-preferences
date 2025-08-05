@@ -25,3 +25,4 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 | [markdown-preferences/hard-linebreak-style](./hard-linebreak-style.md) | enforce consistent hard linebreak style. | 🔧 | ⭐ |
 | [markdown-preferences/no-trailing-spaces](./no-trailing-spaces.md) | disallow trailing whitespace at the end of lines in Markdown files. | 🔧 |  |
 | [markdown-preferences/prefer-link-reference-definitions](./prefer-link-reference-definitions.md) | enforce using link reference definitions instead of inline links | 🔧 |  |
+| [markdown-preferences/sort-definitions](./sort-definitions.md) | enforce a specific order for link definitions and footnote definitions | 🔧 |  |

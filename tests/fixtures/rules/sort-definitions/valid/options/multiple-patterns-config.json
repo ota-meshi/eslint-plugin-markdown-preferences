@@ -1,0 +1,10 @@
+{
+  "options": [
+    {
+      "order": [
+        ["api-docs", "user-guide"],
+        { "match": "/.*-link\\]/u", "sort": "alphabetical" }
+      ]
+    }
+  ]
+}

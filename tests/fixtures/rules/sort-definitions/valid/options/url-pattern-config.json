@@ -1,0 +1,10 @@
+{
+  "options": [
+    {
+      "order": [
+        { "match": "https://github.com/", "sort": "alphabetical" },
+        { "match": "/./u", "sort": "alphabetical" }
+      ]
+    }
+  ]
+}

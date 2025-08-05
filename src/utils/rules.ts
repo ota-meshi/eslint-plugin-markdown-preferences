@@ -9,6 +9,7 @@ import noTrailingSpaces from "../rules/no-trailing-spaces.ts";
 import preferInlineCodeWords from "../rules/prefer-inline-code-words.ts";
 import preferLinkReferenceDefinitions from "../rules/prefer-link-reference-definitions.ts";
 import preferLinkedWords from "../rules/prefer-linked-words.ts";
+import sortDefinitions from "../rules/sort-definitions.ts";
 
 export const rules = [
   definitionsLast,
@@ -18,4 +19,5 @@ export const rules = [
   preferInlineCodeWords,
   preferLinkReferenceDefinitions,
   preferLinkedWords,
+  sortDefinitions,
 ] as RuleModule[];
