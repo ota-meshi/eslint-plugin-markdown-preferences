@@ -1,5 +1,17 @@
 # eslint-plugin-markdown-preferences
 
+## 0.8.0
+
+### Minor Changes
+
+- [#36](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/36) [`509dd4a`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/509dd4afc42c94e4c666cdb772323723c878b5ca) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat([markdown-preferences/prefer-link-reference-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-link-reference-definitions.html)): add support for image urls
+
+- [#34](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/34) [`99692a0`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/99692a0d16d7c9595f1547b2986636e8e9230ac8) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/sort-definitions`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/sort-definitions.html) rule
+
+### Patch Changes
+
+- [#36](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/36) [`509dd4a`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/509dd4afc42c94e4c666cdb772323723c878b5ca) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix([markdown-preferences/prefer-link-reference-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-link-reference-definitions.html)): false positives for autolinks (`<url>` and url text)
+
 ## 0.7.0
 
 ### Minor Changes

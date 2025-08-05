@@ -48,6 +48,11 @@ export interface RuleOptions {
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html
    */
   'markdown-preferences/prefer-linked-words'?: Linter.RuleEntry<MarkdownPreferencesPreferLinkedWords>
+  /**
+   * enforce a specific order for link definitions and footnote definitions
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/sort-definitions.html
+   */
+  'markdown-preferences/sort-definitions'?: Linter.RuleEntry<MarkdownPreferencesSortDefinitions>
 }
 
 /* ======= Declarations ======= */
@@ -90,4 +95,12 @@ type MarkdownPreferencesPreferLinkedWords = []|[{
     [k: string]: unknown | undefined
   }[]
   [k: string]: unknown | undefined
+}]
+// ----- markdown-preferences/sort-definitions -----
+type MarkdownPreferencesSortDefinitions = []|[{
+  order?: (string | [string, ...(string)[]] | {
+    match: (string | [string, ...(string)[]])
+    sort: ("alphabetical" | "ignore")
+  })[]
+  alphabetical?: boolean
 }]
