@@ -63,6 +63,10 @@ The minimum number of links with the same URL to trigger the rule. Default is `2
 
 - [CommonMark Spec: Reference Links](https://spec.commonmark.org/0.31.2/#link-reference-definitions)
 
+## 👫 Related rules
+
+- [markdown-preferences/definitions-last](./definitions-last.md)
+
 ## 🚀 Version
 
 This rule was introduced in eslint-plugin-markdown-preferences v0.6.0

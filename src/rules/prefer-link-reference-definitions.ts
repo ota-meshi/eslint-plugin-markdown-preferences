@@ -1,4 +1,4 @@
-import type { Definition, Link, LinkReference, Resource } from "mdast";
+import type { Definition, Heading, Link, LinkReference, Resource } from "mdast";
 import { createRule } from "../utils/index.js";
 
 export default createRule<[{ minLinks?: number }?]>(
@@ -41,6 +41,7 @@ export default createRule<[{ minLinks?: number }?]>(
       const definitions: Definition[] = [];
       const links: Link[] = [];
       const linkReferences: LinkReference[] = [];
+      const headings: Heading[] = [];
 
       /**
        * Verify links.
@@ -105,16 +106,31 @@ export default createRule<[{ minLinks?: number }?]>(
 
                   if (!definition) {
                     const linkRange = sourceCode.getRange(link);
-                    const reLineBreaks = /\n#{1,6}\s/gu;
-                    reLineBreaks.lastIndex = linkRange[1];
-                    const nextSectionMatch = reLineBreaks.exec(sourceCode.text);
-                    const insertIndex = !nextSectionMatch
-                      ? sourceCode.text.trimEnd().length
-                      : nextSectionMatch.index;
+                    const nextSectionHeading = headings.find(
+                      (heading) =>
+                        linkRange[1] < sourceCode.getRange(heading)[0],
+                    );
+                    let insertIndex: number;
+                    if (nextSectionHeading) {
+                      const headingRange =
+                        sourceCode.getRange(nextSectionHeading);
+                      const headingStartLoc =
+                        sourceCode.getLoc(nextSectionHeading).start;
+                      insertIndex = headingRange[0] - headingStartLoc.column;
+                    } else {
+                      insertIndex = sourceCode.text.trimEnd().length;
+                    }
 
                     yield fixer.insertTextAfterRange(
                       [insertIndex, insertIndex],
-                      `${sourceCode.text[insertIndex - 1] === "\n" ? "" : "\n"}\n[${identifier}]: ${sourceCode.text.slice(linkInfo.urlAndTitleRange[0] + 1, linkInfo.urlAndTitleRange[1] - 1).trim()}${nextSectionMatch ? "\n" : ""}`,
+                      `${
+                        sourceCode.text[insertIndex - 1] === "\n" ? "" : "\n"
+                      }\n[${identifier}]: ${sourceCode.text
+                        .slice(
+                          linkInfo.urlAndTitleRange[0] + 1,
+                          linkInfo.urlAndTitleRange[1] - 1,
+                        )
+                        .trim()}${nextSectionHeading ? "\n" : ""}`,
                     );
                   }
                 },
@@ -158,6 +174,9 @@ export default createRule<[{ minLinks?: number }?]>(
         },
         definition(node) {
           definitions.push(node);
+        },
+        heading(node) {
+          headings.push(node);
         },
         "root:exit"() {
           verify();

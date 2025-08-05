@@ -100,6 +100,10 @@ The style of hard linebreak to enforce.
 - [CommonMark Spec: Hard Line Breaks](https://spec.commonmark.org/0.31.2/#hard-line-breaks)
 - [GitHub Flavored Markdown: Hard Line Breaks](https://github.github.com/gfm/#hard-line-breaks)
 
+## 👫 Related rules
+
+- [markdown-preferences/no-text-backslash-linebreak](./no-text-backslash-linebreak.md)
+
 ## 🚀 Version
 
 This rule was introduced in eslint-plugin-markdown-preferences v0.1.0
