@@ -1,0 +1,259 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: definitions-last >> invalid
+Filename: tests/fixtures/rules/definitions-last/invalid/test01-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | # Test Document
+  2 |
+  3 | [ESLint]: https://eslint.org
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  4 |
+  5 | This document has a link definition in the middle.
+  6 |
+  7 | ## Introduction
+  8 |
+  9 | Welcome to [ESLint] documentation.
+ 10 |
+ 11 | ## Features
+ 12 |
+ 13 | - Supports JavaScript and TypeScript
+ 14 | - Works with Node.js applications
+ 15 |
+
+Output:
+  1 | # Test Document
+  2 |
+  3 | This document has a link definition in the middle.
+  4 |
+  5 | ## Introduction
+  6 |
+  7 | Welcome to [ESLint] documentation.
+  8 |
+  9 | ## Features
+ 10 |
+ 11 | - Supports JavaScript and TypeScript
+ 12 | - Works with Node.js applications
+ 13 |
+ 14 | [ESLint]: https://eslint.org
+ 15 |
+
+[1] Definition or footnote definition should be placed at the end of the document.
+---
+
+
+Test: definitions-last >> invalid
+Filename: tests/fixtures/rules/definitions-last/invalid/test02-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | # Test Document
+  2 |
+  3 | ## Introduction
+  4 |
+  5 | [^footnote]: This footnote is too early.
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  6 |
+  7 | Welcome to the documentation. See footnote[^footnote].
+  8 |
+  9 | ## More Content
+ 10 |
+ 11 | This is more content after the footnote definition.
+ 12 |
+
+Output:
+  1 | # Test Document
+  2 |
+  3 | ## Introduction
+  4 |
+  5 | Welcome to the documentation. See footnote[^footnote].
+  6 |
+  7 | ## More Content
+  8 |
+  9 | This is more content after the footnote definition.
+ 10 |
+ 11 | [^footnote]: This footnote is too early.
+ 12 |
+
+[1] Definition or footnote definition should be placed at the end of the document.
+---
+
+
+Test: definitions-last >> invalid
+Filename: tests/fixtures/rules/definitions-last/invalid/test03-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | # Mixed Definitions
+  2 |
+  3 | ## Section 1
+  4 |
+  5 | [link1]: https://example.com
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  6 |
+  7 | Check [link1] and [link2] for more info.
+  8 |
+  9 | ## Section 2
+ 10 |
+ 11 | [^note]: A footnote definition in the wrong place.
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 12 |
+ 13 | Some text with footnote[^note] reference.
+ 14 |
+ 15 | ## Section 3
+ 16 |
+ 17 | More content here.
+ 18 |
+ 19 | [link2]: https://example2.com
+ 20 |
+
+Output:
+  1 | # Mixed Definitions
+  2 |
+  3 | ## Section 1
+  4 |
+  5 | Check [link1] and [link2] for more info.
+  6 |
+  7 | ## Section 2
+  8 |
+  9 | Some text with footnote[^note] reference.
+ 10 |
+ 11 | ## Section 3
+ 12 |
+ 13 | More content here.
+ 14 |
+ 15 | [^note]: A footnote definition in the wrong place.
+ 16 |
+ 17 | [link1]: https://example.com
+ 18 |
+ 19 | [link2]: https://example2.com
+ 20 |
+
+[1] Definition or footnote definition should be placed at the end of the document.
+[2] Definition or footnote definition should be placed at the end of the document.
+---
+
+
+Test: definitions-last >> invalid
+Filename: tests/fixtures/rules/definitions-last/invalid/test04-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | # Multiple Early Definitions
+  2 |
+  3 | [first]: https://first.com
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  4 | [second]: https://second.com
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  5 |
+  6 | This document has multiple definitions at the beginning.
+  7 |
+  8 | Check [first] and [second] links.
+  9 |
+ 10 | ## Content
+ 11 |
+ 12 | Some content here.
+ 13 |
+ 14 | [^footnote1]: First footnote in wrong place.
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+ 15 | [^footnote2]: Second footnote in wrong place.
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+ 16 |
+ 17 | More text with footnotes[^footnote1] and[^footnote2].
+ 18 |
+ 19 | ## Final Section
+ 20 |
+ 21 | The end.
+ 22 |
+
+Output:
+  1 | # Multiple Early Definitions
+  2 |
+  3 | This document has multiple definitions at the beginning.
+  4 |
+  5 | Check [first] and [second] links.
+  6 |
+  7 | ## Content
+  8 |
+  9 | Some content here.
+ 10 |
+ 11 | More text with footnotes[^footnote1] and[^footnote2].
+ 12 |
+ 13 | ## Final Section
+ 14 |
+ 15 | The end.
+ 16 | [second]: https://second.com
+ 17 | [^footnote2]: Second footnote in wrong place.
+ 18 |
+ 19 | [^footnote1]: First footnote in wrong place.
+ 20 |
+ 21 | [first]: https://first.com
+ 22 |
+
+[1] Definition or footnote definition should be placed at the end of the document.
+[2] Definition or footnote definition should be placed at the end of the document.
+[3] Definition or footnote definition should be placed at the end of the document.
+[4] Definition or footnote definition should be placed at the end of the document.
+---
+
+
+Test: definitions-last >> invalid
+Filename: tests/fixtures/rules/definitions-last/invalid/test05-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | # Definitions with Whitespace
+  2 |
+  3 | This document tests definitions with various whitespace patterns.
+  4 |
+  5 | [spaced-def]: https://example.com
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  6 |
+  7 | Some content referencing [spaced-def].
+  8 |
+  9 | ## Another Section
+ 10 |
+ 11 |
+ 12 | [^spaced-footnote]: A footnote with spacing issues.
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 13 |
+ 14 |
+ 15 | Text with footnote[^spaced-footnote].
+ 16 |
+ 17 | ## Final Content
+ 18 |
+ 19 | More text here.
+ 20 |
+
+Output:
+  1 | # Definitions with Whitespace
+  2 |
+  3 | This document tests definitions with various whitespace patterns.
+  4 |
+  5 | Some content referencing [spaced-def].
+  6 |
+  7 | ## Another Section
+  8 |
+  9 |
+ 10 | Text with footnote[^spaced-footnote].
+ 11 |
+ 12 | ## Final Content
+ 13 |
+ 14 | More text here.
+ 15 |
+ 16 |
+ 17 | [^spaced-footnote]: A footnote with spacing issues.
+ 18 |
+ 19 | [spaced-def]: https://example.com
+ 20 |
+
+[1] Definition or footnote definition should be placed at the end of the document.
+[2] Definition or footnote definition should be placed at the end of the document.
+---
