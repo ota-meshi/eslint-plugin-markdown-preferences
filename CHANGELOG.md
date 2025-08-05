@@ -1,5 +1,15 @@
 # eslint-plugin-markdown-preferences
 
+## 0.7.0
+
+### Minor Changes
+
+- [`2e9cbd4`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/2e9cbd401c4d805b917d64d933ee15c0ee452afc) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/definitions-last`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/definitions-last.html) rule
+
+### Patch Changes
+
+- [#31](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/31) [`c98f496`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/c98f496f91d92c437b71d36077cee263a89e2684) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix([markdown-preferences/prefer-link-reference-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-link-reference-definitions.html)): wrong autofix for image links
+
 ## 0.6.0
 
 ### Minor Changes
