@@ -112,3 +112,27 @@ Output:
 
 [1] Use link reference definitions instead of inline links.
 ---
+
+
+Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/test04-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | [![NPM license](https://img.shields.io/npm/l/eslint-plugin-markdown-preferences.svg)](https://www.npmjs.com/package/eslint-plugin-markdown-preferences)
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  2 | [![NPM version](https://img.shields.io/npm/v/eslint-plugin-markdown-preferences.svg)](https://www.npmjs.com/package/eslint-plugin-markdown-preferences)
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  3 |
+
+Output:
+  1 | [![NPM license](https://img.shields.io/npm/l/eslint-plugin-markdown-preferences.svg)][!-NPM license-(https://img.shields.io/npm/l/eslint-plugin-markdown-preferences.svg)]
+  2 | [![NPM version](https://img.shields.io/npm/v/eslint-plugin-markdown-preferences.svg)][!-NPM license-(https://img.shields.io/npm/l/eslint-plugin-markdown-preferences.svg)]
+  3 |
+  4 | [!-NPM license-(https://img.shields.io/npm/l/eslint-plugin-markdown-preferences.svg)]: https://www.npmjs.com/package/eslint-plugin-markdown-preferences
+  5 |
+
+[1] Use link reference definitions instead of inline links.
+[2] Use link reference definitions instead of inline links.
+---

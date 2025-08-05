@@ -1,5 +1,5 @@
 import type { Definition, Heading, Link, LinkReference, Resource } from "mdast";
-import { createRule } from "../utils/index.js";
+import { createRule } from "../utils/index.ts";
 
 export default createRule<[{ minLinks?: number }?]>(
   "prefer-link-reference-definitions",
@@ -96,7 +96,7 @@ export default createRule<[{ minLinks?: number }?]>(
                   if (definition) {
                     identifier = definition.label ?? definition.identifier;
                   } else {
-                    identifier = linkInfo.label.replaceAll(/\]/g, "-");
+                    identifier = linkInfo.label.replaceAll(/[[\]]/gu, "-");
                   }
 
                   yield fixer.replaceText(
@@ -211,7 +211,7 @@ export default createRule<[{ minLinks?: number }?]>(
           const lastRange = sourceCode.getRange(
             link.children[link.children.length - 1],
           );
-          const index = sourceCode.text.indexOf("]", lastRange[0] + 1);
+          const index = sourceCode.text.indexOf("]", lastRange[1]);
           return [range[0], index + 1];
         }
       }

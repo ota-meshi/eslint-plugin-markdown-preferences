@@ -1,4 +1,4 @@
-import { createRule } from "../utils/index.js";
+import { createRule } from "../utils/index.ts";
 
 export default createRule<[{ style?: "backslash" | "spaces" }?]>(
   "hard-linebreak-style",

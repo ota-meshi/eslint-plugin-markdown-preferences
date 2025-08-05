@@ -38,7 +38,7 @@ const logger = console;
 
   fs.writeFileSync(
     ruleFile,
-    `import { createRule } from "../utils/index.js"
+    `import { createRule } from "../utils/index.ts"
 
 export default createRule("${ruleId}", {
     meta: {
