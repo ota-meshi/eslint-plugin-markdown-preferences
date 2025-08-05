@@ -169,7 +169,6 @@ export default defineConfig([
   {
     files: ["CHANGELOG.md"],
     rules: {
-      "markdown-preferences/prefer-linked-words": "off",
       "markdown-preferences/definitions-last": "off",
       "markdown-preferences/prefer-link-reference-definitions": "off",
     },

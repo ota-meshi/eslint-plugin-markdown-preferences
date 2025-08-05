@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- [#28](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/28) [`911207f`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/911207f8e454b5d79157564365d9a841ba4f8b65) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add `markdown-preferences/definitions-last` rule
+- [#28](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/28) [`911207f`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/911207f8e454b5d79157564365d9a841ba4f8b65) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/definitions-last`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/definitions-last.html) rule
 
 ## 0.6.0
 
@@ -14,7 +14,7 @@
 
 - [#25](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/25) [`7f45288`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/7f4528823517f8282bb4218f49b28c2bec4467d9) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat(prefer-linked-words): improve word detection
 
-- [#27](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/27) [`1d67c5b`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/1d67c5b4501b630ab1293f018dd8db2ef979e93c) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add `markdown-preferences/prefer-link-reference-definitions` rule
+- [#27](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/27) [`1d67c5b`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/1d67c5b4501b630ab1293f018dd8db2ef979e93c) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/prefer-link-reference-definitions`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-link-reference-definitions.html) rule
 
 ## 0.5.0
 
@@ -34,7 +34,7 @@
 
 ### Minor Changes
 
-- [#16](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/16) [`1bd0fc1`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/1bd0fc111b21442ec9f974fa6f935e9616331647) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add `markdown-preferences/prefer-inline-code-words` rule
+- [#16](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/16) [`1bd0fc1`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/1bd0fc111b21442ec9f974fa6f935e9616331647) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/prefer-inline-code-words`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-inline-code-words.html) rule
 
 ## 0.3.3
 
@@ -58,13 +58,13 @@
 
 ### Minor Changes
 
-- [`36c802f`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/36c802f7831b592972f9af2d9fddc69fdff0aa8b) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add `markdown-preferences/no-trailing-spaces` rule
+- [`36c802f`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/36c802f7831b592972f9af2d9fddc69fdff0aa8b) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/no-trailing-spaces`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-trailing-spaces.html) rule
 
 ## 0.2.0
 
 ### Minor Changes
 
-- [#5](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/5) [`07932ad`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/07932adf0f50199017cc16078c5e4b27db53a597) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add `markdown-preferences/no-text-backslash-linebreak` rule
+- [#5](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/5) [`07932ad`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/07932adf0f50199017cc16078c5e4b27db53a597) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/no-text-backslash-linebreak`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-text-backslash-linebreak.html) rule
 
 ## 0.1.1
 
