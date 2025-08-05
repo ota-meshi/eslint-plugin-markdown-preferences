@@ -21,10 +21,13 @@ export interface RuleModule extends MarkdownRuleDefinition {
   create(context: RuleContext<unknown[]>): MarkdownRuleVisitor;
 }
 
+export type ListCategory = "Preference" | "Stylistic";
+
 export interface RuleMetaData {
   docs: {
     description: string;
     categories: "recommended"[] | null;
+    listCategory: ListCategory;
     url: string;
     ruleId: string;
     ruleName: string;
@@ -49,6 +52,7 @@ export interface PartialRuleMetaData {
     description: string;
     categories: "recommended"[] | null;
     default?: "error" | "warn";
+    listCategory: ListCategory;
   };
   messages: { [messageId: string]: string };
   fixable?: "code" | "whitespace";

@@ -17,6 +17,7 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
       docs: {
         description: "enforce the use of inline code for specific words.",
         categories: [],
+        listCategory: "Preference",
       },
       fixable: "code",
       hasSuggestions: false,

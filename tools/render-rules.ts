@@ -1,4 +1,5 @@
 import type { RuleModule } from "../src/types.js";
+import { LIST_CATEGORIES } from "./lib/list-categories.ts";
 import { rules } from "./lib/load-rules.js";
 
 //eslint-disable-next-line jsdoc/require-jsdoc -- tool
@@ -9,6 +10,17 @@ export default function renderRulesTableContent(
   const pluginRules = rules.filter((rule) => !rule.meta.deprecated);
 
   const deprecatedRules = rules.filter((rule) => rule.meta.deprecated);
+
+  const categories = [
+    ...new Set<string>(pluginRules.map((rule) => rule.meta.docs.listCategory)),
+  ].sort((a, b) => {
+    const aIndex = LIST_CATEGORIES.indexOf(a);
+    const bIndex = LIST_CATEGORIES.indexOf(b);
+    if (aIndex === -1 && bIndex === -1) {
+      return a > b ? 1 : a < b ? -1 : 0;
+    }
+    return aIndex - bIndex;
+  });
 
   // -----------------------------------------------------------------------------
 
@@ -49,13 +61,20 @@ export default function renderRulesTableContent(
   }
 
   // -----------------------------------------------------------------------------
-  let rulesTableContent = `
-#${"#".repeat(categoryLevel)} Markdown Rules
+  let rulesTableContent = categories
+    .map((category) => {
+      return `
+#${"#".repeat(categoryLevel)} ${category} Rules
 
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
-${pluginRules.map(toRuleRow).join("\n")}
+${pluginRules
+  .filter((rule) => rule.meta.docs.listCategory === category)
+  .map(toRuleRow)
+  .join("\n")}
 `;
+    })
+    .join("");
 
   // -----------------------------------------------------------------------------
   if (deprecatedRules.length >= 1) {

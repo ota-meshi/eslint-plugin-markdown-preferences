@@ -7,6 +7,7 @@ import type { RuleModule } from "../../src/types.js";
 import { transformerTwoslash } from "@shikijs/vitepress-twoslash";
 import { createTwoslasher as createTwoslasherESLint } from "twoslash-eslint";
 import eslintMarkdown from "@eslint/markdown";
+import { LIST_CATEGORIES } from "../../tools/lib/list-categories.ts";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -25,6 +26,22 @@ export default async (): Promise<UserConfig<DefaultTheme.Config>> => {
   const { rules } = (await import("../../src/utils/rules.js")) as {
     rules: RuleModule[];
   };
+
+  const categories = [
+    ...new Set<string>(
+      rules
+        .filter((rule) => !rule.meta.deprecated)
+        .map((rule) => rule.meta.docs.listCategory),
+    ),
+  ].sort((a, b) => {
+    const aIndex = LIST_CATEGORIES.indexOf(a);
+    const bIndex = LIST_CATEGORIES.indexOf(b);
+    if (aIndex === -1 && bIndex === -1) {
+      return a > b ? 1 : a < b ? -1 : 0;
+    }
+    return aIndex - bIndex;
+  });
+
   const plugin = await import("../../src/index.js").then((m) => m.default || m);
   return defineConfig({
     base: "/eslint-plugin-markdown-preferences/",
@@ -108,13 +125,17 @@ export default async (): Promise<UserConfig<DefaultTheme.Config>> => {
             text: "Rules",
             items: [{ text: "Available Rules", link: "/rules/" }],
           },
-          {
-            text: "Markdown Rules",
+          ...categories.map((category) => ({
+            text: `${category} Rules`,
             collapsed: false,
             items: rules
-              .filter((rule) => !rule.meta.deprecated)
+              .filter(
+                (rule) =>
+                  !rule.meta.deprecated &&
+                  rule.meta.docs.listCategory === category,
+              )
               .map(ruleToSidebarItem),
-          },
+          })),
 
           // Rules in no category.
           ...(rules.some((rule) => rule.meta.deprecated)

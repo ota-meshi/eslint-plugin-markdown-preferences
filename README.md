@@ -86,17 +86,22 @@ The rules with the following star ⭐ are included in the configs.
 
 <!--RULES_TABLE_START-->
 
-### Markdown Rules
+### Preference Rules
+
+| Rule ID | Description | Fixable | RECOMMENDED |
+|:--------|:------------|:-------:|:-----------:|
+| [markdown-preferences/no-text-backslash-linebreak](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-text-backslash-linebreak.html) | disallow text backslash at the end of a line. |  | ⭐ |
+| [markdown-preferences/prefer-inline-code-words](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-inline-code-words.html) | enforce the use of inline code for specific words. | 🔧 |  |
+| [markdown-preferences/prefer-linked-words](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html) | enforce the specified word to be a link. | 🔧 |  |
+
+### Stylistic Rules
 
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
 | [markdown-preferences/definitions-last](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/definitions-last.html) | require link definitions and footnote definitions to be placed at the end of the document | 🔧 |  |
 | [markdown-preferences/hard-linebreak-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/hard-linebreak-style.html) | enforce consistent hard linebreak style. | 🔧 | ⭐ |
-| [markdown-preferences/no-text-backslash-linebreak](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-text-backslash-linebreak.html) | disallow text backslash at the end of a line. |  | ⭐ |
 | [markdown-preferences/no-trailing-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-trailing-spaces.html) | disallow trailing whitespace at the end of lines in Markdown files. | 🔧 |  |
-| [markdown-preferences/prefer-inline-code-words](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-inline-code-words.html) | enforce the use of inline code for specific words. | 🔧 |  |
 | [markdown-preferences/prefer-link-reference-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-link-reference-definitions.html) | enforce using link reference definitions instead of inline links | 🔧 |  |
-| [markdown-preferences/prefer-linked-words](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html) | enforce the specified word to be a link. | 🔧 |  |
 
 <!--RULES_TABLE_END-->
 <!--RULES_SECTION_END-->

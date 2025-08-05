@@ -19,6 +19,7 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
       docs: {
         description: "enforce the specified word to be a link.",
         categories: [],
+        listCategory: "Preference",
       },
       fixable: "code",
       hasSuggestions: false,

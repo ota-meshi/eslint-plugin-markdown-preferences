@@ -46,6 +46,7 @@ export default createRule("${ruleId}", {
         docs: {
             description: "...",
             categories: ["..."],
+            listCategory: "...",
         },
         fixable: null,
         hasSuggestions: null,
