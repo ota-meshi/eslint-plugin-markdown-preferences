@@ -64,7 +64,7 @@
     "@changesets/get-release-plan": "^4.0.8",
     "@eslint/core": "^0.15.0",
     "@eslint/markdown": "^7.1.0",
-    "@ota-meshi/eslint-plugin": "^0.17.6",
+    "@ota-meshi/eslint-plugin": "^0.18.0",
     "@shikijs/vitepress-twoslash": "^3.0.0",
     "@types/eslint": "^9.6.1",
     "@types/eslint-scope": "^8.0.0",
