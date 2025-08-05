@@ -1,0 +1,7 @@
+{
+  "options": [
+    {
+      "order": ["alpha-link", { "match": "/./u", "sort": "alphabetical" }]
+    }
+  ]
+}

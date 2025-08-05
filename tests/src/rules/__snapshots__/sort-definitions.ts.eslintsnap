@@ -1,0 +1,425 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: sort-definitions >> invalid
+Filename: tests/fixtures/rules/sort-definitions/invalid/options/exclude-pattern-input.md
+Language: markdown/gfm
+Options:
+  - order:
+      - special
+      - match: "!/special/u"
+        sort: alphabetical
+Plugins: unable to serialize
+
+Code:
+  1 | # Mixed Pattern Test
+  2 |
+  3 | This tests mixed patterns with exclude option.
+  4 |
+  5 | See [normal] and [special] and note[^note].
+  6 |
+  7 | [normal]: https://example.com/normal
+  8 | [special]: https://example.com/special
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  9 | [^note]: A footnote
+    | ^~~~~~~~~~~~~~~~~~~ [2]
+ 10 |
+
+Output:
+  1 | # Mixed Pattern Test
+  2 |
+  3 | This tests mixed patterns with exclude option.
+  4 |
+  5 | See [normal] and [special] and note[^note].
+  6 |
+  7 | [special]: https://example.com/special
+  8 | [^note]: A footnote
+  9 |
+ 10 | [normal]: https://example.com/normal
+ 11 |
+
+[1] The definition '[special]: https://example.com/special' should be before '[normal]: https://example.com/normal'.
+[2] The definition '[^note]: A footnote' should be before '[normal]: https://example.com/normal'.
+---
+
+
+Test: sort-definitions >> invalid
+Filename: tests/fixtures/rules/sort-definitions/invalid/options/footnotes-first-input.md
+Language: markdown/gfm
+Options:
+  - order:
+      - match: /^\[\^/u
+        sort: alphabetical
+      - match: "!/^\\[\\^/u"
+        sort: alphabetical
+Plugins: unable to serialize
+
+Code:
+  1 | # Custom Order Test
+  2 |
+  3 | This tests custom order configuration.
+  4 |
+  5 | See [ESLint] and [TypeScript] and note[^first] and [^second].
+  6 |
+  7 | [TypeScript]: https://www.typescriptlang.org
+  8 | [ESLint]: https://eslint.org
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  9 | [^first]: First footnote
+    | ^~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 10 | [^second]: Second footnote
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+ 11 |
+
+Output:
+  1 | # Custom Order Test
+  2 |
+  3 | This tests custom order configuration.
+  4 |
+  5 | See [ESLint] and [TypeScript] and note[^first] and [^second].
+  6 |
+  7 | [^first]: First footnote
+  8 |
+  9 | [^second]: Second footnote
+ 10 |
+ 11 | [ESLint]: https://eslint.org
+ 12 | [TypeScript]: https://www.typescriptlang.org
+ 13 |
+
+[1] The definition '[ESLint]: https://eslint.org' should be before '[TypeScript]: https://www.typescriptlang.org'.
+[2] The definition '[^first]: First footnote' should be before '[TypeScript]: https://www.typescriptlang.org'.
+[3] The definition '[^second]: Second footnote' should be before '[TypeScript]: https://www.typescriptlang.org'.
+---
+
+
+Test: sort-definitions >> invalid
+Filename: tests/fixtures/rules/sort-definitions/invalid/options/multiple-patterns-input.md
+Language: markdown/gfm
+Options:
+  - order:
+      - - api-docs
+        - user-guide
+      - match: /.*-link\]/u
+        sort: alphabetical
+Plugins: unable to serialize
+
+Code:
+  1 | # Multiple Match Patterns Test
+  2 |
+  3 | This tests multiple match patterns.
+  4 |
+  5 | See [api-docs] and [user-guide] and [beta-link] and [alpha-link].
+  6 |
+  7 | [user-guide]: https://example.com/user-guide
+  8 | [api-docs]: https://example.com/api-docs
+  9 | [beta-link]: https://example.com/beta
+ 10 | [alpha-link]: https://example.com/alpha
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+ 11 |
+
+Output:
+  1 | # Multiple Match Patterns Test
+  2 |
+  3 | This tests multiple match patterns.
+  4 |
+  5 | See [api-docs] and [user-guide] and [beta-link] and [alpha-link].
+  6 |
+  7 | [user-guide]: https://example.com/user-guide
+  8 | [api-docs]: https://example.com/api-docs
+  9 | [alpha-link]: https://example.com/alpha
+ 10 | [beta-link]: https://example.com/beta
+ 11 |
+
+[1] The definition '[alpha-link]: https://example.com/alpha' should be before '[beta-link]: https://example.com/beta'.
+---
+
+
+Test: sort-definitions >> invalid
+Filename: tests/fixtures/rules/sort-definitions/invalid/options/specific-first-input.md
+Language: markdown/gfm
+Options:
+  - order:
+      - alpha-link
+      - match: /./u
+        sort: alphabetical
+Plugins: unable to serialize
+
+Code:
+  1 | # Specific Pattern Test
+  2 |
+  3 | This tests specific pattern matching.
+  4 |
+  5 | See [beta-link] and [alpha-link] and [gamma-link].
+  6 |
+  7 | [beta-link]: https://example.com/beta
+  8 | [alpha-link]: https://example.com/alpha
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  9 | [gamma-link]: https://example.com/gamma
+ 10 |
+
+Output:
+  1 | # Specific Pattern Test
+  2 |
+  3 | This tests specific pattern matching.
+  4 |
+  5 | See [beta-link] and [alpha-link] and [gamma-link].
+  6 |
+  7 | [alpha-link]: https://example.com/alpha
+  8 | [beta-link]: https://example.com/beta
+  9 | [gamma-link]: https://example.com/gamma
+ 10 |
+
+[1] The definition '[alpha-link]: https://example.com/alpha' should be before '[beta-link]: https://example.com/beta'.
+---
+
+
+Test: sort-definitions >> invalid
+Filename: tests/fixtures/rules/sort-definitions/invalid/options/url-pattern-input.md
+Language: markdown/gfm
+Options:
+  - order:
+      - match: https://github.com/
+        sort: alphabetical
+      - match: /./u
+        sort: alphabetical
+Plugins: unable to serialize
+
+Code:
+  1 | # URL Pattern Test
+  2 |
+  3 | This tests URL pattern matching.
+  4 |
+  5 | See [example] and [github] and [docs].
+  6 |
+  7 | [example]: https://example.com/page
+  8 | [github]: https://github.com/project
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  9 | [docs]: https://docs.example.com/guide
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 10 |
+
+Output:
+  1 | # URL Pattern Test
+  2 |
+  3 | This tests URL pattern matching.
+  4 |
+  5 | See [example] and [github] and [docs].
+  6 |
+  7 | [github]: https://github.com/project
+  8 | [docs]: https://docs.example.com/guide
+  9 | [example]: https://example.com/page
+ 10 |
+
+[1] The definition '[github]: https://github.com/project' should be before '[example]: https://example.com/page'.
+[2] The definition '[docs]: https://docs.example.com/guide' should be before '[example]: https://example.com/page'.
+---
+
+
+Test: sort-definitions >> invalid
+Filename: tests/fixtures/rules/sort-definitions/invalid/test01-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | # Test Document
+  2 |
+  3 | This is a test document with improperly sorted definitions.
+  4 |
+  5 | See [TypeScript] and [ESLint] for details.
+  6 | Also check the footnote[^second] and [^first].
+  7 |
+  8 | [^second]: This is the second footnote
+  9 | [^first]: This is the first footnote
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+ 10 |
+ 11 | [TypeScript]: https://www.typescriptlang.org
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 12 | [ESLint]: https://eslint.org
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+ 13 |
+
+Output:
+  1 | # Test Document
+  2 |
+  3 | This is a test document with improperly sorted definitions.
+  4 |
+  5 | See [TypeScript] and [ESLint] for details.
+  6 | Also check the footnote[^second] and [^first].
+  7 |
+  8 | [ESLint]: https://eslint.org
+  9 | [TypeScript]: https://www.typescriptlang.org
+ 10 |
+ 11 | [^first]: This is the first footnote
+ 12 |
+ 13 | [^second]: This is the second footnote
+ 14 |
+
+[1] The definition '[^first]: This is the first footnote' should be before '[^second]: This is the second footnote'.
+[2] The definition '[TypeScript]: https://www.typescriptlang.org' should be before '[^second]: This is the second footnote'.
+[3] The definition '[ESLint]: https://eslint.org' should be before '[^second]: This is the second footnote'.
+---
+
+
+Test: sort-definitions >> invalid
+Filename: tests/fixtures/rules/sort-definitions/invalid/test02-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | # Documentation
+  2 |
+  3 | This document has definitions in wrong order.
+  4 |
+  5 | Check out [Zulu] and [Alpha] projects.
+  6 |
+  7 | [Zulu]: https://example.com/zulu
+  8 | [Alpha]: https://example.com/alpha
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  9 |
+
+Output:
+  1 | # Documentation
+  2 |
+  3 | This document has definitions in wrong order.
+  4 |
+  5 | Check out [Zulu] and [Alpha] projects.
+  6 |
+  7 | [Alpha]: https://example.com/alpha
+  8 | [Zulu]: https://example.com/zulu
+  9 |
+
+[1] The definition '[Alpha]: https://example.com/alpha' should be before '[Zulu]: https://example.com/zulu'.
+---
+
+
+Test: sort-definitions >> invalid
+Filename: tests/fixtures/rules/sort-definitions/invalid/test03-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | # Mixed Definitions
+  2 |
+  3 | This document has footnotes and links mixed incorrectly.
+  4 |
+  5 | See [Beta] and note[^zebra] and [Alpha] and note[^alpha].
+  6 |
+  7 | [^zebra]: This is a zebra note
+  8 | [^alpha]: This is an alpha note
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  9 |
+ 10 | [Beta]: https://example.com/beta
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 11 | [Alpha]: https://example.com/alpha
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+ 12 |
+
+Output:
+  1 | # Mixed Definitions
+  2 |
+  3 | This document has footnotes and links mixed incorrectly.
+  4 |
+  5 | See [Beta] and note[^zebra] and [Alpha] and note[^alpha].
+  6 |
+  7 | [Alpha]: https://example.com/alpha
+  8 | [Beta]: https://example.com/beta
+  9 |
+ 10 | [^alpha]: This is an alpha note
+ 11 |
+ 12 | [^zebra]: This is a zebra note
+ 13 |
+
+[1] The definition '[^alpha]: This is an alpha note' should be before '[^zebra]: This is a zebra note'.
+[2] The definition '[Beta]: https://example.com/beta' should be before '[^zebra]: This is a zebra note'.
+[3] The definition '[Alpha]: https://example.com/alpha' should be before '[^zebra]: This is a zebra note'.
+---
+
+
+Test: sort-definitions >> invalid
+Filename: tests/fixtures/rules/sort-definitions/invalid/test04-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | # Complex Example
+  2 |
+  3 | Multiple sections with definitions.
+  4 |
+  5 | ## Section 1
+  6 |
+  7 | Check [Yankee] and [X-ray].
+  8 |
+  9 | ## Section 2
+ 10 |
+ 11 | See footnotes[^zoo] and [^apple].
+ 12 |
+ 13 | [^zoo]: Zoo footnote
+ 14 | [^apple]: Apple footnote
+    | ^~~~~~~~~~~~~~~~~~~~~~~~ [1]
+ 15 |
+ 16 | [Yankee]: https://example.com/yankee
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 17 | [X-ray]: https://example.com/xray
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+ 18 |
+
+Output:
+  1 | # Complex Example
+  2 |
+  3 | Multiple sections with definitions.
+  4 |
+  5 | ## Section 1
+  6 |
+  7 | Check [Yankee] and [X-ray].
+  8 |
+  9 | ## Section 2
+ 10 |
+ 11 | See footnotes[^zoo] and [^apple].
+ 12 |
+ 13 | [X-ray]: https://example.com/xray
+ 14 | [Yankee]: https://example.com/yankee
+ 15 |
+ 16 | [^apple]: Apple footnote
+ 17 |
+ 18 | [^zoo]: Zoo footnote
+ 19 |
+
+[1] The definition '[^apple]: Apple footnote' should be before '[^zoo]: Zoo footnote'.
+[2] The definition '[Yankee]: https://example.com/yankee' should be before '[^zoo]: Zoo footnote'.
+[3] The definition '[X-ray]: https://example.com/xray' should be before '[^zoo]: Zoo footnote'.
+---
+
+
+Test: sort-definitions >> invalid
+Filename: tests/fixtures/rules/sort-definitions/invalid/test05-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | # Single Type Sorting
+  2 |
+  3 | Only link definitions, but in wrong order.
+  4 |
+  5 | Check [Zebra] and [Alpha] and [Beta].
+  6 |
+  7 | [Zebra]: https://example.com/zebra
+  8 | [Alpha]: https://example.com/alpha
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  9 | [Beta]: https://example.com/beta
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 10 |
+
+Output:
+  1 | # Single Type Sorting
+  2 |
+  3 | Only link definitions, but in wrong order.
+  4 |
+  5 | Check [Zebra] and [Alpha] and [Beta].
+  6 |
+  7 | [Alpha]: https://example.com/alpha
+  8 | [Beta]: https://example.com/beta
+  9 | [Zebra]: https://example.com/zebra
+ 10 |
+
+[1] The definition '[Alpha]: https://example.com/alpha' should be before '[Zebra]: https://example.com/zebra'.
+[2] The definition '[Beta]: https://example.com/beta' should be before '[Zebra]: https://example.com/zebra'.
+---
