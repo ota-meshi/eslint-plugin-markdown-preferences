@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/definitions-last"
 description: "require link definitions and footnote definitions to be placed at the end of the document"
+since: "v0.7.0"
 ---
 
 # markdown-preferences/definitions-last
 
 > require link definitions and footnote definitions to be placed at the end of the document
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -57,6 +57,10 @@ This rule has no options.
 ## 👫 Related rules
 
 - [markdown-preferences/prefer-link-reference-definitions](./prefer-link-reference-definitions.md) - enforce using link reference definitions
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.7.0
 
 ## 🔍 Implementation
 
