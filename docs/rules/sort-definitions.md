@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/sort-definitions"
 description: "enforce a specific order for link definitions and footnote definitions"
+since: "v0.8.0"
 ---
 
 # markdown-preferences/sort-definitions
 
 > enforce a specific order for link definitions and footnote definitions
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -137,6 +137,10 @@ This means:
 
 - [markdown-preferences/definitions-last](./definitions-last.md)
 - [markdown-preferences/prefer-link-reference-definitions](./prefer-link-reference-definitions.md)
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.8.0
 
 ## 🔍 Implementation
 
