@@ -69,7 +69,7 @@ function parseText(
   const words: WordAndOffset[] = [];
 
   // Use regex to match word patterns, emoji and punctuation separately
-  const pattern = /(\w+(?:[-./]\w+)*|:\w+:|[^\s\w]+|\s+)/gu;
+  const pattern = /(\w+(?:[^\s\w]\w+)*|:\w+:|[^\s\w]+|\s+)/gu;
   let match;
 
   while ((match = pattern.exec(text)) !== null) {
