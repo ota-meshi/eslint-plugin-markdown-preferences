@@ -6,6 +6,8 @@ import { defaultMinorWords } from "../resources/minor-words.ts";
 
 type CaseStyle = "Title Case" | "Sentence case";
 
+type WordType = "normal" | "minor" | "preserved";
+
 /**
  * Parse preserve words and phrases from the options
  * - Single words are added to preserveWords
@@ -123,11 +125,14 @@ function convertWord(
   { word, first, last }: WordAndOffset,
   caseStyle: CaseStyle,
   minorWords: string[],
-): string {
+): { word: string; isMinorWord: boolean } {
   if (caseStyle === "Title Case") {
     // Always capitalize first and last words
     if (first || last) {
-      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+      return {
+        word: word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
+        isMinorWord: false,
+      };
     }
 
     // Check if it's a word that should remain lowercase
@@ -136,18 +141,30 @@ function convertWord(
         (minorWord) => minorWord.toLowerCase() === word.toLowerCase(),
       )
     ) {
-      return word.toLowerCase();
+      return {
+        word: word.toLowerCase(),
+        isMinorWord: true,
+      };
     }
 
     // Capitalize other words
-    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    return {
+      word: word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
+      isMinorWord: false,
+    };
   }
 
   // Sentence case
   if (first) {
-    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    return {
+      word: word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
+      isMinorWord: false,
+    };
   }
-  return word.toLowerCase();
+  return {
+    word: word.toLowerCase(),
+    isMinorWord: false,
+  };
 }
 
 export default createRule<
@@ -205,8 +222,14 @@ export default createRule<
       },
     ],
     messages: {
-      expectedTitleCase: "Expected heading to be in Title Case.",
-      expectedSentenceCase: "Expected heading to be in Sentence case.",
+      expectedTitleCase:
+        'Expected "{{actual}}" to be "{{expected}}" (Title Case).',
+      expectedTitleCaseMinorWord:
+        'Expected "{{actual}}" to be "{{expected}}" (Title Case - minor word).',
+      expectedSentenceCase:
+        'Expected "{{actual}}" to be "{{expected}}" (Sentence case).',
+      expectedPreserveWord:
+        'Expected "{{actual}}" to be "{{expected}}" (preserved word).',
     },
   },
   create(context) {
@@ -285,6 +308,7 @@ export default createRule<
             verifyWord(
               wordAndOffsets[index + wordIndex],
               preservePhrase[wordIndex],
+              "preserved",
             );
           }
           continue;
@@ -296,19 +320,31 @@ export default createRule<
         );
         if (preserveWordList) {
           if (!preserveWordList.some((w) => w === wordAndOffset.word)) {
-            verifyWord(wordAndOffset, preserveWordList[0]);
+            verifyWord(wordAndOffset, preserveWordList[0], "preserved");
           }
           continue;
         }
 
-        const expectedWord = convertWord(wordAndOffset, caseStyle, minorWords);
-        verifyWord(wordAndOffset, expectedWord);
+        const expectedWordResult = convertWord(
+          wordAndOffset,
+          caseStyle,
+          minorWords,
+        );
+        verifyWord(
+          wordAndOffset,
+          expectedWordResult.word,
+          expectedWordResult.isMinorWord ? "minor" : "normal",
+        );
       }
 
       /**
        * Verify a single word against the expected casing
        */
-      function verifyWord(wordAndOffset: WordAndOffset, expectedWord: string) {
+      function verifyWord(
+        wordAndOffset: WordAndOffset,
+        expectedWord: string,
+        wordType: WordType = "normal",
+      ) {
         const { word, offset } = wordAndOffset;
 
         if (word === expectedWord) return;
@@ -329,9 +365,17 @@ export default createRule<
         context.report({
           node,
           messageId:
-            caseStyle === "Title Case"
-              ? "expectedTitleCase"
-              : "expectedSentenceCase",
+            wordType === "preserved"
+              ? "expectedPreserveWord"
+              : caseStyle === "Title Case"
+                ? wordType === "minor"
+                  ? "expectedTitleCaseMinorWord"
+                  : "expectedTitleCase"
+                : "expectedSentenceCase",
+          data: {
+            actual: word,
+            expected: expectedWord,
+          },
           loc: {
             start: { line, column },
             end: { line, column: column + word.length },

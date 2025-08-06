@@ -6,7 +6,7 @@ This document explains how to configure ESLint for your TypeScript project.
 
 You can install ESLint using npm:
 
-```bash
+```sh
 npm install eslint --save-dev
 ```
 

@@ -152,6 +152,7 @@ export default defineConfig([
           ignorePatterns: [String.raw`/^markdown-preferences\//u`],
         },
       ],
+      "markdown-preferences/canonical-code-block-language": "error",
     },
   },
   {
@@ -226,6 +227,7 @@ export default defineConfig([
       "n/file-extension-in-import": "off",
       "@typescript-eslint/no-require-imports": "off",
       "markdown/no-missing-label-refs": "off",
+      "markdown/no-multiple-h1": "off",
       "markdown-preferences/hard-linebreak-style": "off",
       "markdown-preferences/prefer-linked-words": "off",
       "markdown-preferences/no-text-backslash-linebreak": "off",
@@ -233,6 +235,7 @@ export default defineConfig([
       "markdown-preferences/no-trailing-spaces": "off",
       "markdown-preferences/prefer-link-reference-definitions": "off",
       "markdown-preferences/heading-casing": "off",
+      "markdown-preferences/canonical-code-block-language": "off",
     },
   },
   {

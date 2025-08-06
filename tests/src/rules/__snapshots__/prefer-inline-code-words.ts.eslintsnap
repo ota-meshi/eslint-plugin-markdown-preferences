@@ -214,7 +214,7 @@ Code:
   7 | You can install ESLint using npm:
     |                 ^~~~~~ [4]   ^~~ [5]
   8 |
-  9 | ```bash
+  9 | ```sh
  10 | npm install eslint --save-dev
  11 | ```
  12 |
@@ -245,7 +245,7 @@ Output:
   6 |
   7 | You can install `ESLint` using `npm`:
   8 |
-  9 | ```bash
+  9 | ```sh
  10 | npm install eslint --save-dev
  11 | ```
  12 |

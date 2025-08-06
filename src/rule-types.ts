@@ -72,6 +72,8 @@ type MarkdownPreferencesHeadingCasing = []|[{
   preserveWords?: string[]
   
   ignorePatterns?: string[]
+  
+  minorWords?: string[]
 }]
 // ----- markdown-preferences/no-trailing-spaces -----
 type MarkdownPreferencesNoTrailingSpaces = []|[{

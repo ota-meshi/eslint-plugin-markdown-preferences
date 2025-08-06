@@ -2,7 +2,7 @@
 
 ## 💿 Installation
 
-```bash
+```sh
 npm install --save-dev eslint eslint-plugin-markdown-preferences
 ```
 
