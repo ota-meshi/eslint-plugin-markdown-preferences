@@ -45,7 +45,7 @@ bar\
 bar\
 ```
 
-## 💡 When to use this rule
+## 💡 When to Use This Rule
 
 Use this rule when you want to:
 
@@ -56,11 +56,11 @@ Use this rule when you want to:
 
 This rule has no configuration options.
 
-## 📚 Further reading
+## 📚 Further Reading
 
 - [CommonMark Spec: Hard Line Breaks](https://spec.commonmark.org/0.31.2/#hard-line-breaks)
 
-## 👫 Related rules
+## 👫 Related Rules
 
 - [markdown-preferences/hard-linebreak-style](./hard-linebreak-style.md)
 

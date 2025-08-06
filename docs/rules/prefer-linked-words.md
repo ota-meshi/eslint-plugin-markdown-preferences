@@ -221,12 +221,12 @@ In this configuration:
 
 Please refer to the [mdast](https://github.com/syntax-tree/mdast) documentation for detailed properties of each node.
 
-## 📚 Further reading
+## 📚 Further Reading
 
 - [CommonMark Spec: Links](https://spec.commonmark.org/0.31.2/#links)
 - [GitHub Flavored Markdown: Links](https://github.github.com/gfm/#links)
 
-## 👫 Related rules
+## 👫 Related Rules
 
 - [markdown-preferences/prefer-inline-code-words](prefer-inline-code-words.md)
 

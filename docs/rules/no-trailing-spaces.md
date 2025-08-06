@@ -56,7 +56,10 @@ bar
 }
 ```
 
-### `skipBlankLines` (default: `false`)
+- `skipBlankLines` (optional): When `true`, the rule ignores trailing spaces on empty lines. Default is `false`.
+- `ignoreComments` (optional): When `true`, the rule ignores trailing spaces in HTML comment lines. Default is `false`.
+
+### `skipBlankLines` (Default: `false`)
 
 When `true`, the rule ignores trailing spaces on empty lines.
 
@@ -80,7 +83,7 @@ When `true`, the rule ignores trailing spaces on empty lines.
 <!--EOF-->
 ```
 
-### `ignoreComments` (default: `false`)
+### `ignoreComments` (Default: `false`)
 
 When `true`, the rule ignores trailing spaces in HTML comment lines.
 
@@ -103,7 +106,7 @@ When `true`, the rule ignores trailing spaces in HTML comment lines.
 -->
 ```
 
-## 💡 When to use this rule
+## 💡 When to Use This Rule
 
 Use this rule when you want to:
 

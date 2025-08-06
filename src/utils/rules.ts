@@ -4,6 +4,7 @@
 import type { RuleModule } from "../types.ts";
 import definitionsLast from "../rules/definitions-last.ts";
 import hardLinebreakStyle from "../rules/hard-linebreak-style.ts";
+import headingCasing from "../rules/heading-casing.ts";
 import noTextBackslashLinebreak from "../rules/no-text-backslash-linebreak.ts";
 import noTrailingSpaces from "../rules/no-trailing-spaces.ts";
 import preferInlineCodeWords from "../rules/prefer-inline-code-words.ts";
@@ -14,6 +15,7 @@ import sortDefinitions from "../rules/sort-definitions.ts";
 export const rules = [
   definitionsLast,
   hardLinebreakStyle,
+  headingCasing,
   noTextBackslashLinebreak,
   noTrailingSpaces,
   preferInlineCodeWords,

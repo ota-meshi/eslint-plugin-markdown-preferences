@@ -1,0 +1,1045 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: heading-casing >> invalid
+Filename: tests/fixtures/rules/heading-casing/invalid/ignore-patterns-input.md
+Language: markdown/gfm
+Options:
+  - style: Title Case
+    ignorePatterns:
+      - \d+
+      - \w+_\w+
+      - \w+-\w+
+Plugins: unable to serialize
+
+Code:
+  1 | # this is test123 heading
+    |   ^~~~ ^~         ^~~~~~~
+    |   [1]  [2]        [3]
+  2 |
+  3 | ## configuration abc-def setup
+    |    ^~~~~~~~~~~~~ [4]     ^~~~~ [5]
+  4 |
+  5 | ### hello API_KEY world
+    |     ^~~~~ [6]     ^~~~~ [7]
+  6 |
+
+Output:
+  1 | # This Is test123 Heading
+  2 |
+  3 | ## Configuration abc-def Setup
+  4 |
+  5 | ### Hello API_KEY World
+  6 |
+
+[1] Expected heading to be in Title Case.
+[2] Expected heading to be in Title Case.
+[3] Expected heading to be in Title Case.
+[4] Expected heading to be in Title Case.
+[5] Expected heading to be in Title Case.
+[6] Expected heading to be in Title Case.
+[7] Expected heading to be in Title Case.
+---
+
+
+Test: heading-casing >> invalid
+Filename: tests/fixtures/rules/heading-casing/invalid/minor-words-input.md
+Language: markdown/gfm
+Options:
+  - minorWords:
+      - a
+      - an
+      - the
+      - and
+      - or
+      - but
+      - of
+      - in
+      - on
+      - at
+      - to
+      - for
+      - with
+Plugins: unable to serialize
+
+Code:
+  1 | # A Guide To Writing With Custom Minor Words
+    |           ^~ [1]     ^~~~ [2]
+  2 |
+  3 | ## The Best Practices For Writing
+    |                       ^~~ [3]
+  4 |
+  5 | ### Working With Custom Words And Settings
+    |             ^~~~ [4]          ^~~ [5]
+  6 |
+  7 | #### Tips For Writing On The Web
+    |           ^~~         ^~ ^~~
+    |           [6]        [7] [8]
+  8 |
+  9 | ##### How To Use A Tool For Better Results
+    |           ^~ [9] ^ [10] ^~~ [11]
+ 10 |
+ 11 | ###### The Ultimate Guide For Web Development
+    |                           ^~~ [12]
+ 12 |
+
+Output:
+  1 | # A Guide to Writing with Custom Minor Words
+  2 |
+  3 | ## The Best Practices for Writing
+  4 |
+  5 | ### Working with Custom Words and Settings
+  6 |
+  7 | #### Tips for Writing on the Web
+  8 |
+  9 | ##### How to Use a Tool for Better Results
+ 10 |
+ 11 | ###### The Ultimate Guide for Web Development
+ 12 |
+
+[1] Expected heading to be in Title Case.
+[2] Expected heading to be in Title Case.
+[3] Expected heading to be in Title Case.
+[4] Expected heading to be in Title Case.
+[5] Expected heading to be in Title Case.
+[6] Expected heading to be in Title Case.
+[7] Expected heading to be in Title Case.
+[8] Expected heading to be in Title Case.
+[9] Expected heading to be in Title Case.
+[10] Expected heading to be in Title Case.
+[11] Expected heading to be in Title Case.
+[12] Expected heading to be in Title Case.
+---
+
+
+Test: heading-casing >> invalid
+Filename: tests/fixtures/rules/heading-casing/invalid/multiline/test01-input.md
+Language: markdown/gfm
+Options:
+  - style: Title Case
+    preserveWords:
+      - ESLint
+      - JavaScript
+      - TypeScript
+      - GitHub
+Plugins: unable to serialize
+
+Code:
+  1 | # getting started with<br>eslint configuration
+    |   ^~~~~~~ ^~~~~~~ ^~~~    ^~~~~~ ^~~~~~~~~~~~~
+    |   [1]     [2]     [3]     [4]    [5]
+  2 |
+  3 | ## how to configure your<br>javascript and typescript rules
+    |    ^~~    ^~~~~~~~~ ^~~~    ^~~~~~~~~~     ^~~~~~~~~~ ^~~~~
+    |    [6]    [7]       [8]     [9]            [10]       [11]
+  4 |
+  5 | ### working with<br>multiple lines and<br>github integration
+    |     ^~~~~~~ ^~~~    ^~~~~~~~ ^~~~~        ^~~~~~ ^~~~~~~~~~~
+    |     [12]    [13]    [14]     [15]         [16]   [17]
+  6 |
+
+Output:
+  1 | # Getting Started With<br>ESLint Configuration
+  2 |
+  3 | ## How to Configure Your<br>JavaScript and TypeScript Rules
+  4 |
+  5 | ### Working With<br>Multiple Lines and<br>GitHub Integration
+  6 |
+
+[1] Expected heading to be in Title Case.
+[2] Expected heading to be in Title Case.
+[3] Expected heading to be in Title Case.
+[4] Expected heading to be in Title Case.
+[5] Expected heading to be in Title Case.
+[6] Expected heading to be in Title Case.
+[7] Expected heading to be in Title Case.
+[8] Expected heading to be in Title Case.
+[9] Expected heading to be in Title Case.
+[10] Expected heading to be in Title Case.
+[11] Expected heading to be in Title Case.
+[12] Expected heading to be in Title Case.
+[13] Expected heading to be in Title Case.
+[14] Expected heading to be in Title Case.
+[15] Expected heading to be in Title Case.
+[16] Expected heading to be in Title Case.
+[17] Expected heading to be in Title Case.
+---
+
+
+Test: heading-casing >> invalid
+Filename: tests/fixtures/rules/heading-casing/invalid/preserve-words/test01-input.md
+Language: markdown/gfm
+Options:
+  - style: Title Case
+    preserveWords:
+      - ESLint
+      - JavaScript
+      - TypeScript
+      - GitHub
+      - API
+      - Visual Studio Code
+Plugins: unable to serialize
+
+Code:
+  1 | # getting started with eslint
+    |   ^~~~~~~ ^~~~~~~ ^~~~ ^~~~~~
+    |   [1]     [2]     [3]  [4]
+  2 |
+  3 | ## how to configure your eslint rules
+    |    ^~~    ^~~~~~~~~ ^~~~ ^~~~~~ ^~~~~
+    |    [5]    [6]       [7]  [8]    [9]
+  4 |
+  5 | ### working with javascript and typescript
+    |     ^~~~~~~ ^~~~ ^~~~~~~~~~     ^~~~~~~~~~
+    |     [10]    [11] [12]           [13]
+  6 |
+  7 | #### using the github api for documentation
+    |      ^~~~~     ^~~~~~ ^~~     ^~~~~~~~~~~~~
+    |      [14]      [15]   [16]    [17]
+  8 |
+  9 | ##### building a modern web api
+    |       ^~~~~~~~   ^~~~~~ ^~~ ^~~
+    |       [18]       [19]  [20] [21]
+ 10 |
+
+Output:
+  1 | # Getting Started With ESLint
+  2 |
+  3 | ## How to Configure Your ESLint Rules
+  4 |
+  5 | ### Working With JavaScript and TypeScript
+  6 |
+  7 | #### Using the GitHub API for Documentation
+  8 |
+  9 | ##### Building a Modern Web API
+ 10 |
+
+[1] Expected heading to be in Title Case.
+[2] Expected heading to be in Title Case.
+[3] Expected heading to be in Title Case.
+[4] Expected heading to be in Title Case.
+[5] Expected heading to be in Title Case.
+[6] Expected heading to be in Title Case.
+[7] Expected heading to be in Title Case.
+[8] Expected heading to be in Title Case.
+[9] Expected heading to be in Title Case.
+[10] Expected heading to be in Title Case.
+[11] Expected heading to be in Title Case.
+[12] Expected heading to be in Title Case.
+[13] Expected heading to be in Title Case.
+[14] Expected heading to be in Title Case.
+[15] Expected heading to be in Title Case.
+[16] Expected heading to be in Title Case.
+[17] Expected heading to be in Title Case.
+[18] Expected heading to be in Title Case.
+[19] Expected heading to be in Title Case.
+[20] Expected heading to be in Title Case.
+[21] Expected heading to be in Title Case.
+---
+
+
+Test: heading-casing >> invalid
+Filename: tests/fixtures/rules/heading-casing/invalid/preserve-words/test02-input.md
+Language: markdown/gfm
+Options:
+  - style: Title Case
+    preserveWords:
+      - ESLint
+      - JavaScript
+      - TypeScript
+      - GitHub
+      - API
+      - Visual Studio Code
+Plugins: unable to serialize
+
+Code:
+  1 | # setting up visual studio code for development
+    |   ^~~~~~~    ^~~~~~ ^~~~~~ ^~~~     ^~~~~~~~~~~
+    |   [1]        [2]    [3]    [4]      [5]
+  2 |
+  3 | ## configuring visual studio code extensions
+    |    ^~~~~~~~~~~ ^~~~~~ ^~~~~~ ^~~~ ^~~~~~~~~~
+    |    [6]         [7]    [8]    [9]  [10]
+  4 |
+  5 | ### using visual studio code with typescript
+    |     ^~~~~ ^~~~~~ ^~~~~~ ^~~~ ^~~~ ^~~~~~~~~~
+    |     [11]  [12]   [13]   [14] [15] [16]
+  6 |
+  7 | #### best practices for visual studio code and javascript
+    |      ^~~~ ^~~~~~~~~     ^~~~~~ ^~~~~~ ^~~~     ^~~~~~~~~~
+    |      [17] [18]          [19]   [20]   [21]     [22]
+  8 |
+  9 | ##### visual studio code tips and tricks
+    |       ^~~~~~ ^~~~~~ ^~~~ ^~~~     ^~~~~~
+    |       [23]   [24]   [25] [26]     [27]
+ 10 |
+ 11 | ###### how to optimize your visual studio code workflow
+    |        ^~~    ^~~~~~~~ ^~~~ ^~~~~~ ^~~~~~ ^~~~ ^~~~~~~~
+    |        [28]   [29]     [30] [31]   [32]   [33] [34]
+ 12 |
+
+Output:
+  1 | # Setting up Visual Studio Code for Development
+  2 |
+  3 | ## Configuring Visual Studio Code Extensions
+  4 |
+  5 | ### Using Visual Studio Code With TypeScript
+  6 |
+  7 | #### Best Practices for Visual Studio Code and JavaScript
+  8 |
+  9 | ##### Visual Studio Code Tips and Tricks
+ 10 |
+ 11 | ###### How to Optimize Your Visual Studio Code Workflow
+ 12 |
+
+[1] Expected heading to be in Title Case.
+[2] Expected heading to be in Title Case.
+[3] Expected heading to be in Title Case.
+[4] Expected heading to be in Title Case.
+[5] Expected heading to be in Title Case.
+[6] Expected heading to be in Title Case.
+[7] Expected heading to be in Title Case.
+[8] Expected heading to be in Title Case.
+[9] Expected heading to be in Title Case.
+[10] Expected heading to be in Title Case.
+[11] Expected heading to be in Title Case.
+[12] Expected heading to be in Title Case.
+[13] Expected heading to be in Title Case.
+[14] Expected heading to be in Title Case.
+[15] Expected heading to be in Title Case.
+[16] Expected heading to be in Title Case.
+[17] Expected heading to be in Title Case.
+[18] Expected heading to be in Title Case.
+[19] Expected heading to be in Title Case.
+[20] Expected heading to be in Title Case.
+[21] Expected heading to be in Title Case.
+[22] Expected heading to be in Title Case.
+[23] Expected heading to be in Title Case.
+[24] Expected heading to be in Title Case.
+[25] Expected heading to be in Title Case.
+[26] Expected heading to be in Title Case.
+[27] Expected heading to be in Title Case.
+[28] Expected heading to be in Title Case.
+[29] Expected heading to be in Title Case.
+[30] Expected heading to be in Title Case.
+[31] Expected heading to be in Title Case.
+[32] Expected heading to be in Title Case.
+[33] Expected heading to be in Title Case.
+[34] Expected heading to be in Title Case.
+---
+
+
+Test: heading-casing >> invalid
+Filename: tests/fixtures/rules/heading-casing/invalid/preserve-words/test03-input.md
+Language: markdown/gfm
+Options:
+  - style: Title Case
+    preserveWords:
+      - ESLint
+      - JavaScript
+      - TypeScript
+      - GitHub
+      - API
+      - Visual Studio Code
+Plugins: unable to serialize
+
+Code:
+  1 | # visual studio code and modern development
+    |   ^~~~~~ ^~~~~~ ^~~~     ^~~~~~ ^~~~~~~~~~~
+    |   [1]    [2]    [3]      [4]    [5]
+  2 |
+  3 | ## setting up visual studio code
+    |    ^~~~~~~    ^~~~~~ ^~~~~~ ^~~~
+    |    [6]        [7]    [8]    [9]
+  4 |
+  5 | ### installing visual studio code extensions  
+    |     ^~~~~~~~~~ ^~~~~~ ^~~~~~ ^~~~ ^~~~~~~~~~
+    |     [10]       [11]   [12]   [13] [14]
+  6 |
+  7 | #### debugging in visual studio code
+    |      ^~~~~~~~~    ^~~~~~ ^~~~~~ ^~~~
+    |      [15]         [16]   [17]   [18]
+  8 |
+  9 | ##### visual studio code versus other editors
+    |       ^~~~~~ ^~~~~~ ^~~~ ^~~~~~ ^~~~~ ^~~~~~~
+    |       [19]   [20]   [21] [22]   [23]  [24]
+ 10 |
+ 11 | ###### why choose visual studio code for your project
+    |        ^~~ ^~~~~~ ^~~~~~ ^~~~~~ ^~~~     ^~~~ ^~~~~~~
+    |       [25] [26]   [27]   [28]   [29]     [30] [31]
+ 12 |
+
+Output:
+  1 | # Visual Studio Code and Modern Development
+  2 |
+  3 | ## Setting up Visual Studio Code
+  4 |
+  5 | ### Installing Visual Studio Code Extensions  
+  6 |
+  7 | #### Debugging in Visual Studio Code
+  8 |
+  9 | ##### Visual Studio Code Versus Other Editors
+ 10 |
+ 11 | ###### Why Choose Visual Studio Code for Your Project
+ 12 |
+
+[1] Expected heading to be in Title Case.
+[2] Expected heading to be in Title Case.
+[3] Expected heading to be in Title Case.
+[4] Expected heading to be in Title Case.
+[5] Expected heading to be in Title Case.
+[6] Expected heading to be in Title Case.
+[7] Expected heading to be in Title Case.
+[8] Expected heading to be in Title Case.
+[9] Expected heading to be in Title Case.
+[10] Expected heading to be in Title Case.
+[11] Expected heading to be in Title Case.
+[12] Expected heading to be in Title Case.
+[13] Expected heading to be in Title Case.
+[14] Expected heading to be in Title Case.
+[15] Expected heading to be in Title Case.
+[16] Expected heading to be in Title Case.
+[17] Expected heading to be in Title Case.
+[18] Expected heading to be in Title Case.
+[19] Expected heading to be in Title Case.
+[20] Expected heading to be in Title Case.
+[21] Expected heading to be in Title Case.
+[22] Expected heading to be in Title Case.
+[23] Expected heading to be in Title Case.
+[24] Expected heading to be in Title Case.
+[25] Expected heading to be in Title Case.
+[26] Expected heading to be in Title Case.
+[27] Expected heading to be in Title Case.
+[28] Expected heading to be in Title Case.
+[29] Expected heading to be in Title Case.
+[30] Expected heading to be in Title Case.
+[31] Expected heading to be in Title Case.
+---
+
+
+Test: heading-casing >> invalid
+Filename: tests/fixtures/rules/heading-casing/invalid/punctuation-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | # punctuation and symbols in headings
+    |   ^~~~~~~~~~~     ^~~~~~~    ^~~~~~~~
+    |   [1]             [2]        [3]
+  2 |
+  3 | ## how to use javascript (es6) features
+    |    ^~~    ^~~ ^~~~~~~~~~  ^~~  ^~~~~~~~
+    |    [4]    [5] [6]         [7]  [8]
+  4 |
+  5 | ## understanding react hooks: usestate and useeffect
+    |    ^~~~~~~~~~~~~ ^~~~~ ^~~~~  ^~~~~~~~     ^~~~~~~~~
+    |    [9]           [10]  [11]   [12]         [13]
+  6 |
+  7 | ## css-in-js solutions (styled-components vs emotion)
+    |    ^~~~~~~~~ [14]                         ^~ [16]
+    |              ^~~~~~~~~ [15]                  ^~~~~~~ [17]
+  8 |
+  9 | ## api design: rest vs graphql
+    |    ^~~ [18]    ^~~~ [20]
+    |        ^~~~~~ [19]  ^~ [21]
+    |                        ^~~~~~~ [22]
+ 10 |
+ 11 | ## node.js and express.js (server-side javascript)
+    |                            ^~~~~~~~~~~ ^~~~~~~~~~
+    |                            [23]        [24]
+ 12 |
+ 13 | ## working with json: parsing and stringifying
+    |    ^~~~~~~ ^~~~ ^~~~  ^~~~~~~     ^~~~~~~~~~~~
+    |    [25]    [26] [27]  [28]        [29]
+ 14 |
+ 15 | ## modern css: flexbox & grid layout
+    |    ^~~~~~ ^~~  ^~~~~~~   ^~~~ ^~~~~~
+    |    [30]   [31] [32]      [33] [34]
+ 16 |
+ 17 | ## typescript: types, interfaces & generics
+    |    ^~~~~~~~~~  ^~~~~  ^~~~~~~~~~   ^~~~~~~~
+    |    [35]        [36]   [37]         [38]
+ 18 |
+ 19 | ## testing strategies: unit, integration & e2e
+    |    ^~~~~~~ ^~~~~~~~~~  ^~~~  ^~~~~~~~~~~   ^~~
+    |    [39]    [40]        [41]  [42]          [43]
+ 20 |
+ 21 | ## git workflow: branching, merging & rebasing
+    |    ^~~ ^~~~~~~~  ^~~~~~~~~  ^~~~~~~   ^~~~~~~~
+    |   [44] [45]      [46]       [47]      [48]
+ 22 |
+ 23 | ## database optimization: indexing & caching
+    |    ^~~~~~~~ ^~~~~~~~~~~~  ^~~~~~~~   ^~~~~~~
+    |    [49]     [50]          [51]       [52]
+ 24 |
+ 25 | ## web performance: lazy loading & code splitting
+    |    ^~~ ^~~~~~~~~~~  ^~~~ ^~~~~~~   ^~~~ ^~~~~~~~~
+    |   [53] [54]         [55] [56]      [57] [58]
+ 26 |
+ 27 | ## security best practices: authentication & authorization
+    |    ^~~~~~~~ ^~~~ ^~~~~~~~~  ^~~~~~~~~~~~~~   ^~~~~~~~~~~~~
+    |    [59]     [60] [61]       [62]             [63]
+ 28 |
+ 29 | ## monitoring & logging: debugging production issues
+    |    ^~~~~~~~~~   ^~~~~~~  ^~~~~~~~~ ^~~~~~~~~~ ^~~~~~
+    |    [64]         [65]     [66]      [67]       [68]
+ 30 |
+
+Output:
+  1 | # Punctuation and Symbols in Headings
+  2 |
+  3 | ## How to Use JavaScript (ES6) Features
+  4 |
+  5 | ## Understanding React Hooks: Usestate and Useeffect
+  6 |
+  7 | ## CSS-in-JS Solutions (styled-components Vs Emotion)
+  8 |
+  9 | ## API Design: REST Vs GraphQL
+ 10 |
+ 11 | ## node.js and express.js (Server-side JavaScript)
+ 12 |
+ 13 | ## Working With JSON: Parsing and Stringifying
+ 14 |
+ 15 | ## Modern CSS: Flexbox & Grid Layout
+ 16 |
+ 17 | ## TypeScript: Types, Interfaces & Generics
+ 18 |
+ 19 | ## Testing Strategies: Unit, Integration & E2E
+ 20 |
+ 21 | ## Git Workflow: Branching, Merging & Rebasing
+ 22 |
+ 23 | ## Database Optimization: Indexing & Caching
+ 24 |
+ 25 | ## Web Performance: Lazy Loading & Code Splitting
+ 26 |
+ 27 | ## Security Best Practices: Authentication & Authorization
+ 28 |
+ 29 | ## Monitoring & Logging: Debugging Production Issues
+ 30 |
+
+[1] Expected heading to be in Title Case.
+[2] Expected heading to be in Title Case.
+[3] Expected heading to be in Title Case.
+[4] Expected heading to be in Title Case.
+[5] Expected heading to be in Title Case.
+[6] Expected heading to be in Title Case.
+[7] Expected heading to be in Title Case.
+[8] Expected heading to be in Title Case.
+[9] Expected heading to be in Title Case.
+[10] Expected heading to be in Title Case.
+[11] Expected heading to be in Title Case.
+[12] Expected heading to be in Title Case.
+[13] Expected heading to be in Title Case.
+[14] Expected heading to be in Title Case.
+[15] Expected heading to be in Title Case.
+[16] Expected heading to be in Title Case.
+[17] Expected heading to be in Title Case.
+[18] Expected heading to be in Title Case.
+[19] Expected heading to be in Title Case.
+[20] Expected heading to be in Title Case.
+[21] Expected heading to be in Title Case.
+[22] Expected heading to be in Title Case.
+[23] Expected heading to be in Title Case.
+[24] Expected heading to be in Title Case.
+[25] Expected heading to be in Title Case.
+[26] Expected heading to be in Title Case.
+[27] Expected heading to be in Title Case.
+[28] Expected heading to be in Title Case.
+[29] Expected heading to be in Title Case.
+[30] Expected heading to be in Title Case.
+[31] Expected heading to be in Title Case.
+[32] Expected heading to be in Title Case.
+[33] Expected heading to be in Title Case.
+[34] Expected heading to be in Title Case.
+[35] Expected heading to be in Title Case.
+[36] Expected heading to be in Title Case.
+[37] Expected heading to be in Title Case.
+[38] Expected heading to be in Title Case.
+[39] Expected heading to be in Title Case.
+[40] Expected heading to be in Title Case.
+[41] Expected heading to be in Title Case.
+[42] Expected heading to be in Title Case.
+[43] Expected heading to be in Title Case.
+[44] Expected heading to be in Title Case.
+[45] Expected heading to be in Title Case.
+[46] Expected heading to be in Title Case.
+[47] Expected heading to be in Title Case.
+[48] Expected heading to be in Title Case.
+[49] Expected heading to be in Title Case.
+[50] Expected heading to be in Title Case.
+[51] Expected heading to be in Title Case.
+[52] Expected heading to be in Title Case.
+[53] Expected heading to be in Title Case.
+[54] Expected heading to be in Title Case.
+[55] Expected heading to be in Title Case.
+[56] Expected heading to be in Title Case.
+[57] Expected heading to be in Title Case.
+[58] Expected heading to be in Title Case.
+[59] Expected heading to be in Title Case.
+[60] Expected heading to be in Title Case.
+[61] Expected heading to be in Title Case.
+[62] Expected heading to be in Title Case.
+[63] Expected heading to be in Title Case.
+[64] Expected heading to be in Title Case.
+[65] Expected heading to be in Title Case.
+[66] Expected heading to be in Title Case.
+[67] Expected heading to be in Title Case.
+[68] Expected heading to be in Title Case.
+---
+
+
+Test: heading-casing >> invalid
+Filename: tests/fixtures/rules/heading-casing/invalid/sentence-case/test01-input.md
+Language: markdown/gfm
+Options:
+  - style: Sentence case
+Plugins: unable to serialize
+
+Code:
+  1 | # Introduction To Markdown Preferences
+    |                ^~ [1]      ^~~~~~~~~~~ [2]
+  2 |
+  3 | ## Getting Started With The Plugin
+    |            ^~~~~~~ ^~~~ ^~~ ^~~~~~
+    |            [3]     [4]  [5] [6]
+  4 |
+  5 | ### How To Configure Your Eslint Rules
+    |         ^~ ^~~~~~~~~ ^~~~ ^~~~~~ ^~~~~
+    |        [7] [8]       [9]  [10]   [11]
+  6 |
+  7 | #### Articles And Prepositions At The End
+    |               ^~~ [12]         ^~ [14]
+    |                   ^~~~~~~~~~~~ [13]   ^~~ [16]
+    |                                   ^~~ [15]
+  8 |
+  9 | ##### A Guide For Beginners In A New Project
+    |         ^~~~~ [17]          ^~ [20]  ^~~~~~~ [23]
+    |               ^~~ [18]         ^ [21]
+    |                   ^~~~~~~~~ [19] ^~~ [22]
+ 10 |
+ 11 | ###### THE ULTIMATE GUIDE TO WRITING WITH STYLE
+    |        ^~~ [24]     ^~~~~ [26]       ^~~~ [29]
+    |            ^~~~~~~~ [25]  ^~ [27]         ^~~~~ [30]
+    |                              ^~~~~~~ [28]
+ 12 |
+
+Output:
+  1 | # Introduction to Markdown preferences
+  2 |
+  3 | ## Getting started with the plugin
+  4 |
+  5 | ### How to configure your ESLint rules
+  6 |
+  7 | #### Articles and prepositions at the end
+  8 |
+  9 | ##### A guide for beginners in a new project
+ 10 |
+ 11 | ###### The ultimate guide to writing with style
+ 12 |
+
+[1] Expected heading to be in Sentence case.
+[2] Expected heading to be in Sentence case.
+[3] Expected heading to be in Sentence case.
+[4] Expected heading to be in Sentence case.
+[5] Expected heading to be in Sentence case.
+[6] Expected heading to be in Sentence case.
+[7] Expected heading to be in Sentence case.
+[8] Expected heading to be in Sentence case.
+[9] Expected heading to be in Sentence case.
+[10] Expected heading to be in Sentence case.
+[11] Expected heading to be in Sentence case.
+[12] Expected heading to be in Sentence case.
+[13] Expected heading to be in Sentence case.
+[14] Expected heading to be in Sentence case.
+[15] Expected heading to be in Sentence case.
+[16] Expected heading to be in Sentence case.
+[17] Expected heading to be in Sentence case.
+[18] Expected heading to be in Sentence case.
+[19] Expected heading to be in Sentence case.
+[20] Expected heading to be in Sentence case.
+[21] Expected heading to be in Sentence case.
+[22] Expected heading to be in Sentence case.
+[23] Expected heading to be in Sentence case.
+[24] Expected heading to be in Sentence case.
+[25] Expected heading to be in Sentence case.
+[26] Expected heading to be in Sentence case.
+[27] Expected heading to be in Sentence case.
+[28] Expected heading to be in Sentence case.
+[29] Expected heading to be in Sentence case.
+[30] Expected heading to be in Sentence case.
+---
+
+
+Test: heading-casing >> invalid
+Filename: tests/fixtures/rules/heading-casing/invalid/sentence-preserve/test01-input.md
+Language: markdown/gfm
+Options:
+  - style: Sentence case
+    preserveWords:
+      - ESLint
+      - JavaScript
+      - TypeScript
+      - GitHub
+      - API
+      - Node.js
+      - HTML
+      - CSS
+Plugins: unable to serialize
+
+Code:
+  1 | # Getting Started With eslint
+    |           ^~~~~~~ ^~~~ ^~~~~~
+    |           [1]     [2]  [3]
+  2 |
+  3 | ## How To Configure Your javascript Rules
+    |        ^~ ^~~~~~~~~ ^~~~ ^~~~~~~~~~ ^~~~~
+    |       [4] [5]       [6]  [7]        [8]
+  4 |
+  5 | ### Working With typescript And github
+    |             ^~~~ ^~~~~~~~~~ ^~~ ^~~~~~
+    |             [9]  [10]      [11] [12]
+  6 |
+  7 | #### Using The nodejs API For Documentation
+    |            ^~~            ^~~ ^~~~~~~~~~~~~
+    |            [13]          [14] [15]
+  8 |
+  9 | ##### Building Modern html And css With Tools
+    |                ^~~~~~ [16] ^~~ [18]     ^~~~~ [21]
+    |                       ^~~~ [17]    ^~~~ [20]
+    |                                ^~~ [19]
+ 10 |
+
+Output:
+  1 | # Getting started with ESLint
+  2 |
+  3 | ## How to configure your JavaScript rules
+  4 |
+  5 | ### Working with TypeScript and GitHub
+  6 |
+  7 | #### Using the nodejs API for documentation
+  8 |
+  9 | ##### Building modern HTML and CSS with tools
+ 10 |
+
+[1] Expected heading to be in Sentence case.
+[2] Expected heading to be in Sentence case.
+[3] Expected heading to be in Sentence case.
+[4] Expected heading to be in Sentence case.
+[5] Expected heading to be in Sentence case.
+[6] Expected heading to be in Sentence case.
+[7] Expected heading to be in Sentence case.
+[8] Expected heading to be in Sentence case.
+[9] Expected heading to be in Sentence case.
+[10] Expected heading to be in Sentence case.
+[11] Expected heading to be in Sentence case.
+[12] Expected heading to be in Sentence case.
+[13] Expected heading to be in Sentence case.
+[14] Expected heading to be in Sentence case.
+[15] Expected heading to be in Sentence case.
+[16] Expected heading to be in Sentence case.
+[17] Expected heading to be in Sentence case.
+[18] Expected heading to be in Sentence case.
+[19] Expected heading to be in Sentence case.
+[20] Expected heading to be in Sentence case.
+[21] Expected heading to be in Sentence case.
+---
+
+
+Test: heading-casing >> invalid
+Filename: tests/fixtures/rules/heading-casing/invalid/title-case/test01-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | # introduction to markdown preferences
+    |   ^~~~~~~~~~~~    ^~~~~~~~ ^~~~~~~~~~~
+    |   [1]             [2]      [3]
+  2 |
+  3 | ## getting started with the plugin
+    |    ^~~~~~~ ^~~~~~~ ^~~~     ^~~~~~
+    |    [4]     [5]     [6]      [7]
+  4 |
+  5 | ### HOW TO CONFIGURE YOUR ESLINT RULES
+    |     ^~~ [8]          ^~~~ [11]   ^~~~~ [13]
+    |         ^~ [9]            ^~~~~~ [12]
+    |            ^~~~~~~~~ [10]
+  6 |
+  7 | #### articles And prepositions At the end
+    |      ^~~~~~~~ ^~~ ^~~~~~~~~~~~ ^~     ^~~
+    |      [14]    [15] [16]         [17]   [18]
+  8 |
+  9 | ##### a guide For beginners In a new project
+    |       ^ [19]  ^~~ [21]      ^~ [23]  ^~~~~~~ [25]
+    |         ^~~~~ [20]               ^~~ [24]
+    |                   ^~~~~~~~~ [22]
+ 10 |
+ 11 | ###### THE ULTIMATE GUIDE TO WRITING WITH STYLE
+    |        ^~~ [26]     ^~~~~ [28]       ^~~~ [31]
+    |            ^~~~~~~~ [27]  ^~ [29]         ^~~~~ [32]
+    |                              ^~~~~~~ [30]
+ 12 |
+
+Output:
+  1 | # Introduction to Markdown Preferences
+  2 |
+  3 | ## Getting Started With the Plugin
+  4 |
+  5 | ### How to Configure Your ESLint Rules
+  6 |
+  7 | #### Articles and Prepositions at the End
+  8 |
+  9 | ##### A Guide for Beginners in a New Project
+ 10 |
+ 11 | ###### The Ultimate Guide to Writing With Style
+ 12 |
+
+[1] Expected heading to be in Title Case.
+[2] Expected heading to be in Title Case.
+[3] Expected heading to be in Title Case.
+[4] Expected heading to be in Title Case.
+[5] Expected heading to be in Title Case.
+[6] Expected heading to be in Title Case.
+[7] Expected heading to be in Title Case.
+[8] Expected heading to be in Title Case.
+[9] Expected heading to be in Title Case.
+[10] Expected heading to be in Title Case.
+[11] Expected heading to be in Title Case.
+[12] Expected heading to be in Title Case.
+[13] Expected heading to be in Title Case.
+[14] Expected heading to be in Title Case.
+[15] Expected heading to be in Title Case.
+[16] Expected heading to be in Title Case.
+[17] Expected heading to be in Title Case.
+[18] Expected heading to be in Title Case.
+[19] Expected heading to be in Title Case.
+[20] Expected heading to be in Title Case.
+[21] Expected heading to be in Title Case.
+[22] Expected heading to be in Title Case.
+[23] Expected heading to be in Title Case.
+[24] Expected heading to be in Title Case.
+[25] Expected heading to be in Title Case.
+[26] Expected heading to be in Title Case.
+[27] Expected heading to be in Title Case.
+[28] Expected heading to be in Title Case.
+[29] Expected heading to be in Title Case.
+[30] Expected heading to be in Title Case.
+[31] Expected heading to be in Title Case.
+[32] Expected heading to be in Title Case.
+---
+
+
+Test: heading-casing >> invalid
+Filename: tests/fixtures/rules/heading-casing/invalid/words-input.md
+Language: markdown/gfm
+Plugins: unable to serialize
+
+Code:
+  1 | # Extended Technical Terms Testing
+  2 |
+  3 | ## using oauth2 and jwt for authentication
+    |    ^~~~~ ^~~~~~     ^~~     ^~~~~~~~~~~~~~
+    |    [1]   [2]        [3]     [4]
+  4 |
+  5 | ## building react native apps with expo
+    |    ^~~~~~~~ ^~~~~ ^~~~~~ ^~~~ ^~~~ ^~~~
+    |    [5]      [6]   [7]    [8]  [9]  [10]
+  6 |
+  7 | ## setting up ci/cd with github actions
+    |    ^~~~~~~ [11]  ^~ [13] ^~~~~~ [15]
+    |               ^~ [12]           ^~~~~~~ [16]
+    |                     ^~~~ [14]
+  8 |
+  9 | ## ruby on rails vs express.js performance
+    |    ^~~~    ^~~~~ ^~            ^~~~~~~~~~~
+    |    [17]    [18]  [19]          [20]
+ 10 |
+ 11 | ## zero trust security architecture
+    |    ^~~~ ^~~~~ ^~~~~~~~ ^~~~~~~~~~~~
+    |    [21] [22]  [23]     [24]
+ 12 |
+ 13 | ## machine learning with tensorflow and pytorch
+    |    ^~~~~~~ ^~~~~~~~ ^~~~ ^~~~~~~~~~     ^~~~~~~
+    |    [25]    [26]     [27] [28]           [29]
+ 14 |
+ 15 | ## infrastructure as code with terraform
+    |    ^~~~~~~~~~~~~~    ^~~~ ^~~~ ^~~~~~~~~
+    |    [30]              [31] [32] [33]
+ 16 |
+ 17 | ## graphql vs restful api design
+    |    ^~~~~~~ [34]       ^~~ [37]
+    |            ^~ [35]        ^~~~~~ [38]
+    |               ^~~~~~~ [36]
+ 18 |
+ 19 | ## docker and kubernetes deployment
+    |    ^~~~~~     ^~~~~~~~~~ ^~~~~~~~~~
+    |    [39]       [40]       [41]
+ 20 |
+ 21 | ## next.js ssr and ssg strategies
+    |            ^~~     ^~~ ^~~~~~~~~~
+    |            [42]   [43] [44]
+ 22 |
+ 23 | ## pwa development with workbox
+    |    ^~~ ^~~~~~~~~~~ ^~~~ ^~~~~~~
+    |   [45] [46]        [47] [48]
+ 24 |
+ 25 | ## apache kafka for real-time data streaming
+    |    ^~~~~~ ^~~~~     ^~~~~~~~~ ^~~~ ^~~~~~~~~
+    |    [49]   [50]      [51]      [52] [53]
+ 26 |
+ 27 | ## unit testing with jest and cypress e2e
+    |    ^~~~ ^~~~~~~ ^~~~ ^~~~     ^~~~~~~ ^~~
+    |    [54] [55]    [56] [57]     [58]    [59]
+ 28 |
+ 29 | ## managing state with redux toolkit
+    |    ^~~~~~~~ ^~~~~ ^~~~ ^~~~~ ^~~~~~~
+    |    [60]     [61]  [62] [63]  [64]
+ 30 |
+ 31 | ## microservices with grpc communication
+    |    ^~~~~~~~~~~~~ ^~~~ ^~~~ ^~~~~~~~~~~~~
+    |    [65]          [66] [67] [68]
+ 32 |
+ 33 | ## monitoring with prometheus and grafana
+    |    ^~~~~~~~~~ ^~~~ ^~~~~~~~~~     ^~~~~~~
+    |    [69]       [70] [71]           [72]
+ 34 |
+ 35 | ## load balancer configuration in aws
+    |    ^~~~ ^~~~~~~~ ^~~~~~~~~~~~~    ^~~
+    |    [73] [74]     [75]             [76]
+ 36 |
+ 37 | ## spring boot application development
+    |    ^~~~~~ ^~~~ ^~~~~~~~~~~ ^~~~~~~~~~~
+    |    [77]   [78] [79]        [80]
+ 38 |
+ 39 | ## database design with postgresql and redis
+    |    ^~~~~~~~ ^~~~~~ ^~~~ ^~~~~~~~~~     ^~~~~
+    |    [81]     [82]   [83] [84]           [85]
+ 40 |
+
+Output:
+  1 | # Extended Technical Terms Testing
+  2 |
+  3 | ## Using OAuth2 and JWT for Authentication
+  4 |
+  5 | ## Building React Native Apps With Expo
+  6 |
+  7 | ## Setting up CI/CD With GitHub Actions
+  8 |
+  9 | ## Ruby on Rails Vs express.js Performance
+ 10 |
+ 11 | ## Zero Trust Security Architecture
+ 12 |
+ 13 | ## Machine Learning With TensorFlow and PyTorch
+ 14 |
+ 15 | ## Infrastructure as Code With Terraform
+ 16 |
+ 17 | ## GraphQL Vs RESTful API Design
+ 18 |
+ 19 | ## Docker and Kubernetes Deployment
+ 20 |
+ 21 | ## next.js SSR and SSG Strategies
+ 22 |
+ 23 | ## PWA Development With Workbox
+ 24 |
+ 25 | ## Apache Kafka for Real-time Data Streaming
+ 26 |
+ 27 | ## Unit Testing With Jest and Cypress E2E
+ 28 |
+ 29 | ## Managing State With Redux Toolkit
+ 30 |
+ 31 | ## Microservices With gRPC Communication
+ 32 |
+ 33 | ## Monitoring With Prometheus and Grafana
+ 34 |
+ 35 | ## Load Balancer Configuration in AWS
+ 36 |
+ 37 | ## Spring Boot Application Development
+ 38 |
+ 39 | ## Database Design With PostgreSQL and Redis
+ 40 |
+
+[1] Expected heading to be in Title Case.
+[2] Expected heading to be in Title Case.
+[3] Expected heading to be in Title Case.
+[4] Expected heading to be in Title Case.
+[5] Expected heading to be in Title Case.
+[6] Expected heading to be in Title Case.
+[7] Expected heading to be in Title Case.
+[8] Expected heading to be in Title Case.
+[9] Expected heading to be in Title Case.
+[10] Expected heading to be in Title Case.
+[11] Expected heading to be in Title Case.
+[12] Expected heading to be in Title Case.
+[13] Expected heading to be in Title Case.
+[14] Expected heading to be in Title Case.
+[15] Expected heading to be in Title Case.
+[16] Expected heading to be in Title Case.
+[17] Expected heading to be in Title Case.
+[18] Expected heading to be in Title Case.
+[19] Expected heading to be in Title Case.
+[20] Expected heading to be in Title Case.
+[21] Expected heading to be in Title Case.
+[22] Expected heading to be in Title Case.
+[23] Expected heading to be in Title Case.
+[24] Expected heading to be in Title Case.
+[25] Expected heading to be in Title Case.
+[26] Expected heading to be in Title Case.
+[27] Expected heading to be in Title Case.
+[28] Expected heading to be in Title Case.
+[29] Expected heading to be in Title Case.
+[30] Expected heading to be in Title Case.
+[31] Expected heading to be in Title Case.
+[32] Expected heading to be in Title Case.
+[33] Expected heading to be in Title Case.
+[34] Expected heading to be in Title Case.
+[35] Expected heading to be in Title Case.
+[36] Expected heading to be in Title Case.
+[37] Expected heading to be in Title Case.
+[38] Expected heading to be in Title Case.
+[39] Expected heading to be in Title Case.
+[40] Expected heading to be in Title Case.
+[41] Expected heading to be in Title Case.
+[42] Expected heading to be in Title Case.
+[43] Expected heading to be in Title Case.
+[44] Expected heading to be in Title Case.
+[45] Expected heading to be in Title Case.
+[46] Expected heading to be in Title Case.
+[47] Expected heading to be in Title Case.
+[48] Expected heading to be in Title Case.
+[49] Expected heading to be in Title Case.
+[50] Expected heading to be in Title Case.
+[51] Expected heading to be in Title Case.
+[52] Expected heading to be in Title Case.
+[53] Expected heading to be in Title Case.
+[54] Expected heading to be in Title Case.
+[55] Expected heading to be in Title Case.
+[56] Expected heading to be in Title Case.
+[57] Expected heading to be in Title Case.
+[58] Expected heading to be in Title Case.
+[59] Expected heading to be in Title Case.
+[60] Expected heading to be in Title Case.
+[61] Expected heading to be in Title Case.
+[62] Expected heading to be in Title Case.
+[63] Expected heading to be in Title Case.
+[64] Expected heading to be in Title Case.
+[65] Expected heading to be in Title Case.
+[66] Expected heading to be in Title Case.
+[67] Expected heading to be in Title Case.
+[68] Expected heading to be in Title Case.
+[69] Expected heading to be in Title Case.
+[70] Expected heading to be in Title Case.
+[71] Expected heading to be in Title Case.
+[72] Expected heading to be in Title Case.
+[73] Expected heading to be in Title Case.
+[74] Expected heading to be in Title Case.
+[75] Expected heading to be in Title Case.
+[76] Expected heading to be in Title Case.
+[77] Expected heading to be in Title Case.
+[78] Expected heading to be in Title Case.
+[79] Expected heading to be in Title Case.
+[80] Expected heading to be in Title Case.
+[81] Expected heading to be in Title Case.
+[82] Expected heading to be in Title Case.
+[83] Expected heading to be in Title Case.
+[84] Expected heading to be in Title Case.
+[85] Expected heading to be in Title Case.
+---

@@ -139,3 +139,4 @@ dist
 /docs/.vitepress/.temp
 /docs/.vitepress/cache
 /docs/.vitepress/build-system/shim
+/playground/node_modules/

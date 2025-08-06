@@ -116,9 +116,14 @@ export default defineConfig([
       markdown.configs.recommended,
       markdownPreferences.configs.recommended,
     ],
+    language: "markdown/gfm",
+    languageOptions: {
+      frontmatter: "yaml", // Or pass `"toml"` or `"json"` to enable TOML or JSON front matter parsing.
+    },
     rules: {
       "prettier/prettier": "off",
       "markdown/no-missing-link-fragments": "off",
+      "markdown/no-multiple-h1": ["error", { frontmatterTitle: "" }],
 
       "markdown-preferences/prefer-linked-words": [
         "error",
@@ -137,6 +142,16 @@ export default defineConfig([
       "markdown-preferences/definitions-last": "error",
       "markdown-preferences/no-trailing-spaces": "error",
       "markdown-preferences/prefer-link-reference-definitions": "error",
+      "markdown-preferences/heading-casing": [
+        "error",
+        {
+          preserveWords: [
+            "eslint-plugin-markdown-preferences",
+            ...markdownPreferences.resources.defaultPreserveWords,
+          ],
+          ignorePatterns: [String.raw`/^markdown-preferences\//u`],
+        },
+      ],
     },
   },
   {
@@ -181,6 +196,7 @@ export default defineConfig([
       "n/no-unpublished-import": "off",
       "n/no-missing-import": "off",
       "markdown-preferences/prefer-linked-words": "off",
+      "markdown-preferences/heading-casing": "off",
     },
   },
   {
@@ -216,6 +232,7 @@ export default defineConfig([
       "markdown-preferences/definitions-last": "off",
       "markdown-preferences/no-trailing-spaces": "off",
       "markdown-preferences/prefer-link-reference-definitions": "off",
+      "markdown-preferences/heading-casing": "off",
     },
   },
   {

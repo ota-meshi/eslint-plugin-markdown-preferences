@@ -16,7 +16,7 @@ Both `ESLint` and `TypeScript` are essential tools for modern development.
 
 ## Code Blocks
 
-```javascript
+```js
 // ESLint configuration
 module.exports = {
   rules: {

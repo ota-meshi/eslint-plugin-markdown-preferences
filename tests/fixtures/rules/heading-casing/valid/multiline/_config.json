@@ -1,0 +1,8 @@
+{
+  "options": [
+    {
+      "style": "Title Case",
+      "preserveWords": ["ESLint", "JavaScript", "TypeScript", "GitHub"]
+    }
+  ]
+}

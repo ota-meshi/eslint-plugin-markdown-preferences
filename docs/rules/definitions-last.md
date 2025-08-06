@@ -49,12 +49,12 @@ More content here.
 
 This rule has no options.
 
-## 📚 Further reading
+## 📚 Further Reading
 
 - [CommonMark Spec: Link Reference Definitions](https://spec.commonmark.org/0.31.2/#link-reference-definitions)
 - [GitHub Flavored Markdown: Link Reference Definitions](https://github.github.com/gfm/#link-reference-definitions)
 
-## 👫 Related rules
+## 👫 Related Rules
 
 - [markdown-preferences/prefer-link-reference-definitions](./prefer-link-reference-definitions.md) - enforce using link reference definitions
 

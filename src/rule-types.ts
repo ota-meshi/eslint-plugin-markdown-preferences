@@ -24,6 +24,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/hard-linebreak-style'?: Linter.RuleEntry<MarkdownPreferencesHardLinebreakStyle>
   /**
+   * enforce consistent casing in headings.
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/heading-casing.html
+   */
+  'markdown-preferences/heading-casing'?: Linter.RuleEntry<MarkdownPreferencesHeadingCasing>
+  /**
    * disallow text backslash at the end of a line.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-text-backslash-linebreak.html
    */
@@ -59,6 +64,14 @@ export interface RuleOptions {
 // ----- markdown-preferences/hard-linebreak-style -----
 type MarkdownPreferencesHardLinebreakStyle = []|[{
   style?: ("backslash" | "spaces")
+}]
+// ----- markdown-preferences/heading-casing -----
+type MarkdownPreferencesHeadingCasing = []|[{
+  style?: ("Title Case" | "Sentence case")
+  
+  preserveWords?: string[]
+  
+  ignorePatterns?: string[]
 }]
 // ----- markdown-preferences/no-trailing-spaces -----
 type MarkdownPreferencesNoTrailingSpaces = []|[{
