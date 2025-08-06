@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/heading-casing"
 description: "enforce consistent casing in headings."
+since: "v0.9.0"
 ---
 
 # markdown-preferences/heading-casing
 
 > enforce consistent casing in headings.
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -293,6 +293,10 @@ This option is only effective when `style` is set to `"Title Case"`. In `"Senten
 ## 👫 Related Rules
 
 - [markdown-preferences/hard-linebreak-style](./hard-linebreak-style.md) - enforce consistent hard linebreak style
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.9.0
 
 ## 🔍 Implementation
 
