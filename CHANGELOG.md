@@ -1,5 +1,13 @@
 # eslint-plugin-markdown-preferences
 
+## 0.9.0
+
+### Minor Changes
+
+- [#38](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/38) [`a3e2089`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/a3e20897258886ecb93d9833e7160d4126b055a2) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/heading-casing`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/heading-casing.html) rule to enforce consistent casing in headings
+
+- [#40](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/40) [`0a50620`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/0a50620959563001ba38d5e2bf5a0e3fd064ada2) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/canonical-code-block-language`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/canonical-code-block-language.html) rule
+
 ## 0.8.0
 
 ### Minor Changes

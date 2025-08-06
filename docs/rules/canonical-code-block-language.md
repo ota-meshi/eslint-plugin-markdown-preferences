@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/canonical-code-block-language"
 description: "enforce canonical language names in code blocks"
+since: "v0.9.0"
 ---
 
 # markdown-preferences/canonical-code-block-language
 
 > enforce canonical language names in code blocks
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -107,6 +107,10 @@ An object mapping language names to their preferred canonical equivalents.
 
 - [CommonMark Spec: Fenced code blocks](https://spec.commonmark.org/0.31.2/#fenced-code-blocks)
 - [GitHub Flavored Markdown: Fenced code blocks](https://github.github.com/gfm/#fenced-code-blocks)
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.9.0
 
 ## 🔍 Implementation
 
