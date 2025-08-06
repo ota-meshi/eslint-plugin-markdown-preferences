@@ -845,74 +845,73 @@ Code:
     |    [5]      [6]   [7]    [8]  [9]  [10]
   6 |
   7 | ## setting up ci/cd with github actions
-    |    ^~~~~~~ [11]  ^~ [13] ^~~~~~ [15]
-    |               ^~ [12]           ^~~~~~~ [16]
-    |                     ^~~~ [14]
+    |    ^~~~~~~    ^~~~~ ^~~~ ^~~~~~ ^~~~~~~
+    |    [11]       [12]  [13] [14]   [15]
   8 |
   9 | ## ruby on rails vs express.js performance
     |    ^~~~    ^~~~~ ^~            ^~~~~~~~~~~
-    |    [17]    [18]  [19]          [20]
+    |    [16]    [17]  [18]          [19]
  10 |
  11 | ## zero trust security architecture
     |    ^~~~ ^~~~~ ^~~~~~~~ ^~~~~~~~~~~~
-    |    [21] [22]  [23]     [24]
+    |    [20] [21]  [22]     [23]
  12 |
  13 | ## machine learning with tensorflow and pytorch
     |    ^~~~~~~ ^~~~~~~~ ^~~~ ^~~~~~~~~~     ^~~~~~~
-    |    [25]    [26]     [27] [28]           [29]
+    |    [24]    [25]     [26] [27]           [28]
  14 |
  15 | ## infrastructure as code with terraform
     |    ^~~~~~~~~~~~~~    ^~~~ ^~~~ ^~~~~~~~~
-    |    [30]              [31] [32] [33]
+    |    [29]              [30] [31] [32]
  16 |
  17 | ## graphql vs restful api design
-    |    ^~~~~~~ [34]       ^~~ [37]
-    |            ^~ [35]        ^~~~~~ [38]
-    |               ^~~~~~~ [36]
+    |    ^~~~~~~ [33]       ^~~ [36]
+    |            ^~ [34]        ^~~~~~ [37]
+    |               ^~~~~~~ [35]
  18 |
  19 | ## docker and kubernetes deployment
     |    ^~~~~~     ^~~~~~~~~~ ^~~~~~~~~~
-    |    [39]       [40]       [41]
+    |    [38]       [39]       [40]
  20 |
  21 | ## next.js ssr and ssg strategies
     |            ^~~     ^~~ ^~~~~~~~~~
-    |            [42]   [43] [44]
+    |            [41]   [42] [43]
  22 |
  23 | ## pwa development with workbox
     |    ^~~ ^~~~~~~~~~~ ^~~~ ^~~~~~~
-    |   [45] [46]        [47] [48]
+    |   [44] [45]        [46] [47]
  24 |
  25 | ## apache kafka for real-time data streaming
     |    ^~~~~~ ^~~~~     ^~~~~~~~~ ^~~~ ^~~~~~~~~
-    |    [49]   [50]      [51]      [52] [53]
+    |    [48]   [49]      [50]      [51] [52]
  26 |
  27 | ## unit testing with jest and cypress e2e
     |    ^~~~ ^~~~~~~ ^~~~ ^~~~     ^~~~~~~ ^~~
-    |    [54] [55]    [56] [57]     [58]    [59]
+    |    [53] [54]    [55] [56]     [57]    [58]
  28 |
  29 | ## managing state with redux toolkit
     |    ^~~~~~~~ ^~~~~ ^~~~ ^~~~~ ^~~~~~~
-    |    [60]     [61]  [62] [63]  [64]
+    |    [59]     [60]  [61] [62]  [63]
  30 |
  31 | ## microservices with grpc communication
     |    ^~~~~~~~~~~~~ ^~~~ ^~~~ ^~~~~~~~~~~~~
-    |    [65]          [66] [67] [68]
+    |    [64]          [65] [66] [67]
  32 |
  33 | ## monitoring with prometheus and grafana
     |    ^~~~~~~~~~ ^~~~ ^~~~~~~~~~     ^~~~~~~
-    |    [69]       [70] [71]           [72]
+    |    [68]       [69] [70]           [71]
  34 |
  35 | ## load balancer configuration in aws
     |    ^~~~ ^~~~~~~~ ^~~~~~~~~~~~~    ^~~
-    |    [73] [74]     [75]             [76]
+    |    [72] [73]     [74]             [75]
  36 |
  37 | ## spring boot application development
     |    ^~~~~~ ^~~~ ^~~~~~~~~~~ ^~~~~~~~~~~
-    |    [77]   [78] [79]        [80]
+    |    [76]   [77] [78]        [79]
  38 |
  39 | ## database design with postgresql and redis
     |    ^~~~~~~~ ^~~~~~ ^~~~ ^~~~~~~~~~     ^~~~~
-    |    [81]     [82]   [83] [84]           [85]
+    |    [80]     [81]   [82] [83]           [84]
  40 |
 
 Output:
@@ -1041,5 +1040,4 @@ Output:
 [82] Expected heading to be in Title Case.
 [83] Expected heading to be in Title Case.
 [84] Expected heading to be in Title Case.
-[85] Expected heading to be in Title Case.
 ---
