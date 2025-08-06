@@ -102,14 +102,12 @@ In this configuration:
 
 Please refer to the [mdast](https://github.com/syntax-tree/mdast) documentation for detailed properties of each node.
 
-## 📚 Further reading
-
-## 📚 Further reading
+## 📚 Further Reading
 
 - [CommonMark Spec: Code spans](https://spec.commonmark.org/0.31.2/#code-spans)
 - [GitHub Flavored Markdown: Code spans](https://github.github.com/gfm/#code-spans)
 
-## 👫 Related rules
+## 👫 Related Rules
 
 - [markdown-preferences/prefer-linked-words]
 

@@ -86,7 +86,9 @@ and continues here.
 }
 ```
 
-### `style` (string)
+- `style` (optional): The style of hard linebreak to enforce. Can be `"backslash"` (default) or `"spaces"`.
+
+### `style` (`"backslash" | "spaces"`)
 
 The style of hard linebreak to enforce.
 
@@ -95,12 +97,12 @@ The style of hard linebreak to enforce.
 - `"backslash"` (default): Enforces the use of backslashes (`\`) for hard linebreaks.
 - `"spaces"`: Enforces the use of two or more spaces for hard linebreaks.
 
-## 📚 Further reading
+## 📚 Further Reading
 
 - [CommonMark Spec: Hard Line Breaks](https://spec.commonmark.org/0.31.2/#hard-line-breaks)
 - [GitHub Flavored Markdown: Hard Line Breaks](https://github.github.com/gfm/#hard-line-breaks)
 
-## 👫 Related rules
+## 👫 Related Rules
 
 - [markdown-preferences/no-text-backslash-linebreak](./no-text-backslash-linebreak.md)
 

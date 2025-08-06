@@ -1,0 +1,8 @@
+{
+  "options": [
+    {
+      "style": "Title Case",
+      "ignorePatterns": ["\\d+", "\\w+_\\w+", "\\w+-\\w+"]
+    }
+  ]
+}

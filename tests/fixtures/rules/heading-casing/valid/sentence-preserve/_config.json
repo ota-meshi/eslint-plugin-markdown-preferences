@@ -1,0 +1,18 @@
+{
+  "options": [
+    {
+      "style": "Sentence case",
+      "preserveWords": [
+        "ESLint",
+        "JavaScript",
+        "TypeScript",
+        "GitHub",
+        "API",
+        "Node.js",
+        "HTML",
+        "CSS",
+        "Visual Studio Code"
+      ]
+    }
+  ]
+}

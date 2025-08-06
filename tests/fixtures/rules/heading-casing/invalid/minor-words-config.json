@@ -1,0 +1,21 @@
+{
+  "options": [
+    {
+      "minorWords": [
+        "a",
+        "an",
+        "the",
+        "and",
+        "or",
+        "but",
+        "of",
+        "in",
+        "on",
+        "at",
+        "to",
+        "for",
+        "with"
+      ]
+    }
+  ]
+}

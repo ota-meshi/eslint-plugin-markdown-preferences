@@ -59,11 +59,11 @@ The minimum number of links with the same URL to trigger the rule. Default is `2
 - When set to `1`, all inline links will be converted to reference definitions
 - When set to `2` or higher, only URLs that appear multiple times will be converted
 
-## 📚 Further reading
+## 📚 Further Reading
 
 - [CommonMark Spec: Reference Links](https://spec.commonmark.org/0.31.2/#link-reference-definitions)
 
-## 👫 Related rules
+## 👫 Related Rules
 
 - [markdown-preferences/definitions-last](./definitions-last.md)
 

@@ -1,0 +1,15 @@
+{
+  "options": [
+    {
+      "style": "Title Case",
+      "preserveWords": [
+        "ESLint",
+        "JavaScript",
+        "TypeScript",
+        "GitHub",
+        "API",
+        "Visual Studio Code"
+      ]
+    }
+  ]
+}

@@ -58,6 +58,8 @@ You can configure the order and sorting behavior for definitions.
 }
 ```
 
+- `order` (required): An array that defines how definitions should be sorted. Each element can be a string, an array of strings, or an object with `match` and `sort` properties.
+
 ### `order`
 
 An array that defines the order of definition groups and how they should be sorted. Each element can be:
@@ -128,12 +130,12 @@ This means:
 }
 ```
 
-## 📚 Further reading
+## 📚 Further Reading
 
 - [CommonMark Spec: Link Reference Definitions](https://spec.commonmark.org/0.31.2/#link-reference-definitions)
 - [GitHub Flavored Markdown: Link Reference Definitions](https://github.github.com/gfm/#link-reference-definitions)
 
-## 👫 Related rules
+## 👫 Related Rules
 
 - [markdown-preferences/definitions-last](./definitions-last.md)
 - [markdown-preferences/prefer-link-reference-definitions](./prefer-link-reference-definitions.md)

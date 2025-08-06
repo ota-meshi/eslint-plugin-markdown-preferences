@@ -1,0 +1,14 @@
+{
+  "options": [
+    {
+      "style": "Title Case",
+      "ignorePatterns": [
+        "v\\d+\\.\\d+\\.\\d+",
+        "\\w+\\.json",
+        "OAuth\\d+",
+        "\\w+Case",
+        "\\w+_\\w+"
+      ]
+    }
+  ]
+}

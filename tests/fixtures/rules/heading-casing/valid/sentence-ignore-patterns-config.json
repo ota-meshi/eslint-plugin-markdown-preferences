@@ -1,0 +1,8 @@
+{
+  "options": [
+    {
+      "style": "Sentence case",
+      "ignorePatterns": ["\\d+", "\\w+_\\w+", "\\w+\\.json"]
+    }
+  ]
+}
