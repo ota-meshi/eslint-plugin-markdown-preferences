@@ -32,6 +32,7 @@ Both styles are valid in CommonMark, but using one consistently improves readabi
 <!-- eslint markdown-preferences/hard-linebreak-style: 'error' -->
 
 <!-- ✓ GOOD -->
+
 This line ends with a backslash\
 and continues here.
 
@@ -39,10 +40,12 @@ Another example with\
 multiple line breaks.
 
 <!-- ✗ BAD -->
+
 This line ends with spaces  
 and continues here.
 
 <!-- ✗ BAD -->
+
 Mixed styles are not allowed\
 this line uses spaces  
 inconsistently.
@@ -56,6 +59,7 @@ inconsistently.
 <!-- eslint markdown-preferences/hard-linebreak-style: ['error', { style: 'spaces' }] -->
 
 <!-- ✓ GOOD -->
+
 This line ends with spaces  
 and continues here.
 
@@ -63,6 +67,7 @@ Another example with
 multiple line breaks.
 
 <!-- ✗ BAD -->
+
 This line ends with backslash\
 and continues here.
 ```

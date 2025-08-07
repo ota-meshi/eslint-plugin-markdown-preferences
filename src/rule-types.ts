@@ -14,6 +14,11 @@ declare module 'eslint' {
 
 export interface RuleOptions {
   /**
+   * enforce canonical language names in code blocks
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/canonical-code-block-language.html
+   */
+  'markdown-preferences/canonical-code-block-language'?: Linter.RuleEntry<MarkdownPreferencesCanonicalCodeBlockLanguage>
+  /**
    * require link definitions and footnote definitions to be placed at the end of the document
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/definitions-last.html
    */
@@ -61,6 +66,12 @@ export interface RuleOptions {
 }
 
 /* ======= Declarations ======= */
+// ----- markdown-preferences/canonical-code-block-language -----
+type MarkdownPreferencesCanonicalCodeBlockLanguage = []|[{
+  languages?: {
+    [k: string]: string
+  }
+}]
 // ----- markdown-preferences/hard-linebreak-style -----
 type MarkdownPreferencesHardLinebreakStyle = []|[{
   style?: ("backslash" | "spaces")

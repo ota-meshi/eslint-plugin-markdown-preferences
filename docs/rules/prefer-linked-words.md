@@ -31,11 +31,13 @@ This rule enforces that specific words or phrases are always converted to links 
 <!-- eslint markdown-preferences/prefer-linked-words: ["error", { "words": { "ESLint": "https://eslint.org/" } }] -->
 
 <!-- ✓ GOOD -->
+
 [ESLint](https://eslint.org/) is a great linting tool.
 
 Check out the [ESLint](https://eslint.org/) documentation.
 
 <!-- ✗ BAD -->
+
 ESLint is a great linting tool.
 
 Check out the ESLint documentation.
@@ -49,9 +51,11 @@ Check out the ESLint documentation.
 <!-- eslint markdown-preferences/prefer-linked-words: ["error", { "words": { "TypeScript": "https://www.typescriptlang.org/", "Vite": "https://vitejs.dev/", "Prettier": "https://prettier.io/" } }] -->
 
 <!-- ✓ GOOD -->
+
 [TypeScript](https://www.typescriptlang.org/), [Vite](https://vitejs.dev/), and [Prettier](https://prettier.io/) are popular development tools.
 
 <!-- ✗ BAD -->
+
 TypeScript, Vite, and Prettier are popular development tools.
 ```
 
@@ -65,9 +69,11 @@ The rule also works with inline code:
 <!-- eslint markdown-preferences/prefer-linked-words: ["error", { "words": { "console.log": "https://developer.mozilla.org/en-US/docs/Web/API/Console/log" } }] -->
 
 <!-- ✓ GOOD -->
+
 Use the [`console.log`](https://developer.mozilla.org/en-US/docs/Web/API/Console/log) method for debugging.
 
 <!-- ✗ BAD -->
+
 Use the `console.log` method for debugging.
 ```
 
@@ -79,9 +85,11 @@ Use the `console.log` method for debugging.
 <!-- eslint markdown-preferences/prefer-linked-words: ["error", { "words": ["TODO", "FIXME", "NOTE"] }] -->
 
 <!-- ✓ GOOD - Will be reported but not auto-fixed -->
+
 [TODO]: Review this section
 
 <!-- ✗ BAD - Will be reported -->
+
 TODO: Review this section
 ```
 
@@ -199,7 +207,7 @@ You can use the `ignores` option to exclude the rule application under specific 
           "node": { "type": "heading", "depth": 1 }
         },
         {
-          "words": ["ESLint", "TypeScript"], 
+          "words": ["ESLint", "TypeScript"],
           "node": { "type": "listItem" }
         },
         {

@@ -28,16 +28,25 @@ The rule comes with extensive default values for `preserveWords` and `ignorePatt
 <!-- eslint markdown-preferences/heading-casing: 'error' -->
 
 <!-- ✓ GOOD -->
+
 # Introduction to Markdown Preferences
+
 ## Getting Started With the ESLint Plugin
+
 ### How to Configure Your JavaScript Rules
+
 #### Working With APIs and JSON Files
+
 ##### Using TypeScript v2.1.3 Features
 
 <!-- ✗ BAD -->
+
 # introduction to markdown preferences
+
 ## getting started with the eslint plugin
+
 ### HOW TO CONFIGURE YOUR JAVASCRIPT RULES
+
 # how To configure Your javascript Rules
 ```
 
@@ -49,13 +58,19 @@ The rule comes with extensive default values for `preserveWords` and `ignorePatt
 <!-- eslint markdown-preferences/heading-casing: ['error', { style: 'Sentence case' }] -->
 
 <!-- ✓ GOOD -->
+
 # Introduction to Markdown preferences
+
 ## Getting started with the plugin
+
 ### How to configure your ESLint rules
 
 <!-- ✗ BAD -->
+
 # Introduction To Markdown Preferences
+
 ## Getting Started With The Plugin
+
 ### HOW TO CONFIGURE YOUR ESLINT RULES
 ```
 
@@ -67,13 +82,19 @@ The rule comes with extensive default values for `preserveWords` and `ignorePatt
 <!-- eslint markdown-preferences/heading-casing: ['error', { style: 'Title Case', preserveWords: ['ESLint', 'JavaScript', 'TypeScript', 'GitHub'] }] -->
 
 <!-- ✓ GOOD -->
+
 # Getting Started With ESLint
-## Working With JavaScript and TypeScript  
+
+## Working With JavaScript and TypeScript
+
 ### Using the GitHub API
 
 <!-- ✗ BAD -->
+
 # Getting Started With Eslint
+
 ## Working With Javascript and Typescript
+
 ### Using the Github API
 ```
 
@@ -85,9 +106,11 @@ The rule comes with extensive default values for `preserveWords` and `ignorePatt
 <!-- eslint markdown-preferences/heading-casing: ['error', { style: 'Title Case', ignorePatterns: ['/^v\\d+/u', '/\\w+\\.json$/u'] }] -->
 
 <!-- ✓ GOOD -->
+
 # Working With v2.0.1 and config.json Files
 
 <!-- ✗ BAD -->
+
 # working with v2.0.1 and config.json files
 ```
 
@@ -99,15 +122,23 @@ The rule comes with extensive default values for `preserveWords` and `ignorePatt
 <!-- eslint markdown-preferences/heading-casing: ['error', { style: 'Title Case', minorWords: ['a', 'the', 'and', 'or', 'but', 'of', 'in', 'on', 'at', 'to', 'for', 'with'] }] -->
 
 <!-- ✓ GOOD -->
+
 # A Guide to Writing with Custom Minor Words
+
 ## The Best Practices for Writing
+
 ### Working with Custom Words and Settings
+
 #### Tips for Writing on the Web
 
 <!-- ✗ BAD -->
+
 # A Guide To Writing With Custom Minor Words
+
 ## The Best Practices For Writing
+
 ### Working With Custom Words And Settings
+
 #### Tips For Writing On The Web
 ```
 
@@ -168,21 +199,24 @@ Please see the [defaultPreserveWords](https://github.com/microsoft/eslint-plugin
 You can also import and use the default preserve words in your JavaScript code:
 
 ```js
-import plugin from 'eslint-plugin-markdown-preferences';
+import plugin from "eslint-plugin-markdown-preferences";
 
 // Use in your ESLint configuration
 export default {
-  plugins: ['markdown-preferences'],
+  plugins: ["markdown-preferences"],
   rules: {
-    'markdown-preferences/heading-casing': ['error', {
-      style: 'Title Case',
-      preserveWords: [
-        ...plugin.resources.defaultPreserveWords, // Include all default words
-        'MyCustomBrand',  // Add your custom words
-        'MyAPI'
-      ]
-    }]
-  }
+    "markdown-preferences/heading-casing": [
+      "error",
+      {
+        style: "Title Case",
+        preserveWords: [
+          ...plugin.resources.defaultPreserveWords, // Include all default words
+          "MyCustomBrand", // Add your custom words
+          "MyAPI",
+        ],
+      },
+    ],
+  },
 };
 ```
 
@@ -232,7 +266,21 @@ An array of words that should not be capitalized in Title Case (unless they're t
 
 ```json
 {
-  "minorWords": ["a", "an", "the", "and", "or", "but", "of", "in", "on", "at", "to", "for", "with"]
+  "minorWords": [
+    "a",
+    "an",
+    "the",
+    "and",
+    "or",
+    "but",
+    "of",
+    "in",
+    "on",
+    "at",
+    "to",
+    "for",
+    "with"
+  ]
 }
 ```
 
@@ -245,21 +293,24 @@ Please see the [defaultMinorWords](https://github.com/ota-meshi/eslint-plugin-ma
 You can also import and use the default minor words in your JavaScript code:
 
 ```js
-import plugin from 'eslint-plugin-markdown-preferences';
+import plugin from "eslint-plugin-markdown-preferences";
 
 // Use in your ESLint configuration
 export default {
-  plugins: ['markdown-preferences'],
+  plugins: ["markdown-preferences"],
   rules: {
-    'markdown-preferences/heading-casing': ['error', {
-      style: 'Title Case',
-      minorWords: [
-        ...plugin.resources.defaultMinorWords, // Include all default minor words
-        'via',    // Add your custom minor words
-        'per'
-      ]
-    }]
-  }
+    "markdown-preferences/heading-casing": [
+      "error",
+      {
+        style: "Title Case",
+        minorWords: [
+          ...plugin.resources.defaultMinorWords, // Include all default minor words
+          "via", // Add your custom minor words
+          "per",
+        ],
+      },
+    ],
+  },
 };
 ```
 
@@ -271,13 +322,19 @@ export default {
 <!-- eslint markdown-preferences/heading-casing: ['error', { style: 'Title Case', minorWords: ['a', 'the', 'and', 'or', 'but', 'of', 'in', 'on', 'at', 'to', 'for', 'with'] }] -->
 
 <!-- ✓ GOOD -->
+
 # A Guide to Writing with Custom Minor Words
+
 ## The Best Practices for Writing
+
 ### Working with Custom Words and Settings
 
 <!-- ✗ BAD -->
+
 # A Guide To Writing With Custom Minor Words
-## The Best Practices For Writing  
+
+## The Best Practices For Writing
+
 ### Working With Custom Words And Settings
 ```
 

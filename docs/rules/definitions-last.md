@@ -22,6 +22,7 @@ This rule requires link definitions (`[label]: URL`) and footnote definitions (`
 <!-- eslint markdown-preferences/definitions-last: 'error' -->
 
 <!-- ✗ BAD -->
+
 # Document Title
 
 [link]: https://example.com
@@ -33,6 +34,7 @@ This content comes after a link definition.
 More content here with [link] and footnote[^note].
 
 <!-- ✓ GOOD -->
+
 # Document Title
 
 This is some content with [link] references and footnotes[^note].
@@ -42,6 +44,7 @@ This is some content with [link] references and footnotes[^note].
 More content here.
 
 [link]: https://example.com
+
 [^note]: This is a footnote definition.
 ```
 

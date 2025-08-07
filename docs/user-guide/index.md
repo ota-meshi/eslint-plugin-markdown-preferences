@@ -21,7 +21,7 @@ Example **eslint.config.js**:
 ```js
 import { defineConfig } from "eslint/config";
 // import markdown from "@eslint/markdown";
-import markdownPreferences from 'eslint-plugin-markdown-preferences';
+import markdownPreferences from "eslint-plugin-markdown-preferences";
 export default [
   // add more generic rule sets here, such as:
   // markdown.configs.recommended,
@@ -30,8 +30,8 @@ export default [
     rules: {
       // override/add rules settings here, such as:
       // 'markdown-preferences/prefer-linked-words': 'error'
-    }
-  }
+    },
+  },
 ];
 ```
 

@@ -2,6 +2,7 @@ import { defineConfig } from "eslint/config";
 import myPlugin from "@ota-meshi/eslint-plugin";
 import tseslint from "typescript-eslint";
 import markdown from "@eslint/markdown";
+import prettier from "eslint-plugin-prettier";
 import { fileURLToPath } from "url";
 import path from "path";
 
@@ -20,6 +21,7 @@ const MD_BASE_LINKS = {
   "@typescript-eslint/parser": "https://typescript-eslint.io/packages/parser",
   "eslint-typegen": "https://github.com/antfu/eslint-typegen",
   "@stylistic/eslint-plugin": "https://eslint.style/",
+  "@eslint/markdown": "https://github.com/eslint/markdown",
 };
 const MD_LINKS = {
   ...Object.fromEntries(
@@ -39,6 +41,11 @@ const MD_LINKS_FOR_DOCS = {
 };
 
 export default defineConfig([
+  {
+    plugins: {
+      prettier,
+    },
+  },
   {
     files: [
       "js",
@@ -121,7 +128,7 @@ export default defineConfig([
       frontmatter: "yaml", // Or pass `"toml"` or `"json"` to enable TOML or JSON front matter parsing.
     },
     rules: {
-      "prettier/prettier": "off",
+      "prettier/prettier": "error",
       "markdown/no-missing-link-fragments": "off",
       "markdown/no-multiple-h1": ["error", { frontmatterTitle: "" }],
 
@@ -208,6 +215,7 @@ export default defineConfig([
       },
     },
     rules: {
+      "prettier/prettier": "off",
       ...tseslint.configs.disableTypeChecked.rules,
       "jsdoc/require-jsdoc": "off",
       "no-undef": "off",

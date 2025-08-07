@@ -50,7 +50,7 @@ Example **eslint.config.js**:
 ```js
 import { defineConfig } from "eslint/config";
 // import markdown from "@eslint/markdown";
-import markdownPreferences from 'eslint-plugin-markdown-preferences';
+import markdownPreferences from "eslint-plugin-markdown-preferences";
 export default [
   // add more generic rule sets here, such as:
   // markdown.configs.recommended,
@@ -59,8 +59,8 @@ export default [
     rules: {
       // override/add rules settings here, such as:
       // 'markdown-preferences/prefer-linked-words': 'error'
-    }
-  }
+    },
+  },
 ];
 ```
 
@@ -86,6 +86,8 @@ The rules with the following star ⭐ are included in the configs.
 
 <!--RULES_TABLE_START-->
 
+<!-- prettier-ignore-start -->
+
 ### Preference Rules
 
 | Rule ID | Description | Fixable | RECOMMENDED |
@@ -105,6 +107,8 @@ The rules with the following star ⭐ are included in the configs.
 | [markdown-preferences/no-trailing-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-trailing-spaces.html) | disallow trailing whitespace at the end of lines in Markdown files. | 🔧 |  |
 | [markdown-preferences/prefer-link-reference-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-link-reference-definitions.html) | enforce using link reference definitions instead of inline links | 🔧 |  |
 | [markdown-preferences/sort-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/sort-definitions.html) | enforce a specific order for link definitions and footnote definitions | 🔧 |  |
+
+<!-- prettier-ignore-end -->
 
 <!--RULES_TABLE_END-->
 <!--RULES_SECTION_END-->

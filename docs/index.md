@@ -27,6 +27,7 @@ See [User Guide](./user-guide/index.md).
 ## ✅ Rules
 
 See [Available Rules](./rules/index.md).
+
 <!--DOCS_IGNORE_START-->
 
 ## 🍻 Contributing

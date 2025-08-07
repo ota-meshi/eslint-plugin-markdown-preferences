@@ -26,15 +26,16 @@ This rule enforces that specific words or phrases are always wrapped in inline c
 <!-- eslint markdown-preferences/prefer-inline-code-words: ["error", { "words": ["ESLint", "TypeScript", "npm"] }] -->
 
 <!-- ✓ GOOD -->
+
 Use `ESLint` with `TypeScript` for linting. Install it with `npm`.
 
 The `ESLint` configuration file should be in the root directory.
 
 <!-- ✗ BAD -->
+
 Use ESLint with TypeScript for linting. Install it with npm.
 
 The ESLint configuration file should be in the root directory.
-
 ```
 
 ## 🔧 Options
@@ -46,7 +47,14 @@ This rule requires configuration of the words that should be wrapped in inline c
   "markdown-preferences/prefer-inline-code-words": [
     "error",
     {
-      "words": ["ESLint", "TypeScript", "JavaScript", "Prettier", "npm", "yarn"],
+      "words": [
+        "ESLint",
+        "TypeScript",
+        "JavaScript",
+        "Prettier",
+        "npm",
+        "yarn"
+      ],
       "ignores": [
         {
           "words": ["ESLint", "TypeScript", "JavaScript"],
@@ -86,7 +94,7 @@ You can use the `ignores` option to exclude the rule application under specific 
         {
           "words": "JavaScript",
           "node": { "type": "link" }
-        },
+        }
       ]
     }
   ]

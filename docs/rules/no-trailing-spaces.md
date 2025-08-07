@@ -20,39 +20,50 @@ While trailing spaces in Markdown can be used to create hard line breaks (when f
 
 **Note**: This rule preserves intentional hard line breaks created with two trailing spaces followed by a line break.
 
+<!-- prettier-ignore-start -->
+
 <!-- eslint-skip -->
 
 ```md
 <!-- eslint markdown-preferences/no-trailing-spaces: 'error' -->
 
 <!-- ✓ GOOD: Two spaces for hard line break -->
+
 foo  
 bar
 
 <!-- ✓ GOOD: No trailing spaces -->
+
 foo
 bar
 
 <!-- ✗ BAD: Trailing spaces on empty line -->
+
 foo  
 
 bar
 
 <!-- ✗ BAD: Trailing spaces not followed by content -->
+
 foo  
 bar  
 
 <!--EOF-->
 ```
 
+<!-- prettier-ignore-end -->
+
 ## 🔧 Options
 
 ```json
 {
-  "markdown-preferences/no-trailing-spaces": ["error", {
-    "skipBlankLines": false,
-    "ignoreComments": false
-  }]
+  "markdown-preferences/no-trailing-spaces": [
+    "error",
+    {
+      "skipBlankLines": false,
+      "ignoreComments": false
+    }
+  ]
 }
 ```
 
@@ -62,6 +73,8 @@ bar
 ### `skipBlankLines` (Default: `false`)
 
 When `true`, the rule ignores trailing spaces on empty lines.
+
+<!-- prettier-ignore-start -->
 
 <!-- eslint-skip -->
 
@@ -83,9 +96,13 @@ When `true`, the rule ignores trailing spaces on empty lines.
 <!--EOF-->
 ```
 
+<!-- prettier-ignore-end -->
+
 ### `ignoreComments` (Default: `false`)
 
 When `true`, the rule ignores trailing spaces in HTML comment lines.
+
+<!-- prettier-ignore-start -->
 
 <!-- eslint-skip -->
 
@@ -96,6 +113,10 @@ When `true`, the rule ignores trailing spaces in HTML comment lines.
   This is a comment 
 -->
 ```
+
+<!-- prettier-ignore-end -->
+<!-- prettier-ignore-start -->
+
 <!-- eslint-skip -->
 
 ```md
@@ -105,6 +126,8 @@ When `true`, the rule ignores trailing spaces in HTML comment lines.
   This is a comment 
 -->
 ```
+
+<!-- prettier-ignore-end -->
 
 ## 💡 When to Use This Rule
 
