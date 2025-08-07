@@ -24,12 +24,14 @@ The rule automatically converts inline links to reference links and adds the ref
 <!-- eslint markdown-preferences/prefer-link-reference-definitions: 'error' -->
 
 <!-- ✓ GOOD -->
+
 - [ESLint] is a JavaScript linter.
 - [ESLint][eslint] helps maintain code quality.
 
 [eslint]: https://eslint.org
 
 <!-- ✗ BAD -->
+
 - [ESLint](https://eslint.org) is a JavaScript linter.
 - [ESLint](https://eslint.org) helps maintain code quality.
 ```

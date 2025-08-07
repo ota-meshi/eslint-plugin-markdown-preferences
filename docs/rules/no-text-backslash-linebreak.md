@@ -27,21 +27,25 @@ This rule helps prevent confusion and ensures consistent formatting by detecting
 <!-- eslint markdown-preferences/no-text-backslash-linebreak: 'error' -->
 
 <!-- ✓ GOOD: Backslash creates a hard line break -->
+
 foo\
 bar
 
 <!-- ✓ GOOD: No backslash needed for regular line breaks -->
+
 foo
 
 bar
 
 <!-- ✗ BAD: Backslash followed by empty line renders as literal backslash -->
+
 foo\
 
 foo
 bar\
 
 <!-- ✗ BAD: Backslash at end of file renders as literal backslash -->
+
 bar\
 ```
 

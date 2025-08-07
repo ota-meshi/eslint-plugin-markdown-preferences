@@ -89,5 +89,9 @@ ${pluginRules
 ${deprecatedRules.map(toDeprecatedRuleRow).join("\n")}
 `;
   }
-  return rulesTableContent;
+  return `
+<!-- prettier-ignore-start -->
+${rulesTableContent}
+<!-- prettier-ignore-end -->
+`;
 }

@@ -22,21 +22,27 @@ This rule enforces a specific order for link definitions (`[label]: URL`) and fo
 <!-- eslint markdown-preferences/sort-definitions: 'error' -->
 
 <!-- ✓ GOOD -->
+
 See [ESLint] and [TypeScript] for details.
 Also check the footnote[^first] and [^second].
 
 [ESLint]: https://eslint.org
 [TypeScript]: https://www.typescriptlang.org
+
 [^first]: This is the first footnote
+
 [^second]: This is the second footnote
 
 <!-- ✗ BAD -->
+
 See [TypeScript] and [ESLint] for details.
 Also check the footnote[^second] and [^first].
 
 [TypeScript]: https://www.typescriptlang.org
 [ESLint]: https://eslint.org
+
 [^second]: This is the second footnote
+
 [^first]: This is the first footnote
 ```
 
@@ -112,10 +118,7 @@ This means:
 
 ```json
 {
-  "order": [
-    "alpha-link",
-    { "match": "/./u", "sort": "alphabetical" }
-  ]
+  "order": ["alpha-link", { "match": "/./u", "sort": "alphabetical" }]
 }
 ```
 

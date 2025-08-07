@@ -22,12 +22,13 @@ This rule enforces the use of canonical (standardized) language names in Markdow
 <!-- eslint markdown-preferences/canonical-code-block-language: ['error', { languages: { javascript: 'js', typescript: 'ts', python: 'py' } }] -->
 
 <!-- ✓ GOOD -->
+
 ```js
-console.log('Hello, world!');
+console.log("Hello, world!");
 ```
 
 ```ts
-const message: string = 'Hello, TypeScript!';
+const message: string = "Hello, TypeScript!";
 ```
 
 ```py
@@ -35,12 +36,13 @@ print("Hello, Python!")
 ```
 
 <!-- ✗ BAD -->
+
 ```javascript
-console.log('Hello, world!');
+console.log("Hello, world!");
 ```
 
 ```typescript
-const message: string = 'Hello, TypeScript!';
+const message: string = "Hello, TypeScript!";
 ```
 
 ```python
@@ -57,7 +59,7 @@ print("Hello, Python!")
     {
       "languages": {
         "javascript": "js",
-        "jsx": "js", 
+        "jsx": "js",
         "typescript": "ts",
         "tsx": "ts",
         "python": "py",
