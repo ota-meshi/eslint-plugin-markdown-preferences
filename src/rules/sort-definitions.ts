@@ -2,7 +2,6 @@ import type { Definition, FootnoteDefinition } from "mdast";
 import { createRule } from "../utils/index.ts";
 import { toRegExp, isRegExp } from "../utils/regexp.ts";
 import type { MDNode } from "../utils/markdown.ts";
-import { createURLSafe, isValidURL } from "../utils/url.ts";
 
 type MatchOption = string | string[];
 type OrderOption =
@@ -319,7 +318,7 @@ export default createRule<[{ order?: OrderOption[] }?]>("sort-definitions", {
               }
               if (node.type === "definition") {
                 if (node.url === patternStr) return true;
-                if (isValidURL(patternStr)) {
+                if (URL.canParse(patternStr) && URL.canParse(node.url)) {
                   const normalizedPattern = normalizedURL(patternStr);
                   const normalizedUrl = normalizedURL(node.url);
                   if (normalizedUrl.startsWith(normalizedPattern)) {
@@ -395,7 +394,7 @@ function getQuote(text: string) {
  * Normalize a URL by ensuring it ends with a slash.
  */
 function normalizedURL(url: string) {
-  const urlObj = createURLSafe(url);
+  const urlObj = new URL(url);
   if (!urlObj) return url;
   return urlObj.href.endsWith("/") ? urlObj.href : `${urlObj.href}/`;
 }

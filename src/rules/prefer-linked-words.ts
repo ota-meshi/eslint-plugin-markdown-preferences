@@ -7,7 +7,6 @@ import {
   IGNORES_SCHEMA,
   iterateSearchWords,
 } from "../utils/search-words.ts";
-import { isValidURL } from "../utils/url.ts";
 
 type WordsObject = Record<string, string | null>;
 type Words = WordsObject | string[];
@@ -146,7 +145,7 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
        * Adjust link to be relative to the file.
        */
       function adjustLink(link: string): string {
-        if (isValidURL(link)) {
+        if (URL.canParse(link)) {
           return link;
         }
         if (link.startsWith("#")) {
