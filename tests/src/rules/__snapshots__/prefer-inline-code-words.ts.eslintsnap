@@ -4,6 +4,8 @@
 Test: prefer-inline-code-words >> invalid
 Filename: tests/fixtures/rules/prefer-inline-code-words/invalid/ignores/example-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Options:
   - words:
       - ESLint
@@ -78,6 +80,8 @@ Output:
 Test: prefer-inline-code-words >> invalid
 Filename: tests/fixtures/rules/prefer-inline-code-words/invalid/link-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Options:
   - words:
       - ESLint
@@ -131,6 +135,8 @@ Output:
 Test: prefer-inline-code-words >> invalid
 Filename: tests/fixtures/rules/prefer-inline-code-words/invalid/multiple-words-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Options:
   - words:
       - ESLint
@@ -193,6 +199,8 @@ Output:
 Test: prefer-inline-code-words >> invalid
 Filename: tests/fixtures/rules/prefer-inline-code-words/invalid/test01-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Options:
   - words:
       - ESLint
@@ -280,6 +288,8 @@ Output:
 Test: prefer-inline-code-words >> invalid
 Filename: tests/fixtures/rules/prefer-inline-code-words/invalid/test02-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Options:
   - words:
       - ESLint

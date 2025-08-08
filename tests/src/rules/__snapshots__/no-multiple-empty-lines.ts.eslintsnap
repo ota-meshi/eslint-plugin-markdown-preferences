@@ -1,0 +1,266 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: no-multiple-empty-lines >> invalid
+Filename: tests/fixtures/rules/no-multiple-empty-lines/invalid/html-block-multiple-empty-lines-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Heading
+  2 |
+  3 | <div>
+  4 |
+  5 |
+    | ^ [1]
+  6 | html block
+  7 |
+  8 | </div>
+  9 |
+ 10 | Paragraph
+ 11 |
+
+Output:
+  1 | # Heading
+  2 |
+  3 | <div>
+  4 |
+  5 | html block
+  6 |
+  7 | </div>
+  8 |
+  9 | Paragraph
+ 10 |
+
+[1] More than 1 blank line not allowed.
+---
+
+
+Test: no-multiple-empty-lines >> invalid
+Filename: tests/fixtures/rules/no-multiple-empty-lines/invalid/leading-multiple-empty-lines-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Heading
+  2 |
+  3 |
+    | ^ [1]
+  4 | Paragraph
+  5 |
+
+Output:
+  1 | # Heading
+  2 |
+  3 | Paragraph
+  4 |
+
+[1] More than 1 blank line not allowed.
+---
+
+
+Test: no-multiple-empty-lines >> invalid
+Filename: tests/fixtures/rules/no-multiple-empty-lines/invalid/max-plus-one-empty-lines-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Heading
+  2 |
+  3 |
+    | ^\ [1]
+  4 |
+    | ~ [1]
+  5 | Paragraph
+  6 |
+
+Output:
+  1 | # Heading
+  2 |
+  3 | Paragraph
+  4 |
+
+[1] More than 1 blank line not allowed.
+---
+
+
+Test: no-multiple-empty-lines >> invalid
+Filename: tests/fixtures/rules/no-multiple-empty-lines/invalid/maxbof1-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - maxBOF: 1
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 |
+    | ^ [1]
+  3 | # Heading
+  4 |
+  5 | Paragraph
+  6 |
+
+Output:
+  1 |
+  2 | # Heading
+  3 |
+  4 | Paragraph
+  5 |
+
+[1] Too many blank lines at the beginning of file. Max of 1 allowed.
+---
+
+
+Test: no-multiple-empty-lines >> invalid
+Filename: tests/fixtures/rules/no-multiple-empty-lines/invalid/maxbof1-maxeof1-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - maxBOF: 1
+    maxEOF: 1
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 |
+    | ^ [1]
+  3 | # Heading
+  4 |
+  5 | Paragraph
+  6 |
+  7 |
+    | ^ [2]
+  8 |
+
+Output:
+  1 |
+  2 | # Heading
+  3 |
+  4 | Paragraph
+  5 |
+  6 |
+
+[1] Too many blank lines at the beginning of file. Max of 1 allowed.
+[2] Too many blank lines at the end of file. Max of 1 allowed.
+---
+
+
+Test: no-multiple-empty-lines >> invalid
+Filename: tests/fixtures/rules/no-multiple-empty-lines/invalid/maxeof1-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - maxEOF: 1
+Plugins: unable to serialize
+
+Code:
+  1 | # Heading
+  2 |
+  3 | Paragraph
+  4 |
+  5 |
+    | ^ [1]
+  6 |
+
+Output:
+  1 | # Heading
+  2 |
+  3 | Paragraph
+  4 |
+  5 |
+
+[1] Too many blank lines at the end of file. Max of 1 allowed.
+---
+
+
+Test: no-multiple-empty-lines >> invalid
+Filename: tests/fixtures/rules/no-multiple-empty-lines/invalid/middle-multiple-empty-lines-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Heading
+  2 |
+  3 | Paragraph
+  4 |
+  5 |
+    | ^ [1]
+  6 | Another paragraph
+  7 |
+
+Output:
+  1 | # Heading
+  2 |
+  3 | Paragraph
+  4 |
+  5 | Another paragraph
+  6 |
+
+[1] More than 1 blank line not allowed.
+---
+
+
+Test: no-multiple-empty-lines >> invalid >>> "# Heading\n\n\n\nParagraph\n 2"
+Filename: tests/fixtures/rules/no-multiple-empty-lines/invalid/multiple-empty-lines-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Heading
+  2 |
+  3 |
+    | ^\ [1]
+  4 |
+    | ~ [1]
+  5 | Paragraph
+  6 |
+
+Output:
+  1 | # Heading
+  2 |
+  3 | Paragraph
+  4 |
+
+[1] More than 1 blank line not allowed.
+---
+
+
+Test: no-multiple-empty-lines >> invalid >>> "# Heading\n\nParagraph\n\n\n 2"
+Filename: tests/fixtures/rules/no-multiple-empty-lines/invalid/trailing-multiple-empty-lines-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Heading
+  2 |
+  3 | Paragraph
+  4 |
+    | ^\ [1]
+  5 |
+    | ~ [1]
+  6 |
+
+Output:
+  1 | # Heading
+  2 |
+  3 | Paragraph
+  4 |
+
+[1] Too many blank lines at the end of file. Max of 0 allowed.
+---

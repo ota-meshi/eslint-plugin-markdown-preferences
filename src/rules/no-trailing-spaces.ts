@@ -2,6 +2,7 @@ import type { SourceLocation } from "@eslint/core";
 import { createRule } from "../utils/index.ts";
 import type { Break, Code, Html, InlineCode, Text, Yaml } from "mdast";
 import type { Json, Toml } from "@eslint/markdown/types";
+import { parseLines } from "../utils/lines.ts";
 
 const htmlComment = /<!--.*?-->/su;
 
@@ -99,66 +100,49 @@ export default createRule("no-trailing-spaces", {
       "root:exit"() {
         const re = /[^\S\n\r]+$/u;
         const skipMatch = /^[^\S\n\r]*$/u;
-        const lines = sourceCode.lines;
-        const linebreaks = sourceCode.text.match(/\r?\n/gu);
+        const lines = parseLines(sourceCode);
         const commentLineNumbers = getCommentLineNumbers();
 
-        let totalLength = 0;
-
-        for (let i = 0, ii = lines.length; i < ii; i++) {
-          const lineNumber = i + 1;
-
-          // Always add linebreak length to line length to accommodate for line break (\n or \r\n)
-          // Because during the fix time they also reserve one spot in the array.
-          // Usually linebreak length is 2 for \r\n (CRLF) and 1 for \n (LF)
-          const linebreakLength =
-            linebreaks && linebreaks[i] ? linebreaks[i].length : 1;
-          const lineLength = lines[i].length + linebreakLength;
-
-          const matches = re.exec(lines[i]);
+        for (const lineInfo of lines) {
+          const matches = re.exec(lineInfo.text);
 
           if (!matches) {
-            totalLength += lineLength;
             continue;
           }
           const location = {
             start: {
-              line: lineNumber,
+              line: lineInfo.line,
               column: matches.index + 1,
             },
             end: {
-              line: lineNumber,
-              column: lineLength + 1 - linebreakLength,
+              line: lineInfo.line,
+              column: matches.index + 1 + matches[0].length,
             },
           };
 
-          const rangeStart = totalLength + location.start.column - 1;
-          const rangeEnd = totalLength + location.end.column - 1;
+          const range: [number, number] = [
+            lineInfo.range[0] + location.start.column - 1,
+            lineInfo.range[0] + location.end.column - 1,
+          ];
 
           if (
             ignoreNodes.some((node) => {
-              const range = sourceCode.getRange(node);
-              return range[0] <= rangeStart && rangeEnd <= range[1];
+              const nodeRange = sourceCode.getRange(node);
+              return nodeRange[0] <= range[0] && range[1] <= nodeRange[1];
             })
           ) {
-            totalLength += lineLength;
             continue;
           }
 
           // If the line has only whitespace, and skipBlankLines
           // is true, don't report it
-          if (skipBlankLines && skipMatch.test(lines[i])) {
-            totalLength += lineLength;
+          if (skipBlankLines && skipMatch.test(lineInfo.text)) {
             continue;
           }
 
-          const fixRange = [rangeStart, rangeEnd] as [number, number];
-
-          if (!ignoreComments || !commentLineNumbers.has(lineNumber)) {
-            report(location, fixRange);
+          if (!ignoreComments || !commentLineNumbers.has(lineInfo.line)) {
+            report(location, range);
           }
-
-          totalLength += lineLength;
         }
       },
     };

@@ -1,0 +1,3 @@
+{
+  "options": [{ "maxBOF": 1, "maxEOF": 1 }]
+}

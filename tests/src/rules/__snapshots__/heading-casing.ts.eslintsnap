@@ -4,6 +4,8 @@
 Test: heading-casing >> invalid
 Filename: tests/fixtures/rules/heading-casing/invalid/ignore-patterns-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Options:
   - style: Title Case
     ignorePatterns:
@@ -45,6 +47,8 @@ Output:
 Test: heading-casing >> invalid
 Filename: tests/fixtures/rules/heading-casing/invalid/minor-words-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Options:
   - minorWords:
       - a
@@ -115,6 +119,8 @@ Output:
 Test: heading-casing >> invalid
 Filename: tests/fixtures/rules/heading-casing/invalid/multiline/test01-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Options:
   - style: Title Case
     preserveWords:
@@ -169,6 +175,8 @@ Output:
 Test: heading-casing >> invalid
 Filename: tests/fixtures/rules/heading-casing/invalid/preserve-words/test01-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Options:
   - style: Title Case
     preserveWords:
@@ -241,6 +249,8 @@ Output:
 Test: heading-casing >> invalid
 Filename: tests/fixtures/rules/heading-casing/invalid/preserve-words/test02-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Options:
   - style: Title Case
     preserveWords:
@@ -332,6 +342,8 @@ Output:
 Test: heading-casing >> invalid
 Filename: tests/fixtures/rules/heading-casing/invalid/preserve-words/test03-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Options:
   - style: Title Case
     preserveWords:
@@ -420,6 +432,8 @@ Output:
 Test: heading-casing >> invalid
 Filename: tests/fixtures/rules/heading-casing/invalid/punctuation-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Plugins: unable to serialize
 
 Code:
@@ -591,6 +605,8 @@ Output:
 Test: heading-casing >> invalid
 Filename: tests/fixtures/rules/heading-casing/invalid/sentence-case/setext-multiline-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Options:
   - style: Sentence case
 Plugins: unable to serialize
@@ -702,6 +718,8 @@ Output:
 Test: heading-casing >> invalid
 Filename: tests/fixtures/rules/heading-casing/invalid/sentence-case/setext-style-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Options:
   - style: Sentence case
 Plugins: unable to serialize
@@ -773,6 +791,8 @@ Output:
 Test: heading-casing >> invalid
 Filename: tests/fixtures/rules/heading-casing/invalid/sentence-case/test01-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Options:
   - style: Sentence case
 Plugins: unable to serialize
@@ -855,6 +875,8 @@ Output:
 Test: heading-casing >> invalid
 Filename: tests/fixtures/rules/heading-casing/invalid/sentence-preserve/test01-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Options:
   - style: Sentence case
     preserveWords:
@@ -930,6 +952,8 @@ Output:
 Test: heading-casing >> invalid
 Filename: tests/fixtures/rules/heading-casing/invalid/setext-h1-style-heading-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Plugins: unable to serialize
 
 Code:
@@ -1010,6 +1034,8 @@ Output:
 Test: heading-casing >> invalid
 Filename: tests/fixtures/rules/heading-casing/invalid/setext-html-multiline-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Plugins: unable to serialize
 
 Code:
@@ -1122,6 +1148,8 @@ Output:
 Test: heading-casing >> invalid
 Filename: tests/fixtures/rules/heading-casing/invalid/setext-multiline-heading-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Plugins: unable to serialize
 
 Code:
@@ -1234,6 +1262,8 @@ Output:
 Test: heading-casing >> invalid
 Filename: tests/fixtures/rules/heading-casing/invalid/setext-style-heading-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Plugins: unable to serialize
 
 Code:
@@ -1309,6 +1339,8 @@ Output:
 Test: heading-casing >> invalid
 Filename: tests/fixtures/rules/heading-casing/invalid/title-case/test01-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Plugins: unable to serialize
 
 Code:
@@ -1392,6 +1424,8 @@ Output:
 Test: heading-casing >> invalid
 Filename: tests/fixtures/rules/heading-casing/invalid/words-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Plugins: unable to serialize
 
 Code:

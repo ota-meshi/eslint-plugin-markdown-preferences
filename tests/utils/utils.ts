@@ -163,7 +163,7 @@ async function getConfig(inputFile: string) {
 
 async function adjustConfig(
   config: {
-    languageOptions?: { parser: unknown };
+    languageOptions?: { parser?: unknown; frontmatter?: string };
     plugins?: Record<string, unknown>;
     language?: string;
   },
@@ -186,6 +186,13 @@ async function adjustConfig(
     };
     if (!result.language) {
       result.language = "markdown/gfm";
+    }
+
+    if (!result.languageOptions) {
+      result.languageOptions = {};
+    }
+    if (!result.languageOptions.frontmatter) {
+      result.languageOptions.frontmatter = "yaml";
     }
   }
   return result;
