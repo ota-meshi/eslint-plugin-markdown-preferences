@@ -247,6 +247,7 @@ export default defineConfig([
       "markdown-preferences/heading-casing": "off",
       "markdown-preferences/canonical-code-block-language": "off",
       "markdown-preferences/no-multiple-empty-lines": "off",
+      "markdown-preferences/no-laziness-blockquotes": "off",
     },
   },
   {
