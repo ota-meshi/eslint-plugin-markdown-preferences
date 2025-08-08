@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/no-multiple-empty-lines"
 description: "disallow multiple empty lines in Markdown files."
+since: "v0.10.0"
 ---
 
 # markdown-preferences/no-multiple-empty-lines
 
 > disallow multiple empty lines in Markdown files.
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -109,6 +109,10 @@ Paragraph
 - [@stylistic/no-multiple-empty-lines](https://eslint.style/rules/no-multiple-empty-lines)
 
 [no-multiple-empty-lines]: https://eslint.org/docs/latest/rules/no-multiple-empty-lines
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.10.0
 
 ## 🔍 Implementation
 
