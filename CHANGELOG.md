@@ -1,5 +1,13 @@
 # eslint-plugin-markdown-preferences
 
+## 0.10.0
+
+### Minor Changes
+
+- [#45](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/45) [`1ef06b9`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/1ef06b9bf91e1e7ff5907e36fc05d9b9f8cef5ae) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/no-laziness-blockquotes`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-laziness-blockquotes.html) rule
+
+- [#43](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/43) [`a2988c2`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/a2988c2a8a320dc4d43fada6001e1c1d607c881e) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/no-multiple-empty-lines`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multiple-empty-lines.html) rule
+
 ## 0.9.0
 
 ### Minor Changes
