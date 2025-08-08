@@ -34,6 +34,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/heading-casing'?: Linter.RuleEntry<MarkdownPreferencesHeadingCasing>
   /**
+   * disallow laziness in blockquotes
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-laziness-blockquotes.html
+   */
+  'markdown-preferences/no-laziness-blockquotes'?: Linter.RuleEntry<[]>
+  /**
    * disallow multiple empty lines in Markdown files.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multiple-empty-lines.html
    */
