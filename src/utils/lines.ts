@@ -2,7 +2,7 @@ import type { MarkdownSourceCode } from "@eslint/markdown";
 
 const cache = new WeakMap<MarkdownSourceCode, ParsedLines>();
 
-export type LineInfo = {
+export type ParsedLine = {
   text: string;
   range: [number, number];
   line: number;
@@ -10,7 +10,7 @@ export type LineInfo = {
 };
 
 export class ParsedLines {
-  private readonly lines: LineInfo[];
+  private readonly lines: ParsedLine[];
 
   public constructor(codeText: string) {
     let offset = 0;
@@ -37,8 +37,16 @@ export class ParsedLines {
     });
   }
 
-  public [Symbol.iterator](): Iterator<LineInfo> {
+  public [Symbol.iterator](): Iterator<ParsedLine> {
     return this.lines[Symbol.iterator]();
+  }
+
+  public get length(): number {
+    return this.lines.length;
+  }
+
+  public get(lineNumber: number): ParsedLine {
+    return this.lines[lineNumber - 1];
   }
 }
 

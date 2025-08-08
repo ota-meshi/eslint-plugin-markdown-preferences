@@ -1,7 +1,7 @@
 import { createRule } from "../utils/index.ts";
 import type { Code, Html, Yaml } from "mdast";
 import type { Toml, Json } from "@eslint/markdown/types";
-import type { LineInfo } from "../utils/lines.ts";
+import type { ParsedLine } from "../utils/lines.ts";
 import { parseLines } from "../utils/lines.ts";
 
 export default createRule("no-multiple-empty-lines", {
@@ -76,7 +76,7 @@ export default createRule("no-multiple-empty-lines", {
       "root:exit"() {
         const lines = [...parseLines(sourceCode)];
 
-        const bofEmptyLines: LineInfo[] = [];
+        const bofEmptyLines: ParsedLine[] = [];
         while (lines.length) {
           if (lines[0].text.trim()) break;
           bofEmptyLines.push(lines.shift()!);
@@ -97,7 +97,7 @@ export default createRule("no-multiple-empty-lines", {
             },
           });
         }
-        const eofEmptyLines: LineInfo[] = [];
+        const eofEmptyLines: ParsedLine[] = [];
         while (lines.length) {
           if (lines[lines.length - 1].text.trim()) break;
           eofEmptyLines.unshift(lines.pop()!);
@@ -119,7 +119,7 @@ export default createRule("no-multiple-empty-lines", {
           });
         }
 
-        const emptyLines: LineInfo[] = [];
+        const emptyLines: ParsedLine[] = [];
 
         for (const lineInfo of lines) {
           if (

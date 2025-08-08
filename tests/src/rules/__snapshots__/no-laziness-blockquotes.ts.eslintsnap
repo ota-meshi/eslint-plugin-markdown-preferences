@@ -1,0 +1,1352 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: no-laziness-blockquotes >> invalid
+Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/complex-nested-lazy-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: Complex nested blockquotes with multiple lazy lines
+  2 |
+  3 | > Outer blockquote first line
+  4 | > > Inner blockquote first line
+  5 | > Inner lazy line (missing >)
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  6 | > > Inner blockquote continues properly
+  7 | Another inner lazy line
+    | ^~~~~~~~~~~~~~~~~~~~~~~ [2]
+  8 | > Inner lazy line continues
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+  9 |
+ 10 | > Another outer blockquote
+ 11 | > > First inner
+ 12 | > > > Deep nested
+ 13 | Deep lazy line (missing > > >)
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+ 14 | > > Back to second level
+    | ^~~~~~~~~~~~~~~~~~~~~~~~ [5]
+ 15 | Outer lazy again
+ 16 |
+
+[1] Expected 2 '>' marker(s), but found 1. This line will be interpreted as part of level 2 blockquote.
+    Suggestions:
+      - Add 1 '>' marker(s).
+        Output:
+          1 | # Invalid: Complex nested blockquotes with multiple lazy lines
+          2 |
+          3 | > Outer blockquote first line
+          4 | > > Inner blockquote first line
+          5 | > > Inner lazy line (missing >)
+          6 | > > Inner blockquote continues properly
+          7 | Another inner lazy line
+          8 | > Inner lazy line continues
+          9 |
+         10 | > Another outer blockquote
+         11 | > > First inner
+         12 | > > > Deep nested
+         13 | Deep lazy line (missing > > >)
+         14 | > > Back to second level
+         15 | Outer lazy again
+         16 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Complex nested blockquotes with multiple lazy lines
+          2 |
+          3 | > Outer blockquote first line
+          4 | > > Inner blockquote first line
+          5 | >
+          6 | > Inner lazy line (missing >)
+          7 | > > Inner blockquote continues properly
+          8 | Another inner lazy line
+          9 | > Inner lazy line continues
+         10 |
+         11 | > Another outer blockquote
+         12 | > > First inner
+         13 | > > > Deep nested
+         14 | Deep lazy line (missing > > >)
+         15 | > > Back to second level
+         16 | Outer lazy again
+         17 |
+[2] Expected 2 '>' marker(s), but found 0. This line will be interpreted as part of level 2 blockquote.
+    Suggestions:
+      - Add 2 '>' marker(s).
+        Output:
+          1 | # Invalid: Complex nested blockquotes with multiple lazy lines
+          2 |
+          3 | > Outer blockquote first line
+          4 | > > Inner blockquote first line
+          5 | > Inner lazy line (missing >)
+          6 | > > Inner blockquote continues properly
+          7 | > > Another inner lazy line
+          8 | > Inner lazy line continues
+          9 |
+         10 | > Another outer blockquote
+         11 | > > First inner
+         12 | > > > Deep nested
+         13 | Deep lazy line (missing > > >)
+         14 | > > Back to second level
+         15 | Outer lazy again
+         16 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Complex nested blockquotes with multiple lazy lines
+          2 |
+          3 | > Outer blockquote first line
+          4 | > > Inner blockquote first line
+          5 | > Inner lazy line (missing >)
+          6 | > > Inner blockquote continues properly
+          7 |
+          8 | Another inner lazy line
+          9 | > Inner lazy line continues
+         10 |
+         11 | > Another outer blockquote
+         12 | > > First inner
+         13 | > > > Deep nested
+         14 | Deep lazy line (missing > > >)
+         15 | > > Back to second level
+         16 | Outer lazy again
+         17 |
+[3] Expected 2 '>' marker(s), but found 1. This line will be interpreted as part of level 2 blockquote.
+    Suggestions:
+      - Add 1 '>' marker(s).
+        Output:
+          1 | # Invalid: Complex nested blockquotes with multiple lazy lines
+          2 |
+          3 | > Outer blockquote first line
+          4 | > > Inner blockquote first line
+          5 | > Inner lazy line (missing >)
+          6 | > > Inner blockquote continues properly
+          7 | Another inner lazy line
+          8 | > > Inner lazy line continues
+          9 |
+         10 | > Another outer blockquote
+         11 | > > First inner
+         12 | > > > Deep nested
+         13 | Deep lazy line (missing > > >)
+         14 | > > Back to second level
+         15 | Outer lazy again
+         16 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Complex nested blockquotes with multiple lazy lines
+          2 |
+          3 | > Outer blockquote first line
+          4 | > > Inner blockquote first line
+          5 | > Inner lazy line (missing >)
+          6 | > > Inner blockquote continues properly
+          7 | Another inner lazy line
+          8 | >
+          9 | > Inner lazy line continues
+         10 |
+         11 | > Another outer blockquote
+         12 | > > First inner
+         13 | > > > Deep nested
+         14 | Deep lazy line (missing > > >)
+         15 | > > Back to second level
+         16 | Outer lazy again
+         17 |
+[4] Expected 3 '>' marker(s), but found 0. This line will be interpreted as part of level 3 blockquote.
+    Suggestions:
+      - Add 3 '>' marker(s).
+        Output:
+          1 | # Invalid: Complex nested blockquotes with multiple lazy lines
+          2 |
+          3 | > Outer blockquote first line
+          4 | > > Inner blockquote first line
+          5 | > Inner lazy line (missing >)
+          6 | > > Inner blockquote continues properly
+          7 | Another inner lazy line
+          8 | > Inner lazy line continues
+          9 |
+         10 | > Another outer blockquote
+         11 | > > First inner
+         12 | > > > Deep nested
+         13 | > > > Deep lazy line (missing > > >)
+         14 | > > Back to second level
+         15 | Outer lazy again
+         16 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Complex nested blockquotes with multiple lazy lines
+          2 |
+          3 | > Outer blockquote first line
+          4 | > > Inner blockquote first line
+          5 | > Inner lazy line (missing >)
+          6 | > > Inner blockquote continues properly
+          7 | Another inner lazy line
+          8 | > Inner lazy line continues
+          9 |
+         10 | > Another outer blockquote
+         11 | > > First inner
+         12 | > > > Deep nested
+         13 |
+         14 | Deep lazy line (missing > > >)
+         15 | > > Back to second level
+         16 | Outer lazy again
+         17 |
+[5] Expected 3 '>' marker(s), but found 2. This line will be interpreted as part of level 3 blockquote.
+    Suggestions:
+      - Add 1 '>' marker(s).
+        Output:
+          1 | # Invalid: Complex nested blockquotes with multiple lazy lines
+          2 |
+          3 | > Outer blockquote first line
+          4 | > > Inner blockquote first line
+          5 | > Inner lazy line (missing >)
+          6 | > > Inner blockquote continues properly
+          7 | Another inner lazy line
+          8 | > Inner lazy line continues
+          9 |
+         10 | > Another outer blockquote
+         11 | > > First inner
+         12 | > > > Deep nested
+         13 | Deep lazy line (missing > > >)
+         14 | > > > Back to second level
+         15 | Outer lazy again
+         16 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Complex nested blockquotes with multiple lazy lines
+          2 |
+          3 | > Outer blockquote first line
+          4 | > > Inner blockquote first line
+          5 | > Inner lazy line (missing >)
+          6 | > > Inner blockquote continues properly
+          7 | Another inner lazy line
+          8 | > Inner lazy line continues
+          9 |
+         10 | > Another outer blockquote
+         11 | > > First inner
+         12 | > > > Deep nested
+         13 | Deep lazy line (missing > > >)
+         14 | > >
+         15 | > > Back to second level
+         16 | Outer lazy again
+         17 |
+---
+
+
+Test: no-laziness-blockquotes >> invalid
+Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/consecutive-nested-lazy-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: Lazy consecutive nested transitions
+  2 |
+  3 | > A
+  4 | > > B
+  5 | C (lazy for level 2)
+    | ^~~~~~~~~~~~~~~~~~~~ [1]
+  6 | > > D
+  7 | E (lazy for level 2)
+    | ^~~~~~~~~~~~~~~~~~~~ [2]
+  8 |
+  9 | > First
+ 10 | > > Second  
+ 11 | > > > Third
+ 12 | > > Fourth (lazy for level 3)
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+ 13 | Fifth (lazy for level 3)
+ 14 | > Sixth (lazy for level 3)
+ 15 |
+ 16 | > Start
+ 17 | > > Nested
+ 18 | Continue (lazy for level 2)
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+ 19 | > > Nested again
+ 20 | Final (lazy for level 2)
+    | ^~~~~~~~~~~~~~~~~~~~~~~~ [5]
+ 21 |
+
+[1] Expected 2 '>' marker(s), but found 0. This line will be interpreted as part of level 2 blockquote.
+    Suggestions:
+      - Add 2 '>' marker(s).
+        Output:
+          1 | # Invalid: Lazy consecutive nested transitions
+          2 |
+          3 | > A
+          4 | > > B
+          5 | > > C (lazy for level 2)
+          6 | > > D
+          7 | E (lazy for level 2)
+          8 |
+          9 | > First
+         10 | > > Second  
+         11 | > > > Third
+         12 | > > Fourth (lazy for level 3)
+         13 | Fifth (lazy for level 3)
+         14 | > Sixth (lazy for level 3)
+         15 |
+         16 | > Start
+         17 | > > Nested
+         18 | Continue (lazy for level 2)
+         19 | > > Nested again
+         20 | Final (lazy for level 2)
+         21 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Lazy consecutive nested transitions
+          2 |
+          3 | > A
+          4 | > > B
+          5 |
+          6 | C (lazy for level 2)
+          7 | > > D
+          8 | E (lazy for level 2)
+          9 |
+         10 | > First
+         11 | > > Second  
+         12 | > > > Third
+         13 | > > Fourth (lazy for level 3)
+         14 | Fifth (lazy for level 3)
+         15 | > Sixth (lazy for level 3)
+         16 |
+         17 | > Start
+         18 | > > Nested
+         19 | Continue (lazy for level 2)
+         20 | > > Nested again
+         21 | Final (lazy for level 2)
+         22 |
+[2] Expected 2 '>' marker(s), but found 0. This line will be interpreted as part of level 2 blockquote.
+    Suggestions:
+      - Add 2 '>' marker(s).
+        Output:
+          1 | # Invalid: Lazy consecutive nested transitions
+          2 |
+          3 | > A
+          4 | > > B
+          5 | C (lazy for level 2)
+          6 | > > D
+          7 | > > E (lazy for level 2)
+          8 |
+          9 | > First
+         10 | > > Second  
+         11 | > > > Third
+         12 | > > Fourth (lazy for level 3)
+         13 | Fifth (lazy for level 3)
+         14 | > Sixth (lazy for level 3)
+         15 |
+         16 | > Start
+         17 | > > Nested
+         18 | Continue (lazy for level 2)
+         19 | > > Nested again
+         20 | Final (lazy for level 2)
+         21 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Lazy consecutive nested transitions
+          2 |
+          3 | > A
+          4 | > > B
+          5 | C (lazy for level 2)
+          6 | > > D
+          7 |
+          8 | E (lazy for level 2)
+          9 |
+         10 | > First
+         11 | > > Second  
+         12 | > > > Third
+         13 | > > Fourth (lazy for level 3)
+         14 | Fifth (lazy for level 3)
+         15 | > Sixth (lazy for level 3)
+         16 |
+         17 | > Start
+         18 | > > Nested
+         19 | Continue (lazy for level 2)
+         20 | > > Nested again
+         21 | Final (lazy for level 2)
+         22 |
+[3] Expected 3 '>' marker(s), but found 2. This line will be interpreted as part of level 3 blockquote.
+    Suggestions:
+      - Add 1 '>' marker(s).
+        Output:
+          1 | # Invalid: Lazy consecutive nested transitions
+          2 |
+          3 | > A
+          4 | > > B
+          5 | C (lazy for level 2)
+          6 | > > D
+          7 | E (lazy for level 2)
+          8 |
+          9 | > First
+         10 | > > Second  
+         11 | > > > Third
+         12 | > > > Fourth (lazy for level 3)
+         13 | Fifth (lazy for level 3)
+         14 | > Sixth (lazy for level 3)
+         15 |
+         16 | > Start
+         17 | > > Nested
+         18 | Continue (lazy for level 2)
+         19 | > > Nested again
+         20 | Final (lazy for level 2)
+         21 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Lazy consecutive nested transitions
+          2 |
+          3 | > A
+          4 | > > B
+          5 | C (lazy for level 2)
+          6 | > > D
+          7 | E (lazy for level 2)
+          8 |
+          9 | > First
+         10 | > > Second  
+         11 | > > > Third
+         12 | > >
+         13 | > > Fourth (lazy for level 3)
+         14 | Fifth (lazy for level 3)
+         15 | > Sixth (lazy for level 3)
+         16 |
+         17 | > Start
+         18 | > > Nested
+         19 | Continue (lazy for level 2)
+         20 | > > Nested again
+         21 | Final (lazy for level 2)
+         22 |
+[4] Expected 2 '>' marker(s), but found 0. This line will be interpreted as part of level 2 blockquote.
+    Suggestions:
+      - Add 2 '>' marker(s).
+        Output:
+          1 | # Invalid: Lazy consecutive nested transitions
+          2 |
+          3 | > A
+          4 | > > B
+          5 | C (lazy for level 2)
+          6 | > > D
+          7 | E (lazy for level 2)
+          8 |
+          9 | > First
+         10 | > > Second  
+         11 | > > > Third
+         12 | > > Fourth (lazy for level 3)
+         13 | Fifth (lazy for level 3)
+         14 | > Sixth (lazy for level 3)
+         15 |
+         16 | > Start
+         17 | > > Nested
+         18 | > > Continue (lazy for level 2)
+         19 | > > Nested again
+         20 | Final (lazy for level 2)
+         21 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Lazy consecutive nested transitions
+          2 |
+          3 | > A
+          4 | > > B
+          5 | C (lazy for level 2)
+          6 | > > D
+          7 | E (lazy for level 2)
+          8 |
+          9 | > First
+         10 | > > Second  
+         11 | > > > Third
+         12 | > > Fourth (lazy for level 3)
+         13 | Fifth (lazy for level 3)
+         14 | > Sixth (lazy for level 3)
+         15 |
+         16 | > Start
+         17 | > > Nested
+         18 |
+         19 | Continue (lazy for level 2)
+         20 | > > Nested again
+         21 | Final (lazy for level 2)
+         22 |
+[5] Expected 2 '>' marker(s), but found 0. This line will be interpreted as part of level 2 blockquote.
+    Suggestions:
+      - Add 2 '>' marker(s).
+        Output:
+          1 | # Invalid: Lazy consecutive nested transitions
+          2 |
+          3 | > A
+          4 | > > B
+          5 | C (lazy for level 2)
+          6 | > > D
+          7 | E (lazy for level 2)
+          8 |
+          9 | > First
+         10 | > > Second  
+         11 | > > > Third
+         12 | > > Fourth (lazy for level 3)
+         13 | Fifth (lazy for level 3)
+         14 | > Sixth (lazy for level 3)
+         15 |
+         16 | > Start
+         17 | > > Nested
+         18 | Continue (lazy for level 2)
+         19 | > > Nested again
+         20 | > > Final (lazy for level 2)
+         21 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Lazy consecutive nested transitions
+          2 |
+          3 | > A
+          4 | > > B
+          5 | C (lazy for level 2)
+          6 | > > D
+          7 | E (lazy for level 2)
+          8 |
+          9 | > First
+         10 | > > Second  
+         11 | > > > Third
+         12 | > > Fourth (lazy for level 3)
+         13 | Fifth (lazy for level 3)
+         14 | > Sixth (lazy for level 3)
+         15 |
+         16 | > Start
+         17 | > > Nested
+         18 | Continue (lazy for level 2)
+         19 | > > Nested again
+         20 |
+         21 | Final (lazy for level 2)
+         22 |
+---
+
+
+Test: no-laziness-blockquotes >> invalid
+Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/deep-nested-lazy-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: Deeply nested with lazy continuation at various levels
+  2 |
+  3 | > Level 1 start
+  4 | > > Level 2 start  
+  5 | > > > Level 3 start
+  6 | Level 3 lazy line (missing > > >) - REPORTED
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  7 | > > > Level 3 continues
+  8 | Level 3 lazy line (missing > > >) - REPORTED (new violation sequence)
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  9 | > > Level 3 lazy line (looks like level 2, but missing >) - REPORTED
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+ 10 | Level 3 lazy line (missing > > >) - not reported (consecutive violation)
+ 11 | > Level 3 lazy line (looks like level 1, but missing > >) - not reported (consecutive violation)
+ 12 |
+
+[1] Expected 3 '>' marker(s), but found 0. This line will be interpreted as part of level 3 blockquote.
+    Suggestions:
+      - Add 3 '>' marker(s).
+        Output:
+          1 | # Invalid: Deeply nested with lazy continuation at various levels
+          2 |
+          3 | > Level 1 start
+          4 | > > Level 2 start  
+          5 | > > > Level 3 start
+          6 | > > > Level 3 lazy line (missing > > >) - REPORTED
+          7 | > > > Level 3 continues
+          8 | Level 3 lazy line (missing > > >) - REPORTED (new violation sequence)
+          9 | > > Level 3 lazy line (looks like level 2, but missing >) - REPORTED
+         10 | Level 3 lazy line (missing > > >) - not reported (consecutive violation)
+         11 | > Level 3 lazy line (looks like level 1, but missing > >) - not reported (consecutive violation)
+         12 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Deeply nested with lazy continuation at various levels
+          2 |
+          3 | > Level 1 start
+          4 | > > Level 2 start  
+          5 | > > > Level 3 start
+          6 |
+          7 | Level 3 lazy line (missing > > >) - REPORTED
+          8 | > > > Level 3 continues
+          9 | Level 3 lazy line (missing > > >) - REPORTED (new violation sequence)
+         10 | > > Level 3 lazy line (looks like level 2, but missing >) - REPORTED
+         11 | Level 3 lazy line (missing > > >) - not reported (consecutive violation)
+         12 | > Level 3 lazy line (looks like level 1, but missing > >) - not reported (consecutive violation)
+         13 |
+[2] Expected 3 '>' marker(s), but found 0. This line will be interpreted as part of level 3 blockquote.
+    Suggestions:
+      - Add 3 '>' marker(s).
+        Output:
+          1 | # Invalid: Deeply nested with lazy continuation at various levels
+          2 |
+          3 | > Level 1 start
+          4 | > > Level 2 start  
+          5 | > > > Level 3 start
+          6 | Level 3 lazy line (missing > > >) - REPORTED
+          7 | > > > Level 3 continues
+          8 | > > > Level 3 lazy line (missing > > >) - REPORTED (new violation sequence)
+          9 | > > Level 3 lazy line (looks like level 2, but missing >) - REPORTED
+         10 | Level 3 lazy line (missing > > >) - not reported (consecutive violation)
+         11 | > Level 3 lazy line (looks like level 1, but missing > >) - not reported (consecutive violation)
+         12 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Deeply nested with lazy continuation at various levels
+          2 |
+          3 | > Level 1 start
+          4 | > > Level 2 start  
+          5 | > > > Level 3 start
+          6 | Level 3 lazy line (missing > > >) - REPORTED
+          7 | > > > Level 3 continues
+          8 |
+          9 | Level 3 lazy line (missing > > >) - REPORTED (new violation sequence)
+         10 | > > Level 3 lazy line (looks like level 2, but missing >) - REPORTED
+         11 | Level 3 lazy line (missing > > >) - not reported (consecutive violation)
+         12 | > Level 3 lazy line (looks like level 1, but missing > >) - not reported (consecutive violation)
+         13 |
+[3] Expected 3 '>' marker(s), but found 2. This line will be interpreted as part of level 3 blockquote.
+    Suggestions:
+      - Add 1 '>' marker(s).
+        Output:
+          1 | # Invalid: Deeply nested with lazy continuation at various levels
+          2 |
+          3 | > Level 1 start
+          4 | > > Level 2 start  
+          5 | > > > Level 3 start
+          6 | Level 3 lazy line (missing > > >) - REPORTED
+          7 | > > > Level 3 continues
+          8 | Level 3 lazy line (missing > > >) - REPORTED (new violation sequence)
+          9 | > > > Level 3 lazy line (looks like level 2, but missing >) - REPORTED
+         10 | Level 3 lazy line (missing > > >) - not reported (consecutive violation)
+         11 | > Level 3 lazy line (looks like level 1, but missing > >) - not reported (consecutive violation)
+         12 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Deeply nested with lazy continuation at various levels
+          2 |
+          3 | > Level 1 start
+          4 | > > Level 2 start  
+          5 | > > > Level 3 start
+          6 | Level 3 lazy line (missing > > >) - REPORTED
+          7 | > > > Level 3 continues
+          8 | Level 3 lazy line (missing > > >) - REPORTED (new violation sequence)
+          9 | > >
+         10 | > > Level 3 lazy line (looks like level 2, but missing >) - REPORTED
+         11 | Level 3 lazy line (missing > > >) - not reported (consecutive violation)
+         12 | > Level 3 lazy line (looks like level 1, but missing > >) - not reported (consecutive violation)
+         13 |
+---
+
+
+Test: no-laziness-blockquotes >> invalid
+Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/example-complex-nested-lazy-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Example of complex nested lazy blockquotes
+  2 |
+  3 | > Level 1 start
+  4 | > > Level 2 start
+  5 | > > > Level 3 start
+  6 | > > This looks like level 2 text but is actually lazy for level 3
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  7 | > > > Level 3 continues
+  8 | > This looks like level 1 text but is actually lazy for level 3
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  9 | > > This looks like level 2 text but is actually lazy for level 3
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+ 10 | > This looks like level 1 text but is actually lazy for level 3.
+ 11 | > However, this level 1-looking content will not be reported
+ 12 | > because the previous line's intent (level 2 vs level 3) is ambiguous and cannot be correctly determined.
+ 13 | > If the previous line intended level 2, this content might be level 1 or level 2.
+ 14 | > But if the previous line intended level 3, this content might be level 1 or level 3.
+ 15 |
+
+[1] Expected 3 '>' marker(s), but found 2. This line will be interpreted as part of level 3 blockquote.
+    Suggestions:
+      - Add 1 '>' marker(s).
+        Output:
+          1 | # Example of complex nested lazy blockquotes
+          2 |
+          3 | > Level 1 start
+          4 | > > Level 2 start
+          5 | > > > Level 3 start
+          6 | > > > This looks like level 2 text but is actually lazy for level 3
+          7 | > > > Level 3 continues
+          8 | > This looks like level 1 text but is actually lazy for level 3
+          9 | > > This looks like level 2 text but is actually lazy for level 3
+         10 | > This looks like level 1 text but is actually lazy for level 3.
+         11 | > However, this level 1-looking content will not be reported
+         12 | > because the previous line's intent (level 2 vs level 3) is ambiguous and cannot be correctly determined.
+         13 | > If the previous line intended level 2, this content might be level 1 or level 2.
+         14 | > But if the previous line intended level 3, this content might be level 1 or level 3.
+         15 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Example of complex nested lazy blockquotes
+          2 |
+          3 | > Level 1 start
+          4 | > > Level 2 start
+          5 | > > > Level 3 start
+          6 | > >
+          7 | > > This looks like level 2 text but is actually lazy for level 3
+          8 | > > > Level 3 continues
+          9 | > This looks like level 1 text but is actually lazy for level 3
+         10 | > > This looks like level 2 text but is actually lazy for level 3
+         11 | > This looks like level 1 text but is actually lazy for level 3.
+         12 | > However, this level 1-looking content will not be reported
+         13 | > because the previous line's intent (level 2 vs level 3) is ambiguous and cannot be correctly determined.
+         14 | > If the previous line intended level 2, this content might be level 1 or level 2.
+         15 | > But if the previous line intended level 3, this content might be level 1 or level 3.
+         16 |
+[2] Expected 3 '>' marker(s), but found 1. This line will be interpreted as part of level 3 blockquote.
+    Suggestions:
+      - Add 2 '>' marker(s).
+        Output:
+          1 | # Example of complex nested lazy blockquotes
+          2 |
+          3 | > Level 1 start
+          4 | > > Level 2 start
+          5 | > > > Level 3 start
+          6 | > > This looks like level 2 text but is actually lazy for level 3
+          7 | > > > Level 3 continues
+          8 | > > > This looks like level 1 text but is actually lazy for level 3
+          9 | > > This looks like level 2 text but is actually lazy for level 3
+         10 | > This looks like level 1 text but is actually lazy for level 3.
+         11 | > However, this level 1-looking content will not be reported
+         12 | > because the previous line's intent (level 2 vs level 3) is ambiguous and cannot be correctly determined.
+         13 | > If the previous line intended level 2, this content might be level 1 or level 2.
+         14 | > But if the previous line intended level 3, this content might be level 1 or level 3.
+         15 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Example of complex nested lazy blockquotes
+          2 |
+          3 | > Level 1 start
+          4 | > > Level 2 start
+          5 | > > > Level 3 start
+          6 | > > This looks like level 2 text but is actually lazy for level 3
+          7 | > > > Level 3 continues
+          8 | >
+          9 | > This looks like level 1 text but is actually lazy for level 3
+         10 | > > This looks like level 2 text but is actually lazy for level 3
+         11 | > This looks like level 1 text but is actually lazy for level 3.
+         12 | > However, this level 1-looking content will not be reported
+         13 | > because the previous line's intent (level 2 vs level 3) is ambiguous and cannot be correctly determined.
+         14 | > If the previous line intended level 2, this content might be level 1 or level 2.
+         15 | > But if the previous line intended level 3, this content might be level 1 or level 3.
+         16 |
+[3] Expected 3 '>' marker(s), but found 2. This line will be interpreted as part of level 3 blockquote.
+    Suggestions:
+      - Add 1 '>' marker(s).
+        Output:
+          1 | # Example of complex nested lazy blockquotes
+          2 |
+          3 | > Level 1 start
+          4 | > > Level 2 start
+          5 | > > > Level 3 start
+          6 | > > This looks like level 2 text but is actually lazy for level 3
+          7 | > > > Level 3 continues
+          8 | > This looks like level 1 text but is actually lazy for level 3
+          9 | > > > This looks like level 2 text but is actually lazy for level 3
+         10 | > This looks like level 1 text but is actually lazy for level 3.
+         11 | > However, this level 1-looking content will not be reported
+         12 | > because the previous line's intent (level 2 vs level 3) is ambiguous and cannot be correctly determined.
+         13 | > If the previous line intended level 2, this content might be level 1 or level 2.
+         14 | > But if the previous line intended level 3, this content might be level 1 or level 3.
+         15 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Example of complex nested lazy blockquotes
+          2 |
+          3 | > Level 1 start
+          4 | > > Level 2 start
+          5 | > > > Level 3 start
+          6 | > > This looks like level 2 text but is actually lazy for level 3
+          7 | > > > Level 3 continues
+          8 | > This looks like level 1 text but is actually lazy for level 3
+          9 | > >
+         10 | > > This looks like level 2 text but is actually lazy for level 3
+         11 | > This looks like level 1 text but is actually lazy for level 3.
+         12 | > However, this level 1-looking content will not be reported
+         13 | > because the previous line's intent (level 2 vs level 3) is ambiguous and cannot be correctly determined.
+         14 | > If the previous line intended level 2, this content might be level 1 or level 2.
+         15 | > But if the previous line intended level 3, this content might be level 1 or level 3.
+         16 |
+---
+
+
+Test: no-laziness-blockquotes >> invalid
+Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/lazy-continuation-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: Lazy continuation lines
+  2 |
+  3 | > This is a blockquote
+  4 | with a lazy continuation line
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  5 |
+
+[1] Expected 1 '>' marker(s), but found 0. This line will be interpreted as part of level 1 blockquote.
+    Suggestions:
+      - Add 1 '>' marker(s).
+        Output:
+          1 | # Invalid: Lazy continuation lines
+          2 |
+          3 | > This is a blockquote
+          4 | > with a lazy continuation line
+          5 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Lazy continuation lines
+          2 |
+          3 | > This is a blockquote
+          4 |
+          5 | with a lazy continuation line
+          6 |
+---
+
+
+Test: no-laziness-blockquotes >> invalid
+Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/mixed-content-nested-lazy-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: Mixed content with nested blockquotes
+  2 |
+  3 | Some text before.
+  4 |
+  5 | > Outer blockquote
+  6 | >
+  7 | > Some content
+  8 | > > Nested quote
+  9 | This lazy line belongs to nested
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+ 10 | > > Proper nested line
+ 11 | This lazy line belongs to nested
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 12 | >
+ 13 | > Final outer line
+ 14 |
+ 15 | Some text after.
+ 16 |
+
+[1] Expected 2 '>' marker(s), but found 0. This line will be interpreted as part of level 2 blockquote.
+    Suggestions:
+      - Add 2 '>' marker(s).
+        Output:
+          1 | # Invalid: Mixed content with nested blockquotes
+          2 |
+          3 | Some text before.
+          4 |
+          5 | > Outer blockquote
+          6 | >
+          7 | > Some content
+          8 | > > Nested quote
+          9 | > > This lazy line belongs to nested
+         10 | > > Proper nested line
+         11 | This lazy line belongs to nested
+         12 | >
+         13 | > Final outer line
+         14 |
+         15 | Some text after.
+         16 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Mixed content with nested blockquotes
+          2 |
+          3 | Some text before.
+          4 |
+          5 | > Outer blockquote
+          6 | >
+          7 | > Some content
+          8 | > > Nested quote
+          9 |
+         10 | This lazy line belongs to nested
+         11 | > > Proper nested line
+         12 | This lazy line belongs to nested
+         13 | >
+         14 | > Final outer line
+         15 |
+         16 | Some text after.
+         17 |
+[2] Expected 2 '>' marker(s), but found 0. This line will be interpreted as part of level 2 blockquote.
+    Suggestions:
+      - Add 2 '>' marker(s).
+        Output:
+          1 | # Invalid: Mixed content with nested blockquotes
+          2 |
+          3 | Some text before.
+          4 |
+          5 | > Outer blockquote
+          6 | >
+          7 | > Some content
+          8 | > > Nested quote
+          9 | This lazy line belongs to nested
+         10 | > > Proper nested line
+         11 | > > This lazy line belongs to nested
+         12 | >
+         13 | > Final outer line
+         14 |
+         15 | Some text after.
+         16 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Mixed content with nested blockquotes
+          2 |
+          3 | Some text before.
+          4 |
+          5 | > Outer blockquote
+          6 | >
+          7 | > Some content
+          8 | > > Nested quote
+          9 | This lazy line belongs to nested
+         10 | > > Proper nested line
+         11 |
+         12 | This lazy line belongs to nested
+         13 | >
+         14 | > Final outer line
+         15 |
+         16 | Some text after.
+         17 |
+---
+
+
+Test: no-laziness-blockquotes >> invalid
+Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/mixed-lazy-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: Mixed lazy and proper lines
+  2 |
+  3 | > First line is proper
+  4 | lazy second line
+    | ^~~~~~~~~~~~~~~~ [1]
+  5 | > Third line is proper again
+  6 | another lazy line
+    | ^~~~~~~~~~~~~~~~~ [2]
+  7 |
+
+[1] Expected 1 '>' marker(s), but found 0. This line will be interpreted as part of level 1 blockquote.
+    Suggestions:
+      - Add 1 '>' marker(s).
+        Output:
+          1 | # Invalid: Mixed lazy and proper lines
+          2 |
+          3 | > First line is proper
+          4 | > lazy second line
+          5 | > Third line is proper again
+          6 | another lazy line
+          7 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Mixed lazy and proper lines
+          2 |
+          3 | > First line is proper
+          4 |
+          5 | lazy second line
+          6 | > Third line is proper again
+          7 | another lazy line
+          8 |
+[2] Expected 1 '>' marker(s), but found 0. This line will be interpreted as part of level 1 blockquote.
+    Suggestions:
+      - Add 1 '>' marker(s).
+        Output:
+          1 | # Invalid: Mixed lazy and proper lines
+          2 |
+          3 | > First line is proper
+          4 | lazy second line
+          5 | > Third line is proper again
+          6 | > another lazy line
+          7 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Mixed lazy and proper lines
+          2 |
+          3 | > First line is proper
+          4 | lazy second line
+          5 | > Third line is proper again
+          6 |
+          7 | another lazy line
+          8 |
+---
+
+
+Test: no-laziness-blockquotes >> invalid
+Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/multi-level-transition-lazy-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: Multiple level transitions with lazy lines
+  2 |
+  3 | > Level 1 start
+  4 | > > Level 2 start
+  5 | > > > Level 3 content
+  6 | > > Level 3 lazy line (looks like level 2, but missing >) - REPORTED
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  7 | Level 3 lazy line (missing > > >) - not reported (consecutive violation)
+  8 |
+  9 | > Another test
+ 10 | > > Second level
+ 11 | > > > Third level  
+ 12 | > > > More third level
+ 13 | Level 3 lazy line (missing > > >) - REPORTED
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 14 | > Back to first level properly
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+ 15 |
+
+[1] Expected 3 '>' marker(s), but found 2. This line will be interpreted as part of level 3 blockquote.
+    Suggestions:
+      - Add 1 '>' marker(s).
+        Output:
+          1 | # Invalid: Multiple level transitions with lazy lines
+          2 |
+          3 | > Level 1 start
+          4 | > > Level 2 start
+          5 | > > > Level 3 content
+          6 | > > > Level 3 lazy line (looks like level 2, but missing >) - REPORTED
+          7 | Level 3 lazy line (missing > > >) - not reported (consecutive violation)
+          8 |
+          9 | > Another test
+         10 | > > Second level
+         11 | > > > Third level  
+         12 | > > > More third level
+         13 | Level 3 lazy line (missing > > >) - REPORTED
+         14 | > Back to first level properly
+         15 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Multiple level transitions with lazy lines
+          2 |
+          3 | > Level 1 start
+          4 | > > Level 2 start
+          5 | > > > Level 3 content
+          6 | > >
+          7 | > > Level 3 lazy line (looks like level 2, but missing >) - REPORTED
+          8 | Level 3 lazy line (missing > > >) - not reported (consecutive violation)
+          9 |
+         10 | > Another test
+         11 | > > Second level
+         12 | > > > Third level  
+         13 | > > > More third level
+         14 | Level 3 lazy line (missing > > >) - REPORTED
+         15 | > Back to first level properly
+         16 |
+[2] Expected 3 '>' marker(s), but found 0. This line will be interpreted as part of level 3 blockquote.
+    Suggestions:
+      - Add 3 '>' marker(s).
+        Output:
+          1 | # Invalid: Multiple level transitions with lazy lines
+          2 |
+          3 | > Level 1 start
+          4 | > > Level 2 start
+          5 | > > > Level 3 content
+          6 | > > Level 3 lazy line (looks like level 2, but missing >) - REPORTED
+          7 | Level 3 lazy line (missing > > >) - not reported (consecutive violation)
+          8 |
+          9 | > Another test
+         10 | > > Second level
+         11 | > > > Third level  
+         12 | > > > More third level
+         13 | > > > Level 3 lazy line (missing > > >) - REPORTED
+         14 | > Back to first level properly
+         15 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Multiple level transitions with lazy lines
+          2 |
+          3 | > Level 1 start
+          4 | > > Level 2 start
+          5 | > > > Level 3 content
+          6 | > > Level 3 lazy line (looks like level 2, but missing >) - REPORTED
+          7 | Level 3 lazy line (missing > > >) - not reported (consecutive violation)
+          8 |
+          9 | > Another test
+         10 | > > Second level
+         11 | > > > Third level  
+         12 | > > > More third level
+         13 |
+         14 | Level 3 lazy line (missing > > >) - REPORTED
+         15 | > Back to first level properly
+         16 |
+[3] Expected 3 '>' marker(s), but found 1. This line will be interpreted as part of level 3 blockquote.
+    Suggestions:
+      - Add 2 '>' marker(s).
+        Output:
+          1 | # Invalid: Multiple level transitions with lazy lines
+          2 |
+          3 | > Level 1 start
+          4 | > > Level 2 start
+          5 | > > > Level 3 content
+          6 | > > Level 3 lazy line (looks like level 2, but missing >) - REPORTED
+          7 | Level 3 lazy line (missing > > >) - not reported (consecutive violation)
+          8 |
+          9 | > Another test
+         10 | > > Second level
+         11 | > > > Third level  
+         12 | > > > More third level
+         13 | Level 3 lazy line (missing > > >) - REPORTED
+         14 | > > > Back to first level properly
+         15 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Multiple level transitions with lazy lines
+          2 |
+          3 | > Level 1 start
+          4 | > > Level 2 start
+          5 | > > > Level 3 content
+          6 | > > Level 3 lazy line (looks like level 2, but missing >) - REPORTED
+          7 | Level 3 lazy line (missing > > >) - not reported (consecutive violation)
+          8 |
+          9 | > Another test
+         10 | > > Second level
+         11 | > > > Third level  
+         12 | > > > More third level
+         13 | Level 3 lazy line (missing > > >) - REPORTED
+         14 | >
+         15 | > Back to first level properly
+         16 |
+---
+
+
+Test: no-laziness-blockquotes >> invalid
+Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/multiple-lazy-lines-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: Multiple lazy lines
+  2 |
+  3 | > This is a blockquote
+  4 | with a lazy continuation line
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~\ [1]
+  5 | and another lazy line
+    | ~~~~~~~~~~~~~~~~~~~~~ [1]
+  6 |
+
+[1] Expected 1 '>' marker(s), but found 0. This line will be interpreted as part of level 1 blockquote.
+    Suggestions:
+      - Add 1 '>' marker(s).
+        Output:
+          1 | # Invalid: Multiple lazy lines
+          2 |
+          3 | > This is a blockquote
+          4 | > with a lazy continuation line
+          5 | > and another lazy line
+          6 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Multiple lazy lines
+          2 |
+          3 | > This is a blockquote
+          4 |
+          5 | with a lazy continuation line
+          6 | and another lazy line
+          7 |
+---
+
+
+Test: no-laziness-blockquotes >> invalid
+Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/nested-lazy-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: Nested blockquote with lazy lines
+  2 |
+  3 | > This is a blockquote
+  4 | > > Nested blockquote
+  5 | but this is lazy
+    | ^~~~~~~~~~~~~~~~ [1]
+  6 |
+
+[1] Expected 2 '>' marker(s), but found 0. This line will be interpreted as part of level 2 blockquote.
+    Suggestions:
+      - Add 2 '>' marker(s).
+        Output:
+          1 | # Invalid: Nested blockquote with lazy lines
+          2 |
+          3 | > This is a blockquote
+          4 | > > Nested blockquote
+          5 | > > but this is lazy
+          6 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Nested blockquote with lazy lines
+          2 |
+          3 | > This is a blockquote
+          4 | > > Nested blockquote
+          5 |
+          6 | but this is lazy
+          7 |
+---
+
+
+Test: no-laziness-blockquotes >> invalid
+Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/nested-to-outer-lazy-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: Lazy transition from nested to outer blockquote
+  2 |
+  3 | > A
+  4 | > > B
+  5 | C
+    | ^ [1]
+  6 |
+  7 | > First outer line  
+  8 | > > Nested content
+  9 | > > More nested content
+ 10 | > Back to outer level (but lazy for nested level)
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 11 |
+ 12 | > Another example
+ 13 | > > Deep nested
+ 14 | > > > Even deeper
+ 15 | > > Back to second level (but lazy for deeper level)
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+ 16 | > Back to first level (but lazy for deeper level)
+ 17 |
+
+[1] Expected 2 '>' marker(s), but found 0. This line will be interpreted as part of level 2 blockquote.
+    Suggestions:
+      - Add 2 '>' marker(s).
+        Output:
+          1 | # Invalid: Lazy transition from nested to outer blockquote
+          2 |
+          3 | > A
+          4 | > > B
+          5 | > > C
+          6 |
+          7 | > First outer line  
+          8 | > > Nested content
+          9 | > > More nested content
+         10 | > Back to outer level (but lazy for nested level)
+         11 |
+         12 | > Another example
+         13 | > > Deep nested
+         14 | > > > Even deeper
+         15 | > > Back to second level (but lazy for deeper level)
+         16 | > Back to first level (but lazy for deeper level)
+         17 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Lazy transition from nested to outer blockquote
+          2 |
+          3 | > A
+          4 | > > B
+          5 |
+          6 | C
+          7 |
+          8 | > First outer line  
+          9 | > > Nested content
+         10 | > > More nested content
+         11 | > Back to outer level (but lazy for nested level)
+         12 |
+         13 | > Another example
+         14 | > > Deep nested
+         15 | > > > Even deeper
+         16 | > > Back to second level (but lazy for deeper level)
+         17 | > Back to first level (but lazy for deeper level)
+         18 |
+[2] Expected 2 '>' marker(s), but found 1. This line will be interpreted as part of level 2 blockquote.
+    Suggestions:
+      - Add 1 '>' marker(s).
+        Output:
+          1 | # Invalid: Lazy transition from nested to outer blockquote
+          2 |
+          3 | > A
+          4 | > > B
+          5 | C
+          6 |
+          7 | > First outer line  
+          8 | > > Nested content
+          9 | > > More nested content
+         10 | > > Back to outer level (but lazy for nested level)
+         11 |
+         12 | > Another example
+         13 | > > Deep nested
+         14 | > > > Even deeper
+         15 | > > Back to second level (but lazy for deeper level)
+         16 | > Back to first level (but lazy for deeper level)
+         17 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Lazy transition from nested to outer blockquote
+          2 |
+          3 | > A
+          4 | > > B
+          5 | C
+          6 |
+          7 | > First outer line  
+          8 | > > Nested content
+          9 | > > More nested content
+         10 | >
+         11 | > Back to outer level (but lazy for nested level)
+         12 |
+         13 | > Another example
+         14 | > > Deep nested
+         15 | > > > Even deeper
+         16 | > > Back to second level (but lazy for deeper level)
+         17 | > Back to first level (but lazy for deeper level)
+         18 |
+[3] Expected 3 '>' marker(s), but found 2. This line will be interpreted as part of level 3 blockquote.
+    Suggestions:
+      - Add 1 '>' marker(s).
+        Output:
+          1 | # Invalid: Lazy transition from nested to outer blockquote
+          2 |
+          3 | > A
+          4 | > > B
+          5 | C
+          6 |
+          7 | > First outer line  
+          8 | > > Nested content
+          9 | > > More nested content
+         10 | > Back to outer level (but lazy for nested level)
+         11 |
+         12 | > Another example
+         13 | > > Deep nested
+         14 | > > > Even deeper
+         15 | > > > Back to second level (but lazy for deeper level)
+         16 | > Back to first level (but lazy for deeper level)
+         17 |
+      - Add line break to separate from blockquote.
+        Output:
+          1 | # Invalid: Lazy transition from nested to outer blockquote
+          2 |
+          3 | > A
+          4 | > > B
+          5 | C
+          6 |
+          7 | > First outer line  
+          8 | > > Nested content
+          9 | > > More nested content
+         10 | > Back to outer level (but lazy for nested level)
+         11 |
+         12 | > Another example
+         13 | > > Deep nested
+         14 | > > > Even deeper
+         15 | > >
+         16 | > > Back to second level (but lazy for deeper level)
+         17 | > Back to first level (but lazy for deeper level)
+         18 |
+---
