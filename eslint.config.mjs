@@ -160,6 +160,7 @@ export default defineConfig([
         },
       ],
       "markdown-preferences/canonical-code-block-language": "error",
+      "markdown-preferences/no-multiple-empty-lines": "error",
     },
   },
   {
@@ -236,6 +237,7 @@ export default defineConfig([
       "@typescript-eslint/no-require-imports": "off",
       "markdown/no-missing-label-refs": "off",
       "markdown/no-multiple-h1": "off",
+      "markdown/fenced-code-language": "off",
       "markdown-preferences/hard-linebreak-style": "off",
       "markdown-preferences/prefer-linked-words": "off",
       "markdown-preferences/no-text-backslash-linebreak": "off",
@@ -244,6 +246,7 @@ export default defineConfig([
       "markdown-preferences/prefer-link-reference-definitions": "off",
       "markdown-preferences/heading-casing": "off",
       "markdown-preferences/canonical-code-block-language": "off",
+      "markdown-preferences/no-multiple-empty-lines": "off",
     },
   },
   {

@@ -6,6 +6,7 @@ import canonicalCodeBlockLanguage from "../rules/canonical-code-block-language.t
 import definitionsLast from "../rules/definitions-last.ts";
 import hardLinebreakStyle from "../rules/hard-linebreak-style.ts";
 import headingCasing from "../rules/heading-casing.ts";
+import noMultipleEmptyLines from "../rules/no-multiple-empty-lines.ts";
 import noTextBackslashLinebreak from "../rules/no-text-backslash-linebreak.ts";
 import noTrailingSpaces from "../rules/no-trailing-spaces.ts";
 import preferInlineCodeWords from "../rules/prefer-inline-code-words.ts";
@@ -18,6 +19,7 @@ export const rules = [
   definitionsLast,
   hardLinebreakStyle,
   headingCasing,
+  noMultipleEmptyLines,
   noTextBackslashLinebreak,
   noTrailingSpaces,
   preferInlineCodeWords,

@@ -34,6 +34,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/heading-casing'?: Linter.RuleEntry<MarkdownPreferencesHeadingCasing>
   /**
+   * disallow multiple empty lines in Markdown files.
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multiple-empty-lines.html
+   */
+  'markdown-preferences/no-multiple-empty-lines'?: Linter.RuleEntry<MarkdownPreferencesNoMultipleEmptyLines>
+  /**
    * disallow text backslash at the end of a line.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-text-backslash-linebreak.html
    */
@@ -85,6 +90,12 @@ type MarkdownPreferencesHeadingCasing = []|[{
   ignorePatterns?: string[]
   
   minorWords?: string[]
+}]
+// ----- markdown-preferences/no-multiple-empty-lines -----
+type MarkdownPreferencesNoMultipleEmptyLines = []|[{
+  max?: number
+  maxEOF?: number
+  maxBOF?: number
 }]
 // ----- markdown-preferences/no-trailing-spaces -----
 type MarkdownPreferencesNoTrailingSpaces = []|[{

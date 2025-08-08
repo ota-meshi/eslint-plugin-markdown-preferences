@@ -4,6 +4,8 @@
 Test: no-text-backslash-linebreak >> invalid
 Filename: tests/fixtures/rules/no-text-backslash-linebreak/invalid/example-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Plugins: unable to serialize
 
 Code:
@@ -60,6 +62,8 @@ Code:
 Test: no-text-backslash-linebreak >> invalid
 Filename: tests/fixtures/rules/no-text-backslash-linebreak/invalid/with-linebreak-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Plugins: unable to serialize
 
 Code:

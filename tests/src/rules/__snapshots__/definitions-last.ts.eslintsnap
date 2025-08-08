@@ -4,6 +4,8 @@
 Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/test01-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Plugins: unable to serialize
 
 Code:
@@ -48,6 +50,8 @@ Output:
 Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/test02-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Plugins: unable to serialize
 
 Code:
@@ -86,6 +90,8 @@ Output:
 Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/test03-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Plugins: unable to serialize
 
 Code:
@@ -142,6 +148,8 @@ Output:
 Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/test04-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Plugins: unable to serialize
 
 Code:
@@ -206,6 +214,8 @@ Output:
 Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/test05-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Plugins: unable to serialize
 
 Code:

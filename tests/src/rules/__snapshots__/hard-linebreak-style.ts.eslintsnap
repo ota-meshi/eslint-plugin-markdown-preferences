@@ -4,6 +4,8 @@
 Test: hard-linebreak-style >> invalid
 Filename: tests/fixtures/rules/hard-linebreak-style/invalid/backslash/test01-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Options:
   - style: backslash
 Plugins: unable to serialize
@@ -37,6 +39,8 @@ Output:
 Test: hard-linebreak-style >> invalid
 Filename: tests/fixtures/rules/hard-linebreak-style/invalid/example-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Plugins: unable to serialize
 
 Code:
@@ -72,6 +76,8 @@ Output:
 Test: hard-linebreak-style >> invalid >>> "# Test\n\nfoo\\\nbaz\n\nfoo  \nbaz\n 2"
 Filename: tests/fixtures/rules/hard-linebreak-style/invalid/spaces/test01-input.md
 Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
 Options:
   - style: spaces
 Plugins: unable to serialize
