@@ -20,7 +20,10 @@ import plugin from "../index.ts";
 import markdown from "@eslint/markdown";
 export const name = "markdown-preferences/recommended";
 export const files = ["*.md", "**/*.md"];
-export const language = "markdown/commonmark";
+export const language = "markdown/gfm";
+export const languageOptions = {
+  frontmatter: "yaml",
+};
 export const plugins = {
   markdown,
   // eslint-disable-next-line @typescript-eslint/naming-convention -- ignore

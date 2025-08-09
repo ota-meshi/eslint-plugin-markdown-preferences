@@ -129,10 +129,6 @@ export default defineConfig([
       markdown.configs.recommended,
       markdownPreferences.configs.recommended,
     ],
-    language: "markdown/gfm",
-    languageOptions: {
-      frontmatter: "yaml", // Or pass `"toml"` or `"json"` to enable TOML or JSON front matter parsing.
-    },
     rules: {
       "prettier/prettier": "error",
       "markdown/no-missing-link-fragments": "off",
