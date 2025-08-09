@@ -23,4 +23,5 @@ export const rules: Linter.RulesRecord = {
   "markdown-preferences/no-laziness-blockquotes": "error",
   "markdown-preferences/no-text-backslash-linebreak": "error",
   "markdown-preferences/prefer-autolinks": "error",
+  "markdown-preferences/prefer-fenced-code-blocks": "error",
 };

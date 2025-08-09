@@ -58,7 +58,7 @@ Use this rule when you want to:
 
 ## 🔧 Options
 
-This rule has no configuration options.
+This rule has no options.
 
 ## 📚 Further Reading
 

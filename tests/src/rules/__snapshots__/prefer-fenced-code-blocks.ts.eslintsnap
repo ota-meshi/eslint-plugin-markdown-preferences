@@ -1,0 +1,210 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: prefer-fenced-code-blocks >> invalid
+Filename: tests/fixtures/rules/prefer-fenced-code-blocks/invalid/blockquote-indented-codeblock-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Blockquote indented code block
+  2 |
+  3 | >     code in blockquote
+    |   ^~~~~~~~~~~~~~~~~~~~~~\ [1]
+  4 | >     second line
+    | ~~~~~~~~~~~~~~~~~ [1]
+  5 |
+
+Output:
+  1 | # Blockquote indented code block
+  2 |
+  3 | > ```
+  4 | > code in blockquote
+  5 | > second line
+  6 | > ```
+  7 |
+
+[1] Use a fenced code block instead of an indented code block.
+---
+
+
+Test: prefer-fenced-code-blocks >> invalid >>> "# Invalid indented code block (tab)\n\n>\\u0009\\u0009a\n\n---\n\n>\\u0009 \\u0009\\u0009a\n"
+Filename: tests/fixtures/rules/prefer-fenced-code-blocks/invalid/complex-tab-indented-codeblock-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid indented code block (tab)
+  2 |
+  3 | >		a
+    |   ^~ [1]
+  4 |
+  5 | ---
+  6 |
+  7 | >	 		a
+    |   ^~~~ [2]
+  8 |
+
+Output: unchanged
+
+[1] Use a fenced code block instead of an indented code block.
+[2] Use a fenced code block instead of an indented code block.
+---
+
+
+Test: prefer-fenced-code-blocks >> invalid
+Filename: tests/fixtures/rules/prefer-fenced-code-blocks/invalid/indented-codeblock-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid indented code block
+  2 |
+  3 |     function foo() {
+    | ^~~~~~~~~~~~~~~~~~~~\ [1]
+  4 |       return 42;
+    | ~~~~~~~~~~~~~~~~\ [1]
+  5 |     }
+    | ~~~~~ [1]
+  6 |
+
+Output:
+  1 | # Invalid indented code block
+  2 |
+  3 | ```
+  4 | function foo() {
+  5 |   return 42;
+  6 | }
+  7 | ```
+  8 |
+
+[1] Use a fenced code block instead of an indented code block.
+---
+
+
+Test: prefer-fenced-code-blocks >> invalid >>> "# Mixed tab and space indentation\n\n\\u0009code with tab and spaces\n\\u0009  code with tab and spaces\n\n---\n\n\\u0009code with tab and spaces\n\\u0009  code with tab and spaces\n"
+Filename: tests/fixtures/rules/prefer-fenced-code-blocks/invalid/mixed-tab-space-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Mixed tab and space indentation
+  2 |
+  3 | 	code with tab and spaces
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~\ [1]
+  4 | 	  code with tab and spaces
+    | ~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  5 |
+  6 | ---
+  7 |
+  8 | 	code with tab and spaces
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~\ [2]
+  9 | 	  code with tab and spaces
+    | ~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 10 |
+
+Output:
+  1 | # Mixed tab and space indentation
+  2 |
+  3 | ```
+  4 | code with tab and spaces
+  5 |   code with tab and spaces
+  6 | ```
+  7 |
+  8 | ---
+  9 |
+ 10 | ```
+ 11 | code with tab and spaces
+ 12 |   code with tab and spaces
+ 13 | ```
+ 14 |
+
+[1] Use a fenced code block instead of an indented code block.
+[2] Use a fenced code block instead of an indented code block.
+---
+
+
+Test: prefer-fenced-code-blocks >> invalid >>> "# Inconsistent indentation prefix\n\n>     code\n>\\u0009  code\n"
+Filename: tests/fixtures/rules/prefer-fenced-code-blocks/invalid/prefix-inconsistent-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Inconsistent indentation prefix
+  2 |
+  3 | >     code
+    |   ^~~~~~~~\ [1]
+  4 | >	  code
+    | ~~~~~~~~ [1]
+  5 |
+
+Output: unchanged
+
+[1] Use a fenced code block instead of an indented code block.
+---
+
+
+Test: prefer-fenced-code-blocks >> invalid >>> "# Invalid indented code block (tab)\n\n\\u0009function bar() {\n\\u0009  return 99;\n\\u0009}\n\n---\n\n    code\n   \\u0009code with 3 spaces\n  \\u0009code with 2 spaces\n \\u0009code with 1 spaces\n\\u0009code with tab\n"
+Filename: tests/fixtures/rules/prefer-fenced-code-blocks/invalid/tab-indented-codeblock-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid indented code block (tab)
+  2 |
+  3 | 	function bar() {
+    | ^~~~~~~~~~~~~~~~~\ [1]
+  4 | 	  return 99;
+    | ~~~~~~~~~~~~~\ [1]
+  5 | 	}
+    | ~~ [1]
+  6 |
+  7 | ---
+  8 |
+  9 |     code
+    | ^~~~~~~~\ [2]
+ 10 |    	code with 3 spaces
+    | ~~~~~~~~~~~~~~~~~~~~~~\ [2]
+ 11 |   	code with 2 spaces
+    | ~~~~~~~~~~~~~~~~~~~~~\ [2]
+ 12 |  	code with 1 spaces
+    | ~~~~~~~~~~~~~~~~~~~~\ [2]
+ 13 | 	code with tab
+    | ~~~~~~~~~~~~~~ [2]
+ 14 |
+
+Output:
+  1 | # Invalid indented code block (tab)
+  2 |
+  3 | ```
+  4 | function bar() {
+  5 |   return 99;
+  6 | }
+  7 | ```
+  8 |
+  9 | ---
+ 10 |
+ 11 | ```
+ 12 | code
+ 13 | code with 3 spaces
+ 14 | code with 2 spaces
+ 15 | code with 1 spaces
+ 16 | code with tab
+ 17 | ```
+ 18 |
+
+[1] Use a fenced code block instead of an indented code block.
+[2] Use a fenced code block instead of an indented code block.
+---

@@ -98,7 +98,7 @@ This rule reports ???.
 
 ## 🔧 Options
 
-Nothing.
+This rule has no options.
 
 <!-- or -->
 

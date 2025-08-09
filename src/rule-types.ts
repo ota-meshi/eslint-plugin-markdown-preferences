@@ -59,6 +59,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/prefer-autolinks'?: Linter.RuleEntry<[]>
   /**
+   * enforce the use of fenced code blocks over indented code blocks
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-fenced-code-blocks.html
+   */
+  'markdown-preferences/prefer-fenced-code-blocks'?: Linter.RuleEntry<[]>
+  /**
    * enforce the use of inline code for specific words.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-inline-code-words.html
    */

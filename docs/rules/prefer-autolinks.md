@@ -47,13 +47,13 @@ Converting these patterns to autolinks keeps your Markdown concise and readable.
 
 ## 🔧 Options
 
-This rule does not accept any options.
+This rule has no options.
 
 ## 📚 Further Reading
 
 - [GitHub Flavored Markdown: Autolinks](https://github.github.com/gfm/#autolinks)
 - [GitHub Flavored Markdown: Autolinks (extension)][Autolinks (extension)]
-- [CommonMark: Autolinks](https://spec.commonmark.org/0.32.1/#autolinks)
+- [CommonMark: Autolinks](https://spec.commonmark.org/0.31.2/#autolinks)
 
 [Autolinks (extension)]: https://github.github.com/gfm/#autolinks-extension-
 

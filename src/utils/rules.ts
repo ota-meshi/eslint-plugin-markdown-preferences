@@ -11,6 +11,7 @@ import noMultipleEmptyLines from "../rules/no-multiple-empty-lines.ts";
 import noTextBackslashLinebreak from "../rules/no-text-backslash-linebreak.ts";
 import noTrailingSpaces from "../rules/no-trailing-spaces.ts";
 import preferAutolinks from "../rules/prefer-autolinks.ts";
+import preferFencedCodeBlocks from "../rules/prefer-fenced-code-blocks.ts";
 import preferInlineCodeWords from "../rules/prefer-inline-code-words.ts";
 import preferLinkReferenceDefinitions from "../rules/prefer-link-reference-definitions.ts";
 import preferLinkedWords from "../rules/prefer-linked-words.ts";
@@ -26,6 +27,7 @@ export const rules = [
   noTextBackslashLinebreak,
   noTrailingSpaces,
   preferAutolinks,
+  preferFencedCodeBlocks,
   preferInlineCodeWords,
   preferLinkReferenceDefinitions,
   preferLinkedWords,

@@ -35,7 +35,7 @@ export default createRule<[{ languages?: LanguageMapping }?]>(
       docs: {
         description: "enforce canonical language names in code blocks",
         categories: [],
-        listCategory: "Stylistic",
+        listCategory: "Preference",
       },
       fixable: "code",
       hasSuggestions: false,
