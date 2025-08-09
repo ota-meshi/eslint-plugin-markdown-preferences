@@ -1,5 +1,15 @@
 # eslint-plugin-markdown-preferences
 
+## 0.11.0
+
+### Minor Changes
+
+- [#46](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/46) [`ac22a4b`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/ac22a4b79a9895660aaffa6e7c2d54132c1792a1) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/prefer-autolinks`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-autolinks.html) rule
+
+- [#49](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/49) [`11ff302`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/11ff3028e5b6d6afea2d9d32cdad43c64155d0ff) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/prefer-fenced-code-blocks`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-fenced-code-blocks.html) rule
+
+- [#47](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/47) [`8e93df7`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/8e93df7bf3722a3535619ed54a90eaa50d23150d) Thanks [@ota-meshi](https://github.com/ota-meshi)! - **BREAKING!**: change recommended config
+
 ## 0.10.0
 
 ### Minor Changes
