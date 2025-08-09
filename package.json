@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-markdown-preferences",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "ESLint plugin that enforces our markdown preferences",
   "type": "module",
   "exports": {
