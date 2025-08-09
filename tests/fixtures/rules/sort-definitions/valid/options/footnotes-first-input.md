@@ -6,5 +6,5 @@ See [ESLint] and [TypeScript] and note[^first] and [^second].
 
 [^first]: First footnote
 [^second]: Second footnote
-[ESLint]: https://eslint.org
-[TypeScript]: https://www.typescriptlang.org
+[ESLint]: <https://eslint.org>
+[TypeScript]: <https://www.typescriptlang.org>

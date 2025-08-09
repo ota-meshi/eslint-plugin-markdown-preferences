@@ -54,6 +54,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/no-trailing-spaces'?: Linter.RuleEntry<MarkdownPreferencesNoTrailingSpaces>
   /**
+   * enforce the use of autolinks for URLs
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-autolinks.html
+   */
+  'markdown-preferences/prefer-autolinks'?: Linter.RuleEntry<[]>
+  /**
    * enforce the use of inline code for specific words.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-inline-code-words.html
    */

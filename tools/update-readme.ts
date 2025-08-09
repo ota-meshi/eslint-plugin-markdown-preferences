@@ -44,7 +44,7 @@ fs.writeFileSync(
       "See [User Guide](./user-guide/index.md).",
     )
     .replace(
-      /\[LICENSE\]\(LICENSE\)/gu,
+      /\[LICENSE\]\(\.\/LICENSE\)/gu,
       "[LICENSE](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/LICENSE)",
     )
     .replace(/<!--DOCS_IGNORE_START-->[\s\S]*?<!--DOCS_IGNORE_END-->/gu, "")
