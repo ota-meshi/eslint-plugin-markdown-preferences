@@ -15,6 +15,7 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
+| [markdown-preferences/canonical-code-block-language](./canonical-code-block-language.md) | enforce canonical language names in code blocks | 🔧 |  |
 | [markdown-preferences/no-text-backslash-linebreak](./no-text-backslash-linebreak.md) | disallow text backslash at the end of a line. |  | ⭐ |
 | [markdown-preferences/prefer-inline-code-words](./prefer-inline-code-words.md) | enforce the use of inline code for specific words. | 🔧 |  |
 | [markdown-preferences/prefer-linked-words](./prefer-linked-words.md) | enforce the specified word to be a link. | 🔧 |  |
@@ -23,7 +24,6 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
-| [markdown-preferences/canonical-code-block-language](./canonical-code-block-language.md) | enforce canonical language names in code blocks | 🔧 |  |
 | [markdown-preferences/definitions-last](./definitions-last.md) | require link definitions and footnote definitions to be placed at the end of the document | 🔧 |  |
 | [markdown-preferences/hard-linebreak-style](./hard-linebreak-style.md) | enforce consistent hard linebreak style. | 🔧 | ⭐ |
 | [markdown-preferences/heading-casing](./heading-casing.md) | enforce consistent casing in headings. | 🔧 |  |
@@ -31,6 +31,7 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 | [markdown-preferences/no-multiple-empty-lines](./no-multiple-empty-lines.md) | disallow multiple empty lines in Markdown files. | 🔧 |  |
 | [markdown-preferences/no-trailing-spaces](./no-trailing-spaces.md) | disallow trailing whitespace at the end of lines in Markdown files. | 🔧 |  |
 | [markdown-preferences/prefer-autolinks](./prefer-autolinks.md) | enforce the use of autolinks for URLs | 🔧 | ⭐ |
+| [markdown-preferences/prefer-fenced-code-blocks](./prefer-fenced-code-blocks.md) | enforce the use of fenced code blocks over indented code blocks | 🔧 | ⭐ |
 | [markdown-preferences/prefer-link-reference-definitions](./prefer-link-reference-definitions.md) | enforce using link reference definitions instead of inline links | 🔧 |  |
 | [markdown-preferences/sort-definitions](./sort-definitions.md) | enforce a specific order for link definitions and footnote definitions | 🔧 |  |
 
