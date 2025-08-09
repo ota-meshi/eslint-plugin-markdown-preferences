@@ -30,6 +30,7 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 | [markdown-preferences/no-laziness-blockquotes](./no-laziness-blockquotes.md) | disallow laziness in blockquotes |  | ⭐ |
 | [markdown-preferences/no-multiple-empty-lines](./no-multiple-empty-lines.md) | disallow multiple empty lines in Markdown files. | 🔧 |  |
 | [markdown-preferences/no-trailing-spaces](./no-trailing-spaces.md) | disallow trailing whitespace at the end of lines in Markdown files. | 🔧 |  |
+| [markdown-preferences/prefer-autolinks](./prefer-autolinks.md) | enforce the use of autolinks for URLs | 🔧 | ⭐ |
 | [markdown-preferences/prefer-link-reference-definitions](./prefer-link-reference-definitions.md) | enforce using link reference definitions instead of inline links | 🔧 |  |
 | [markdown-preferences/sort-definitions](./sort-definitions.md) | enforce a specific order for link definitions and footnote definitions | 🔧 |  |
 

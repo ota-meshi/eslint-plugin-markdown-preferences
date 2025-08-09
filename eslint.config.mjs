@@ -14,6 +14,7 @@ try {
   markdownPreferences = await import("./lib/index.js");
 }
 const rules = Object.values(markdownPreferences.rules);
+const markdownRules = Object.entries(markdown.rules);
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 const MD_BASE_LINKS = {
@@ -27,17 +28,22 @@ const MD_LINKS = {
   ...Object.fromEntries(
     rules.map((rule) => [rule.meta.docs.ruleId, rule.meta.docs.url]),
   ),
+  ...Object.fromEntries(
+    markdownRules.map(([nm, rule]) => {
+      return [`markdown/${nm}`, rule.meta.docs.url];
+    }),
+  ),
   ...MD_BASE_LINKS,
 };
 // Links to rule docs from files in docs will link to the md file.
 const MD_LINKS_FOR_DOCS = {
+  ...MD_LINKS,
   ...Object.fromEntries(
     rules.map((rule) => [
       rule.meta.docs.ruleId,
       path.resolve(dirname, "./docs/rules", `./${rule.meta.docs.ruleName}.md`),
     ]),
   ),
-  ...MD_BASE_LINKS,
 };
 
 export default defineConfig([
@@ -248,6 +254,7 @@ export default defineConfig([
       "markdown-preferences/canonical-code-block-language": "off",
       "markdown-preferences/no-multiple-empty-lines": "off",
       "markdown-preferences/no-laziness-blockquotes": "off",
+      "markdown-preferences/prefer-autolinks": "off",
     },
   },
   {

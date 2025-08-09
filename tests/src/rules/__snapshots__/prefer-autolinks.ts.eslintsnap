@@ -1,0 +1,49 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: prefer-autolinks >> invalid
+Filename: tests/fixtures/rules/prefer-autolinks/invalid/bare-url-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid Test Case for GFM Autolink (Bare URL)
+  2 |
+  3 | https://example.com
+    | ^~~~~~~~~~~~~~~~~~~ [1]
+  4 |
+
+Output:
+  1 | # Invalid Test Case for GFM Autolink (Bare URL)
+  2 |
+  3 | <https://example.com>
+  4 |
+
+[1] Use an autolink instead of a GFM autolink (bare url).
+---
+
+
+Test: prefer-autolinks >> invalid
+Filename: tests/fixtures/rules/prefer-autolinks/invalid/inline-link-same-label-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid Test Case for GFM Autolink (Bare URL)
+  2 |
+  3 | [https://example.com](https://example.com)
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  4 |
+
+Output:
+  1 | # Invalid Test Case for GFM Autolink (Bare URL)
+  2 |
+  3 | <https://example.com>
+  4 |
+
+[1] Use an autolink instead of an inline link with the same URL.
+---

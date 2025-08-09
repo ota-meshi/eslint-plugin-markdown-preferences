@@ -107,6 +107,7 @@ The rules with the following star ⭐ are included in the configs.
 | [markdown-preferences/no-laziness-blockquotes](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-laziness-blockquotes.html) | disallow laziness in blockquotes |  | ⭐ |
 | [markdown-preferences/no-multiple-empty-lines](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multiple-empty-lines.html) | disallow multiple empty lines in Markdown files. | 🔧 |  |
 | [markdown-preferences/no-trailing-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-trailing-spaces.html) | disallow trailing whitespace at the end of lines in Markdown files. | 🔧 |  |
+| [markdown-preferences/prefer-autolinks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-autolinks.html) | enforce the use of autolinks for URLs | 🔧 | ⭐ |
 | [markdown-preferences/prefer-link-reference-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-link-reference-definitions.html) | enforce using link reference definitions instead of inline links | 🔧 |  |
 | [markdown-preferences/sort-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/sort-definitions.html) | enforce a specific order for link definitions and footnote definitions | 🔧 |  |
 
@@ -129,7 +130,7 @@ Please use GitHub's Issues/PRs.
 
 ## 🔒 License
 
-See the [LICENSE](LICENSE) file for license rights and limitations (MIT).
+See the [LICENSE](./LICENSE) file for license rights and limitations (MIT).
 
 [npm-package]: https://www.npmjs.com/package/eslint-plugin-markdown-preferences
 [npmtrends]: http://www.npmtrends.com/eslint-plugin-markdown-preferences
