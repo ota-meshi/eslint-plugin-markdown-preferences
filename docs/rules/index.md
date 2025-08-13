@@ -18,6 +18,7 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 | [markdown-preferences/canonical-code-block-language](./canonical-code-block-language.md) | enforce canonical language names in code blocks | 🔧 |  |
 | [markdown-preferences/heading-casing](./heading-casing.md) | enforce consistent casing in headings. | 🔧 |  |
 | [markdown-preferences/no-text-backslash-linebreak](./no-text-backslash-linebreak.md) | disallow text backslash at the end of a line. |  | ⭐ |
+| [markdown-preferences/ordered-list-marker-start](./ordered-list-marker-start.md) | enforce that ordered list markers start with 1 or 0 | 🔧 |  |
 | [markdown-preferences/prefer-inline-code-words](./prefer-inline-code-words.md) | enforce the use of inline code for specific words. | 🔧 |  |
 | [markdown-preferences/prefer-linked-words](./prefer-linked-words.md) | enforce the specified word to be a link. | 🔧 |  |
 

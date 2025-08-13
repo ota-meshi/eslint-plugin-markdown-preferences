@@ -95,6 +95,7 @@ The rules with the following star ⭐ are included in the configs.
 | [markdown-preferences/canonical-code-block-language](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/canonical-code-block-language.html) | enforce canonical language names in code blocks | 🔧 |  |
 | [markdown-preferences/heading-casing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/heading-casing.html) | enforce consistent casing in headings. | 🔧 |  |
 | [markdown-preferences/no-text-backslash-linebreak](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-text-backslash-linebreak.html) | disallow text backslash at the end of a line. |  | ⭐ |
+| [markdown-preferences/ordered-list-marker-start](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-start.html) | enforce that ordered list markers start with 1 or 0 | 🔧 |  |
 | [markdown-preferences/prefer-inline-code-words](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-inline-code-words.html) | enforce the use of inline code for specific words. | 🔧 |  |
 | [markdown-preferences/prefer-linked-words](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html) | enforce the specified word to be a link. | 🔧 |  |
 
