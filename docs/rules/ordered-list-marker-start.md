@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/ordered-list-marker-start"
 description: "enforce that ordered list markers start with 1 or 0"
+since: "v0.12.0"
 ---
 
 # markdown-preferences/ordered-list-marker-start
 
 > enforce that ordered list markers start with 1 or 0
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 - 💡 Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
@@ -75,6 +75,10 @@ If you want to allow lists to start with 0, use the option `{ "start": 0 }`:
 ## 👫 Related Rules
 
 - [markdown-preferences/ordered-list-marker-sequence](./ordered-list-marker-sequence.md)
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.12.0
 
 ## 🔍 Implementation
 
