@@ -163,6 +163,7 @@ export default defineConfig([
       ],
       "markdown-preferences/canonical-code-block-language": "error",
       "markdown-preferences/no-multiple-empty-lines": "error",
+      "markdown-preferences/ordered-list-marker-sequence": "error",
     },
   },
   {
@@ -252,6 +253,7 @@ export default defineConfig([
       "markdown-preferences/no-laziness-blockquotes": "off",
       "markdown-preferences/prefer-autolinks": "off",
       "markdown-preferences/prefer-fenced-code-blocks": "off",
+      "markdown-preferences/ordered-list-marker-sequence": "off",
     },
   },
   {

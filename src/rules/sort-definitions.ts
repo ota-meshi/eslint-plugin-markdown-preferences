@@ -1,7 +1,7 @@
 import type { Definition, FootnoteDefinition } from "mdast";
 import { createRule } from "../utils/index.ts";
 import { toRegExp, isRegExp } from "../utils/regexp.ts";
-import type { MDNode } from "../utils/markdown.ts";
+import type { MDNode } from "../utils/ast.ts";
 
 type MatchOption = string | string[];
 type OrderOption =

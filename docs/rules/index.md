@@ -17,6 +17,7 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 |:--------|:------------|:-------:|:-----------:|
 | [markdown-preferences/canonical-code-block-language](./canonical-code-block-language.md) | enforce canonical language names in code blocks | 🔧 |  |
 | [markdown-preferences/no-text-backslash-linebreak](./no-text-backslash-linebreak.md) | disallow text backslash at the end of a line. |  | ⭐ |
+| [markdown-preferences/ordered-list-marker-sequence](./ordered-list-marker-sequence.md) | enforce that ordered list markers use sequential numbers | 🔧 |  |
 | [markdown-preferences/prefer-inline-code-words](./prefer-inline-code-words.md) | enforce the use of inline code for specific words. | 🔧 |  |
 | [markdown-preferences/prefer-linked-words](./prefer-linked-words.md) | enforce the specified word to be a link. | 🔧 |  |
 
