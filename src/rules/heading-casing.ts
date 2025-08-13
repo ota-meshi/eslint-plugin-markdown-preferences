@@ -182,7 +182,7 @@ export default createRule<
     docs: {
       description: "enforce consistent casing in headings.",
       categories: [],
-      listCategory: "Stylistic",
+      listCategory: "Preference",
     },
     fixable: "code",
     hasSuggestions: false,
