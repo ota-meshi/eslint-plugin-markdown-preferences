@@ -1,5 +1,13 @@
 # eslint-plugin-markdown-preferences
 
+## 0.12.0
+
+### Minor Changes
+
+- [#54](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/54) [`d14e037`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/d14e037b579cd896d30069a39935bf4428a64842) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/ordered-list-marker-sequence`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-sequence.html) rule
+
+- [#56](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/56) [`859a403`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/859a403eea78356ec9f4252a22e9eec35c5f23b9) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/ordered-list-marker-start`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-start.html) rule
+
 ## 0.11.0
 
 ### Minor Changes
