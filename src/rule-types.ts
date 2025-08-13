@@ -59,6 +59,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/ordered-list-marker-sequence'?: Linter.RuleEntry<[]>
   /**
+   * enforce that ordered list markers start with 1 or 0
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-start.html
+   */
+  'markdown-preferences/ordered-list-marker-start'?: Linter.RuleEntry<MarkdownPreferencesOrderedListMarkerStart>
+  /**
    * enforce the use of autolinks for URLs
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-autolinks.html
    */
@@ -121,6 +126,10 @@ type MarkdownPreferencesNoMultipleEmptyLines = []|[{
 type MarkdownPreferencesNoTrailingSpaces = []|[{
   skipBlankLines?: boolean
   ignoreComments?: boolean
+}]
+// ----- markdown-preferences/ordered-list-marker-start -----
+type MarkdownPreferencesOrderedListMarkerStart = []|[{
+  start?: (1 | 0)
 }]
 // ----- markdown-preferences/prefer-inline-code-words -----
 type MarkdownPreferencesPreferInlineCodeWords = []|[{

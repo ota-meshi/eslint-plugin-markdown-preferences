@@ -1,0 +1,82 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: ordered-list-marker-start >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-start/invalid/start-not-0-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - start: 0
+Plugins: unable to serialize
+
+Code:
+  1 | # ordered-list-marker-start: invalid (start is not 0, option)
+  2 |
+  3 | 2. foo
+    | ^~~~~~ [1]
+  4 | 3. bar
+  5 | 4. baz
+  6 |
+
+Output:
+  1 | # ordered-list-marker-start: invalid (start is not 0, option)
+  2 |
+  3 | 0. foo
+  4 | 3. bar
+  5 | 4. baz
+  6 |
+
+[1] Ordered list should start with '0' but found '2'.
+---
+
+
+Test: ordered-list-marker-start >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-start/invalid/start-not-1-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # ordered-list-marker-start: invalid (start is not 1)
+  2 |
+  3 | 1. foo
+  4 | 2. bar
+  5 | 3. baz
+  6 |
+  7 | <!-- comment -->
+  8 |
+  9 | 5. qux
+    | ^~~~~~ [1]
+ 10 |
+
+Output: unchanged
+
+[1] Ordered list should start with '1' or '4' but found '5'.
+    Suggestions:
+      - Change list marker to start from '4'.
+        Output:
+          1 | # ordered-list-marker-start: invalid (start is not 1)
+          2 |
+          3 | 1. foo
+          4 | 2. bar
+          5 | 3. baz
+          6 |
+          7 | <!-- comment -->
+          8 |
+          9 | 4. qux
+         10 |
+      - Change list marker to start from '1'.
+        Output:
+          1 | # ordered-list-marker-start: invalid (start is not 1)
+          2 |
+          3 | 1. foo
+          4 | 2. bar
+          5 | 3. baz
+          6 |
+          7 | <!-- comment -->
+          8 |
+          9 | 1. qux
+         10 |
+---

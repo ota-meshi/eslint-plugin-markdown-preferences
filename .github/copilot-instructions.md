@@ -6,7 +6,7 @@ Refer to [`CONTRIBUTING.md`] for additional details.
 
 ## Communication Guidelines
 
-The maintainer is Japanese and may communicate with you in Japanese, but source code and documentation should be written in English.
+The maintainer is Japanese and may communicate with you in Japanese, but source code and documentation should be written in **English**.
 If you are addressed in Japanese, please conduct the conversation in Japanese.
 
 ## Project Overview
@@ -54,7 +54,7 @@ tests/fixtures/rules/<rule-name>/
 ```
 
 - Name input files descriptively, e.g., `multiple-heading-input.md`, `setext-heading-input.md`, etc.
-- Place configuration files as `_config.json` in the same directory. You may also use `xxx-config.json` for input-specific configs.
+- Place configuration files as `_config.json` in the same directory. You may also use `xxx-config.json` for input-specific (`xxx-input.md`) configs.
 - You may create subdirectories such as `multiline/` or `spaces/` for different test cases.
 
   **Example:**
@@ -76,6 +76,8 @@ tests/fixtures/rules/<rule-name>/
       ├── yyy-input.md
       └── ...
   ```
+
+- If possible, it is recommended to add a level 1 heading at the beginning of each test case to describe the fixture.
 
 #### Running Tests
 

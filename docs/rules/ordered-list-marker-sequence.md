@@ -111,6 +111,10 @@ This rule has no options.
 
 - [CommonMark: List items](https://spec.commonmark.org/0.31.2/#list-items)
 
+## 👫 Related Rules
+
+- [markdown-preferences/ordered-list-marker-start](./ordered-list-marker-start.md)
+
 ## 🔍 Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/ordered-list-marker-sequence.ts)
