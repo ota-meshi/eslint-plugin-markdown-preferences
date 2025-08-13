@@ -29,5 +29,6 @@
     "vue-html",
     "vue-postcss",
     "stylus"
-  ]
+  ],
+  "chat.mcp.enabled": true
 }

@@ -1,0 +1,335 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: ordered-list-marker-sequence >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/all-one-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # All markers are '1.' (should be invalid)
+  2 |
+  3 | 1. foo
+  4 | 1. bar
+    | ^~~~~~ [1]
+  5 | 1. baz
+    | ^~~~~~ [2]
+  6 |
+
+Output:
+  1 | # All markers are '1.' (should be invalid)
+  2 |
+  3 | 1. foo
+  4 | 2. bar
+  5 | 3. baz
+  6 |
+
+[1] Ordered list marker should be '2.' but found '1.'.
+[2] Ordered list marker should be '3.' but found '1.'.
+---
+
+
+Test: ordered-list-marker-sequence >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/deep-nested-jump-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Deeply nested ordered list marker is not sequential (should be invalid)
+  2 |
+  3 | 1. foo
+  4 | 2. bar
+  5 |    1. nested
+  6 |    2. nested2
+  7 |       1. deep
+  8 |       3. deep-jump
+    |       ^~~~~~~~~~~~ [1]
+  9 |    3. nested3
+ 10 | 3. baz
+ 11 |
+
+Output:
+  1 | # Deeply nested ordered list marker is not sequential (should be invalid)
+  2 |
+  3 | 1. foo
+  4 | 2. bar
+  5 |    1. nested
+  6 |    2. nested2
+  7 |       1. deep
+  8 |       2. deep-jump
+  9 |    3. nested3
+ 10 | 3. baz
+ 11 |
+
+[1] Ordered list marker should be '2.' but found '3.'.
+---
+
+
+Test: ordered-list-marker-sequence >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/jump-number-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # List marker jumps (should be invalid)
+  2 |
+  3 | 1. foo
+  4 | 3. bar
+    | ^~~~~~ [1]
+  5 | 4. baz
+    | ^~~~~~ [2]
+  6 |
+
+Output:
+  1 | # List marker jumps (should be invalid)
+  2 |
+  3 | 1. foo
+  4 | 2. bar
+  5 | 3. baz
+  6 |
+
+[1] Ordered list marker should be '2.' but found '3.'.
+[2] Ordered list marker should be '3.' but found '4.'.
+---
+
+
+Test: ordered-list-marker-sequence >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/last-sequence-jump-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | # Test for sharing sequence across multiple lists
+  3 |
+  4 | 1. item1
+  5 | 2. item2
+  6 | 3. item3
+  7 |
+  8 | paragraph
+  9 |
+ 10 | 4. item4
+ 11 | 6. item5
+    | ^~~~~~~~ [1]
+ 12 | 7. item6
+    | ^~~~~~~~ [2]
+ 13 |
+
+Output:
+  1 |
+  2 | # Test for sharing sequence across multiple lists
+  3 |
+  4 | 1. item1
+  5 | 2. item2
+  6 | 3. item3
+  7 |
+  8 | paragraph
+  9 |
+ 10 | 4. item4
+ 11 | 5. item5
+ 12 | 6. item6
+ 13 |
+
+[1] Ordered list marker should be '5.' but found '6.'.
+[2] Ordered list marker should be '6.' but found '7.'.
+---
+
+
+Test: ordered-list-marker-sequence >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/last-sequence-jump2-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | # Test for sharing sequence across multiple lists
+  3 |
+  4 | 1. item1
+  5 | 2. item2
+  6 | 3. item3
+  7 |
+  8 | paragraph
+  9 |
+ 10 | 5. item4
+    | ^~~~~~~~ [1]
+ 11 | 6. item5
+ 12 | 7. item6
+ 13 |
+
+Output: unchanged
+
+[1] Ordered list start should be '0', '1', or '4' but found '5'.
+    Suggestions:
+      - Change list marker to start from '4'.
+        Output:
+          1 |
+          2 | # Test for sharing sequence across multiple lists
+          3 |
+          4 | 1. item1
+          5 | 2. item2
+          6 | 3. item3
+          7 |
+          8 | paragraph
+          9 |
+         10 | 4. item4
+         11 | 6. item5
+         12 | 7. item6
+         13 |
+      - Change list marker to start from '1'.
+        Output:
+          1 |
+          2 | # Test for sharing sequence across multiple lists
+          3 |
+          4 | 1. item1
+          5 | 2. item2
+          6 | 3. item3
+          7 |
+          8 | paragraph
+          9 |
+         10 | 1. item4
+         11 | 6. item5
+         12 | 7. item6
+         13 |
+      - Change list marker to start from '0'.
+        Output:
+          1 |
+          2 | # Test for sharing sequence across multiple lists
+          3 |
+          4 | 1. item1
+          5 | 2. item2
+          6 | 3. item3
+          7 |
+          8 | paragraph
+          9 |
+         10 | 0. item4
+         11 | 6. item5
+         12 | 7. item6
+         13 |
+---
+
+
+Test: ordered-list-marker-sequence >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/nested-jump-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Nested ordered list marker is not sequential (should be invalid)
+  2 |
+  3 | 1. foo
+  4 | 2. bar
+  5 |    1. nested
+  6 |    3. nested2
+    |    ^~~~~~~~~~ [1]
+  7 | 3. baz
+  8 |
+
+Output:
+  1 | # Nested ordered list marker is not sequential (should be invalid)
+  2 |
+  3 | 1. foo
+  4 | 2. bar
+  5 |    1. nested
+  6 |    2. nested2
+  7 | 3. baz
+  8 |
+
+[1] Ordered list marker should be '2.' but found '3.'.
+---
+
+
+Test: ordered-list-marker-sequence >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/parent-continues-after-nest-jump-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Parent list does not continue sequentially after nested list (should be invalid)
+  2 |
+  3 | 1. foo
+  4 | 2. bar
+  5 |    1. nested
+  6 |    2. nested2
+  7 | 4. baz
+    | ^~~~~~ [1]
+  8 | 5. qux
+    | ^~~~~~ [2]
+  9 |
+
+Output:
+  1 | # Parent list does not continue sequentially after nested list (should be invalid)
+  2 |
+  3 | 1. foo
+  4 | 2. bar
+  5 |    1. nested
+  6 |    2. nested2
+  7 | 3. baz
+  8 | 4. qux
+  9 |
+
+[1] Ordered list marker should be '3.' but found '4.'.
+[2] Ordered list marker should be '4.' but found '5.'.
+---
+
+
+Test: ordered-list-marker-sequence >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/reverse-number-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # List marker is in reverse order (should be invalid)
+  2 |
+  3 | 3. foo
+    | ^~~~~~ [1]
+  4 | 2. bar
+    | ^~~~~~ [2]
+  5 | 1. baz
+    | ^~~~~~ [3]
+  6 |
+
+Output:
+  1 | # List marker is in reverse order (should be invalid)
+  2 |
+  3 | 1. foo
+  4 | 2. bar
+  5 | 3. baz
+  6 |
+
+[1] Ordered list start should be '0' or '1' but found '3'.
+    Suggestions:
+      - Change list marker to start from '1'.
+        Output:
+          1 | # List marker is in reverse order (should be invalid)
+          2 |
+          3 | 1. foo
+          4 | 2. bar
+          5 | 1. baz
+          6 |
+      - Change list marker to start from '0'.
+        Output:
+          1 | # List marker is in reverse order (should be invalid)
+          2 |
+          3 | 0. foo
+          4 | 2. bar
+          5 | 1. baz
+          6 |
+[2] Ordered list marker should be '4.' but found '2.'.
+[3] Ordered list marker should be '5.' but found '1.'.
+---

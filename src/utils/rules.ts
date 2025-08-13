@@ -10,6 +10,7 @@ import noLazinessBlockquotes from "../rules/no-laziness-blockquotes.ts";
 import noMultipleEmptyLines from "../rules/no-multiple-empty-lines.ts";
 import noTextBackslashLinebreak from "../rules/no-text-backslash-linebreak.ts";
 import noTrailingSpaces from "../rules/no-trailing-spaces.ts";
+import orderedListMarkerSequence from "../rules/ordered-list-marker-sequence.ts";
 import preferAutolinks from "../rules/prefer-autolinks.ts";
 import preferFencedCodeBlocks from "../rules/prefer-fenced-code-blocks.ts";
 import preferInlineCodeWords from "../rules/prefer-inline-code-words.ts";
@@ -26,6 +27,7 @@ export const rules = [
   noMultipleEmptyLines,
   noTextBackslashLinebreak,
   noTrailingSpaces,
+  orderedListMarkerSequence,
   preferAutolinks,
   preferFencedCodeBlocks,
   preferInlineCodeWords,

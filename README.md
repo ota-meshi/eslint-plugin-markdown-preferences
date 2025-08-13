@@ -94,6 +94,7 @@ The rules with the following star ⭐ are included in the configs.
 |:--------|:------------|:-------:|:-----------:|
 | [markdown-preferences/canonical-code-block-language](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/canonical-code-block-language.html) | enforce canonical language names in code blocks | 🔧 |  |
 | [markdown-preferences/no-text-backslash-linebreak](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-text-backslash-linebreak.html) | disallow text backslash at the end of a line. |  | ⭐ |
+| [markdown-preferences/ordered-list-marker-sequence](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-sequence.html) | enforce that ordered list markers use sequential numbers | 🔧 |  |
 | [markdown-preferences/prefer-inline-code-words](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-inline-code-words.html) | enforce the use of inline code for specific words. | 🔧 |  |
 | [markdown-preferences/prefer-linked-words](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html) | enforce the specified word to be a link. | 🔧 |  |
 

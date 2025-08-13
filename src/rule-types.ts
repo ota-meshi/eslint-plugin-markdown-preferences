@@ -54,6 +54,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/no-trailing-spaces'?: Linter.RuleEntry<MarkdownPreferencesNoTrailingSpaces>
   /**
+   * enforce that ordered list markers use sequential numbers
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-sequence.html
+   */
+  'markdown-preferences/ordered-list-marker-sequence'?: Linter.RuleEntry<[]>
+  /**
    * enforce the use of autolinks for URLs
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-autolinks.html
    */
