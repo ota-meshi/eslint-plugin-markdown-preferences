@@ -23,6 +23,7 @@ If you are addressed in Japanese, please conduct the conversation in Japanese.
 - Note that this project focuses on rules related to Markdown preferences. Ensure your proposed rule aligns with this scope.
   - Rules that already exist in [`@eslint/markdown`] are not accepted.
   - Rules that might be accepted by [`@eslint/markdown`] should be proposed there first. If not accepted, they may be added to this package.
+- Please carefully check the existing rules in this plugin and do not propose rules that already exist.
 
 ## Development Workflow
 
