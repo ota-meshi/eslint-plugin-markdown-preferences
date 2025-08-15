@@ -14,6 +14,11 @@ declare module 'eslint' {
 
 export interface RuleOptions {
   /**
+   * enforce consistent use of closing sequence in ATX headings.
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-headings-closing-sequence.html
+   */
+  'markdown-preferences/atx-headings-closing-sequence'?: Linter.RuleEntry<MarkdownPreferencesAtxHeadingsClosingSequence>
+  /**
    * enforce canonical language names in code blocks
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/canonical-code-block-language.html
    */
@@ -96,6 +101,8 @@ export interface RuleOptions {
 }
 
 /* ======= Declarations ======= */
+// ----- markdown-preferences/atx-headings-closing-sequence -----
+type MarkdownPreferencesAtxHeadingsClosingSequence = []|[("always" | "never")]
 // ----- markdown-preferences/canonical-code-block-language -----
 type MarkdownPreferencesCanonicalCodeBlockLanguage = []|[{
   languages?: {

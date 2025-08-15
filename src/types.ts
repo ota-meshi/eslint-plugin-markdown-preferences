@@ -8,7 +8,10 @@ import type {
 import type { JSONSchema4 } from "json-schema";
 import type { Node } from "mdast";
 
-export type RuleContext<O extends any[]> = CoreRuleContext<{
+export type RuleContext<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- ignore
+  O extends any[],
+> = CoreRuleContext<{
   LangOptions: MarkdownLanguageOptions;
   Code: MarkdownSourceCode;
   RuleOptions: O;
@@ -42,7 +45,10 @@ export interface RuleMetaData {
   type: "problem" | "suggestion" | "layout";
 }
 
-export interface PartialRuleModule<O extends any[]> {
+export interface PartialRuleModule<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- ignore
+  O extends any[],
+> {
   meta: PartialRuleMetaData;
   create(context: RuleContext<O>): MarkdownRuleVisitor;
 }

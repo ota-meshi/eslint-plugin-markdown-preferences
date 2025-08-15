@@ -205,7 +205,10 @@ This rule was introduced in eslint-plugin-markdown-preferences ${await this.sinc
     };
     const computed = `---\n${Object.keys(fileIntro)
 
-      .map((key) => `${key}: ${yamlValue((fileIntro as any)[key])}`)
+      .map(
+        (key) =>
+          `${key}: ${yamlValue(fileIntro[key as keyof typeof fileIntro])}`,
+      )
       .join("\n")}\n---\n\n`;
 
     const fileIntroPattern = /^---\n(?:.*\n)+?---\n*/gu;

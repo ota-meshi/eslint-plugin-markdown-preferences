@@ -95,7 +95,6 @@ export default defineConfig([
         },
       ],
       "default-case": "off",
-      "@typescript-eslint/no-explicit-any": "off",
     },
   },
   {
@@ -165,6 +164,7 @@ export default defineConfig([
       "markdown-preferences/no-multiple-empty-lines": "error",
       "markdown-preferences/ordered-list-marker-sequence": "error",
       "markdown-preferences/ordered-list-marker-start": "error",
+      "markdown-preferences/atx-headings-closing-sequence": "error",
     },
   },
   {
@@ -256,6 +256,7 @@ export default defineConfig([
       "markdown-preferences/prefer-fenced-code-blocks": "off",
       "markdown-preferences/ordered-list-marker-sequence": "off",
       "markdown-preferences/ordered-list-marker-start": "off",
+      "markdown-preferences/atx-headings-closing-sequence": "off",
     },
   },
   {

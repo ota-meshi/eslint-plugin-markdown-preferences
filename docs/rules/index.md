@@ -15,6 +15,7 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
+| [markdown-preferences/atx-headings-closing-sequence](./atx-headings-closing-sequence.md) | enforce consistent use of closing sequence in ATX headings. | 🔧 |  |
 | [markdown-preferences/canonical-code-block-language](./canonical-code-block-language.md) | enforce canonical language names in code blocks | 🔧 |  |
 | [markdown-preferences/heading-casing](./heading-casing.md) | enforce consistent casing in headings. | 🔧 |  |
 | [markdown-preferences/no-text-backslash-linebreak](./no-text-backslash-linebreak.md) | disallow text backslash at the end of a line. |  | ⭐ |

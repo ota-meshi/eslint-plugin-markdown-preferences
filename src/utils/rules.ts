@@ -2,6 +2,7 @@
 // This file has been automatically generated,
 // in order to update its content execute "npm run update"
 import type { RuleModule } from "../types.ts";
+import atxHeadingsClosingSequence from "../rules/atx-headings-closing-sequence.ts";
 import canonicalCodeBlockLanguage from "../rules/canonical-code-block-language.ts";
 import definitionsLast from "../rules/definitions-last.ts";
 import hardLinebreakStyle from "../rules/hard-linebreak-style.ts";
@@ -20,6 +21,7 @@ import preferLinkedWords from "../rules/prefer-linked-words.ts";
 import sortDefinitions from "../rules/sort-definitions.ts";
 
 export const rules = [
+  atxHeadingsClosingSequence,
   canonicalCodeBlockLanguage,
   definitionsLast,
   hardLinebreakStyle,
