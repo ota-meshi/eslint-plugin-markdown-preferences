@@ -15,7 +15,7 @@ since: "v0.10.0"
 
 ## 📖 Rule Details
 
-This rule enforces that all lines within blockquotes must be properly prefixed with the `>` marker, preventing the use of "lazy" continuation lines as defined in the [CommonMark specification].
+This rule enforces that all lines within blockquotes must be properly prefixed with the `>` marker, preventing the use of "lazy" continuation lines as defined in the [CommonMark specification][CommonMark Spec: Block quotes].
 
 In CommonMark, blockquotes support "laziness," which allows continuation lines to omit the `>` marker. However, this can lead to inconsistent formatting and make blockquotes harder to read and maintain.
 
@@ -124,8 +124,6 @@ another lazy line
 
 <!-- prettier-ignore-end -->
 
-[CommonMark specification]: https://spec.commonmark.org/0.31.2/#block-quotes
-
 ## 💡 When to Use This Rule
 
 Use this rule when you want to:
@@ -141,8 +139,10 @@ This rule has no options.
 
 ## 📚 Further Reading
 
-- [CommonMark Spec: Block quotes][CommonMark specification]
+- [CommonMark Spec: Block quotes]
 - [CommonMark Spec: Laziness in block quotes](https://spec.commonmark.org/0.31.2/#example-232)
+
+[CommonMark Spec: Block quotes]: https://spec.commonmark.org/0.31.2/#block-quotes
 
 ## 🚀 Version
 

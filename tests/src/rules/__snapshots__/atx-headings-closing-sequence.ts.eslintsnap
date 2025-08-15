@@ -1,0 +1,137 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: atx-headings-closing-sequence >> invalid
+Filename: tests/fixtures/rules/atx-headings-closing-sequence/invalid/always-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - closingSequence: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | Invalid: missing closing sequence (always)
+  3 | =========================================
+  4 |
+  5 | # Heading 1
+    | ^~~~~~~~~~~ [1]
+  6 | ## Heading 2
+    | ^~~~~~~~~~~~ [2]
+  7 | ### Heading 3
+    | ^~~~~~~~~~~~~ [3]
+  8 |
+  9 | # # #
+ 10 | # Heading #1
+    | ^~~~~~~~~~~~ [4]
+ 11 | # Heading #
+ 12 |
+
+Output:
+  1 |
+  2 | Invalid: missing closing sequence (always)
+  3 | =========================================
+  4 |
+  5 | # Heading 1 # 
+  6 | ## Heading 2 ## 
+  7 | ### Heading 3 ### 
+  8 |
+  9 | # # #
+ 10 | # Heading #1 # 
+ 11 | # Heading #
+ 12 |
+
+[1] ATX heading should have a closing sequence (e.g. '### heading ###').
+[2] ATX heading should have a closing sequence (e.g. '### heading ###').
+[3] ATX heading should have a closing sequence (e.g. '### heading ###').
+[4] ATX heading should have a closing sequence (e.g. '### heading ###').
+---
+
+
+Test: atx-headings-closing-sequence >> invalid
+Filename: tests/fixtures/rules/atx-headings-closing-sequence/invalid/default-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | Invalid: has closing sequence (default)
+  3 | ===============================
+  4 |
+  5 | # Heading 1 #
+    |            ^~ [1]
+  6 | ## Heading 2 ##
+    |             ^~~ [2]
+  7 | ### Heading 3 ###
+    |              ^~~~ [3]
+  8 |
+
+Output:
+  1 |
+  2 | Invalid: has closing sequence (default)
+  3 | ===============================
+  4 |
+  5 | # Heading 1
+  6 | ## Heading 2
+  7 | ### Heading 3
+  8 |
+
+[1] ATX heading should not have a closing sequence.
+[2] ATX heading should not have a closing sequence.
+[3] ATX heading should not have a closing sequence.
+---
+
+
+Test: atx-headings-closing-sequence >> invalid
+Filename: tests/fixtures/rules/atx-headings-closing-sequence/invalid/never-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - closingSequence: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | Invalid: has closing sequence (never)
+  3 | ===============================
+  4 |
+  5 | # Heading 1 #
+    |            ^~ [1]
+  6 | ## Heading 2 ##
+    |             ^~~ [2]
+  7 | ### Heading 3 ###
+    |              ^~~~ [3]
+  8 |
+  9 | # # # #
+    |      ^~ [4]
+ 10 | # Heading #1 #
+    |             ^~ [5]
+ 11 | # Heading # #
+    |            ^~ [6]
+ 12 |
+
+Output:
+  1 |
+  2 | Invalid: has closing sequence (never)
+  3 | ===============================
+  4 |
+  5 | # Heading 1
+  6 | ## Heading 2
+  7 | ### Heading 3
+  8 |
+  9 | # # \#
+ 10 | # Heading #1
+ 11 | # Heading \#
+ 12 |
+
+[1] ATX heading should not have a closing sequence.
+[2] ATX heading should not have a closing sequence.
+[3] ATX heading should not have a closing sequence.
+[4] ATX heading should not have a closing sequence.
+[5] ATX heading should not have a closing sequence.
+[6] ATX heading should not have a closing sequence.
+---
