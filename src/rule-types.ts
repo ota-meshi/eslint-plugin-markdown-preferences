@@ -19,6 +19,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/atx-headings-closing-sequence'?: Linter.RuleEntry<MarkdownPreferencesAtxHeadingsClosingSequence>
   /**
+   * Enforce consistent length for the closing sequence (trailing #s) in ATX headings.
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-headings-closing-sequence-length.html
+   */
+  'markdown-preferences/atx-headings-closing-sequence-length'?: Linter.RuleEntry<MarkdownPreferencesAtxHeadingsClosingSequenceLength>
+  /**
    * enforce canonical language names in code blocks
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/canonical-code-block-language.html
    */
@@ -102,7 +107,14 @@ export interface RuleOptions {
 
 /* ======= Declarations ======= */
 // ----- markdown-preferences/atx-headings-closing-sequence -----
-type MarkdownPreferencesAtxHeadingsClosingSequence = []|[("always" | "never")]
+type MarkdownPreferencesAtxHeadingsClosingSequence = []|[{
+  closingSequence?: ("always" | "never")
+}]
+// ----- markdown-preferences/atx-headings-closing-sequence-length -----
+type MarkdownPreferencesAtxHeadingsClosingSequenceLength = []|[{
+  mode?: ("match-opening" | "length" | "consistent" | "consistent-line-length" | "fixed-line-length")
+  length?: number
+}]
 // ----- markdown-preferences/canonical-code-block-language -----
 type MarkdownPreferencesCanonicalCodeBlockLanguage = []|[{
   languages?: {

@@ -2,6 +2,23 @@ import type { SourceLocation } from "@eslint/core";
 import type { MarkdownSourceCode } from "@eslint/markdown";
 import type { Heading } from "mdast";
 
+export type ParsedATXHeadingClosingSequence = {
+  closingSequence: {
+    text: string;
+    range: [number, number];
+    loc: SourceLocation;
+  };
+  rawBefore: {
+    text: string;
+    range: [number, number];
+    loc: SourceLocation;
+  };
+  rawAfter: {
+    text: string;
+    range: [number, number];
+    loc: SourceLocation;
+  };
+};
 /**
  * Parse the closing sequence of an ATX heading.
  */
@@ -9,23 +26,7 @@ export function parseATXHeadingClosingSequence(
   sourceCode: MarkdownSourceCode,
   node: Heading,
 ):
-  | {
-      closingSequence: {
-        text: string;
-        range: [number, number];
-        loc: SourceLocation;
-      };
-      rawBefore: {
-        text: string;
-        range: [number, number];
-        loc: SourceLocation;
-      };
-      rawAfter: {
-        text: string;
-        range: [number, number];
-        loc: SourceLocation;
-      };
-    }
+  | ParsedATXHeadingClosingSequence
   | {
       closingSequence: null;
     }

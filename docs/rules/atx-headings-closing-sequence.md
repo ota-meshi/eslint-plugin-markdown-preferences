@@ -130,6 +130,7 @@ This rule has one option:
 ## 👫 Related Rules
 
 - [markdown-preferences/heading-casing](./heading-casing.md)
+- [markdown-preferences/atx-headings-closing-sequence-length](./atx-headings-closing-sequence-length.md)
 
 ## 🔍 Implementation
 
