@@ -35,6 +35,13 @@ If you are addressed in Japanese, please conduct the conversation in Japanese.
    - Test fixtures: `tests/fixtures/rules/<rule-name>/`
    - Documentation: `docs/rules/<rule-name>.md`
 
+When editing files, please note the following:
+
+- Do not use the `any` type when implementing rules.
+- Please use the provided utilities as much as possible when implementing rules.
+- Respect the format of the initially generated documentation.
+  - In particular, ensure that sample code and the order of sections are consistent with other documents.
+
 ### Rule Testing
 
 #### Creating Test Fixtures

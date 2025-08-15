@@ -120,5 +120,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "string-width": "^7.2.0"
   }
 }

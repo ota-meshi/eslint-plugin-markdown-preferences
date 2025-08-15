@@ -1,0 +1,295 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: atx-headings-closing-sequence-length >> invalid
+Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/consistent/consistent-invalid-1-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent
+Plugins: unable to serialize
+
+Code:
+  1 | # Consistent heading ##
+  2 |
+  3 | ## Another heading ###
+    |                    ^~~ [1]
+  4 |
+  5 | ### Third heading ##
+  6 |
+
+Output:
+  1 | # Consistent heading ##
+  2 |
+  3 | ## Another heading ##
+  4 |
+  5 | ### Third heading ##
+  6 |
+
+[1] The closing sequence length should be 2 (was 3).
+---
+
+
+Test: atx-headings-closing-sequence-length >> invalid
+Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/consistent-line-length/consistent-line-invalid-1-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent-line-length
+Plugins: unable to serialize
+
+Code:
+  1 | # Heading ###
+    |           ^~~ [1]
+  2 | # Another ##
+  3 |
+
+Output:
+  1 | # Heading ##
+  2 | # Another ##
+  3 |
+
+[1] The closing sequence length should be 2 (was 3).
+---
+
+
+Test: atx-headings-closing-sequence-length >> invalid
+Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/consistent-line-length/consistent-line-invalid-2-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent-line-length
+Plugins: unable to serialize
+
+Code:
+  1 | # Heading ##
+    |           ^~ [1]
+  2 | # Another #
+  3 |
+
+Output:
+  1 | # Heading #
+  2 | # Another #
+  3 |
+
+[1] The closing sequence length should be 1 (was 2).
+---
+
+
+Test: atx-headings-closing-sequence-length >> invalid
+Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/consistent-line-length/long-header-late-invalid-1-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent-line-length
+Plugins: unable to serialize
+
+Code:
+  1 | # Short #
+    |         ^ [1]
+  2 | # This is a very very long heading #
+  3 |
+
+Output:
+  1 | # Short ############################
+  2 | # This is a very very long heading #
+  3 |
+
+[1] The closing sequence length should be 28 (was 1).
+---
+
+
+Test: atx-headings-closing-sequence-length >> invalid
+Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/consistent-line-length/only-closing-sequence-invalid-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent-line-length
+Plugins: unable to serialize
+
+Code:
+  1 | # Only closing sequence
+  2 | # ###
+  3 | ## ##
+  4 | ### ###
+    |     ^~~ [1]
+  5 |
+
+Output:
+  1 | # Only closing sequence
+  2 | # ###
+  3 | ## ##
+  4 | ### #
+  5 |
+
+[1] The closing sequence length should be 1 (was 3).
+---
+
+
+Test: atx-headings-closing-sequence-length >> invalid >>> "# Only hashes and spaces (invalid)\n#    ##\n#\\u0009##\n#\n# Heading ###############\n"
+Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/consistent-line-length/only-hashes-and-spaces-invalid-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent-line-length
+Plugins: unable to serialize
+
+Code:
+  1 | # Only hashes and spaces (invalid)
+  2 | #    ##
+    |      ^~ [1]
+  3 | #	##
+    |   ^~ [2]
+  4 | #
+  5 | # Heading ###############
+  6 |
+
+Output:
+  1 | # Only hashes and spaces (invalid)
+  2 | #    ####################
+  3 | #	#####################
+  4 | #
+  5 | # Heading ###############
+  6 |
+
+[1] The closing sequence length should be 20 (was 2).
+[2] The closing sequence length should be 21 (was 2).
+---
+
+
+Test: atx-headings-closing-sequence-length >> invalid >>> "# 全角文字・異体字セレクタを含む見出しのテスト\n# 見出しＡＢＣ ###\n# 竈門 禰󠄀豆子 ##\n# Heading ###\n# 見\\u0009出\\u0009し\\u0009##\n# Heading ############\n"
+Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/consistent-line-length/zenkaku-ivs-invalid-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent-line-length
+Plugins: unable to serialize
+
+Code:
+  1 | # 全角文字・異体字セレクタを含む見出しのテスト
+  2 | # 見出しＡＢＣ ###
+  3 | # 竈門 禰󠄀豆子 ##
+    |            ^~ [1]
+  4 | # Heading ###
+    |           ^~~ [2]
+  5 | # 見	出	し	##
+  6 | # Heading ############
+    |           ^~~~~~~~~~~~ [3]
+  7 |
+
+Output:
+  1 | # 全角文字・異体字セレクタを含む見出しのテスト
+  2 | # 見出しＡＢＣ ###
+  3 | # 竈門 禰󠄀豆子 ####
+  4 | # Heading ########
+  5 | # 見	出	し	##
+  6 | # Heading ########
+  7 |
+
+[1] The closing sequence length should be 4 (was 2).
+[2] The closing sequence length should be 8 (was 3).
+[3] The closing sequence length should be 8 (was 12).
+---
+
+
+Test: atx-headings-closing-sequence-length >> invalid
+Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/fixed-line-length/fixed-line-invalid-1-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: fixed-line-length
+    length: 30
+Plugins: unable to serialize
+
+Code:
+  1 | # Heading ##
+    |           ^~ [1]
+  2 |
+
+Output:
+  1 | # Heading ####################
+  2 |
+
+[1] The closing sequence length should be 20 (was 2).
+---
+
+
+Test: atx-headings-closing-sequence-length >> invalid
+Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/length/simple-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: length
+    length: 2
+Plugins: unable to serialize
+
+Code:
+  1 | # Heading #
+    |           ^ [1]
+  2 | ## Heading ###
+    |            ^~~ [2]
+  3 | ### Heading #
+    |             ^ [3]
+  4 |
+
+Output:
+  1 | # Heading ##
+  2 | ## Heading ##
+  3 | ### Heading ##
+  4 |
+
+[1] The closing sequence length should be 2 (was 1).
+[2] The closing sequence length should be 2 (was 3).
+[3] The closing sequence length should be 2 (was 1).
+---
+
+
+Test: atx-headings-closing-sequence-length >> invalid
+Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/match-opening/simple-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: match-opening
+Plugins: unable to serialize
+
+Code:
+  1 | # Level 1 ##
+    |           ^~ [1]
+  2 | ## Level 2 #
+    |            ^ [2]
+  3 | ### Level 3 ####
+    |             ^~~~ [3]
+  4 | #### Level 4 ###
+    |              ^~~ [4]
+  5 | ##### Level 5 ######
+    |               ^~~~~~ [5]
+  6 | ###### Level 6 #####
+    |                ^~~~~ [6]
+  7 |
+
+Output:
+  1 | # Level 1 #
+  2 | ## Level 2 ##
+  3 | ### Level 3 ###
+  4 | #### Level 4 ####
+  5 | ##### Level 5 #####
+  6 | ###### Level 6 ######
+  7 |
+
+[1] The closing sequence length should be 1 (was 2).
+[2] The closing sequence length should be 2 (was 1).
+[3] The closing sequence length should be 3 (was 4).
+[4] The closing sequence length should be 4 (was 3).
+[5] The closing sequence length should be 5 (was 6).
+[6] The closing sequence length should be 6 (was 5).
+---
