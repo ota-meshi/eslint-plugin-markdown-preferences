@@ -2,6 +2,35 @@
 
 
 Test: emoji-notation >> invalid
+Filename: tests/fixtures/rules/emoji-notation/invalid/colon-ignore-unknown-false-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - prefer: colon
+    ignoreUnknown: false
+Plugins: unable to serialize
+
+Code:
+  1 | # Prefer colon, ignoreUnknown: false
+  2 |
+  3 | I love open source! 😄
+    |                     ^~ [1]
+  4 | I love open source! :my-original-emoji:
+  5 |
+
+Output:
+  1 | # Prefer colon, ignoreUnknown: false
+  2 |
+  3 | I love open source! :smile:
+  4 | I love open source! :my-original-emoji:
+  5 |
+
+[1] Use colon-style emoji ':smile:' instead of Unicode emoji ('😄').
+---
+
+
+Test: emoji-notation >> invalid
 Filename: tests/fixtures/rules/emoji-notation/invalid/colon-in-unicode-input.md
 Language: markdown/gfm
 LanguageOptions:
@@ -23,7 +52,38 @@ Output:
   3 | I love open source! 😄
   4 |
 
-[1] Use colon-style emoji ':smile:' instead of Unicode emoji ('😄').
+[1] Use Unicode emoji '😄' instead of colon-style emoji (':smile:').
+---
+
+
+Test: emoji-notation >> invalid
+Filename: tests/fixtures/rules/emoji-notation/invalid/ignore-unknown-false-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - prefer: unicode
+    ignoreUnknown: false
+Plugins: unable to serialize
+
+Code:
+  1 | # Ignore Unknown (false)
+  2 |
+  3 | I love open source! :my-original-emoji:
+    |                     ^~~~~~~~~~~~~~~~~~~ [1]
+  4 | I love open source! :smile:
+    |                     ^~~~~~~ [2]
+  5 |
+
+Output:
+  1 | # Ignore Unknown (false)
+  2 |
+  3 | I love open source! :my-original-emoji:
+  4 | I love open source! 😄
+  5 |
+
+[1] Use Unicode emoji (e.g. '😄') instead of colon-style emoji (':my-original-emoji:').
+[2] Use Unicode emoji '😄' instead of colon-style emoji (':smile:').
 ---
 
 
@@ -54,8 +114,8 @@ Output:
   5 |
   6 |
 
-[1] Use colon-style emoji ':smile:' instead of Unicode emoji ('😄').
-[2] Use colon-style emoji ':+1:' instead of Unicode emoji ('👍').
+[1] Use Unicode emoji '😄' instead of colon-style emoji (':smile:').
+[2] Use Unicode emoji '👍' instead of colon-style emoji (':+1:').
 ---
 
 

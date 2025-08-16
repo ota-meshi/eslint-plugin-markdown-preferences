@@ -185,7 +185,7 @@ export default createRule<[Options?]>("emoji-notation", {
               start: { line, column },
               end: { line, column: column + colon.length },
             },
-            messageId: colon ? "preferColon" : "preferUnknownColon",
+            messageId: emoji ? "preferUnicode" : "preferUnknownUnicode",
             data: { unicode: emoji || "😄", colon },
             fix: emoji
               ? (fixer) => {
