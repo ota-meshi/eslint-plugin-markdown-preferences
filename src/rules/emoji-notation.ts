@@ -1,3 +1,4 @@
+import { getSourceLocationFromRange } from "../utils/ast.ts";
 import { createRule } from "../utils/index.ts";
 import { toRegExp } from "../utils/regexp.ts";
 import { GH_EMOJI_MAP } from "../utils/resources/gh-emoji.ts";
@@ -120,33 +121,21 @@ export default createRule<[Options?]>("emoji-notation", {
             if (isIgnore(emoji)) continue;
             const emojiOffset = match.index;
 
-            const loc = sourceCode.getLoc(node);
-            const beforeLines = text.slice(0, emojiOffset).split(/\n/u);
-            const line = loc.start.line + beforeLines.length - 1;
-            const column =
-              (beforeLines.length === 1 ? loc.start.column : 1) +
-              (beforeLines.at(-1) || "").length;
+            const [nodeStart] = sourceCode.getRange(node);
+            const range: [number, number] = [
+              nodeStart + emojiOffset,
+              nodeStart + emojiOffset + emoji.length,
+            ];
 
             const colon = emojiData.emojiToColon[emoji];
-
             context.report({
               node,
-              loc: {
-                start: { line, column },
-                end: { line, column: column + emoji.length },
-              },
+              loc: getSourceLocationFromRange(sourceCode, node, range),
               messageId: colon ? "preferColon" : "preferUnknownColon",
               data: { unicode: emoji, colon: colon || ":smile:" },
               fix: colon
                 ? (fixer) => {
-                    const [nodeStart] = sourceCode.getRange(node);
-                    return fixer.replaceTextRange(
-                      [
-                        nodeStart + emojiOffset,
-                        nodeStart + emojiOffset + emoji.length,
-                      ],
-                      colon,
-                    );
+                    return fixer.replaceTextRange(range, colon);
                   }
                 : null,
             });
@@ -171,32 +160,21 @@ export default createRule<[Options?]>("emoji-notation", {
           if (isIgnore(colon)) continue;
           const colonOffset = match.index;
 
-          const loc = sourceCode.getLoc(node);
-          const beforeLines = text.slice(0, colonOffset).split(/\n/u);
-          const line = loc.start.line + beforeLines.length - 1;
-          const column =
-            (beforeLines.length === 1 ? loc.start.column : 1) +
-            (beforeLines.at(-1) || "").length;
+          const [nodeStart] = sourceCode.getRange(node);
+          const range: [number, number] = [
+            nodeStart + colonOffset,
+            nodeStart + colonOffset + colon.length,
+          ];
 
           const emoji = emojiData.colonToEmoji[colon];
           context.report({
             node,
-            loc: {
-              start: { line, column },
-              end: { line, column: column + colon.length },
-            },
+            loc: getSourceLocationFromRange(sourceCode, node, range),
             messageId: emoji ? "preferUnicode" : "preferUnknownUnicode",
             data: { unicode: emoji || "😄", colon },
             fix: emoji
               ? (fixer) => {
-                  const [nodeStart] = sourceCode.getRange(node);
-                  return fixer.replaceTextRange(
-                    [
-                      nodeStart + colonOffset,
-                      nodeStart + colonOffset + colon.length,
-                    ],
-                    emoji,
-                  );
+                  return fixer.replaceTextRange(range, emoji);
                 }
               : null,
           });

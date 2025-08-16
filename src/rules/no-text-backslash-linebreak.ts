@@ -1,3 +1,4 @@
+import { getSourceLocationFromRange } from "../utils/ast.ts";
 import { createRule } from "../utils/index.ts";
 
 export default createRule("no-text-backslash-linebreak", {
@@ -33,27 +34,17 @@ export default createRule("no-text-backslash-linebreak", {
           }
         }
 
-        const loc = sourceCode.getLoc(node);
-        const beforeLines = sourceCode.text
-          .slice(range[0], range[1] - 1)
-          .split(/\n/u);
-        const line = loc.start.line + beforeLines.length - 1;
-        const column =
-          (beforeLines.length === 1 ? loc.start.column : 1) +
-          (beforeLines.at(-1) || "").length;
+        const backslashRange: [number, number] = [range[1] - 1, range[1]];
 
         context.report({
           node,
-          loc: {
-            start: { line, column },
-            end: { line, column: column + 1 },
-          },
+          loc: getSourceLocationFromRange(sourceCode, node, backslashRange),
           messageId: "textBackslashWithLinebreak",
           suggest: [
             {
               messageId: "removeBackslash",
               fix: (fixer) => {
-                return fixer.removeRange([range[1] - 1, range[1]]);
+                return fixer.removeRange(backslashRange);
               },
             },
           ],

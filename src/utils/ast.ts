@@ -1,3 +1,4 @@
+import type { SourceLocation } from "@eslint/core";
 import type { MarkdownSourceCode } from "@eslint/markdown";
 import type { Json, Toml } from "@eslint/markdown/types";
 import type {
@@ -124,5 +125,38 @@ export function getListItemMarker(
     kind: ")",
     raw: matchParen[0],
     sequence: Number(matchParen[1]),
+  };
+}
+
+/**
+ * Get the source location from a range in a node.
+ */
+export function getSourceLocationFromRange(
+  sourceCode: MarkdownSourceCode,
+  node: Text | Code,
+  range: [number, number],
+): SourceLocation {
+  const [nodeStart] = sourceCode.getRange(node);
+  let startLine: number, startColumn: number;
+  if (nodeStart <= range[0]) {
+    const loc = sourceCode.getLoc(node);
+    const beforeLines = sourceCode.text.slice(nodeStart, range[0]).split(/\n/u);
+    startLine = loc.start.line + beforeLines.length - 1;
+    startColumn =
+      (beforeLines.length === 1 ? loc.start.column : 1) +
+      (beforeLines.at(-1) || "").length;
+  } else {
+    const beforeLines = sourceCode.text.slice(0, range[0]).split(/\n/u);
+    startLine = beforeLines.length;
+    startColumn = 1 + (beforeLines.at(-1) || "").length;
+  }
+  const contentLines = sourceCode.text.slice(range[0], range[1]).split(/\n/u);
+  const endLine = startLine + contentLines.length - 1;
+  const endColumn =
+    (contentLines.length === 1 ? startColumn : 1) +
+    (contentLines.at(-1) || "").length;
+  return {
+    start: { line: startLine, column: startColumn },
+    end: { line: endLine, column: endColumn },
   };
 }

@@ -3,6 +3,7 @@ import { createRule } from "../utils/index.ts";
 import { isRegExp, toRegExp } from "../utils/regexp.ts";
 import { defaultPreserveWords } from "../resources/preserve-words.ts";
 import { defaultMinorWords } from "../resources/minor-words.ts";
+import { getSourceLocationFromRange } from "../utils/ast.ts";
 
 type CaseStyle = "Title Case" | "Sentence case";
 
@@ -349,17 +350,10 @@ export default createRule<
 
         if (word === expectedWord) return;
 
-        const nodeLoc = sourceCode.getLoc(node);
-        const beforeLines = text.slice(0, offset).split(/\n/u);
-        const line = nodeLoc.start.line + beforeLines.length - 1;
-        const column =
-          (beforeLines.length === 1 ? nodeLoc.start.column : 1) +
-          (beforeLines.at(-1) || "").length;
-
-        const nodeRange = sourceCode.getRange(node);
-        const wordRange: [number, number] = [
-          nodeRange[0] + offset,
-          nodeRange[0] + offset + word.length,
+        const [nodeStart] = sourceCode.getRange(node);
+        const range: [number, number] = [
+          nodeStart + offset,
+          nodeStart + offset + word.length,
         ];
 
         context.report({
@@ -376,13 +370,10 @@ export default createRule<
             actual: word,
             expected: expectedWord,
           },
-          loc: {
-            start: { line, column },
-            end: { line, column: column + word.length },
-          },
+          loc: getSourceLocationFromRange(sourceCode, node, range),
           fix(fixer) {
             // Replace only the specific word
-            return fixer.replaceTextRange(wordRange, expectedWord);
+            return fixer.replaceTextRange(range, expectedWord);
           },
         });
       }
