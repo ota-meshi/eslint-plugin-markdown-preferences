@@ -16,6 +16,7 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
 | [markdown-preferences/canonical-code-block-language](./canonical-code-block-language.md) | enforce canonical language names in code blocks | 🔧 |  |
+| [markdown-preferences/emoji-notation](./emoji-notation.md) | Enforce consistent emoji notation style in Markdown files. | 🔧 |  |
 | [markdown-preferences/heading-casing](./heading-casing.md) | enforce consistent casing in headings. | 🔧 |  |
 | [markdown-preferences/no-text-backslash-linebreak](./no-text-backslash-linebreak.md) | disallow text backslash at the end of a line. |  | ⭐ |
 | [markdown-preferences/ordered-list-marker-start](./ordered-list-marker-start.md) | enforce that ordered list markers start with 1 or 0 | 🔧 |  |
@@ -26,7 +27,7 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
-| [markdown-preferences/atx-headings-closing-sequence-length](./atx-headings-closing-sequence-length.md) | Enforce consistent length for the closing sequence (trailing #s) in ATX headings. | 🔧 |  |
+| [markdown-preferences/atx-headings-closing-sequence-length](./atx-headings-closing-sequence-length.md) | enforce consistent length for the closing sequence (trailing #s) in ATX headings. | 🔧 |  |
 | [markdown-preferences/atx-headings-closing-sequence](./atx-headings-closing-sequence.md) | enforce consistent use of closing sequence in ATX headings. | 🔧 |  |
 | [markdown-preferences/definitions-last](./definitions-last.md) | require link definitions and footnote definitions to be placed at the end of the document | 🔧 |  |
 | [markdown-preferences/hard-linebreak-style](./hard-linebreak-style.md) | enforce consistent hard linebreak style. | 🔧 | ⭐ |

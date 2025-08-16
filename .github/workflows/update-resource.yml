@@ -1,0 +1,30 @@
+name: Update resources
+
+on:
+  workflow_dispatch: null
+  schedule:
+    - cron: 0 0 * * 0
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v5
+      - name: Setup node
+        uses: actions/setup-node@v4
+      - name: Install deps
+        run: npm install
+      - name: Update resources
+        run: npm run update:resources
+      - uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c
+        with:
+          commit-message: "fix: updates resources"
+          branch: update-resource
+          branch-suffix: timestamp
+          title: "fix: updates resources"

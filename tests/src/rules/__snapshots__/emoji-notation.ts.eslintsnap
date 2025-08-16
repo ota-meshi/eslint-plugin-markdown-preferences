@@ -1,0 +1,119 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: emoji-notation >> invalid
+Filename: tests/fixtures/rules/emoji-notation/invalid/colon-in-unicode-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - prefer: unicode
+Plugins: unable to serialize
+
+Code:
+  1 | # Emoji Example
+  2 |
+  3 | I love open source! :smile:
+    |                     ^~~~~~~ [1]
+  4 |
+
+Output:
+  1 | # Emoji Example
+  2 |
+  3 | I love open source! 😄
+  4 |
+
+[1] Use colon-style emoji ':smile:' instead of Unicode emoji ('😄').
+---
+
+
+Test: emoji-notation >> invalid
+Filename: tests/fixtures/rules/emoji-notation/invalid/multiline/multiline-colon-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - prefer: unicode
+Plugins: unable to serialize
+
+Code:
+  1 | # Multiline Emoji Example
+  2 |
+  3 | I love open source! :smile:
+    |                     ^~~~~~~ [1]
+  4 | And I love ESLint! :+1:
+    |                    ^~~~ [2]
+  5 |
+  6 |
+
+Output:
+  1 | # Multiline Emoji Example
+  2 |
+  3 | I love open source! 😄
+  4 | And I love ESLint! 👍
+  5 |
+  6 |
+
+[1] Use colon-style emoji ':smile:' instead of Unicode emoji ('😄').
+[2] Use colon-style emoji ':+1:' instead of Unicode emoji ('👍').
+---
+
+
+Test: emoji-notation >> invalid
+Filename: tests/fixtures/rules/emoji-notation/invalid/multiline/multiline-unicode-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - prefer: colon
+Plugins: unable to serialize
+
+Code:
+  1 | # Multiline Emoji Example
+  2 |
+  3 | I love open source! 😄
+    |                     ^~ [1]
+  4 | And I love ESLint! 👍
+    |                    ^~ [2]
+  5 |
+  6 |
+
+Output:
+  1 | # Multiline Emoji Example
+  2 |
+  3 | I love open source! :smile:
+  4 | And I love ESLint! :thumbsup:
+  5 |
+  6 |
+
+[1] Use colon-style emoji ':smile:' instead of Unicode emoji ('😄').
+[2] Use colon-style emoji ':thumbsup:' instead of Unicode emoji ('👍').
+---
+
+
+Test: emoji-notation >> invalid
+Filename: tests/fixtures/rules/emoji-notation/invalid/unicode-in-colon-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - prefer: colon
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | # Emoji Example
+  3 |
+  4 | I love open source! 😄
+    |                     ^~ [1]
+  5 |
+
+Output:
+  1 |
+  2 | # Emoji Example
+  3 |
+  4 | I love open source! :smile:
+  5 |
+
+[1] Use colon-style emoji ':smile:' instead of Unicode emoji ('😄').
+---

@@ -6,6 +6,7 @@ import atxHeadingsClosingSequenceLength from "../rules/atx-headings-closing-sequ
 import atxHeadingsClosingSequence from "../rules/atx-headings-closing-sequence.ts";
 import canonicalCodeBlockLanguage from "../rules/canonical-code-block-language.ts";
 import definitionsLast from "../rules/definitions-last.ts";
+import emojiNotation from "../rules/emoji-notation.ts";
 import hardLinebreakStyle from "../rules/hard-linebreak-style.ts";
 import headingCasing from "../rules/heading-casing.ts";
 import noLazinessBlockquotes from "../rules/no-laziness-blockquotes.ts";
@@ -26,6 +27,7 @@ export const rules = [
   atxHeadingsClosingSequence,
   canonicalCodeBlockLanguage,
   definitionsLast,
+  emojiNotation,
   hardLinebreakStyle,
   headingCasing,
   noLazinessBlockquotes,

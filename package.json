@@ -26,6 +26,7 @@
     "cover": "c8 --reporter=lcov npm run test",
     "test:update": "npm run mocha -- \"tests/src/**/*.ts\" --reporter=dot --update",
     "update": "npm run ts -- ./tools/update.ts && npm run eslint-fix",
+    "update:resources": "npm run ts -- ./tools/update-resources.ts && npm run eslint-fix",
     "new": "npm run ts -- ./tools/new-rule.ts",
     "docs:watch": "vitepress dev docs --open",
     "docs:build": "vitepress build docs",
@@ -122,6 +123,7 @@
     "access": "public"
   },
   "dependencies": {
+    "emoji-regex-xs": "^2.0.1",
     "string-width": "^7.2.0"
   }
 }

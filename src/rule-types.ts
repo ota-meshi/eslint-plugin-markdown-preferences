@@ -19,7 +19,7 @@ export interface RuleOptions {
    */
   'markdown-preferences/atx-headings-closing-sequence'?: Linter.RuleEntry<MarkdownPreferencesAtxHeadingsClosingSequence>
   /**
-   * Enforce consistent length for the closing sequence (trailing #s) in ATX headings.
+   * enforce consistent length for the closing sequence (trailing #s) in ATX headings.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-headings-closing-sequence-length.html
    */
   'markdown-preferences/atx-headings-closing-sequence-length'?: Linter.RuleEntry<MarkdownPreferencesAtxHeadingsClosingSequenceLength>
@@ -33,6 +33,11 @@ export interface RuleOptions {
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/definitions-last.html
    */
   'markdown-preferences/definitions-last'?: Linter.RuleEntry<[]>
+  /**
+   * Enforce consistent emoji notation style in Markdown files.
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/emoji-notation.html
+   */
+  'markdown-preferences/emoji-notation'?: Linter.RuleEntry<MarkdownPreferencesEmojiNotation>
   /**
    * enforce consistent hard linebreak style.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/hard-linebreak-style.html
@@ -120,6 +125,15 @@ type MarkdownPreferencesCanonicalCodeBlockLanguage = []|[{
   languages?: {
     [k: string]: string
   }
+}]
+// ----- markdown-preferences/emoji-notation -----
+type MarkdownPreferencesEmojiNotation = []|[{
+  
+  prefer?: ("unicode" | "colon")
+  
+  ignoreUnknown?: boolean
+  
+  ignoreList?: string[]
 }]
 // ----- markdown-preferences/hard-linebreak-style -----
 type MarkdownPreferencesHardLinebreakStyle = []|[{
