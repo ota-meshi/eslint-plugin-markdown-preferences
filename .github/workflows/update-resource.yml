@@ -22,7 +22,7 @@ jobs:
         run: npm install
       - name: Update resources
         run: npm run update:resources
-      - uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c
+      - uses: peter-evans/create-pull-request@cb4d3bfce175d44325c6b7697f81e0afe8a79bdf
         with:
           commit-message: "fix: updates resources"
           branch: update-resource
