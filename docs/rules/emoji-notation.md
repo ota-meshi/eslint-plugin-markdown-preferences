@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/emoji-notation"
 description: "Enforce consistent emoji notation style in Markdown files."
+since: "v0.13.0"
 ---
 
 # markdown-preferences/emoji-notation
 
 > Enforce consistent emoji notation style in Markdown files.
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -161,6 +161,10 @@ In the above example, `ignoreList` is used with `"prefer": "colon"` and contains
 ## 👫 Related Rules
 
 No direct related rules.
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.13.0
 
 ## 🔍 Implementation
 
