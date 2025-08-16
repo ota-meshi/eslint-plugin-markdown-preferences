@@ -1,0 +1,8 @@
+{
+  "options": [
+    {
+      "prefer": "unicode",
+      "ignoreList": [":zzz:", "😺", "/^\\p{RGI_Emoji_Flag_Sequence}$/v"]
+    }
+  ]
+}

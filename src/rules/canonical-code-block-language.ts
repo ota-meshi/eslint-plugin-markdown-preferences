@@ -1,5 +1,6 @@
 import type { Code } from "mdast";
 import { createRule } from "../utils/index.ts";
+import { getSourceLocationFromRange } from "../utils/ast.ts";
 
 type LanguageMapping = Record<string, string>;
 
@@ -93,31 +94,20 @@ export default createRule<[{ languages?: LanguageMapping }?]>(
           }
 
           const [, fence, langInfo] = fenceMatch;
-          const langStart = nodeRange[0] + fence.length;
-          const langEnd = langStart + langInfo.length;
-
-          // Calculate position within the text
-          const nodeLoc = sourceCode.getLoc(node);
-          const beforeFence = sourceCode.text.slice(nodeRange[0], langStart);
-          const beforeLines = beforeFence.split(/\n/u);
-          const line = nodeLoc.start.line + beforeLines.length - 1;
-          const column =
-            (beforeLines.length === 1 ? nodeLoc.start.column : 0) +
-            (beforeLines.at(-1) || "").length;
-
+          const range: [number, number] = [
+            nodeRange[0] + fence.length,
+            nodeRange[0] + fence.length + langInfo.length,
+          ];
           context.report({
             node,
-            loc: {
-              start: { line, column },
-              end: { line, column: column + langInfo.length },
-            },
+            loc: getSourceLocationFromRange(sourceCode, node, range),
             messageId: "useCanonical",
             data: {
               canonical,
               current,
             },
             fix(fixer) {
-              return fixer.replaceTextRange([langStart, langEnd], canonical);
+              return fixer.replaceTextRange(range, canonical);
             },
           });
         },
