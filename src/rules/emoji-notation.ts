@@ -46,7 +46,7 @@ export default createRule<[Options?]>("emoji-notation", {
   meta: {
     type: "suggestion",
     docs: {
-      description: "Enforce consistent emoji notation style in Markdown files.",
+      description: "enforce consistent emoji notation style in Markdown files.",
       categories: [],
       listCategory: "Preference",
     },

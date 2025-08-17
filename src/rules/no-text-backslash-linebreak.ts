@@ -3,11 +3,11 @@ import { createRule } from "../utils/index.ts";
 
 export default createRule("no-text-backslash-linebreak", {
   meta: {
-    type: "suggestion",
+    type: "layout",
     docs: {
       description: "disallow text backslash at the end of a line.",
       categories: ["recommended"],
-      listCategory: "Preference",
+      listCategory: "Stylistic",
     },
     fixable: undefined,
     hasSuggestions: true,

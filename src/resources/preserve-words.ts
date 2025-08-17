@@ -136,6 +136,7 @@ export const defaultPreserveWords = [
   "Biome",
   "oxc",
   "swc",
+  "markdownlint",
 
   // Build Tools and Bundlers
   "Webpack",

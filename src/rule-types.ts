@@ -34,7 +34,7 @@ export interface RuleOptions {
    */
   'markdown-preferences/definitions-last'?: Linter.RuleEntry<[]>
   /**
-   * Enforce consistent emoji notation style in Markdown files.
+   * enforce consistent emoji notation style in Markdown files.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/emoji-notation.html
    */
   'markdown-preferences/emoji-notation'?: Linter.RuleEntry<MarkdownPreferencesEmojiNotation>
