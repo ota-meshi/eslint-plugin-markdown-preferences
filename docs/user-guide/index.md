@@ -3,7 +3,7 @@
 ## 💿 Installation
 
 ```sh
-npm install --save-dev eslint eslint-plugin-markdown-preferences
+npm install --save-dev eslint @eslint/markdown eslint-plugin-markdown-preferences
 ```
 
 ## 📖 Usage

@@ -29,7 +29,7 @@ For detailed usage instructions, rule configurations, and examples, visit our co
 ## 💿 Installation
 
 ```sh
-npm install --save-dev eslint eslint-plugin-markdown-preferences
+npm install --save-dev eslint @eslint/markdown eslint-plugin-markdown-preferences
 ```
 
 <!--DOCS_IGNORE_END-->

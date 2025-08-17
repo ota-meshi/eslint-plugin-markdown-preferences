@@ -22,6 +22,7 @@
     "lint": "eslint .",
     "tsc": "tsc --project tsconfig.build.json",
     "eslint-fix": "eslint . --fix",
+    "markdownlint": "npx -y markdownlint-cli2 .",
     "test": "npm run mocha -- \"tests/src/**/*.ts\" --reporter=dot --timeout=60000",
     "cover": "c8 --reporter=lcov npm run test",
     "test:update": "npm run mocha -- \"tests/src/**/*.ts\" --reporter=dot --update",
@@ -58,6 +59,10 @@
   "peerDependencies": {
     "@eslint/markdown": "^7.1.0",
     "eslint": ">=9.0.0"
+  },
+  "dependencies": {
+    "emoji-regex-xs": "^2.0.1",
+    "string-width": "^7.2.0"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.1",
@@ -121,9 +126,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "emoji-regex-xs": "^2.0.1",
-    "string-width": "^7.2.0"
   }
 }
