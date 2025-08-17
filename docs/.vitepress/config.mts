@@ -7,7 +7,7 @@ import type { RuleModule } from "../../src/types.js";
 import { transformerTwoslash } from "@shikijs/vitepress-twoslash";
 import { createTwoslasher as createTwoslasherESLint } from "twoslash-eslint";
 import eslintMarkdown from "@eslint/markdown";
-import { LIST_CATEGORIES } from "../../tools/lib/list-categories.ts";
+import { compareCategories } from "../../tools/lib/categories.ts";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -33,14 +33,7 @@ export default async (): Promise<UserConfig<DefaultTheme.Config>> => {
         .filter((rule) => !rule.meta.deprecated)
         .map((rule) => rule.meta.docs.listCategory),
     ),
-  ].sort((a, b) => {
-    const aIndex = LIST_CATEGORIES.indexOf(a);
-    const bIndex = LIST_CATEGORIES.indexOf(b);
-    if (aIndex === -1 && bIndex === -1) {
-      return a > b ? 1 : a < b ? -1 : 0;
-    }
-    return aIndex - bIndex;
-  });
+  ].sort(compareCategories);
 
   const plugin = await import("../../src/index.js").then((m) => m.default || m);
   return defineConfig({

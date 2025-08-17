@@ -13,6 +13,8 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 
 ## Preference Rules
 
+- Rules to unify the expression and description style of documents.
+
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
 | [markdown-preferences/canonical-code-block-language](./canonical-code-block-language.md) | enforce canonical language names in code blocks | 🔧 |  |
@@ -24,6 +26,8 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 | [markdown-preferences/prefer-linked-words](./prefer-linked-words.md) | enforce the specified word to be a link. | 🔧 |  |
 
 ## Stylistic Rules
+
+- Rules related to the formatting and visual style of Markdown.
 
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|

@@ -1,5 +1,5 @@
 import type { RuleModule } from "../src/types.js";
-import { LIST_CATEGORIES } from "./lib/list-categories.ts";
+import { CATEGORY_DESCRIPTIONS, compareCategories } from "./lib/categories.ts";
 import { rules } from "./lib/load-rules.js";
 
 //eslint-disable-next-line jsdoc/require-jsdoc -- tool
@@ -13,14 +13,7 @@ export default function renderRulesTableContent(
 
   const categories = [
     ...new Set<string>(pluginRules.map((rule) => rule.meta.docs.listCategory)),
-  ].sort((a, b) => {
-    const aIndex = LIST_CATEGORIES.indexOf(a);
-    const bIndex = LIST_CATEGORIES.indexOf(b);
-    if (aIndex === -1 && bIndex === -1) {
-      return a > b ? 1 : a < b ? -1 : 0;
-    }
-    return aIndex - bIndex;
-  });
+  ].sort(compareCategories);
 
   // -----------------------------------------------------------------------------
 
@@ -65,7 +58,7 @@ export default function renderRulesTableContent(
     .map((category) => {
       return `
 #${"#".repeat(categoryLevel)} ${category} Rules
-
+${CATEGORY_DESCRIPTIONS[category] ? `\n- ${CATEGORY_DESCRIPTIONS[category]}\n` : ""}
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
 ${pluginRules

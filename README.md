@@ -90,6 +90,8 @@ The rules with the following star ⭐ are included in the configs.
 
 ### Preference Rules
 
+- Rules to unify the expression and description style of documents.
+
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
 | [markdown-preferences/canonical-code-block-language](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/canonical-code-block-language.html) | enforce canonical language names in code blocks | 🔧 |  |
@@ -101,6 +103,8 @@ The rules with the following star ⭐ are included in the configs.
 | [markdown-preferences/prefer-linked-words](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html) | enforce the specified word to be a link. | 🔧 |  |
 
 ### Stylistic Rules
+
+- Rules related to the formatting and visual style of Markdown.
 
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
