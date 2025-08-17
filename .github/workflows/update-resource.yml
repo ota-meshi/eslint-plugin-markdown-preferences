@@ -10,7 +10,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  format:
+  update-resources:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,6 +20,8 @@ jobs:
         uses: actions/setup-node@v4
       - name: Install deps
         run: npm install
+      - name: Build
+        run: npm run build
       - name: Update resources
         run: npm run update:resources
       - uses: peter-evans/create-pull-request@cb4d3bfce175d44325c6b7697f81e0afe8a79bdf
