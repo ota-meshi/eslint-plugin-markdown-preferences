@@ -143,6 +143,17 @@ export default async (): Promise<UserConfig<DefaultTheme.Config>> => {
               ]
             : []),
         ],
+        "/appendix/": [
+          {
+            text: "Appendix",
+            items: [
+              {
+                text: "Comparison With markdownlint Rules",
+                link: "/appendix/comparison-with-markdownlint-rules",
+              },
+            ],
+          },
+        ],
         "/": [
           {
             text: "Guide",
@@ -150,6 +161,7 @@ export default async (): Promise<UserConfig<DefaultTheme.Config>> => {
               { text: "Introduction", link: "/" },
               { text: "User Guide", link: "/user-guide/" },
               { text: "Rules", link: "/rules/" },
+              { text: "Appendix", link: "/appendix/" },
             ],
           },
         ],
