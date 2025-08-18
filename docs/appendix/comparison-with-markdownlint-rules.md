@@ -78,6 +78,14 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 | Code fence style                          | **[MD048]** _code-fence-style_<br>Code fence style                                           | --                                                                              | --                                                                                                                      |
 | Canonical code block language names       | --                                                                                           | --                                                                              | **[markdown-preferences/canonical-code-block-language]**<br>enforce canonical language names in code blocks             |
 
+## Rules Related to Blockquotes
+
+| Description                                      | [markdownlint]'s Rule                                                                 | [@eslint/markdown]'s Rule | `eslint-plugin-markdown-preferences`'s Rule                                            |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------- | ------------------------- | -------------------------------------------------------------------------------------- |
+| Disallow multiple spaces after blockquote symbol | **[MD027]** _no-multiple-space-blockquote_<br>Multiple spaces after blockquote symbol | --                        | --                                                                                     |
+| Require blank lines around blockquotes           | **[MD028]** _no-blanks-blockquote_<br>Blank line inside blockquote                    | --                        | --                                                                                     |
+| Disallow laziness in blockquotes                 | --                                                                                    | --                        | **[markdown-preferences/no-laziness-blockquotes]**<br>disallow laziness in blockquotes |
+
 ## Rules Related to Syntax
 
 | Description                            | [markdownlint]'s Rule                                   | [@eslint/markdown]'s Rule                                                          | `eslint-plugin-markdown-preferences`'s Rule |
@@ -94,8 +102,6 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 - **[MD012]** _no-multiple-blanks_<br>Multiple consecutive blank lines
 - **[MD013]** _line-length_<br>Line length
 - **[MD014]** _commands-show-output_<br>Dollar signs used before commands without showing output
-- **[MD027]** _no-multiple-space-blockquote_<br>Multiple spaces after blockquote symbol
-- **[MD028]** _no-blanks-blockquote_<br>Blank line inside blockquote
 - **[MD033]** _no-inline-html_<br>Inline HTML
 - **[MD035]** _hr-style_<br>Horizontal rule style
 - **[MD037]** _no-space-in-emphasis_<br>Spaces inside emphasis markers
@@ -123,7 +129,6 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 - **[markdown-preferences/heading-casing]**<br>enforce consistent casing in headings
 - **[markdown-preferences/prefer-inline-code-words]**<br>enforce the use of inline code for specific words
 - **[markdown-preferences/hard-linebreak-style]**<br>nforce consistent hard linebreak style
-- **[markdown-preferences/no-laziness-blockquotes]**<br>disallow laziness in blockquotes
 - **[markdown-preferences/no-multiple-empty-lines]**<br>disallow multiple empty lines in Markdown files
 - **[markdown-preferences/no-text-backslash-linebreak]**<br>disallow text backslash at the end of a line
 - **[markdown-preferences/no-trailing-spaces]**<br>disallow trailing whitespace at the end of lines in Markdown files
