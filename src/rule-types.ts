@@ -108,6 +108,11 @@ export interface RuleOptions {
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/sort-definitions.html
    */
   'markdown-preferences/sort-definitions'?: Linter.RuleEntry<MarkdownPreferencesSortDefinitions>
+  /**
+   * enforce consistent casing in table header cells.
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-header-casing.html
+   */
+  'markdown-preferences/table-header-casing'?: Linter.RuleEntry<MarkdownPreferencesTableHeaderCasing>
 }
 
 /* ======= Declarations ======= */
@@ -202,4 +207,14 @@ type MarkdownPreferencesSortDefinitions = []|[{
     sort: ("alphabetical" | "ignore")
   })[]
   alphabetical?: boolean
+}]
+// ----- markdown-preferences/table-header-casing -----
+type MarkdownPreferencesTableHeaderCasing = []|[{
+  style?: ("Title Case" | "Sentence case")
+  
+  preserveWords?: string[]
+  
+  ignorePatterns?: string[]
+  
+  minorWords?: string[]
 }]

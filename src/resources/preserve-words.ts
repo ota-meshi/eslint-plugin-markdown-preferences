@@ -559,4 +559,7 @@ export const defaultPreserveWords = [
 
   // Common Words and Phrases
   "FAQ",
+
+  // Products
+  "YouTube",
 ];

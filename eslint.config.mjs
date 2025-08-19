@@ -166,6 +166,12 @@ export default defineConfig([
       "markdown-preferences/ordered-list-marker-start": "error",
       "markdown-preferences/atx-headings-closing-sequence": "error",
       "markdown-preferences/emoji-notation": "error",
+      "markdown-preferences/table-header-casing": [
+        "error",
+        {
+          ignorePatterns: ["ID", "RECOMMENDED"],
+        },
+      ],
     },
   },
   {
@@ -259,6 +265,7 @@ export default defineConfig([
       "markdown-preferences/ordered-list-marker-start": "off",
       "markdown-preferences/atx-headings-closing-sequence": "off",
       "markdown-preferences/emoji-notation": "off",
+      "markdown-preferences/table-header-casing": "off",
     },
   },
   {

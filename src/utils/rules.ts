@@ -21,6 +21,7 @@ import preferInlineCodeWords from "../rules/prefer-inline-code-words.ts";
 import preferLinkReferenceDefinitions from "../rules/prefer-link-reference-definitions.ts";
 import preferLinkedWords from "../rules/prefer-linked-words.ts";
 import sortDefinitions from "../rules/sort-definitions.ts";
+import tableHeaderCasing from "../rules/table-header-casing.ts";
 
 export const rules = [
   atxHeadingsClosingSequenceLength,
@@ -42,4 +43,5 @@ export const rules = [
   preferLinkReferenceDefinitions,
   preferLinkedWords,
   sortDefinitions,
+  tableHeaderCasing,
 ] as RuleModule[];

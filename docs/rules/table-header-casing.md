@@ -1,20 +1,20 @@
 ---
 pageClass: "rule-details"
 sidebarDepth: 0
-title: "markdown-preferences/heading-casing"
-description: "enforce consistent casing in headings."
-since: "v0.9.0"
+title: "markdown-preferences/table-header-casing"
+description: "enforce consistent casing in table header cells."
 ---
 
-# markdown-preferences/heading-casing
+# markdown-preferences/table-header-casing
 
-> enforce consistent casing in headings.
+> enforce consistent casing in table header cells.
 
+- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
 
-This rule enforces consistent casing conventions for headings in Markdown files. Proper heading capitalization improves readability and maintains a professional appearance in documentation.
+This rule enforces consistent casing conventions for table header cells in Markdown tables. Proper capitalization improves readability and maintains a professional appearance in documentation tables.
 
 ### Examples
 
@@ -25,29 +25,19 @@ The rule comes with extensive default values for `preserveWords` and `ignorePatt
 <!-- eslint-skip -->
 
 ```md
-<!-- eslint markdown-preferences/heading-casing: 'error' -->
+<!-- eslint markdown-preferences/table-header-casing: 'error' -->
 
 <!-- ✓ GOOD -->
 
-# Introduction to Markdown Preferences
-
-## Getting Started With the ESLint Plugin
-
-### How to Configure Your JavaScript Rules
-
-#### Working With APIs and JSON Files
-
-##### Using TypeScript v2.1.3 Features
+| User Name | Date Of Birth | Favorite Color |
+| --------- | ------------- | -------------- |
+| Alice     | 2000-01-01    | Blue           |
 
 <!-- ✗ BAD -->
 
-# introduction to markdown preferences
-
-## getting started with the eslint plugin
-
-### HOW TO CONFIGURE YOUR JAVASCRIPT RULES
-
-# how To configure Your javascript Rules
+| user name | date of birth | favorite color |
+| --------- | ------------- | -------------- |
+| Alice     | 2000-01-01    | Blue           |
 ```
 
 #### With `"Sentence case"` Configuration
@@ -55,23 +45,19 @@ The rule comes with extensive default values for `preserveWords` and `ignorePatt
 <!-- eslint-skip -->
 
 ```md
-<!-- eslint markdown-preferences/heading-casing: ['error', { style: 'Sentence case' }] -->
+<!-- eslint markdown-preferences/table-header-casing: ['error', { style: 'Sentence case' }] -->
 
 <!-- ✓ GOOD -->
 
-# Introduction to Markdown preferences
-
-## Getting started with the plugin
-
-### How to configure your ESLint rules
+| User name | Date of birth | Favorite color |
+| --------- | ------------- | -------------- |
+| Alice     | 2000-01-01    | Blue           |
 
 <!-- ✗ BAD -->
 
-# Introduction To Markdown Preferences
-
-## Getting Started With The Plugin
-
-### HOW TO CONFIGURE YOUR ESLINT RULES
+| User Name | Date Of Birth | Favorite Color |
+| --------- | ------------- | -------------- |
+| Alice     | 2000-01-01    | Blue           |
 ```
 
 #### With `preserveWords` Option
@@ -79,23 +65,19 @@ The rule comes with extensive default values for `preserveWords` and `ignorePatt
 <!-- eslint-skip -->
 
 ```md
-<!-- eslint markdown-preferences/heading-casing: ['error', { style: 'Title Case', preserveWords: ['ESLint', 'JavaScript', 'TypeScript', 'GitHub'] }] -->
+<!-- eslint markdown-preferences/table-header-casing: ['error', { style: 'Title Case', preserveWords: ['GitHub', 'iPhone', 'YouTube', 'API', 'GraphQL'] }] -->
 
 <!-- ✓ GOOD -->
 
-# Getting Started With ESLint
-
-## Working With JavaScript and TypeScript
-
-### Using the GitHub API
+| GitHub | iPhone | YouTube | API | GraphQL |
+| ------ | ------ | ------- | --- | ------- |
+| foo    | bar    | baz     | qux | quux    |
 
 <!-- ✗ BAD -->
 
-# Getting Started With Eslint
-
-## Working With Javascript and Typescript
-
-### Using the Github API
+| Github | Iphone | Youtube | Api | Graphql |
+| ------ | ------ | ------- | --- | ------- |
+| foo    | bar    | baz     | qux | quux    |
 ```
 
 #### Using `ignorePatterns` for Technical Terms
@@ -103,15 +85,19 @@ The rule comes with extensive default values for `preserveWords` and `ignorePatt
 <!-- eslint-skip -->
 
 ```md
-<!-- eslint markdown-preferences/heading-casing: ['error', { style: 'Title Case', ignorePatterns: ['/^v\\d+/u', '/\\w+\\.json$/u'] }] -->
+<!-- eslint markdown-preferences/table-header-casing: ['error', { style: 'Title Case', ignorePatterns: ['/_token$/u'] }] -->
 
 <!-- ✓ GOOD -->
 
-# Working With v2.0.1 and config.json Files
+| access_token | refresh_token |
+| ------------ | ------------- |
+| abc          | xyz           |
 
 <!-- ✗ BAD -->
 
-# working with v2.0.1 and config.json files
+| user_id | password |
+| ------- | -------- |
+| abc     | xyz      |
 ```
 
 #### Customizing `minorWords` for Title Case
@@ -119,27 +105,17 @@ The rule comes with extensive default values for `preserveWords` and `ignorePatt
 <!-- eslint-skip -->
 
 ```md
-<!-- eslint markdown-preferences/heading-casing: ['error', { style: 'Title Case', minorWords: ['a', 'the', 'and', 'or', 'but', 'of', 'in', 'on', 'at', 'to', 'for', 'with'] }] -->
+<!-- eslint markdown-preferences/table-header-casing: ['error', { style: 'Title Case', minorWords: ['a', 'the', 'and', 'or', 'but', 'of', 'in', 'on', 'at', 'to', 'for', 'with'] }] -->
 
 <!-- ✓ GOOD -->
 
-# A Guide to Writing with Custom Minor Words
-
-## The Best Practices for Writing
-
-### Working with Custom Words and Settings
-
-#### Tips for Writing on the Web
+| A Guide to Writing with Custom Minor Words |
+| ------------------------------------------ |
 
 <!-- ✗ BAD -->
 
-# A Guide To Writing With Custom Minor Words
-
-## The Best Practices For Writing
-
-### Working With Custom Words And Settings
-
-#### Tips For Writing On The Web
+| A Guide To Writing With Custom Minor Words |
+| ------------------------------------------ |
 ```
 
 ### When Not to Use
@@ -152,7 +128,7 @@ The rule comes with extensive default values for `preserveWords` and `ignorePatt
 
 ```json
 {
-  "markdown-preferences/heading-casing": [
+  "markdown-preferences/table-header-casing": [
     "error",
     {
       "style": "Title Case", // or "Sentence case"
@@ -164,19 +140,19 @@ The rule comes with extensive default values for `preserveWords` and `ignorePatt
 }
 ```
 
-- `style` (optional): The casing style to enforce for headings. Can be `"Title Case"` (default) or `"Sentence case"`.
+- `style` (optional): The casing style to enforce for table header cells. Can be `"Title Case"` (default) or `"Sentence case"`.
 - `preserveWords` (optional): An array of words that should be preserved with their exact casing, regardless of the chosen style. The matching is case-insensitive. Includes extensive defaults for common technical terms.
 - `ignorePatterns` (optional): An array of regular expression patterns for words that should be ignored during casing checks. Words matching any of these patterns will be left unchanged. Includes useful defaults for version numbers, file extensions, and technical patterns.
 - `minorWords` (optional): An array of words that should not be capitalized in Title Case (unless they're the first or last word). Includes defaults for articles, conjunctions, and prepositions.
 
 ### `style` (`string`)
 
-The casing style to enforce for headings.
+The casing style to enforce for table header cells.
 
 **Available Options:**
 
 - `"Title Case"` (default): Enforces Title Case capitalization where major words are capitalized. Articles, conjunctions, and short prepositions remain lowercase unless they are the first or last word.
-- `"Sentence case"`: Enforces Sentence case capitalization where only the first letter of the heading is capitalized, and the rest are lowercase.
+- `"Sentence case"`: Enforces Sentence case capitalization where only the first letter of the cell is capitalized, and the rest are lowercase.
 
 ### `preserveWords` (`string[]`)
 
@@ -194,7 +170,7 @@ An array of words that should be preserved with their exact casing, regardless o
 
 The rule comes with an extensive list of common technical terms as default values.
 
-Please see the [defaultPreserveWords](https://github.com/microsoft/eslint-plugin-markdown-preferences/blob/main/src/resources/preserve-words.ts) for the complete list.
+Please see the [defaultPreserveWords](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/resources/preserve-words.ts) for the complete list.
 
 You can also import and use the default preserve words in your JavaScript code:
 
@@ -205,7 +181,7 @@ import plugin from "eslint-plugin-markdown-preferences";
 export default {
   plugins: ["markdown-preferences"],
   rules: {
-    "markdown-preferences/heading-casing": [
+    "markdown-preferences/table-header-casing": [
       "error",
       {
         style: "Title Case",
@@ -231,9 +207,9 @@ An array of regular expression patterns for words that should be ignored during 
   "ignorePatterns": [
     "/^v\\d+/u", // Version numbers starting with 'v' (e.g., v1, v2.0.1)
     "/\\w+\\.[a-z\\d]+$/u", // File extensions and names (e.g., config.json, package.json, index.html)
-    "/\\w*(?:API|Api)$/u", // Words ending with API (e.g., webAPI, restAPI)
-    "/\\w*(?:SDK|Sdk)$/u", // Words ending with SDK (e.g., nodeSDK, javaSDK)
-    "/\\w*(?:CLI|Cli)$/u" // Words ending with CLI (e.g., nodeCLI, gitCLI)
+    "/\\w+(?:API|Api)$/u", // Words ending with API (e.g., webAPI, restAPI)
+    "/\\w+(?:SDK|Sdk)$/u", // Words ending with SDK (e.g., nodeSDK, javaSDK)
+    "/\\w+(?:CLI|Cli)$/u" // Words ending with CLI (e.g., nodeCLI, gitCLI)
   ]
 }
 ```
@@ -244,9 +220,9 @@ The rule includes several useful default patterns:
 
 - `/^v\\d+/u` - Version numbers starting with 'v' (e.g., v1.2.3, v2.0.1)
 - `/\\w+\\.[a-z\\d]+$/u` - File extensions and names (e.g., config.json, package.json, index.html)
-- `/\\w+(?:API|Api)$/u` - Words ending with API (e.g., webAPI, restAPI)
-- `/\\w+(?:SDK|Sdk)$/u` - Words ending with SDK (e.g., nodeSDK, javaSDK)
-- `/\\w+(?:CLI|Cli)$/u` - Words ending with CLI (e.g., nodeCLI, gitCLI)
+- `/\\w*(?:API|Api)$/u` - Words ending with API (e.g., webAPI, restAPI)
+- `/\\w*(?:SDK|Sdk)$/u` - Words ending with SDK (e.g., nodeSDK, javaSDK)
+- `/\\w*(?:CLI|Cli)$/u` - Words ending with CLI (e.g., nodeCLI, gitCLI)
 
 This is particularly useful for:
 
@@ -299,7 +275,7 @@ import plugin from "eslint-plugin-markdown-preferences";
 export default {
   plugins: ["markdown-preferences"],
   rules: {
-    "markdown-preferences/heading-casing": [
+    "markdown-preferences/table-header-casing": [
       "error",
       {
         style: "Title Case",
@@ -319,23 +295,17 @@ export default {
 <!-- eslint-skip -->
 
 ```md
-<!-- eslint markdown-preferences/heading-casing: ['error', { style: 'Title Case', minorWords: ['a', 'the', 'and', 'or', 'but', 'of', 'in', 'on', 'at', 'to', 'for', 'with'] }] -->
+<!-- eslint markdown-preferences/table-header-casing: ['error', { style: 'Title Case', minorWords: ['a', 'the', 'and', 'or', 'but', 'of', 'in', 'on', 'at', 'to', 'for', 'with'] }] -->
 
 <!-- ✓ GOOD -->
 
-# A Guide to Writing with Custom Minor Words
-
-## The Best Practices for Writing
-
-### Working with Custom Words and Settings
+| A Guide to Writing with Custom Minor Words |
+| ------------------------------------------ |
 
 <!-- ✗ BAD -->
 
-# A Guide To Writing With Custom Minor Words
-
-## The Best Practices For Writing
-
-### Working With Custom Words And Settings
+| A Guide To Writing With Custom Minor Words |
+| ------------------------------------------ |
 ```
 
 This option is only effective when `style` is set to `"Title Case"`. In `"Sentence case"`, all words except the first one are lowercase regardless of this setting.
@@ -349,14 +319,10 @@ This option is only effective when `style` is set to `"Title Case"`. In `"Senten
 
 ## 👫 Related Rules
 
-- [markdown-preferences/table-header-casing](./table-header-casing.md)
-
-## 🚀 Version
-
-This rule was introduced in eslint-plugin-markdown-preferences v0.9.0
+- [markdown-preferences/heading-casing](./heading-casing.md)
 
 ## 🔍 Implementation
 
-- [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/heading-casing.ts)
-- [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/heading-casing.ts)
-- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/heading-casing)
+- [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/table-header-casing.ts)
+- [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/table-header-casing.ts)
+- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/table-header-casing)
