@@ -13,10 +13,10 @@ A specialized ESLint plugin that helps enforce consistent writing style and form
 
 ## 📛 Features
 
-- **⚡ Effortless automation** - Transform your Markdown with auto-fixing that handles formatting, linking, and style consistency automatically
-- **📖 Professional documentation** - Enforce consistent line breaks, clean up trailing spaces, and organize link definitions for enterprise-ready documentation
-- **🎯 Smart terminology management** - Automatically convert specified words into inline code or clickable links based on your configuration
-- **⚙️ Highly customizable configuration** - Fine-tune every aspect with granular rule options, word lists, ignore patterns, and flexible thresholds to match your exact requirements
+- **⚡ Effortless automation** - Transform your Markdown with auto-fixing that handles formatting, casing, and style consistency automatically
+- **📖 Professional documentation** - Enforce consistent headings, table headers, and organize link definitions for enterprise-ready documentation
+- **🎨 Clean formatting** - Remove trailing spaces, control line breaks, standardize code blocks, and ensure consistent list numbering for polished output
+- **⚙️ Flexible customization** - Configure casing styles (Title Case, Sentence case), code block languages, emoji notation, and more with extensive options
 
 **Try it live:** Check out the [Online Demo](https://eslint-online-playground.netlify.app/#eslint-plugin-markdown-preferences) to see the plugin in action!
 
