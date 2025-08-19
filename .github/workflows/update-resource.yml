@@ -24,7 +24,7 @@ jobs:
         run: npm run build
       - name: Update resources
         run: npm run update:resources
-      - uses: peter-evans/create-pull-request@cb4d3bfce175d44325c6b7697f81e0afe8a79bdf
+      - uses: peter-evans/create-pull-request@18e469570b1cf0dfc11d60ec121099f8ff3e617a
         with:
           commit-message: "fix: updates resources"
           branch: update-resource
