@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/table-header-casing"
 description: "enforce consistent casing in table header cells."
+since: "v0.14.0"
 ---
 
 # markdown-preferences/table-header-casing
 
 > enforce consistent casing in table header cells.
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -320,6 +320,10 @@ This option is only effective when `style` is set to `"Title Case"`. In `"Senten
 ## 👫 Related Rules
 
 - [markdown-preferences/heading-casing](./heading-casing.md)
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.14.0
 
 ## 🔍 Implementation
 

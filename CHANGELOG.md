@@ -1,5 +1,13 @@
 # eslint-plugin-markdown-preferences
 
+## 0.14.0
+
+### Minor Changes
+
+- [#63](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/63) [`3b15301`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/3b153017fdef8b54aea4e9e537d6ddc531e565b4) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: change default for `ignorePatterns` option in [`markdown-preferences/heading-casing`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/heading-casing.html) rule
+
+- [#63](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/63) [`3b15301`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/3b153017fdef8b54aea4e9e537d6ddc531e565b4) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/table-header-casing`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-header-casing.html) rule
+
 ## 0.13.0
 
 ### Minor Changes
