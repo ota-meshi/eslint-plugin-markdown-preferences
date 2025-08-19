@@ -45,7 +45,7 @@ export default createRule("${ruleId}", {
         type: "",
         docs: {
             description: "...",
-            categories: ["..."],
+            categories: [],
             listCategory: "...",
         },
         fixable: null,
@@ -84,6 +84,8 @@ tester.run("${ruleId}", rule as any, await loadTestCases("${ruleId}"))
 
 This rule reports ???.
 
+<!-- prettier-ignore-start -->
+
 <!-- eslint-skip -->
 
 \`\`\`md
@@ -95,6 +97,8 @@ This rule reports ???.
 <!-- ✗ BAD -->
 
 \`\`\`
+
+<!-- prettier-ignore-end -->
 
 ## 🔧 Options
 
@@ -113,11 +117,11 @@ This rule has no options.
 
 - 
 
-## 📚 Further reading
+## 📚 Further Reading
 
 - 
 
-## 👫 Related rules
+## 👫 Related Rules
 
 - [xxx]
 

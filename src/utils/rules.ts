@@ -9,6 +9,7 @@ import definitionsLast from "../rules/definitions-last.ts";
 import emojiNotation from "../rules/emoji-notation.ts";
 import hardLinebreakStyle from "../rules/hard-linebreak-style.ts";
 import headingCasing from "../rules/heading-casing.ts";
+import listMarkerAlignment from "../rules/list-marker-alignment.ts";
 import noLazinessBlockquotes from "../rules/no-laziness-blockquotes.ts";
 import noMultipleEmptyLines from "../rules/no-multiple-empty-lines.ts";
 import noTextBackslashLinebreak from "../rules/no-text-backslash-linebreak.ts";
@@ -31,6 +32,7 @@ export const rules = [
   emojiNotation,
   hardLinebreakStyle,
   headingCasing,
+  listMarkerAlignment,
   noLazinessBlockquotes,
   noMultipleEmptyLines,
   noTextBackslashLinebreak,
