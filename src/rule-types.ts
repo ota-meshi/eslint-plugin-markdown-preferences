@@ -49,6 +49,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/heading-casing'?: Linter.RuleEntry<MarkdownPreferencesHeadingCasing>
   /**
+   * enforce consistent alignment of list markers
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/list-marker-alignment.html
+   */
+  'markdown-preferences/list-marker-alignment'?: Linter.RuleEntry<MarkdownPreferencesListMarkerAlignment>
+  /**
    * disallow laziness in blockquotes
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-laziness-blockquotes.html
    */
@@ -153,6 +158,10 @@ type MarkdownPreferencesHeadingCasing = []|[{
   ignorePatterns?: string[]
   
   minorWords?: string[]
+}]
+// ----- markdown-preferences/list-marker-alignment -----
+type MarkdownPreferencesListMarkerAlignment = []|[{
+  align?: ("left" | "right")
 }]
 // ----- markdown-preferences/no-multiple-empty-lines -----
 type MarkdownPreferencesNoMultipleEmptyLines = []|[{

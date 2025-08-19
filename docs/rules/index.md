@@ -35,6 +35,7 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 | [markdown-preferences/atx-headings-closing-sequence](./atx-headings-closing-sequence.md) | enforce consistent use of closing sequence in ATX headings. | 🔧 |  |
 | [markdown-preferences/definitions-last](./definitions-last.md) | require link definitions and footnote definitions to be placed at the end of the document | 🔧 |  |
 | [markdown-preferences/hard-linebreak-style](./hard-linebreak-style.md) | enforce consistent hard linebreak style. | 🔧 | ⭐ |
+| [markdown-preferences/list-marker-alignment](./list-marker-alignment.md) | enforce consistent alignment of list markers | 🔧 | ⭐ |
 | [markdown-preferences/no-laziness-blockquotes](./no-laziness-blockquotes.md) | disallow laziness in blockquotes |  | ⭐ |
 | [markdown-preferences/no-multiple-empty-lines](./no-multiple-empty-lines.md) | disallow multiple empty lines in Markdown files. | 🔧 |  |
 | [markdown-preferences/no-text-backslash-linebreak](./no-text-backslash-linebreak.md) | disallow text backslash at the end of a line. |  | ⭐ |

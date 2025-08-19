@@ -1,0 +1,321 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: list-marker-alignment >> invalid
+Filename: tests/fixtures/rules/list-marker-alignment/invalid/align-right/ordered-misaligned-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - align: right
+Plugins: unable to serialize
+
+Code:
+  1 | # Misaligned ordered list with align right
+  2 |
+  3 |    1. foo
+  4 |  10. foo
+    |  ^~~ [1]
+  5 | 100. foo
+    | ^~~~ [2]
+  6 | 1000. foo
+  7 |
+
+Output:
+  1 | # Misaligned ordered list with align right
+  2 |
+  3 |    1. foo
+  4 |   10. foo
+  5 |  100. foo
+  6 | 1000. foo
+  7 |
+
+[1] List marker alignment is inconsistent. Expected 2 characters of indentation, but got 1.
+[2] List marker alignment is inconsistent. Expected 1 characters of indentation, but got 0.
+---
+
+
+Test: list-marker-alignment >> invalid
+Filename: tests/fixtures/rules/list-marker-alignment/invalid/blockquote-misaligned-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Blockquote with misaligned list
+  2 |
+  3 | > - Item 1
+  4 | >  - Item 2
+    |    ^ [1]
+  5 | > - Item 3
+  6 |
+
+Output:
+  1 | # Blockquote with misaligned list
+  2 |
+  3 | > - Item 1
+  4 | > - Item 2
+  5 | > - Item 3
+  6 |
+
+[1] List marker alignment is inconsistent. Expected 2 characters of indentation, but got 3.
+---
+
+
+Test: list-marker-alignment >> invalid
+Filename: tests/fixtures/rules/list-marker-alignment/invalid/blockquote-ordered-misaligned-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Blockquote with misaligned ordered list
+  2 |
+  3 | > 1. Item 1
+  4 | >  2. Item 2
+    |    ^~ [1]
+  5 | > 3. Item 3
+  6 |
+
+Output:
+  1 | # Blockquote with misaligned ordered list
+  2 |
+  3 | > 1. Item 1
+  4 | > 2. Item 2
+  5 | > 3. Item 3
+  6 |
+
+[1] List marker alignment is inconsistent. Expected 2 characters of indentation, but got 3.
+---
+
+
+Test: list-marker-alignment >> invalid
+Filename: tests/fixtures/rules/list-marker-alignment/invalid/extra-spaces-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Extra spaces
+  2 |
+  3 | -  Item 1
+  4 |  -  Item 2
+    |  ^ [1]
+  5 |  -  Item 3
+    |  ^ [2]
+  6 |
+
+Output:
+  1 | # Extra spaces
+  2 |
+  3 | -  Item 1
+  4 | -  Item 2
+  5 | -  Item 3
+  6 |
+
+[1] List marker alignment is inconsistent. Expected 0 characters of indentation, but got 1.
+[2] List marker alignment is inconsistent. Expected 0 characters of indentation, but got 1.
+---
+
+
+Test: list-marker-alignment >> invalid
+Filename: tests/fixtures/rules/list-marker-alignment/invalid/mixed-blockquote-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Mixed content with blockquote and list
+  2 |
+  3 | Some text before.
+  4 |
+  5 | > This is a blockquote with a list:
+  6 | > - Item 1
+  7 | >  - Item 2
+    |    ^ [1]
+  8 | > - Item 3
+  9 |
+ 10 | Some text after.
+ 11 |
+
+Output:
+  1 | # Mixed content with blockquote and list
+  2 |
+  3 | Some text before.
+  4 |
+  5 | > This is a blockquote with a list:
+  6 | > - Item 1
+  7 | > - Item 2
+  8 | > - Item 3
+  9 |
+ 10 | Some text after.
+ 11 |
+
+[1] List marker alignment is inconsistent. Expected 2 characters of indentation, but got 3.
+---
+
+
+Test: list-marker-alignment >> invalid
+Filename: tests/fixtures/rules/list-marker-alignment/invalid/mixed-indentation-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Mixed indentation
+  2 |
+  3 | - Item 1
+  4 |  - Item 2
+    |  ^ [1]
+  5 | - Item 3
+  6 |
+
+Output:
+  1 | # Mixed indentation
+  2 |
+  3 | - Item 1
+  4 | - Item 2
+  5 | - Item 3
+  6 |
+
+[1] List marker alignment is inconsistent. Expected 0 characters of indentation, but got 1.
+---
+
+
+Test: list-marker-alignment >> invalid
+Filename: tests/fixtures/rules/list-marker-alignment/invalid/nested-list-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Misaligned nested list
+  2 |
+  3 | - Item 1
+  4 |   - Nested item 1
+  5 |    - Nested item 2
+    |    ^ [1]
+  6 | - Item 2
+  7 |
+
+Output:
+  1 | # Misaligned nested list
+  2 |
+  3 | - Item 1
+  4 |   - Nested item 1
+  5 |   - Nested item 2
+  6 | - Item 2
+  7 |
+
+[1] List marker alignment is inconsistent. Expected 2 characters of indentation, but got 3.
+---
+
+
+Test: list-marker-alignment >> invalid
+Filename: tests/fixtures/rules/list-marker-alignment/invalid/ordered-misaligned-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Misaligned ordered list
+  2 |
+  3 | 1. Item 1
+  4 |  2. Item 2
+    |  ^~ [1]
+  5 | 3. Item 3
+  6 |
+
+Output:
+  1 | # Misaligned ordered list
+  2 |
+  3 | 1. Item 1
+  4 | 2. Item 2
+  5 | 3. Item 3
+  6 |
+
+[1] List marker alignment is inconsistent. Expected 0 characters of indentation, but got 1.
+---
+
+
+Test: list-marker-alignment >> invalid
+Filename: tests/fixtures/rules/list-marker-alignment/invalid/scattered-blockquote-misaligned-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Scattered blockquote with misaligned list
+  2 |
+  3 | > - Item 1
+  4 | >  - Item 2
+    |    ^ [1]
+  5 |  > - Item 3
+    |    ^ [2]
+  6 |   > - Item 4
+    |     ^ [3]
+  7 | >   - Nest Item 1
+  8 | >    - Nest Item 2
+    |      ^ [4]
+  9 |  >   - Nest Item 3
+    |      ^ [5]
+ 10 |   >   - Nest Item 4
+    |       ^ [6]
+ 11 |
+
+Output:
+  1 | # Scattered blockquote with misaligned list
+  2 |
+  3 | > - Item 1
+  4 | > - Item 2
+  5 |  > - Item 3
+  6 |   > - Item 4
+  7 | >   - Nest Item 1
+  8 | >   - Nest Item 2
+  9 |  >   - Nest Item 3
+ 10 |   >   - Nest Item 4
+ 11 |
+
+[1] List marker alignment is inconsistent. Expected 2 characters of indentation, but got 3.
+[2] List marker alignment is inconsistent. Expected 2 characters of indentation, but got 3.
+[3] List marker alignment is inconsistent. Expected 2 characters of indentation, but got 4.
+[4] List marker alignment is inconsistent. Expected 4 characters of indentation, but got 5.
+[5] List marker alignment is inconsistent. Expected 4 characters of indentation, but got 5.
+[6] List marker alignment is inconsistent. Expected 4 characters of indentation, but got 6.
+---
+
+
+Test: list-marker-alignment >> invalid
+Filename: tests/fixtures/rules/list-marker-alignment/invalid/unordered-misaligned-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Misaligned unordered list
+  2 |
+  3 | - Item 1
+  4 |  - Item 2
+    |  ^ [1]
+  5 | - Item 3
+  6 |
+
+Output:
+  1 | # Misaligned unordered list
+  2 |
+  3 | - Item 1
+  4 | - Item 2
+  5 | - Item 3
+  6 |
+
+[1] List marker alignment is inconsistent. Expected 0 characters of indentation, but got 1.
+---

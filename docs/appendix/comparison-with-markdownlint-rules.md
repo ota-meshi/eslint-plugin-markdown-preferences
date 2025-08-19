@@ -38,12 +38,14 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 | Description                         | [markdownlint] Rules                                                                   | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules                                                                      |
 | ----------------------------------- | -------------------------------------------------------------------------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------- |
 | `<ul>` notation style               | **[MD004]** _ul-style_<br>Unordered list style                                         | --                       | --                                                                                                              |
-| List indentation                    | **[MD005]** _list-indent_<br>Inconsistent indentation for list items at the same level | --                       | --                                                                                                              |
+| List indentation                    | **[MD005]** _list-indent_<br>Inconsistent indentation for list items at the same level | --                       | [markdown-preferences/list-marker-alignment]<br>enforce consistent alignment of list markers                    |
 | `<ul>` indentation                  | **[MD007]** _ul-indent_<br>Unordered list indentation                                  | --                       | --                                                                                                              |
 | Enforce `<ol>` marker sequence      | **[MD029]** _ol-prefix_<br>Ordered list item prefix                                    | --                       | [markdown-preferences/ordered-list-marker-sequence]<br>enforce that ordered list markers use sequential numbers |
 | Enforce `<ol>` marker start         | **[MD029]** _ol-prefix_<br>Ordered list item prefix                                    | --                       | [markdown-preferences/ordered-list-marker-start]<br>enforce that ordered list markers start with 1 or 0         |
 | Consistent spaces after list marker | **[MD030]** _list-marker-space_<br>Spaces after list markers                           | --                       | --                                                                                                              |
 | Require empty lines around lists    | **[MD032]** _blanks-around-lists_<br>Lists should be surrounded by blank lines         | --                       | --                                                                                                              |
+
+[markdown-preferences/list-marker-alignment]: ./../rules/list-marker-alignment.md
 
 ## Rules Related to Links and Images
 
