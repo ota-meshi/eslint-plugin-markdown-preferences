@@ -13,7 +13,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 
 ## Rules Related to Headings
 
-| Description                                             | [markdownlint]'s Rule                                                                                   | [@eslint/markdown]'s Rule                                                                              | `eslint-plugin-markdown-preferences`'s Rule                                                                                                          |
+| Description                                             | [markdownlint] Rules                                                                                    | [@eslint/markdown] Rules                                                                               | `eslint-plugin-markdown-preferences` Rules                                                                                                           |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Heading levels should only increment by one             | **[MD001]** _heading-increment_<br>Heading levels should only increment by one level at a time          | **[markdown/heading-increment]**<br>Enforce heading levels increment by one                            | --                                                                                                                                                   |
 | Heading notation style                                  | **[MD003]** _heading-style_<br>Heading style                                                            | --                                                                                                     | --                                                                                                                                                   |
@@ -35,19 +35,19 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 
 ## Rules Related to Lists
 
-| Description                         | [markdownlint]'s Rule                                                                  | [@eslint/markdown]'s Rule | `eslint-plugin-markdown-preferences`'s Rule                                                                     |
-| ----------------------------------- | -------------------------------------------------------------------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `<ul>` notation style               | **[MD004]** _ul-style_<br>Unordered list style                                         | --                        | --                                                                                                              |
-| List indentation                    | **[MD005]** _list-indent_<br>Inconsistent indentation for list items at the same level | --                        | --                                                                                                              |
-| `<ul>` indentation                  | **[MD007]** _ul-indent_<br>Unordered list indentation                                  | --                        | --                                                                                                              |
-| Enforce `<ol>` marker sequence      | **[MD029]** _ol-prefix_<br>Ordered list item prefix                                    | --                        | [markdown-preferences/ordered-list-marker-sequence]<br>enforce that ordered list markers use sequential numbers |
-| Enforce `<ol>` marker start         | **[MD029]** _ol-prefix_<br>Ordered list item prefix                                    | --                        | [markdown-preferences/ordered-list-marker-start]<br>enforce that ordered list markers start with 1 or 0         |
-| Consistent spaces after list marker | **[MD030]** _list-marker-space_<br>Spaces after list markers                           | --                        | --                                                                                                              |
-| Require empty lines around lists    | **[MD032]** _blanks-around-lists_<br>Lists should be surrounded by blank lines         | --                        | --                                                                                                              |
+| Description                         | [markdownlint] Rules                                                                   | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules                                                                      |
+| ----------------------------------- | -------------------------------------------------------------------------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `<ul>` notation style               | **[MD004]** _ul-style_<br>Unordered list style                                         | --                       | --                                                                                                              |
+| List indentation                    | **[MD005]** _list-indent_<br>Inconsistent indentation for list items at the same level | --                       | --                                                                                                              |
+| `<ul>` indentation                  | **[MD007]** _ul-indent_<br>Unordered list indentation                                  | --                       | --                                                                                                              |
+| Enforce `<ol>` marker sequence      | **[MD029]** _ol-prefix_<br>Ordered list item prefix                                    | --                       | [markdown-preferences/ordered-list-marker-sequence]<br>enforce that ordered list markers use sequential numbers |
+| Enforce `<ol>` marker start         | **[MD029]** _ol-prefix_<br>Ordered list item prefix                                    | --                       | [markdown-preferences/ordered-list-marker-start]<br>enforce that ordered list markers start with 1 or 0         |
+| Consistent spaces after list marker | **[MD030]** _list-marker-space_<br>Spaces after list markers                           | --                       | --                                                                                                              |
+| Require empty lines around lists    | **[MD032]** _blanks-around-lists_<br>Lists should be surrounded by blank lines         | --                       | --                                                                                                              |
 
 ## Rules Related to Links and Images
 
-| Description                                   | [markdownlint]'s Rule                                                                                 | [@eslint/markdown]'s Rule                                                                            | `eslint-plugin-markdown-preferences`'s Rule                                               |
+| Description                                   | [markdownlint] Rules                                                                                  | [@eslint/markdown] Rules                                                                             | `eslint-plugin-markdown-preferences` Rules                                                |
 | --------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | Disallow bare URLs                            | **[MD034]** _no-bare-urls_<br>Bare URL used                                                           | **[markdown/no-bare-urls]**<br>Disallow bare URLs                                                    | **[markdown-preferences/prefer-autolinks]**<br>enforce the use of autolinks for URLs      |
 | Spaces around the text in links               | **[MD039]** _no-space-in-links_<br>Spaces inside link text                                            | --                                                                                                   | --                                                                                        |
@@ -62,7 +62,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 
 ## Rules Related to Link Definitions and Footnote Definitions
 
-| Description                                | [markdownlint]'s Rule                                                                                   | [@eslint/markdown]'s Rule                                                 | `eslint-plugin-markdown-preferences`'s Rule                                                                                              |
+| Description                                | [markdownlint] Rules                                                                                    | [@eslint/markdown] Rules                                                  | `eslint-plugin-markdown-preferences` Rules                                                                                               |
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | Disallow unused link/image definitions     | **[MD053]** _link-image-reference-definitions_<br>Link and image reference definitions should be needed | **[markdown/no-unused-definitions]**<br>Disallow unused definitions       | --                                                                                                                                       |
 | Enforce using link reference definitions   | **[MD054]** _link-image-style_<br>Link and image style                                                  | --                                                                        | **[markdown-preferences/prefer-link-reference-definitions]**<br>enforce using link reference definitions instead of inline links         |
@@ -74,7 +74,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 
 ## Rules Related to Code & Fences
 
-| Description                                   | [markdownlint]'s Rule                                                                          | [@eslint/markdown]'s Rule                                                       | `eslint-plugin-markdown-preferences`'s Rule                                                                             |
+| Description                                   | [markdownlint] Rules                                                                           | [@eslint/markdown] Rules                                                        | `eslint-plugin-markdown-preferences` Rules                                                                              |
 | --------------------------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | Disallow `$` signs in shell code              | **[MD014]** _commands-show-output_<br>Dollar signs used before commands without showing output | --                                                                              | --                                                                                                                      |
 | Require empty lines around fenced code blocks | **[MD031]** _blanks-around-fences_<br>Fenced code blocks should be surrounded by blank lines   | --                                                                              | --                                                                                                                      |
@@ -87,70 +87,73 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 
 ## Rules Related to Blockquotes
 
-| Description                                      | [markdownlint]'s Rule                                                                 | [@eslint/markdown]'s Rule | `eslint-plugin-markdown-preferences`'s Rule                                            |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------- | ------------------------- | -------------------------------------------------------------------------------------- |
-| Disallow multiple spaces after blockquote symbol | **[MD027]** _no-multiple-space-blockquote_<br>Multiple spaces after blockquote symbol | --                        | --                                                                                     |
-| Require empty lines around blockquotes           | **[MD028]** _no-blanks-blockquote_<br>Blank line inside blockquote                    | --                        | --                                                                                     |
-| Disallow laziness in blockquotes                 | --                                                                                    | --                        | **[markdown-preferences/no-laziness-blockquotes]**<br>disallow laziness in blockquotes |
+| Description                                      | [markdownlint] Rules                                                                  | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules                                             |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------- | ------------------------ | -------------------------------------------------------------------------------------- |
+| Disallow multiple spaces after blockquote symbol | **[MD027]** _no-multiple-space-blockquote_<br>Multiple spaces after blockquote symbol | --                       | --                                                                                     |
+| Require empty lines around blockquotes           | **[MD028]** _no-blanks-blockquote_<br>Blank line inside blockquote                    | --                       | --                                                                                     |
+| Disallow laziness in blockquotes                 | --                                                                                    | --                       | **[markdown-preferences/no-laziness-blockquotes]**<br>disallow laziness in blockquotes |
 
 ## Rules Related to Tables
 
-| Description                       | [markdownlint]'s Rule                                                            | [@eslint/markdown]'s Rule                                                                                     | `eslint-plugin-markdown-preferences`'s Rule |
-| --------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| Table pipe style                  | **[MD055]** _table-pipe-style_<br>Table pipe style                               | --                                                                                                            | --                                          |
-| Table column count                | **[MD056]** _table-column-count_<br>Table column count                           | **[markdown/table-column-count]**<br>Disallow data rows in a table from having more cells than the header row | --                                          |
-| Require empty lines around tables | **[MD058]** _blanks-around-tables_<br>Tables should be surrounded by blank lines | --                                                                                                            | --                                          |
+| Description                       | [markdownlint] Rules                                                             | [@eslint/markdown] Rules                                                                                      | `eslint-plugin-markdown-preferences` Rules                                                        |
+| --------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Table pipe style                  | **[MD055]** _table-pipe-style_<br>Table pipe style                               | --                                                                                                            | --                                                                                                |
+| Table column count                | **[MD056]** _table-column-count_<br>Table column count                           | **[markdown/table-column-count]**<br>Disallow data rows in a table from having more cells than the header row | --                                                                                                |
+| Require empty lines around tables | **[MD058]** _blanks-around-tables_<br>Tables should be surrounded by blank lines | --                                                                                                            | --                                                                                                |
+| Table header casing               | --                                                                               | --                                                                                                            | **[markdown-preferences/table-header-casing]**<br>enforce consistent casing in table header cells |
+
+[markdown-preferences/table-header-casing]: ./../rules/table-header-casing.md
 
 ## Rules Related to Emphasis and Strong Emphasis
 
-| Description                        | [markdownlint]'s Rule                                                | [@eslint/markdown]'s Rule | `eslint-plugin-markdown-preferences`'s Rule |
-| ---------------------------------- | -------------------------------------------------------------------- | ------------------------- | ------------------------------------------- |
-| Spaces around the text in emphasis | **[MD037]** _no-space-in-emphasis_<br>Spaces inside emphasis markers | --                        | --                                          |
-| Emphasis notation style            | **[MD049]** _emphasis-style_<br>Emphasis style                       | --                        | --                                          |
-| Strong emphasis notation style     | **[MD050]** _strong-style_<br>Strong style                           | --                        | --                                          |
+| Description                        | [markdownlint] Rules                                                 | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules |
+| ---------------------------------- | -------------------------------------------------------------------- | ------------------------ | ------------------------------------------ |
+| Spaces around the text in emphasis | **[MD037]** _no-space-in-emphasis_<br>Spaces inside emphasis markers | --                       | --                                         |
+| Emphasis notation style            | **[MD049]** _emphasis-style_<br>Emphasis style                       | --                       | --                                         |
+| Strong emphasis notation style     | **[MD050]** _strong-style_<br>Strong style                           | --                       | --                                         |
 
 ## Rules Related to Thematic Breaks
 
-| Description           | [markdownlint]'s Rule                           | [@eslint/markdown]'s Rule | `eslint-plugin-markdown-preferences`'s Rule |
-| --------------------- | ----------------------------------------------- | ------------------------- | ------------------------------------------- |
-| `<hr>` notation style | **[MD035]** _hr-style_<br>Horizontal rule style | --                        | --                                          |
+| Description           | [markdownlint] Rules                            | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules |
+| --------------------- | ----------------------------------------------- | ------------------------ | ------------------------------------------ |
+| `<hr>` notation style | **[MD035]** _hr-style_<br>Horizontal rule style | --                       | --                                         |
 
 ## Rules Related to HTML
 
-| Description          | [markdownlint]'s Rule                       | [@eslint/markdown]'s Rule                    | `eslint-plugin-markdown-preferences`'s Rule |
-| -------------------- | ------------------------------------------- | -------------------------------------------- | ------------------------------------------- |
-| Disallow inline HTML | **[MD033]** _no-inline-html_<br>Inline HTML | **[markdown/no-html]**<br>Disallow HTML tags | --                                          |
+| Description          | [markdownlint] Rules                        | [@eslint/markdown] Rules                     | `eslint-plugin-markdown-preferences` Rules |
+| -------------------- | ------------------------------------------- | -------------------------------------------- | ------------------------------------------ |
+| Disallow inline HTML | **[MD033]** _no-inline-html_<br>Inline HTML | **[markdown/no-html]**<br>Disallow HTML tags | --                                         |
 
 ## Rules Related to Emoji
 
-| Description          | [markdownlint]'s Rule | [@eslint/markdown]'s Rule | `eslint-plugin-markdown-preferences`'s Rule                                                            |
-| -------------------- | --------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Emoji notation style | --                    | --                        | **[markdown-preferences/emoji-notation]**<br>enforce consistent emoji notation style in Markdown files |
+| Description          | [markdownlint] Rules | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules                                                             |
+| -------------------- | -------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------ |
+| Emoji notation style | --                   | --                       | **[markdown-preferences/emoji-notation]**<br>enforce consistent emoji notation style in Markdown files |
 
 ## Rules Related to Whitespaces
 
-| Description                           | [markdownlint]'s Rule                                                                     | [@eslint/markdown]'s Rule | `eslint-plugin-markdown-preferences`'s Rule                                                                         |
-| ------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| Disallow trailing spaces              | **[MD009]** _no-trailing-spaces_<br>Trailing spaces                                       | --                        | **[markdown-preferences/no-trailing-spaces]**<br>disallow trailing whitespace at the end of lines in Markdown files |
-| Disallow hard tabs                    | **[MD010]** _no-hard-tabs_<br>Hard tabs                                                   | --                        | --                                                                                                                  |
-| Disallow multiple empty lines         | **[MD012]** _no-multiple-blanks_<br>Multiple consecutive blank lines                      | --                        | **[markdown-preferences/no-multiple-empty-lines]**<br>disallow multiple empty lines in Markdown files               |
-| Require linebreak at the end of files | **[MD047]** _single-trailing-newline_<br>Files should end with a single newline character | --                        | --                                                                                                                  |
-| Disallow trailing backslash linebreak | --                                                                                        | --                        | **[markdown-preferences/no-text-backslash-linebreak]**<br>disallow text backslash at the end of a line              |
-| Enforce hard linebreak style          | --                                                                                        | --                        | **[markdown-preferences/hard-linebreak-style]**<br>enforce consistent hard linebreak style                          |
+| Description                           | [markdownlint] Rules                                                                      | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules                                                                          |
+| ------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| Disallow trailing spaces              | **[MD009]** _no-trailing-spaces_<br>Trailing spaces                                       | --                       | **[markdown-preferences/no-trailing-spaces]**<br>disallow trailing whitespace at the end of lines in Markdown files |
+| Disallow hard tabs                    | **[MD010]** _no-hard-tabs_<br>Hard tabs                                                   | --                       | --                                                                                                                  |
+| Disallow multiple empty lines         | **[MD012]** _no-multiple-blanks_<br>Multiple consecutive blank lines                      | --                       | **[markdown-preferences/no-multiple-empty-lines]**<br>disallow multiple empty lines in Markdown files               |
+| Require linebreak at the end of files | **[MD047]** _single-trailing-newline_<br>Files should end with a single newline character | --                       | --                                                                                                                  |
+| Disallow trailing backslash linebreak | --                                                                                        | --                       | **[markdown-preferences/no-text-backslash-linebreak]**<br>disallow text backslash at the end of a line              |
+| Enforce hard linebreak style          | --                                                                                        | --                       | **[markdown-preferences/hard-linebreak-style]**<br>enforce consistent hard linebreak style                          |
 
 ## Rules Related to Documents
 
-| Description                   | [markdownlint]'s Rule                                                             | [@eslint/markdown]'s Rule | `eslint-plugin-markdown-preferences`'s Rule |
-| ----------------------------- | --------------------------------------------------------------------------------- | ------------------------- | ------------------------------------------- |
-| Enforce a maximum line length | **[MD013]** _line-length_<br>Line length                                          | --                        | --                                          |
-| Proper names                  | **[MD044]** _proper-names_<br>Proper names should have the correct capitalization | --                        | --                                          |
+| Description                   | [markdownlint] Rules                                                              | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules |
+| ----------------------------- | --------------------------------------------------------------------------------- | ------------------------ | ------------------------------------------ |
+| Enforce a maximum line length | **[MD013]** _line-length_<br>Line length                                          | --                       | --                                         |
+| Proper names                  | **[MD044]** _proper-names_<br>Proper names should have the correct capitalization | --                       | --                                         |
 
 ## Rules Related to Syntax
 
-| Description                            | [markdownlint]'s Rule                                   | [@eslint/markdown]'s Rule                                                          | `eslint-plugin-markdown-preferences`'s Rule |
-| -------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------- |
-| Disallow reversed link/image syntax    | **[MD011]** _no-reversed-links_<br>Reversed link syntax | **[markdown/no-reversed-media-syntax]**<br>Disallow reversed link and image syntax | --                                          |
-| Disallow invalid link label references | --                                                      | **[markdown/no-invalid-label-refs]**<br>Disallow invalid label references          | --                                          |
+| Description                            | [markdownlint] Rules                                    | [@eslint/markdown] Rules                                                           | `eslint-plugin-markdown-preferences` Rules |
+| -------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------ |
+| Disallow reversed link/image syntax    | **[MD011]** _no-reversed-links_<br>Reversed link syntax | **[markdown/no-reversed-media-syntax]**<br>Disallow reversed link and image syntax | --                                         |
+| Disallow invalid link label references | --                                                      | **[markdown/no-invalid-label-refs]**<br>Disallow invalid label references          | --                                         |
 
 [MD001]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md001.md
 [MD003]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md003.md
