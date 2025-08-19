@@ -23,6 +23,7 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 | [markdown-preferences/ordered-list-marker-start](./ordered-list-marker-start.md) | enforce that ordered list markers start with 1 or 0 | 🔧 |  |
 | [markdown-preferences/prefer-inline-code-words](./prefer-inline-code-words.md) | enforce the use of inline code for specific words. | 🔧 |  |
 | [markdown-preferences/prefer-linked-words](./prefer-linked-words.md) | enforce the specified word to be a link. | 🔧 |  |
+| [markdown-preferences/table-header-casing](./table-header-casing.md) | enforce consistent casing in table header cells. | 🔧 |  |
 
 ## Stylistic Rules
 

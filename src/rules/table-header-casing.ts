@@ -1,36 +1,34 @@
-import type { Heading, Text } from "mdast";
 import { createRule } from "../utils/index.ts";
 import { isRegExp, toRegExp } from "../utils/regexp.ts";
 import { defaultPreserveWords } from "../resources/preserve-words.ts";
 import { defaultMinorWords } from "../resources/minor-words.ts";
-import { getSourceLocationFromRange } from "../utils/ast.ts";
-import type { CaseStyle } from "../utils/word-casing.ts";
-import { convertWordCasing } from "../utils/word-casing.ts";
+import type { Text } from "mdast";
 import { parsePreserveWordsOption } from "../utils/preserve-words.ts";
 import type { WordAndOffset } from "../utils/words.ts";
 import { parseWordsFromText } from "../utils/words.ts";
+import { convertWordCasing } from "../utils/word-casing.ts";
+import { getSourceLocationFromRange } from "../utils/ast.ts";
 
 type WordType = "normal" | "minor" | "preserved";
 
 export default createRule<
   [
     {
-      style?: CaseStyle;
+      style?: "Title Case" | "Sentence case";
       preserveWords?: string[];
       ignorePatterns?: string[];
       minorWords?: string[];
     }?,
   ]
->("heading-casing", {
+>("table-header-casing", {
   meta: {
     type: "suggestion",
+    fixable: "code",
     docs: {
-      description: "enforce consistent casing in headings.",
+      description: "enforce consistent casing in table header cells.",
       categories: [],
       listCategory: "Preference",
     },
-    fixable: "code",
-    hasSuggestions: false,
     schema: [
       {
         type: "object",
@@ -232,26 +230,26 @@ export default createRule<
     }
 
     return {
-      heading(node: Heading) {
-        // Skip empty headings
-        if (!node.children.length) {
-          return;
+      table(node) {
+        if (!node.children.length) return;
+        const headerRow = node.children[0];
+        if (headerRow.type !== "tableRow") return;
+        for (const cell of headerRow.children) {
+          const children = cell.children.filter(
+            (child) => child.type !== "text" || child.value.trim(),
+          );
+
+          // Check each text node in the cell
+          children.forEach((child, i) => {
+            if (child.type === "text") {
+              checkTextNode(
+                child,
+                i === 0, // First text node
+                i === children.length - 1, // Last text node
+              );
+            }
+          });
         }
-
-        const children = node.children.filter(
-          (child) => child.type !== "text" || child.value.trim(),
-        );
-
-        // Check each text node in the heading
-        children.forEach((child, i) => {
-          if (child.type === "text") {
-            checkTextNode(
-              child,
-              i === 0, // First text node
-              i === children.length - 1, // Last text node
-            );
-          }
-        });
       },
     };
   },

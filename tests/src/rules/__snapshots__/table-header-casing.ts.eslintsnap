@@ -1,0 +1,312 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: table-header-casing >> invalid
+Filename: tests/fixtures/rules/table-header-casing/invalid/basic-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Table header casing invalid
+  2 |
+  3 | | name | AGE |
+    |   ^~~~   ^~~
+    |   [1]    [2]
+  4 | | ---- | --- |
+  5 | | Alice | 20 |
+  6 |
+
+Output:
+  1 | # Table header casing invalid
+  2 |
+  3 | | Name | Age |
+  4 | | ---- | --- |
+  5 | | Alice | 20 |
+  6 |
+
+[1] Expected "name" to be "Name" (Title Case).
+[2] Expected "AGE" to be "Age" (Title Case).
+---
+
+
+Test: table-header-casing >> invalid
+Filename: tests/fixtures/rules/table-header-casing/invalid/ignore-patterns/test01-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - ignorePatterns:
+      - /^user_id$/
+Plugins: unable to serialize
+
+Code:
+  1 | # Table Header Casing: ignorePatterns (Invalid)
+  2 |
+  3 | | user_id | user id | create_at |
+    |             ^~~~ ^~   ^~~~~~~~~
+    |             [1]  [2]  [3]
+  4 | | ------- | ------- | --------- |
+  5 | | xxxxxxx | xxxxxxx | xxxxxxxxx |
+  6 |
+
+Output:
+  1 | # Table Header Casing: ignorePatterns (Invalid)
+  2 |
+  3 | | user_id | User Id | Create_at |
+  4 | | ------- | ------- | --------- |
+  5 | | xxxxxxx | xxxxxxx | xxxxxxxxx |
+  6 |
+
+[1] Expected "user" to be "User" (Title Case).
+[2] Expected "id" to be "Id" (Title Case).
+[3] Expected "create_at" to be "Create_at" (Title Case).
+---
+
+
+Test: table-header-casing >> invalid
+Filename: tests/fixtures/rules/table-header-casing/invalid/minor-words/test01-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - minorWords:
+      - a
+      - the
+      - and
+      - or
+      - but
+      - of
+      - in
+      - on
+      - at
+      - to
+      - for
+      - with
+Plugins: unable to serialize
+
+Code:
+  1 | # Table Header Casing: minorWords (Invalid)
+  2 |
+  3 | | A Guide To Writing With Custom Minor Words |
+    |           ^~ [1]     ^~~~ [2]
+  4 | | ------------------------------------------ |
+  5 |
+
+Output:
+  1 | # Table Header Casing: minorWords (Invalid)
+  2 |
+  3 | | A Guide to Writing with Custom Minor Words |
+  4 | | ------------------------------------------ |
+  5 |
+
+[1] Expected "To" to be "to" (Title Case - minor word).
+[2] Expected "With" to be "with" (Title Case - minor word).
+---
+
+
+Test: table-header-casing >> invalid
+Filename: tests/fixtures/rules/table-header-casing/invalid/multiline/test01-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Table Header Casing: Multiline (Invalid)
+  2 |
+  3 | | user name | date of birth |
+    |   ^~~~ ^~~~   ^~~~    ^~~~~
+    |   [1]  [2]    [3]     [4]
+  4 | | --------- | ------------- |
+  5 | | Alice     | 2000-01-01    |
+  6 | | Bob       | 1999-12-31    |
+  7 |
+
+Output:
+  1 | # Table Header Casing: Multiline (Invalid)
+  2 |
+  3 | | User Name | Date of Birth |
+  4 | | --------- | ------------- |
+  5 | | Alice     | 2000-01-01    |
+  6 | | Bob       | 1999-12-31    |
+  7 |
+
+[1] Expected "user" to be "User" (Title Case).
+[2] Expected "name" to be "Name" (Title Case).
+[3] Expected "date" to be "Date" (Title Case).
+[4] Expected "birth" to be "Birth" (Title Case).
+---
+
+
+Test: table-header-casing >> invalid
+Filename: tests/fixtures/rules/table-header-casing/invalid/preserve-words/test01-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - preserveWords:
+      - GitHub
+      - iPhone
+      - YouTube
+      - API
+      - GraphQL
+Plugins: unable to serialize
+
+Code:
+  1 | # Table Header Casing: preserveWords (Invalid)
+  2 |
+  3 | | Github | Iphone | Youtube | Api | Graphql |
+    |   ^~~~~~   ^~~~~~   ^~~~~~~   ^~~   ^~~~~~~
+    |   [1]      [2]      [3]       [4]   [5]
+  4 | | ------ | ------ | ------- | --- | ------- |
+  5 | | foo    | bar    | baz     | qux | quux    |
+  6 |
+
+Output:
+  1 | # Table Header Casing: preserveWords (Invalid)
+  2 |
+  3 | | GitHub | iPhone | YouTube | API | GraphQL |
+  4 | | ------ | ------ | ------- | --- | ------- |
+  5 | | foo    | bar    | baz     | qux | quux    |
+  6 |
+
+[1] Expected "Github" to be "GitHub" (preserved word).
+[2] Expected "Iphone" to be "iPhone" (preserved word).
+[3] Expected "Youtube" to be "YouTube" (preserved word).
+[4] Expected "Api" to be "API" (preserved word).
+[5] Expected "Graphql" to be "GraphQL" (preserved word).
+---
+
+
+Test: table-header-casing >> invalid
+Filename: tests/fixtures/rules/table-header-casing/invalid/punctuation/test01-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Table Header Casing: Punctuation (Invalid)
+  2 |
+  3 | | user name! | date of birth? |
+    |   ^~~~ ^~~~    ^~~~    ^~~~~
+    |   [1]  [2]     [3]     [4]
+  4 | | ---------- | -------------- |
+  5 | | Alice      | 2000-01-01     |
+  6 |
+
+Output:
+  1 | # Table Header Casing: Punctuation (Invalid)
+  2 |
+  3 | | User Name! | Date of Birth? |
+  4 | | ---------- | -------------- |
+  5 | | Alice      | 2000-01-01     |
+  6 |
+
+[1] Expected "user" to be "User" (Title Case).
+[2] Expected "name" to be "Name" (Title Case).
+[3] Expected "date" to be "Date" (Title Case).
+[4] Expected "birth" to be "Birth" (Title Case).
+---
+
+
+Test: table-header-casing >> invalid
+Filename: tests/fixtures/rules/table-header-casing/invalid/sentence-case/test01-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: Sentence case
+Plugins: unable to serialize
+
+Code:
+  1 | # Table Header Casing: Sentence case (Invalid)
+  2 |
+  3 | | User Name | Date Of Birth | Favorite Color |
+    |        ^~~~        ^~ ^~~~~            ^~~~~
+    |        [1]        [2] [3]              [4]
+  4 | | --------- | ------------- | -------------- |
+  5 | | Alice     | 2000-01-01    | Blue           |
+  6 |
+
+Output:
+  1 | # Table Header Casing: Sentence case (Invalid)
+  2 |
+  3 | | User name | Date of birth | Favorite color |
+  4 | | --------- | ------------- | -------------- |
+  5 | | Alice     | 2000-01-01    | Blue           |
+  6 |
+
+[1] Expected "Name" to be "name" (Sentence case).
+[2] Expected "Of" to be "of" (Sentence case).
+[3] Expected "Birth" to be "birth" (Sentence case).
+[4] Expected "Color" to be "color" (Sentence case).
+---
+
+
+Test: table-header-casing >> invalid
+Filename: tests/fixtures/rules/table-header-casing/invalid/title-case/test01-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: Title Case
+Plugins: unable to serialize
+
+Code:
+  1 | # Table Header Casing: Title Case (Invalid)
+  2 |
+  3 | | user name | date of birth | favorite color |
+    |   ^~~~ ^~~~   ^~~~    ^~~~~   ^~~~~~~~ ^~~~~
+    |   [1]  [2]    [3]     [4]     [5]      [6]
+  4 | | --------- | ------------- | -------------- |
+  5 | | Alice     | 2000-01-01    | Blue           |
+  6 |
+
+Output:
+  1 | # Table Header Casing: Title Case (Invalid)
+  2 |
+  3 | | User Name | Date of Birth | Favorite Color |
+  4 | | --------- | ------------- | -------------- |
+  5 | | Alice     | 2000-01-01    | Blue           |
+  6 |
+
+[1] Expected "user" to be "User" (Title Case).
+[2] Expected "name" to be "Name" (Title Case).
+[3] Expected "date" to be "Date" (Title Case).
+[4] Expected "birth" to be "Birth" (Title Case).
+[5] Expected "favorite" to be "Favorite" (Title Case).
+[6] Expected "color" to be "Color" (Title Case).
+---
+
+
+Test: table-header-casing >> invalid
+Filename: tests/fixtures/rules/table-header-casing/invalid/words/test01-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Table Header Casing: Words (Invalid)
+  2 |
+  3 | | user | name |
+    |   ^~~~   ^~~~
+    |   [1]    [2]
+  4 | | ---- | ---- |
+  5 | | foo  | bar  |
+  6 |
+
+Output:
+  1 | # Table Header Casing: Words (Invalid)
+  2 |
+  3 | | User | Name |
+  4 | | ---- | ---- |
+  5 | | foo  | bar  |
+  6 |
+
+[1] Expected "user" to be "User" (Title Case).
+[2] Expected "name" to be "Name" (Title Case).
+---

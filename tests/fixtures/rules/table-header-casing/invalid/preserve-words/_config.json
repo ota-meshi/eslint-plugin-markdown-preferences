@@ -1,0 +1,7 @@
+{
+  "options": [
+    {
+      "preserveWords": ["GitHub", "iPhone", "YouTube", "API", "GraphQL"]
+    }
+  ]
+}
