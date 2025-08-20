@@ -45,8 +45,6 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 | Consistent spaces after list marker | **[MD030]** _list-marker-space_<br>Spaces after list markers                           | --                       | --                                                                                                              |
 | Require empty lines around lists    | **[MD032]** _blanks-around-lists_<br>Lists should be surrounded by blank lines         | --                       | --                                                                                                              |
 
-[markdown-preferences/list-marker-alignment]: ./../rules/list-marker-alignment.md
-
 ## Rules Related to Links and Images
 
 | Description                                   | [markdownlint] Rules                                                                                  | [@eslint/markdown] Rules                                                                             | `eslint-plugin-markdown-preferences` Rules                                                |
@@ -96,8 +94,6 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 | Disallow laziness in blockquotes                 | --                                                                                    | --                       | **[markdown-preferences/no-laziness-blockquotes]**<br>disallow laziness in blockquotes                       |
 | Blockquote marker alignment                      | --                                                                                    | --                       | **[markdown-preferences/blockquote-marker-alignment]**<br>enforce consistent alignment of blockquote markers |
 
-[markdown-preferences/blockquote-marker-alignment]: ../rules/blockquote-marker-alignment.md
-
 ## Rules Related to Tables
 
 | Description                       | [markdownlint] Rules                                                             | [@eslint/markdown] Rules                                                                                      | `eslint-plugin-markdown-preferences` Rules                                                        |
@@ -106,8 +102,6 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 | Table column count                | **[MD056]** _table-column-count_<br>Table column count                           | **[markdown/table-column-count]**<br>Disallow data rows in a table from having more cells than the header row | --                                                                                                |
 | Require empty lines around tables | **[MD058]** _blanks-around-tables_<br>Tables should be surrounded by blank lines | --                                                                                                            | --                                                                                                |
 | Table header casing               | --                                                                               | --                                                                                                            | **[markdown-preferences/table-header-casing]**<br>enforce consistent casing in table header cells |
-
-[markdown-preferences/table-header-casing]: ./../rules/table-header-casing.md
 
 ## Rules Related to Emphasis and Strong Emphasis
 
@@ -249,3 +243,6 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 [markdown-preferences/prefer-fenced-code-blocks]: ../rules/prefer-fenced-code-blocks.md
 [markdown-preferences/prefer-link-reference-definitions]: ../rules/prefer-link-reference-definitions.md
 [markdown-preferences/sort-definitions]: ../rules/sort-definitions.md
+[markdown-preferences/table-header-casing]: ../rules/table-header-casing.md
+[markdown-preferences/list-marker-alignment]: ../rules/list-marker-alignment.md
+[markdown-preferences/blockquote-marker-alignment]: ../rules/blockquote-marker-alignment.md

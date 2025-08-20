@@ -38,8 +38,9 @@ This rule enforces consistent alignment (indentation) of blockquote markers (`>`
 <!-- ✓ GOOD: Consistent alignment within each nesting level -->
 > First level blockquote.
 > Another line at first level.
->> Nested blockquote.
->> Another nested line.
+> > Nested blockquote.
+> > Another nested line.
+>
 > Back to first level.
 
   > Indented blockquote.
@@ -48,11 +49,12 @@ This rule enforces consistent alignment (indentation) of blockquote markers (`>`
 <!-- ✗ BAD: Inconsistent alignment -->
 > First level blockquote.
  > This line has extra indentation.
+ >
 > Back to normal.
 
->> Nested blockquote.
- >> This nested line has extra space.
->> Back to correct nesting.
+> > Nested blockquote.
+>  > This nested line has extra space.
+> > Back to correct nesting.
 ```
 
 <!-- prettier-ignore-end -->
