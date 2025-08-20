@@ -1,5 +1,13 @@
 # eslint-plugin-markdown-preferences
 
+## 0.15.0
+
+### Minor Changes
+
+- [#68](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/68) [`7053d9f`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/7053d9fccb40cede1546bd8a00b16f64c0e9a4b6) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/blockquote-marker-alignment`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/blockquote-marker-alignment.html) rule
+
+- [#65](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/65) [`9108f4e`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/9108f4e42fc6273f3289ed627d212fd63895ff86) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/list-marker-alignment`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/list-marker-alignment.html) rule
+
 ## 0.14.0
 
 ### Minor Changes

@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/blockquote-marker-alignment"
 description: "enforce consistent alignment of blockquote markers"
+since: "v0.15.0"
 ---
 
 # markdown-preferences/blockquote-marker-alignment
 
 > enforce consistent alignment of blockquote markers
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - ⚙️ This rule is included in `plugin.configs.recommended`.
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
@@ -71,6 +71,10 @@ This rule has no options.
 
 - [markdown-preferences/no-laziness-blockquotes](./no-laziness-blockquotes.md)
 - [markdown-preferences/list-marker-alignment](./list-marker-alignment.md)
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.15.0
 
 ## 🔍 Implementation
 
