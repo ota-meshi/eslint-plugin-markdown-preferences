@@ -1,19 +1,23 @@
 import { defineConfig } from "eslint/config";
 // import markdown from "@eslint/markdown";
 import markdownPreferences from "eslint-plugin-markdown-preferences";
+const ruleEntries = Object.entries(markdownPreferences.rules).filter(
+  ([, rule]) => !rule.meta.deprecated
+);
 export default defineConfig([
   // add more generic rule sets here, such as:
   // markdown.configs.recommended,
   markdownPreferences.configs.recommended,
   {
     rules: {
-      // override/add rules settings here, such as:
+      // Add all "eslint-plugin-markdown-preferences" rules
       ...Object.fromEntries(
-        Object.entries(markdownPreferences.rules).map(([name, rule]) => [
+        ruleEntries.map(([name, rule]) => [
           `markdown-preferences/${name}`,
           "error",
         ])
       ),
+      // override/add rules settings here, such as:
       "markdown-preferences/prefer-linked-words": [
         "error",
         {
@@ -21,7 +25,7 @@ export default defineConfig([
             "eslint-plugin-markdown-preferences":
               "https://ota-meshi.github.io/eslint-plugin-markdown-preferences/",
             ...Object.fromEntries(
-              Object.entries(markdownPreferences.rules).map(([name, rule]) => {
+              ruleEntries.map(([name, rule]) => {
                 return [`markdown-preferences/${name}`, rule.meta.docs.url];
               })
             ),
