@@ -1,6 +1,6 @@
 import type { List, ListItem } from "mdast";
 import { createRule } from "../utils/index.ts";
-import { parseLines } from "../utils/lines.ts";
+import { getParsedLines } from "../utils/lines.ts";
 import { getListItemMarker } from "../utils/ast.ts";
 
 const ALIGN_TO_POSITION_NAME = {
@@ -95,7 +95,7 @@ export default createRule<[{ align?: "left" | "right" }?]>(
               actual: String(markerLocation.start),
             },
             fix(fixer) {
-              const lines = parseLines(sourceCode);
+              const lines = getParsedLines(sourceCode);
               const line = lines.get(markerLocation.line);
 
               if (diff < 0) {

@@ -55,7 +55,7 @@ export class ParsedLines {
  * @param sourceCode source code to parse
  * @returns parsed lines
  */
-export function parseLines(sourceCode: MarkdownSourceCode): ParsedLines {
+export function getParsedLines(sourceCode: MarkdownSourceCode): ParsedLines {
   const cached = cache.get(sourceCode);
   if (cached) {
     return cached;

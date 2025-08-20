@@ -146,6 +146,7 @@ List markers are aligned to the right, which is useful for ordered lists with va
 
 - [markdown-preferences/ordered-list-marker-sequence](./ordered-list-marker-sequence.md)
 - [markdown-preferences/ordered-list-marker-start](./ordered-list-marker-start.md)
+- [markdown-preferences/blockquote-marker-alignment](./blockquote-marker-alignment.md)
 
 ## 🔍 Implementation
 

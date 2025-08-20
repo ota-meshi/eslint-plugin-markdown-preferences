@@ -1,7 +1,7 @@
 import type { Code } from "mdast";
 import { getCodeBlockKind } from "../utils/ast.ts";
 import { createRule } from "../utils/index.ts";
-import { parseLines } from "../utils/lines.ts";
+import { getParsedLines } from "../utils/lines.ts";
 
 export default createRule("prefer-fenced-code-blocks", {
   meta: {
@@ -23,8 +23,6 @@ export default createRule("prefer-fenced-code-blocks", {
   create(context) {
     const sourceCode = context.sourceCode;
 
-    const lines = parseLines(sourceCode);
-
     return {
       code(node) {
         const kind = getCodeBlockKind(sourceCode, node);
@@ -39,6 +37,7 @@ export default createRule("prefer-fenced-code-blocks", {
               // Do not fix if the code block is not fixable
               return null;
             }
+            const lines = getParsedLines(sourceCode);
             const startColumnOffset = loc.start.column - 1;
             const removeRanges: [number, number][] = [];
             let prefixText: string | null = null;
@@ -96,6 +95,7 @@ export default createRule("prefer-fenced-code-blocks", {
      */
     function isFixableIndentedCodeBlock(node: Code): boolean {
       if (!node.value.startsWith(" ")) return true;
+      const lines = getParsedLines(sourceCode);
       const loc = sourceCode.getLoc(node);
       const firstLine = lines.get(loc.start.line);
 

@@ -2,7 +2,7 @@ import type { SourceLocation } from "@eslint/core";
 import { createRule } from "../utils/index.ts";
 import type { Break, Code, Html, InlineCode, Text, Yaml } from "mdast";
 import type { Json, Toml } from "@eslint/markdown/types";
-import { parseLines } from "../utils/lines.ts";
+import { getParsedLines } from "../utils/lines.ts";
 
 const htmlComment = /<!--.*?-->/su;
 
@@ -100,7 +100,7 @@ export default createRule("no-trailing-spaces", {
       "root:exit"() {
         const re = /[^\S\n\r]+$/u;
         const skipMatch = /^[^\S\n\r]*$/u;
-        const lines = parseLines(sourceCode);
+        const lines = getParsedLines(sourceCode);
         const commentLineNumbers = getCommentLineNumbers();
 
         for (const lineInfo of lines) {

@@ -1,26 +1,8 @@
 import { createRule } from "../utils/index.ts";
 import type { Blockquote } from "mdast";
-import type { ParsedLine } from "../utils/lines.ts";
-import { parseLines } from "../utils/lines.ts";
-
-type BlockquoteLineInfo = {
-  prefix: string;
-  level: number;
-  line: ParsedLine;
-};
-
-/**
- * Helper function to get blockquote line information.
- */
-function getBlockquoteLineInfo(line: ParsedLine): BlockquoteLineInfo {
-  const regex = /^\s*(?:>\s*)*/u;
-  const match = regex.exec(line.text)!;
-  return {
-    line,
-    prefix: match[0],
-    level: (match[0].match(/>/gu) || []).length,
-  };
-}
+import type { BlockquoteLevelInfo } from "../utils/blockquotes.ts";
+import { getBlockquoteLevelFromLine } from "../utils/blockquotes.ts";
+import { getParsedLines } from "../utils/lines.ts";
 
 export default createRule("no-laziness-blockquotes", {
   meta: {
@@ -44,19 +26,16 @@ export default createRule("no-laziness-blockquotes", {
     const sourceCode = context.sourceCode;
     const checkedLines = new Set<number>();
 
-    // Get all lines in the document
-    const lines = parseLines(sourceCode);
-
     /**
      * Report invalid blockquote lines.
      */
     function reportInvalidLines(
-      invalidLines: BlockquoteLineInfo[],
-      base: BlockquoteLineInfo,
+      invalidLines: BlockquoteLevelInfo[],
+      base: BlockquoteLevelInfo,
     ) {
       type InvalidGroup = {
         level: number;
-        lines: BlockquoteLineInfo[];
+        lines: BlockquoteLevelInfo[];
       };
       const invalidGroups: InvalidGroup[] = [];
       for (const invalidLine of invalidLines) {
@@ -79,13 +58,18 @@ export default createRule("no-laziness-blockquotes", {
       for (const group of invalidGroups) {
         const first = group.lines[0];
         const last = group.lines.at(-1)!;
+
+        const lines = getParsedLines(sourceCode);
         context.report({
           loc: {
             start: {
-              line: first.line.line,
+              line: first.line,
               column: 1,
             },
-            end: { line: last.line.line, column: last.line.text.length + 1 },
+            end: {
+              line: last.line,
+              column: lines.get(last.line).text.length + 1,
+            },
           },
           messageId: "lazyBlockquoteLine",
           data: {
@@ -100,10 +84,11 @@ export default createRule("no-laziness-blockquotes", {
               },
               *fix(fixer) {
                 for (const invalidLine of group.lines) {
+                  const parsedLine = lines.get(invalidLine.line);
                   yield fixer.replaceTextRange(
                     [
-                      invalidLine.line.range[0],
-                      invalidLine.line.range[0] + invalidLine.prefix.length,
+                      parsedLine.range[0],
+                      parsedLine.range[0] + invalidLine.prefix.length,
                     ],
                     base.prefix,
                   );
@@ -113,8 +98,9 @@ export default createRule("no-laziness-blockquotes", {
             {
               messageId: "addLineBreak",
               fix: (fixer) => {
+                const parsedLine = lines.get(first.line);
                 return fixer.insertTextBeforeRange(
-                  [first.line.range[0], first.line.range[0]],
+                  [parsedLine.range[0], parsedLine.range[0]],
                   `${first.prefix.trimEnd()}\n`,
                 );
               },
@@ -131,10 +117,9 @@ export default createRule("no-laziness-blockquotes", {
         const endLine = loc.end.line;
 
         // Get the base blockquote level from the first line of this blockquote
-        const base = getBlockquoteLineInfo(lines.get(startLine));
+        const base = getBlockquoteLevelFromLine(sourceCode, startLine);
 
-        //
-        const invalidLines: BlockquoteLineInfo[] = [];
+        const invalidLines: BlockquoteLevelInfo[] = [];
 
         // Only process lines that are part of this blockquote
         for (
@@ -150,9 +135,7 @@ export default createRule("no-laziness-blockquotes", {
           }
           checkedLines.add(lineNumber);
 
-          const line = lines.get(lineNumber);
-
-          const current = getBlockquoteLineInfo(line);
+          const current = getBlockquoteLevelFromLine(sourceCode, lineNumber);
 
           if (base.level <= current.level) {
             reportInvalidLines(invalidLines, base);

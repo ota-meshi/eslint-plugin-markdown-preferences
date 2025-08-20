@@ -1,0 +1,171 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: blockquote-marker-alignment >> invalid
+Filename: tests/fixtures/rules/blockquote-marker-alignment/invalid/inconsistent-nested-levels-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Inconsistent Nested Levels
+  2 |
+  3 | > First level.
+  4 |  > Still first level but with extra space.
+    |  ^ [1]
+  5 | >> Second level.
+  6 |  >> Second level with extra space.
+    |  ^ [2]
+  7 | >
+  8 | > Back to first level.
+  9 |
+
+Output:
+  1 | # Inconsistent Nested Levels
+  2 |
+  3 | > First level.
+  4 | > Still first level but with extra space.
+  5 | >> Second level.
+  6 | >> Second level with extra space.
+  7 | >
+  8 | > Back to first level.
+  9 |
+
+[1] Blockquote markers should be consistently aligned at the same nesting level.
+[2] Blockquote markers should be consistently aligned at the same nesting level.
+---
+
+
+Test: blockquote-marker-alignment >> invalid
+Filename: tests/fixtures/rules/blockquote-marker-alignment/invalid/inconsistent-nested-levels2-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Inconsistent Nested Levels
+  2 |
+  3 | > First level.
+  4 | >> Second level.
+  5 | > > Second level with extra space.
+    |   ^ [1]
+  6 | >
+  7 | > Back to first level.
+  8 |
+  9 | ---
+ 10 |
+ 11 | > First level.
+ 12 | > > Second level.
+ 13 | >> Second level without space.
+    |  ^ [2]
+ 14 | >
+ 15 | > Back to first level.
+ 16 |
+ 17 | ---
+ 18 |
+ 19 |  > First level.
+ 20 | > > Second level without space.
+    | ^ [3]
+ 21 |  > > Second level.
+ 22 |  >> Second level without space.
+ 23 |  >
+ 24 | > Back to first level.
+    | ^ [4]
+ 25 |
+
+Output:
+  1 | # Inconsistent Nested Levels
+  2 |
+  3 | > First level.
+  4 | >> Second level.
+  5 | >> Second level with extra space.
+  6 | >
+  7 | > Back to first level.
+  8 |
+  9 | ---
+ 10 |
+ 11 | > First level.
+ 12 | > > Second level.
+ 13 | > > Second level without space.
+ 14 | >
+ 15 | > Back to first level.
+ 16 |
+ 17 | ---
+ 18 |
+ 19 |  > First level.
+ 20 |  > > Second level without space.
+ 21 |  > > Second level.
+ 22 |  > > Second level without space.
+ 23 |  >
+ 24 |  > Back to first level.
+ 25 |
+
+[1] Blockquote markers should be consistently aligned at the same nesting level.
+[2] Blockquote markers should be consistently aligned at the same nesting level.
+[3] Blockquote markers should be consistently aligned at the same nesting level.
+[4] Blockquote markers should be consistently aligned at the same nesting level.
+---
+
+
+Test: blockquote-marker-alignment >> invalid
+Filename: tests/fixtures/rules/blockquote-marker-alignment/invalid/inconsistent-single-level-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Inconsistent Single Level
+  2 |
+  3 | > This is a blockquote.
+  4 |  > This line has extra indentation.
+    |  ^ [1]
+  5 | > Back to normal.
+  6 |
+
+Output:
+  1 | # Inconsistent Single Level
+  2 |
+  3 | > This is a blockquote.
+  4 | > This line has extra indentation.
+  5 | > Back to normal.
+  6 |
+
+[1] Blockquote markers should be consistently aligned at the same nesting level.
+---
+
+
+Test: blockquote-marker-alignment >> invalid
+Filename: tests/fixtures/rules/blockquote-marker-alignment/invalid/mixed-indentation-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Mixed Indentation Issues
+  2 |
+  3 |   > Indented blockquote.
+  4 |  > This one has one less space.
+    |  ^ [1]
+  5 |   > Back to correct indentation.
+  6 |   >> Nested level.
+  7 |  >> This nested has one less space.
+    |  ^ [2]
+  8 |
+
+Output:
+  1 | # Mixed Indentation Issues
+  2 |
+  3 |   > Indented blockquote.
+  4 |   > This one has one less space.
+  5 |   > Back to correct indentation.
+  6 |   >> Nested level.
+  7 |   >> This nested has one less space.
+  8 |
+
+[1] Blockquote markers should be consistently aligned at the same nesting level.
+[2] Blockquote markers should be consistently aligned at the same nesting level.
+---
