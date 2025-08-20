@@ -24,6 +24,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/atx-headings-closing-sequence-length'?: Linter.RuleEntry<MarkdownPreferencesAtxHeadingsClosingSequenceLength>
   /**
+   * enforce consistent alignment of blockquote markers
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/blockquote-marker-alignment.html
+   */
+  'markdown-preferences/blockquote-marker-alignment'?: Linter.RuleEntry<[]>
+  /**
    * enforce canonical language names in code blocks
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/canonical-code-block-language.html
    */
