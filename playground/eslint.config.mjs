@@ -8,15 +8,30 @@ export default defineConfig([
   {
     rules: {
       // override/add rules settings here, such as:
+      ...Object.fromEntries(
+        Object.entries(markdownPreferences.rules).map(([name, rule]) => [
+          `markdown-preferences/${name}`,
+          "error",
+        ])
+      ),
       "markdown-preferences/prefer-linked-words": [
         "error",
         {
           words: {
             "eslint-plugin-markdown-preferences":
               "https://ota-meshi.github.io/eslint-plugin-markdown-preferences/",
-            "markdown-preferences/prefer-linked-words":
-              "https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html",
+            ...Object.fromEntries(
+              Object.entries(markdownPreferences.rules).map(([name, rule]) => {
+                return [`markdown-preferences/${name}`, rule.meta.docs.url];
+              })
+            ),
           },
+        },
+      ],
+      "markdown-preferences/prefer-link-reference-definitions": [
+        "error",
+        {
+          minLinks: 1,
         },
       ],
     },

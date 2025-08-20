@@ -1,7 +1,41 @@
-# eslint-plugin-markdown-preferences
+# Project Example
 
-eslint-plugin-markdown-preferences is an ESLint plugin that provides rules for Markdown files to enforce preferences.
+This is a sample Markdown document to demonstrate various features and rules of `eslint-plugin-markdown-preferences`.
 
-## Rules
+## FEATURES
 
-- `markdown-preferences/prefer-linked-words` ... Enforce the specified word to be a link.
+- Enforces consistent heading styles
+- Checks for proper list marker alignment
+- Validates code block language
+ - Ensures table header casing
+
+## usage
+
+```shell
+npx eslint . --ext .md
+```
+
+## example table
+
+| Name      | age | role      |
+|-----------|-----|-----------|
+| Alice     |  30 | Developer |
+| Bob       |  25 | Designer  |
+| Charlie   |  35 | Manager   |
+
+## Blockquote
+
+> This is a blockquote example.
+ > First level blockquote
+> > Second level blockquote
+> This looks like the first level text but is actually lazy for the second level
+
+## List Example
+
+1. First item
+ 2. Second item
+3. Third item
+
+## Emoji
+
+You can use emoji :sparkles: in your Markdown!
