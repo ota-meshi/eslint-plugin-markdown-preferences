@@ -19,6 +19,7 @@ export const plugins = {
 };
 export const rules: Linter.RulesRecord = {
   // eslint-plugin-markdown-preferences rules
+  "markdown-preferences/blockquote-marker-alignment": "error",
   "markdown-preferences/hard-linebreak-style": "error",
   "markdown-preferences/list-marker-alignment": "error",
   "markdown-preferences/no-laziness-blockquotes": "error",

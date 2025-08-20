@@ -3,8 +3,7 @@ import type { Heading } from "mdast";
 import type { MarkdownSourceCode } from "@eslint/markdown";
 import type { ParsedATXHeadingClosingSequence } from "../utils/atx-heading.ts";
 import { parseATXHeadingClosingSequence } from "../utils/atx-heading.ts";
-import type { ParsedLines } from "../utils/lines.ts";
-import { parseLines } from "../utils/lines.ts";
+import { getParsedLines } from "../utils/lines.ts";
 import stringWidth from "string-width";
 
 type Options = {
@@ -114,12 +113,11 @@ export default createRule<[Options?]>("atx-headings-closing-sequence-length", {
         : option.mode === "fixed-line-length"
           ? (() => {
               const totalLength = option.length || 80;
-              const lines = parseLines(sourceCode);
               const getExpected = (
                 _node: Heading,
                 parsed: ParsedATXHeadingClosingSequence,
               ) => {
-                return totalLength - getContentLength(lines, parsed);
+                return totalLength - getContentLength(parsed);
               };
               return {
                 heading(node: Heading) {
@@ -157,7 +155,6 @@ export default createRule<[Options?]>("atx-headings-closing-sequence-length", {
                     node: Heading;
                     parsed: ParsedATXHeadingClosingSequence;
                   };
-                  const lines = parseLines(sourceCode);
                   const headings: HeadingInfo[] = [];
                   return {
                     heading(node: Heading) {
@@ -177,18 +174,12 @@ export default createRule<[Options?]>("atx-headings-closing-sequence-length", {
                           })
                         | null = null;
                       for (const heading of headings) {
-                        const contentLength = getContentLength(
-                          lines,
-                          heading.parsed,
-                        );
+                        const contentLength = getContentLength(heading.parsed);
                         if (
                           mostLongContentHeading == null ||
                           contentLength > mostLongContentHeading.contentLength
                         ) {
-                          const lineLength = getLineLength(
-                            lines,
-                            heading.parsed,
-                          );
+                          const lineLength = getLineLength(heading.parsed);
                           mostLongContentHeading = {
                             ...heading,
                             contentLength,
@@ -201,7 +192,7 @@ export default createRule<[Options?]>("atx-headings-closing-sequence-length", {
                       let minLineLength: number =
                         mostLongContentHeading.lineLength;
                       for (const heading of headings) {
-                        const lineLength = getLineLength(lines, heading.parsed);
+                        const lineLength = getLineLength(heading.parsed);
                         if (
                           mostLongContentHeading.contentLength < lineLength &&
                           lineLength < minLineLength
@@ -213,7 +204,7 @@ export default createRule<[Options?]>("atx-headings-closing-sequence-length", {
                         _node: Heading,
                         parsed: ParsedATXHeadingClosingSequence,
                       ) => {
-                        return minLineLength - getContentLength(lines, parsed);
+                        return minLineLength - getContentLength(parsed);
                       };
                       for (const { node } of headings) {
                         verifyATXHeadingClosingSequenceLength(
@@ -229,10 +220,8 @@ export default createRule<[Options?]>("atx-headings-closing-sequence-length", {
     /**
      * Get the content length of the heading.
      */
-    function getContentLength(
-      lines: ParsedLines,
-      parsed: ParsedATXHeadingClosingSequence,
-    ) {
+    function getContentLength(parsed: ParsedATXHeadingClosingSequence) {
+      const lines = getParsedLines(sourceCode);
       const line = lines.get(parsed.closingSequence.loc.start.line);
       // Length before the closing sequence
       const beforeClosing = sourceCode.text.slice(
@@ -245,10 +234,8 @@ export default createRule<[Options?]>("atx-headings-closing-sequence-length", {
     /**
      * Get the line length of the heading.
      */
-    function getLineLength(
-      lines: ParsedLines,
-      parsed: ParsedATXHeadingClosingSequence,
-    ) {
+    function getLineLength(parsed: ParsedATXHeadingClosingSequence) {
+      const lines = getParsedLines(sourceCode);
       const line = lines.get(parsed.closingSequence.loc.start.line);
       const lineText = sourceCode.text.slice(
         line.range[0],

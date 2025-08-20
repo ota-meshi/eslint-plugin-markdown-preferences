@@ -2,7 +2,7 @@ import { createRule } from "../utils/index.ts";
 import type { Code, Html, Yaml } from "mdast";
 import type { Toml, Json } from "@eslint/markdown/types";
 import type { ParsedLine } from "../utils/lines.ts";
-import { parseLines } from "../utils/lines.ts";
+import { getParsedLines } from "../utils/lines.ts";
 
 export default createRule("no-multiple-empty-lines", {
   meta: {
@@ -74,7 +74,7 @@ export default createRule("no-multiple-empty-lines", {
       json: addIgnoreLoc,
 
       "root:exit"() {
-        const lines = [...parseLines(sourceCode)];
+        const lines = [...getParsedLines(sourceCode)];
 
         const bofEmptyLines: ParsedLine[] = [];
         while (lines.length) {

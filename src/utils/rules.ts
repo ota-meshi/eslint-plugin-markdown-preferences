@@ -4,6 +4,7 @@
 import type { RuleModule } from "../types.ts";
 import atxHeadingsClosingSequenceLength from "../rules/atx-headings-closing-sequence-length.ts";
 import atxHeadingsClosingSequence from "../rules/atx-headings-closing-sequence.ts";
+import blockquoteMarkerAlignment from "../rules/blockquote-marker-alignment.ts";
 import canonicalCodeBlockLanguage from "../rules/canonical-code-block-language.ts";
 import definitionsLast from "../rules/definitions-last.ts";
 import emojiNotation from "../rules/emoji-notation.ts";
@@ -27,6 +28,7 @@ import tableHeaderCasing from "../rules/table-header-casing.ts";
 export const rules = [
   atxHeadingsClosingSequenceLength,
   atxHeadingsClosingSequence,
+  blockquoteMarkerAlignment,
   canonicalCodeBlockLanguage,
   definitionsLast,
   emojiNotation,
