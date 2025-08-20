@@ -89,11 +89,14 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 
 ## Rules Related to Blockquotes
 
-| Description                                      | [markdownlint] Rules                                                                  | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules                                             |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------- | ------------------------ | -------------------------------------------------------------------------------------- |
-| Disallow multiple spaces after blockquote symbol | **[MD027]** _no-multiple-space-blockquote_<br>Multiple spaces after blockquote symbol | --                       | --                                                                                     |
-| Require empty lines around blockquotes           | **[MD028]** _no-blanks-blockquote_<br>Blank line inside blockquote                    | --                       | --                                                                                     |
-| Disallow laziness in blockquotes                 | --                                                                                    | --                       | **[markdown-preferences/no-laziness-blockquotes]**<br>disallow laziness in blockquotes |
+| Description                                      | [markdownlint] Rules                                                                  | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules                                                                   |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| Disallow multiple spaces after blockquote symbol | **[MD027]** _no-multiple-space-blockquote_<br>Multiple spaces after blockquote symbol | --                       | --                                                                                                           |
+| Require empty lines around blockquotes           | **[MD028]** _no-blanks-blockquote_<br>Blank line inside blockquote                    | --                       | --                                                                                                           |
+| Disallow laziness in blockquotes                 | --                                                                                    | --                       | **[markdown-preferences/no-laziness-blockquotes]**<br>disallow laziness in blockquotes                       |
+| Blockquote marker alignment                      | --                                                                                    | --                       | **[markdown-preferences/blockquote-marker-alignment]**<br>enforce consistent alignment of blockquote markers |
+
+[markdown-preferences/blockquote-marker-alignment]: ../rules/blockquote-marker-alignment.md
 
 ## Rules Related to Tables
 
