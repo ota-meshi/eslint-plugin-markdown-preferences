@@ -62,7 +62,7 @@
   },
   "dependencies": {
     "emoji-regex-xs": "^2.0.1",
-    "string-width": "^7.2.0"
+    "string-width": "^8.0.0"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.1",
