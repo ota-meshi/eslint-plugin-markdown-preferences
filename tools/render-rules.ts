@@ -59,12 +59,20 @@ export default function renderRulesTableContent(
       return `
 #${"#".repeat(categoryLevel)} ${category} Rules
 ${CATEGORY_DESCRIPTIONS[category] ? `\n- ${CATEGORY_DESCRIPTIONS[category]}\n` : ""}
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+
+<!-- prettier-ignore-start -->
+
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
 ${pluginRules
   .filter((rule) => rule.meta.docs.listCategory === category)
   .map(toRuleRow)
   .join("\n")}
+
+<!-- prettier-ignore-end -->
+
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
 `;
     })
     .join("");
@@ -77,14 +85,18 @@ ${pluginRules
 - ⚠️ We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
 - 😇 We don't fix bugs which are in deprecated rules since we don't have enough resources.
 
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+
+<!-- prettier-ignore-start -->
+
 | Rule ID | Replaced by |
 |:--------|:------------|
 ${deprecatedRules.map(toDeprecatedRuleRow).join("\n")}
+
+<!-- prettier-ignore-end -->
+
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
 `;
   }
-  return `
-<!-- prettier-ignore-start -->
-${rulesTableContent}
-<!-- prettier-ignore-end -->
-`;
+  return `${rulesTableContent}`;
 }

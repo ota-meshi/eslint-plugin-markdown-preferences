@@ -144,9 +144,13 @@ This rule was introduced in eslint-plugin-markdown-preferences ${await this.sinc
         : ""
     }## 🔍 Implementation
 
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/${ruleName}.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/${ruleName}.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/${ruleName})
+
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
 `;
     if (footerPattern.test(this.content)) {
       this.content = this.content.replace(

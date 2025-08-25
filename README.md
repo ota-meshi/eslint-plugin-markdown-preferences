@@ -86,11 +86,11 @@ The rules with the following star ⭐ are included in the configs.
 
 <!--RULES_TABLE_START-->
 
-<!-- prettier-ignore-start -->
-
 ### Preference Rules
 
 - Rules to unify the expression and description style of documents.
+
+<!-- prettier-ignore-start -->
 
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
@@ -102,9 +102,13 @@ The rules with the following star ⭐ are included in the configs.
 | [markdown-preferences/prefer-linked-words](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html) | enforce the specified word to be a link. | 🔧 |  |
 | [markdown-preferences/table-header-casing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-header-casing.html) | enforce consistent casing in table header cells. | 🔧 |  |
 
+<!-- prettier-ignore-end -->
+
 ### Stylistic Rules
 
 - Rules related to the formatting and visual style of Markdown.
+
+<!-- prettier-ignore-start -->
 
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|

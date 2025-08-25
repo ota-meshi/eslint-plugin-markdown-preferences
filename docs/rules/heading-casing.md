@@ -194,7 +194,7 @@ An array of words that should be preserved with their exact casing, regardless o
 
 The rule comes with an extensive list of common technical terms as default values.
 
-Please see the [defaultPreserveWords](https://github.com/microsoft/eslint-plugin-markdown-preferences/blob/main/src/resources/preserve-words.ts) for the complete list.
+Please see the [defaultPreserveWords](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/resources/preserve-words.ts) for the complete list.
 
 You can also import and use the default preserve words in your JavaScript code:
 

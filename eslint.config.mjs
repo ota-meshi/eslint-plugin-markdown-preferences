@@ -3,6 +3,7 @@ import myPlugin from "@ota-meshi/eslint-plugin";
 import tseslint from "typescript-eslint";
 import markdown from "@eslint/markdown";
 import prettier from "eslint-plugin-prettier";
+import markdownLinks from "eslint-plugin-markdown-links";
 import { fileURLToPath } from "url";
 import path from "path";
 
@@ -127,6 +128,7 @@ export default defineConfig([
     extends: [
       markdown.configs.recommended,
       markdownPreferences.configs.recommended,
+      markdownLinks.configs.recommended,
     ],
     rules: {
       "prettier/prettier": "error",
@@ -170,6 +172,15 @@ export default defineConfig([
         "error",
         {
           ignorePatterns: ["ID", "RECOMMENDED"],
+        },
+      ],
+      "markdown-links/no-dead-urls": [
+        "error",
+        {
+          allowedAnchors: {
+            "/^https:\\/\\/eslint-online-playground\\.netlify\\.app\\//u":
+              "/.*/u",
+          },
         },
       ],
     },
@@ -251,6 +262,12 @@ export default defineConfig([
       "markdown/fenced-code-language": "off",
       ...Object.fromEntries(
         rules.map((rule) => [rule.meta.docs.ruleId, "off"]),
+      ),
+      ...Object.fromEntries(
+        Object.values(markdownLinks.rules).map((rule) => [
+          rule.meta.docs.ruleId,
+          "off",
+        ]),
       ),
     },
   },

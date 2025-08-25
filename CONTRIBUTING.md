@@ -4,7 +4,7 @@ Thank you for your interest in this project! Contributions are welcome. Please f
 
 ## Getting Started
 
-- For bug reports and feature requests, please use [Issues](./issues).
+- For bug reports and feature requests, please use [Issues](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/issues).
   - Documentation improvements and suggestions are welcome, but general questions are not supported.
 - Pull requests are welcome. Opening an Issue before submitting a PR is recommended for smooth collaboration.
 
