@@ -183,6 +183,14 @@ export default defineConfig([
           },
         },
       ],
+      "markdown-links/no-missing-path": [
+        "error",
+        {
+          anchorOption: {
+            slugify: "mdit-vue",
+          },
+        },
+      ],
     },
   },
   {
