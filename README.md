@@ -132,6 +132,11 @@ The rules with the following star ⭐ are included in the configs.
 
 <!--RULES_TABLE_END-->
 <!--RULES_SECTION_END-->
+
+## 👫 Related Packages
+
+- [eslint-plugin-markdown-links](https://github.com/ota-meshi/eslint-plugin-markdown-links) ... ESLint plugin with powerful checking rules related to Markdown links.
+
 <!--DOCS_IGNORE_START-->
 
 ## 🍻 Contributing

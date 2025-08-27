@@ -28,6 +28,10 @@ See [User Guide](./user-guide/index.md).
 
 See [Available Rules](./rules/index.md).
 
+## 👫 Related Packages
+
+- [eslint-plugin-markdown-links](https://github.com/ota-meshi/eslint-plugin-markdown-links) ... ESLint plugin with powerful checking rules related to Markdown links.
+
 <!--DOCS_IGNORE_START-->
 
 ## 🍻 Contributing
