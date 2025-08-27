@@ -105,11 +105,11 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 
 ## Rules Related to Emphasis and Strong Emphasis
 
-| Description                        | [markdownlint] Rules                                                 | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules |
-| ---------------------------------- | -------------------------------------------------------------------- | ------------------------ | ------------------------------------------ |
-| Spaces around the text in emphasis | **[MD037]** _no-space-in-emphasis_<br>Spaces inside emphasis markers | --                       | --                                         |
-| Emphasis notation style            | **[MD049]** _emphasis-style_<br>Emphasis style                       | --                       | --                                         |
-| Strong emphasis notation style     | **[MD050]** _strong-style_<br>Strong style                           | --                       | --                                         |
+| Description                        | [markdownlint] Rules                                                 | [@eslint/markdown] Rules                                                   | `eslint-plugin-markdown-preferences` Rules |
+| ---------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------ |
+| Spaces around the text in emphasis | **[MD037]** _no-space-in-emphasis_<br>Spaces inside emphasis markers | [markdown/no-space-in-emphasis]<br>Disallow spaces around emphasis markers | --                                         |
+| Emphasis notation style            | **[MD049]** _emphasis-style_<br>Emphasis style                       | --                                                                         | --                                         |
+| Strong emphasis notation style     | **[MD050]** _strong-style_<br>Strong style                           | --                                                                         | --                                         |
 
 ## Rules Related to Thematic Breaks
 
@@ -224,6 +224,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 [markdown/no-unused-definitions]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/no-unused-definitions.md
 [markdown/require-alt-text]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/require-alt-text.md
 [markdown/table-column-count]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/table-column-count.md
+[markdown/no-space-in-emphasis]: https://github.com/eslint/markdown/blob/main/docs/rules/no-space-in-emphasis.md
 [markdown-preferences/canonical-code-block-language]: ../rules/canonical-code-block-language.md
 [markdown-preferences/emoji-notation]: ../rules/emoji-notation.md
 [markdown-preferences/heading-casing]: ../rules/heading-casing.md
