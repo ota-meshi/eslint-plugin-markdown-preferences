@@ -108,6 +108,8 @@ The rules with the following star ⭐ are included in the configs.
 
 - Rules related to the formatting and visual style of Markdown.
 
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+
 <!-- prettier-ignore-start -->
 
 | Rule ID | Description | Fixable | RECOMMENDED |
@@ -123,12 +125,15 @@ The rules with the following star ⭐ are included in the configs.
 | [markdown-preferences/no-text-backslash-linebreak](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-text-backslash-linebreak.html) | disallow text backslash at the end of a line. |  | ⭐ |
 | [markdown-preferences/no-trailing-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-trailing-spaces.html) | disallow trailing whitespace at the end of lines in Markdown files. | 🔧 |  |
 | [markdown-preferences/ordered-list-marker-sequence](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-sequence.html) | enforce that ordered list markers use sequential numbers | 🔧 |  |
+| [markdown-preferences/padding-line-between-blocks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/padding-line-between-blocks.html) | require or disallow padding lines between blocks | 🔧 | ⭐ |
 | [markdown-preferences/prefer-autolinks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-autolinks.html) | enforce the use of autolinks for URLs | 🔧 | ⭐ |
 | [markdown-preferences/prefer-fenced-code-blocks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-fenced-code-blocks.html) | enforce the use of fenced code blocks over indented code blocks | 🔧 | ⭐ |
 | [markdown-preferences/prefer-link-reference-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-link-reference-definitions.html) | enforce using link reference definitions instead of inline links | 🔧 |  |
 | [markdown-preferences/sort-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/sort-definitions.html) | enforce a specific order for link definitions and footnote definitions | 🔧 |  |
 
 <!-- prettier-ignore-end -->
+
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
 
 <!--RULES_TABLE_END-->
 <!--RULES_SECTION_END-->

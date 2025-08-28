@@ -89,6 +89,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/ordered-list-marker-start'?: Linter.RuleEntry<MarkdownPreferencesOrderedListMarkerStart>
   /**
+   * require or disallow padding lines between blocks
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/padding-line-between-blocks.html
+   */
+  'markdown-preferences/padding-line-between-blocks'?: Linter.RuleEntry<MarkdownPreferencesPaddingLineBetweenBlocks>
+  /**
    * enforce the use of autolinks for URLs
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-autolinks.html
    */
@@ -183,6 +188,12 @@ type MarkdownPreferencesNoTrailingSpaces = []|[{
 type MarkdownPreferencesOrderedListMarkerStart = []|[{
   start?: (1 | 0)
 }]
+// ----- markdown-preferences/padding-line-between-blocks -----
+type MarkdownPreferencesPaddingLineBetweenBlocks = {
+  prev: (("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*") | [("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"), ...(("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"))[]])
+  next: (("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*") | [("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"), ...(("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"))[]])
+  blankLines: ("any" | "never" | "always")
+}[]
 // ----- markdown-preferences/prefer-inline-code-words -----
 type MarkdownPreferencesPreferInlineCodeWords = []|[{
   words: string[]

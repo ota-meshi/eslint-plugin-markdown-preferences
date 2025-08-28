@@ -1,6 +1,7 @@
 import type { SourceLocation } from "@eslint/core";
 import type { MarkdownSourceCode } from "@eslint/markdown";
 import type { Heading } from "mdast";
+import { getHeadingKind } from "./ast.ts";
 
 export type ParsedATXHeadingClosingSequence = {
   closingSequence: {
@@ -31,11 +32,8 @@ export function parseATXHeadingClosingSequence(
       closingSequence: null;
     }
   | null {
+  if (getHeadingKind(sourceCode, node) !== "atx") return null;
   const loc = sourceCode.getLoc(node);
-  if (loc.start.line !== loc.end.line) {
-    // It's a Setext heading
-    return null;
-  }
   const range = sourceCode.getRange(node);
   const parsed = parseATXHeadingClosingSequenceFromText(
     sourceCode.text.slice(...range),

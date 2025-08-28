@@ -1,0 +1,9 @@
+{
+  "options": [
+    {
+      "prev": "blockquote",
+      "next": "list",
+      "blankLine": "always"
+    }
+  ]
+}

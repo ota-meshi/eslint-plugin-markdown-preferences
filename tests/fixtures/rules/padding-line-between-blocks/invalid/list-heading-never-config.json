@@ -1,0 +1,9 @@
+{
+  "options": [
+    {
+      "prev": "list",
+      "next": "heading",
+      "blankLine": "never"
+    }
+  ]
+}

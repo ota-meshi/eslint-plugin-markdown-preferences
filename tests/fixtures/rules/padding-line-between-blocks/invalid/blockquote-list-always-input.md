@@ -1,0 +1,10 @@
+# Blockquote to List Test
+
+> This is a blockquote
+> that should be followed by a blank line.
+- Item 1
+- Item 2
+- Item 3
+
+## Another Section
+Some text here.

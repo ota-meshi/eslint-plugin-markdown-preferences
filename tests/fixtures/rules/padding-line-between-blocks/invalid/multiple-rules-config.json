@@ -1,0 +1,19 @@
+{
+  "options": [
+    {
+      "prev": "heading",
+      "next": "paragraph",
+      "blankLine": "always"
+    },
+    {
+      "prev": "list",
+      "next": "blockquote",
+      "blankLine": "never"
+    },
+    {
+      "prev": "table",
+      "next": "thematic-break",
+      "blankLine": "always"
+    }
+  ]
+}

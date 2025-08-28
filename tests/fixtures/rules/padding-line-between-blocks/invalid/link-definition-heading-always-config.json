@@ -1,0 +1,9 @@
+{
+  "options": [
+    {
+      "prev": "link-definition",
+      "next": "heading",
+      "blankLine": "always"
+    }
+  ]
+}

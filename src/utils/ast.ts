@@ -30,6 +30,21 @@ import type {
   Yaml,
 } from "mdast";
 
+export type MDFrontmatter = Yaml | Toml | Json;
+export type MDBlock =
+  | Blockquote
+  | Code
+  | Heading
+  | List
+  | Paragraph
+  | ThematicBreak
+  | Table;
+export type MDDefinition = Definition | FootnoteDefinition;
+export type MDSpecialNode = ListItem | TableCell | TableRow;
+export type MDInline = Exclude<
+  MDNode,
+  Root | MDBlock | MDFrontmatter | MDDefinition | MDSpecialNode
+>;
 export type MDNode =
   | Root
   | Blockquote
@@ -60,6 +75,19 @@ export type MDNode =
   | Toml
   | Json;
 
+/**
+ * Get the kind of heading.
+ */
+export function getHeadingKind(
+  sourceCode: MarkdownSourceCode,
+  node: Heading,
+): "atx" | "setext" {
+  const loc = sourceCode.getLoc(node);
+  if (loc.start.line !== loc.end.line) {
+    return "setext";
+  }
+  return "atx";
+}
 /**
  * Get the kind of code block.
  */
@@ -125,6 +153,22 @@ export function getListItemMarker(
     kind: ")",
     raw: matchParen[0],
     sequence: Number(matchParen[1]),
+  };
+}
+/**
+ * Get the marker for a thematic break.
+ */
+export function getThematicBreakMarker(
+  sourceCode: MarkdownSourceCode,
+  node: ThematicBreak,
+): {
+  kind: "-" | "*";
+  hasSpaces: boolean;
+} {
+  const text = sourceCode.getText(node);
+  return {
+    kind: text.startsWith("-") ? "-" : "*",
+    hasSpaces: /\s/u.test(text),
   };
 }
 

@@ -46,6 +46,7 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 | [markdown-preferences/no-text-backslash-linebreak](./no-text-backslash-linebreak.md) | disallow text backslash at the end of a line. |  | ⭐ |
 | [markdown-preferences/no-trailing-spaces](./no-trailing-spaces.md) | disallow trailing whitespace at the end of lines in Markdown files. | 🔧 |  |
 | [markdown-preferences/ordered-list-marker-sequence](./ordered-list-marker-sequence.md) | enforce that ordered list markers use sequential numbers | 🔧 |  |
+| [markdown-preferences/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | 🔧 | ⭐ |
 | [markdown-preferences/prefer-autolinks](./prefer-autolinks.md) | enforce the use of autolinks for URLs | 🔧 | ⭐ |
 | [markdown-preferences/prefer-fenced-code-blocks](./prefer-fenced-code-blocks.md) | enforce the use of fenced code blocks over indented code blocks | 🔧 | ⭐ |
 | [markdown-preferences/prefer-link-reference-definitions](./prefer-link-reference-definitions.md) | enforce using link reference definitions instead of inline links | 🔧 |  |
