@@ -37,6 +37,7 @@ npm install --save-dev eslint @eslint/markdown eslint-plugin-markdown-preference
 ## 📖 Usage
 
 <!--USAGE_SECTION_START-->
+
 <!--USAGE_GUIDE_START-->
 
 ### Configuration
@@ -75,6 +76,7 @@ See [the rule list](https://ota-meshi.github.io/eslint-plugin-markdown-preferenc
 Is not supported.
 
 <!--USAGE_GUIDE_END-->
+
 <!--USAGE_SECTION_END-->
 
 ## ✅ Rules
@@ -108,6 +110,8 @@ The rules with the following star ⭐ are included in the configs.
 
 - Rules related to the formatting and visual style of Markdown.
 
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+
 <!-- prettier-ignore-start -->
 
 | Rule ID | Description | Fixable | RECOMMENDED |
@@ -123,6 +127,7 @@ The rules with the following star ⭐ are included in the configs.
 | [markdown-preferences/no-text-backslash-linebreak](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-text-backslash-linebreak.html) | disallow text backslash at the end of a line. |  | ⭐ |
 | [markdown-preferences/no-trailing-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-trailing-spaces.html) | disallow trailing whitespace at the end of lines in Markdown files. | 🔧 |  |
 | [markdown-preferences/ordered-list-marker-sequence](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-sequence.html) | enforce that ordered list markers use sequential numbers | 🔧 |  |
+| [markdown-preferences/padding-line-between-blocks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/padding-line-between-blocks.html) | require or disallow padding lines between blocks | 🔧 | ⭐ |
 | [markdown-preferences/prefer-autolinks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-autolinks.html) | enforce the use of autolinks for URLs | 🔧 | ⭐ |
 | [markdown-preferences/prefer-fenced-code-blocks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-fenced-code-blocks.html) | enforce the use of fenced code blocks over indented code blocks | 🔧 | ⭐ |
 | [markdown-preferences/prefer-link-reference-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-link-reference-definitions.html) | enforce using link reference definitions instead of inline links | 🔧 |  |
@@ -130,7 +135,10 @@ The rules with the following star ⭐ are included in the configs.
 
 <!-- prettier-ignore-end -->
 
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
+
 <!--RULES_TABLE_END-->
+
 <!--RULES_SECTION_END-->
 
 ## 👫 Related Packages

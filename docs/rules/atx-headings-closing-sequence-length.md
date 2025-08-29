@@ -20,7 +20,9 @@ This rule does not enforce whether a closing sequence is present or absent. If a
 **Mode: closing sequence length matches heading level (`"match-opening"`)**
 
 <!-- prettier-ignore-start -->
+
 <!-- eslint-skip -->
+
 ```md
 <!-- eslint markdown-preferences/atx-headings-closing-sequence-length: ["error", {"mode": "match-opening"}] -->
 <!-- ✓ GOOD (with { "mode": "match-opening" }) -->
@@ -30,12 +32,15 @@ This rule does not enforce whether a closing sequence is present or absent. If a
 # Heading ###
 ## Heading #
 ```
+
 <!-- prettier-ignore-end -->
 
 **Mode: closing sequence length is always 2 (`{ "mode": "length", "length": 2 }`)**
 
 <!-- prettier-ignore-start -->
+
 <!-- eslint-skip -->
+
 ```md
 <!-- eslint markdown-preferences/atx-headings-closing-sequence-length: ["error", {"mode": "length", "length": 2}] -->
 <!-- ✓ GOOD (with { "mode": "length", "length": 2 }) -->
@@ -45,12 +50,15 @@ This rule does not enforce whether a closing sequence is present or absent. If a
 # Heading #
 ## Heading ###
 ```
+
 <!-- prettier-ignore-end -->
 
 **Mode: all headings have a total line length of 30 (`{ "mode": "fixed-line-length", "length": 30 }`)**
 
 <!-- prettier-ignore-start -->
+
 <!-- eslint-skip -->
+
 ```md
 <!-- eslint markdown-preferences/atx-headings-closing-sequence-length: ["error", {"mode": "fixed-line-length", "length": 30}] -->
 <!-- ✓ GOOD (with { "mode": "fixed-line-length", "length": 30 }) -->
@@ -60,12 +68,15 @@ This rule does not enforce whether a closing sequence is present or absent. If a
 # Short heading #
 ## Long heading ###
 ```
+
 <!-- prettier-ignore-end -->
 
 **Mode: all headings have the same number of trailing # as the first heading with a closing sequence (`"consistent"`)**
 
 <!-- prettier-ignore-start -->
+
 <!-- eslint-skip -->
+
 ```md
 <!-- eslint markdown-preferences/atx-headings-closing-sequence-length: ["error", {"mode": "consistent"}] -->
 <!-- ✓ GOOD (with { "mode": "consistent" }) -->
@@ -75,12 +86,15 @@ This rule does not enforce whether a closing sequence is present or absent. If a
 # Heading #
 ## Heading ##
 ```
+
 <!-- prettier-ignore-end -->
 
 **Mode: all headings are padded with trailing # so that each heading line has the same length as the shortest line that can fully contain the longest heading in the document (`"consistent-line-length"`)**
 
 <!-- prettier-ignore-start -->
+
 <!-- eslint-skip -->
+
 ```md
 <!-- eslint markdown-preferences/atx-headings-closing-sequence-length: ["error", {"mode": "consistent-line-length"}] -->
 <!-- ✓ GOOD (with { "mode": "consistent-line-length" }) -->
@@ -90,6 +104,7 @@ This rule does not enforce whether a closing sequence is present or absent. If a
 # Short #
 ## Long heading ###
 ```
+
 <!-- prettier-ignore-end -->
 
 ## 🔧 Options

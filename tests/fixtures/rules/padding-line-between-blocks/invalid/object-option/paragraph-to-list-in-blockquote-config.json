@@ -1,0 +1,14 @@
+{
+  "options": [
+    {
+      "prev": "*",
+      "next": "*",
+      "blankLine": "always"
+    },
+    {
+      "prev": "paragraph",
+      "next": { "type": "list", "in": "blockquote" },
+      "blankLine": "never"
+    }
+  ]
+}

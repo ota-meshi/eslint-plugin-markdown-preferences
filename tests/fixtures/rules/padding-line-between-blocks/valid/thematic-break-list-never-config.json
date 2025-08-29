@@ -1,0 +1,9 @@
+{
+  "options": [
+    {
+      "prev": "thematic-break",
+      "next": "list",
+      "blankLine": "never"
+    }
+  ]
+}

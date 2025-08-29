@@ -24,6 +24,7 @@ export const rules: Linter.RulesRecord = {
   "markdown-preferences/list-marker-alignment": "error",
   "markdown-preferences/no-laziness-blockquotes": "error",
   "markdown-preferences/no-text-backslash-linebreak": "error",
+  "markdown-preferences/padding-line-between-blocks": "error",
   "markdown-preferences/prefer-autolinks": "error",
   "markdown-preferences/prefer-fenced-code-blocks": "error",
 };

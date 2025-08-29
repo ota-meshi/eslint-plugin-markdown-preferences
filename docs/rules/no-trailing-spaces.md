@@ -115,6 +115,7 @@ When `true`, the rule ignores trailing spaces in HTML comment lines.
 ```
 
 <!-- prettier-ignore-end -->
+
 <!-- prettier-ignore-start -->
 
 <!-- eslint-skip -->

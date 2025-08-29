@@ -174,6 +174,25 @@ export default defineConfig([
           ignorePatterns: ["ID", "RECOMMENDED"],
         },
       ],
+      "markdown-preferences/padding-line-between-blocks": [
+        "error",
+        { prev: "*", next: "*", blankLine: "always" },
+        {
+          prev: "link-definition",
+          next: "link-definition",
+          blankLine: "never",
+        },
+        {
+          prev: "footnote-definition",
+          next: "footnote-definition",
+          blankLine: "never",
+        },
+        {
+          prev: "paragraph",
+          next: { type: "list", in: "list" },
+          blankLine: "never",
+        },
+      ],
       "markdown-links/no-dead-urls": [
         "error",
         {
@@ -268,6 +287,7 @@ export default defineConfig([
       "markdown/no-missing-label-refs": "off",
       "markdown/no-multiple-h1": "off",
       "markdown/fenced-code-language": "off",
+      "markdown/no-unused-definitions": "off",
       ...Object.fromEntries(
         rules.map((rule) => [rule.meta.docs.ruleId, "off"]),
       ),

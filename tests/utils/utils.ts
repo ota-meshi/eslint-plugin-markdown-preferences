@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
-import type { RuleTester } from "eslint";
 import { fileURLToPath } from "url";
 import eslintMarkdown from "@eslint/markdown";
+import type { TestCase } from "eslint-snapshot-rule-tester";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 /**
@@ -59,12 +59,12 @@ export async function loadTestCases(
   ruleName: string,
   _options?: any,
   additionals?: {
-    valid?: (RuleTester.ValidTestCase | string)[];
-    invalid?: RuleTester.InvalidTestCase[];
+    valid?: (TestCase | string)[];
+    invalid?: (TestCase | string)[];
   },
 ): Promise<{
-  valid: RuleTester.ValidTestCase[];
-  invalid: RuleTester.InvalidTestCase[];
+  valid: (TestCase | string)[];
+  invalid: (TestCase | string)[];
 }> {
   const validFixtureRoot = path.resolve(
     dirname,

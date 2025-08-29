@@ -1,0 +1,9 @@
+{
+  "options": [
+    {
+      "prev": "table",
+      "next": "paragraph",
+      "blankLine": "never"
+    }
+  ]
+}
