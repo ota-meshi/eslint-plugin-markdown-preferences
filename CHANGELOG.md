@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.16.0
+
+### Minor Changes
+
+- [#73](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/73) [`0bb6e12`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/0bb6e1255721237224085496fa34f98fcec194b6) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/padding-line-between-blocks`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/padding-line-between-blocks.html) rule
+
 ## 0.15.0
 
 ### Minor Changes

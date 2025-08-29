@@ -192,11 +192,11 @@ type MarkdownPreferencesOrderedListMarkerStart = []|[{
 type MarkdownPreferencesPaddingLineBetweenBlocks = {
   prev: (("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*") | [("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"), ...(("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"))[]] | {
     type: (("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*") | [("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"), ...(("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"))[]])
-    inList?: boolean
+    in?: ("list" | "blockquote" | "footnote-definition")
   })
   next: (("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*") | [("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"), ...(("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"))[]] | {
     type: (("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*") | [("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"), ...(("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"))[]])
-    inList?: boolean
+    in?: ("list" | "blockquote" | "footnote-definition")
   })
   blankLine: ("any" | "never" | "always")
 }[]

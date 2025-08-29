@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/padding-line-between-blocks"
 description: "require or disallow padding lines between blocks"
+since: "v0.16.0"
 ---
 
 # markdown-preferences/padding-line-between-blocks
 
 > require or disallow padding lines between blocks
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - ⚙️ This rule is included in `plugin.configs.recommended`.
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
@@ -257,12 +257,12 @@ Here is some text.
 
 - [markdown-preferences/no-multiple-empty-lines](./no-multiple-empty-lines.md)
 
-## 🔍 Implementation
+## 🚀 Version
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+This rule was introduced in eslint-plugin-markdown-preferences v0.16.0
+
+## 🔍 Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/padding-line-between-blocks.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/padding-line-between-blocks.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/padding-line-between-blocks)
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
