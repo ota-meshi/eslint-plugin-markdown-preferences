@@ -37,6 +37,7 @@ npm install --save-dev eslint @eslint/markdown eslint-plugin-markdown-preference
 ## 📖 Usage
 
 <!--USAGE_SECTION_START-->
+
 <!--USAGE_GUIDE_START-->
 
 ### Configuration
@@ -75,6 +76,7 @@ See [the rule list](https://ota-meshi.github.io/eslint-plugin-markdown-preferenc
 Is not supported.
 
 <!--USAGE_GUIDE_END-->
+
 <!--USAGE_SECTION_END-->
 
 ## ✅ Rules
@@ -136,6 +138,7 @@ The rules with the following star ⭐ are included in the configs.
 <!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
 
 <!--RULES_TABLE_END-->
+
 <!--RULES_SECTION_END-->
 
 ## 👫 Related Packages

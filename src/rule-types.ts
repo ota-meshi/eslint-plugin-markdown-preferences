@@ -190,9 +190,15 @@ type MarkdownPreferencesOrderedListMarkerStart = []|[{
 }]
 // ----- markdown-preferences/padding-line-between-blocks -----
 type MarkdownPreferencesPaddingLineBetweenBlocks = {
-  prev: (("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*") | [("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"), ...(("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"))[]])
-  next: (("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*") | [("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"), ...(("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"))[]])
-  blankLines: ("any" | "never" | "always")
+  prev: (("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*") | [("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"), ...(("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"))[]] | {
+    type: (("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*") | [("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"), ...(("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"))[]])
+    inList?: boolean
+  })
+  next: (("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*") | [("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"), ...(("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"))[]] | {
+    type: (("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*") | [("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"), ...(("blockquote" | "code" | "heading" | "html" | "list" | "paragraph" | "thematic-break" | "table" | "link-definition" | "footnote-definition" | "frontmatter" | "*"))[]])
+    inList?: boolean
+  })
+  blankLine: ("any" | "never" | "always")
 }[]
 // ----- markdown-preferences/prefer-inline-code-words -----
 type MarkdownPreferencesPreferInlineCodeWords = []|[{

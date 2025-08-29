@@ -85,8 +85,8 @@ for (const entry1 of syntaxEntries) {
       withBlankLine: codeWithPadding,
       withoutBlankLine: codeWithoutPadding,
       requiresPadding: requiresBlankLineBetween(
-        sourceCodeForCodeWithPadding.ast.children[0] as MarkdownBlockNode,
-        sourceCodeForCodeWithPadding.ast.children[1] as MarkdownBlockNode,
+        sourceCodeForCodeWithPadding.ast.children[0],
+        sourceCodeForCodeWithPadding.ast.children[1],
         sourceCodeForCodeWithPadding,
       ),
     });

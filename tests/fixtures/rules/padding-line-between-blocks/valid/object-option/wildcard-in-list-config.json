@@ -1,0 +1,14 @@
+{
+  "options": [
+    {
+      "prev": "*",
+      "next": "*",
+      "blankLine": "always"
+    },
+    {
+      "prev": "*",
+      "next": { "type": "*", "in": "list" },
+      "blankLine": "never"
+    }
+  ]
+}

@@ -18,6 +18,7 @@ import type { ParsedLine } from "../utils/lines.ts";
 import { getParsedLines } from "../utils/lines.ts";
 import { getBlockquoteLevelFromLine } from "../utils/blockquotes.ts";
 import type { MarkdownSourceCode } from "@eslint/markdown";
+import type { JSONSchema4 } from "json-schema";
 
 type BlockType =
   | "blockquote"
@@ -30,16 +31,24 @@ type BlockType =
   | "table"
   | "link-definition"
   | "footnote-definition"
-  | "frontmatter"
-  | "*";
+  | "frontmatter";
+type BlockTypeOption = BlockType | "*";
+
+type ObjectSelector = {
+  type: BlockTypeOption | BlockTypeOption[];
+  in?: "list" | "blockquote" | "footnote-definition";
+};
+type Selector = BlockTypeOption | ObjectSelector;
 
 interface PaddingRule {
-  prev: BlockType | BlockType[];
-  next: BlockType | BlockType[];
+  prev: Selector | Selector[];
+  next: Selector | Selector[];
   blankLine: "any" | "never" | "always";
 }
 
 type Options = PaddingRule[];
+
+type MDBlockContainer = Root | Blockquote | ListItem | FootnoteDefinition;
 
 export type MarkdownBlockNode = MDBlock | MDDefinition | MDFrontmatter | Html;
 
@@ -48,8 +57,8 @@ export type MarkdownBlockNode = MDBlock | MDDefinition | MDFrontmatter | Html;
  * due to Markdown syntax constraints (e.g., setext headings).
  */
 export function requiresBlankLineBetween(
-  prev: MarkdownBlockNode,
-  next: MarkdownBlockNode,
+  prev: MDNode,
+  next: MDNode,
   sourceCode: MarkdownSourceCode,
 ): boolean {
   if (prev.type === "paragraph") {
@@ -109,7 +118,7 @@ export function requiresBlankLineBetween(
   return false;
 }
 
-const BLOCK_TYPES: BlockType[] = [
+const BLOCK_TYPES: BlockTypeOption[] = [
   "blockquote",
   "code",
   "heading",
@@ -124,8 +133,44 @@ const BLOCK_TYPES: BlockType[] = [
   "*",
 ];
 
+const BLOCK_TYPE_SCHEMAS: JSONSchema4[] = [
+  {
+    type: "string",
+    enum: BLOCK_TYPES,
+  },
+  {
+    type: "array",
+    items: {
+      type: "string",
+      enum: BLOCK_TYPES,
+    },
+    minItems: 1,
+  },
+];
+
+const SELECTOR_SCHEMA: JSONSchema4 = {
+  oneOf: [
+    ...BLOCK_TYPE_SCHEMAS,
+    {
+      type: "object",
+      properties: {
+        type: {
+          oneOf: BLOCK_TYPE_SCHEMAS,
+        },
+        in: {
+          enum: ["list", "blockquote", "footnote-definition"],
+        },
+      },
+      required: ["type"],
+      additionalProperties: false,
+    },
+  ],
+};
+
 // For MDBlock types - use explicit mapping
-const BLOCK_TYPE_MAP: Record<MarkdownBlockNode["type"], BlockType> = {
+const BLOCK_TYPE_MAP0: {
+  [K in MarkdownBlockNode["type"]]: BlockType;
+} = {
   heading: "heading",
   paragraph: "paragraph",
   list: "list",
@@ -140,11 +185,14 @@ const BLOCK_TYPE_MAP: Record<MarkdownBlockNode["type"], BlockType> = {
   toml: "frontmatter",
   yaml: "frontmatter",
 };
+const BLOCK_TYPE_MAP: {
+  [K in MDNode["type"]]?: BlockType;
+} = BLOCK_TYPE_MAP0 as typeof BLOCK_TYPE_MAP;
 
 /**
  * Get the block type of a node
  */
-function getBlockType(node: MarkdownBlockNode): BlockType {
+function getBlockType(node: MDNode): BlockType | null {
   const nodeType = node.type;
 
   const blockType = BLOCK_TYPE_MAP[nodeType];
@@ -152,18 +200,10 @@ function getBlockType(node: MarkdownBlockNode): BlockType {
     return blockType;
   }
 
-  // Fallback - should not happen with proper type guards
-  return "paragraph";
+  return null;
 }
 
-/**
- * Check if a node is a block-level node
- */
-function isBlockNode(node: MDNode): node is MarkdownBlockNode {
-  return Boolean(BLOCK_TYPE_MAP[node.type as MarkdownBlockNode["type"]]);
-}
-
-export default createRule("padding-line-between-blocks", {
+export default createRule<Options>("padding-line-between-blocks", {
   meta: {
     type: "layout",
     docs: {
@@ -178,38 +218,8 @@ export default createRule("padding-line-between-blocks", {
       items: {
         type: "object",
         properties: {
-          prev: {
-            oneOf: [
-              {
-                type: "string",
-                enum: BLOCK_TYPES,
-              },
-              {
-                type: "array",
-                items: {
-                  type: "string",
-                  enum: BLOCK_TYPES,
-                },
-                minItems: 1,
-              },
-            ],
-          },
-          next: {
-            oneOf: [
-              {
-                type: "string",
-                enum: BLOCK_TYPES,
-              },
-              {
-                type: "array",
-                items: {
-                  type: "string",
-                  enum: BLOCK_TYPES,
-                },
-                minItems: 1,
-              },
-            ],
-          },
+          prev: SELECTOR_SCHEMA,
+          next: SELECTOR_SCHEMA,
           blankLine: {
             type: "string",
             enum: ["any", "never", "always"],
@@ -228,44 +238,74 @@ export default createRule("padding-line-between-blocks", {
   },
   create(context) {
     const sourceCode = context.sourceCode;
-    const options: Options = context.options || [];
+    const options: Options = [...(context.options || [])].reverse();
 
-    type BlockquoteStack = {
-      node: Blockquote | Root;
-      upper: BlockquoteStack;
-    };
-    let blockquoteStack: BlockquoteStack = {
-      node: sourceCode.ast,
-      upper: null!,
-    };
+    const containerStack: MDBlockContainer[] = [];
 
     /**
      * Check if the actual type matches the expected type pattern
      */
     function matchesType(
       actualType: BlockType,
-      expectedType: BlockType | BlockType[],
-    ): boolean {
-      if (Array.isArray(expectedType)) {
-        return expectedType.includes(actualType) || expectedType.includes("*");
+      block: MDNode,
+      expected: Selector | Selector[],
+    ): BlockType | null {
+      if (Array.isArray(expected)) {
+        for (const e of expected) {
+          const matched = matchesType(actualType, block, e);
+          if (matched) return matched;
+        }
+        return null;
       }
-      return expectedType === "*" || expectedType === actualType;
+      if (typeof expected === "string") {
+        return expected === actualType || expected === "*" ? actualType : null;
+      }
+      let matched: BlockType | null = null;
+      if (Array.isArray(expected.type)) {
+        for (const e of expected.type) {
+          matched = matchesType(actualType, block, e);
+          if (matched) break;
+        }
+      } else {
+        matched = matchesType(actualType, block, expected.type);
+      }
+      if (!matched) return null;
+
+      if (expected.in === "list") {
+        if (containerStack[0]?.type !== "listItem") return null;
+      } else if (expected.in === "blockquote") {
+        if (containerStack[0]?.type !== "blockquote") return null;
+      } else if (expected.in === "footnote-definition") {
+        if (containerStack[0]?.type !== "footnoteDefinition") return null;
+      }
+      return matched;
     }
 
     /**
-     * Get the expected number of blank lines between two block types
+     * Get the expected padding between two blocks
      */
-    function getExpectedblankLine(
-      prevType: BlockType,
-      nextType: BlockType,
-    ): "any" | "never" | "always" | null {
+    function getExpectedPadding(
+      prevBlock: MDNode,
+      nextBlock: MDNode,
+    ): {
+      prev: BlockType;
+      next: BlockType;
+      blankLine: PaddingRule["blankLine"];
+    } | null {
+      const prevType = getBlockType(prevBlock);
+      const nextType = getBlockType(nextBlock);
+      if (!prevType || !nextType) return null;
+
       for (const rule of options) {
-        if (
-          matchesType(prevType, rule.prev) &&
-          matchesType(nextType, rule.next)
-        ) {
-          return rule.blankLine;
-        }
+        const prev = matchesType(prevType, prevBlock, rule.prev);
+        if (!prev) continue;
+        const next = matchesType(nextType, nextBlock, rule.next);
+        if (!next) continue;
+        return {
+          prev,
+          next,
+          blankLine: rule.blankLine,
+        };
       }
       return null; // No rule matched
     }
@@ -273,41 +313,37 @@ export default createRule("padding-line-between-blocks", {
     /**
      * Check padding between blocks in a container node
      */
-    function checkBlockPadding(
-      containerNode: Root | Blockquote | ListItem | FootnoteDefinition,
-    ) {
-      const blocks: MarkdownBlockNode[] = [];
-
-      // Collect all block-level nodes
-      for (const child of containerNode.children) {
-        if (isBlockNode(child)) {
-          blocks.push(child);
-        }
-      }
-
+    function checkBlockPadding(containerNode: MDBlockContainer) {
       // Check padding between consecutive blocks
-      for (let i = 0; i < blocks.length - 1; i++) {
-        const prevBlock = blocks[i];
-        const nextBlock = blocks[i + 1];
+      for (let i = 0; i < containerNode.children.length - 1; i++) {
+        const prevBlock = containerNode.children[i];
+        const nextBlock = containerNode.children[i + 1];
 
-        const prevType = getBlockType(prevBlock);
-        const nextType = getBlockType(nextBlock);
-
-        const expectedblankLine = getExpectedblankLine(prevType, nextType);
-        if (expectedblankLine === null) continue;
+        const expected = getExpectedPadding(prevBlock, nextBlock);
+        if (expected === null) continue;
 
         const prevLoc = sourceCode.getLoc(prevBlock);
         const nextLoc = sourceCode.getLoc(nextBlock);
 
-        const actualblankLine = nextLoc.start.line - prevLoc.end.line - 1;
-        const hasBlankLine = actualblankLine > 0;
+        const actualBlankLine = nextLoc.start.line - prevLoc.end.line - 1;
+        const hasBlankLine = actualBlankLine > 0;
 
         let messageId: "expectedBlankLine" | "unexpectedBlankLine" =
           "expectedBlankLine";
-        if (expectedblankLine === "always") {
+        if (expected.blankLine === "always") {
           if (hasBlankLine) continue;
+          let list: ListItem | null = null;
+          const stack = [...containerStack];
+          let target: MDBlockContainer | undefined;
+          while ((target = stack.shift())) {
+            if (target.type === "listItem") {
+              list = target;
+              break;
+            }
+          }
+          if (list && !list.spread) continue;
           messageId = "expectedBlankLine";
-        } else if (expectedblankLine === "never") {
+        } else if (expected.blankLine === "never") {
           if (!hasBlankLine) continue;
           if (requiresBlankLineBetween(prevBlock, nextBlock, sourceCode))
             continue;
@@ -319,7 +355,15 @@ export default createRule("padding-line-between-blocks", {
 
         const lineLength = sourceCode.lines[nextLoc.start.line - 1].length;
 
-        const blockquoteOrRoot = blockquoteStack.node;
+        let blockquote: Blockquote | null = null;
+        const stack = [...containerStack];
+        let target: MDBlockContainer | undefined;
+        while ((target = stack.shift())) {
+          if (target.type === "blockquote") {
+            blockquote = target;
+            break;
+          }
+        }
 
         context.report({
           node: nextBlock,
@@ -332,14 +376,14 @@ export default createRule("padding-line-between-blocks", {
           },
           messageId,
           data: {
-            prevType,
-            nextType,
+            prevType: expected.prev,
+            nextType: expected.next,
           },
           fix(fixer) {
-            if (expectedblankLine === "always") {
+            if (expected.blankLine === "always") {
               let text = "\n";
-              if (blockquoteOrRoot.type === "blockquote") {
-                const blockquoteLoc = sourceCode.getLoc(blockquoteOrRoot);
+              if (blockquote) {
+                const blockquoteLoc = sourceCode.getLoc(blockquote);
                 text += getBlockquoteLevelFromLine(
                   sourceCode,
                   blockquoteLoc.start.line,
@@ -367,24 +411,14 @@ export default createRule("padding-line-between-blocks", {
     }
 
     return {
-      blockquote(node: Blockquote) {
-        blockquoteStack = {
-          node,
-          upper: blockquoteStack,
-        };
+      "root, blockquote, listItem, footnoteDefinition"(node: MDBlockContainer) {
+        containerStack.unshift(node);
       },
-      "root:exit"(node) {
+      "root, blockquote, listItem, footnoteDefinition:exit"(
+        node: MDBlockContainer,
+      ) {
         checkBlockPadding(node);
-      },
-      "blockquote:exit"(node) {
-        checkBlockPadding(node);
-        blockquoteStack = blockquoteStack.upper;
-      },
-      "listItem:exit"(node) {
-        checkBlockPadding(node);
-      },
-      "footnoteDefinition:exit"(node) {
-        checkBlockPadding(node);
+        containerStack.shift();
       },
     };
   },

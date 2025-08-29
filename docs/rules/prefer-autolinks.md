@@ -28,6 +28,7 @@ Converting these patterns to autolinks keeps your Markdown concise and readable.
 
 - [markdown/no-bare-urls] only reports bare URLs (e.g., `https://example.com`) and auto-fixes them to autolinks.
 - This rule also reports and auto-fixes redundant inline links where the label and URL are identical—cases not handled by [markdown/no-bare-urls].
+
 <!-- eslint-skip -->
 
 ```md

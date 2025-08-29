@@ -25,6 +25,7 @@ This rule enforces consistent padding lines between Markdown block elements.
 <!-- eslint markdown-preferences/padding-line-between-blocks: ["error", {"prev": "*", "next": "*", "blankLine": "always"}] -->
 
 <!-- ✓ GOOD -->
+
 # Heading
 
 Paragraph content.
@@ -61,6 +62,21 @@ This rule accepts an array of objects that define spacing rules between differen
         "prev": "*",
         "next": "*",
         "blankLine": "always"
+      },
+      {
+        "prev": "link-definition",
+        "next": "link-definition",
+        "blankLine": "never"
+      },
+      {
+        "prev": "footnote-definition",
+        "next": "footnote-definition",
+        "blankLine": "never"
+      },
+      {
+        "prev": "paragraph",
+        "next": { "type": "list", "in": "list" },
+        "blankLine": "never"
       }
     ]
   ]
@@ -71,24 +87,140 @@ This rule accepts an array of objects that define spacing rules between differen
 
 Each rule object has the following properties:
 
-- `prev`: The type of the previous block element
-- `next`: The type of the next block element
+- `prev`: The type of the previous block element (string or object)
+- `next`: The type of the next block element (string or object)
 - `blankLine`: Spacing requirement between blocks
+
+If multiple configurations match a block pair, the configuration that appears last in the array takes precedence.
+
+#### Advanced Block Matching
+
+For more specific matching, you can use object notation for `prev` and `next`:
+
+```json
+{
+  "prev": "paragraph",
+  "next": { "type": "list", "in": "list" },
+  "blankLine": "never"
+}
+```
+
+Object notation supports the following properties:
+
+- `type`: The block type (same as string notation)
+- `in`: (string) The container context where the block is located
+  - `"list"` - Block is inside a list item
+  - `"blockquote"` - Block is inside a blockquote
+  - `"footnote-definition"` - Block is inside a footnote definition
 
 #### Block Types
 
+You can specify block types in two ways:
+
+**String notation** (simple matching):
+
 - `"blockquote"` - Blockquote elements
+
+  e.g.
+
+  ```md
+  > Blockquote
+  ```
+
 - `"code"` - Code blocks
-- `"heading"` - Heading elements
-- `"list"` - List elements
-- `"paragraph"` - Paragraph elements
-- `"thematic-break"` - Horizontal rules
-- `"table"` - Table elements
-- `"link-definition"` - Link definitions
+
+  e.g.
+
+  ````md
+  ```json
+  "Code block"
+  ```
+  ````
+
 - `"footnote-definition"` - Footnote definitions
+
+  e.g.
+
+  ```md
+  [^footnote]: Footnote content
+  ```
+
 - `"frontmatter"` - Frontmatter sections (e.g., YAML frontmatter)
+
+  e.g.
+
+  ```md
+  ---
+  title: Document Title
+  ---
+  ```
+
+- `"heading"` - Heading elements
+
+  e.g.
+
+  ```md
+  # Heading
+  ```
+
 - `"html"` - HTML elements
+
+  e.g.
+
+  ```md
+  <div>HTML content</div>
+  ```
+
+- `"link-definition"` - Link definitions
+
+  e.g.
+
+  ```md
+  [link]: #link-definitions
+  ```
+
+- `"list"` - List elements
+
+  e.g.
+
+  ```md
+  - List item
+  ```
+
+- `"paragraph"` - Paragraph elements
+
+  e.g.
+
+  ```md
+  Paragraph text.
+  ```
+
+- `"table"` - Table elements
+
+  e.g.
+
+  ```md
+  | Header | Header |
+  | ------ | ------ |
+  | Cell   | Cell   |
+  ```
+
+- `"thematic-break"` - Horizontal rules
+
+  e.g.
+
+  ```md
+  ---
+  ```
+
 - `"*"` - Wildcard matching any block type
+
+**Object notation** (advanced matching):
+
+- `{ "type": "blockquote" }` - Same as string notation
+- `{ "type": "list", "in": "list" }` - List elements inside another list
+- `{ "type": "paragraph", "in": "blockquote" }` - Paragraphs inside blockquotes
+- `{ "type": "*", "in": "footnote-definition" }` - Any block inside footnote definitions
 
 #### Spacing Values
 
