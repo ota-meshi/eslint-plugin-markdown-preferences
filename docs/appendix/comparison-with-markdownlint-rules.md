@@ -114,9 +114,11 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 
 ## Rules Related to Thematic Breaks
 
-| Description           | [markdownlint] Rules                        | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules |
-| --------------------- | ------------------------------------------- | ------------------------ | ------------------------------------------ |
-| `<hr>` notation style | [MD035] _hr-style_<br>Horizontal rule style | --                       | --                                         |
+| Description           | [markdownlint] Rules                        | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules                                                                                                       |
+| --------------------- | ------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `<hr>` notation style | [MD035] _hr-style_<br>Horizontal rule style | --                       | [markdown-preferences/thematic-break-character-style]<br>enforce a consistent character style for thematic breaks (horizontal rules) in Markdown |
+
+[markdown-preferences/thematic-break-character-style]: ./../rules/thematic-break-character-style.md
 
 ## Rules Related to HTML
 

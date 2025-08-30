@@ -26,6 +26,7 @@ import preferLinkedWords from "../rules/prefer-linked-words.ts";
 import setextHeadingUnderlineLength from "../rules/setext-heading-underline-length.ts";
 import sortDefinitions from "../rules/sort-definitions.ts";
 import tableHeaderCasing from "../rules/table-header-casing.ts";
+import thematicBreakCharacterStyle from "../rules/thematic-break-character-style.ts";
 
 export const rules = [
   atxHeadingsClosingSequenceLength,
@@ -52,4 +53,5 @@ export const rules = [
   setextHeadingUnderlineLength,
   sortDefinitions,
   tableHeaderCasing,
+  thematicBreakCharacterStyle,
 ] as RuleModule[];

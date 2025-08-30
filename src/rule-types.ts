@@ -133,6 +133,11 @@ export interface RuleOptions {
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-header-casing.html
    */
   'markdown-preferences/table-header-casing'?: Linter.RuleEntry<MarkdownPreferencesTableHeaderCasing>
+  /**
+   * enforce a consistent character style for thematic breaks (horizontal rules) in Markdown.
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-character-style.html
+   */
+  'markdown-preferences/thematic-break-character-style'?: Linter.RuleEntry<MarkdownPreferencesThematicBreakCharacterStyle>
 }
 
 /* ======= Declarations ======= */
@@ -238,7 +243,7 @@ type MarkdownPreferencesPreferLinkedWords = []|[{
 }]
 // ----- markdown-preferences/setext-heading-underline-length -----
 type MarkdownPreferencesSetextHeadingUnderlineLength = []|[{
-  mode?: ("exact" | "minimum" | "consistent")
+  mode?: ("exact" | "minimum" | "consistent" | "consistent-line-length")
   align?: ("any" | "exact" | "minimum" | "length")
   length?: number
 }]
@@ -259,4 +264,8 @@ type MarkdownPreferencesTableHeaderCasing = []|[{
   ignorePatterns?: string[]
   
   minorWords?: string[]
+}]
+// ----- markdown-preferences/thematic-break-character-style -----
+type MarkdownPreferencesThematicBreakCharacterStyle = []|[{
+  style?: ("-" | "*" | "_")
 }]

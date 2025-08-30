@@ -1,0 +1,3 @@
+# valid: dash style
+---
+---

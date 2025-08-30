@@ -1,0 +1,3 @@
+# valid: spaced dash style
+- - -
+- - - - -

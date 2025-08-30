@@ -224,10 +224,6 @@ This rule accepts an object option with the following properties:
 
 ## 🔍 Implementation
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
-
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/setext-heading-underline-length.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/setext-heading-underline-length.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/setext-heading-underline-length)
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->

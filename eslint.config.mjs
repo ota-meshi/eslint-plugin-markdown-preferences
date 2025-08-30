@@ -245,6 +245,12 @@ export default defineConfig([
     rules: {
       "markdown-preferences/definitions-last": "off",
       "markdown-preferences/prefer-link-reference-definitions": "off",
+      // eslint-disable-next-line no-process-env -- Ignore
+      ...(process.env.IN_VERSION_SCRIPT
+        ? {
+            "markdown-links/no-dead-urls": "off",
+          }
+        : {}),
     },
   },
   {
