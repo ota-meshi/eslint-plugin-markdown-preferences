@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/setext-heading-underline-length"
 description: "enforce setext heading underline length"
+since: "v0.17.0"
 ---
 
 # markdown-preferences/setext-heading-underline-length
 
 > enforce setext heading underline length
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -221,6 +221,10 @@ This rule accepts an object option with the following properties:
 ## 👫 Related Rules
 
 - [heading-casing](./heading-casing.md)
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.17.0
 
 ## 🔍 Implementation
 

@@ -1,5 +1,13 @@
 # eslint-plugin-markdown-preferences
 
+## 0.17.0
+
+### Minor Changes
+
+- [#75](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/75) [`0a33fa5`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/0a33fa5bf221d608cb35a2c3e963d6c6b0ee775a) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/setext-heading-underline-length`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/setext-heading-underline-length.html) rule
+
+- [#76](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/76) [`fb6260e`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/fb6260e512e7fa885fd11d2318215fecfc1e1915) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/thematic-break-character-style`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-character-style.html) rule
+
 ## 0.16.0
 
 ### Minor Changes
