@@ -23,6 +23,7 @@ import preferFencedCodeBlocks from "../rules/prefer-fenced-code-blocks.ts";
 import preferInlineCodeWords from "../rules/prefer-inline-code-words.ts";
 import preferLinkReferenceDefinitions from "../rules/prefer-link-reference-definitions.ts";
 import preferLinkedWords from "../rules/prefer-linked-words.ts";
+import setextHeadingUnderlineLength from "../rules/setext-heading-underline-length.ts";
 import sortDefinitions from "../rules/sort-definitions.ts";
 import tableHeaderCasing from "../rules/table-header-casing.ts";
 
@@ -48,6 +49,7 @@ export const rules = [
   preferInlineCodeWords,
   preferLinkReferenceDefinitions,
   preferLinkedWords,
+  setextHeadingUnderlineLength,
   sortDefinitions,
   tableHeaderCasing,
 ] as RuleModule[];

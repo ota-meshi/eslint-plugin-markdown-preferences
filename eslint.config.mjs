@@ -193,6 +193,7 @@ export default defineConfig([
           blankLine: "never",
         },
       ],
+      "markdown-preferences/setext-heading-underline-length": "error",
       "markdown-links/no-dead-urls": [
         "error",
         {

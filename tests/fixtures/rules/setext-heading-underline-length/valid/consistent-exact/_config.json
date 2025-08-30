@@ -1,0 +1,8 @@
+{
+  "options": [
+    {
+      "mode": "consistent",
+      "align": "exact"
+    }
+  ]
+}
