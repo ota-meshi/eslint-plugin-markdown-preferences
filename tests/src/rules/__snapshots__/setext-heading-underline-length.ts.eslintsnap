@@ -1056,6 +1056,56 @@ Output:
 ---
 
 
+Test: setext-heading-underline-length >> invalid >>> "# 全角文字・異体字セレクタを含む見出しのテスト\n\n見出しＡＢＣ\n===\n\n竈門 禰󠄀豆子\n===\n\nHeading\n===\n\n見\\u0009出\\u0009し\\u0009a\\u0009bcd\\u0009e\n===\n"
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/exact/zenkaku-ivs-invalid-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # 全角文字・異体字セレクタを含む見出しのテスト
+  2 |
+  3 | 見出しＡＢＣ
+  4 | ===
+    | ^~~ [1]
+  5 |
+  6 | 竈門 禰󠄀豆子
+  7 | ===
+    | ^~~ [2]
+  8 |
+  9 | Heading
+ 10 | ===
+    | ^~~ [3]
+ 11 |
+ 12 | 見	出	し	a	bcd	e
+ 13 | ===
+    | ^~~ [4]
+ 14 |
+
+Output:
+  1 | # 全角文字・異体字セレクタを含む見出しのテスト
+  2 |
+  3 | 見出しＡＢＣ
+  4 | ============
+  5 |
+  6 | 竈門 禰󠄀豆子
+  7 | ===========
+  8 |
+  9 | Heading
+ 10 | =======
+ 11 |
+ 12 | 見	出	し	a	bcd	e
+ 13 | =====================
+ 14 |
+
+[1] Setext heading underline should be exactly the same length as the heading text.
+[2] Setext heading underline should be exactly the same length as the heading text.
+[3] Setext heading underline should be exactly the same length as the heading text.
+[4] Setext heading underline should be exactly the same length as the heading text.
+---
+
+
 Test: setext-heading-underline-length >> invalid
 Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/minimum/blockquote-input.md
 Language: markdown/gfm
