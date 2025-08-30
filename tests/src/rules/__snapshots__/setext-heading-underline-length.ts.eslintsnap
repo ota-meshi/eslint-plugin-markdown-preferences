@@ -1,0 +1,1007 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-any/basic-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent
+    align: any
+Plugins: unable to serialize
+
+Code:
+  1 | # Consistent any mode test (invalid)
+  2 |
+  3 | First heading
+  4 | =======
+  5 |
+  6 | Second heading text
+  7 | ========
+    | ^~~~~~~~ [1]
+  8 |
+  9 | Third heading
+ 10 | =======
+ 11 |
+
+Output:
+  1 | # Consistent any mode test (invalid)
+  2 |
+  3 | First heading
+  4 | =======
+  5 |
+  6 | Second heading text
+  7 | =======
+  8 |
+  9 | Third heading
+ 10 | =======
+ 11 |
+
+[1] Setext heading underline should be consistent with other underlines in the document.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-any/blockquote-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent
+    align: any
+Plugins: unable to serialize
+
+Code:
+  1 | # Blockquote consistent any test (invalid)
+  2 |
+  3 | > First heading
+  4 | > =======
+  5 |
+  6 | > Second heading
+  7 | > ========
+    |   ^~~~~~~~ [1]
+  8 |
+  9 | ## Normal heading
+ 10 |
+
+Output:
+  1 | # Blockquote consistent any test (invalid)
+  2 |
+  3 | > First heading
+  4 | > =======
+  5 |
+  6 | > Second heading
+  7 | > =======
+  8 |
+  9 | ## Normal heading
+ 10 |
+
+[1] Setext heading underline should be consistent with other underlines in the document.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-any/blockquote2-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent
+    align: any
+Plugins: unable to serialize
+
+Code:
+  1 | # Blockquote heading test (consistent any mode)
+  2 |
+  3 | > First heading
+  4 | > =============
+  5 |
+  6 | > Second heading
+  7 | > ===
+    |   ^~~ [1]
+  8 |
+
+Output:
+  1 | # Blockquote heading test (consistent any mode)
+  2 |
+  3 | > First heading
+  4 | > =============
+  5 |
+  6 | > Second heading
+  7 | > =============
+  8 |
+
+[1] Setext heading underline should be consistent with other underlines in the document.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-any/consistent-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent
+    align: any
+Plugins: unable to serialize
+
+Code:
+  1 | # Consistent style test
+  2 |
+  3 | First heading
+  4 | =============
+  5 |
+  6 | Second heading
+  7 | ===
+    | ^~~ [1]
+  8 |
+  9 | Another heading
+ 10 | ===============
+    | ^~~~~~~~~~~~~~~ [2]
+ 11 |
+
+Output:
+  1 | # Consistent style test
+  2 |
+  3 | First heading
+  4 | =============
+  5 |
+  6 | Second heading
+  7 | =============
+  8 |
+  9 | Another heading
+ 10 | =============
+ 11 |
+
+[1] Setext heading underline should be consistent with other underlines in the document.
+[2] Setext heading underline should be consistent with other underlines in the document.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-any/mixed-markers-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent
+    align: any
+Plugins: unable to serialize
+
+Code:
+  1 | # Mixed markers test (invalid)
+  2 |
+  3 | First heading
+  4 | =======
+  5 |
+  6 | Second heading
+  7 | --------
+    | ^~~~~~~~ [1]
+  8 |
+  9 | Third heading
+ 10 | =======
+ 11 |
+
+Output:
+  1 | # Mixed markers test (invalid)
+  2 |
+  3 | First heading
+  4 | =======
+  5 |
+  6 | Second heading
+  7 | -------
+  8 |
+  9 | Third heading
+ 10 | =======
+ 11 |
+
+[1] Setext heading underline should be consistent with other underlines in the document.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-any/multiline-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent
+    align: any
+Plugins: unable to serialize
+
+Code:
+  1 | # Multiline consistent any test (invalid)
+  2 |
+  3 | First
+  4 | multiline
+  5 | =========
+  6 |
+  7 | Second multiline
+  8 | heading text
+  9 | =======
+    | ^~~~~~~ [1]
+ 10 |
+ 11 | Third
+ 12 | heading
+ 13 | =========
+ 14 |
+
+Output:
+  1 | # Multiline consistent any test (invalid)
+  2 |
+  3 | First
+  4 | multiline
+  5 | =========
+  6 |
+  7 | Second multiline
+  8 | heading text
+  9 | =========
+ 10 |
+ 11 | Third
+ 12 | heading
+ 13 | =========
+ 14 |
+
+[1] Setext heading underline should be consistent with other underlines in the document.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-any/single-marker-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent
+    align: any
+Plugins: unable to serialize
+
+Code:
+  1 | # Single character setext heading (invalid/consistent-any)
+  2 |
+  3 | A
+  4 | =
+  5 |
+  6 | B
+  7 | --
+    | ^~ [1]
+  8 |
+  9 | C
+ 10 | ===
+    | ^~~ [2]
+ 11 |
+
+Output:
+  1 | # Single character setext heading (invalid/consistent-any)
+  2 |
+  3 | A
+  4 | =
+  5 |
+  6 | B
+  7 | -
+  8 |
+  9 | C
+ 10 | =
+ 11 |
+
+[1] Setext heading underline should be consistent with other underlines in the document.
+[2] Setext heading underline should be consistent with other underlines in the document.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-exact/blockquote-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent
+    align: exact
+Plugins: unable to serialize
+
+Code:
+  1 | # Blockquote heading test (consistent exact mode)
+  2 |
+  3 | > Short
+  4 | > ==========
+    |   ^~~~~~~~~~ [1]
+  5 |
+  6 | > Very long heading text
+  7 | > =====
+    |   ^~~~~ [2]
+  8 |
+
+Output:
+  1 | # Blockquote heading test (consistent exact mode)
+  2 |
+  3 | > Short
+  4 | > ======================
+  5 |
+  6 | > Very long heading text
+  7 | > ======================
+  8 |
+
+[1] Setext heading underline should be exactly the same length as the longest heading text in the document.
+[2] Setext heading underline should be exactly the same length as the longest heading text in the document.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-exact/consistent-exact-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent
+    align: exact
+Plugins: unable to serialize
+
+Code:
+  1 | # Consistent exact style test
+  2 |
+  3 | Short
+  4 | =====
+    | ^~~~~ [1]
+  5 |
+  6 | Short2
+  7 | =============================
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  8 |
+  9 | Very long heading text
+ 10 | =====
+    | ^~~~~ [3]
+ 11 |
+
+Output:
+  1 | # Consistent exact style test
+  2 |
+  3 | Short
+  4 | ======================
+  5 |
+  6 | Short2
+  7 | ======================
+  8 |
+  9 | Very long heading text
+ 10 | ======================
+ 11 |
+
+[1] Setext heading underline should be exactly the same length as the longest heading text in the document.
+[2] Setext heading underline should be exactly the same length as the longest heading text in the document.
+[3] Setext heading underline should be exactly the same length as the longest heading text in the document.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-exact/multiline-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent
+    align: exact
+Plugins: unable to serialize
+
+Code:
+  1 | # Multiline consistent exact test (invalid)
+  2 |
+  3 | Short
+  4 | line
+  5 | =============
+    | ^~~~~~~~~~~~~ [1]
+  6 |
+  7 | This is a very long line of text
+  8 | that should be the longest
+  9 | =================
+    | ^~~~~~~~~~~~~~~~~ [2]
+ 10 |
+
+Output:
+  1 | # Multiline consistent exact test (invalid)
+  2 |
+  3 | Short
+  4 | line
+  5 | ================================
+  6 |
+  7 | This is a very long line of text
+  8 | that should be the longest
+  9 | ================================
+ 10 |
+
+[1] Setext heading underline should be exactly the same length as the longest heading text in the document.
+[2] Setext heading underline should be exactly the same length as the longest heading text in the document.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-exact/single-marker-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent
+    align: exact
+Plugins: unable to serialize
+
+Code:
+  1 | # Single character setext heading (invalid/consistent-exact)
+  2 |
+  3 | A
+  4 | ==
+    | ^~ [1]
+  5 |
+  6 | B
+  7 | --
+    | ^~ [2]
+  8 |
+
+Output:
+  1 | # Single character setext heading (invalid/consistent-exact)
+  2 |
+  3 | A
+  4 | =
+  5 |
+  6 | B
+  7 | -
+  8 |
+
+[1] Setext heading underline should be exactly the same length as the longest heading text in the document.
+[2] Setext heading underline should be exactly the same length as the longest heading text in the document.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-length/blockquote-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent
+    align: length
+    length: 5
+Plugins: unable to serialize
+
+Code:
+  1 | # Blockquote heading test (length mode)
+  2 |
+  3 | > Short
+  4 | > ========
+    |   ^~~~~~~~ [1]
+  5 |
+  6 | > Very long heading text
+  7 | > ==========
+    |   ^~~~~~~~~~ [2]
+  8 |
+
+Output:
+  1 | # Blockquote heading test (length mode)
+  2 |
+  3 | > Short
+  4 | > =====
+  5 |
+  6 | > Very long heading text
+  7 | > =====
+  8 |
+
+[1] Setext heading underline should be 5 characters long for consistency.
+[2] Setext heading underline should be 5 characters long for consistency.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-length/length-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent
+    align: length
+    length: 5
+Plugins: unable to serialize
+
+Code:
+  1 | # Length mode test
+  2 |
+  3 | Short
+  4 | ========
+    | ^~~~~~~~ [1]
+  5 |
+  6 | Very long heading text
+  7 | ==========
+    | ^~~~~~~~~~ [2]
+  8 |
+
+Output:
+  1 | # Length mode test
+  2 |
+  3 | Short
+  4 | =====
+  5 |
+  6 | Very long heading text
+  7 | =====
+  8 |
+
+[1] Setext heading underline should be 5 characters long for consistency.
+[2] Setext heading underline should be 5 characters long for consistency.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-minimum/blockquote-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent
+    align: minimum
+Plugins: unable to serialize
+
+Code:
+  1 | # Blockquote heading test (consistent minimum mode)
+  2 |
+  3 | > Short
+  4 | > ===============
+    |   ^~~~~~~~~~~~~~~ [1]
+  5 |
+  6 | > Very long heading text
+  7 | > ===
+    |   ^~~ [2]
+  8 |
+
+Output:
+  1 | # Blockquote heading test (consistent minimum mode)
+  2 |
+  3 | > Short
+  4 | > ======================
+  5 |
+  6 | > Very long heading text
+  7 | > ======================
+  8 |
+
+[1] Setext heading underline should be at least as long as the longest heading text in the document.
+[2] Setext heading underline should be at least as long as the longest heading text in the document.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-minimum/consistent-minimum-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent
+    align: minimum
+Plugins: unable to serialize
+
+Code:
+  1 | # Consistent minimum style test
+  2 |
+  3 | Short
+  4 | ===============
+    | ^~~~~~~~~~~~~~~ [1]
+  5 |
+  6 | Very long heading text
+  7 | ===
+    | ^~~ [2]
+  8 |
+
+Output:
+  1 | # Consistent minimum style test
+  2 |
+  3 | Short
+  4 | ======================
+  5 |
+  6 | Very long heading text
+  7 | ======================
+  8 |
+
+[1] Setext heading underline should be at least as long as the longest heading text in the document.
+[2] Setext heading underline should be at least as long as the longest heading text in the document.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-minimum/example-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent
+    align: minimum
+Plugins: unable to serialize
+
+Code:
+  1 | <!-- ✓ GOOD (consistent mode with align: minimum) -->
+  2 | Short
+  3 | ==================
+  4 |
+  5 | Long heading text
+  6 | ==================
+  7 |
+  8 | <!-- ✗ BAD (consistent mode with align: minimum) -->
+  9 | Short
+ 10 | =================
+    | ^~~~~~~~~~~~~~~~~ [1]
+ 11 |
+ 12 | Long heading text
+ 13 | =================
+    | ^~~~~~~~~~~~~~~~~ [2]
+ 14 |
+
+Output:
+  1 | <!-- ✓ GOOD (consistent mode with align: minimum) -->
+  2 | Short
+  3 | ==================
+  4 |
+  5 | Long heading text
+  6 | ==================
+  7 |
+  8 | <!-- ✗ BAD (consistent mode with align: minimum) -->
+  9 | Short
+ 10 | ==================
+ 11 |
+ 12 | Long heading text
+ 13 | ==================
+ 14 |
+
+[1] Setext heading underline should be at least as long as the longest heading text in the document.
+[2] Setext heading underline should be at least as long as the longest heading text in the document.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/exact/blockquote-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Blockquote heading test (exact mode)
+  2 |
+  3 | > Head
+  4 | > ---
+    |   ^~~ [1]
+  5 |
+  6 | Normal heading
+  7 | ==============
+  8 |
+
+Output:
+  1 | # Blockquote heading test (exact mode)
+  2 |
+  3 | > Head
+  4 | > ----
+  5 |
+  6 | Normal heading
+  7 | ==============
+  8 |
+
+[1] Setext heading underline should be exactly the same length as the heading text.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/exact/long-underline-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Long underline (exact style)
+  2 |
+  3 | Short
+  4 | =========
+    | ^~~~~~~~~ [1]
+  5 |
+  6 | Test
+  7 | -------
+    | ^~~~~~~ [2]
+  8 |
+
+Output:
+  1 | # Long underline (exact style)
+  2 |
+  3 | Short
+  4 | =====
+  5 |
+  6 | Test
+  7 | ----
+  8 |
+
+[1] Setext heading underline should be exactly the same length as the heading text.
+[2] Setext heading underline should be exactly the same length as the heading text.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/exact/multiline-blockquote-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Multiline blockquote test (exact mode)
+  2 |
+  3 | > This is a multiline
+  4 | > blockquote heading
+  5 | > ========
+    |   ^~~~~~~~ [1]
+  6 |
+  7 | ## Normal heading
+  8 |
+
+Output:
+  1 | # Multiline blockquote test (exact mode)
+  2 |
+  3 | > This is a multiline
+  4 | > blockquote heading
+  5 | > ===================
+  6 |
+  7 | ## Normal heading
+  8 |
+
+[1] Setext heading underline should be exactly the same length as the heading text.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/exact/multiline-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Multiline setext heading test (exact mode)
+  2 |
+  3 | This is a multiline
+  4 | setext heading text
+  5 | =============
+    | ^~~~~~~~~~~~~ [1]
+  6 |
+  7 | Another
+  8 | multiline heading
+  9 | ---------------------
+    | ^~~~~~~~~~~~~~~~~~~~~ [2]
+ 10 |
+
+Output:
+  1 | # Multiline setext heading test (exact mode)
+  2 |
+  3 | This is a multiline
+  4 | setext heading text
+  5 | ===================
+  6 |
+  7 | Another
+  8 | multiline heading
+  9 | -----------------
+ 10 |
+
+[1] Setext heading underline should be exactly the same length as the heading text.
+[2] Setext heading underline should be exactly the same length as the heading text.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/exact/short-underline-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Short underline (exact style)
+  2 |
+  3 | This heading is too long
+  4 | ===
+    | ^~~ [1]
+  5 |
+  6 | Another heading
+  7 | ----
+    | ^~~~ [2]
+  8 |
+  9 | Short
+ 10 | =======
+    | ^~~~~~~ [3]
+ 11 |
+
+Output:
+  1 | # Short underline (exact style)
+  2 |
+  3 | This heading is too long
+  4 | ========================
+  5 |
+  6 | Another heading
+  7 | ---------------
+  8 |
+  9 | Short
+ 10 | =====
+ 11 |
+
+[1] Setext heading underline should be exactly the same length as the heading text.
+[2] Setext heading underline should be exactly the same length as the heading text.
+[3] Setext heading underline should be exactly the same length as the heading text.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/exact/single-marker-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Single character setext heading (invalid/exact)
+  2 |
+  3 | A
+  4 | ==
+    | ^~ [1]
+  5 |
+  6 | B
+  7 | --
+    | ^~ [2]
+  8 |
+
+Output:
+  1 | # Single character setext heading (invalid/exact)
+  2 |
+  3 | A
+  4 | =
+  5 |
+  6 | B
+  7 | -
+  8 |
+
+[1] Setext heading underline should be exactly the same length as the heading text.
+[2] Setext heading underline should be exactly the same length as the heading text.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/minimum/blockquote-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: minimum
+Plugins: unable to serialize
+
+Code:
+  1 | # Blockquote heading test (minimum mode)
+  2 |
+  3 | > Short
+  4 | > --
+    |   ^~ [1]
+  5 |
+  6 | > Very long heading text
+  7 | > ===
+    |   ^~~ [2]
+  8 |
+
+Output:
+  1 | # Blockquote heading test (minimum mode)
+  2 |
+  3 | > Short
+  4 | > -----
+  5 |
+  6 | > Very long heading text
+  7 | > ======================
+  8 |
+
+[1] Setext heading underline should be at least as long as the heading text.
+[2] Setext heading underline should be at least as long as the heading text.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/minimum/minimum-length-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: minimum
+Plugins: unable to serialize
+
+Code:
+  1 | # Minimum length test case
+  2 |
+  3 | Short heading
+  4 | ===
+    | ^~~ [1]
+  5 |
+  6 | Test
+  7 | --
+    | ^~ [2]
+  8 |
+
+Output:
+  1 | # Minimum length test case
+  2 |
+  3 | Short heading
+  4 | =============
+  5 |
+  6 | Test
+  7 | ----
+  8 |
+
+[1] Setext heading underline should be at least as long as the heading text.
+[2] Setext heading underline should be at least as long as the heading text.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/minimum/multiline-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: minimum
+Plugins: unable to serialize
+
+Code:
+  1 | # Multiline setext heading test (minimum mode)
+  2 |
+  3 | Short
+  4 | multiline
+  5 | ===
+    | ^~~ [1]
+  6 |
+  7 | This is a very long line of text
+  8 | that spans multiple lines
+  9 | ==========
+    | ^~~~~~~~~~ [2]
+ 10 |
+
+Output:
+  1 | # Multiline setext heading test (minimum mode)
+  2 |
+  3 | Short
+  4 | multiline
+  5 | =========
+  6 |
+  7 | This is a very long line of text
+  8 | that spans multiple lines
+  9 | ================================
+ 10 |
+
+[1] Setext heading underline should be at least as long as the heading text.
+[2] Setext heading underline should be at least as long as the heading text.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/minimum/single-marker-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: minimum
+Plugins: unable to serialize
+
+Code:
+  1 | # Single character setext heading (invalid/minimum)
+  2 |
+  3 | Foo
+  4 | =
+    | ^ [1]
+  5 |
+  6 | B
+  7 | -
+  8 |
+
+Output:
+  1 | # Single character setext heading (invalid/minimum)
+  2 |
+  3 | Foo
+  4 | ===
+  5 |
+  6 | B
+  7 | -
+  8 |
+
+[1] Setext heading underline should be at least as long as the heading text.
+---

@@ -50,6 +50,7 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 | [markdown-preferences/prefer-autolinks](./prefer-autolinks.md) | enforce the use of autolinks for URLs | 🔧 | ⭐ |
 | [markdown-preferences/prefer-fenced-code-blocks](./prefer-fenced-code-blocks.md) | enforce the use of fenced code blocks over indented code blocks | 🔧 | ⭐ |
 | [markdown-preferences/prefer-link-reference-definitions](./prefer-link-reference-definitions.md) | enforce using link reference definitions instead of inline links | 🔧 |  |
+| [markdown-preferences/setext-heading-underline-length](./setext-heading-underline-length.md) | enforce setext heading underline length | 🔧 |  |
 | [markdown-preferences/sort-definitions](./sort-definitions.md) | enforce a specific order for link definitions and footnote definitions | 🔧 |  |
 
 <!-- prettier-ignore-end -->

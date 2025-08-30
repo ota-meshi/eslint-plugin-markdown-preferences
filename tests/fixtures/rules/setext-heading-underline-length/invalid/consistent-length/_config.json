@@ -1,0 +1,9 @@
+{
+  "options": [
+    {
+      "mode": "consistent",
+      "align": "length",
+      "length": 5
+    }
+  ]
+}

@@ -4,7 +4,7 @@ import type { MarkdownSourceCode } from "@eslint/markdown";
 import type { ParsedATXHeadingClosingSequence } from "../utils/atx-heading.ts";
 import { parseATXHeadingClosingSequence } from "../utils/atx-heading.ts";
 import { getParsedLines } from "../utils/lines.ts";
-import stringWidth from "string-width";
+import { getTextWidth } from "../utils/get-text-width.ts";
 
 type Options = {
   mode?:
@@ -15,8 +15,6 @@ type Options = {
     | "fixed-line-length";
   length?: number;
 };
-
-let segmenter: Intl.Segmenter | null;
 
 export default createRule<[Options?]>("atx-headings-closing-sequence-length", {
   meta: {
@@ -245,24 +243,3 @@ export default createRule<[Options?]>("atx-headings-closing-sequence-length", {
     }
   },
 });
-
-/**
- * Get the width of a text string.
- */
-function getTextWidth(text: string) {
-  if (!text.includes("\t")) {
-    return stringWidth(text);
-  }
-  if (!segmenter) {
-    segmenter = new Intl.Segmenter("en");
-  }
-  let width = 0;
-  for (const { segment: c } of segmenter.segment(text)) {
-    if (c === "\t") {
-      width += 4 - (width % 4);
-    } else {
-      width += stringWidth(c);
-    }
-  }
-  return width;
-}

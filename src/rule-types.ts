@@ -119,6 +119,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/prefer-linked-words'?: Linter.RuleEntry<MarkdownPreferencesPreferLinkedWords>
   /**
+   * enforce setext heading underline length
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/setext-heading-underline-length.html
+   */
+  'markdown-preferences/setext-heading-underline-length'?: Linter.RuleEntry<MarkdownPreferencesSetextHeadingUnderlineLength>
+  /**
    * enforce a specific order for link definitions and footnote definitions
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/sort-definitions.html
    */
@@ -230,6 +235,12 @@ type MarkdownPreferencesPreferLinkedWords = []|[{
     [k: string]: unknown | undefined
   }[]
   [k: string]: unknown | undefined
+}]
+// ----- markdown-preferences/setext-heading-underline-length -----
+type MarkdownPreferencesSetextHeadingUnderlineLength = []|[{
+  mode?: ("exact" | "minimum" | "consistent")
+  align?: ("any" | "exact" | "minimum" | "length")
+  length?: number
 }]
 // ----- markdown-preferences/sort-definitions -----
 type MarkdownPreferencesSortDefinitions = []|[{
