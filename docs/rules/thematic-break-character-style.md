@@ -2,14 +2,15 @@
 pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/thematic-break-character-style"
-description: "..."
+description: "enforce a consistent character style for thematic breaks (horizontal rules) in Markdown."
 ---
 
 # markdown-preferences/thematic-break-character-style
 
-> ...
+> enforce a consistent character style for thematic breaks (horizontal rules) in Markdown.
 
 - ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
+- 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
 
