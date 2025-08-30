@@ -162,12 +162,12 @@ export function getThematicBreakMarker(
   sourceCode: MarkdownSourceCode,
   node: ThematicBreak,
 ): {
-  kind: "-" | "*";
+  kind: "-" | "*" | "_";
   hasSpaces: boolean;
 } {
   const text = sourceCode.getText(node);
   return {
-    kind: text.startsWith("-") ? "-" : "*",
+    kind: text.startsWith("-") ? "-" : text.startsWith("*") ? "*" : "_",
     hasSpaces: /\s/u.test(text),
   };
 }

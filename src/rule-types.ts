@@ -238,7 +238,7 @@ type MarkdownPreferencesPreferLinkedWords = []|[{
 }]
 // ----- markdown-preferences/setext-heading-underline-length -----
 type MarkdownPreferencesSetextHeadingUnderlineLength = []|[{
-  mode?: ("exact" | "minimum" | "consistent")
+  mode?: ("exact" | "minimum" | "consistent" | "consistent-line-length")
   align?: ("any" | "exact" | "minimum" | "length")
   length?: number
 }]

@@ -1,0 +1,3 @@
+# valid: spaced asterisk style
+* * *
+* * * * *

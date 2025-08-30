@@ -52,5 +52,6 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 | [markdown-preferences/prefer-link-reference-definitions](./prefer-link-reference-definitions.md) | enforce using link reference definitions instead of inline links | 🔧 |  |
 | [markdown-preferences/setext-heading-underline-length](./setext-heading-underline-length.md) | enforce setext heading underline length | 🔧 |  |
 | [markdown-preferences/sort-definitions](./sort-definitions.md) | enforce a specific order for link definitions and footnote definitions | 🔧 |  |
+| [markdown-preferences/thematic-break-character-style](./thematic-break-character-style.md) | ... |  |  |
 
 <!-- prettier-ignore-end -->
