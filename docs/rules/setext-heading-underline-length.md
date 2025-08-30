@@ -160,6 +160,31 @@ Long heading
 
 <!-- prettier-ignore-end -->
 
+<!-- prettier-ignore-start -->
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/setext-heading-underline-length: ['error', { "mode": "consistent-line-length", "align": "exact" }] -->
+
+<!-- ✓ GOOD (consistent-line-length mode with align: exact) -->
+
+Heading
+=======================
+
+> Heading in Blockquote
+> =====================
+
+<!-- ✗ BAD (consistent-line-length mode with align: exact) -->
+Heading
+=====================
+
+> Heading in Blockquote
+> =====================
+```
+
+<!-- prettier-ignore-end -->
+
 ## 🔧 Options
 
 ```json
@@ -181,10 +206,11 @@ This rule accepts an object option with the following properties:
   - `"exact"` (default): Underline length must exactly match the heading text length.
   - `"minimum"`: Underline length must be at least as long as the heading text.
   - `"consistent"`: All underlines with the same marker (= or -) must be consistent. Requires the `align` property.
-- `align` (required for `consistent` mode):
+  - `"consistent-line-length"`: All underlines with the same marker (= or -) must be consistent in line length, including blockquote markers and leading characters. Requires the `align` property.
+- `align` (required for `consistent` and `consistent-line-length` modes):
   - `"any"`: Use the length of the first occurrence for consistency.
-  - `"exact"`: All underlines must be exactly as long as the longest heading text in the document.
-  - `"minimum"`: All underlines must be at least as long as the longest heading text in the document.
+  - `"exact"`: All underlines must be exactly as long as the longest heading in the document.
+  - `"minimum"`: All underlines must be at least as long as the longest heading in the document.
   - `"length"`: All underlines must have the specified fixed length. Requires the `length` property.
 - `length` (number, required for `align: "length"`): The required length for underlines.
 

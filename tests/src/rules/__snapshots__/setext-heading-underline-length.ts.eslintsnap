@@ -451,78 +451,273 @@ Output:
 
 
 Test: setext-heading-underline-length >> invalid
-Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-length/blockquote-input.md
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-line-length-any/basic-input.md
 Language: markdown/gfm
 LanguageOptions:
   frontmatter: yaml
 Options:
-  - mode: consistent
-    align: length
-    length: 5
+  - mode: consistent-line-length
+    align: any
 Plugins: unable to serialize
 
 Code:
-  1 | # Blockquote heading test (length mode)
+  1 | # Consistent line length (align: any, invalid)
   2 |
-  3 | > Short
-  4 | > ========
-    |   ^~~~~~~~ [1]
+  3 | Heading 1
+  4 | ==============
   5 |
-  6 | > Very long heading text
-  7 | > ==========
-    |   ^~~~~~~~~~ [2]
+  6 | > Blockquote Heading
+  7 | > ==============
+    |   ^~~~~~~~~~~~~~ [1]
   8 |
 
 Output:
-  1 | # Blockquote heading test (length mode)
+  1 | # Consistent line length (align: any, invalid)
   2 |
-  3 | > Short
-  4 | > =====
+  3 | Heading 1
+  4 | ==============
   5 |
-  6 | > Very long heading text
-  7 | > =====
+  6 | > Blockquote Heading
+  7 | > ============
   8 |
 
-[1] Setext heading underline should be 5 characters long for consistency.
-[2] Setext heading underline should be 5 characters long for consistency.
+[1] Setext heading underline should be consistent in line length with other underlines in the document.
 ---
 
 
 Test: setext-heading-underline-length >> invalid
-Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-length/length-input.md
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-line-length-any/blockquote-length-input.md
 Language: markdown/gfm
 LanguageOptions:
   frontmatter: yaml
 Options:
-  - mode: consistent
-    align: length
-    length: 5
+  - mode: consistent-line-length
+    align: any
 Plugins: unable to serialize
 
 Code:
-  1 | # Length mode test
+  1 | # Consistent line length (align: length, invalid)
   2 |
-  3 | Short
-  4 | ========
-    | ^~~~~~~~ [1]
+  3 | Heading
+  4 | ===
+    | ^~~ [1]
   5 |
-  6 | Very long heading text
-  7 | ==========
-    | ^~~~~~~~~~ [2]
+  6 | > > Blockquote Heading
+  7 | > > ===
+    |     ^~~ [2]
   8 |
 
 Output:
-  1 | # Length mode test
+  1 | # Consistent line length (align: length, invalid)
   2 |
-  3 | Short
+  3 | Heading
   4 | =====
   5 |
-  6 | Very long heading text
-  7 | =====
+  6 | > > Blockquote Heading
+  7 | > > =
   8 |
 
-[1] Setext heading underline should be 5 characters long for consistency.
-[2] Setext heading underline should be 5 characters long for consistency.
+[1] Setext heading underline should be consistent in line length with other underlines in the document.
+[2] Setext heading underline should be consistent in line length with other underlines in the document.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-line-length-exact/basic-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent-line-length
+    align: exact
+Plugins: unable to serialize
+
+Code:
+  1 | # Consistent line length (align: exact, invalid)
+  2 |
+  3 | Heading 1
+  4 | ==================
+    | ^~~~~~~~~~~~~~~~~~ [1]
+  5 |
+  6 | > Blockquote Heading
+  7 | > ==================
+  8 |
+
+Output:
+  1 | # Consistent line length (align: exact, invalid)
+  2 |
+  3 | Heading 1
+  4 | ====================
+  5 |
+  6 | > Blockquote Heading
+  7 | > ==================
+  8 |
+
+[1] Setext heading underline should be exactly the same line length as the longest heading line in the document.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-line-length-length/basic-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent-line-length
+    align: length
+    length: 15
+Plugins: unable to serialize
+
+Code:
+  1 | # Consistent line length (align: length, invalid)
+  2 |
+  3 | Heading 1
+  4 | ================
+    | ^~~~~~~~~~~~~~~~ [1]
+  5 |
+  6 | > Blockquote Heading
+  7 | > ============
+    |   ^~~~~~~~~~~~ [2]
+  8 |
+
+Output:
+  1 | # Consistent line length (align: length, invalid)
+  2 |
+  3 | Heading 1
+  4 | ===============
+  5 |
+  6 | > Blockquote Heading
+  7 | > =============
+  8 |
+
+[1] Setext heading underline should be 15 characters long for line length consistency.
+[2] Setext heading underline should be 13 characters long for line length consistency.
+---
+
+
+Test: setext-heading-underline-length >> invalid >>> "# Consistent line length (align: length, invalid)\n\nHeading\n===\n\n> > Blockquote Heading\n> > ===\n 2"
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-line-length-length/blockquote-length-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent-line-length
+    align: length
+    length: 3
+Plugins: unable to serialize
+
+Code:
+  1 | # Consistent line length (align: length, invalid)
+  2 |
+  3 | Heading
+  4 | ===
+    | ^~~ [1]
+  5 |
+  6 | > > Blockquote Heading
+  7 | > > ===
+    |     ^~~ [2]
+  8 |
+
+Output:
+  1 | # Consistent line length (align: length, invalid)
+  2 |
+  3 | Heading
+  4 | =====
+  5 |
+  6 | > > Blockquote Heading
+  7 | > > =
+  8 |
+
+[1] Setext heading underline should be 5 characters long for line length consistency.
+[2] Setext heading underline should be 1 characters long for line length consistency.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-line-length-minimum/basic-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent-line-length
+    align: minimum
+Plugins: unable to serialize
+
+Code:
+  1 | # Consistent line length (align: minimum, invalid)
+  2 |
+  3 | Heading 1
+  4 | ==================
+    | ^~~~~~~~~~~~~~~~~~ [1]
+  5 |
+  6 | > Blockquote Heading
+  7 | > ================
+    |   ^~~~~~~~~~~~~~~~ [2]
+  8 | >
+  9 | > Blockquote Heading
+ 10 | > =============
+    |   ^~~~~~~~~~~~~ [3]
+ 11 |
+
+Output:
+  1 | # Consistent line length (align: minimum, invalid)
+  2 |
+  3 | Heading 1
+  4 | ====================
+  5 |
+  6 | > Blockquote Heading
+  7 | > ==================
+  8 | >
+  9 | > Blockquote Heading
+ 10 | > ==================
+ 11 |
+
+[1] Setext heading underline should be at least as long as the longest heading line in the document.
+[2] Setext heading underline should be at least as long as the longest heading line in the document.
+[3] Setext heading underline should be at least as long as the longest heading line in the document.
+---
+
+
+Test: setext-heading-underline-length >> invalid
+Filename: tests/fixtures/rules/setext-heading-underline-length/invalid/consistent-line-length-minimum/basic2-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent-line-length
+    align: minimum
+Plugins: unable to serialize
+
+Code:
+  1 | # Consistent line length (align: minimum, invalid)
+  2 |
+  3 | Heading 1
+  4 | ==================
+    | ^~~~~~~~~~~~~~~~~~ [1]
+  5 |
+  6 | > Blockquote Heading
+  7 | > ===================
+  8 | >
+  9 | > Blockquote Heading
+ 10 | > ====================
+    |   ^~~~~~~~~~~~~~~~~~~~ [2]
+ 11 |
+
+Output:
+  1 | # Consistent line length (align: minimum, invalid)
+  2 |
+  3 | Heading 1
+  4 | =====================
+  5 |
+  6 | > Blockquote Heading
+  7 | > ===================
+  8 | >
+  9 | > Blockquote Heading
+ 10 | > ===================
+ 11 |
+
+[1] Setext heading underline should be at least as long as the longest heading line in the document.
+[2] Setext heading underline should be at least as long as the longest heading line in the document.
 ---
 
 
@@ -620,12 +815,12 @@ Code:
   7 |
   8 | <!-- ✗ BAD (consistent mode with align: minimum) -->
   9 | Short
- 10 | =================
-    | ^~~~~~~~~~~~~~~~~ [1]
+ 10 | ===================
+    | ^~~~~~~~~~~~~~~~~~~ [1]
  11 |
  12 | Long heading text
- 13 | =================
-    | ^~~~~~~~~~~~~~~~~ [2]
+ 13 | =====================
+    | ^~~~~~~~~~~~~~~~~~~~~ [2]
  14 |
 
 Output:

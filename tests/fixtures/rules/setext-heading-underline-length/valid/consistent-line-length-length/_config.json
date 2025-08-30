@@ -1,9 +1,9 @@
 {
   "options": [
     {
-      "mode": "consistent",
+      "mode": "consistent-line-length",
       "align": "length",
-      "length": 5
+      "length": 15
     }
   ]
 }

@@ -1,0 +1,8 @@
+{
+  "options": [
+    {
+      "mode": "consistent-line-length",
+      "align": "minimum"
+    }
+  ]
+}
