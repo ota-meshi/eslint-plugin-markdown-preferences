@@ -1,0 +1,260 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: thematic-break-length >> invalid
+Filename: tests/fixtures/rules/thematic-break-length/invalid/default/basic-invalid-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options: []
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: inconsistent thematic break length (default)
+  2 |
+  3 | ---
+  4 | ----
+    | ^~~~ [1]
+  5 | ---
+  6 |
+
+Output:
+  1 | # Invalid: inconsistent thematic break length (default)
+  2 |
+  3 | ---
+  4 | ---
+  5 | ---
+  6 |
+
+[1] Thematic break should be 3 characters, but found 4.
+---
+
+
+Test: thematic-break-length >> invalid
+Filename: tests/fixtures/rules/thematic-break-length/invalid/default/mixed-style-invalid-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options: []
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: mixed thematic break styles (default)
+  2 |
+  3 | ----
+    | ^~~~ [1]
+  4 | ****
+    | ^~~~ [2]
+  5 | ____
+    | ^~~~ [3]
+  6 |
+
+Output:
+  1 | # Invalid: mixed thematic break styles (default)
+  2 |
+  3 | ---
+  4 | ***
+  5 | ___
+  6 |
+
+[1] Thematic break should be 3 characters, but found 4.
+[2] Thematic break should be 3 characters, but found 4.
+[3] Thematic break should be 3 characters, but found 4.
+---
+
+
+Test: thematic-break-length >> invalid
+Filename: tests/fixtures/rules/thematic-break-length/invalid/default/space-separated-invalid-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options: []
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: space-separated thematic break (default)
+  2 |
+  3 | - - -
+    | ^~~~~ [1]
+  4 | - - - -
+    | ^~~~~~~ [2]
+  5 | - - - - -
+    | ^~~~~~~~~ [3]
+  6 |
+
+Output: unchanged
+
+[1] Thematic break should be 3 characters, but found 5.
+[2] Thematic break should be 3 characters, but found 7.
+[3] Thematic break should be 3 characters, but found 9.
+---
+
+
+Test: thematic-break-length >> invalid
+Filename: tests/fixtures/rules/thematic-break-length/invalid/length-5/complex-space-separated-invalid-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - length: 5
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: space-separated thematic break (default)
+  2 |
+  3 | -- --
+  4 | -- -- --
+    | ^~~~~~~~ [1]
+  5 |
+  6 | ** **
+  7 | ** ** **
+    | ^~~~~~~~ [2]
+  8 |
+  9 | __ __
+ 10 | __ __ __
+    | ^~~~~~~~ [3]
+ 11 |
+
+Output:
+  1 | # Invalid: space-separated thematic break (default)
+  2 |
+  3 | -- --
+  4 | -- --
+  5 |
+  6 | ** **
+  7 | ** **
+  8 |
+  9 | __ __
+ 10 | __ __
+ 11 |
+
+[1] Thematic break should be 5 characters, but found 8.
+[2] Thematic break should be 5 characters, but found 8.
+[3] Thematic break should be 5 characters, but found 8.
+---
+
+
+Test: thematic-break-length >> invalid
+Filename: tests/fixtures/rules/thematic-break-length/invalid/length-5/length-5-invalid-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - length: 5
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: inconsistent thematic break length (length: 5)
+  2 |
+  3 | -----
+  4 | ----
+    | ^~~~ [1]
+  5 | ---
+    | ^~~ [2]
+  6 | ------
+    | ^~~~~~ [3]
+  7 |
+
+Output:
+  1 | # Invalid: inconsistent thematic break length (length: 5)
+  2 |
+  3 | -----
+  4 | -----
+  5 | -----
+  6 | -----
+  7 |
+
+[1] Thematic break should be 5 characters, but found 4.
+[2] Thematic break should be 5 characters, but found 3.
+[3] Thematic break should be 5 characters, but found 6.
+---
+
+
+Test: thematic-break-length >> invalid
+Filename: tests/fixtures/rules/thematic-break-length/invalid/length-5/mixed-style-invalid-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - length: 5
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: mixed thematic break styles (default)
+  2 |
+  3 | ---
+    | ^~~ [1]
+  4 | ***
+    | ^~~ [2]
+  5 | ___
+    | ^~~ [3]
+  6 |
+
+Output:
+  1 | # Invalid: mixed thematic break styles (default)
+  2 |
+  3 | -----
+  4 | *****
+  5 | _____
+  6 |
+
+[1] Thematic break should be 5 characters, but found 3.
+[2] Thematic break should be 5 characters, but found 3.
+[3] Thematic break should be 5 characters, but found 3.
+---
+
+
+Test: thematic-break-length >> invalid
+Filename: tests/fixtures/rules/thematic-break-length/invalid/length-5/space-separated-invalid-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - length: 5
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: space-separated thematic break (default)
+  2 |
+  3 | - - -
+  4 | - - - -
+    | ^~~~~~~ [1]
+  5 | - - - - -
+    | ^~~~~~~~~ [2]
+  6 |
+  7 | * * *
+  8 | * * * *
+    | ^~~~~~~ [3]
+  9 | * * * * *
+    | ^~~~~~~~~ [4]
+ 10 |
+ 11 | _ _ _
+ 12 | _ _ _ _
+    | ^~~~~~~ [5]
+ 13 | _ _ _ _ _
+    | ^~~~~~~~~ [6]
+ 14 |
+
+Output:
+  1 | # Invalid: space-separated thematic break (default)
+  2 |
+  3 | - - -
+  4 | - - -
+  5 | - - -
+  6 |
+  7 | * * *
+  8 | * * *
+  9 | * * *
+ 10 |
+ 11 | _ _ _
+ 12 | _ _ _
+ 13 | _ _ _
+ 14 |
+
+[1] Thematic break should be 5 characters, but found 7.
+[2] Thematic break should be 5 characters, but found 9.
+[3] Thematic break should be 5 characters, but found 7.
+[4] Thematic break should be 5 characters, but found 9.
+[5] Thematic break should be 5 characters, but found 7.
+[6] Thematic break should be 5 characters, but found 9.
+---

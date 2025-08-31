@@ -155,20 +155,23 @@ export function getListItemMarker(
     sequence: Number(matchParen[1]),
   };
 }
+export type ThematicBreakMarker = {
+  kind: "-" | "*" | "_";
+  hasSpaces: boolean;
+  text: string;
+};
 /**
  * Get the marker for a thematic break.
  */
 export function getThematicBreakMarker(
   sourceCode: MarkdownSourceCode,
   node: ThematicBreak,
-): {
-  kind: "-" | "*" | "_";
-  hasSpaces: boolean;
-} {
+): ThematicBreakMarker {
   const text = sourceCode.getText(node);
   return {
     kind: text.startsWith("-") ? "-" : text.startsWith("*") ? "*" : "_",
     hasSpaces: /\s/u.test(text),
+    text: text.trimEnd(),
   };
 }
 
