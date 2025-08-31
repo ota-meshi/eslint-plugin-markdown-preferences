@@ -167,11 +167,11 @@ export function getThematicBreakMarker(
   sourceCode: MarkdownSourceCode,
   node: ThematicBreak,
 ): ThematicBreakMarker {
-  const text = sourceCode.getText(node);
+  const text = sourceCode.getText(node).trimEnd();
   return {
     kind: text.startsWith("-") ? "-" : text.startsWith("*") ? "*" : "_",
     hasSpaces: /\s/u.test(text),
-    text: text.trimEnd(),
+    text,
   };
 }
 
