@@ -143,6 +143,11 @@ export interface RuleOptions {
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-length.html
    */
   'markdown-preferences/thematic-break-length'?: Linter.RuleEntry<MarkdownPreferencesThematicBreakLength>
+  /**
+   * enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown.
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-sequence-pattern.html
+   */
+  'markdown-preferences/thematic-break-sequence-pattern'?: Linter.RuleEntry<MarkdownPreferencesThematicBreakSequencePattern>
 }
 
 /* ======= Declarations ======= */
@@ -277,4 +282,8 @@ type MarkdownPreferencesThematicBreakCharacterStyle = []|[{
 // ----- markdown-preferences/thematic-break-length -----
 type MarkdownPreferencesThematicBreakLength = []|[{
   length?: number
+}]
+// ----- markdown-preferences/thematic-break-sequence-pattern -----
+type MarkdownPreferencesThematicBreakSequencePattern = []|[{
+  pattern: (string | string | string)
 }]

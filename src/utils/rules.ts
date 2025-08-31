@@ -28,6 +28,7 @@ import sortDefinitions from "../rules/sort-definitions.ts";
 import tableHeaderCasing from "../rules/table-header-casing.ts";
 import thematicBreakCharacterStyle from "../rules/thematic-break-character-style.ts";
 import thematicBreakLength from "../rules/thematic-break-length.ts";
+import thematicBreakSequencePattern from "../rules/thematic-break-sequence-pattern.ts";
 
 export const rules = [
   atxHeadingsClosingSequenceLength,
@@ -56,4 +57,5 @@ export const rules = [
   tableHeaderCasing,
   thematicBreakCharacterStyle,
   thematicBreakLength,
+  thematicBreakSequencePattern,
 ] as RuleModule[];

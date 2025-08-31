@@ -54,5 +54,6 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 | [markdown-preferences/sort-definitions](./sort-definitions.md) | enforce a specific order for link definitions and footnote definitions | 🔧 |  |
 | [markdown-preferences/thematic-break-character-style](./thematic-break-character-style.md) | enforce consistent character style for thematic breaks (horizontal rules) in Markdown. | 🔧 |  |
 | [markdown-preferences/thematic-break-length](./thematic-break-length.md) | enforce consistent length for thematic breaks (horizontal rules) in Markdown. | 🔧 |  |
+| [markdown-preferences/thematic-break-sequence-pattern](./thematic-break-sequence-pattern.md) | enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown. | 🔧 |  |
 
 <!-- prettier-ignore-end -->

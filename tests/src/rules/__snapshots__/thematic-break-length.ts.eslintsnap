@@ -258,3 +258,39 @@ Output:
 [5] Thematic break should be 5 characters, but found 7.
 [6] Thematic break should be 5 characters, but found 9.
 ---
+
+
+Test: thematic-break-length >> invalid
+Filename: tests/fixtures/rules/thematic-break-length/invalid/length-6/complex-space-separated-invalid-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - length: 6
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: space-separated thematic break
+  2 |
+  3 | -- ---
+  4 | -- --
+    | ^~~~~ [1]
+  5 | - - -
+    | ^~~~~ [2]
+  6 | ---
+    | ^~~ [3]
+  7 |
+
+Output:
+  1 | # Invalid: space-separated thematic break
+  2 |
+  3 | -- ---
+  4 | -- --
+  5 | - - -
+  6 | ------
+  7 |
+
+[1] Thematic break should be 6 characters, but found 5.
+[2] Thematic break should be 6 characters, but found 5.
+[3] Thematic break should be 6 characters, but found 3.
+---

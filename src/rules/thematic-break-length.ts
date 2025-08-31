@@ -2,6 +2,10 @@ import type { ThematicBreakMarker } from "../utils/ast.ts";
 import { getThematicBreakMarker } from "../utils/ast.ts";
 import { createRule } from "../utils/index.ts";
 import type { ThematicBreak } from "mdast";
+import {
+  createThematicBreakFromPattern,
+  isValidThematicBreakPattern,
+} from "../utils/thematic-break.ts";
 
 export default createRule<[{ length?: number }?]>("thematic-break-length", {
   meta: {
@@ -63,18 +67,7 @@ export default createRule<[{ length?: number }?]>("thematic-break-length", {
         // Infer sequence pattern
         const pattern = inferSequencePattern(marker.text);
         if (pattern) {
-          let candidate = pattern.repeat(
-            Math.floor(expectedLength / pattern.length),
-          );
-          if (candidate.length < expectedLength) {
-            candidate += pattern.slice(0, expectedLength - candidate.length);
-          }
-          let markCount = 0;
-          for (const c of candidate) {
-            if (c !== marker.kind) continue;
-            markCount++;
-            if (markCount >= 3) return candidate;
-          }
+          return createThematicBreakFromPattern(pattern, expectedLength);
         }
         return null;
       }
@@ -87,28 +80,11 @@ export default createRule<[{ length?: number }?]>("thematic-break-length", {
     function inferSequencePattern(original: string) {
       for (let length = 2; length < original.length; length++) {
         const pattern = original.slice(0, length);
-        if (isValidPattern(pattern, original)) {
+        if (isValidThematicBreakPattern(pattern, original)) {
           return pattern;
         }
       }
       return null;
-    }
-
-    /**
-     * Check if the pattern is valid within the original string.
-     */
-    function isValidPattern(pattern: string, original: string) {
-      for (let i = 0; i < original.length; i += pattern.length) {
-        const subSequence = original.slice(i, i + pattern.length);
-        if (subSequence === pattern) continue;
-        if (
-          subSequence.length < pattern.length &&
-          pattern.startsWith(subSequence)
-        )
-          continue;
-        return false;
-      }
-      return true;
     }
   },
 });
