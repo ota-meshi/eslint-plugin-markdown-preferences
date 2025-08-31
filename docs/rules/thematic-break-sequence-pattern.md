@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/thematic-break-sequence-pattern"
 description: "enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown."
+since: "v0.17.0"
 ---
 
 # markdown-preferences/thematic-break-sequence-pattern
 
 > enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown.
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -132,12 +132,12 @@ ___
 [markdown-preferences/thematic-break-character-style]: ./thematic-break-character-style.md
 [markdown-preferences/thematic-break-length]: ./thematic-break-length.md
 
-## 🔍 Implementation
+## 🚀 Version
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+This rule was introduced in eslint-plugin-markdown-preferences v0.17.0
+
+## 🔍 Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/thematic-break-sequence-pattern.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/thematic-break-sequence-pattern.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/thematic-break-sequence-pattern)
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->

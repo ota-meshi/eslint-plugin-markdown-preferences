@@ -1,5 +1,17 @@
 # eslint-plugin-markdown-preferences
 
+## 0.17.0
+
+### Minor Changes
+
+- [#75](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/75) [`0a33fa5`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/0a33fa5bf221d608cb35a2c3e963d6c6b0ee775a) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/setext-heading-underline-length`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/setext-heading-underline-length.html) rule
+
+- [#76](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/76) [`fb6260e`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/fb6260e512e7fa885fd11d2318215fecfc1e1915) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/thematic-break-character-style`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-character-style.html) rule
+
+- [#80](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/80) [`cf8747b`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/cf8747b6ee4bba3019f0c332ab83b5819fe529ba) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/thematic-break-length`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-length.html) rule
+
+- [#82](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/82) [`c303233`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/c3032335f7544bf6ae69f2a55373ef984e60f524) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/thematic-break-sequence-pattern`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-sequence-pattern.html) rule
+
 ## 0.16.0
 
 ### Minor Changes
