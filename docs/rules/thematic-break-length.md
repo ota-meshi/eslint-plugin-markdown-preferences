@@ -74,6 +74,7 @@ _____
 ## 👫 Related Rules
 
 - [markdown-preferences/thematic-break-character-style](./thematic-break-character-style.md)
+- [markdown-preferences/thematic-break-sequence-pattern](./thematic-break-sequence-pattern.md)
 
 ## 🔍 Implementation
 

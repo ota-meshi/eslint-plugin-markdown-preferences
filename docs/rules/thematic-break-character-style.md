@@ -56,6 +56,7 @@ If no option is specified, `"-"` is used by default.
 ## 👫 Related Rules
 
 - [markdown-preferences/thematic-break-length](./thematic-break-length.md)
+- [markdown-preferences/thematic-break-sequence-pattern](./thematic-break-sequence-pattern.md)
 
 ## 🔍 Implementation
 

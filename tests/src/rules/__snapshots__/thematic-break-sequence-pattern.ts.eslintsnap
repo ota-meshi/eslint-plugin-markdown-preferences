@@ -1,0 +1,377 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: thematic-break-sequence-pattern >> invalid
+Filename: tests/fixtures/rules/thematic-break-sequence-pattern/invalid/asterisk/spaced-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - pattern: "*"
+Plugins: unable to serialize
+
+Code:
+  1 | # spaced pattern
+  2 |
+  3 | - - -
+    | ^~~~~ [1]
+  4 |
+  5 | * * *
+    | ^~~~~ [2]
+  6 |
+  7 | _ _ _
+    | ^~~~~ [3]
+  8 |
+
+Output:
+  1 | # spaced pattern
+  2 |
+  3 | -----
+  4 |
+  5 | *****
+  6 |
+  7 | _____
+  8 |
+
+[1] Thematic break does not match the preferred repeating pattern '*'.
+[2] Thematic break does not match the preferred repeating pattern '*'.
+[3] Thematic break does not match the preferred repeating pattern '*'.
+---
+
+
+Test: thematic-break-sequence-pattern >> invalid
+Filename: tests/fixtures/rules/thematic-break-sequence-pattern/invalid/asterisk-spaced/solid-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - pattern: "* "
+Plugins: unable to serialize
+
+Code:
+  1 | # solid pattern
+  2 |
+  3 | ---
+    | ^~~ [1]
+  4 |
+  5 | ***
+    | ^~~ [2]
+  6 |
+  7 | ___
+    | ^~~ [3]
+  8 |
+  9 | -------
+    | ^~~~~~~ [4]
+ 10 |
+ 11 | *****
+    | ^~~~~ [5]
+ 12 |
+ 13 | _________
+    | ^~~~~~~~~ [6]
+ 14 |
+
+Output:
+  1 | # solid pattern
+  2 |
+  3 | ---
+  4 |
+  5 | ***
+  6 |
+  7 | ___
+  8 |
+  9 | - - - -
+ 10 |
+ 11 | * * *
+ 12 |
+ 13 | _ _ _ _ _
+ 14 |
+
+[1] Thematic break does not match the preferred repeating pattern '* '.
+[2] Thematic break does not match the preferred repeating pattern '* '.
+[3] Thematic break does not match the preferred repeating pattern '* '.
+[4] Thematic break does not match the preferred repeating pattern '* '.
+[5] Thematic break does not match the preferred repeating pattern '* '.
+[6] Thematic break does not match the preferred repeating pattern '* '.
+---
+
+
+Test: thematic-break-sequence-pattern >> invalid
+Filename: tests/fixtures/rules/thematic-break-sequence-pattern/invalid/complex/complex-pattern-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - pattern: "-- - "
+Plugins: unable to serialize
+
+Code:
+  1 | # Complex invalid
+  2 |
+  3 | -- -
+  4 |
+  5 | -- - -- -
+  6 |
+  7 | -- -- -- -- -- -
+    | ^~~~~~~~~~~~~~~~ [1]
+  8 |
+  9 | ----------
+    | ^~~~~~~~~~ [2]
+ 10 |
+
+Output:
+  1 | # Complex invalid
+  2 |
+  3 | -- -
+  4 |
+  5 | -- - -- -
+  6 |
+  7 | -- - -- - -- - -
+  8 |
+  9 | ----------
+ 10 |
+
+[1] Thematic break does not match the preferred repeating pattern '-- - '.
+[2] Thematic break does not match the preferred repeating pattern '-- - '.
+---
+
+
+Test: thematic-break-sequence-pattern >> invalid
+Filename: tests/fixtures/rules/thematic-break-sequence-pattern/invalid/multiline/multiline-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - pattern: "-"
+Plugins: unable to serialize
+
+Code:
+  1 | # Multiline invalid
+  2 |
+  3 | - - -
+    | ^~~~~ [1]
+  4 |
+  5 | Text
+  6 |
+  7 | - - - - -
+    | ^~~~~~~~~ [2]
+  8 |
+  9 | * * * * *
+    | ^~~~~~~~~ [3]
+ 10 |
+ 11 | _ _ _ _ _
+    | ^~~~~~~~~ [4]
+ 12 |
+
+Output:
+  1 | # Multiline invalid
+  2 |
+  3 | -----
+  4 |
+  5 | Text
+  6 |
+  7 | ---------
+  8 |
+  9 | *********
+ 10 |
+ 11 | _________
+ 12 |
+
+[1] Thematic break does not match the preferred repeating pattern '-'.
+[2] Thematic break does not match the preferred repeating pattern '-'.
+[3] Thematic break does not match the preferred repeating pattern '-'.
+[4] Thematic break does not match the preferred repeating pattern '-'.
+---
+
+
+Test: thematic-break-sequence-pattern >> invalid
+Filename: tests/fixtures/rules/thematic-break-sequence-pattern/invalid/solid/spaced-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - pattern: "-"
+Plugins: unable to serialize
+
+Code:
+  1 | # spaced pattern
+  2 |
+  3 | - - -
+    | ^~~~~ [1]
+  4 |
+  5 | -- -- --
+    | ^~~~~~~~ [2]
+  6 |
+  7 | * * *
+    | ^~~~~ [3]
+  8 |
+  9 | _ _ _
+    | ^~~~~ [4]
+ 10 |
+
+Output:
+  1 | # spaced pattern
+  2 |
+  3 | -----
+  4 |
+  5 | --------
+  6 |
+  7 | *****
+  8 |
+  9 | _____
+ 10 |
+
+[1] Thematic break does not match the preferred repeating pattern '-'.
+[2] Thematic break does not match the preferred repeating pattern '-'.
+[3] Thematic break does not match the preferred repeating pattern '-'.
+[4] Thematic break does not match the preferred repeating pattern '-'.
+---
+
+
+Test: thematic-break-sequence-pattern >> invalid >>> "# solid pattern\n\n---\n\n***\n\n___\n\n-------\n\n*****\n\n_________\n 2"
+Filename: tests/fixtures/rules/thematic-break-sequence-pattern/invalid/spaced/solid-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - pattern: "- "
+Plugins: unable to serialize
+
+Code:
+  1 | # solid pattern
+  2 |
+  3 | ---
+    | ^~~ [1]
+  4 |
+  5 | ***
+    | ^~~ [2]
+  6 |
+  7 | ___
+    | ^~~ [3]
+  8 |
+  9 | -------
+    | ^~~~~~~ [4]
+ 10 |
+ 11 | *****
+    | ^~~~~ [5]
+ 12 |
+ 13 | _________
+    | ^~~~~~~~~ [6]
+ 14 |
+
+Output:
+  1 | # solid pattern
+  2 |
+  3 | ---
+  4 |
+  5 | ***
+  6 |
+  7 | ___
+  8 |
+  9 | - - - -
+ 10 |
+ 11 | * * *
+ 12 |
+ 13 | _ _ _ _ _
+ 14 |
+
+[1] Thematic break does not match the preferred repeating pattern '- '.
+[2] Thematic break does not match the preferred repeating pattern '- '.
+[3] Thematic break does not match the preferred repeating pattern '- '.
+[4] Thematic break does not match the preferred repeating pattern '- '.
+[5] Thematic break does not match the preferred repeating pattern '- '.
+[6] Thematic break does not match the preferred repeating pattern '- '.
+---
+
+
+Test: thematic-break-sequence-pattern >> invalid >>> "# spaced pattern\n\n- - -\n\n* * *\n\n_ _ _\n 2"
+Filename: tests/fixtures/rules/thematic-break-sequence-pattern/invalid/underscore/spaced-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - pattern: _
+Plugins: unable to serialize
+
+Code:
+  1 | # spaced pattern
+  2 |
+  3 | - - -
+    | ^~~~~ [1]
+  4 |
+  5 | * * *
+    | ^~~~~ [2]
+  6 |
+  7 | _ _ _
+    | ^~~~~ [3]
+  8 |
+
+Output:
+  1 | # spaced pattern
+  2 |
+  3 | -----
+  4 |
+  5 | *****
+  6 |
+  7 | _____
+  8 |
+
+[1] Thematic break does not match the preferred repeating pattern '_'.
+[2] Thematic break does not match the preferred repeating pattern '_'.
+[3] Thematic break does not match the preferred repeating pattern '_'.
+---
+
+
+Test: thematic-break-sequence-pattern >> invalid >>> "# solid pattern\n\n---\n\n***\n\n___\n\n-------\n\n*****\n\n_________\n 3"
+Filename: tests/fixtures/rules/thematic-break-sequence-pattern/invalid/underscore-spaced/solid-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - pattern: "_ "
+Plugins: unable to serialize
+
+Code:
+  1 | # solid pattern
+  2 |
+  3 | ---
+    | ^~~ [1]
+  4 |
+  5 | ***
+    | ^~~ [2]
+  6 |
+  7 | ___
+    | ^~~ [3]
+  8 |
+  9 | -------
+    | ^~~~~~~ [4]
+ 10 |
+ 11 | *****
+    | ^~~~~ [5]
+ 12 |
+ 13 | _________
+    | ^~~~~~~~~ [6]
+ 14 |
+
+Output:
+  1 | # solid pattern
+  2 |
+  3 | ---
+  4 |
+  5 | ***
+  6 |
+  7 | ___
+  8 |
+  9 | - - - -
+ 10 |
+ 11 | * * *
+ 12 |
+ 13 | _ _ _ _ _
+ 14 |
+
+[1] Thematic break does not match the preferred repeating pattern '_ '.
+[2] Thematic break does not match the preferred repeating pattern '_ '.
+[3] Thematic break does not match the preferred repeating pattern '_ '.
+[4] Thematic break does not match the preferred repeating pattern '_ '.
+[5] Thematic break does not match the preferred repeating pattern '_ '.
+[6] Thematic break does not match the preferred repeating pattern '_ '.
+---

@@ -114,10 +114,11 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 
 ## Rules Related to Thematic Breaks
 
-| Description           | [markdownlint] Rules                        | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules                                                                                                       |
-| --------------------- | ------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `<hr>` notation style | [MD035] _hr-style_<br>Horizontal rule style | --                       | [markdown-preferences/thematic-break-character-style]<br>enforce a consistent character style for thematic breaks (horizontal rules) in Markdown |
-| `<hr>` length         | --                                          | --                       | [markdown-preferences/thematic-break-length]<br>enforce consistent length for thematic breaks (horizontal rules) in Markdown                     |
+| Description             | [markdownlint] Rules                        | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules                                                                                                       |
+| ----------------------- | ------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `<hr>` notation style   | [MD035] _hr-style_<br>Horizontal rule style | --                       | [markdown-preferences/thematic-break-character-style]<br>enforce a consistent character style for thematic breaks (horizontal rules) in Markdown |
+| `<hr>` length           | --                                          | --                       | [markdown-preferences/thematic-break-length]<br>enforce consistent length for thematic breaks (horizontal rules) in Markdown                     |
+| `<hr>` sequence pattern | --                                          | --                       | [markdown-preferences/thematic-break-sequence-pattern]<br>enforce consistent sequence pattern for thematic breaks (horizontal rules) in Markdown |
 
 ## Rules Related to HTML
 
@@ -254,3 +255,4 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 [markdown-preferences/setext-heading-underline-length]: ./../rules/setext-heading-underline-length.md
 [markdown-preferences/thematic-break-character-style]: ./../rules/thematic-break-character-style.md
 [markdown-preferences/thematic-break-length]: ./../rules/thematic-break-length.md
+[markdown-preferences/thematic-break-sequence-pattern]: ./../rules/thematic-break-sequence-pattern.md

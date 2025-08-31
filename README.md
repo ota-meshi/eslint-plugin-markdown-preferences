@@ -110,6 +110,8 @@ The rules with the following star ⭐ are included in the configs.
 
 - Rules related to the formatting and visual style of Markdown.
 
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+
 <!-- prettier-ignore-start -->
 
 | Rule ID | Description | Fixable | RECOMMENDED |
@@ -133,8 +135,11 @@ The rules with the following star ⭐ are included in the configs.
 | [markdown-preferences/sort-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/sort-definitions.html) | enforce a specific order for link definitions and footnote definitions | 🔧 |  |
 | [markdown-preferences/thematic-break-character-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-character-style.html) | enforce consistent character style for thematic breaks (horizontal rules) in Markdown. | 🔧 |  |
 | [markdown-preferences/thematic-break-length](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-length.html) | enforce consistent length for thematic breaks (horizontal rules) in Markdown. | 🔧 |  |
+| [markdown-preferences/thematic-break-sequence-pattern](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-sequence-pattern.html) | enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown. | 🔧 |  |
 
 <!-- prettier-ignore-end -->
+
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
 
 <!--RULES_TABLE_END-->
 
