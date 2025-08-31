@@ -194,6 +194,8 @@ export default defineConfig([
         },
       ],
       "markdown-preferences/setext-heading-underline-length": "error",
+      "markdown-preferences/thematic-break-character-style": "error",
+      "markdown-preferences/thematic-break-length": "error",
       "markdown-links/no-dead-urls": [
         "error",
         {
