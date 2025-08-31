@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/thematic-break-length"
 description: "enforce consistent length for thematic breaks (horizontal rules) in Markdown."
+since: "v0.17.0"
 ---
 
 # markdown-preferences/thematic-break-length
 
 > enforce consistent length for thematic breaks (horizontal rules) in Markdown.
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -75,6 +75,10 @@ _____
 
 - [markdown-preferences/thematic-break-character-style](./thematic-break-character-style.md)
 - [markdown-preferences/thematic-break-sequence-pattern](./thematic-break-sequence-pattern.md)
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.17.0
 
 ## 🔍 Implementation
 
