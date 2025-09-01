@@ -1,0 +1,262 @@
+import type { Blockquote, FootnoteDefinition, ListItem, Root } from "mdast";
+import { createRule } from "../utils/index.ts";
+import type { List } from "mdast";
+import { getListItemMarker } from "../utils/ast.ts";
+
+type Marker = "-" | "*" | "+";
+type Options = {
+  primary?: Marker;
+  secondary?: Marker | "any";
+  overrides?: {
+    level?: number;
+    parentMarker?: Marker | "any" | "ordered";
+    primary: Marker;
+    secondary: Marker | "any";
+  }[];
+};
+
+type ParsedOptions = {
+  get(
+    level: number,
+    parentMarker: Marker | "ordered" | "top",
+  ): {
+    primary: Marker;
+    secondary: Marker | "any";
+  };
+};
+type MDBlockContainer = Root | Blockquote | ListItem | FootnoteDefinition;
+
+const MARKERS: Marker[] = ["-", "*", "+"];
+
+/**
+ * Parse rule options.
+ */
+function parseOptions(options: Options): ParsedOptions {
+  const primary = options.primary || "-";
+  const secondary =
+    options.secondary || MARKERS.find((mark) => primary !== mark)!;
+
+  if (primary === secondary) {
+    throw new Error(
+      `\`primary\` and \`secondary\` cannot be the same (primary: "${primary}", secondary: "${secondary}").`,
+    );
+  }
+  const overrides = (options.overrides ?? [])
+    .map((override, index) => {
+      const primaryForOverride = override.primary || "-";
+      const secondaryForOverride =
+        override.secondary || MARKERS.find((mark) => primary !== mark)!;
+
+      if (primaryForOverride === secondaryForOverride) {
+        throw new Error(
+          `overrides[${index}]: \`primary\` and \`secondary\` cannot be the same (primary: "${primaryForOverride}", secondary: "${secondaryForOverride}").`,
+        );
+      }
+      return {
+        level: override.level,
+        parentMarker: override.parentMarker ?? "any",
+        primary: primaryForOverride,
+        secondary: secondaryForOverride,
+      };
+    })
+    .reverse();
+
+  return {
+    get(level, parentMarker) {
+      for (const o of overrides) {
+        if (
+          (o.level == null || o.level === level) &&
+          (o.parentMarker === "any" || o.parentMarker === parentMarker)
+        ) {
+          return { primary: o.primary, secondary: o.secondary };
+        }
+      }
+      return { primary, secondary };
+    },
+  };
+}
+
+export default createRule<[Options?]>("bullet-list-marker-style", {
+  meta: {
+    type: "layout",
+    docs: {
+      description:
+        "enforce consistent bullet list (unordered list) marker style",
+      categories: [],
+      listCategory: "Stylistic",
+    },
+    fixable: "code",
+    hasSuggestions: false,
+    schema: [
+      {
+        type: "object",
+        properties: {
+          primary: {
+            enum: MARKERS,
+          },
+          secondary: {
+            enum: [...MARKERS, "any"],
+          },
+          overrides: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                level: { type: "integer", minimum: 1 },
+                parentMarker: { enum: [...MARKERS, "any", "ordered"] },
+                primary: { enum: MARKERS },
+                secondary: { enum: [...MARKERS, "any"] },
+              },
+              additionalProperties: false,
+            },
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
+    messages: {
+      unexpected: "Bullet list marker should be '{{marker}}'.",
+    },
+  },
+  create(context) {
+    const sourceCode = context.sourceCode;
+    const options = parseOptions(context.options[0] || {});
+
+    type ContainerStack = {
+      node: MDBlockContainer;
+      level: number;
+      upper: ContainerStack | null;
+    };
+    let containerStack: ContainerStack = {
+      node: sourceCode.ast,
+      level: 1,
+      upper: null,
+    };
+
+    /**
+     * Check bullet list marker style
+     */
+    function checkBulletList(node: List) {
+      let parentMarker: Marker | "ordered" | "top";
+      if (containerStack.node.type === "listItem") {
+        const parentMarkerKind = getListItemMarker(
+          sourceCode,
+          containerStack.node,
+        ).kind;
+        parentMarker =
+          parentMarkerKind === "." || parentMarkerKind === ")"
+            ? "ordered"
+            : parentMarkerKind;
+      } else {
+        parentMarker = "top";
+      }
+      const { primary, secondary } = options.get(
+        containerStack.level,
+        parentMarker,
+      );
+      const nodeIndex = containerStack.node.children.indexOf(node);
+      if (nodeIndex === -1) return;
+      const prevNode =
+        nodeIndex > 0 ? containerStack.node.children[nodeIndex - 1] : null;
+
+      const prevBulletList =
+        prevNode &&
+        (prevNode.type === "list" && !prevNode.ordered ? prevNode : null);
+      const prevBulletListMarker =
+        prevBulletList && getListItemMarker(sourceCode, prevBulletList);
+
+      const expectedMarker =
+        prevBulletListMarker?.kind !== primary ? primary : secondary;
+      if (expectedMarker === "any") return;
+
+      const marker = getListItemMarker(sourceCode, node);
+      if (marker.kind === expectedMarker) return;
+
+      const loc = sourceCode.getLoc(node);
+
+      context.report({
+        node,
+        loc: {
+          start: loc.start,
+          end: {
+            line: loc.start.line,
+            column: loc.start.column + marker.raw.length,
+          },
+        },
+        messageId: "unexpected",
+        data: { marker: expectedMarker },
+        *fix(fixer) {
+          if (
+            prevNode?.type === "list" &&
+            prevBulletListMarker &&
+            (prevBulletListMarker.kind === "-" ||
+              prevBulletListMarker.kind === "*" ||
+              prevBulletListMarker.kind === "+")
+          ) {
+            yield fixMarker(prevNode.children[0], prevBulletListMarker.kind); // Avoid conflicts with the auto
+          }
+          yield* fixMarkers(node, expectedMarker);
+          let prevMarker = expectedMarker;
+          for (
+            let index = nodeIndex + 1;
+            index < containerStack.node.children.length;
+            index++
+          ) {
+            const nextNode = containerStack.node.children[index];
+            if (nextNode.type !== "list") break;
+            const nextMarker = getListItemMarker(sourceCode, nextNode);
+            if (nextMarker.kind !== prevMarker) break;
+            let expectedNextMarker =
+              prevMarker === primary ? secondary : primary;
+            if (expectedNextMarker === "any") {
+              const unavailableMarker = prevMarker;
+              expectedNextMarker = MARKERS.find(
+                (mark) => unavailableMarker !== mark,
+              )!;
+            }
+
+            yield* fixMarkers(nextNode, expectedNextMarker);
+            prevMarker = expectedNextMarker;
+          }
+
+          /**
+           * Fix bullet list markers
+           */
+          function* fixMarkers(list: List, replacementMarker: Marker) {
+            for (const item of list.children) {
+              yield fixMarker(item, replacementMarker);
+            }
+          }
+
+          /**
+           * Fix bullet list item marker
+           */
+          function fixMarker(item: ListItem, replacementMarker: Marker) {
+            const range = sourceCode.getRange(item);
+            return fixer.replaceTextRange(
+              [range[0], range[0] + 1],
+              replacementMarker,
+            );
+          }
+        },
+      });
+    }
+
+    return {
+      list(node) {
+        if (node.ordered) return;
+        checkBulletList(node);
+      },
+      "root, blockquote, listItem, footnoteDefinition"(node: MDBlockContainer) {
+        containerStack = {
+          node,
+          level: node.type === "listItem" ? containerStack.level + 1 : 1,
+          upper: containerStack,
+        };
+      },
+      "root, blockquote, listItem, footnoteDefinition:exit"() {
+        containerStack = containerStack.upper!;
+      },
+    };
+  },
+});

@@ -1,0 +1,1059 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/custom-primary-secondary/consecutive-same-secondary-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - primary: +
+    secondary: "-"
+Plugins: unable to serialize
+
+Code:
+  1 | # Consecutive lists with same secondary marker
+  2 |
+  3 | * First list item
+    | ^ [1]
+  4 | * Second list item
+  5 |
+  6 | ---
+  7 |
+  8 | * Next list first item (should use + instead of *)
+    | ^ [2]
+  9 | * Next list second item
+ 10 |
+
+Output:
+  1 | # Consecutive lists with same secondary marker
+  2 |
+  3 | + First list item
+  4 | + Second list item
+  5 |
+  6 | ---
+  7 |
+  8 | + Next list first item (should use + instead of *)
+  9 | + Next list second item
+ 10 |
+
+[1] Bullet list marker should be '+'.
+[2] Bullet list marker should be '+'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/custom-primary-secondary/wrong-alternating-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - primary: +
+    secondary: "-"
+Plugins: unable to serialize
+
+Code:
+  1 | # Custom primary/secondary configuration
+  2 |
+  3 | * First list item (correct primary)
+    | ^ [1]
+  4 | * Second list item
+  5 |
+  6 | + Next list first item (correct secondary)
+  7 | + Next list second item
+  8 |
+  9 | * Third list (back to primary)
+    | ^ [2]
+ 10 | * Third list item
+ 11 |
+
+Output:
+  1 | # Custom primary/secondary configuration
+  2 |
+  3 | + First list item (correct primary)
+  4 | + Second list item
+  5 |
+  6 | - Next list first item (correct secondary)
+  7 | - Next list second item
+  8 |
+  9 | + Third list (back to primary)
+ 10 | + Third list item
+ 11 |
+
+[1] Bullet list marker should be '+'.
+[2] Bullet list marker should be '-'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/custom-primary-secondary/wrong-markers-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - primary: +
+    secondary: "-"
+Plugins: unable to serialize
+
+Code:
+  1 | # Custom Primary Secondary Test
+  2 |
+  3 | This tests custom primary (+) and secondary (-) markers.
+  4 |
+  5 | + First list item with plus (primary)
+  6 | + Second list item with plus
+  7 |
+  8 | * Third list item with asterisk (should be dash)
+    | ^ [1]
+  9 | * Fourth list item with asterisk (should be dash)
+ 10 |
+ 11 | + Fifth list item with plus
+ 12 |   - Nested with dash (should be plus)
+    |   ^ [2]
+ 13 |   - Another nested with dash (should be plus)
+ 14 | + Sixth list item with plus
+ 15 |   * Nested with asterisk (should be plus)
+    |   ^ [3]
+ 16 |   * Another nested with asterisk (should be plus)
+ 17 |
+
+Output:
+  1 | # Custom Primary Secondary Test
+  2 |
+  3 | This tests custom primary (+) and secondary (-) markers.
+  4 |
+  5 | + First list item with plus (primary)
+  6 | + Second list item with plus
+  7 |
+  8 | - Third list item with asterisk (should be dash)
+  9 | - Fourth list item with asterisk (should be dash)
+ 10 |
+ 11 | + Fifth list item with plus
+ 12 |   + Nested with dash (should be plus)
+ 13 |   + Another nested with dash (should be plus)
+ 14 | + Sixth list item with plus
+ 15 |   + Nested with asterisk (should be plus)
+ 16 |   + Another nested with asterisk (should be plus)
+ 17 |
+
+[1] Bullet list marker should be '-'.
+[2] Bullet list marker should be '+'.
+[3] Bullet list marker should be '+'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/deep-nested-structure-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Deep nested structure
+  2 |
+  3 | - First level
+  4 |   + Second level (should be -)
+    |   ^ [1]
+  5 |     - Third level (should be -)
+  6 |     - Another third level item
+  7 |   + Another second level item
+  8 | - Another first level item
+  9 |
+ 10 | * Next list (correct secondary)
+ 11 | * Another item
+ 12 |
+
+Output:
+  1 | # Deep nested structure
+  2 |
+  3 | - First level
+  4 |   - Second level (should be -)
+  5 |     - Third level (should be -)
+  6 |     - Another third level item
+  7 |   - Another second level item
+  8 | - Another first level item
+  9 |
+ 10 | * Next list (correct secondary)
+ 11 | * Another item
+ 12 |
+
+[1] Bullet list marker should be '-'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/deep-nesting-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Deep Nesting Test
+  2 |
+  3 | This tests deeply nested lists.
+  4 |
+  5 | - Level 1 with dash
+  6 |   * Level 2 with asterisk (should be dash)
+    |   ^ [1]
+  7 |     - Level 3 with dash (should be dash)
+  8 |       * Level 4 with asterisk (should be dash)
+    |       ^ [2]
+  9 |         + Level 5 with plus (should be dash)
+    |         ^ [3]
+ 10 |         + Another level 5 with plus (should be dash)
+ 11 |       * Another level 4 with asterisk
+ 12 |     - Another level 3 with dash
+ 13 |   * Another level 2 with asterisk
+ 14 | - Another level 1 with dash
+ 15 |
+
+Output:
+  1 | # Deep Nesting Test
+  2 |
+  3 | This tests deeply nested lists.
+  4 |
+  5 | - Level 1 with dash
+  6 |   - Level 2 with asterisk (should be dash)
+  7 |     - Level 3 with dash (should be dash)
+  8 |       - Level 4 with asterisk (should be dash)
+  9 |         - Level 5 with plus (should be dash)
+ 10 |         - Another level 5 with plus (should be dash)
+ 11 |       - Another level 4 with asterisk
+ 12 |     - Another level 3 with dash
+ 13 |   - Another level 2 with asterisk
+ 14 | - Another level 1 with dash
+ 15 |
+
+[1] Bullet list marker should be '-'.
+[2] Bullet list marker should be '-'.
+[3] Bullet list marker should be '-'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/default-nested-wrong-marker-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Nested list wrong marker
+  2 |
+  3 | - First level
+  4 |   * Second level (should be -)
+    |   ^ [1]
+  5 |   * Another second level item
+  6 | - Another first level
+  7 |
+
+Output:
+  1 | # Nested list wrong marker
+  2 |
+  3 | - First level
+  4 |   - Second level (should be -)
+  5 |   - Another second level item
+  6 | - Another first level
+  7 |
+
+[1] Bullet list marker should be '-'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/default-wrong-primary-marker-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Wrong primary marker
+  2 |
+  3 | * First list item (should be -)
+    | ^ [1]
+  4 | * Second list item
+  5 |
+  6 | + Another list item (should be *)
+    | ^ [2]
+  7 | + Another item
+  8 |
+
+Output:
+  1 | # Wrong primary marker
+  2 |
+  3 | - First list item (should be -)
+  4 | - Second list item
+  5 |
+  6 | * Another list item (should be *)
+  7 | * Another item
+  8 |
+
+[1] Bullet list marker should be '-'.
+[2] Bullet list marker should be '-'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/edge-cases-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Edge Cases Test
+  2 |
+  3 | This tests various edge cases.
+  4 |
+  5 | - First list item
+  6 | <!-- HTML comment -->
+  7 | - Second list item
+  8 | ---
+  9 | * Third list item (should be dash)
+    | ^ [1]
+ 10 |
+ 11 | ## Heading
+ 12 |
+ 13 | * Fourth list item (should be dash, new list after heading)
+    | ^ [2]
+ 14 | * Fifth list item (should be dash)
+ 15 |
+ 16 | - Sixth list item (should be asterisk, continuing list)
+ 17 |
+ 18 | **Bold text**
+ 19 |
+ 20 | + Seventh list item (should be dash)
+    | ^ [3]
+ 21 | + Eighth list item (should be dash)
+ 22 |
+
+Output:
+  1 | # Edge Cases Test
+  2 |
+  3 | This tests various edge cases.
+  4 |
+  5 | - First list item
+  6 | <!-- HTML comment -->
+  7 | - Second list item
+  8 | ---
+  9 | - Third list item (should be dash)
+ 10 |
+ 11 | ## Heading
+ 12 |
+ 13 | - Fourth list item (should be dash, new list after heading)
+ 14 | - Fifth list item (should be dash)
+ 15 |
+ 16 | * Sixth list item (should be asterisk, continuing list)
+ 17 |
+ 18 | **Bold text**
+ 19 |
+ 20 | - Seventh list item (should be dash)
+ 21 | - Eighth list item (should be dash)
+ 22 |
+
+[1] Bullet list marker should be '-'.
+[2] Bullet list marker should be '-'.
+[3] Bullet list marker should be '-'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/mixed-list-types-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Mixed List Types Test
+  2 |
+  3 | This tests mixing ordered and unordered lists.
+  4 |
+  5 | 1. First ordered item
+  6 | 2. Second ordered item
+  7 |
+  8 | - First unordered item (should be dash)
+  9 | - Second unordered item
+ 10 |
+ 11 | 3. Third ordered item
+ 12 |    * Nested unordered under ordered (should be dash)
+    |    ^ [1]
+ 13 |    * Another nested unordered
+ 14 | 4. Fourth ordered item
+ 15 |
+ 16 | * Fifth unordered item (should be dash)
+    | ^ [2]
+ 17 | * Sixth unordered item (should be dash)
+ 18 |
+
+Output:
+  1 | # Mixed List Types Test
+  2 |
+  3 | This tests mixing ordered and unordered lists.
+  4 |
+  5 | 1. First ordered item
+  6 | 2. Second ordered item
+  7 |
+  8 | - First unordered item (should be dash)
+  9 | - Second unordered item
+ 10 |
+ 11 | 3. Third ordered item
+ 12 |    - Nested unordered under ordered (should be dash)
+ 13 |    - Another nested unordered
+ 14 | 4. Fourth ordered item
+ 15 |
+ 16 | - Fifth unordered item (should be dash)
+ 17 | - Sixth unordered item (should be dash)
+ 18 |
+
+[1] Bullet list marker should be '-'.
+[2] Bullet list marker should be '-'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/mixed-with-paragraphs-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Mixed with paragraphs
+  2 |
+  3 | - First list item
+  4 | - Second list item
+  5 |
+  6 | Some paragraph text between lists.
+  7 |
+  8 | * Next list after paragraph (should be primary)
+    | ^ [1]
+  9 | * Another item
+ 10 |
+ 11 | Another paragraph.
+ 12 |
+ 13 | - Third list (back to primary)
+ 14 | - Another item
+ 15 |
+
+Output:
+  1 | # Mixed with paragraphs
+  2 |
+  3 | - First list item
+  4 | - Second list item
+  5 |
+  6 | Some paragraph text between lists.
+  7 |
+  8 | - Next list after paragraph (should be primary)
+  9 | - Another item
+ 10 |
+ 11 | Another paragraph.
+ 12 |
+ 13 | - Third list (back to primary)
+ 14 | - Another item
+ 15 |
+
+[1] Bullet list marker should be '-'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/multiple-overrides-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - primary: "-"
+    secondary: "*"
+    overrides:
+      - level: 2
+        primary: +
+        secondary: "*"
+      - level: 3
+        primary: "*"
+        secondary: +
+      - parentMarker: +
+        primary: "-"
+        secondary: "*"
+Plugins: unable to serialize
+
+Code:
+  1 | # Multiple overrides with complex nesting
+  2 |
+  3 | - Level 1 (default primary)
+  4 |   * Level 2 (should be +)
+    |   ^ [1]
+  5 |     + Level 3 (should be -)
+    |     ^ [2]
+  6 |     + Another level 3 item
+  7 |   * Another level 2 item
+  8 | - Another level 1 item
+  9 |   + Level 2
+ 10 |   * Level 2 (secondary)
+ 11 |     + Level 3 (should be *)
+    |     ^ [3]
+ 12 |     + Another level 3 item
+ 13 |
+
+Output:
+  1 | # Multiple overrides with complex nesting
+  2 |
+  3 | - Level 1 (default primary)
+  4 |   + Level 2 (should be +)
+  5 |     - Level 3 (should be -)
+  6 |     - Another level 3 item
+  7 |   + Another level 2 item
+  8 | - Another level 1 item
+  9 |   + Level 2
+ 10 |   * Level 2 (secondary)
+ 11 |     * Level 3 (should be *)
+ 12 |     * Another level 3 item
+ 13 |
+
+[1] Bullet list marker should be '+'.
+[2] Bullet list marker should be '*'.
+[3] Bullet list marker should be '*'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/nested-wrong-secondary-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Nested Lists Test
+  2 |
+  3 | This tests nested lists with different markers.
+  4 |
+  5 | - First level with dash
+  6 |   * Second level with asterisk (should be dash)
+    |   ^ [1]
+  7 |   * Another second level with asterisk
+  8 | - Another first level with dash
+  9 |   + Second level with plus (should be dash)
+    |   ^ [2]
+ 10 |   + Another second level with plus (should be dash)
+ 11 |
+
+Output:
+  1 | # Nested Lists Test
+  2 |
+  3 | This tests nested lists with different markers.
+  4 |
+  5 | - First level with dash
+  6 |   - Second level with asterisk (should be dash)
+  7 |   - Another second level with asterisk
+  8 | - Another first level with dash
+  9 |   - Second level with plus (should be dash)
+ 10 |   - Another second level with plus (should be dash)
+ 11 |
+
+[1] Bullet list marker should be '-'.
+[2] Bullet list marker should be '-'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/overrides-level/wrong-level1-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - overrides:
+      - level: 1
+        primary: "*"
+        secondary: +
+Plugins: unable to serialize
+
+Code:
+  1 | # Overrides Level Test
+  2 |
+  3 | This tests overrides for specific levels.
+  4 |
+  5 | * First list item at level 1 (override: asterisk)
+  6 | * Second list item at level 1
+  7 |
+  8 | - Third list item at level 1 (should be plus)
+    | ^ [1]
+  9 | - Fourth list item at level 1 (should be plus)
+ 10 |
+ 11 | * Fifth list item at level 1
+ 12 |   - Nested at level 2 (default: dash primary, asterisk secondary)
+ 13 |   - Another nested at level 2
+ 14 | * Sixth list item at level 1
+ 15 |   * Nested at level 2 (should be dash)
+    |   ^ [2]
+ 16 |   * Another nested at level 2 (should be dash)
+ 17 |
+
+Output:
+  1 | # Overrides Level Test
+  2 |
+  3 | This tests overrides for specific levels.
+  4 |
+  5 | * First list item at level 1 (override: asterisk)
+  6 | * Second list item at level 1
+  7 |
+  8 | + Third list item at level 1 (should be plus)
+  9 | + Fourth list item at level 1 (should be plus)
+ 10 |
+ 11 | * Fifth list item at level 1
+ 12 |   - Nested at level 2 (default: dash primary, asterisk secondary)
+ 13 |   - Another nested at level 2
+ 14 | * Sixth list item at level 1
+ 15 |   - Nested at level 2 (should be dash)
+ 16 |   - Another nested at level 2 (should be dash)
+ 17 |
+
+[1] Bullet list marker should be '+'.
+[2] Bullet list marker should be '-'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/overrides-level/wrong-level2-marker-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - overrides:
+      - level: 1
+        primary: "*"
+        secondary: +
+Plugins: unable to serialize
+
+Code:
+  1 | # Level overrides configuration
+  2 |
+  3 | - First level item
+    | ^ [1]
+  4 |   - Second level item (should be *)
+  5 |   - Another second level item
+  6 | - Another first level item
+  7 |   * Correct second level item
+    |   ^ [2]
+  8 |   * Another correct second level item
+  9 |
+
+Output:
+  1 | # Level overrides configuration
+  2 |
+  3 | * First level item
+  4 |   - Second level item (should be *)
+  5 |   - Another second level item
+  6 | * Another first level item
+  7 |   - Correct second level item
+  8 |   - Another correct second level item
+  9 |
+
+[1] Bullet list marker should be '*'.
+[2] Bullet list marker should be '-'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/overrides-ordered-parent/wrong-nested-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - overrides:
+      - parentMarker: ordered
+        primary: "*"
+        secondary: +
+Plugins: unable to serialize
+
+Code:
+  1 | # Overrides Ordered Parent Test
+  2 |
+  3 | This tests overrides for unordered lists nested under ordered lists.
+  4 |
+  5 | 1. First ordered item
+  6 |    * Nested unordered under ordered (override: asterisk)
+  7 |    * Another nested unordered under ordered
+  8 | 2. Second ordered item
+  9 |    - Nested unordered under ordered (should be asterisk)
+    |    ^ [1]
+ 10 |    - Another nested unordered under ordered (should be asterisk)
+ 11 |
+ 12 | - First unordered item
+ 13 |   - Nested unordered under unordered (default: dash)
+ 14 |   - Another nested unordered under unordered
+ 15 | - Second unordered item
+ 16 |   * Nested unordered under unordered (should be dash)
+    |   ^ [2]
+ 17 |   * Another nested unordered under unordered (should be dash)
+ 18 |
+
+Output:
+  1 | # Overrides Ordered Parent Test
+  2 |
+  3 | This tests overrides for unordered lists nested under ordered lists.
+  4 |
+  5 | 1. First ordered item
+  6 |    * Nested unordered under ordered (override: asterisk)
+  7 |    * Another nested unordered under ordered
+  8 | 2. Second ordered item
+  9 |    * Nested unordered under ordered (should be asterisk)
+ 10 |    * Another nested unordered under ordered (should be asterisk)
+ 11 |
+ 12 | - First unordered item
+ 13 |   - Nested unordered under unordered (default: dash)
+ 14 |   - Another nested unordered under unordered
+ 15 | - Second unordered item
+ 16 |   - Nested unordered under unordered (should be dash)
+ 17 |   - Another nested unordered under unordered (should be dash)
+ 18 |
+
+[1] Bullet list marker should be '*'.
+[2] Bullet list marker should be '-'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/overrides-ordered-parent/wrong-nested-under-ordered-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - overrides:
+      - parentMarker: ordered
+        primary: "*"
+        secondary: +
+Plugins: unable to serialize
+
+Code:
+  1 | # Ordered parent marker override
+  2 |
+  3 | 1. First ordered item
+  4 |    - Nested under ordered parent (should be *)
+    |    ^ [1]
+  5 |    - Another nested item (should be *)
+  6 |
+  7 | 2. Second ordered item
+  8 |    * Correct nested item
+  9 |    * Another correct nested item
+ 10 |
+ 11 | - Top-level unordered (default rule applies)
+ 12 | - Another top-level item
+ 13 |
+
+Output:
+  1 | # Ordered parent marker override
+  2 |
+  3 | 1. First ordered item
+  4 |    * Nested under ordered parent (should be *)
+  5 |    * Another nested item (should be *)
+  6 |
+  7 | 2. Second ordered item
+  8 |    * Correct nested item
+  9 |    * Another correct nested item
+ 10 |
+ 11 | - Top-level unordered (default rule applies)
+ 12 | - Another top-level item
+ 13 |
+
+[1] Bullet list marker should be '*'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/overrides-parent-marker/wrong-nested-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - overrides:
+      - parentMarker: "-"
+        primary: +
+        secondary: "*"
+Plugins: unable to serialize
+
+Code:
+  1 | # Overrides Parent Marker Test
+  2 |
+  3 | This tests overrides based on parent marker.
+  4 |
+  5 | - First level with dash
+  6 |   + Nested under dash (override: plus)
+  7 |   + Another nested under dash
+  8 | - Another first level with dash
+  9 |   * Nested under dash (should be plus)
+    |   ^ [1]
+ 10 |   * Another nested under dash (should be plus)
+ 11 |
+ 12 | * First level with asterisk
+ 13 |   - Nested under dash (default: dash)
+ 14 |   - Another nested under dash
+ 15 | * Another first level with asterisk
+ 16 |   * Nested under asterisk (should be dash)
+    |   ^ [2]
+ 17 |   * Another nested under asterisk (should be dash)
+ 18 |
+
+Output:
+  1 | # Overrides Parent Marker Test
+  2 |
+  3 | This tests overrides based on parent marker.
+  4 |
+  5 | - First level with dash
+  6 |   + Nested under dash (override: plus)
+  7 |   + Another nested under dash
+  8 | - Another first level with dash
+  9 |   + Nested under dash (should be plus)
+ 10 |   + Another nested under dash (should be plus)
+ 11 |
+ 12 | * First level with asterisk
+ 13 |   - Nested under dash (default: dash)
+ 14 |   - Another nested under dash
+ 15 | * Another first level with asterisk
+ 16 |   - Nested under asterisk (should be dash)
+ 17 |   - Another nested under asterisk (should be dash)
+ 18 |
+
+[1] Bullet list marker should be '+'.
+[2] Bullet list marker should be '-'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/overrides-parent-marker/wrong-nested-marker-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - overrides:
+      - parentMarker: "-"
+        primary: +
+        secondary: "*"
+Plugins: unable to serialize
+
+Code:
+  1 | # Parent marker overrides configuration
+  2 |
+  3 | - First level item
+  4 |   - Nested under dash parent (should be +)
+    |   ^ [1]
+  5 |   - Another nested item (should be +)
+  6 |
+  7 | * Second level item
+  8 |   - Nested under asterisk parent (default rule)
+  9 |   - Another nested item
+ 10 |
+
+Output:
+  1 | # Parent marker overrides configuration
+  2 |
+  3 | - First level item
+  4 |   + Nested under dash parent (should be +)
+  5 |   + Another nested item (should be +)
+  6 |
+  7 | * Second level item
+  8 |   - Nested under asterisk parent (default rule)
+  9 |   - Another nested item
+ 10 |
+
+[1] Bullet list marker should be '+'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/secondary-any/wrong-primary-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - secondary: any
+Plugins: unable to serialize
+
+Code:
+  1 | # Secondary Any Test
+  2 |
+  3 | This tests with secondary="any" where only primary level matters.
+  4 |
+  5 | - First list item with dash (primary)
+  6 | - Second list item with dash
+  7 |
+  8 | * Third list item with asterisk (any secondary is OK)
+  9 | * Fourth list item with asterisk (any secondary is OK)
+ 10 |
+ 11 | - Fifth list item with dash
+ 12 |   + Nested with plus
+    |   ^ [1]
+ 13 |   * Nested with asterisk
+    |   ^ [2]
+ 14 |   - Nested with dash
+ 15 | - Sixth list item with dash
+ 16 |
+ 17 | * Third list item with plus (any secondary is OK)
+ 18 | * Fourth list item with plus (any secondary is OK)
+ 19 |
+
+Output:
+  1 | # Secondary Any Test
+  2 |
+  3 | This tests with secondary="any" where only primary level matters.
+  4 |
+  5 | - First list item with dash (primary)
+  6 | - Second list item with dash
+  7 |
+  8 | * Third list item with asterisk (any secondary is OK)
+  9 | * Fourth list item with asterisk (any secondary is OK)
+ 10 |
+ 11 | - Fifth list item with dash
+ 12 |   - Nested with plus
+ 13 |   * Nested with asterisk
+ 14 |   - Nested with dash
+ 15 | - Sixth list item with dash
+ 16 |
+ 17 | * Third list item with plus (any secondary is OK)
+ 18 | * Fourth list item with plus (any secondary is OK)
+ 19 |
+
+[1] Bullet list marker should be '-'.
+[2] Bullet list marker should be '-'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/separated-lists-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Separated Lists Test
+  2 |
+  3 | This tests lists separated by text blocks.
+  4 |
+  5 | - First list item
+  6 | - Second list item
+  7 |
+  8 | Some text in between lists.
+  9 |
+ 10 | - Third list item (same list continues)
+ 11 | - Fourth list item
+ 12 |
+ 13 | More text and a code block:
+ 14 |
+ 15 | ```
+ 16 | code block
+ 17 | ```
+ 18 |
+ 19 | * Fifth list item (should be dash, new list)
+    | ^ [1]
+ 20 | * Sixth list item (should be dash)
+ 21 |
+
+Output:
+  1 | # Separated Lists Test
+  2 |
+  3 | This tests lists separated by text blocks.
+  4 |
+  5 | - First list item
+  6 | - Second list item
+  7 |
+  8 | Some text in between lists.
+  9 |
+ 10 | - Third list item (same list continues)
+ 11 | - Fourth list item
+ 12 |
+ 13 | More text and a code block:
+ 14 |
+ 15 | ```
+ 16 | code block
+ 17 | ```
+ 18 |
+ 19 | - Fifth list item (should be dash, new list)
+ 20 | - Sixth list item (should be dash)
+ 21 |
+
+[1] Bullet list marker should be '-'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/simple-invalid-consecutive-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Simple Invalid Test
+  2 |
+  3 | * First list item (should be -)
+    | ^ [1]
+  4 | * Second list item
+  5 |
+  6 | - Third list item (correct secondary, but autofix to be +)
+  7 | - Fourth list item
+  8 |
+
+Output:
+  1 | # Simple Invalid Test
+  2 |
+  3 | - First list item (should be -)
+  4 | - Second list item
+  5 |
+  6 | * Third list item (correct secondary, but autofix to be +)
+  7 | * Fourth list item
+  8 |
+
+[1] Bullet list marker should be '-'.
+---
+
+
+Test: bullet-list-marker-style >> invalid
+Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/single-item-lists-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Single Item Lists Test
+  2 |
+  3 | This tests single item lists.
+  4 |
+  5 | - Single item list with dash
+  6 |
+  7 | * Single item list with asterisk
+  8 |
+  9 | + Single item list with plus (should be dash)
+    | ^ [1]
+ 10 |
+ 11 | - Another single item list with dash
+ 12 |   * Single nested item
+    |   ^ [2]
+ 13 |
+ 14 | * Final single item list
+ 15 |
+
+Output:
+  1 | # Single Item Lists Test
+  2 |
+  3 | This tests single item lists.
+  4 |
+  5 | - Single item list with dash
+  6 |
+  7 | * Single item list with asterisk
+  8 |
+  9 | - Single item list with plus (should be dash)
+ 10 |
+ 11 | * Another single item list with dash
+ 12 |   - Single nested item
+ 13 |
+ 14 | - Final single item list
+ 15 |
+
+[1] Bullet list marker should be '-'.
+[2] Bullet list marker should be '-'.
+---

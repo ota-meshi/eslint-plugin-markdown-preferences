@@ -19,7 +19,7 @@ This rule enforces consistent alignment (indentation) of list markers within the
 
 **What this rule checks:**
 
-- Unordered lists (`-`, `*`, `+` markers)
+- Bullet lists (unordered lists) (`-`, `*`, `+` markers)
 - Ordered lists (`1.`, `2.`, etc.)
 - Lists inside blockquotes
 - Nested lists (each nesting level is checked independently)
