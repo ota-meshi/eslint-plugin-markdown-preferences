@@ -29,6 +29,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/blockquote-marker-alignment'?: Linter.RuleEntry<[]>
   /**
+   * enforce consistent bullet list (unordered list) marker style
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/bullet-list-marker-style.html
+   */
+  'markdown-preferences/bullet-list-marker-style'?: Linter.RuleEntry<MarkdownPreferencesBulletListMarkerStyle>
+  /**
    * enforce canonical language names in code blocks
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/canonical-code-block-language.html
    */
@@ -159,6 +164,17 @@ type MarkdownPreferencesAtxHeadingsClosingSequence = []|[{
 type MarkdownPreferencesAtxHeadingsClosingSequenceLength = []|[{
   mode?: ("match-opening" | "length" | "consistent" | "consistent-line-length" | "fixed-line-length")
   length?: number
+}]
+// ----- markdown-preferences/bullet-list-marker-style -----
+type MarkdownPreferencesBulletListMarkerStyle = []|[{
+  primary?: ("-" | "*" | "+")
+  secondary?: ("-" | "*" | "+" | "any")
+  overrides?: {
+    level?: number
+    parentMarker?: ("-" | "*" | "+" | "any" | "ordered")
+    primary?: ("-" | "*" | "+")
+    secondary?: ("-" | "*" | "+" | "any")
+  }[]
 }]
 // ----- markdown-preferences/canonical-code-block-language -----
 type MarkdownPreferencesCanonicalCodeBlockLanguage = []|[{

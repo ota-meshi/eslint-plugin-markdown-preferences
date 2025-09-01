@@ -110,6 +110,8 @@ The rules with the following star ⭐ are included in the configs.
 
 - Rules related to the formatting and visual style of Markdown.
 
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+
 <!-- prettier-ignore-start -->
 
 | Rule ID | Description | Fixable | RECOMMENDED |
@@ -117,6 +119,7 @@ The rules with the following star ⭐ are included in the configs.
 | [markdown-preferences/atx-headings-closing-sequence-length](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-headings-closing-sequence-length.html) | enforce consistent length for the closing sequence (trailing #s) in ATX headings. | 🔧 |  |
 | [markdown-preferences/atx-headings-closing-sequence](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-headings-closing-sequence.html) | enforce consistent use of closing sequence in ATX headings. | 🔧 |  |
 | [markdown-preferences/blockquote-marker-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/blockquote-marker-alignment.html) | enforce consistent alignment of blockquote markers | 🔧 | ⭐ |
+| [markdown-preferences/bullet-list-marker-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/bullet-list-marker-style.html) | enforce consistent bullet list (unordered list) marker style | 🔧 |  |
 | [markdown-preferences/definitions-last](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/definitions-last.html) | require link definitions and footnote definitions to be placed at the end of the document | 🔧 |  |
 | [markdown-preferences/hard-linebreak-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/hard-linebreak-style.html) | enforce consistent hard linebreak style. | 🔧 | ⭐ |
 | [markdown-preferences/list-marker-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/list-marker-alignment.html) | enforce consistent alignment of list markers | 🔧 | ⭐ |
@@ -136,6 +139,8 @@ The rules with the following star ⭐ are included in the configs.
 | [markdown-preferences/thematic-break-sequence-pattern](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-sequence-pattern.html) | enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown. | 🔧 |  |
 
 <!-- prettier-ignore-end -->
+
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
 
 <!--RULES_TABLE_END-->
 

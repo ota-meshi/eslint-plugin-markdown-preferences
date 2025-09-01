@@ -38,7 +38,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 
 | Description                         | [markdownlint] Rules                                                               | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules                                                                      |
 | ----------------------------------- | ---------------------------------------------------------------------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------- |
-| `<ul>` notation style               | [MD004] _ul-style_<br>Unordered list style                                         | --                       | --                                                                                                              |
+| `<ul>` notation style               | [MD004] _ul-style_<br>Unordered list style                                         | --                       | [markdown-preferences/bullet-list-marker-style]<br>enforce consistent bullet list (unordered list) marker style |
 | List indentation                    | [MD005] _list-indent_<br>Inconsistent indentation for list items at the same level | --                       | [markdown-preferences/list-marker-alignment]<br>enforce consistent alignment of list markers                    |
 | `<ul>` indentation                  | [MD007] _ul-indent_<br>Unordered list indentation                                  | --                       | --                                                                                                              |
 | Enforce `<ol>` marker sequence      | [MD029] _ol-prefix_<br>Ordered list item prefix                                    | --                       | [markdown-preferences/ordered-list-marker-sequence]<br>enforce that ordered list markers use sequential numbers |
@@ -251,6 +251,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 [markdown-preferences/table-header-casing]: ../rules/table-header-casing.md
 [markdown-preferences/list-marker-alignment]: ../rules/list-marker-alignment.md
 [markdown-preferences/blockquote-marker-alignment]: ../rules/blockquote-marker-alignment.md
+[markdown-preferences/bullet-list-marker-style]: ../rules/bullet-list-marker-style.md
 [markdown-preferences/padding-line-between-blocks]: ../rules/padding-line-between-blocks.md
 [markdown-preferences/setext-heading-underline-length]: ./../rules/setext-heading-underline-length.md
 [markdown-preferences/thematic-break-character-style]: ./../rules/thematic-break-character-style.md

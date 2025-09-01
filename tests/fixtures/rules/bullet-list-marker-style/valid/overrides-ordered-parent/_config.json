@@ -1,0 +1,13 @@
+{
+  "options": [
+    {
+      "overrides": [
+        {
+          "parentMarker": "ordered",
+          "primary": "*",
+          "secondary": "+"
+        }
+      ]
+    }
+  ]
+}

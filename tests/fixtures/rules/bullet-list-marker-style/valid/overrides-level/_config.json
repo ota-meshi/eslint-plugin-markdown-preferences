@@ -1,0 +1,13 @@
+{
+  "options": [
+    {
+      "overrides": [
+        {
+          "level": 1,
+          "primary": "*",
+          "secondary": "+"
+        }
+      ]
+    }
+  ]
+}

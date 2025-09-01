@@ -1,0 +1,25 @@
+{
+  "options": [
+    {
+      "primary": "-",
+      "secondary": "*",
+      "overrides": [
+        {
+          "level": 2,
+          "primary": "+",
+          "secondary": "*"
+        },
+        {
+          "level": 3,
+          "primary": "*",
+          "secondary": "+"
+        },
+        {
+          "parentMarker": "+",
+          "primary": "-",
+          "secondary": "*"
+        }
+      ]
+    }
+  ]
+}
