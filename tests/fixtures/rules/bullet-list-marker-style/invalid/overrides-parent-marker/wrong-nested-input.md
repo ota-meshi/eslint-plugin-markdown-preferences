@@ -10,8 +10,8 @@ This tests overrides based on parent marker.
   * Another nested under dash (should be plus)
 
 * First level with asterisk
-  - Nested under asterisk (default: asterisk)
-  - Another nested under asterisk
+  - Nested under dash (default: dash)
+  - Another nested under dash
 * Another first level with asterisk
-  * Nested under asterisk (should be asterisk)
-  * Another nested under asterisk (should be asterisk)
+  * Nested under asterisk (should be dash)
+  * Another nested under asterisk (should be dash)

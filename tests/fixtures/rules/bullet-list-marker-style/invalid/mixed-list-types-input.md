@@ -9,7 +9,7 @@ This tests mixing ordered and unordered lists.
 - Second unordered item
 
 3. Third ordered item
-   * Nested unordered under ordered (should be asterisk)
+   * Nested unordered under ordered (should be dash)
    * Another nested unordered
 4. Fourth ordered item
 

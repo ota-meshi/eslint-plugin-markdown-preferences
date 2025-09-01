@@ -3,5 +3,5 @@
 * First list item (should be -)
 * Second list item
 
-- Third list item (correct secondary)
+- Third list item (correct secondary, but autofix to be +)
 - Fourth list item

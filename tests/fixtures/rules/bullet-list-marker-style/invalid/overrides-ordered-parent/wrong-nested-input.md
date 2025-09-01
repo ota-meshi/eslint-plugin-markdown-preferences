@@ -10,8 +10,8 @@ This tests overrides for unordered lists nested under ordered lists.
    - Another nested unordered under ordered (should be asterisk)
 
 - First unordered item
-  - Nested unordered under unordered (default: asterisk)
+  - Nested unordered under unordered (default: dash)
   - Another nested unordered under unordered
 - Second unordered item
-  * Nested unordered under unordered (should be asterisk)
-  * Another nested unordered under unordered (should be asterisk)
+  * Nested unordered under unordered (should be dash)
+  * Another nested unordered under unordered (should be dash)

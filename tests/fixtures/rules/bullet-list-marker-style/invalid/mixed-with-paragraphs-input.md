@@ -5,7 +5,7 @@
 
 Some paragraph text between lists.
 
-* Next list after paragraph (should be secondary)
+* Next list after paragraph (should be primary)
 * Another item
 
 Another paragraph.

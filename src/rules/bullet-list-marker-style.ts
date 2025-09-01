@@ -159,13 +159,14 @@ export default createRule<[Options?]>("bullet-list-marker-style", {
       const prevNode =
         nodeIndex > 0 ? containerStack.node.children[nodeIndex - 1] : null;
 
-      const prevList =
+      const prevBulletList =
         prevNode &&
         (prevNode.type === "list" && !prevNode.ordered ? prevNode : null);
-      const prevListMarker =
-        prevList && getListItemMarker(sourceCode, prevList).kind;
+      const prevBulletListMarker =
+        prevBulletList && getListItemMarker(sourceCode, prevBulletList);
 
-      const expectedMarker = prevListMarker !== primary ? primary : secondary;
+      const expectedMarker =
+        prevBulletListMarker?.kind !== primary ? primary : secondary;
       if (expectedMarker === "any") return;
 
       const marker = getListItemMarker(sourceCode, node);
@@ -184,6 +185,60 @@ export default createRule<[Options?]>("bullet-list-marker-style", {
         },
         messageId: "unexpected",
         data: { marker: expectedMarker },
+        *fix(fixer) {
+          if (
+            prevNode?.type === "list" &&
+            prevBulletListMarker &&
+            (prevBulletListMarker.kind === "-" ||
+              prevBulletListMarker.kind === "*" ||
+              prevBulletListMarker.kind === "+")
+          ) {
+            yield fixMarker(prevNode.children[0], prevBulletListMarker.kind); // Avoid conflicts with the auto
+          }
+          yield* fixMarkers(node, expectedMarker);
+          let prevMarker = expectedMarker;
+          for (
+            let index = nodeIndex + 1;
+            index < containerStack.node.children.length;
+            index++
+          ) {
+            const nextNode = containerStack.node.children[index];
+            if (nextNode.type !== "list") break;
+            const nextMarker = getListItemMarker(sourceCode, nextNode);
+            if (nextMarker.kind !== prevMarker) break;
+            let expectedNextMarker =
+              prevMarker === primary ? secondary : primary;
+            if (expectedNextMarker === "any") {
+              const unavailableMarker = prevMarker;
+              expectedNextMarker = MARKERS.find(
+                (mark) => unavailableMarker !== mark,
+              )!;
+            }
+
+            yield* fixMarkers(nextNode, expectedNextMarker);
+            prevMarker = expectedNextMarker;
+          }
+
+          /**
+           * Fix bullet list markers
+           */
+          function* fixMarkers(list: List, replacementMarker: Marker) {
+            for (const item of list.children) {
+              yield fixMarker(item, replacementMarker);
+            }
+          }
+
+          /**
+           * Fix bullet list item marker
+           */
+          function fixMarker(item: ListItem, replacementMarker: Marker) {
+            const range = sourceCode.getRange(item);
+            return fixer.replaceTextRange(
+              [range[0], range[0] + 1],
+              replacementMarker,
+            );
+          }
+        },
       });
     }
 

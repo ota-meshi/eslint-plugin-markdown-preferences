@@ -5,7 +5,7 @@ This tests various edge cases.
 - First list item
 <!-- HTML comment -->
 - Second list item
-
+---
 * Third list item (should be dash)
 
 ## Heading
@@ -13,7 +13,7 @@ This tests various edge cases.
 * Fourth list item (should be dash, new list after heading)
 * Fifth list item (should be dash)
 
-- Sixth list item (should be dash, continuing list)
+- Sixth list item (should be asterisk, continuing list)
 
 **Bold text**
 

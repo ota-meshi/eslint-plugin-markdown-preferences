@@ -1,7 +1,7 @@
 # Deep nested structure
 
 - First level
-  + Second level (should be *)
+  + Second level (should be -)
     - Third level (should be -)
     - Another third level item
   + Another second level item
