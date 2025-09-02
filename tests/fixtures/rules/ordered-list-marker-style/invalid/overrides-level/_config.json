@@ -1,0 +1,13 @@
+{
+  "options": [
+    {
+      "prefer": "n.",
+      "overrides": [
+        {
+          "level": 2,
+          "prefer": "n)"
+        }
+      ]
+    }
+  ]
+}

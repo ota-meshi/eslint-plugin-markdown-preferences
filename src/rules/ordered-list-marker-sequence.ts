@@ -86,7 +86,7 @@ export default createRule("ordered-list-marker-sequence", {
           expected: new Intl.ListFormat("en-US", {
             type: "disjunction",
           }).format(expected.map((n) => `'${n}'`)),
-          actual: String(marker.sequence),
+          actual: marker.sequence.raw,
         },
         fix:
           scope.last == null
@@ -116,7 +116,7 @@ export default createRule("ordered-list-marker-sequence", {
           continue;
         }
         const expectedSequence = node.start + i;
-        if (marker.sequence !== expectedSequence) {
+        if (marker.sequence.value !== expectedSequence) {
           const expectedMarker = `${expectedSequence}${marker.kind}`;
           context.report({
             node: item,

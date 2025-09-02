@@ -124,7 +124,10 @@ export type BulletListMarker = { kind: BulletListMarkerKind; raw: string };
 export type OrderedListMarker = {
   kind: OrderedListMarkerKind;
   raw: string;
-  sequence: number;
+  sequence: {
+    value: number;
+    raw: string;
+  };
 };
 
 /**
@@ -145,14 +148,20 @@ export function getListItemMarker(
     return {
       kind: ".",
       raw: matchDot[0],
-      sequence: Number(matchDot[1]),
+      sequence: {
+        value: Number(matchDot[1]),
+        raw: matchDot[1],
+      },
     };
   }
   const matchParen = /^(\d+)\)/.exec(text)!;
   return {
     kind: ")",
     raw: matchParen[0],
-    sequence: Number(matchParen[1]),
+    sequence: {
+      value: Number(matchParen[1]),
+      raw: matchParen[1],
+    },
   };
 }
 export type ThematicBreakMarker = {

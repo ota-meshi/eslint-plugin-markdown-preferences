@@ -198,6 +198,7 @@ export default defineConfig([
       "markdown-preferences/thematic-break-length": "error",
       "markdown-preferences/thematic-break-sequence-pattern": "error",
       "markdown-preferences/bullet-list-marker-style": "error",
+      "markdown-preferences/ordered-list-marker-style": "error",
       "markdown-links/no-dead-urls": [
         "error",
         {

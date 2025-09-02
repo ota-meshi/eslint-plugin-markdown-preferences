@@ -1,0 +1,19 @@
+{
+  "options": [
+    {
+      "prefer": "n.",
+      "overrides": [
+        {
+          "level": 2,
+          "parentMarker": "n.",
+          "prefer": "n)"
+        },
+        {
+          "level": 2,
+          "parentMarker": "n)",
+          "prefer": "n."
+        }
+      ]
+    }
+  ]
+}

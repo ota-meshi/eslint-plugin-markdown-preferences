@@ -43,6 +43,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 | `<ul>` indentation                  | [MD007] _ul-indent_<br>Unordered list indentation                                  | --                       | --                                                                                                              |
 | Enforce `<ol>` marker sequence      | [MD029] _ol-prefix_<br>Ordered list item prefix                                    | --                       | [markdown-preferences/ordered-list-marker-sequence]<br>enforce that ordered list markers use sequential numbers |
 | Enforce `<ol>` marker start         | [MD029] _ol-prefix_<br>Ordered list item prefix                                    | --                       | [markdown-preferences/ordered-list-marker-start]<br>enforce that ordered list markers start with 1 or 0         |
+| Enforce `<ol>` marker style         |                                                                                    | --                       | [markdown-preferences/ordered-list-marker-style]<br>enforce consistent ordered list marker style                |
 | Consistent spaces after list marker | [MD030] _list-marker-space_<br>Spaces after list markers                           | --                       | --                                                                                                              |
 | Require empty lines around lists    | [MD032] _blanks-around-lists_<br>Lists should be surrounded by blank lines         | --                       | [markdown-preferences/padding-line-between-blocks]<br>require or disallow padding lines between block elements  |
 
@@ -244,6 +245,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 [markdown-preferences/no-text-backslash-linebreak]: ../rules/no-text-backslash-linebreak.md
 [markdown-preferences/no-trailing-spaces]: ../rules/no-trailing-spaces.md
 [markdown-preferences/ordered-list-marker-sequence]: ../rules/ordered-list-marker-sequence.md
+[markdown-preferences/ordered-list-marker-style]: ../rules/ordered-list-marker-style.md
 [markdown-preferences/prefer-autolinks]: ../rules/prefer-autolinks.md
 [markdown-preferences/prefer-fenced-code-blocks]: ../rules/prefer-fenced-code-blocks.md
 [markdown-preferences/prefer-link-reference-definitions]: ../rules/prefer-link-reference-definitions.md
