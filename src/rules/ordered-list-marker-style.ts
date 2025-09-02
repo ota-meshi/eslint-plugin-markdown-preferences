@@ -1,68 +1,68 @@
-import type { Blockquote, FootnoteDefinition, ListItem, Root } from "mdast";
+import type {
+  Blockquote,
+  FootnoteDefinition,
+  List,
+  ListItem,
+  Root,
+} from "mdast";
 import { createRule } from "../utils/index.ts";
-import type { List } from "mdast";
+import type { BulletListMarker, OrderedListMarker } from "../utils/ast.ts";
 import { getListItemMarker } from "../utils/ast.ts";
 
-type Marker = "-" | "*" | "+";
+type MarkerKind = "." | ")";
+type Marker = `n${MarkerKind}`;
 type Options = {
-  primary?: Marker;
-  secondary?: Marker | "any";
+  prefer?: Marker;
   overrides?: {
     level?: number;
-    parentMarker?: Marker | "any" | "ordered";
-    primary?: Marker;
-    secondary?: Marker | "any";
+    parentMarker?: Marker | "any" | "bullet";
+    prefer?: Marker;
   }[];
 };
 
 type ParsedOptions = {
   get(
     level: number,
-    parentMarker: Marker | "ordered" | "top",
+    parentMarker: MarkerKind | "bullet" | "top",
   ): {
-    primary: Marker;
-    secondary: Marker | "any";
+    prefer: MarkerKind;
   };
 };
 type MDBlockContainer = Root | Blockquote | ListItem | FootnoteDefinition;
 
-const MARKERS: Marker[] = ["-", "*", "+"];
+const MARKER_KINDS: MarkerKind[] = [".", ")"];
+const MARKERS: Marker[] = MARKER_KINDS.map((kind): Marker => `n${kind}`);
 
 /**
- * Get the other marker.
+ * Get the other marker kind.
  */
-function getOtherMarker(unavailableMarker: Marker) {
-  return MARKERS.find((mark) => unavailableMarker !== mark)!;
+function getOtherMarkerKind(unavailableMarker: MarkerKind) {
+  return MARKER_KINDS.find((mark) => unavailableMarker !== mark)!;
+}
+
+/**
+ * Get the marker kind from a marker.
+ */
+function markerToKind(marker: Marker): MarkerKind;
+function markerToKind<O>(marker: Marker | O): MarkerKind | O;
+function markerToKind<O>(marker: Marker | O): MarkerKind | O {
+  if (marker === "n.") return ".";
+  if (marker === "n)") return ")";
+  return marker;
 }
 
 /**
  * Parse rule options.
  */
 function parseOptions(options: Options): ParsedOptions {
-  const primary = options.primary || "-";
-  const secondary = options.secondary || getOtherMarker(primary);
-
-  if (primary === secondary) {
-    throw new Error(
-      `\`primary\` and \`secondary\` cannot be the same (primary: "${primary}", secondary: "${secondary}").`,
-    );
-  }
+  const prefer = markerToKind(options.prefer) || ".";
   const overrides = (options.overrides ?? [])
-    .map((override, index) => {
-      const primaryForOverride = override.primary || "-";
-      const secondaryForOverride =
-        override.secondary || getOtherMarker(primaryForOverride);
-
-      if (primaryForOverride === secondaryForOverride) {
-        throw new Error(
-          `overrides[${index}]: \`primary\` and \`secondary\` cannot be the same (primary: "${primaryForOverride}", secondary: "${secondaryForOverride}").`,
-        );
-      }
+    .map((override) => {
+      const preferForOverride = markerToKind(override.prefer) || ".";
       return {
         level: override.level,
-        parentMarker: override.parentMarker ?? "any",
-        primary: primaryForOverride,
-        secondary: secondaryForOverride,
+        parentMarker: markerToKind(override.parentMarker) ?? "any",
+        prefer: preferForOverride,
       };
     })
     .reverse();
@@ -74,20 +74,28 @@ function parseOptions(options: Options): ParsedOptions {
           (o.level == null || o.level === level) &&
           (o.parentMarker === "any" || o.parentMarker === parentMarker)
         ) {
-          return { primary: o.primary, secondary: o.secondary };
+          return { prefer: o.prefer };
         }
       }
-      return { primary, secondary };
+      return { prefer };
     },
   };
 }
 
-export default createRule<[Options?]>("bullet-list-marker-style", {
+/**
+ * Check if a item marker is an ordered list marker.
+ */
+function isOrderedListItemMarker(
+  itemMarker: BulletListMarker | OrderedListMarker,
+): itemMarker is OrderedListMarker {
+  return itemMarker.kind === "." || itemMarker.kind === ")";
+}
+
+export default createRule("ordered-list-marker-style", {
   meta: {
     type: "layout",
     docs: {
-      description:
-        "enforce consistent bullet list (unordered list) marker style",
+      description: "enforce consistent ordered list marker style",
       categories: [],
       listCategory: "Stylistic",
     },
@@ -97,11 +105,8 @@ export default createRule<[Options?]>("bullet-list-marker-style", {
       {
         type: "object",
         properties: {
-          primary: {
+          prefer: {
             enum: MARKERS,
-          },
-          secondary: {
-            enum: [...MARKERS, "any"],
           },
           overrides: {
             type: "array",
@@ -109,9 +114,8 @@ export default createRule<[Options?]>("bullet-list-marker-style", {
               type: "object",
               properties: {
                 level: { type: "integer", minimum: 1 },
-                parentMarker: { enum: [...MARKERS, "any", "ordered"] },
-                primary: { enum: MARKERS },
-                secondary: { enum: [...MARKERS, "any"] },
+                parentMarker: { enum: [...MARKERS, "any", "bullet"] },
+                prefer: { enum: MARKERS },
               },
               additionalProperties: false,
             },
@@ -121,7 +125,7 @@ export default createRule<[Options?]>("bullet-list-marker-style", {
       },
     ],
     messages: {
-      unexpected: "Bullet list marker should be '{{marker}}'.",
+      unexpected: "Ordered list marker should be '{{sequence}}{{markerKind}}'.",
     },
   },
   create(context) {
@@ -140,26 +144,25 @@ export default createRule<[Options?]>("bullet-list-marker-style", {
     };
 
     /**
-     * Check bullet list marker style
+     * Check ordered list marker style
      */
-    function checkBulletList(node: List) {
-      let parentMarker: Marker | "ordered" | "top";
+    function checkOrderedList(node: List) {
+      let parentMarker: MarkerKind | "bullet" | "top";
       if (containerStack.node.type === "listItem") {
         const parentMarkerKind = getListItemMarker(
           sourceCode,
           containerStack.node,
         ).kind;
         parentMarker =
-          parentMarkerKind === "." || parentMarkerKind === ")"
-            ? "ordered"
+          parentMarkerKind === "-" ||
+          parentMarkerKind === "*" ||
+          parentMarkerKind === "+"
+            ? "bullet"
             : parentMarkerKind;
       } else {
         parentMarker = "top";
       }
-      const { primary, secondary } = options.get(
-        containerStack.level,
-        parentMarker,
-      );
+      const { prefer } = options.get(containerStack.level, parentMarker);
       const nodeIndex = containerStack.node.children.indexOf(node);
       if (nodeIndex === -1) return;
       const prevNode =
@@ -171,11 +174,13 @@ export default createRule<[Options?]>("bullet-list-marker-style", {
         prevBulletList && getListItemMarker(sourceCode, prevBulletList);
 
       const expectedMarker =
-        prevBulletListMarker?.kind !== primary ? primary : secondary;
-      if (expectedMarker === "any") return;
+        prevBulletListMarker?.kind !== prefer
+          ? prefer
+          : getOtherMarkerKind(prefer);
 
       const marker = getListItemMarker(sourceCode, node);
-      if (marker.kind === expectedMarker) return;
+      if (marker.kind === expectedMarker || !isOrderedListItemMarker(marker))
+        return;
 
       const loc = sourceCode.getLoc(node);
 
@@ -189,16 +194,14 @@ export default createRule<[Options?]>("bullet-list-marker-style", {
           },
         },
         messageId: "unexpected",
-        data: { marker: expectedMarker },
+        data: { sequence: marker.sequence.raw, markerKind: expectedMarker },
         *fix(fixer) {
           if (
             prevNode?.type === "list" &&
             prevBulletListMarker &&
-            (prevBulletListMarker.kind === "-" ||
-              prevBulletListMarker.kind === "*" ||
-              prevBulletListMarker.kind === "+")
+            isOrderedListItemMarker(prevBulletListMarker)
           ) {
-            yield fixMarker(prevNode.children[0], prevBulletListMarker.kind); // Avoid conflicts with the auto
+            yield* fixMarker(prevNode.children[0], prevBulletListMarker.kind); // Avoid conflicts with the auto
           }
           yield* fixMarkers(node, expectedMarker);
           let prevMarker = expectedMarker;
@@ -211,32 +214,34 @@ export default createRule<[Options?]>("bullet-list-marker-style", {
             if (nextNode.type !== "list") break;
             const nextMarker = getListItemMarker(sourceCode, nextNode);
             if (nextMarker.kind !== prevMarker) break;
-            let expectedNextMarker =
-              prevMarker === primary ? secondary : primary;
-            if (expectedNextMarker === "any") {
-              expectedNextMarker = getOtherMarker(prevMarker);
-            }
+            const expectedNextMarker =
+              prevMarker === prefer ? getOtherMarkerKind(prefer) : prefer;
 
             yield* fixMarkers(nextNode, expectedNextMarker);
             prevMarker = expectedNextMarker;
           }
 
           /**
-           * Fix bullet list markers
+           * Fix ordered list markers
            */
-          function* fixMarkers(list: List, replacementMarker: Marker) {
+          function* fixMarkers(list: List, replacementMarker: MarkerKind) {
             for (const item of list.children) {
-              yield fixMarker(item, replacementMarker);
+              yield* fixMarker(item, replacementMarker);
             }
           }
 
           /**
-           * Fix bullet list item marker
+           * Fix ordered list item marker
            */
-          function fixMarker(item: ListItem, replacementMarker: Marker) {
+          function* fixMarker(item: ListItem, replacementMarker: MarkerKind) {
             const range = sourceCode.getRange(item);
-            return fixer.replaceTextRange(
-              [range[0], range[0] + 1],
+            const itemMarker = getListItemMarker(sourceCode, item);
+            if (!isOrderedListItemMarker(itemMarker)) return;
+            yield fixer.replaceTextRange(
+              [
+                range[0] + itemMarker.raw.length - 1,
+                range[0] + itemMarker.raw.length,
+              ],
               replacementMarker,
             );
           }
@@ -246,8 +251,8 @@ export default createRule<[Options?]>("bullet-list-marker-style", {
 
     return {
       list(node) {
-        if (node.ordered) return;
-        checkBulletList(node);
+        if (!node.ordered) return;
+        checkOrderedList(node);
       },
       "root, blockquote, listItem, footnoteDefinition"(node: MDBlockContainer) {
         containerStack = {

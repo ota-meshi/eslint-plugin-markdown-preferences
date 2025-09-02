@@ -18,6 +18,7 @@ import noTextBackslashLinebreak from "../rules/no-text-backslash-linebreak.ts";
 import noTrailingSpaces from "../rules/no-trailing-spaces.ts";
 import orderedListMarkerSequence from "../rules/ordered-list-marker-sequence.ts";
 import orderedListMarkerStart from "../rules/ordered-list-marker-start.ts";
+import orderedListMarkerStyle from "../rules/ordered-list-marker-style.ts";
 import paddingLineBetweenBlocks from "../rules/padding-line-between-blocks.ts";
 import preferAutolinks from "../rules/prefer-autolinks.ts";
 import preferFencedCodeBlocks from "../rules/prefer-fenced-code-blocks.ts";
@@ -48,6 +49,7 @@ export const rules = [
   noTrailingSpaces,
   orderedListMarkerSequence,
   orderedListMarkerStart,
+  orderedListMarkerStyle,
   paddingLineBetweenBlocks,
   preferAutolinks,
   preferFencedCodeBlocks,

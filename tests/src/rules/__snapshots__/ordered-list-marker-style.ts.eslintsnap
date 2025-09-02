@@ -1,0 +1,494 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: ordered-list-marker-style >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-style/invalid/custom-prefer-parenthesis/wrong-markers-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - prefer: n)
+Plugins: unable to serialize
+
+Code:
+  1 | # Custom Prefer Parenthesis Wrong
+  2 |
+  3 | This tests custom preference for parenthesis with wrong markers.
+  4 |
+  5 | 1. First item with period (should be parenthesis)
+    | ^~ [1]
+  6 | 2. Second item with period
+  7 |
+  8 | 1) Third item with parenthesis (different list, should be period)
+  9 | 2) Fourth item with parenthesis
+ 10 |
+ 11 | 1. Fifth item with period (should be parenthesis)
+ 12 |    1. Nested item with period (inherits incorrect parent marker)
+    |    ^~ [2]
+ 13 |    2. Another nested item with period
+ 14 | 2. Sixth item with period
+ 15 |
+
+Output:
+  1 | # Custom Prefer Parenthesis Wrong
+  2 |
+  3 | This tests custom preference for parenthesis with wrong markers.
+  4 |
+  5 | 1) First item with period (should be parenthesis)
+  6 | 2) Second item with period
+  7 |
+  8 | 1. Third item with parenthesis (different list, should be period)
+  9 | 2. Fourth item with parenthesis
+ 10 |
+ 11 | 1) Fifth item with period (should be parenthesis)
+ 12 |    1) Nested item with period (inherits incorrect parent marker)
+ 13 |    2) Another nested item with period
+ 14 | 2) Sixth item with period
+ 15 |
+
+[1] Ordered list marker should be '1)'.
+[2] Ordered list marker should be '1)'.
+---
+
+
+Test: ordered-list-marker-style >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-style/invalid/deep-nesting-wrong-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Deep Nesting Wrong Markers
+  2 |
+  3 | This tests deep nesting with incorrect markers.
+  4 |
+  5 | 1) Level 1 item (should be period)
+    | ^~ [1]
+  6 |    1) Level 2 item (should be period, inherits from parent)
+    |    ^~ [2]
+  7 |       1) Level 3 item (should be period, inherits from parent)
+    |       ^~ [3]
+  8 |          1) Level 4 item (should be period, inherits from parent)
+    |          ^~ [4]
+  9 |    2) Another level 2 item
+ 10 | 2) Another level 1 item
+ 11 |
+ 12 | 1. Correct list with period
+ 13 |    1. Level 2 correct
+ 14 |       1. Level 3 correct
+ 15 |    2. Another level 2
+ 16 | 2. Another level 1
+ 17 |
+
+Output:
+  1 | # Deep Nesting Wrong Markers
+  2 |
+  3 | This tests deep nesting with incorrect markers.
+  4 |
+  5 | 1. Level 1 item (should be period)
+  6 |    1. Level 2 item (should be period, inherits from parent)
+  7 |       1. Level 3 item (should be period, inherits from parent)
+  8 |          1. Level 4 item (should be period, inherits from parent)
+  9 |    2. Another level 2 item
+ 10 | 2. Another level 1 item
+ 11 |
+ 12 | 1) Correct list with period
+ 13 |    1. Level 2 correct
+ 14 |       1. Level 3 correct
+ 15 |    2. Another level 2
+ 16 | 2) Another level 1
+ 17 |
+
+[1] Ordered list marker should be '1.'.
+[2] Ordered list marker should be '1.'.
+[3] Ordered list marker should be '1.'.
+[4] Ordered list marker should be '1.'.
+---
+
+
+Test: ordered-list-marker-style >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-style/invalid/default-wrong-primary-marker-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Wrong Primary Marker
+  2 |
+  3 | This tests default behavior with incorrect primary markers.
+  4 |
+  5 | 1) First item with parenthesis (should be period)
+    | ^~ [1]
+  6 | 2) Second item with parenthesis
+  7 |
+  8 | 1. Third item with period (different list, should be parenthesis)
+  9 | 2. Fourth item with period
+ 10 |
+ 11 | 1) Fifth item with parenthesis (should be period)
+ 12 |    1) Nested item with parenthesis (inherits incorrect parent marker)
+    |    ^~ [2]
+ 13 |    2) Another nested item with parenthesis
+ 14 | 2) Sixth item with parenthesis
+ 15 |
+
+Output:
+  1 | # Wrong Primary Marker
+  2 |
+  3 | This tests default behavior with incorrect primary markers.
+  4 |
+  5 | 1. First item with parenthesis (should be period)
+  6 | 2. Second item with parenthesis
+  7 |
+  8 | 1) Third item with period (different list, should be parenthesis)
+  9 | 2) Fourth item with period
+ 10 |
+ 11 | 1. Fifth item with parenthesis (should be period)
+ 12 |    1. Nested item with parenthesis (inherits incorrect parent marker)
+ 13 |    2. Another nested item with parenthesis
+ 14 | 2. Sixth item with parenthesis
+ 15 |
+
+[1] Ordered list marker should be '1.'.
+[2] Ordered list marker should be '1.'.
+---
+
+
+Test: ordered-list-marker-style >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-style/invalid/mixed-list-types-wrong-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Mixed List Types with Wrong Markers
+  2 |
+  3 | This tests mixed list types with wrong ordered list markers.
+  4 |
+  5 | - Bullet list item
+  6 | - Another bullet item
+  7 |
+  8 | 1) First ordered list (should use period)
+    | ^~ [1]
+  9 | 2) Second item (should use period)
+ 10 |
+ 11 | * Another bullet list
+ 12 | * Another bullet item
+ 13 |
+ 14 | 1) Another ordered list (should use period, back to primary)
+    | ^~ [2]
+ 15 | 2) Second item
+ 16 |
+ 17 | + Final bullet list
+ 18 | + Final bullet item
+ 19 |
+ 20 | 1) Final ordered list (should use period, back to primary)
+    | ^~ [3]
+ 21 | 2) Final item
+ 22 |
+
+Output:
+  1 | # Mixed List Types with Wrong Markers
+  2 |
+  3 | This tests mixed list types with wrong ordered list markers.
+  4 |
+  5 | - Bullet list item
+  6 | - Another bullet item
+  7 |
+  8 | 1. First ordered list (should use period)
+  9 | 2. Second item (should use period)
+ 10 |
+ 11 | * Another bullet list
+ 12 | * Another bullet item
+ 13 |
+ 14 | 1. Another ordered list (should use period, back to primary)
+ 15 | 2. Second item
+ 16 |
+ 17 | + Final bullet list
+ 18 | + Final bullet item
+ 19 |
+ 20 | 1. Final ordered list (should use period, back to primary)
+ 21 | 2. Final item
+ 22 |
+
+[1] Ordered list marker should be '1.'.
+[2] Ordered list marker should be '1.'.
+[3] Ordered list marker should be '1.'.
+---
+
+
+Test: ordered-list-marker-style >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-style/invalid/multiple-overrides/wrong-multiple-levels-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - prefer: n.
+    overrides:
+      - level: 2
+        prefer: n)
+      - level: 3
+        prefer: n.
+Plugins: unable to serialize
+
+Code:
+  1 | # Multiple Overrides Wrong
+  2 |
+  3 | This tests multiple level overrides with wrong markers.
+  4 |
+  5 | 1. Level 1 (period - correct)
+  6 |    1. Level 2 (period - should be parenthesis per override)
+    |    ^~ [1]
+  7 |       1) Level 3 (parenthesis - should be period per override)
+    |       ^~ [2]
+  8 |          1) Level 4 (parenthesis - should be period, inherits from default)
+    |          ^~ [3]
+  9 |       2) Another level 3 (parenthesis - should be period per override)
+ 10 |    2. Another level 2 (period - should be parenthesis per override)
+ 11 |       1) Level 3 (parenthesis - should be period per override)
+    |       ^~ [4]
+ 12 |       2) Another level 3 (parenthesis - should be period per override)
+ 13 | 2. Another level 1 (period - correct)
+ 14 |
+
+Output:
+  1 | # Multiple Overrides Wrong
+  2 |
+  3 | This tests multiple level overrides with wrong markers.
+  4 |
+  5 | 1. Level 1 (period - correct)
+  6 |    1) Level 2 (period - should be parenthesis per override)
+  7 |       1. Level 3 (parenthesis - should be period per override)
+  8 |          1. Level 4 (parenthesis - should be period, inherits from default)
+  9 |       2. Another level 3 (parenthesis - should be period per override)
+ 10 |    2) Another level 2 (period - should be parenthesis per override)
+ 11 |       1. Level 3 (parenthesis - should be period per override)
+ 12 |       2. Another level 3 (parenthesis - should be period per override)
+ 13 | 2. Another level 1 (period - correct)
+ 14 |
+
+[1] Ordered list marker should be '1)'.
+[2] Ordered list marker should be '1.'.
+[3] Ordered list marker should be '1.'.
+[4] Ordered list marker should be '1.'.
+---
+
+
+Test: ordered-list-marker-style >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-style/invalid/overrides-bullet-parent/wrong-bullet-parent-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - prefer: n.
+    overrides:
+      - level: 2
+        parentMarker: bullet
+        prefer: n)
+Plugins: unable to serialize
+
+Code:
+  1 | # Bullet Parent Override Wrong
+  2 |
+  3 | This tests override for ordered lists nested under bullet lists with wrong markers.
+  4 |
+  5 | - Bullet list item
+  6 |   1. Ordered list nested under bullet (should use parenthesis override)
+    |   ^~ [1]
+  7 |   2. Another ordered item (should use parenthesis)
+  8 | - Another bullet item
+  9 |   1. Another ordered list under bullet (should use parenthesis override)
+    |   ^~ [2]
+ 10 |   2. Another ordered item (should use parenthesis)
+ 11 |
+ 12 | 1. Top-level ordered list (uses correct default period)
+ 13 |    1. Nested ordered list under ordered parent (uses correct default period)
+ 14 |    2. Another nested ordered item
+ 15 | 2. Another top-level ordered item
+ 16 |
+
+Output:
+  1 | # Bullet Parent Override Wrong
+  2 |
+  3 | This tests override for ordered lists nested under bullet lists with wrong markers.
+  4 |
+  5 | - Bullet list item
+  6 |   1) Ordered list nested under bullet (should use parenthesis override)
+  7 |   2) Another ordered item (should use parenthesis)
+  8 | - Another bullet item
+  9 |   1) Another ordered list under bullet (should use parenthesis override)
+ 10 |   2) Another ordered item (should use parenthesis)
+ 11 |
+ 12 | 1. Top-level ordered list (uses correct default period)
+ 13 |    1. Nested ordered list under ordered parent (uses correct default period)
+ 14 |    2. Another nested ordered item
+ 15 | 2. Another top-level ordered item
+ 16 |
+
+[1] Ordered list marker should be '1)'.
+[2] Ordered list marker should be '1)'.
+---
+
+
+Test: ordered-list-marker-style >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-style/invalid/overrides-level/level-2-wrong-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - prefer: n.
+    overrides:
+      - level: 2
+        prefer: n)
+Plugins: unable to serialize
+
+Code:
+  1 | # Level 2 Override Wrong
+  2 |
+  3 | This tests level 2 override configuration with wrong markers.
+  4 |
+  5 | 1. Level 1 item (period - correct)
+  6 |    1. Level 2 item (period - should be parenthesis per override)
+    |    ^~ [1]
+  7 |    2. Another level 2 item (period - should be parenthesis)
+  8 |       1. Level 3 item (period - should be parenthesis, inherits from parent)
+  9 |       2. Another level 3 item (period - should be parenthesis)
+ 10 |    3. Third level 2 item (period - should be parenthesis)
+ 11 | 2. Another level 1 item (period - correct)
+ 12 |    1. Level 2 item (period - should be parenthesis per override)
+    |    ^~ [2]
+ 13 |    2. Another level 2 item (period - should be parenthesis)
+ 14 | 3. Third level 1 item (period - correct)
+ 15 |
+
+Output:
+  1 | # Level 2 Override Wrong
+  2 |
+  3 | This tests level 2 override configuration with wrong markers.
+  4 |
+  5 | 1. Level 1 item (period - correct)
+  6 |    1) Level 2 item (period - should be parenthesis per override)
+  7 |    2) Another level 2 item (period - should be parenthesis)
+  8 |       1. Level 3 item (period - should be parenthesis, inherits from parent)
+  9 |       2. Another level 3 item (period - should be parenthesis)
+ 10 |    3) Third level 2 item (period - should be parenthesis)
+ 11 | 2. Another level 1 item (period - correct)
+ 12 |    1) Level 2 item (period - should be parenthesis per override)
+ 13 |    2) Another level 2 item (period - should be parenthesis)
+ 14 | 3. Third level 1 item (period - correct)
+ 15 |
+
+[1] Ordered list marker should be '1)'.
+[2] Ordered list marker should be '1)'.
+---
+
+
+Test: ordered-list-marker-style >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-style/invalid/overrides-parent-marker/wrong-alternating-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - prefer: n.
+    overrides:
+      - level: 2
+        parentMarker: n.
+        prefer: n)
+      - level: 2
+        parentMarker: n)
+        prefer: n.
+Plugins: unable to serialize
+
+Code:
+  1 | # Parent Marker Override Wrong
+  2 |
+  3 | This tests parent marker override configuration with wrong markers.
+  4 |
+  5 | 1. Level 1 with period
+  6 |    1. Level 2 with period (should be parenthesis because parent uses period)
+    |    ^~ [1]
+  7 |    2. Another level 2 with period (should be parenthesis)
+  8 |
+  9 | 1) Level 1 with parenthesis (different list, uses secondary marker)
+ 10 |    1) Level 2 with parenthesis (should be period because parent uses parenthesis)
+    |    ^~ [2]
+ 11 |    2) Another level 2 with parenthesis (should be period)
+ 12 |
+ 13 | 1. Level 1 with period (back to primary)
+ 14 |    1. Level 2 with period (should be parenthesis because parent uses period)
+    |    ^~ [3]
+ 15 |    2. Another level 2 with period (should be parenthesis)
+ 16 |
+
+Output:
+  1 | # Parent Marker Override Wrong
+  2 |
+  3 | This tests parent marker override configuration with wrong markers.
+  4 |
+  5 | 1. Level 1 with period
+  6 |    1) Level 2 with period (should be parenthesis because parent uses period)
+  7 |    2) Another level 2 with period (should be parenthesis)
+  8 |
+  9 | 1) Level 1 with parenthesis (different list, uses secondary marker)
+ 10 |    1. Level 2 with parenthesis (should be period because parent uses parenthesis)
+ 11 |    2. Another level 2 with parenthesis (should be period)
+ 12 |
+ 13 | 1. Level 1 with period (back to primary)
+ 14 |    1) Level 2 with period (should be parenthesis because parent uses period)
+ 15 |    2) Another level 2 with period (should be parenthesis)
+ 16 |
+
+[1] Ordered list marker should be '1)'.
+[2] Ordered list marker should be '1.'.
+[3] Ordered list marker should be '1)'.
+---
+
+
+Test: ordered-list-marker-style >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-style/invalid/single-item-lists-wrong-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Single Item Lists
+  2 |
+  3 | This tests single item lists with wrong markers.
+  4 |
+  5 | 1) Single item list (should use period)
+    | ^~ [1]
+  6 |
+  7 | Some text between lists.
+  8 |
+  9 | 1) Another single item list (should use period again)
+    | ^~ [2]
+ 10 |
+ 11 | More text.
+ 12 |
+ 13 | 1) Third single item list (should use period again)
+    | ^~ [3]
+ 14 |
+
+Output:
+  1 | # Single Item Lists
+  2 |
+  3 | This tests single item lists with wrong markers.
+  4 |
+  5 | 1. Single item list (should use period)
+  6 |
+  7 | Some text between lists.
+  8 |
+  9 | 1. Another single item list (should use period again)
+ 10 |
+ 11 | More text.
+ 12 |
+ 13 | 1. Third single item list (should use period again)
+ 14 |
+
+[1] Ordered list marker should be '1.'.
+[2] Ordered list marker should be '1.'.
+[3] Ordered list marker should be '1.'.
+---

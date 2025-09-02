@@ -108,7 +108,10 @@ describe("utils/ast", () => {
       assert.deepStrictEqual(getListItemMarker(src!, node), {
         kind: ".",
         raw: "1.",
-        sequence: 1,
+        sequence: {
+          value: 1,
+          raw: "1",
+        },
       });
     });
     it("should return ')' and sequence for ordered list", () => {
@@ -118,7 +121,10 @@ describe("utils/ast", () => {
       assert.deepStrictEqual(getListItemMarker(src!, node), {
         kind: ")",
         raw: "1)",
-        sequence: 1,
+        sequence: {
+          value: 1,
+          raw: "1",
+        },
       });
     });
     it("should work with List node directly", () => {

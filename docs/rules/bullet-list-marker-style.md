@@ -205,13 +205,10 @@ In the following example, `"-"` and `"*"` are allowed by default, but for level 
 
 - [markdown-preferences/ordered-list-marker-sequence](./ordered-list-marker-sequence.md)
 - [markdown-preferences/ordered-list-marker-start](./ordered-list-marker-start.md)
+- [markdown-preferences/ordered-list-marker-style](./ordered-list-marker-style.md)
 
 ## 🔍 Implementation
-
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/bullet-list-marker-style.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/bullet-list-marker-style.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/bullet-list-marker-style)
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
