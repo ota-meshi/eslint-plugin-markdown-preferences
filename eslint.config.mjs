@@ -167,7 +167,7 @@ export default defineConfig([
       "markdown-preferences/no-multiple-empty-lines": "error",
       "markdown-preferences/ordered-list-marker-sequence": "error",
       "markdown-preferences/ordered-list-marker-start": "error",
-      "markdown-preferences/atx-headings-closing-sequence": "error",
+      "markdown-preferences/atx-heading-closing-sequence": "error",
       "markdown-preferences/emoji-notation": "error",
       "markdown-preferences/table-header-casing": [
         "error",

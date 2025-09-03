@@ -2,8 +2,8 @@
 // This file has been automatically generated,
 // in order to update its content execute "npm run update"
 import type { RuleModule } from "../types.ts";
-import atxHeadingsClosingSequenceLength from "../rules/atx-headings-closing-sequence-length.ts";
-import atxHeadingsClosingSequence from "../rules/atx-headings-closing-sequence.ts";
+import atxHeadingsClosingSequenceLength from "../rules/atx-heading-closing-sequence-length.ts";
+import atxHeadingsClosingSequence from "../rules/atx-heading-closing-sequence.ts";
 import blockquoteMarkerAlignment from "../rules/blockquote-marker-alignment.ts";
 import bulletListMarkerStyle from "../rules/bullet-list-marker-style.ts";
 import canonicalCodeBlockLanguage from "../rules/canonical-code-block-language.ts";

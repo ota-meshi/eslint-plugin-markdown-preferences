@@ -116,8 +116,8 @@ The rules with the following star ⭐ are included in the configs.
 
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
-| [markdown-preferences/atx-headings-closing-sequence-length](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-headings-closing-sequence-length.html) | enforce consistent length for the closing sequence (trailing #s) in ATX headings. | 🔧 |  |
-| [markdown-preferences/atx-headings-closing-sequence](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-headings-closing-sequence.html) | enforce consistent use of closing sequence in ATX headings. | 🔧 |  |
+| [markdown-preferences/atx-heading-closing-sequence-length](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-heading-closing-sequence-length.html) | enforce consistent length for the closing sequence (trailing #s) in ATX headings. | 🔧 |  |
+| [markdown-preferences/atx-heading-closing-sequence](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-heading-closing-sequence.html) | enforce consistent use of closing sequence in ATX headings. | 🔧 |  |
 | [markdown-preferences/blockquote-marker-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/blockquote-marker-alignment.html) | enforce consistent alignment of blockquote markers | 🔧 | ⭐ |
 | [markdown-preferences/bullet-list-marker-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/bullet-list-marker-style.html) | enforce consistent bullet list (unordered list) marker style | 🔧 |  |
 | [markdown-preferences/definitions-last](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/definitions-last.html) | require link definitions and footnote definitions to be placed at the end of the document | 🔧 |  |

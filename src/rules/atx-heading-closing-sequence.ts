@@ -10,7 +10,7 @@ type OptionObject = {
 };
 type Option = OptionObject;
 
-export default createRule<[Option?]>("atx-headings-closing-sequence", {
+export default createRule<[Option?]>("atx-heading-closing-sequence", {
   meta: {
     type: "layout",
     docs: {

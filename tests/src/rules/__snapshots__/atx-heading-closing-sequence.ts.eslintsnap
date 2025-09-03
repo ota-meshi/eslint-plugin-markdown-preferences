@@ -1,8 +1,8 @@
 # eslint-snapshot-rule-tester format: v1
 
 
-Test: atx-headings-closing-sequence >> invalid
-Filename: tests/fixtures/rules/atx-headings-closing-sequence/invalid/always-input.md
+Test: atx-heading-closing-sequence >> invalid
+Filename: tests/fixtures/rules/atx-heading-closing-sequence/invalid/always-input.md
 Language: markdown/gfm
 LanguageOptions:
   frontmatter: yaml
@@ -49,8 +49,8 @@ Output:
 ---
 
 
-Test: atx-headings-closing-sequence >> invalid
-Filename: tests/fixtures/rules/atx-headings-closing-sequence/invalid/default-input.md
+Test: atx-heading-closing-sequence >> invalid
+Filename: tests/fixtures/rules/atx-heading-closing-sequence/invalid/default-input.md
 Language: markdown/gfm
 LanguageOptions:
   frontmatter: yaml
@@ -85,8 +85,8 @@ Output:
 ---
 
 
-Test: atx-headings-closing-sequence >> invalid
-Filename: tests/fixtures/rules/atx-headings-closing-sequence/invalid/never-input.md
+Test: atx-heading-closing-sequence >> invalid
+Filename: tests/fixtures/rules/atx-heading-closing-sequence/invalid/never-input.md
 Language: markdown/gfm
 LanguageOptions:
   frontmatter: yaml
