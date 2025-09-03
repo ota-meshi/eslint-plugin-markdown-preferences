@@ -15,14 +15,14 @@ declare module 'eslint' {
 export interface RuleOptions {
   /**
    * enforce consistent use of closing sequence in ATX headings.
-   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-headings-closing-sequence.html
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-heading-closing-sequence.html
    */
-  'markdown-preferences/atx-headings-closing-sequence'?: Linter.RuleEntry<MarkdownPreferencesAtxHeadingsClosingSequence>
+  'markdown-preferences/atx-heading-closing-sequence'?: Linter.RuleEntry<MarkdownPreferencesAtxHeadingsClosingSequence>
   /**
    * enforce consistent length for the closing sequence (trailing #s) in ATX headings.
-   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-headings-closing-sequence-length.html
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-heading-closing-sequence-length.html
    */
-  'markdown-preferences/atx-headings-closing-sequence-length'?: Linter.RuleEntry<MarkdownPreferencesAtxHeadingsClosingSequenceLength>
+  'markdown-preferences/atx-heading-closing-sequence-length'?: Linter.RuleEntry<MarkdownPreferencesAtxHeadingsClosingSequenceLength>
   /**
    * enforce consistent alignment of blockquote markers
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/blockquote-marker-alignment.html
@@ -166,11 +166,11 @@ export interface RuleOptions {
 }
 
 /* ======= Declarations ======= */
-// ----- markdown-preferences/atx-headings-closing-sequence -----
+// ----- markdown-preferences/atx-heading-closing-sequence -----
 type MarkdownPreferencesAtxHeadingsClosingSequence = []|[{
   closingSequence?: ("always" | "never")
 }]
-// ----- markdown-preferences/atx-headings-closing-sequence-length -----
+// ----- markdown-preferences/atx-heading-closing-sequence-length -----
 type MarkdownPreferencesAtxHeadingsClosingSequenceLength = []|[{
   mode?: ("match-opening" | "length" | "consistent" | "consistent-line-length" | "fixed-line-length")
   length?: number

@@ -1,12 +1,12 @@
 ---
 pageClass: "rule-details"
 sidebarDepth: 0
-title: "markdown-preferences/atx-headings-closing-sequence-length"
+title: "markdown-preferences/atx-heading-closing-sequence-length"
 description: "enforce consistent length for the closing sequence (trailing #s) in ATX headings."
 since: "v0.13.0"
 ---
 
-# markdown-preferences/atx-headings-closing-sequence-length
+# markdown-preferences/atx-heading-closing-sequence-length
 
 > enforce consistent length for the closing sequence (trailing #s) in ATX headings.
 
@@ -24,7 +24,7 @@ This rule does not enforce whether a closing sequence is present or absent. If a
 <!-- eslint-skip -->
 
 ```md
-<!-- eslint markdown-preferences/atx-headings-closing-sequence-length: ["error", {"mode": "match-opening"}] -->
+<!-- eslint markdown-preferences/atx-heading-closing-sequence-length: ["error", {"mode": "match-opening"}] -->
 <!-- ✓ GOOD (with { "mode": "match-opening" }) -->
 # Heading #
 ## Heading ##
@@ -42,7 +42,7 @@ This rule does not enforce whether a closing sequence is present or absent. If a
 <!-- eslint-skip -->
 
 ```md
-<!-- eslint markdown-preferences/atx-headings-closing-sequence-length: ["error", {"mode": "length", "length": 2}] -->
+<!-- eslint markdown-preferences/atx-heading-closing-sequence-length: ["error", {"mode": "length", "length": 2}] -->
 <!-- ✓ GOOD (with { "mode": "length", "length": 2 }) -->
 # Heading ##
 ## Heading ##
@@ -60,7 +60,7 @@ This rule does not enforce whether a closing sequence is present or absent. If a
 <!-- eslint-skip -->
 
 ```md
-<!-- eslint markdown-preferences/atx-headings-closing-sequence-length: ["error", {"mode": "fixed-line-length", "length": 30}] -->
+<!-- eslint markdown-preferences/atx-heading-closing-sequence-length: ["error", {"mode": "fixed-line-length", "length": 30}] -->
 <!-- ✓ GOOD (with { "mode": "fixed-line-length", "length": 30 }) -->
 # Short heading ##############
 ## Long heading ##############
@@ -78,7 +78,7 @@ This rule does not enforce whether a closing sequence is present or absent. If a
 <!-- eslint-skip -->
 
 ```md
-<!-- eslint markdown-preferences/atx-headings-closing-sequence-length: ["error", {"mode": "consistent"}] -->
+<!-- eslint markdown-preferences/atx-heading-closing-sequence-length: ["error", {"mode": "consistent"}] -->
 <!-- ✓ GOOD (with { "mode": "consistent" }) -->
 # Heading #
 ## Heading #
@@ -96,7 +96,7 @@ This rule does not enforce whether a closing sequence is present or absent. If a
 <!-- eslint-skip -->
 
 ```md
-<!-- eslint markdown-preferences/atx-headings-closing-sequence-length: ["error", {"mode": "consistent-line-length"}] -->
+<!-- eslint markdown-preferences/atx-heading-closing-sequence-length: ["error", {"mode": "consistent-line-length"}] -->
 <!-- ✓ GOOD (with { "mode": "consistent-line-length" }) -->
 # Short ##########
 ## Long heading ##
@@ -111,7 +111,7 @@ This rule does not enforce whether a closing sequence is present or absent. If a
 
 ```json
 {
-  "markdown-preferences/atx-headings-closing-sequence-length": [
+  "markdown-preferences/atx-heading-closing-sequence-length": [
     "error",
     {
       "mode": "match-opening",
@@ -135,11 +135,11 @@ This rule accepts an object option with the following properties:
 
 - [CommonMark Spec: ATX Headings]
 
-[CommonMark Spec: ATX Headings]: https://spec.commonmark.org/0.31.2/#atx-headings
+[CommonMark Spec: ATX Headings]: https://spec.commonmark.org/0.31.2/#atx-heading
 
 ## 👫 Related Rules
 
-- [markdown-preferences/atx-headings-closing-sequence](./atx-headings-closing-sequence.md)
+- [markdown-preferences/atx-heading-closing-sequence](./atx-heading-closing-sequence.md)
 
 ## 🚀 Version
 
@@ -147,6 +147,6 @@ This rule was introduced in eslint-plugin-markdown-preferences v0.13.0
 
 ## 🔍 Implementation
 
-- [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/atx-headings-closing-sequence-length.ts)
-- [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/atx-headings-closing-sequence-length.ts)
-- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/atx-headings-closing-sequence-length)
+- [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/atx-heading-closing-sequence-length.ts)
+- [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/atx-heading-closing-sequence-length.ts)
+- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/atx-heading-closing-sequence-length)

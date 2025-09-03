@@ -19,7 +19,7 @@ type Options = {
   length?: number;
 };
 
-export default createRule<[Options?]>("atx-headings-closing-sequence-length", {
+export default createRule<[Options?]>("atx-heading-closing-sequence-length", {
   meta: {
     type: "layout",
     docs: {

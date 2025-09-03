@@ -1,12 +1,12 @@
 ---
 pageClass: "rule-details"
 sidebarDepth: 0
-title: "markdown-preferences/atx-headings-closing-sequence"
+title: "markdown-preferences/atx-heading-closing-sequence"
 description: "enforce consistent use of closing sequence in ATX headings."
 since: "v0.13.0"
 ---
 
-# markdown-preferences/atx-headings-closing-sequence
+# markdown-preferences/atx-heading-closing-sequence
 
 > enforce consistent use of closing sequence in ATX headings.
 
@@ -55,7 +55,7 @@ Depending on your configuration, this rule will require (`"always"`) or forbid (
 <!-- eslint-skip -->
 
 ```md
-<!-- eslint markdown-preferences/atx-headings-closing-sequence: "error" -->
+<!-- eslint markdown-preferences/atx-heading-closing-sequence: "error" -->
 
 <!-- ✓ GOOD -->
 
@@ -83,7 +83,7 @@ Depending on your configuration, this rule will require (`"always"`) or forbid (
 <!-- eslint-skip -->
 
 ```md
-<!-- eslint markdown-preferences/atx-headings-closing-sequence: ["error", { "closingSequence": "always" }] -->
+<!-- eslint markdown-preferences/atx-heading-closing-sequence: ["error", { "closingSequence": "always" }] -->
 
 <!-- ✓ GOOD -->
 
@@ -110,7 +110,7 @@ This rule has one option:
 
 ```json
 {
-  "markdown-preferences/atx-headings-closing-sequence": [
+  "markdown-preferences/atx-heading-closing-sequence": [
     "error",
     { "closingSequence": "never" }
   ]
@@ -125,12 +125,12 @@ This rule has one option:
 
 - [CommonMark Spec: ATX Headings]
 
-[CommonMark Spec: ATX Headings]: https://spec.commonmark.org/0.31.2/#atx-headings
+[CommonMark Spec: ATX Headings]: https://spec.commonmark.org/0.31.2/#atx-heading
 
 ## 👫 Related Rules
 
 - [markdown-preferences/heading-casing](./heading-casing.md)
-- [markdown-preferences/atx-headings-closing-sequence-length](./atx-headings-closing-sequence-length.md)
+- [markdown-preferences/atx-heading-closing-sequence-length](./atx-heading-closing-sequence-length.md)
 
 ## 🚀 Version
 
@@ -138,6 +138,6 @@ This rule was introduced in eslint-plugin-markdown-preferences v0.13.0
 
 ## 🔍 Implementation
 
-- [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/atx-headings-closing-sequence.ts)
-- [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/atx-headings-closing-sequence.ts)
-- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/atx-headings-closing-sequence)
+- [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/atx-heading-closing-sequence.ts)
+- [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/atx-heading-closing-sequence.ts)
+- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/atx-heading-closing-sequence)

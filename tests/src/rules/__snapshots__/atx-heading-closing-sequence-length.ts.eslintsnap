@@ -1,8 +1,8 @@
 # eslint-snapshot-rule-tester format: v1
 
 
-Test: atx-headings-closing-sequence-length >> invalid
-Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/consistent/consistent-invalid-1-input.md
+Test: atx-heading-closing-sequence-length >> invalid
+Filename: tests/fixtures/rules/atx-heading-closing-sequence-length/invalid/consistent/consistent-invalid-1-input.md
 Language: markdown/gfm
 LanguageOptions:
   frontmatter: yaml
@@ -31,8 +31,8 @@ Output:
 ---
 
 
-Test: atx-headings-closing-sequence-length >> invalid
-Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/consistent-line-length/consistent-line-invalid-1-input.md
+Test: atx-heading-closing-sequence-length >> invalid
+Filename: tests/fixtures/rules/atx-heading-closing-sequence-length/invalid/consistent-line-length/consistent-line-invalid-1-input.md
 Language: markdown/gfm
 LanguageOptions:
   frontmatter: yaml
@@ -55,8 +55,8 @@ Output:
 ---
 
 
-Test: atx-headings-closing-sequence-length >> invalid
-Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/consistent-line-length/consistent-line-invalid-2-input.md
+Test: atx-heading-closing-sequence-length >> invalid
+Filename: tests/fixtures/rules/atx-heading-closing-sequence-length/invalid/consistent-line-length/consistent-line-invalid-2-input.md
 Language: markdown/gfm
 LanguageOptions:
   frontmatter: yaml
@@ -79,8 +79,8 @@ Output:
 ---
 
 
-Test: atx-headings-closing-sequence-length >> invalid
-Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/consistent-line-length/long-header-late-invalid-1-input.md
+Test: atx-heading-closing-sequence-length >> invalid
+Filename: tests/fixtures/rules/atx-heading-closing-sequence-length/invalid/consistent-line-length/long-header-late-invalid-1-input.md
 Language: markdown/gfm
 LanguageOptions:
   frontmatter: yaml
@@ -103,8 +103,8 @@ Output:
 ---
 
 
-Test: atx-headings-closing-sequence-length >> invalid
-Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/consistent-line-length/only-closing-sequence-invalid-input.md
+Test: atx-heading-closing-sequence-length >> invalid
+Filename: tests/fixtures/rules/atx-heading-closing-sequence-length/invalid/consistent-line-length/only-closing-sequence-invalid-input.md
 Language: markdown/gfm
 LanguageOptions:
   frontmatter: yaml
@@ -131,8 +131,8 @@ Output:
 ---
 
 
-Test: atx-headings-closing-sequence-length >> invalid >>> "# Only hashes and spaces (invalid)\n#    ##\n#\\u0009##\n#\n# Heading ###############\n"
-Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/consistent-line-length/only-hashes-and-spaces-invalid-input.md
+Test: atx-heading-closing-sequence-length >> invalid >>> "# Only hashes and spaces (invalid)\n#    ##\n#\\u0009##\n#\n# Heading ###############\n"
+Filename: tests/fixtures/rules/atx-heading-closing-sequence-length/invalid/consistent-line-length/only-hashes-and-spaces-invalid-input.md
 Language: markdown/gfm
 LanguageOptions:
   frontmatter: yaml
@@ -163,8 +163,8 @@ Output:
 ---
 
 
-Test: atx-headings-closing-sequence-length >> invalid >>> "# 全角文字・異体字セレクタを含む見出しのテスト\n# 見出しＡＢＣ ###\n# 竈門 禰󠄀豆子 ##\n# Heading ###\n# 見\\u0009出\\u0009し\\u0009##\n# Heading ############\n"
-Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/consistent-line-length/zenkaku-ivs-invalid-input.md
+Test: atx-heading-closing-sequence-length >> invalid >>> "# 全角文字・異体字セレクタを含む見出しのテスト\n# 見出しＡＢＣ ###\n# 竈門 禰󠄀豆子 ##\n# Heading ###\n# 見\\u0009出\\u0009し\\u0009##\n# Heading ############\n"
+Filename: tests/fixtures/rules/atx-heading-closing-sequence-length/invalid/consistent-line-length/zenkaku-ivs-invalid-input.md
 Language: markdown/gfm
 LanguageOptions:
   frontmatter: yaml
@@ -199,8 +199,8 @@ Output:
 ---
 
 
-Test: atx-headings-closing-sequence-length >> invalid
-Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/fixed-line-length/fixed-line-invalid-1-input.md
+Test: atx-heading-closing-sequence-length >> invalid
+Filename: tests/fixtures/rules/atx-heading-closing-sequence-length/invalid/fixed-line-length/fixed-line-invalid-1-input.md
 Language: markdown/gfm
 LanguageOptions:
   frontmatter: yaml
@@ -222,8 +222,8 @@ Output:
 ---
 
 
-Test: atx-headings-closing-sequence-length >> invalid
-Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/length/simple-input.md
+Test: atx-heading-closing-sequence-length >> invalid
+Filename: tests/fixtures/rules/atx-heading-closing-sequence-length/invalid/length/simple-input.md
 Language: markdown/gfm
 LanguageOptions:
   frontmatter: yaml
@@ -253,8 +253,8 @@ Output:
 ---
 
 
-Test: atx-headings-closing-sequence-length >> invalid
-Filename: tests/fixtures/rules/atx-headings-closing-sequence-length/invalid/match-opening/simple-input.md
+Test: atx-heading-closing-sequence-length >> invalid
+Filename: tests/fixtures/rules/atx-heading-closing-sequence-length/invalid/match-opening/simple-input.md
 Language: markdown/gfm
 LanguageOptions:
   frontmatter: yaml
