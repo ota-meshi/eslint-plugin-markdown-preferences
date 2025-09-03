@@ -193,10 +193,6 @@ In the following example, `"n."` is preferred by default, but for level 2 lists,
 
 ## 🔍 Implementation
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
-
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/ordered-list-marker-style.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/ordered-list-marker-style.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/ordered-list-marker-style)
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->

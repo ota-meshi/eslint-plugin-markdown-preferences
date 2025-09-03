@@ -1,0 +1,457 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: level1-heading-style >> invalid
+Filename: tests/fixtures/rules/level1-heading-style/invalid/atx-style/blockquote-multiline-setext-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: atx
+Plugins: unable to serialize
+
+Code:
+  1 | # Main ATX Level 1 Heading
+  2 |
+  3 | This is valid.
+  4 |
+  5 | > Multi-line
+    |   ^~~~~~~~~~\ [1]
+  6 | > Setext Heading
+    | ~~~~~~~~~~~~~~~~\ [1]
+  7 | > in Blockquote
+    | ~~~~~~~~~~~~~~~\ [1]
+  8 | > ==============
+    | ~~~~~~~~~~~~~~~~ [1]
+  9 | >
+ 10 | > This should be invalid when allowMultilineSetext is false (default).
+ 11 |
+ 12 | ## Normal Level 2 Heading
+ 13 |
+ 14 | This should not be affected.
+ 15 |
+
+Output: unchanged
+
+[1] Multiline Setext headings are not allowed.
+---
+
+
+Test: level1-heading-style >> invalid
+Filename: tests/fixtures/rules/level1-heading-style/invalid/atx-style/blockquote-setext-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: atx
+Plugins: unable to serialize
+
+Code:
+  1 | # Main ATX Level 1 Heading
+  2 |
+  3 | This is valid.
+  4 |
+  5 | > Blockquote Setext Level 1 Heading
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\ [1]
+  6 | > ==================================
+    | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  7 | >
+  8 | > This level 1 heading inside a blockquote should be invalid when ATX style is enforced.
+  9 | >
+ 10 | > ## Level 2 in blockquote
+ 11 | >
+ 12 | > This should not be affected.
+ 13 |
+ 14 | ## Normal Level 2 Heading
+ 15 |
+ 16 | This should not be affected.
+ 17 |
+
+Output:
+  1 | # Main ATX Level 1 Heading
+  2 |
+  3 | This is valid.
+  4 |
+  5 | > # Blockquote Setext Level 1 Heading
+  6 | >
+  7 | > This level 1 heading inside a blockquote should be invalid when ATX style is enforced.
+  8 | >
+  9 | > ## Level 2 in blockquote
+ 10 | >
+ 11 | > This should not be affected.
+ 12 |
+ 13 | ## Normal Level 2 Heading
+ 14 |
+ 15 | This should not be affected.
+ 16 |
+
+[1] Expected ATX style heading (# Heading).
+---
+
+
+Test: level1-heading-style >> invalid
+Filename: tests/fixtures/rules/level1-heading-style/invalid/atx-style/multiline-setext-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: atx
+Plugins: unable to serialize
+
+Code:
+  1 | Multi-line
+    | ^~~~~~~~~~\ [1]
+  2 | Setext Heading
+    | ~~~~~~~~~~~~~~\ [1]
+  3 | ==============
+    | ~~~~~~~~~~~~~~ [1]
+  4 |
+  5 | This should be invalid when allowMultilineSetext is false (default).
+  6 |
+  7 | ## Level 2 Heading
+  8 |
+  9 | This should not be affected.
+ 10 |
+
+Output: unchanged
+
+[1] Multiline Setext headings are not allowed.
+---
+
+
+Test: level1-heading-style >> invalid
+Filename: tests/fixtures/rules/level1-heading-style/invalid/atx-style/setext-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: atx
+Plugins: unable to serialize
+
+Code:
+  1 | Setext Style Heading
+    | ^~~~~~~~~~~~~~~~~~~~\ [1]
+  2 | ====================
+    | ~~~~~~~~~~~~~~~~~~~~ [1]
+  3 |
+  4 | This should be invalid when ATX style is enforced.
+  5 |
+  6 | ## Level 2 Heading
+  7 |
+  8 | This should not be affected.
+  9 |
+
+Output:
+  1 | # Setext Style Heading
+  2 |
+  3 | This should be invalid when ATX style is enforced.
+  4 |
+  5 | ## Level 2 Heading
+  6 |
+  7 | This should not be affected.
+  8 |
+
+[1] Expected ATX style heading (# Heading).
+---
+
+
+Test: level1-heading-style >> invalid
+Filename: tests/fixtures/rules/level1-heading-style/invalid/atx-style/setext-to-atx-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: atx
+Plugins: unable to serialize
+
+Code:
+  1 | ATX Level 1 Heading
+    | ^~~~~~~~~~~~~~~~~~~\ [1]
+  2 | ===================
+    | ~~~~~~~~~~~~~~~~~~~ [1]
+  3 |
+  4 | This should be converted to ATX style.
+  5 |
+  6 | Another Setext Heading
+    | ^~~~~~~~~~~~~~~~~~~~~~\ [2]
+  7 | ======================
+    | ~~~~~~~~~~~~~~~~~~~~~~ [2]
+  8 |
+  9 | This should also be converted.
+ 10 |
+ 11 | ## Level 2 Heading
+ 12 |
+ 13 | This should not be affected.
+ 14 |
+
+Output:
+  1 | # ATX Level 1 Heading
+  2 |
+  3 | This should be converted to ATX style.
+  4 |
+  5 | # Another Setext Heading
+  6 |
+  7 | This should also be converted.
+  8 |
+  9 | ## Level 2 Heading
+ 10 |
+ 11 | This should not be affected.
+ 12 |
+
+[1] Expected ATX style heading (# Heading).
+[2] Expected ATX style heading (# Heading).
+---
+
+
+Test: level1-heading-style >> invalid
+Filename: tests/fixtures/rules/level1-heading-style/invalid/default-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | Setext Style Heading
+    | ^~~~~~~~~~~~~~~~~~~~\ [1]
+  2 | ====================
+    | ~~~~~~~~~~~~~~~~~~~~ [1]
+  3 |
+  4 | This should be invalid with default options (ATX style preferred).
+  5 |
+  6 | ## Level 2 Heading
+  7 |
+  8 | This should not be affected.
+  9 |
+
+Output:
+  1 | # Setext Style Heading
+  2 |
+  3 | This should be invalid with default options (ATX style preferred).
+  4 |
+  5 | ## Level 2 Heading
+  6 |
+  7 | This should not be affected.
+  8 |
+
+[1] Expected ATX style heading (# Heading).
+---
+
+
+Test: level1-heading-style >> invalid
+Filename: tests/fixtures/rules/level1-heading-style/invalid/setext-style/atx-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: setext
+Plugins: unable to serialize
+
+Code:
+  1 | # ATX Style Heading
+    | ^~~~~~~~~~~~~~~~~~~ [1]
+  2 |
+  3 | This should be invalid when Setext style is enforced.
+  4 |
+  5 | Level 2 Setext Heading
+  6 | -----------------------
+  7 |
+  8 | This should not be affected.
+  9 |
+
+Output:
+  1 | ATX Style Heading
+  2 | =================
+  3 |
+  4 | This should be invalid when Setext style is enforced.
+  5 |
+  6 | Level 2 Setext Heading
+  7 | -----------------------
+  8 |
+  9 | This should not be affected.
+ 10 |
+
+[1] Expected Setext style heading (Heading\n======).
+---
+
+
+Test: level1-heading-style >> invalid
+Filename: tests/fixtures/rules/level1-heading-style/invalid/setext-style/atx-with-closing-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: setext
+Plugins: unable to serialize
+
+Code:
+  1 | Main Setext Level 1 Heading
+  2 | ============================
+  3 |
+  4 | This is valid.
+  5 |
+  6 | # ATX Style with Closing Sequence #
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  7 |
+  8 | This should be invalid when Setext style is enforced.
+  9 |
+ 10 | # Another ATX Style Heading ###
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 11 |
+ 12 | This should also be invalid.
+ 13 |
+ 14 | Level 2 Setext Heading
+ 15 | ----------------------
+ 16 |
+ 17 | This should not be affected.
+ 18 |
+
+Output:
+  1 | Main Setext Level 1 Heading
+  2 | ============================
+  3 |
+  4 | This is valid.
+  5 |
+  6 | ATX Style with Closing Sequence
+  7 | ===============================
+  8 |
+  9 | This should be invalid when Setext style is enforced.
+ 10 |
+ 11 | Another ATX Style Heading
+ 12 | =========================
+ 13 |
+ 14 | This should also be invalid.
+ 15 |
+ 16 | Level 2 Setext Heading
+ 17 | ----------------------
+ 18 |
+ 19 | This should not be affected.
+ 20 |
+
+[1] Expected Setext style heading (Heading\n======).
+[2] Expected Setext style heading (Heading\n======).
+---
+
+
+Test: level1-heading-style >> invalid
+Filename: tests/fixtures/rules/level1-heading-style/invalid/setext-style/blockquote-atx-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: setext
+Plugins: unable to serialize
+
+Code:
+  1 | Main Setext Level 1 Heading
+  2 | ============================
+  3 |
+  4 | This is valid.
+  5 |
+  6 | > # Blockquote ATX Level 1 Heading
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  7 | >
+  8 | > This level 1 heading inside a blockquote should be invalid when Setext style is enforced.
+  9 | >
+ 10 | > Level 2 in blockquote
+ 11 | > ---------------------
+ 12 | >
+ 13 | > This should not be affected.
+ 14 |
+ 15 | Level 2 Normal Heading
+ 16 | ----------------------
+ 17 |
+ 18 | This should not be affected.
+ 19 |
+
+Output:
+  1 | Main Setext Level 1 Heading
+  2 | ============================
+  3 |
+  4 | This is valid.
+  5 |
+  6 | > Blockquote ATX Level 1 Heading
+  7 | > ==============================
+  8 | >
+  9 | > This level 1 heading inside a blockquote should be invalid when Setext style is enforced.
+ 10 | >
+ 11 | > Level 2 in blockquote
+ 12 | > ---------------------
+ 13 | >
+ 14 | > This should not be affected.
+ 15 |
+ 16 | Level 2 Normal Heading
+ 17 | ----------------------
+ 18 |
+ 19 | This should not be affected.
+ 20 |
+
+[1] Expected Setext style heading (Heading\n======).
+---
+
+
+Test: level1-heading-style >> invalid
+Filename: tests/fixtures/rules/level1-heading-style/invalid/setext-style/blockquote-atx-with-closing-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: setext
+Plugins: unable to serialize
+
+Code:
+  1 | Main Setext Level 1 Heading
+  2 | ============================
+  3 |
+  4 | This is valid.
+  5 |
+  6 | > # Blockquote ATX Level 1 Heading #
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  7 | >
+  8 | > This should be invalid when Setext style is enforced.
+  9 | >
+ 10 | > # Another Blockquote Heading ###
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 11 | >
+ 12 | > This should also be invalid.
+ 13 | >
+ 14 | > Level 2 in blockquote
+ 15 | > ---------------------
+ 16 | >
+ 17 | > This should not be affected.
+ 18 |
+ 19 | Level 2 Normal Heading
+ 20 | ----------------------
+ 21 |
+ 22 | This should not be affected.
+ 23 |
+
+Output:
+  1 | Main Setext Level 1 Heading
+  2 | ============================
+  3 |
+  4 | This is valid.
+  5 |
+  6 | > Blockquote ATX Level 1 Heading
+  7 | > ==============================
+  8 | >
+  9 | > This should be invalid when Setext style is enforced.
+ 10 | >
+ 11 | > Another Blockquote Heading
+ 12 | > ==========================
+ 13 | >
+ 14 | > This should also be invalid.
+ 15 | >
+ 16 | > Level 2 in blockquote
+ 17 | > ---------------------
+ 18 | >
+ 19 | > This should not be affected.
+ 20 |
+ 21 | Level 2 Normal Heading
+ 22 | ----------------------
+ 23 |
+ 24 | This should not be affected.
+ 25 |
+
+[1] Expected Setext style heading (Heading\n======).
+[2] Expected Setext style heading (Heading\n======).
+---
