@@ -17,12 +17,12 @@ export interface RuleOptions {
    * enforce consistent use of closing sequence in ATX headings.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-heading-closing-sequence.html
    */
-  'markdown-preferences/atx-heading-closing-sequence'?: Linter.RuleEntry<MarkdownPreferencesAtxHeadingsClosingSequence>
+  'markdown-preferences/atx-heading-closing-sequence'?: Linter.RuleEntry<MarkdownPreferencesAtxHeadingClosingSequence>
   /**
    * enforce consistent length for the closing sequence (trailing #s) in ATX headings.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-heading-closing-sequence-length.html
    */
-  'markdown-preferences/atx-heading-closing-sequence-length'?: Linter.RuleEntry<MarkdownPreferencesAtxHeadingsClosingSequenceLength>
+  'markdown-preferences/atx-heading-closing-sequence-length'?: Linter.RuleEntry<MarkdownPreferencesAtxHeadingClosingSequenceLength>
   /**
    * enforce consistent alignment of blockquote markers
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/blockquote-marker-alignment.html
@@ -63,6 +63,11 @@ export interface RuleOptions {
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/level1-heading-style.html
    */
   'markdown-preferences/level1-heading-style'?: Linter.RuleEntry<MarkdownPreferencesLevel1HeadingStyle>
+  /**
+   * enforce consistent style for level 2 headings
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/level2-heading-style.html
+   */
+  'markdown-preferences/level2-heading-style'?: Linter.RuleEntry<MarkdownPreferencesLevel2HeadingStyle>
   /**
    * enforce consistent alignment of list markers
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/list-marker-alignment.html
@@ -167,11 +172,11 @@ export interface RuleOptions {
 
 /* ======= Declarations ======= */
 // ----- markdown-preferences/atx-heading-closing-sequence -----
-type MarkdownPreferencesAtxHeadingsClosingSequence = []|[{
+type MarkdownPreferencesAtxHeadingClosingSequence = []|[{
   closingSequence?: ("always" | "never")
 }]
 // ----- markdown-preferences/atx-heading-closing-sequence-length -----
-type MarkdownPreferencesAtxHeadingsClosingSequenceLength = []|[{
+type MarkdownPreferencesAtxHeadingClosingSequenceLength = []|[{
   mode?: ("match-opening" | "length" | "consistent" | "consistent-line-length" | "fixed-line-length")
   length?: number
 }]
@@ -217,6 +222,11 @@ type MarkdownPreferencesHeadingCasing = []|[{
 }]
 // ----- markdown-preferences/level1-heading-style -----
 type MarkdownPreferencesLevel1HeadingStyle = []|[{
+  style?: ("atx" | "setext")
+  allowMultilineSetext?: boolean
+}]
+// ----- markdown-preferences/level2-heading-style -----
+type MarkdownPreferencesLevel2HeadingStyle = []|[{
   style?: ("atx" | "setext")
   allowMultilineSetext?: boolean
 }]

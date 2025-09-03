@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/ordered-list-marker-style"
 description: "enforce consistent ordered list marker style"
+since: "v0.18.0"
 ---
 
 # markdown-preferences/ordered-list-marker-style
 
 > enforce consistent ordered list marker style
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -190,6 +190,10 @@ In the following example, `"n."` is preferred by default, but for level 2 lists,
 - [markdown-preferences/bullet-list-marker-style](./bullet-list-marker-style.md)
 - [markdown-preferences/ordered-list-marker-sequence](./ordered-list-marker-sequence.md)
 - [markdown-preferences/ordered-list-marker-start](./ordered-list-marker-start.md)
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.18.0
 
 ## 🔍 Implementation
 

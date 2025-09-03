@@ -147,10 +147,6 @@ This rule was introduced in eslint-plugin-markdown-preferences v0.13.0
 
 ## 🔍 Implementation
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
-
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/atx-heading-closing-sequence-length.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/atx-heading-closing-sequence-length.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/atx-heading-closing-sequence-length)
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->

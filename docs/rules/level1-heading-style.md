@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/level1-heading-style"
 description: "enforce consistent style for level 1 headings"
+since: "v0.18.0"
 ---
 
 # markdown-preferences/level1-heading-style
 
 > enforce consistent style for level 1 headings
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -152,6 +152,10 @@ When `true`, allows Setext headings that span multiple lines. When `false`, mult
 ## 👫 Related Rules
 
 - [markdown-preferences/level2-heading-style](./level2-heading-style.md)
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.18.0
 
 ## 🔍 Implementation
 
