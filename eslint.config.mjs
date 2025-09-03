@@ -157,6 +157,7 @@ export default defineConfig([
         {
           preserveWords: [
             "eslint-plugin-markdown-preferences",
+            "ATX",
             ...markdownPreferences.resources.defaultPreserveWords,
           ],
           ignorePatterns: [String.raw`/^markdown-preferences\//u`],

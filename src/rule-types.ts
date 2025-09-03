@@ -59,6 +59,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/heading-casing'?: Linter.RuleEntry<MarkdownPreferencesHeadingCasing>
   /**
+   * enforce consistent style for level 1 headings
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/level1-heading-style.html
+   */
+  'markdown-preferences/level1-heading-style'?: Linter.RuleEntry<MarkdownPreferencesLevel1HeadingStyle>
+  /**
    * enforce consistent alignment of list markers
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/list-marker-alignment.html
    */
@@ -93,6 +98,11 @@ export interface RuleOptions {
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-start.html
    */
   'markdown-preferences/ordered-list-marker-start'?: Linter.RuleEntry<MarkdownPreferencesOrderedListMarkerStart>
+  /**
+   * enforce consistent ordered list marker style
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-style.html
+   */
+  'markdown-preferences/ordered-list-marker-style'?: Linter.RuleEntry<MarkdownPreferencesOrderedListMarkerStyle>
   /**
    * require or disallow padding lines between blocks
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/padding-line-between-blocks.html
@@ -205,6 +215,11 @@ type MarkdownPreferencesHeadingCasing = []|[{
   
   minorWords?: string[]
 }]
+// ----- markdown-preferences/level1-heading-style -----
+type MarkdownPreferencesLevel1HeadingStyle = []|[{
+  style?: ("atx" | "setext")
+  allowMultilineSetext?: boolean
+}]
 // ----- markdown-preferences/list-marker-alignment -----
 type MarkdownPreferencesListMarkerAlignment = []|[{
   align?: ("left" | "right")
@@ -223,6 +238,15 @@ type MarkdownPreferencesNoTrailingSpaces = []|[{
 // ----- markdown-preferences/ordered-list-marker-start -----
 type MarkdownPreferencesOrderedListMarkerStart = []|[{
   start?: (1 | 0)
+}]
+// ----- markdown-preferences/ordered-list-marker-style -----
+type MarkdownPreferencesOrderedListMarkerStyle = []|[{
+  prefer?: ("n." | "n)")
+  overrides?: {
+    level?: number
+    parentMarker?: ("n." | "n)" | "any" | "bullet")
+    prefer?: ("n." | "n)")
+  }[]
 }]
 // ----- markdown-preferences/padding-line-between-blocks -----
 type MarkdownPreferencesPaddingLineBetweenBlocks = {

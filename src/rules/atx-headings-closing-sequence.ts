@@ -1,7 +1,7 @@
 import type { Heading } from "mdast";
 import { createRule } from "../utils/index.ts";
 import {
-  parseATXHeadingClosingSequence,
+  parseATXHeading,
   parseATXHeadingClosingSequenceFromText,
 } from "../utils/atx-heading.ts";
 
@@ -56,7 +56,7 @@ export default createRule<[Option?]>("atx-headings-closing-sequence", {
 
     return {
       heading(node: Heading) {
-        const parsed = parseATXHeadingClosingSequence(sourceCode, node);
+        const parsed = parseATXHeading(sourceCode, node);
         if (!parsed) return;
 
         if (closingSequence === "always") {
@@ -74,13 +74,13 @@ export default createRule<[Option?]>("atx-headings-closing-sequence", {
           context.report({
             node,
             loc: {
-              start: parsed.rawBefore.loc.start,
+              start: parsed.closingSequence.raws.spaceBefore.loc.start,
               end: parsed.closingSequence.loc.end,
             },
             messageId: "forbidClosing",
             *fix(fixer) {
               const removeRange = [
-                parsed.rawBefore.range[0],
+                parsed.closingSequence.raws.spaceBefore.range[0],
                 parsed.closingSequence.range[1],
               ] as [number, number];
               const newHeadingText = sourceCode.text.slice(

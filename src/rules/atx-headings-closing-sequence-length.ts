@@ -2,7 +2,7 @@ import { createRule } from "../utils/index.ts";
 import type { Heading } from "mdast";
 import type { MarkdownSourceCode } from "@eslint/markdown";
 import type { ParsedATXHeadingClosingSequence } from "../utils/atx-heading.ts";
-import { parseATXHeadingClosingSequence } from "../utils/atx-heading.ts";
+import { parseATXHeading } from "../utils/atx-heading.ts";
 import { getParsedLines } from "../utils/lines.ts";
 import { getTextWidth } from "../utils/get-text-width.ts";
 
@@ -67,7 +67,7 @@ export default createRule<[Options?]>("atx-headings-closing-sequence-length", {
         parsed: ParsedATXHeadingClosingSequence,
       ) => number,
     ) {
-      const parsed = parseATXHeadingClosingSequence(sourceCode, node);
+      const parsed = parseATXHeading(sourceCode, node);
       if (!parsed || parsed.closingSequence == null) return;
       const actualLength = parsed.closingSequence.text.length;
       const expectedLength = getExpected(node, parsed);
@@ -134,10 +134,7 @@ export default createRule<[Options?]>("atx-headings-closing-sequence-length", {
                 return {
                   heading(node: Heading) {
                     if (getExpected == null) {
-                      const parsed = parseATXHeadingClosingSequence(
-                        sourceCode,
-                        node,
-                      );
+                      const parsed = parseATXHeading(sourceCode, node);
                       if (!parsed || parsed.closingSequence == null) return;
                       const expected = parsed.closingSequence.text.length;
                       getExpected = () => expected;
@@ -156,10 +153,7 @@ export default createRule<[Options?]>("atx-headings-closing-sequence-length", {
                   const headings: HeadingInfo[] = [];
                   return {
                     heading(node: Heading) {
-                      const parsed = parseATXHeadingClosingSequence(
-                        sourceCode,
-                        node,
-                      );
+                      const parsed = parseATXHeading(sourceCode, node);
                       if (!parsed || !parsed.closingSequence) return;
                       headings.push({ node, parsed });
                     },
