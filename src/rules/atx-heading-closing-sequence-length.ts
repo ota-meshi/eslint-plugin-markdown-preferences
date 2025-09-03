@@ -1,10 +1,7 @@
 import { createRule } from "../utils/index.ts";
 import type { Heading } from "mdast";
 import type { MarkdownSourceCode } from "@eslint/markdown";
-import type {
-  ParsedATXHeading,
-  ParsedATXHeadingWithClosingSequence,
-} from "../utils/atx-heading.ts";
+import type { ParsedATXHeadingWithClosingSequence } from "../utils/atx-heading.ts";
 import { parseATXHeading } from "../utils/atx-heading.ts";
 import { getParsedLines } from "../utils/lines.ts";
 import { getTextWidth } from "../utils/get-text-width.ts";
@@ -64,19 +61,14 @@ export default createRule<[Options?]>("atx-heading-closing-sequence-length", {
      * Verify the closing sequence length of an ATX heading.
      */
     function verifyATXHeadingClosingSequenceLength(
-      node: Heading,
-      getExpected: (
-        node: Heading,
-        parsed: ParsedATXHeadingWithClosingSequence,
-      ) => number,
+      parsed: ParsedATXHeadingWithClosingSequence,
+      reportNode: Heading,
+      expectedLength: number,
     ) {
-      const parsed = parseATXHeading(sourceCode, node);
-      if (!parsed || parsed.closingSequence == null) return;
       const actualLength = parsed.closingSequence.text.length;
-      const expectedLength = getExpected(node, parsed);
       if (expectedLength === actualLength) return;
       context.report({
-        node,
+        node: reportNode,
         loc: parsed.closingSequence.loc,
         messageId: "wrongClosingLength",
         data: {
@@ -92,122 +84,111 @@ export default createRule<[Options?]>("atx-heading-closing-sequence-length", {
       });
     }
 
-    return option.mode === "match-opening"
-      ? (() => {
-          const getExpected = (node: Heading) => node.depth;
-          return {
-            heading(node: Heading) {
-              verifyATXHeadingClosingSequenceLength(node, getExpected);
-            },
-          };
-        })()
-      : option.mode === "length"
-        ? (() => {
-            const expected = option.length || 2;
-            const getExpected = () => expected;
-            return {
-              heading(node: Heading) {
-                verifyATXHeadingClosingSequenceLength(node, getExpected);
-              },
-            };
-          })()
-        : option.mode === "fixed-line-length"
-          ? (() => {
-              const totalLength = option.length || 80;
-              const getExpected = (
-                _node: Heading,
-                parsed: ParsedATXHeadingWithClosingSequence,
-              ) => {
-                return totalLength - getContentLength(parsed);
+    if (option.mode === "match-opening") {
+      return {
+        heading(node: Heading) {
+          const parsed = parseATXHeading(sourceCode, node);
+          if (!parsed || parsed.closingSequence == null) return;
+          verifyATXHeadingClosingSequenceLength(parsed, node, node.depth);
+        },
+      };
+    }
+    if (option.mode === "length") {
+      const expected = option.length || 2;
+      return {
+        heading(node: Heading) {
+          const parsed = parseATXHeading(sourceCode, node);
+          if (!parsed || parsed.closingSequence == null) return;
+          verifyATXHeadingClosingSequenceLength(parsed, node, expected);
+        },
+      };
+    }
+    if (option.mode === "fixed-line-length") {
+      const totalLength = option.length || 80;
+      return {
+        heading(node: Heading) {
+          const parsed = parseATXHeading(sourceCode, node);
+          if (!parsed || parsed.closingSequence == null) return;
+          verifyATXHeadingClosingSequenceLength(
+            parsed,
+            node,
+            totalLength - getContentLength(parsed),
+          );
+        },
+      };
+    }
+    if (option.mode === "consistent") {
+      let expectedLength: number | null = null;
+      return {
+        heading(node: Heading) {
+          const parsed = parseATXHeading(sourceCode, node);
+          if (!parsed || parsed.closingSequence == null) return;
+          if (expectedLength == null) {
+            expectedLength = parsed.closingSequence.text.length;
+          } else {
+            verifyATXHeadingClosingSequenceLength(parsed, node, expectedLength);
+          }
+        },
+      };
+    }
+    if (option.mode === "consistent-line-length") {
+      type HeadingInfo = {
+        node: Heading;
+        parsed: ParsedATXHeadingWithClosingSequence;
+      };
+      const headings: HeadingInfo[] = [];
+      return {
+        heading(node: Heading) {
+          const parsed = parseATXHeading(sourceCode, node);
+          if (!parsed || !parsed.closingSequence) return;
+          headings.push({ node, parsed });
+        },
+        "root:exit"() {
+          // Find the heading with the longest content
+          let mostLongContentHeading:
+            | (HeadingInfo & {
+                contentLength: number;
+                lineLength: number;
+              })
+            | null = null;
+          for (const heading of headings) {
+            const contentLength = getContentLength(heading.parsed);
+            if (
+              mostLongContentHeading == null ||
+              contentLength > mostLongContentHeading.contentLength
+            ) {
+              const lineLength = getLineLength(heading.parsed);
+              mostLongContentHeading = {
+                ...heading,
+                contentLength,
+                lineLength,
               };
-              return {
-                heading(node: Heading) {
-                  verifyATXHeadingClosingSequenceLength(node, getExpected);
-                },
-              };
-            })()
-          : option.mode === "consistent"
-            ? (() => {
-                let getExpected:
-                  | ((node: Heading, parsed: ParsedATXHeading) => number)
-                  | null = null;
-                return {
-                  heading(node: Heading) {
-                    if (getExpected == null) {
-                      const parsed = parseATXHeading(sourceCode, node);
-                      if (!parsed || parsed.closingSequence == null) return;
-                      const expected = parsed.closingSequence.text.length;
-                      getExpected = () => expected;
-                    } else {
-                      verifyATXHeadingClosingSequenceLength(node, getExpected);
-                    }
-                  },
-                };
-              })()
-            : option.mode === "consistent-line-length"
-              ? (() => {
-                  type HeadingInfo = {
-                    node: Heading;
-                    parsed: ParsedATXHeadingWithClosingSequence;
-                  };
-                  const headings: HeadingInfo[] = [];
-                  return {
-                    heading(node: Heading) {
-                      const parsed = parseATXHeading(sourceCode, node);
-                      if (!parsed || !parsed.closingSequence) return;
-                      headings.push({ node, parsed });
-                    },
-                    "root:exit"() {
-                      // Find the heading with the longest content
-                      let mostLongContentHeading:
-                        | (HeadingInfo & {
-                            contentLength: number;
-                            lineLength: number;
-                          })
-                        | null = null;
-                      for (const heading of headings) {
-                        const contentLength = getContentLength(heading.parsed);
-                        if (
-                          mostLongContentHeading == null ||
-                          contentLength > mostLongContentHeading.contentLength
-                        ) {
-                          const lineLength = getLineLength(heading.parsed);
-                          mostLongContentHeading = {
-                            ...heading,
-                            contentLength,
-                            lineLength,
-                          };
-                        }
-                      }
-                      if (!mostLongContentHeading) return;
-                      // Among headings longer than the longest content, find the shortest line
-                      let minLineLength: number =
-                        mostLongContentHeading.lineLength;
-                      for (const heading of headings) {
-                        const lineLength = getLineLength(heading.parsed);
-                        if (
-                          mostLongContentHeading.contentLength < lineLength &&
-                          lineLength < minLineLength
-                        ) {
-                          minLineLength = Math.min(minLineLength, lineLength);
-                        }
-                      }
-                      const getExpected = (
-                        _node: Heading,
-                        parsed: ParsedATXHeadingWithClosingSequence,
-                      ) => {
-                        return minLineLength - getContentLength(parsed);
-                      };
-                      for (const { node } of headings) {
-                        verifyATXHeadingClosingSequenceLength(
-                          node,
-                          getExpected,
-                        );
-                      }
-                    },
-                  };
-                })()
-              : {};
+            }
+          }
+          if (!mostLongContentHeading) return;
+          // Among headings longer than the longest content, find the shortest line
+          let minLineLength: number = mostLongContentHeading.lineLength;
+          for (const heading of headings) {
+            const lineLength = getLineLength(heading.parsed);
+            if (
+              mostLongContentHeading.contentLength < lineLength &&
+              lineLength < minLineLength
+            ) {
+              minLineLength = Math.min(minLineLength, lineLength);
+            }
+          }
+          for (const heading of headings) {
+            verifyATXHeadingClosingSequenceLength(
+              heading.parsed,
+              heading.node,
+              minLineLength - getContentLength(heading.parsed),
+            );
+          }
+        },
+      };
+    }
+
+    return {};
 
     /**
      * Get the content length of the heading.
