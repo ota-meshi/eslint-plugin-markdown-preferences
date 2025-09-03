@@ -155,10 +155,6 @@ When `true`, allows Setext headings that span multiple lines. When `false`, mult
 
 ## 🔍 Implementation
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
-
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/level2-heading-style.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/level2-heading-style.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/level2-heading-style)
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
