@@ -38,9 +38,9 @@
 
 ### Minor Changes
 
-- [#59](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/59) [`5eaa0a2`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/5eaa0a21e477dc67b0d0965328cf77cd62afc74e) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/atx-headings-closing-sequence-length`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-headings-closing-sequence-length.html) rule
+- [#59](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/59) [`5eaa0a2`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/5eaa0a21e477dc67b0d0965328cf77cd62afc74e) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/atx-headings-closing-sequence-length`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-heading-closing-sequence-length.html) rule
 
-- [#57](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/57) [`c89c913`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/c89c91376ac2639a9beb66289566f2d0c22debb5) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/atx-headings-closing-sequence`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-headings-closing-sequence.html) rule
+- [#57](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/57) [`c89c913`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/c89c91376ac2639a9beb66289566f2d0c22debb5) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/atx-headings-closing-sequence`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-heading-closing-sequence.html) rule
 
 - [#60](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/60) [`835ef52`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/835ef520602b42983b1e4eac3fa9e4a6b0c3037f) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/emoji-notation`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/emoji-notation.html) rule
 
