@@ -1,5 +1,23 @@
 # eslint-plugin-markdown-preferences
 
+## 0.18.0
+
+### Minor Changes
+
+- [#83](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/83) [`f90d8d4`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/f90d8d45d4429e8d04e29ad943233151d3243d4e) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/bullet-list-marker-style`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/bullet-list-marker-style.html) rule
+
+- [#88](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/88) [`4722315`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/47223156087be342d7d7b681c2c049669f448f0b) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: refactor [`markdown-preferences/atx-heading-closing-sequence-length`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-heading-closing-sequence-length.html)
+
+- [#86](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/86) [`b870e7b`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/b870e7b337d30162198ccd12b2a7480d544abfe4) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/level1-heading-style`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/level1-heading-style.html) rule
+
+- [#86](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/86) [`b870e7b`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/b870e7b337d30162198ccd12b2a7480d544abfe4) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/level2-heading-style`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/level2-heading-style.html) rule
+
+- [#85](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/85) [`f8ef87f`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/f8ef87f2d846bbc3ed67de9b8aa24b69267be04b) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/ordered-list-marker-style`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-style.html) rule
+
+- [#87](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/87) [`c975fbe`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/c975fbeae5f7d564ea4117f21446b2088a6939f2) Thanks [@ota-meshi](https://github.com/ota-meshi)! - BREAKING: rename `markdown-preferences/atx-headings-closing-sequence-length` rule to [`markdown-preferences/atx-heading-closing-sequence-length`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-heading-closing-sequence-length.html)
+
+- [#87](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/87) [`c975fbe`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/c975fbeae5f7d564ea4117f21446b2088a6939f2) Thanks [@ota-meshi](https://github.com/ota-meshi)! - BREAKING: rename `markdown-preferences/atx-headings-closing-sequence` rule to [`markdown-preferences/atx-heading-closing-sequence`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-heading-closing-sequence.html)
+
 ## 0.17.0
 
 ### Minor Changes

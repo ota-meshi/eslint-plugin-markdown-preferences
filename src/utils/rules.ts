@@ -2,8 +2,8 @@
 // This file has been automatically generated,
 // in order to update its content execute "npm run update"
 import type { RuleModule } from "../types.ts";
-import atxHeadingsClosingSequenceLength from "../rules/atx-heading-closing-sequence-length.ts";
-import atxHeadingsClosingSequence from "../rules/atx-heading-closing-sequence.ts";
+import atxHeadingClosingSequenceLength from "../rules/atx-heading-closing-sequence-length.ts";
+import atxHeadingClosingSequence from "../rules/atx-heading-closing-sequence.ts";
 import blockquoteMarkerAlignment from "../rules/blockquote-marker-alignment.ts";
 import bulletListMarkerStyle from "../rules/bullet-list-marker-style.ts";
 import canonicalCodeBlockLanguage from "../rules/canonical-code-block-language.ts";
@@ -35,8 +35,8 @@ import thematicBreakLength from "../rules/thematic-break-length.ts";
 import thematicBreakSequencePattern from "../rules/thematic-break-sequence-pattern.ts";
 
 export const rules = [
-  atxHeadingsClosingSequenceLength,
-  atxHeadingsClosingSequence,
+  atxHeadingClosingSequenceLength,
+  atxHeadingClosingSequence,
   blockquoteMarkerAlignment,
   bulletListMarkerStyle,
   canonicalCodeBlockLanguage,
