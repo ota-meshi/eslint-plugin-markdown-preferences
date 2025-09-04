@@ -35,9 +35,6 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 | Headings casing                                         | --                                                                                                  | --                                                                                                     | [markdown-preferences/heading-casing]<br>enforce consistent casing in headings                                                                  |
 | Setext heading underline length                         | --                                                                                                  | --                                                                                                     | [markdown-preferences/setext-heading-underline-length]<br>enforce consistent underline length.                                                  |
 
-[markdown-preferences/level1-heading-style]: ./../rules/level1-heading-style.md
-[markdown-preferences/level2-heading-style]: ./../rules/level2-heading-style.md
-
 ## Rules Related to Lists
 
 | Description                         | [markdownlint] Rules                                                               | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules                                                                      |
@@ -111,11 +108,11 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 
 ## Rules Related to Emphasis and Strong Emphasis
 
-| Description                        | [markdownlint] Rules                                             | [@eslint/markdown] Rules                                                   | `eslint-plugin-markdown-preferences` Rules |
-| ---------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------ |
-| Spaces around the text in emphasis | [MD037] _no-space-in-emphasis_<br>Spaces inside emphasis markers | [markdown/no-space-in-emphasis]<br>Disallow spaces around emphasis markers | --                                         |
-| Emphasis notation style            | [MD049] _emphasis-style_<br>Emphasis style                       | --                                                                         | --                                         |
-| Strong emphasis notation style     | [MD050] _strong-style_<br>Strong style                           | --                                                                         | --                                         |
+| Description                        | [markdownlint] Rules                                             | [@eslint/markdown] Rules                                                   | `eslint-plugin-markdown-preferences` Rules                                                                                |
+| ---------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Spaces around the text in emphasis | [MD037] _no-space-in-emphasis_<br>Spaces inside emphasis markers | [markdown/no-space-in-emphasis]<br>Disallow spaces around emphasis markers | --                                                                                                                        |
+| Emphasis notation style            | [MD049] _emphasis-style_<br>Emphasis style                       | --                                                                         | [markdown-preferences/emphasis-delimiters-style]<br>enforce a consistent delimiter style for emphasis and strong emphasis |
+| Strong emphasis notation style     | [MD050] _strong-style_<br>Strong style                           | --                                                                         | [markdown-preferences/emphasis-delimiters-style]<br>enforce a consistent delimiter style for emphasis and strong emphasis |
 
 ## Rules Related to Thematic Breaks
 
@@ -263,3 +260,6 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 [markdown-preferences/thematic-break-character-style]: ./../rules/thematic-break-character-style.md
 [markdown-preferences/thematic-break-length]: ./../rules/thematic-break-length.md
 [markdown-preferences/thematic-break-sequence-pattern]: ./../rules/thematic-break-sequence-pattern.md
+[markdown-preferences/emphasis-delimiters-style]: ./../rules/emphasis-delimiters-style.md
+[markdown-preferences/level1-heading-style]: ./../rules/level1-heading-style.md
+[markdown-preferences/level2-heading-style]: ./../rules/level2-heading-style.md

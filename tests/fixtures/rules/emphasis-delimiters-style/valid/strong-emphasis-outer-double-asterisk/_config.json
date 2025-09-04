@@ -1,0 +1,9 @@
+{
+  "options": [
+    {
+      "emphasis": "*",
+      "strong": "**",
+      "strongEmphasis": { "outer": "**", "inner": "_" }
+    }
+  ]
+}

@@ -49,6 +49,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/emoji-notation'?: Linter.RuleEntry<MarkdownPreferencesEmojiNotation>
   /**
+   * enforce a consistent delimiter style for emphasis and strong emphasis
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/emphasis-delimiters-style.html
+   */
+  'markdown-preferences/emphasis-delimiters-style'?: Linter.RuleEntry<MarkdownPreferencesEmphasisDelimitersStyle>
+  /**
    * enforce consistent hard linebreak style.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/hard-linebreak-style.html
    */
@@ -205,6 +210,24 @@ type MarkdownPreferencesEmojiNotation = []|[{
   ignoreUnknown?: boolean
   
   ignoreList?: string[]
+}]
+// ----- markdown-preferences/emphasis-delimiters-style -----
+type MarkdownPreferencesEmphasisDelimitersStyle = []|[{
+  emphasis?: ("*" | "_")
+  strong?: ("**" | "__")
+  strongEmphasis?: (("***" | "___") | {
+    outer: "*"
+    inner: "__"
+  } | {
+    outer: "**"
+    inner: "_"
+  } | {
+    outer: "_"
+    inner: "**"
+  } | {
+    outer: "__"
+    inner: "*"
+  })
 }]
 // ----- markdown-preferences/hard-linebreak-style -----
 type MarkdownPreferencesHardLinebreakStyle = []|[{
