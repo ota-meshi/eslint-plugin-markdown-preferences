@@ -40,6 +40,7 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 | [markdown-preferences/blockquote-marker-alignment](./blockquote-marker-alignment.md) | enforce consistent alignment of blockquote markers | 🔧 | ⭐ |
 | [markdown-preferences/bullet-list-marker-style](./bullet-list-marker-style.md) | enforce consistent bullet list (unordered list) marker style | 🔧 |  |
 | [markdown-preferences/definitions-last](./definitions-last.md) | require link definitions and footnote definitions to be placed at the end of the document | 🔧 |  |
+| [markdown-preferences/emphasis-delimiters-style](./emphasis-delimiters-style.md) | enforce a consistent delimiter style for emphasis and strong emphasis | 🔧 |  |
 | [markdown-preferences/hard-linebreak-style](./hard-linebreak-style.md) | enforce consistent hard linebreak style. | 🔧 | ⭐ |
 | [markdown-preferences/level1-heading-style](./level1-heading-style.md) | enforce consistent style for level 1 headings | 🔧 |  |
 | [markdown-preferences/level2-heading-style](./level2-heading-style.md) | enforce consistent style for level 2 headings | 🔧 |  |

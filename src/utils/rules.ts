@@ -9,6 +9,7 @@ import bulletListMarkerStyle from "../rules/bullet-list-marker-style.ts";
 import canonicalCodeBlockLanguage from "../rules/canonical-code-block-language.ts";
 import definitionsLast from "../rules/definitions-last.ts";
 import emojiNotation from "../rules/emoji-notation.ts";
+import emphasisDelimitersStyle from "../rules/emphasis-delimiters-style.ts";
 import hardLinebreakStyle from "../rules/hard-linebreak-style.ts";
 import headingCasing from "../rules/heading-casing.ts";
 import level1HeadingStyle from "../rules/level1-heading-style.ts";
@@ -42,6 +43,7 @@ export const rules = [
   canonicalCodeBlockLanguage,
   definitionsLast,
   emojiNotation,
+  emphasisDelimitersStyle,
   hardLinebreakStyle,
   headingCasing,
   level1HeadingStyle,

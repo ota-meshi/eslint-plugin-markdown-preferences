@@ -1,0 +1,1339 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: emphasis-delimiters-style >> invalid
+Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/basic-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | <!-- Basic -->
+  2 |
+  3 | ***StrongEmph***
+    | ^~~~~~~~~~~~~~~~ [1]
+  4 | ___StrongEmph___
+    | ^~~~~~~~~~~~~~~~ [2]
+  5 | _**StrongEmph**_
+    | ^~~~~~~~~~~~~~~~ [3]
+  6 | **_StrongEmph_**
+  7 | __*StrongEmph*__
+    | ^~~~~~~~~~~~~~~~ [4]
+  8 | *__StrongEmph__*
+    | ^~~~~~~~~~~~~~~~ [5]
+  9 |
+ 10 | **Strong**
+ 11 | __Strong__
+    | ^~~~~~~~~~ [6]
+ 12 |
+ 13 | *Emph*
+    | ^~~~~~ [7]
+ 14 | _Emph_
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | ****NestingStrong****
+ 23 | ____NestingStrong____
+    | ^~~~~~~~~~~~~~~~~~~~~ [8]
+    |   ^~~~~~~~~~~~~~~~~ [9]
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S***StrongEmph***E
+    |  ^~~~~~~~~~~~~~~~ [10]
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S**_StrongEmph_**E
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+Output:
+  1 | <!-- Basic -->
+  2 |
+  3 | **_StrongEmph_**
+  4 | **_StrongEmph_**
+  5 | **_StrongEmph_**
+  6 | **_StrongEmph_**
+  7 | **_StrongEmph_**
+  8 | **_StrongEmph_**
+  9 |
+ 10 | **Strong**
+ 11 | **Strong**
+ 12 |
+ 13 | _Emph_
+ 14 | _Emph_
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | ****NestingStrong****
+ 23 | **__NestingStrong__**
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S**_StrongEmph_**E
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S**_StrongEmph_**E
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+[1] Delimiters for strong+emphasis should be '**_' ... '_**' (was '***' ... '***').
+[2] Delimiters for strong+emphasis should be '**_' ... '_**' (was '___' ... '___').
+[3] Delimiters for strong+emphasis should be '**_' ... '_**' (was '_**' ... '**_').
+[4] Delimiters for strong+emphasis should be '**_' ... '_**' (was '__*' ... '*__').
+[5] Delimiters for strong+emphasis should be '**_' ... '_**' (was '*__' ... '__*').
+[6] Strong emphasis delimiter should be '**' (was '__').
+[7] Emphasis delimiter should be '_' (was '*').
+[8] Strong emphasis delimiter should be '**' (was '__').
+[9] Strong emphasis delimiter should be '**' (was '__').
+[10] Delimiters for strong+emphasis should be '**_' ... '_**' (was '***' ... '***').
+---
+
+
+Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 2"
+Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/emphasis-asterisk-and-strong-asterisk/basic-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - emphasis: "*"
+    strong: "**"
+Plugins: unable to serialize
+
+Code:
+  1 | <!-- Basic -->
+  2 |
+  3 | ***StrongEmph***
+  4 | ___StrongEmph___
+    | ^~~~~~~~~~~~~~~~ [1]
+  5 | _**StrongEmph**_
+    | ^~~~~~~~~~~~~~~~ [2]
+  6 | **_StrongEmph_**
+    | ^~~~~~~~~~~~~~~~ [3]
+  7 | __*StrongEmph*__
+    | ^~~~~~~~~~~~~~~~ [4]
+  8 | *__StrongEmph__*
+    | ^~~~~~~~~~~~~~~~ [5]
+  9 |
+ 10 | **Strong**
+ 11 | __Strong__
+    | ^~~~~~~~~~ [6]
+ 12 |
+ 13 | *Emph*
+ 14 | _Emph_
+    | ^~~~~~ [7]
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | ****NestingStrong****
+ 23 | ____NestingStrong____
+    | ^~~~~~~~~~~~~~~~~~~~~ [8]
+    |   ^~~~~~~~~~~~~~~~~ [9]
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S***StrongEmph***E
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S**_StrongEmph_**E
+    |  ^~~~~~~~~~~~~~~~ [10]
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+Output:
+  1 | <!-- Basic -->
+  2 |
+  3 | ***StrongEmph***
+  4 | ***StrongEmph***
+  5 | ***StrongEmph***
+  6 | ***StrongEmph***
+  7 | ***StrongEmph***
+  8 | ***StrongEmph***
+  9 |
+ 10 | **Strong**
+ 11 | **Strong**
+ 12 |
+ 13 | *Emph*
+ 14 | *Emph*
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | ****NestingStrong****
+ 23 | **__NestingStrong__**
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S***StrongEmph***E
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S***StrongEmph***E
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+[1] Delimiter for strong+emphasis should be '***' (was '___').
+[2] Delimiters for strong+emphasis should be '***' ... '***' (was '_**' ... '**_').
+[3] Delimiters for strong+emphasis should be '***' ... '***' (was '**_' ... '_**').
+[4] Delimiters for strong+emphasis should be '***' ... '***' (was '__*' ... '*__').
+[5] Delimiters for strong+emphasis should be '***' ... '***' (was '*__' ... '__*').
+[6] Strong emphasis delimiter should be '**' (was '__').
+[7] Emphasis delimiter should be '*' (was '_').
+[8] Strong emphasis delimiter should be '**' (was '__').
+[9] Strong emphasis delimiter should be '**' (was '__').
+[10] Delimiters for strong+emphasis should be '***' ... '***' (was '**_' ... '_**').
+---
+
+
+Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 3"
+Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/emphasis-asterisk-and-strong-underline/basic-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - emphasis: "*"
+    strong: __
+Plugins: unable to serialize
+
+Code:
+  1 | <!-- Basic -->
+  2 |
+  3 | ***StrongEmph***
+    | ^~~~~~~~~~~~~~~~ [1]
+  4 | ___StrongEmph___
+    | ^~~~~~~~~~~~~~~~ [2]
+  5 | _**StrongEmph**_
+    | ^~~~~~~~~~~~~~~~ [3]
+  6 | **_StrongEmph_**
+    | ^~~~~~~~~~~~~~~~ [4]
+  7 | __*StrongEmph*__
+    | ^~~~~~~~~~~~~~~~ [5]
+  8 | *__StrongEmph__*
+  9 |
+ 10 | **Strong**
+    | ^~~~~~~~~~ [6]
+ 11 | __Strong__
+ 12 |
+ 13 | *Emph*
+ 14 | _Emph_
+    | ^~~~~~ [7]
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | ****NestingStrong****
+    | ^~~~~~~~~~~~~~~~~~~~~ [8]
+    |   ^~~~~~~~~~~~~~~~~ [9]
+ 23 | ____NestingStrong____
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S***StrongEmph***E
+    |  ^~~~~~~~~~~~~~~~ [10]
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S**_StrongEmph_**E
+    |  ^~~~~~~~~~~~~~~~ [11]
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+Output:
+  1 | <!-- Basic -->
+  2 |
+  3 | *__StrongEmph__*
+  4 | *__StrongEmph__*
+  5 | *__StrongEmph__*
+  6 | *__StrongEmph__*
+  7 | *__StrongEmph__*
+  8 | *__StrongEmph__*
+  9 |
+ 10 | __Strong__
+ 11 | __Strong__
+ 12 |
+ 13 | *Emph*
+ 14 | *Emph*
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | __**NestingStrong**__
+ 23 | ____NestingStrong____
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S*__StrongEmph__*E
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S*__StrongEmph__*E
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+[1] Delimiters for strong+emphasis should be '*__' ... '__*' (was '***' ... '***').
+[2] Delimiters for strong+emphasis should be '*__' ... '__*' (was '___' ... '___').
+[3] Delimiters for strong+emphasis should be '*__' ... '__*' (was '_**' ... '**_').
+[4] Delimiters for strong+emphasis should be '*__' ... '__*' (was '**_' ... '_**').
+[5] Delimiters for strong+emphasis should be '*__' ... '__*' (was '__*' ... '*__').
+[6] Strong emphasis delimiter should be '__' (was '**').
+[7] Emphasis delimiter should be '*' (was '_').
+[8] Strong emphasis delimiter should be '__' (was '**').
+[9] Strong emphasis delimiter should be '__' (was '**').
+[10] Delimiters for strong+emphasis should be '*__' ... '__*' (was '***' ... '***').
+[11] Delimiters for strong+emphasis should be '*__' ... '__*' (was '**_' ... '_**').
+---
+
+
+Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 4"
+Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/emphasis-underline-and-strong-asterisk/basic-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - emphasis: _
+    strong: "**"
+Plugins: unable to serialize
+
+Code:
+  1 | <!-- Basic -->
+  2 |
+  3 | ***StrongEmph***
+    | ^~~~~~~~~~~~~~~~ [1]
+  4 | ___StrongEmph___
+    | ^~~~~~~~~~~~~~~~ [2]
+  5 | _**StrongEmph**_
+    | ^~~~~~~~~~~~~~~~ [3]
+  6 | **_StrongEmph_**
+  7 | __*StrongEmph*__
+    | ^~~~~~~~~~~~~~~~ [4]
+  8 | *__StrongEmph__*
+    | ^~~~~~~~~~~~~~~~ [5]
+  9 |
+ 10 | **Strong**
+ 11 | __Strong__
+    | ^~~~~~~~~~ [6]
+ 12 |
+ 13 | *Emph*
+    | ^~~~~~ [7]
+ 14 | _Emph_
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | ****NestingStrong****
+ 23 | ____NestingStrong____
+    | ^~~~~~~~~~~~~~~~~~~~~ [8]
+    |   ^~~~~~~~~~~~~~~~~ [9]
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S***StrongEmph***E
+    |  ^~~~~~~~~~~~~~~~ [10]
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S**_StrongEmph_**E
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+Output:
+  1 | <!-- Basic -->
+  2 |
+  3 | **_StrongEmph_**
+  4 | **_StrongEmph_**
+  5 | **_StrongEmph_**
+  6 | **_StrongEmph_**
+  7 | **_StrongEmph_**
+  8 | **_StrongEmph_**
+  9 |
+ 10 | **Strong**
+ 11 | **Strong**
+ 12 |
+ 13 | _Emph_
+ 14 | _Emph_
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | ****NestingStrong****
+ 23 | **__NestingStrong__**
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S**_StrongEmph_**E
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S**_StrongEmph_**E
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+[1] Delimiters for strong+emphasis should be '**_' ... '_**' (was '***' ... '***').
+[2] Delimiters for strong+emphasis should be '**_' ... '_**' (was '___' ... '___').
+[3] Delimiters for strong+emphasis should be '**_' ... '_**' (was '_**' ... '**_').
+[4] Delimiters for strong+emphasis should be '**_' ... '_**' (was '__*' ... '*__').
+[5] Delimiters for strong+emphasis should be '**_' ... '_**' (was '*__' ... '__*').
+[6] Strong emphasis delimiter should be '**' (was '__').
+[7] Emphasis delimiter should be '_' (was '*').
+[8] Strong emphasis delimiter should be '**' (was '__').
+[9] Strong emphasis delimiter should be '**' (was '__').
+[10] Delimiters for strong+emphasis should be '**_' ... '_**' (was '***' ... '***').
+---
+
+
+Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 5"
+Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/emphasis-underline-and-strong-underline/basic-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - emphasis: _
+    strong: __
+Plugins: unable to serialize
+
+Code:
+  1 | <!-- Basic -->
+  2 |
+  3 | ***StrongEmph***
+    | ^~~~~~~~~~~~~~~~ [1]
+  4 | ___StrongEmph___
+  5 | _**StrongEmph**_
+    | ^~~~~~~~~~~~~~~~ [2]
+  6 | **_StrongEmph_**
+    | ^~~~~~~~~~~~~~~~ [3]
+  7 | __*StrongEmph*__
+    | ^~~~~~~~~~~~~~~~ [4]
+  8 | *__StrongEmph__*
+    | ^~~~~~~~~~~~~~~~ [5]
+  9 |
+ 10 | **Strong**
+    | ^~~~~~~~~~ [6]
+ 11 | __Strong__
+ 12 |
+ 13 | *Emph*
+    | ^~~~~~ [7]
+ 14 | _Emph_
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | ****NestingStrong****
+    | ^~~~~~~~~~~~~~~~~~~~~ [8]
+    |   ^~~~~~~~~~~~~~~~~ [9]
+ 23 | ____NestingStrong____
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S***StrongEmph***E
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S**_StrongEmph_**E
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+Output:
+  1 | <!-- Basic -->
+  2 |
+  3 | ___StrongEmph___
+  4 | ___StrongEmph___
+  5 | ___StrongEmph___
+  6 | ___StrongEmph___
+  7 | ___StrongEmph___
+  8 | ___StrongEmph___
+  9 |
+ 10 | __Strong__
+ 11 | __Strong__
+ 12 |
+ 13 | _Emph_
+ 14 | _Emph_
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | __**NestingStrong**__
+ 23 | ____NestingStrong____
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S***StrongEmph***E
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S**_StrongEmph_**E
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+[1] Delimiter for strong+emphasis should be '___' (was '***').
+[2] Delimiters for strong+emphasis should be '___' ... '___' (was '_**' ... '**_').
+[3] Delimiters for strong+emphasis should be '___' ... '___' (was '**_' ... '_**').
+[4] Delimiters for strong+emphasis should be '___' ... '___' (was '__*' ... '*__').
+[5] Delimiters for strong+emphasis should be '___' ... '___' (was '*__' ... '__*').
+[6] Strong emphasis delimiter should be '__' (was '**').
+[7] Emphasis delimiter should be '_' (was '*').
+[8] Strong emphasis delimiter should be '__' (was '**').
+[9] Strong emphasis delimiter should be '__' (was '**').
+---
+
+
+Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 6"
+Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/strong-emphasis-asterisk/basic-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - emphasis: _
+    strong: __
+    strongEmphasis: "***"
+Plugins: unable to serialize
+
+Code:
+  1 | <!-- Basic -->
+  2 |
+  3 | ***StrongEmph***
+  4 | ___StrongEmph___
+    | ^~~~~~~~~~~~~~~~ [1]
+  5 | _**StrongEmph**_
+    | ^~~~~~~~~~~~~~~~ [2]
+  6 | **_StrongEmph_**
+    | ^~~~~~~~~~~~~~~~ [3]
+  7 | __*StrongEmph*__
+    | ^~~~~~~~~~~~~~~~ [4]
+  8 | *__StrongEmph__*
+    | ^~~~~~~~~~~~~~~~ [5]
+  9 |
+ 10 | **Strong**
+    | ^~~~~~~~~~ [6]
+ 11 | __Strong__
+ 12 |
+ 13 | *Emph*
+    | ^~~~~~ [7]
+ 14 | _Emph_
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | ****NestingStrong****
+    | ^~~~~~~~~~~~~~~~~~~~~ [8]
+    |   ^~~~~~~~~~~~~~~~~ [9]
+ 23 | ____NestingStrong____
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S***StrongEmph***E
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S**_StrongEmph_**E
+    |  ^~~~~~~~~~~~~~~~ [10]
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+Output:
+  1 | <!-- Basic -->
+  2 |
+  3 | ***StrongEmph***
+  4 | ***StrongEmph***
+  5 | ***StrongEmph***
+  6 | ***StrongEmph***
+  7 | ***StrongEmph***
+  8 | ***StrongEmph***
+  9 |
+ 10 | __Strong__
+ 11 | __Strong__
+ 12 |
+ 13 | _Emph_
+ 14 | _Emph_
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | __**NestingStrong**__
+ 23 | ____NestingStrong____
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S***StrongEmph***E
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S***StrongEmph***E
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+[1] Delimiter for strong+emphasis should be '***' (was '___').
+[2] Delimiters for strong+emphasis should be '***' ... '***' (was '_**' ... '**_').
+[3] Delimiters for strong+emphasis should be '***' ... '***' (was '**_' ... '_**').
+[4] Delimiters for strong+emphasis should be '***' ... '***' (was '__*' ... '*__').
+[5] Delimiters for strong+emphasis should be '***' ... '***' (was '*__' ... '__*').
+[6] Strong emphasis delimiter should be '__' (was '**').
+[7] Emphasis delimiter should be '_' (was '*').
+[8] Strong emphasis delimiter should be '__' (was '**').
+[9] Strong emphasis delimiter should be '__' (was '**').
+[10] Delimiters for strong+emphasis should be '***' ... '***' (was '**_' ... '_**').
+---
+
+
+Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 7"
+Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/strong-emphasis-outer-double-asterisk/basic-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - emphasis: "*"
+    strong: "**"
+    strongEmphasis:
+      outer: "**"
+      inner: _
+Plugins: unable to serialize
+
+Code:
+  1 | <!-- Basic -->
+  2 |
+  3 | ***StrongEmph***
+    | ^~~~~~~~~~~~~~~~ [1]
+  4 | ___StrongEmph___
+    | ^~~~~~~~~~~~~~~~ [2]
+  5 | _**StrongEmph**_
+    | ^~~~~~~~~~~~~~~~ [3]
+  6 | **_StrongEmph_**
+  7 | __*StrongEmph*__
+    | ^~~~~~~~~~~~~~~~ [4]
+  8 | *__StrongEmph__*
+    | ^~~~~~~~~~~~~~~~ [5]
+  9 |
+ 10 | **Strong**
+ 11 | __Strong__
+    | ^~~~~~~~~~ [6]
+ 12 |
+ 13 | *Emph*
+ 14 | _Emph_
+    | ^~~~~~ [7]
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | ****NestingStrong****
+ 23 | ____NestingStrong____
+    | ^~~~~~~~~~~~~~~~~~~~~ [8]
+    |   ^~~~~~~~~~~~~~~~~ [9]
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S***StrongEmph***E
+    |  ^~~~~~~~~~~~~~~~ [10]
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S**_StrongEmph_**E
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+Output:
+  1 | <!-- Basic -->
+  2 |
+  3 | **_StrongEmph_**
+  4 | **_StrongEmph_**
+  5 | **_StrongEmph_**
+  6 | **_StrongEmph_**
+  7 | **_StrongEmph_**
+  8 | **_StrongEmph_**
+  9 |
+ 10 | **Strong**
+ 11 | **Strong**
+ 12 |
+ 13 | *Emph*
+ 14 | *Emph*
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | ****NestingStrong****
+ 23 | **__NestingStrong__**
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S**_StrongEmph_**E
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S**_StrongEmph_**E
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+[1] Delimiters for strong+emphasis should be '**_' ... '_**' (was '***' ... '***').
+[2] Delimiters for strong+emphasis should be '**_' ... '_**' (was '___' ... '___').
+[3] Delimiters for strong+emphasis should be '**_' ... '_**' (was '_**' ... '**_').
+[4] Delimiters for strong+emphasis should be '**_' ... '_**' (was '__*' ... '*__').
+[5] Delimiters for strong+emphasis should be '**_' ... '_**' (was '*__' ... '__*').
+[6] Strong emphasis delimiter should be '**' (was '__').
+[7] Emphasis delimiter should be '*' (was '_').
+[8] Strong emphasis delimiter should be '**' (was '__').
+[9] Strong emphasis delimiter should be '**' (was '__').
+[10] Delimiters for strong+emphasis should be '**_' ... '_**' (was '***' ... '***').
+---
+
+
+Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 8"
+Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/strong-emphasis-outer-double-underline/basic-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - emphasis: "*"
+    strong: "**"
+    strongEmphasis:
+      outer: __
+      inner: "*"
+Plugins: unable to serialize
+
+Code:
+  1 | <!-- Basic -->
+  2 |
+  3 | ***StrongEmph***
+    | ^~~~~~~~~~~~~~~~ [1]
+  4 | ___StrongEmph___
+    | ^~~~~~~~~~~~~~~~ [2]
+  5 | _**StrongEmph**_
+    | ^~~~~~~~~~~~~~~~ [3]
+  6 | **_StrongEmph_**
+    | ^~~~~~~~~~~~~~~~ [4]
+  7 | __*StrongEmph*__
+  8 | *__StrongEmph__*
+    | ^~~~~~~~~~~~~~~~ [5]
+  9 |
+ 10 | **Strong**
+ 11 | __Strong__
+    | ^~~~~~~~~~ [6]
+ 12 |
+ 13 | *Emph*
+ 14 | _Emph_
+    | ^~~~~~ [7]
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | ****NestingStrong****
+ 23 | ____NestingStrong____
+    | ^~~~~~~~~~~~~~~~~~~~~ [8]
+    |   ^~~~~~~~~~~~~~~~~ [9]
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S***StrongEmph***E
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S**_StrongEmph_**E
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+Output:
+  1 | <!-- Basic -->
+  2 |
+  3 | __*StrongEmph*__
+  4 | __*StrongEmph*__
+  5 | __*StrongEmph*__
+  6 | __*StrongEmph*__
+  7 | __*StrongEmph*__
+  8 | __*StrongEmph*__
+  9 |
+ 10 | **Strong**
+ 11 | **Strong**
+ 12 |
+ 13 | *Emph*
+ 14 | *Emph*
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | ****NestingStrong****
+ 23 | **__NestingStrong__**
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S***StrongEmph***E
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S**_StrongEmph_**E
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+[1] Delimiters for strong+emphasis should be '__*' ... '*__' (was '***' ... '***').
+[2] Delimiters for strong+emphasis should be '__*' ... '*__' (was '___' ... '___').
+[3] Delimiters for strong+emphasis should be '__*' ... '*__' (was '_**' ... '**_').
+[4] Delimiters for strong+emphasis should be '__*' ... '*__' (was '**_' ... '_**').
+[5] Delimiters for strong+emphasis should be '__*' ... '*__' (was '*__' ... '__*').
+[6] Strong emphasis delimiter should be '**' (was '__').
+[7] Emphasis delimiter should be '*' (was '_').
+[8] Strong emphasis delimiter should be '**' (was '__').
+[9] Strong emphasis delimiter should be '**' (was '__').
+---
+
+
+Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 9"
+Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/strong-emphasis-outer-single-asterisk/basic-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - emphasis: "*"
+    strong: "**"
+    strongEmphasis:
+      outer: "*"
+      inner: __
+Plugins: unable to serialize
+
+Code:
+  1 | <!-- Basic -->
+  2 |
+  3 | ***StrongEmph***
+    | ^~~~~~~~~~~~~~~~ [1]
+  4 | ___StrongEmph___
+    | ^~~~~~~~~~~~~~~~ [2]
+  5 | _**StrongEmph**_
+    | ^~~~~~~~~~~~~~~~ [3]
+  6 | **_StrongEmph_**
+    | ^~~~~~~~~~~~~~~~ [4]
+  7 | __*StrongEmph*__
+    | ^~~~~~~~~~~~~~~~ [5]
+  8 | *__StrongEmph__*
+  9 |
+ 10 | **Strong**
+ 11 | __Strong__
+    | ^~~~~~~~~~ [6]
+ 12 |
+ 13 | *Emph*
+ 14 | _Emph_
+    | ^~~~~~ [7]
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | ****NestingStrong****
+ 23 | ____NestingStrong____
+    | ^~~~~~~~~~~~~~~~~~~~~ [8]
+    |   ^~~~~~~~~~~~~~~~~ [9]
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S***StrongEmph***E
+    |  ^~~~~~~~~~~~~~~~ [10]
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S**_StrongEmph_**E
+    |  ^~~~~~~~~~~~~~~~ [11]
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+Output:
+  1 | <!-- Basic -->
+  2 |
+  3 | *__StrongEmph__*
+  4 | *__StrongEmph__*
+  5 | *__StrongEmph__*
+  6 | *__StrongEmph__*
+  7 | *__StrongEmph__*
+  8 | *__StrongEmph__*
+  9 |
+ 10 | **Strong**
+ 11 | **Strong**
+ 12 |
+ 13 | *Emph*
+ 14 | *Emph*
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | ****NestingStrong****
+ 23 | **__NestingStrong__**
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S*__StrongEmph__*E
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S*__StrongEmph__*E
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+[1] Delimiters for strong+emphasis should be '*__' ... '__*' (was '***' ... '***').
+[2] Delimiters for strong+emphasis should be '*__' ... '__*' (was '___' ... '___').
+[3] Delimiters for strong+emphasis should be '*__' ... '__*' (was '_**' ... '**_').
+[4] Delimiters for strong+emphasis should be '*__' ... '__*' (was '**_' ... '_**').
+[5] Delimiters for strong+emphasis should be '*__' ... '__*' (was '__*' ... '*__').
+[6] Strong emphasis delimiter should be '**' (was '__').
+[7] Emphasis delimiter should be '*' (was '_').
+[8] Strong emphasis delimiter should be '**' (was '__').
+[9] Strong emphasis delimiter should be '**' (was '__').
+[10] Delimiters for strong+emphasis should be '*__' ... '__*' (was '***' ... '***').
+[11] Delimiters for strong+emphasis should be '*__' ... '__*' (was '**_' ... '_**').
+---
+
+
+Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 10"
+Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/strong-emphasis-outer-single-underline/basic-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - emphasis: "*"
+    strong: "**"
+    strongEmphasis:
+      outer: _
+      inner: "**"
+Plugins: unable to serialize
+
+Code:
+  1 | <!-- Basic -->
+  2 |
+  3 | ***StrongEmph***
+    | ^~~~~~~~~~~~~~~~ [1]
+  4 | ___StrongEmph___
+    | ^~~~~~~~~~~~~~~~ [2]
+  5 | _**StrongEmph**_
+  6 | **_StrongEmph_**
+    | ^~~~~~~~~~~~~~~~ [3]
+  7 | __*StrongEmph*__
+    | ^~~~~~~~~~~~~~~~ [4]
+  8 | *__StrongEmph__*
+    | ^~~~~~~~~~~~~~~~ [5]
+  9 |
+ 10 | **Strong**
+ 11 | __Strong__
+    | ^~~~~~~~~~ [6]
+ 12 |
+ 13 | *Emph*
+ 14 | _Emph_
+    | ^~~~~~ [7]
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | ****NestingStrong****
+ 23 | ____NestingStrong____
+    | ^~~~~~~~~~~~~~~~~~~~~ [8]
+    |   ^~~~~~~~~~~~~~~~~ [9]
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S***StrongEmph***E
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S**_StrongEmph_**E
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+Output:
+  1 | <!-- Basic -->
+  2 |
+  3 | _**StrongEmph**_
+  4 | _**StrongEmph**_
+  5 | _**StrongEmph**_
+  6 | _**StrongEmph**_
+  7 | _**StrongEmph**_
+  8 | _**StrongEmph**_
+  9 |
+ 10 | **Strong**
+ 11 | **Strong**
+ 12 |
+ 13 | *Emph*
+ 14 | *Emph*
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | ****NestingStrong****
+ 23 | **__NestingStrong__**
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S***StrongEmph***E
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S**_StrongEmph_**E
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+[1] Delimiters for strong+emphasis should be '_**' ... '**_' (was '***' ... '***').
+[2] Delimiters for strong+emphasis should be '_**' ... '**_' (was '___' ... '___').
+[3] Delimiters for strong+emphasis should be '_**' ... '**_' (was '**_' ... '_**').
+[4] Delimiters for strong+emphasis should be '_**' ... '**_' (was '__*' ... '*__').
+[5] Delimiters for strong+emphasis should be '_**' ... '**_' (was '*__' ... '__*').
+[6] Strong emphasis delimiter should be '**' (was '__').
+[7] Emphasis delimiter should be '*' (was '_').
+[8] Strong emphasis delimiter should be '**' (was '__').
+[9] Strong emphasis delimiter should be '**' (was '__').
+---
+
+
+Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 11"
+Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/strong-emphasis-underline/basic-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - emphasis: "*"
+    strong: "**"
+    strongEmphasis: ___
+Plugins: unable to serialize
+
+Code:
+  1 | <!-- Basic -->
+  2 |
+  3 | ***StrongEmph***
+    | ^~~~~~~~~~~~~~~~ [1]
+  4 | ___StrongEmph___
+  5 | _**StrongEmph**_
+    | ^~~~~~~~~~~~~~~~ [2]
+  6 | **_StrongEmph_**
+    | ^~~~~~~~~~~~~~~~ [3]
+  7 | __*StrongEmph*__
+    | ^~~~~~~~~~~~~~~~ [4]
+  8 | *__StrongEmph__*
+    | ^~~~~~~~~~~~~~~~ [5]
+  9 |
+ 10 | **Strong**
+ 11 | __Strong__
+    | ^~~~~~~~~~ [6]
+ 12 |
+ 13 | *Emph*
+ 14 | _Emph_
+    | ^~~~~~ [7]
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | ****NestingStrong****
+ 23 | ____NestingStrong____
+    | ^~~~~~~~~~~~~~~~~~~~~ [8]
+    |   ^~~~~~~~~~~~~~~~~ [9]
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S***StrongEmph***E
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S**_StrongEmph_**E
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+Output:
+  1 | <!-- Basic -->
+  2 |
+  3 | ___StrongEmph___
+  4 | ___StrongEmph___
+  5 | ___StrongEmph___
+  6 | ___StrongEmph___
+  7 | ___StrongEmph___
+  8 | ___StrongEmph___
+  9 |
+ 10 | **Strong**
+ 11 | **Strong**
+ 12 |
+ 13 | *Emph*
+ 14 | *Emph*
+ 15 |
+ 16 | *_NestingEmph_*
+ 17 | _*NestingEmph*_
+ 18 |
+ 19 | _*_NestingEmph_*_
+ 20 | *_*NestingEmph*_*
+ 21 |
+ 22 | ****NestingStrong****
+ 23 | **__NestingStrong__**
+ 24 | **__NestingStrong__**
+ 25 | __**NestingStrong**__
+ 26 |
+ 27 | <!-- Tests for delimiters -->
+ 28 |
+ 29 | S___text___E
+ 30 | S__text__E
+ 31 | S_text_E
+ 32 |
+ 33 | S***StrongEmph***E
+ 34 | S**Strong**E
+ 35 | S*Emph*E
+ 36 |
+ 37 | S_**Strong**_E
+ 38 | S**_StrongEmph_**E
+ 39 |
+ 40 | S*_NestingEmph_*E
+ 41 | S_*Emph*_E
+ 42 |
+
+[1] Delimiter for strong+emphasis should be '___' (was '***').
+[2] Delimiters for strong+emphasis should be '___' ... '___' (was '_**' ... '**_').
+[3] Delimiters for strong+emphasis should be '___' ... '___' (was '**_' ... '_**').
+[4] Delimiters for strong+emphasis should be '___' ... '___' (was '__*' ... '*__').
+[5] Delimiters for strong+emphasis should be '___' ... '___' (was '*__' ... '__*').
+[6] Strong emphasis delimiter should be '**' (was '__').
+[7] Emphasis delimiter should be '*' (was '_').
+[8] Strong emphasis delimiter should be '**' (was '__').
+[9] Strong emphasis delimiter should be '**' (was '__').
+---

@@ -148,7 +148,7 @@ async function getConfig(inputFile: string) {
     };
   }
   // inline config
-  const configStr = /^<!--(.*?)-->/u.exec(code);
+  const configStr = /^<!--(\{.*?)-->/u.exec(code);
   if (configStr) {
     code = code.replace(/^<!--(.*?)-->/u, `<!--${filename}-->`);
     try {

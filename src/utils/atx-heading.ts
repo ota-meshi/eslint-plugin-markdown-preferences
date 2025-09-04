@@ -2,6 +2,7 @@ import type { SourceLocation } from "@eslint/core";
 import type { MarkdownSourceCode } from "@eslint/markdown";
 import type { Heading } from "mdast";
 import { getHeadingKind } from "./ast.ts";
+import { isSpaceOrTab } from "./unicode.ts";
 
 export type BaseParsedATXHeading = {
   openingSequence: {
@@ -243,11 +244,7 @@ export function parseATXHeadingOpeningSequenceFromText(text: string): {
   function skipWhitespace(index: number) {
     let result = index;
     let c: string;
-    while (
-      result < text.length &&
-      (c = text[result]) &&
-      (c === " " || c === "\t")
-    ) {
+    while (result < text.length && (c = text[result]) && isSpaceOrTab(c)) {
       result++;
     }
     return result;
@@ -293,7 +290,7 @@ export function parseATXHeadingClosingSequenceFromText(text: string): {
   function skipEndWhitespace(index: number) {
     let result = index;
     let c: string;
-    while (result >= 0 && (c = text[result]) && (c === " " || c === "\t")) {
+    while (result >= 0 && (c = text[result]) && isSpaceOrTab(c)) {
       result--;
     }
     return result;
