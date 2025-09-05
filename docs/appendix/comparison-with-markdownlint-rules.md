@@ -162,14 +162,12 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 | Disallow invalid link label references | --                                                  | [markdown/no-invalid-label-refs]<br>Disallow invalid label references          | --                                         |
 
 [@eslint/markdown]: https://github.com/eslint/markdown
-
 [MD001]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md001.md
 [MD003]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md003.md
 [MD004]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md004.md
 [MD005]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md005.md
 [MD007]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md007.md
 [MD009]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md009.md
-[markdown-preferences/code-fence-style]: ./../rules/code-fence-style.md
 [MD010]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md010.md
 [MD011]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md011.md
 [MD012]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md012.md
@@ -221,6 +219,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 [markdown-preferences/blockquote-marker-alignment]: ../rules/blockquote-marker-alignment.md
 [markdown-preferences/bullet-list-marker-style]: ../rules/bullet-list-marker-style.md
 [markdown-preferences/canonical-code-block-language]: ../rules/canonical-code-block-language.md
+[markdown-preferences/code-fence-style]: ./../rules/code-fence-style.md
 [markdown-preferences/definitions-last]: ../rules/definitions-last.md
 [markdown-preferences/emoji-notation]: ../rules/emoji-notation.md
 [markdown-preferences/emphasis-delimiters-style]: ./../rules/emphasis-delimiters-style.md
