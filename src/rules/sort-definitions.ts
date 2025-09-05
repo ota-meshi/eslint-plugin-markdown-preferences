@@ -193,7 +193,7 @@ export default createRule<[{ order?: OrderOption[] }?]>("sort-definitions", {
             sourceCode.getParent(node) !== sourceCode.getParent(last))
         ) {
           const range = sourceCode.getRange(node);
-          const lastDefinitionRange = sourceCode.getRange(node);
+          const lastDefinitionRange = sourceCode.getRange(last);
           if (lastDefinitionRange[1] <= range[0]) {
             verify(group);
             group.length = 0;

@@ -132,5 +132,5 @@ Below are the main npm scripts useful for development:
 
 Refer to [`CONTRIBUTING.md`] for more details.
 
-[`CONTRIBUTING.md`]: ../CONTRIBUTING.md
 [`@eslint/markdown`]: https://github.com/eslint/markdown
+[`CONTRIBUTING.md`]: ../CONTRIBUTING.md

@@ -2,6 +2,40 @@
 
 
 Test: sort-definitions >> invalid
+Filename: tests/fixtures/rules/sort-definitions/invalid/nesting-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Test Document
+  2 |
+  3 | > [b]: #b
+  4 | > [a]: #a
+    |   ^~~~~~~ [1]
+  5 |
+  6 | [d]: #d
+  7 | [c]: #c
+    | ^~~~~~~ [2]
+  8 |
+
+Output:
+  1 | # Test Document
+  2 |
+  3 | > [a]: #a
+  4 | > [b]: #b
+  5 |
+  6 | [c]: #c
+  7 | [d]: #d
+  8 |
+
+[1] The definition '[a]: #a' should be before '[b]: #b'.
+[2] The definition '[c]: #c' should be before '[d]: #d'.
+---
+
+
+Test: sort-definitions >> invalid
 Filename: tests/fixtures/rules/sort-definitions/invalid/options/exclude-pattern-input.md
 Language: markdown/gfm
 LanguageOptions:
