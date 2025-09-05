@@ -1,5 +1,17 @@
 # eslint-plugin-markdown-preferences
 
+## 0.19.0
+
+### Minor Changes
+
+- [#91](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/91) [`f3a3c78`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/f3a3c78b9e8be9df880db53021902caf01bd381a) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/emphasis-delimiters-style`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/emphasis-delimiters-style.html) rule
+
+- [#94](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/94) [`afaba32`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/afaba32ebee968c73b5249438311207068fcbc9e) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/strikethrough-delimiters-style`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/strikethrough-delimiters-style.html) rule
+
+### Patch Changes
+
+- [#95](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/95) [`7d6273a`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/7d6273ad51b70c15d57be7adb2d0544d5c012844) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix([markdown-preferences/sort-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/sort-definitions.html)): incorrect grouping
+
 ## 0.18.0
 
 ### Minor Changes
