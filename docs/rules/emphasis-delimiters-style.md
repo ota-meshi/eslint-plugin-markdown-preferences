@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/emphasis-delimiters-style"
 description: "enforce a consistent delimiter style for emphasis and strong emphasis"
+since: "v0.19.0"
 ---
 
 # markdown-preferences/emphasis-delimiters-style
 
 > enforce a consistent delimiter style for emphasis and strong emphasis
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -129,6 +129,10 @@ Only one style can be specified; you cannot allow multiple styles at once.
 ## 👫 Related Rules
 
 - [markdown-preferences/strikethrough-delimiters-style](./strikethrough-delimiters-style.md) - enforce consistent strikethrough delimiters
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.19.0
 
 ## 🔍 Implementation
 
