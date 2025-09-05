@@ -157,7 +157,7 @@ export interface RuleOptions {
    * enforce a consistent delimiter style for strikethrough
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/strikethrough-delimiters-style.html
    */
-  'markdown-preferences/strikethrough-delimiters-style'?: Linter.RuleEntry<[]>
+  'markdown-preferences/strikethrough-delimiters-style'?: Linter.RuleEntry<MarkdownPreferencesStrikethroughDelimitersStyle>
   /**
    * enforce consistent casing in table header cells.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-header-casing.html
@@ -342,6 +342,10 @@ type MarkdownPreferencesSortDefinitions = []|[{
     sort: ("alphabetical" | "ignore")
   })[]
   alphabetical?: boolean
+}]
+// ----- markdown-preferences/strikethrough-delimiters-style -----
+type MarkdownPreferencesStrikethroughDelimitersStyle = []|[{
+  delimiter?: ("~" | "~~")
 }]
 // ----- markdown-preferences/table-header-casing -----
 type MarkdownPreferencesTableHeaderCasing = []|[{

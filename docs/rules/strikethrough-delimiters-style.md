@@ -2,12 +2,12 @@
 pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/strikethrough-delimiters-style"
-description: "enforce a consistent delimiter style for strikethrough (GFM extension)"
+description: "enforce a consistent delimiter style for strikethrough"
 ---
 
 # markdown-preferences/strikethrough-delimiters-style
 
-> Enforce a consistent delimiter style for strikethrough (GFM extension)
+> enforce a consistent delimiter style for strikethrough
 
 - ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -89,10 +89,6 @@ This rule has one option:
 
 ## 🔍 Implementation
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
-
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/strikethrough-delimiters-style.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/strikethrough-delimiters-style.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/strikethrough-delimiters-style)
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->

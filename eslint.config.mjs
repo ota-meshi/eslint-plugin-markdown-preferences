@@ -204,7 +204,7 @@ export default defineConfig([
       "markdown-preferences/strikethrough-delimiters-style": "error",
       "markdown-preferences/level1-heading-style": "error",
       "markdown-preferences/level2-heading-style": "error",
-      // "markdown-preferences/sort-definitions": "error",
+      "markdown-preferences/sort-definitions": "error",
 
       "markdown-links/no-dead-urls": [
         "error",
