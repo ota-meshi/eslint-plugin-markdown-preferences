@@ -201,8 +201,10 @@ export default defineConfig([
       "markdown-preferences/bullet-list-marker-style": "error",
       "markdown-preferences/ordered-list-marker-style": "error",
       "markdown-preferences/emphasis-delimiters-style": "error",
+      "markdown-preferences/strikethrough-delimiters-style": "error",
       "markdown-preferences/level1-heading-style": "error",
       "markdown-preferences/level2-heading-style": "error",
+      // "markdown-preferences/sort-definitions": "error",
 
       "markdown-links/no-dead-urls": [
         "error",

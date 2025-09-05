@@ -1,0 +1,113 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: strikethrough-delimiters-style >> invalid
+Filename: tests/fixtures/rules/strikethrough-delimiters-style/invalid/basic-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid strikethrough delimiter (should be ~~)
+  2 |
+  3 | ~strikethrough~
+    | ^~~~~~~~~~~~~~~ [1]
+  4 |
+  5 | Some text ~strikethrough~ more text.
+    |           ^~~~~~~~~~~~~~~ [2]
+  6 |
+  7 | ~~valid~~ ~invalid~ ~~valid again~~
+    |           ^~~~~~~~~ [3]
+  8 |
+
+Output:
+  1 | # Invalid strikethrough delimiter (should be ~~)
+  2 |
+  3 | ~~strikethrough~~
+  4 |
+  5 | Some text ~~strikethrough~~ more text.
+  6 |
+  7 | ~~valid~~ ~~invalid~~ ~~valid again~~
+  8 |
+
+[1] Strikethrough delimiter should be '~~' (was '~').
+[2] Strikethrough delimiter should be '~~' (was '~').
+[3] Strikethrough delimiter should be '~~' (was '~').
+---
+
+
+Test: strikethrough-delimiters-style >> invalid
+Filename: tests/fixtures/rules/strikethrough-delimiters-style/invalid/double-tilde/basic-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - delimiter: ~~
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: should use double ~~
+  2 |
+  3 | ~strikethrough~
+    | ^~~~~~~~~~~~~~~ [1]
+  4 |
+  5 | Some text ~strikethrough~ more text.
+    |           ^~~~~~~~~~~~~~~ [2]
+  6 |
+  7 | ~~valid~~ ~invalid~ ~~valid again~~
+    |           ^~~~~~~~~ [3]
+  8 |
+
+Output:
+  1 | # Invalid: should use double ~~
+  2 |
+  3 | ~~strikethrough~~
+  4 |
+  5 | Some text ~~strikethrough~~ more text.
+  6 |
+  7 | ~~valid~~ ~~invalid~~ ~~valid again~~
+  8 |
+
+[1] Strikethrough delimiter should be '~~' (was '~').
+[2] Strikethrough delimiter should be '~~' (was '~').
+[3] Strikethrough delimiter should be '~~' (was '~').
+---
+
+
+Test: strikethrough-delimiters-style >> invalid
+Filename: tests/fixtures/rules/strikethrough-delimiters-style/invalid/single-tilde/basic-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - delimiter: "~"
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid: should use single ~
+  2 |
+  3 | ~~strikethrough~~
+    | ^~~~~~~~~~~~~~~~~ [1]
+  4 |
+  5 | Some text ~~strikethrough~~ more text.
+    |           ^~~~~~~~~~~~~~~~~ [2]
+  6 |
+  7 | ~valid~ ~~invalid~~ ~valid again~
+    |         ^~~~~~~~~~~ [3]
+  8 |
+
+Output:
+  1 | # Invalid: should use single ~
+  2 |
+  3 | ~strikethrough~
+  4 |
+  5 | Some text ~strikethrough~ more text.
+  6 |
+  7 | ~valid~ ~invalid~ ~valid again~
+  8 |
+
+[1] Strikethrough delimiter should be '~' (was '~~').
+[2] Strikethrough delimiter should be '~' (was '~~').
+[3] Strikethrough delimiter should be '~' (was '~~').
+---

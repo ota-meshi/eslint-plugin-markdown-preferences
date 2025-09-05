@@ -57,6 +57,7 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 | [markdown-preferences/prefer-link-reference-definitions](./prefer-link-reference-definitions.md) | enforce using link reference definitions instead of inline links | 🔧 |  |
 | [markdown-preferences/setext-heading-underline-length](./setext-heading-underline-length.md) | enforce setext heading underline length | 🔧 |  |
 | [markdown-preferences/sort-definitions](./sort-definitions.md) | enforce a specific order for link definitions and footnote definitions | 🔧 |  |
+| [markdown-preferences/strikethrough-delimiters-style](./strikethrough-delimiters-style.md) | enforce a consistent delimiter style for strikethrough | 🔧 |  |
 | [markdown-preferences/thematic-break-character-style](./thematic-break-character-style.md) | enforce consistent character style for thematic breaks (horizontal rules) in Markdown. | 🔧 |  |
 | [markdown-preferences/thematic-break-length](./thematic-break-length.md) | enforce consistent length for thematic breaks (horizontal rules) in Markdown. | 🔧 |  |
 | [markdown-preferences/thematic-break-sequence-pattern](./thematic-break-sequence-pattern.md) | enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown. | 🔧 |  |

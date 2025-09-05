@@ -1,15 +1,15 @@
 # Comparison With markdownlint Rules
 
-<!-- eslint markdown-preferences/prefer-link-reference-definitions: ["error", { "minLinks": 1 }] -->
+<!-- eslint
+  markdown-preferences/prefer-link-reference-definitions: ["error", { "minLinks": 1 }],
+  markdown-preferences/definitions-last: ["error"]
+  -->
 
 `eslint-plugin-markdown-preferences` does not aim for compatibility with [markdownlint], but comparing rules is useful to check the strengths of each.\
 Also, by combining [markdownlint] and using each rule, you may be able to achieve the optimal Markdown style for you.\
 `eslint-plugin-markdown-preferences` is designed to provide useful features when used together with [@eslint/markdown], so rules from [@eslint/markdown] are also compared.
 
 Please note that each OSS is constantly evolving, so this list is not exhaustive.
-
-[@eslint/markdown]: https://github.com/eslint/markdown
-[markdownlint]: https://github.com/DavidAnson/markdownlint
 
 ## Rules Related to Headings
 
@@ -113,6 +113,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 | Spaces around the text in emphasis | [MD037] _no-space-in-emphasis_<br>Spaces inside emphasis markers | [markdown/no-space-in-emphasis]<br>Disallow spaces around emphasis markers | --                                                                                                                        |
 | Emphasis notation style            | [MD049] _emphasis-style_<br>Emphasis style                       | --                                                                         | [markdown-preferences/emphasis-delimiters-style]<br>enforce a consistent delimiter style for emphasis and strong emphasis |
 | Strong emphasis notation style     | [MD050] _strong-style_<br>Strong style                           | --                                                                         | [markdown-preferences/emphasis-delimiters-style]<br>enforce a consistent delimiter style for emphasis and strong emphasis |
+| Strikethrough notation style       | --                                                               | --                                                                         | [markdown-preferences/strikethrough-delimiters-style]<br>enforce a consistent delimiter style for strikethrough           |
 
 ## Rules Related to Thematic Breaks
 
@@ -160,6 +161,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 | Disallow reversed link/image syntax    | [MD011] _no-reversed-links_<br>Reversed link syntax | [markdown/no-reversed-media-syntax]<br>Disallow reversed link and image syntax | --                                         |
 | Disallow invalid link label references | --                                                  | [markdown/no-invalid-label-refs]<br>Disallow invalid label references          | --                                         |
 
+[@eslint/markdown]: https://github.com/eslint/markdown
 [MD001]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md001.md
 [MD003]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md003.md
 [MD004]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md004.md
@@ -212,54 +214,56 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 [MD056]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md056.md
 [MD058]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md058.md
 [MD059]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md059.md
-[markdown/fenced-code-language]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/fenced-code-language.md
-[markdown/heading-increment]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/heading-increment.md
-[markdown/no-bare-urls]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/no-bare-urls.md
-[markdown/no-duplicate-definitions]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/no-duplicate-definitions.md
-[markdown/no-duplicate-headings]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/no-duplicate-headings.md
-[markdown/no-empty-definitions]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/no-empty-definitions.md
-[markdown/no-empty-images]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/no-empty-images.md
-[markdown/no-empty-links]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/no-empty-links.md
-[markdown/no-html]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/no-html.md
-[markdown/no-invalid-label-refs]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/no-invalid-label-refs.md
-[markdown/no-missing-atx-heading-space]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/no-missing-atx-heading-space.md
-[markdown/no-missing-label-refs]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/no-missing-label-refs.md
-[markdown/no-missing-link-fragments]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/no-missing-link-fragments.md
-[markdown/no-multiple-h1]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/no-multiple-h1.md
-[markdown/no-reversed-media-syntax]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/no-reversed-media-syntax.md
-[markdown/no-unused-definitions]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/no-unused-definitions.md
-[markdown/require-alt-text]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/require-alt-text.md
-[markdown/table-column-count]: https://github.com/eslint/markdown/blob/v7.1.0/docs/rules/table-column-count.md
-[markdown/no-space-in-emphasis]: https://github.com/eslint/markdown/blob/main/docs/rules/no-space-in-emphasis.md
-[markdown-preferences/canonical-code-block-language]: ../rules/canonical-code-block-language.md
-[markdown-preferences/emoji-notation]: ../rules/emoji-notation.md
-[markdown-preferences/heading-casing]: ../rules/heading-casing.md
-[markdown-preferences/ordered-list-marker-start]: ../rules/ordered-list-marker-start.md
-[markdown-preferences/prefer-inline-code-words]: ../rules/prefer-inline-code-words.md
-[markdown-preferences/prefer-linked-words]: ../rules/prefer-linked-words.md
-[markdown-preferences/atx-heading-closing-sequence]: ../rules/atx-heading-closing-sequence.md
 [markdown-preferences/atx-heading-closing-sequence-length]: ../rules/atx-heading-closing-sequence-length.md
+[markdown-preferences/atx-heading-closing-sequence]: ../rules/atx-heading-closing-sequence.md
+[markdown-preferences/blockquote-marker-alignment]: ../rules/blockquote-marker-alignment.md
+[markdown-preferences/bullet-list-marker-style]: ../rules/bullet-list-marker-style.md
+[markdown-preferences/canonical-code-block-language]: ../rules/canonical-code-block-language.md
 [markdown-preferences/definitions-last]: ../rules/definitions-last.md
+[markdown-preferences/emoji-notation]: ../rules/emoji-notation.md
+[markdown-preferences/emphasis-delimiters-style]: ./../rules/emphasis-delimiters-style.md
 [markdown-preferences/hard-linebreak-style]: ../rules/hard-linebreak-style.md
+[markdown-preferences/heading-casing]: ../rules/heading-casing.md
+[markdown-preferences/level1-heading-style]: ./../rules/level1-heading-style.md
+[markdown-preferences/level2-heading-style]: ./../rules/level2-heading-style.md
+[markdown-preferences/list-marker-alignment]: ../rules/list-marker-alignment.md
 [markdown-preferences/no-laziness-blockquotes]: ../rules/no-laziness-blockquotes.md
 [markdown-preferences/no-multiple-empty-lines]: ../rules/no-multiple-empty-lines.md
 [markdown-preferences/no-text-backslash-linebreak]: ../rules/no-text-backslash-linebreak.md
 [markdown-preferences/no-trailing-spaces]: ../rules/no-trailing-spaces.md
 [markdown-preferences/ordered-list-marker-sequence]: ../rules/ordered-list-marker-sequence.md
+[markdown-preferences/ordered-list-marker-start]: ../rules/ordered-list-marker-start.md
 [markdown-preferences/ordered-list-marker-style]: ../rules/ordered-list-marker-style.md
+[markdown-preferences/padding-line-between-blocks]: ../rules/padding-line-between-blocks.md
 [markdown-preferences/prefer-autolinks]: ../rules/prefer-autolinks.md
 [markdown-preferences/prefer-fenced-code-blocks]: ../rules/prefer-fenced-code-blocks.md
+[markdown-preferences/prefer-inline-code-words]: ../rules/prefer-inline-code-words.md
 [markdown-preferences/prefer-link-reference-definitions]: ../rules/prefer-link-reference-definitions.md
-[markdown-preferences/sort-definitions]: ../rules/sort-definitions.md
-[markdown-preferences/table-header-casing]: ../rules/table-header-casing.md
-[markdown-preferences/list-marker-alignment]: ../rules/list-marker-alignment.md
-[markdown-preferences/blockquote-marker-alignment]: ../rules/blockquote-marker-alignment.md
-[markdown-preferences/bullet-list-marker-style]: ../rules/bullet-list-marker-style.md
-[markdown-preferences/padding-line-between-blocks]: ../rules/padding-line-between-blocks.md
+[markdown-preferences/prefer-linked-words]: ../rules/prefer-linked-words.md
 [markdown-preferences/setext-heading-underline-length]: ./../rules/setext-heading-underline-length.md
+[markdown-preferences/sort-definitions]: ../rules/sort-definitions.md
+[markdown-preferences/strikethrough-delimiters-style]: ./../rules/strikethrough-delimiters-style.md
+[markdown-preferences/table-header-casing]: ../rules/table-header-casing.md
 [markdown-preferences/thematic-break-character-style]: ./../rules/thematic-break-character-style.md
 [markdown-preferences/thematic-break-length]: ./../rules/thematic-break-length.md
 [markdown-preferences/thematic-break-sequence-pattern]: ./../rules/thematic-break-sequence-pattern.md
-[markdown-preferences/emphasis-delimiters-style]: ./../rules/emphasis-delimiters-style.md
-[markdown-preferences/level1-heading-style]: ./../rules/level1-heading-style.md
-[markdown-preferences/level2-heading-style]: ./../rules/level2-heading-style.md
+[markdown/fenced-code-language]: https://github.com/eslint/markdown/blob/v7.2.0/docs/rules/fenced-code-language.md
+[markdown/heading-increment]: https://github.com/eslint/markdown/blob/v7.2.0/docs/rules/heading-increment.md
+[markdown/no-bare-urls]: https://github.com/eslint/markdown/blob/v7.2.0/docs/rules/no-bare-urls.md
+[markdown/no-duplicate-definitions]: https://github.com/eslint/markdown/blob/v7.2.0/docs/rules/no-duplicate-definitions.md
+[markdown/no-duplicate-headings]: https://github.com/eslint/markdown/blob/v7.2.0/docs/rules/no-duplicate-headings.md
+[markdown/no-empty-definitions]: https://github.com/eslint/markdown/blob/v7.2.0/docs/rules/no-empty-definitions.md
+[markdown/no-empty-images]: https://github.com/eslint/markdown/blob/v7.2.0/docs/rules/no-empty-images.md
+[markdown/no-empty-links]: https://github.com/eslint/markdown/blob/v7.2.0/docs/rules/no-empty-links.md
+[markdown/no-html]: https://github.com/eslint/markdown/blob/v7.2.0/docs/rules/no-html.md
+[markdown/no-invalid-label-refs]: https://github.com/eslint/markdown/blob/v7.2.0/docs/rules/no-invalid-label-refs.md
+[markdown/no-missing-atx-heading-space]: https://github.com/eslint/markdown/blob/v7.2.0/docs/rules/no-missing-atx-heading-space.md
+[markdown/no-missing-label-refs]: https://github.com/eslint/markdown/blob/v7.2.0/docs/rules/no-missing-label-refs.md
+[markdown/no-missing-link-fragments]: https://github.com/eslint/markdown/blob/v7.2.0/docs/rules/no-missing-link-fragments.md
+[markdown/no-multiple-h1]: https://github.com/eslint/markdown/blob/v7.2.0/docs/rules/no-multiple-h1.md
+[markdown/no-reversed-media-syntax]: https://github.com/eslint/markdown/blob/v7.2.0/docs/rules/no-reversed-media-syntax.md
+[markdown/no-space-in-emphasis]: https://github.com/eslint/markdown/blob/v7.2.0/docs/rules/no-space-in-emphasis.md
+[markdown/no-unused-definitions]: https://github.com/eslint/markdown/blob/v7.2.0/docs/rules/no-unused-definitions.md
+[markdown/require-alt-text]: https://github.com/eslint/markdown/blob/v7.2.0/docs/rules/require-alt-text.md
+[markdown/table-column-count]: https://github.com/eslint/markdown/blob/v7.2.0/docs/rules/table-column-count.md
+[markdownlint]: https://github.com/DavidAnson/markdownlint
