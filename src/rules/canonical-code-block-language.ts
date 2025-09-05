@@ -1,6 +1,6 @@
 import type { Code } from "mdast";
 import { createRule } from "../utils/index.ts";
-import { getSourceLocationFromRange } from "../utils/ast.ts";
+import { parseFencedCodeBlock } from "../utils/fenced-code-block.ts";
 
 type LanguageMapping = Record<string, string>;
 
@@ -80,34 +80,21 @@ export default createRule<[{ languages?: LanguageMapping }?]>(
             return;
           }
 
-          // Get the position of the language info in the opening fence
-          const nodeRange = sourceCode.getRange(node);
-          const nodeText = sourceCode.text.slice(nodeRange[0], nodeRange[1]);
-
-          // Find the opening fence and language using exec
-          // This regex captures the fence and language, allowing for meta info after the language
-          // Supports 3 or more backticks/tildes for extended fences
-          const fenceRegex = /^(`{3,}|~{3,})(\w*)(?:\s.*)?$/mu;
-          const fenceMatch = fenceRegex.exec(nodeText.split("\n")[0]);
-          if (!fenceMatch) {
+          const parsed = parseFencedCodeBlock(sourceCode, node);
+          if (!parsed || !parsed.language) {
             return;
           }
 
-          const [, fence, langInfo] = fenceMatch;
-          const range: [number, number] = [
-            nodeRange[0] + fence.length,
-            nodeRange[0] + fence.length + langInfo.length,
-          ];
           context.report({
             node,
-            loc: getSourceLocationFromRange(sourceCode, node, range),
+            loc: parsed.language.loc,
             messageId: "useCanonical",
             data: {
               canonical,
               current,
             },
             fix(fixer) {
-              return fixer.replaceTextRange(range, canonical);
+              return fixer.replaceTextRange(parsed.language!.range, canonical);
             },
           });
         },

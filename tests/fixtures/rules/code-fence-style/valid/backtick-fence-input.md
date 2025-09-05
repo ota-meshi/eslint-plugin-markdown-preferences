@@ -1,0 +1,10 @@
+# Mixed code fence styles
+
+```js
+console.log('backtick');
+```
+
+~~~js
+```md
+```
+~~~

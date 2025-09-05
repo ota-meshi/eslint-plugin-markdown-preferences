@@ -205,6 +205,7 @@ export default defineConfig([
       "markdown-preferences/level1-heading-style": "error",
       "markdown-preferences/level2-heading-style": "error",
       "markdown-preferences/sort-definitions": "error",
+      "markdown-preferences/code-fence-style": "error",
 
       "markdown-links/no-dead-urls": [
         "error",
