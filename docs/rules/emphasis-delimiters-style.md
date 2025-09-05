@@ -128,14 +128,10 @@ Only one style can be specified; you cannot allow multiple styles at once.
 
 ## 👫 Related Rules
 
-None.
+- [markdown-preferences/strikethrough-delimiters-style](./strikethrough-delimiters-style.md) - enforce consistent strikethrough delimiters
 
 ## 🔍 Implementation
-
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/emphasis-delimiters-style.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/emphasis-delimiters-style.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/emphasis-delimiters-style)
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->

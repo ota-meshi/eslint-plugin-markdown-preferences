@@ -30,6 +30,7 @@ import preferLinkReferenceDefinitions from "../rules/prefer-link-reference-defin
 import preferLinkedWords from "../rules/prefer-linked-words.ts";
 import setextHeadingUnderlineLength from "../rules/setext-heading-underline-length.ts";
 import sortDefinitions from "../rules/sort-definitions.ts";
+import strikethroughDelimitersStyle from "../rules/strikethrough-delimiters-style.ts";
 import tableHeaderCasing from "../rules/table-header-casing.ts";
 import thematicBreakCharacterStyle from "../rules/thematic-break-character-style.ts";
 import thematicBreakLength from "../rules/thematic-break-length.ts";
@@ -64,6 +65,7 @@ export const rules = [
   preferLinkedWords,
   setextHeadingUnderlineLength,
   sortDefinitions,
+  strikethroughDelimitersStyle,
   tableHeaderCasing,
   thematicBreakCharacterStyle,
   thematicBreakLength,
