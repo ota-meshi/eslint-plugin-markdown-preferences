@@ -57,7 +57,8 @@ export function parseFencedCodeBlock(
     if (c === "\n") break;
     return null; // invalid closing fence
   }
-  if (!closingFenceText || !closingFenceText.endsWith(fenceText)) return null;
+  closingFenceText = closingFenceText.trimStart();
+  if (!closingFenceText || !closingFenceText.startsWith(fenceText)) return null;
 
   const lines = getParsedLines(sourceCode);
   const afterOpeningFence = lines

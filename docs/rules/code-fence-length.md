@@ -58,7 +58,7 @@ console.log("bad")
 
 <!-- eslint-skip -->
 
-```````md
+``````md
 <!-- eslint markdown-preferences/code-fence-length: ['error', { "length": 3, "fallbackLength": "minimum" }] -->
 
 <!-- ✓ GOOD (content contains 3 backticks, so fence is 4) -->
@@ -74,7 +74,7 @@ code
 code
 ```
 `````
-```````
+``````
 
 <!-- prettier-ignore-end -->
 
@@ -84,7 +84,7 @@ code
 
 <!-- eslint-skip -->
 
-```````md
+`````md
 <!-- eslint markdown-preferences/code-fence-length: ['error', { "length": 3, "overrides": [{ "lang": "md", "length": 4 }] }] -->
 
 <!-- ✓ GOOD (markdown code block uses 4) -->
@@ -103,7 +103,7 @@ console.log("sample")
 console.log("js")
 ```
 
-```````
+`````
 
 <!-- prettier-ignore-end -->
 
