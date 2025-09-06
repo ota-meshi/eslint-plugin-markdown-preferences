@@ -2,6 +2,7 @@ import type { SourceLocation } from "@eslint/core";
 import type { MarkdownSourceCode } from "@eslint/markdown";
 import type { Code } from "mdast";
 import { getParsedLines } from "./lines.ts";
+import { isSpaceOrTab } from "./unicode.ts";
 
 export type ParsedFencedCodeBlock = {
   openingFence: {
@@ -41,10 +42,23 @@ export function parseFencedCodeBlock(
   if (!match) return null;
   const [, fenceText] = match;
 
+  const fenceChar = fenceText[0];
+
   // parse closing fence
+  let closingFenceText = "";
   const trimmed = text.trimEnd();
   const trailingSpacesLength = text.length - trimmed.length;
-  if (!trimmed.endsWith(`\n${fenceText}`)) return null;
+  for (let index = trimmed.length - 1; index >= 0; index--) {
+    const c = trimmed[index];
+    if (c === fenceChar || isSpaceOrTab(c)) {
+      closingFenceText = c + closingFenceText;
+      continue;
+    }
+    if (c === "\n") break;
+    return null; // invalid closing fence
+  }
+  closingFenceText = closingFenceText.trimStart();
+  if (!closingFenceText || !closingFenceText.startsWith(fenceText)) return null;
 
   const lines = getParsedLines(sourceCode);
   const afterOpeningFence = lines
@@ -139,15 +153,16 @@ export function parseFencedCodeBlock(
     language,
     meta,
     closingFence: {
-      text: fenceText,
+      text: closingFenceText,
       range: [
-        range[1] - trailingSpacesLength - fenceText.length,
+        range[1] - trailingSpacesLength - closingFenceText.length,
         range[1] - trailingSpacesLength,
       ],
       loc: {
         start: {
           line: loc.end.line,
-          column: loc.end.column - trailingSpacesLength - fenceText.length,
+          column:
+            loc.end.column - trailingSpacesLength - closingFenceText.length,
         },
         end: {
           line: loc.end.line,

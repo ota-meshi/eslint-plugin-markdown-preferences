@@ -236,7 +236,7 @@ This careful handling ensures that the rule maintains semantic correctness while
 
 <!-- prettier-ignore-start -->
 
-````md
+```md
 <!-- eslint markdown-preferences/padding-line-between-blocks: ["error", {"prev": "paragraph", "next": "thematic-break", "blankLine": "never"}] -->
 
 <!-- ✓ GOOD - Setext-style heading -->
@@ -249,7 +249,7 @@ Here is some title.
 Here is some text.
 
 ---
-````
+```
 
 <!-- prettier-ignore-end -->
 

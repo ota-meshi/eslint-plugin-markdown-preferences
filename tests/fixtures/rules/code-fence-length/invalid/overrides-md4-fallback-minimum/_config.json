@@ -1,0 +1,9 @@
+{
+  "options": [
+    {
+      "length": 3,
+      "fallbackLength": "minimum",
+      "overrides": [{ "lang": "md", "length": 4, "fallbackLength": "minimum" }]
+    }
+  ]
+}

@@ -18,6 +18,11 @@ Code:
   4 | console.log('should be tilde');
   5 | ```
   6 |
+  7 | ```js
+    | ^~~ [2]
+  8 | console.log('should be tilde');
+  9 | ``````
+ 10 |
 
 Output:
   1 | # Backtick fence in tilde config
@@ -26,8 +31,13 @@ Output:
   4 | console.log('should be tilde');
   5 | ~~~
   6 |
+  7 | ~~~js
+  8 | console.log('should be tilde');
+  9 | ~~~~~~
+ 10 |
 
 [1] Use ~~~ code fence style instead of ```.
+[2] Use ~~~ code fence style instead of ```.
 ---
 
 
