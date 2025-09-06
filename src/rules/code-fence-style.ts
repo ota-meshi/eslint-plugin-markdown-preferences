@@ -39,16 +39,16 @@ export default createRule("code-fence-style", {
         const parsed = parseFencedCodeBlock(sourceCode, node);
         if (!parsed) return; // Skip if not an indented code block
 
-        const expectedCodeFence = expectedChar.repeat(
-          Math.max(3, parsed.openingFence.text.length),
-        );
-
-        if (parsed.openingFence.text === expectedCodeFence) {
+        if (parsed.openingFence.text.includes(expectedChar)) {
           // The fence style is as expected
           return;
         }
 
-        if (node.value.includes(`\n${expectedCodeFence}`)) {
+        const expectedOpeningFence = expectedChar.repeat(
+          Math.max(3, parsed.openingFence.text.length),
+        );
+
+        if (node.value.includes(expectedOpeningFence)) {
           // The code block contains the expected fence, so fixing it would be problematic
           return;
         }
@@ -57,7 +57,7 @@ export default createRule("code-fence-style", {
           node,
           loc: parsed.openingFence.loc,
           data: {
-            expected: expectedCodeFence,
+            expected: expectedOpeningFence,
             actual: parsed.openingFence.text,
           },
           messageId: "useCodeFenceStyle",
@@ -65,11 +65,13 @@ export default createRule("code-fence-style", {
             return [
               fixer.replaceTextRange(
                 parsed.openingFence.range,
-                expectedCodeFence,
+                expectedOpeningFence,
               ),
               fixer.replaceTextRange(
                 parsed.closingFence.range,
-                expectedCodeFence,
+                expectedChar.repeat(
+                  Math.max(3, parsed.closingFence.text.length),
+                ),
               ),
             ];
           },
