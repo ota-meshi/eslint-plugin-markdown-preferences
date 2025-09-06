@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/code-fence-length"
 description: "enforce consistent code fence length in fenced code blocks."
+since: "v0.20.0"
 ---
 
 # markdown-preferences/code-fence-length
 
 > enforce consistent code fence length in fenced code blocks.
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -147,4 +147,12 @@ console.log("js")
 - [markdown-preferences/code-fence-style](./code-fence-style.md)
 - [markdown-preferences/prefer-fenced-code-blocks](./prefer-fenced-code-blocks.md)
 
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.20.0
+
 ## 🔍 Implementation
+
+- [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/code-fence-length.ts)
+- [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/code-fence-length.ts)
+- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/code-fence-length)
