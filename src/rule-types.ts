@@ -39,6 +39,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/canonical-code-block-language'?: Linter.RuleEntry<MarkdownPreferencesCanonicalCodeBlockLanguage>
   /**
+   * enforce a consistent code fence style (backtick or tilde) in Markdown fenced code blocks.
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/code-fence-style.html
+   */
+  'markdown-preferences/code-fence-style'?: Linter.RuleEntry<MarkdownPreferencesCodeFenceStyle>
+  /**
    * require link definitions and footnote definitions to be placed at the end of the document
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/definitions-last.html
    */
@@ -206,6 +211,10 @@ type MarkdownPreferencesCanonicalCodeBlockLanguage = []|[{
   languages?: {
     [k: string]: string
   }
+}]
+// ----- markdown-preferences/code-fence-style -----
+type MarkdownPreferencesCodeFenceStyle = []|[{
+  style?: ("backtick" | "tilde")
 }]
 // ----- markdown-preferences/emoji-notation -----
 type MarkdownPreferencesEmojiNotation = []|[{

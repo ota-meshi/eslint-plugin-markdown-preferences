@@ -7,6 +7,7 @@ import atxHeadingClosingSequence from "../rules/atx-heading-closing-sequence.ts"
 import blockquoteMarkerAlignment from "../rules/blockquote-marker-alignment.ts";
 import bulletListMarkerStyle from "../rules/bullet-list-marker-style.ts";
 import canonicalCodeBlockLanguage from "../rules/canonical-code-block-language.ts";
+import codeFenceStyle from "../rules/code-fence-style.ts";
 import definitionsLast from "../rules/definitions-last.ts";
 import emojiNotation from "../rules/emoji-notation.ts";
 import emphasisDelimitersStyle from "../rules/emphasis-delimiters-style.ts";
@@ -42,6 +43,7 @@ export const rules = [
   blockquoteMarkerAlignment,
   bulletListMarkerStyle,
   canonicalCodeBlockLanguage,
+  codeFenceStyle,
   definitionsLast,
   emojiNotation,
   emphasisDelimitersStyle,
