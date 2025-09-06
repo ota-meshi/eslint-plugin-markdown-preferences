@@ -1,5 +1,13 @@
 # eslint-plugin-markdown-preferences
 
+## 0.20.0
+
+### Minor Changes
+
+- [#98](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/98) [`c6b4ff4`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/c6b4ff441b4978248a5504a34ae0ffcb1c1fe6f5) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/code-fence-length`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/code-fence-length.html) rule
+
+- [#96](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/96) [`3c0ccf3`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/3c0ccf309a7efdea793a81875becfca2f582797e) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/code-fence-style`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/code-fence-style.html) rule
+
 ## 0.19.0
 
 ### Minor Changes

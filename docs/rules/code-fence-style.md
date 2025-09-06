@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/code-fence-style"
 description: "enforce a consistent code fence style (backtick or tilde) in Markdown fenced code blocks."
+since: "v0.20.0"
 ---
 
 # markdown-preferences/code-fence-style
 
 > enforce a consistent code fence style (backtick or tilde) in Markdown fenced code blocks.
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -79,6 +79,10 @@ console.log("hello");
 
 - [markdown-preferences/code-fence-length](./code-fence-length.md)
 - [markdown-preferences/prefer-fenced-code-blocks](./prefer-fenced-code-blocks.md)
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.20.0
 
 ## 🔍 Implementation
 
