@@ -48,6 +48,7 @@ The rules with the following star ⭐ are included in the `plugin.configs.recomm
 | [markdown-preferences/level2-heading-style](./level2-heading-style.md) | enforce consistent style for level 2 headings | 🔧 |  |
 | [markdown-preferences/list-marker-alignment](./list-marker-alignment.md) | enforce consistent alignment of list markers | 🔧 | ⭐ |
 | [markdown-preferences/no-laziness-blockquotes](./no-laziness-blockquotes.md) | disallow laziness in blockquotes |  | ⭐ |
+| [markdown-preferences/no-multi-spaces](./no-multi-spaces.md) | disallow multiple spaces | 🔧 |  |
 | [markdown-preferences/no-multiple-empty-lines](./no-multiple-empty-lines.md) | disallow multiple empty lines in Markdown files. | 🔧 |  |
 | [markdown-preferences/no-text-backslash-linebreak](./no-text-backslash-linebreak.md) | disallow text backslash at the end of a line. |  | ⭐ |
 | [markdown-preferences/no-trailing-spaces](./no-trailing-spaces.md) | disallow trailing whitespace at the end of lines in Markdown files. | 🔧 |  |

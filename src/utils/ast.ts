@@ -75,6 +75,58 @@ export type MDNode =
   | Toml
   | Json;
 
+export type MDParent<N extends MDNode> = N extends Root
+  ? null
+  : MDNode extends infer P
+    ? P extends { children: (infer C)[] }
+      ? N extends C
+        ? Extract<P, { children: C[] }>
+        : never
+      : never
+    : never;
+
+/**
+ * Get the parent of a node.
+ */
+export function getParent<N extends MDNode>(
+  sourceCode: MarkdownSourceCode,
+  node: N,
+): MDParent<N> {
+  return sourceCode.getParent(node) as MDParent<N>;
+}
+
+export type MDSibling<N extends MDNode> = NonNullable<
+  MDParent<N>
+>["children"][number];
+
+/**
+ * Get the previous sibling of a node.
+ */
+export function getPrevSibling<N extends MDNode>(
+  sourceCode: MarkdownSourceCode,
+  node: N,
+): MDSibling<N> | null {
+  const parent = getParent(sourceCode, node);
+  if (!parent) return null;
+  const index = (parent.children as MDNode[]).indexOf(node);
+  if (index <= 0) return null;
+  return parent.children[index - 1] as MDSibling<N>;
+}
+
+/**
+ * Get the next sibling of a node.
+ */
+export function getNextSibling<N extends MDNode>(
+  sourceCode: MarkdownSourceCode,
+  node: N,
+): MDSibling<N> | null {
+  const parent = getParent(sourceCode, node);
+  if (!parent) return null;
+  const index = (parent.children as MDNode[]).indexOf(node);
+  if (index < 0 || index >= parent.children.length - 1) return null;
+  return parent.children[index + 1] as MDSibling<N>;
+}
+
 /**
  * Get the kind of heading.
  */
@@ -189,7 +241,7 @@ export function getThematicBreakMarker(
  */
 export function getSourceLocationFromRange(
   sourceCode: MarkdownSourceCode,
-  node: Text | Code,
+  node: MDNode,
   range: [number, number],
 ): SourceLocation {
   const [nodeStart] = sourceCode.getRange(node);

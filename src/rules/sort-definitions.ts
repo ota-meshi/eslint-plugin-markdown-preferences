@@ -1,7 +1,7 @@
 import type { Definition, FootnoteDefinition } from "mdast";
 import { createRule } from "../utils/index.ts";
 import { toRegExp, isRegExp } from "../utils/regexp.ts";
-import type { MDNode } from "../utils/ast.ts";
+import { getParent, type MDNode } from "../utils/ast.ts";
 
 type MatchOption = string | string[];
 type OrderOption =
@@ -190,7 +190,7 @@ export default createRule<[{ order?: OrderOption[] }?]>("sort-definitions", {
         if (
           last &&
           ((node.type !== "definition" && node.type !== "footnoteDefinition") ||
-            sourceCode.getParent(node) !== sourceCode.getParent(last))
+            getParent(sourceCode, node) !== getParent(sourceCode, last))
         ) {
           const range = sourceCode.getRange(node);
           const lastDefinitionRange = sourceCode.getRange(last);
