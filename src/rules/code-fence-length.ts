@@ -73,7 +73,9 @@ export default createRule<[Options?]>("code-fence-length", {
       length: number;
       fallbackLength: number | "minimum" | "as-is";
     } {
-      const override = options.overrides?.find((o) => o.lang === node.lang);
+      const override = options.overrides
+        ? [...options.overrides].reverse().find((o) => o.lang === node.lang)
+        : null;
       return {
         length: override?.length ?? options.length ?? 3,
         fallbackLength:
