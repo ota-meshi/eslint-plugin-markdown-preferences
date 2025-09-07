@@ -208,7 +208,7 @@ export default createRule<Options>("padding-line-between-blocks", {
     type: "layout",
     docs: {
       description: "require or disallow padding lines between blocks",
-      categories: [],
+      categories: ["standard"],
       listCategory: "Stylistic",
     },
     fixable: "whitespace",
