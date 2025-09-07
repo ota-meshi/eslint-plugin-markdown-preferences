@@ -18,7 +18,7 @@ export default createRule<
     type: "layout",
     docs: {
       description: "enforce setext heading underline length",
-      categories: [],
+      categories: ["standard"],
       listCategory: "Stylistic",
     },
     fixable: "whitespace",

@@ -10,7 +10,7 @@ since: "v0.11.0"
 
 > enforce the use of fenced code blocks over indented code blocks
 
-- ⚙️ This rule is included in `plugin.configs.recommended`.
+- ⚙️ This rule is included in `plugin.configs.recommended` and `plugin.configs.standard`.
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details

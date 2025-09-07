@@ -38,6 +38,7 @@ export default [
 This plugin provides configs:
 
 - `*.configs.recommended` ... Recommended config provided by the plugin.
+- `*.configs.standard` ... Enforces opinionated stylistic conventions. You can extend this to enforce any stylistic conventions you like.
 
 See [the rule list](../rules/index.md) to get the `rules` that this plugin provides.
 

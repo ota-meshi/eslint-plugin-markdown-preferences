@@ -14,7 +14,7 @@ export default createRule("no-trailing-spaces", {
     docs: {
       description:
         "disallow trailing whitespace at the end of lines in Markdown files.",
-      categories: [],
+      categories: ["standard"],
       listCategory: "Stylistic",
     },
     fixable: "whitespace",

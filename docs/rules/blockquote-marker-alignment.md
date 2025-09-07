@@ -10,7 +10,7 @@ since: "v0.15.0"
 
 > enforce consistent alignment of blockquote markers
 
-- ⚙️ This rule is included in `plugin.configs.recommended`.
+- ⚙️ This rule is included in `plugin.configs.recommended` and `plugin.configs.standard`.
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details

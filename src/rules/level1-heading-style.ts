@@ -17,7 +17,7 @@ export default createRule<[Option?]>("level1-heading-style", {
     type: "layout",
     docs: {
       description: "enforce consistent style for level 1 headings",
-      categories: [],
+      categories: ["standard"],
       listCategory: "Stylistic",
     },
     fixable: "code",

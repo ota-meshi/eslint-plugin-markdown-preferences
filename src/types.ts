@@ -29,7 +29,7 @@ export type ListCategory = "Preference" | "Stylistic";
 export interface RuleMetaData {
   docs: {
     description: string;
-    categories: "recommended"[] | null;
+    categories: ("recommended" | "standard")[] | null;
     listCategory: ListCategory;
     url: string;
     ruleId: string;
@@ -56,7 +56,7 @@ export interface PartialRuleModule<
 export interface PartialRuleMetaData {
   docs: {
     description: string;
-    categories: "recommended"[] | null;
+    categories: ["recommended", "standard"] | ["standard"] | [] | null;
     default?: "error" | "warn";
     listCategory: ListCategory;
   };

@@ -15,7 +15,7 @@ export default createRule("ordered-list-marker-sequence", {
     type: "layout",
     docs: {
       description: "enforce that ordered list markers use sequential numbers",
-      categories: [],
+      categories: ["standard"],
       listCategory: "Stylistic",
     },
     fixable: "code",

@@ -20,22 +20,18 @@ export default function renderRulesTableContent(
   //eslint-disable-next-line jsdoc/require-jsdoc -- tool
   function toRuleRow(rule: RuleModule) {
     const fixableMark = rule.meta.fixable ? "🔧" : "";
-    const recommendedMark =
-      rule.meta.docs.categories &&
-      rule.meta.docs.categories.includes("recommended")
-        ? "⭐"
-        : "";
-    // const standardMark =
-    //   rule.meta.docs.categories &&
-    //   rule.meta.docs.categories.includes("standard")
-    //     ? "⭐"
-    //     : "";
+    const recommendedMark = rule.meta.docs.categories?.includes("recommended")
+      ? "⭐"
+      : "";
+    const standardMark = rule.meta.docs.categories?.includes("standard")
+      ? "💄"
+      : "";
     const link = `[${rule.meta.docs.ruleId}](${buildRulePath(
       rule.meta.docs.ruleName || "",
     )})`;
     const description = rule.meta.docs.description || "(no description)";
 
-    return `| ${link} | ${description} | ${fixableMark} | ${recommendedMark} |`;
+    return `| ${link} | ${description} | ${fixableMark} | ${recommendedMark}${standardMark} |`;
   }
 
   //eslint-disable-next-line jsdoc/require-jsdoc -- tool
@@ -63,7 +59,7 @@ ${CATEGORY_DESCRIPTIONS[category] ? `\n- ${CATEGORY_DESCRIPTIONS[category]}\n` :
 
 <!-- prettier-ignore-start -->
 
-| Rule ID | Description | Fixable | RECOMMENDED |
+| Rule ID | Description | Fixable | Config      |
 |:--------|:------------|:-------:|:-----------:|
 ${pluginRules
   .filter((rule) => rule.meta.docs.listCategory === category)

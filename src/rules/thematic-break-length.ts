@@ -13,7 +13,7 @@ export default createRule<[{ length?: number }?]>("thematic-break-length", {
     docs: {
       description:
         "enforce consistent length for thematic breaks (horizontal rules) in Markdown.",
-      categories: [],
+      categories: ["standard"],
       listCategory: "Stylistic",
     },
     fixable: "code",

@@ -7,7 +7,7 @@ export default createRule<[{ style?: "backslash" | "spaces" }?]>(
       type: "layout",
       docs: {
         description: "enforce consistent hard linebreak style.",
-        categories: ["recommended"],
+        categories: ["recommended", "standard"],
         listCategory: "Stylistic",
       },
       fixable: "code",
