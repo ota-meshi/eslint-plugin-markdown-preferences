@@ -10,7 +10,7 @@ since: "v0.10.0"
 
 > disallow laziness in blockquotes
 
-- ⚙️ This rule is included in `plugin.configs.recommended`.
+- ⚙️ This rule is included in `plugin.configs.recommended` and `plugin.configs.standard`.
 - 💡 Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## 📖 Rule Details

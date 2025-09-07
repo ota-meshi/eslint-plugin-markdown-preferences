@@ -94,6 +94,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/no-laziness-blockquotes'?: Linter.RuleEntry<[]>
   /**
+   * disallow multiple spaces
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multi-spaces.html
+   */
+  'markdown-preferences/no-multi-spaces'?: Linter.RuleEntry<[]>
+  /**
    * disallow multiple empty lines in Markdown files.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multiple-empty-lines.html
    */

@@ -14,7 +14,7 @@ export default createRule<
     type: "layout",
     docs: {
       description: "enforce a consistent delimiter style for strikethrough",
-      categories: [],
+      categories: ["standard"],
       listCategory: "Stylistic",
     },
     fixable: "code",

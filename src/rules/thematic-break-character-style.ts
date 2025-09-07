@@ -9,7 +9,7 @@ export default createRule<[{ style?: "-" | "*" | "_" }?]>(
       docs: {
         description:
           "enforce consistent character style for thematic breaks (horizontal rules) in Markdown.",
-        categories: [],
+        categories: ["standard"],
         listCategory: "Stylistic",
       },
       fixable: "code",

@@ -16,7 +16,7 @@ export default createRule<[{ order?: OrderOption[] }?]>("sort-definitions", {
     docs: {
       description:
         "enforce a specific order for link definitions and footnote definitions",
-      categories: [],
+      categories: ["standard"],
       listCategory: "Stylistic",
     },
     fixable: "code",

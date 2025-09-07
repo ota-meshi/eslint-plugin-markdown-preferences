@@ -22,7 +22,7 @@ export default createRule<[Options?]>("atx-heading-closing-sequence-length", {
     docs: {
       description:
         "enforce consistent length for the closing sequence (trailing #s) in ATX headings.",
-      categories: [],
+      categories: ["standard"],
       listCategory: "Stylistic",
     },
     fixable: "code",
@@ -52,10 +52,8 @@ export default createRule<[Options?]>("atx-heading-closing-sequence-length", {
   },
   create(context) {
     const sourceCode: MarkdownSourceCode = context.sourceCode;
-    const option = Object.assign(
-      { mode: "match-opening" },
-      context.options[0] || {},
-    );
+    const option = context.options[0] || {};
+    const mode = option.mode || "match-opening";
 
     /**
      * Verify the closing sequence length of an ATX heading.
@@ -84,7 +82,7 @@ export default createRule<[Options?]>("atx-heading-closing-sequence-length", {
       });
     }
 
-    if (option.mode === "match-opening") {
+    if (mode === "match-opening") {
       return {
         heading(node: Heading) {
           const parsed = parseATXHeading(sourceCode, node);
@@ -93,7 +91,7 @@ export default createRule<[Options?]>("atx-heading-closing-sequence-length", {
         },
       };
     }
-    if (option.mode === "length") {
+    if (mode === "length") {
       const expected = option.length || 2;
       return {
         heading(node: Heading) {
@@ -103,7 +101,7 @@ export default createRule<[Options?]>("atx-heading-closing-sequence-length", {
         },
       };
     }
-    if (option.mode === "fixed-line-length") {
+    if (mode === "fixed-line-length") {
       const totalLength = option.length || 80;
       return {
         heading(node: Heading) {
@@ -117,7 +115,7 @@ export default createRule<[Options?]>("atx-heading-closing-sequence-length", {
         },
       };
     }
-    if (option.mode === "consistent") {
+    if (mode === "consistent") {
       let expectedLength: number | null = null;
       return {
         heading(node: Heading) {
@@ -131,7 +129,7 @@ export default createRule<[Options?]>("atx-heading-closing-sequence-length", {
         },
       };
     }
-    if (option.mode === "consistent-line-length") {
+    if (mode === "consistent-line-length") {
       type HeadingInfo = {
         node: Heading;
         parsed: ParsedATXHeadingWithClosingSequence;

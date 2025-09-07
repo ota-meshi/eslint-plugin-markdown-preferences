@@ -9,7 +9,7 @@ export default createRule("no-laziness-blockquotes", {
     type: "problem",
     docs: {
       description: "disallow laziness in blockquotes",
-      categories: ["recommended"],
+      categories: ["recommended", "standard"],
       listCategory: "Stylistic",
     },
     fixable: undefined,

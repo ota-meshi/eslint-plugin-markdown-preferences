@@ -9,7 +9,7 @@ export default createRule("no-multiple-empty-lines", {
     type: "layout",
     docs: {
       description: "disallow multiple empty lines in Markdown files.",
-      categories: null,
+      categories: ["standard"],
       listCategory: "Stylistic",
     },
     fixable: "whitespace",

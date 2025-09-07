@@ -49,7 +49,7 @@ export default createRule<[EmphasisDelimitersStyleOption?]>(
       docs: {
         description:
           "enforce a consistent delimiter style for emphasis and strong emphasis",
-        categories: [],
+        categories: ["standard"],
         listCategory: "Stylistic",
       },
       fixable: "code",

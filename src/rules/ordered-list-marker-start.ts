@@ -19,7 +19,7 @@ export default createRule<[Option?]>("ordered-list-marker-start", {
     type: "layout",
     docs: {
       description: "enforce that ordered list markers start with 1 or 0",
-      categories: [],
+      categories: ["standard"],
       listCategory: "Preference",
     },
     fixable: "code",
