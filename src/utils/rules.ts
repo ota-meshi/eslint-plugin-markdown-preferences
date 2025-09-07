@@ -18,6 +18,7 @@ import level1HeadingStyle from "../rules/level1-heading-style.ts";
 import level2HeadingStyle from "../rules/level2-heading-style.ts";
 import listMarkerAlignment from "../rules/list-marker-alignment.ts";
 import noLazinessBlockquotes from "../rules/no-laziness-blockquotes.ts";
+import noMultiSpaces from "../rules/no-multi-spaces.ts";
 import noMultipleEmptyLines from "../rules/no-multiple-empty-lines.ts";
 import noTextBackslashLinebreak from "../rules/no-text-backslash-linebreak.ts";
 import noTrailingSpaces from "../rules/no-trailing-spaces.ts";
@@ -55,6 +56,7 @@ export const rules = [
   level2HeadingStyle,
   listMarkerAlignment,
   noLazinessBlockquotes,
+  noMultiSpaces,
   noMultipleEmptyLines,
   noTextBackslashLinebreak,
   noTrailingSpaces,

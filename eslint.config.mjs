@@ -135,6 +135,9 @@ export default defineConfig([
       "markdown/no-missing-link-fragments": "off",
       "markdown/no-multiple-h1": ["error", { frontmatterTitle: "" }],
 
+      ...Object.fromEntries(
+        rules.map((rule) => [rule.meta.docs.ruleId, "error"]),
+      ),
       "markdown-preferences/prefer-linked-words": [
         "error",
         {
@@ -149,9 +152,6 @@ export default defineConfig([
           ],
         },
       ],
-      "markdown-preferences/definitions-last": "error",
-      "markdown-preferences/no-trailing-spaces": "error",
-      "markdown-preferences/prefer-link-reference-definitions": "error",
       "markdown-preferences/heading-casing": [
         "error",
         {
@@ -163,12 +163,6 @@ export default defineConfig([
           ignorePatterns: [String.raw`/^markdown-preferences\//u`],
         },
       ],
-      "markdown-preferences/canonical-code-block-language": "error",
-      "markdown-preferences/no-multiple-empty-lines": "error",
-      "markdown-preferences/ordered-list-marker-sequence": "error",
-      "markdown-preferences/ordered-list-marker-start": "error",
-      "markdown-preferences/atx-heading-closing-sequence": "error",
-      "markdown-preferences/emoji-notation": "error",
       "markdown-preferences/table-header-casing": [
         "error",
         {
@@ -194,19 +188,6 @@ export default defineConfig([
           blankLine: "never",
         },
       ],
-      "markdown-preferences/setext-heading-underline-length": "error",
-      "markdown-preferences/thematic-break-character-style": "error",
-      "markdown-preferences/thematic-break-length": "error",
-      "markdown-preferences/thematic-break-sequence-pattern": "error",
-      "markdown-preferences/bullet-list-marker-style": "error",
-      "markdown-preferences/ordered-list-marker-style": "error",
-      "markdown-preferences/emphasis-delimiters-style": "error",
-      "markdown-preferences/strikethrough-delimiters-style": "error",
-      "markdown-preferences/level1-heading-style": "error",
-      "markdown-preferences/level2-heading-style": "error",
-      "markdown-preferences/sort-definitions": "error",
-      "markdown-preferences/code-fence-style": "error",
-      "markdown-preferences/code-fence-length": "error",
 
       "markdown-links/no-dead-urls": [
         "error",
@@ -309,6 +290,9 @@ export default defineConfig([
       "markdown/no-multiple-h1": "off",
       "markdown/fenced-code-language": "off",
       "markdown/no-unused-definitions": "off",
+      "markdown-links/no-dead-urls": "off",
+      "markdown-links/no-missing-path": "off",
+      "markdown/require-alt-text": "off",
       ...Object.fromEntries(
         rules.map((rule) => [rule.meta.docs.ruleId, "off"]),
       ),

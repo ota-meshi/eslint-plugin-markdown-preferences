@@ -3,6 +3,8 @@ import { createRule } from "../utils/index.ts";
 import type { Break, Code, Html, InlineCode, Text, Yaml } from "mdast";
 import type { Json, Toml } from "@eslint/markdown/types";
 import { getParsedLines } from "../utils/lines.ts";
+import { getSourceLocationFromRange } from "../utils/ast.ts";
+import { isWhitespace } from "../utils/unicode.ts";
 
 const htmlComment = /<!--.*?-->/su;
 
@@ -94,7 +96,38 @@ export default createRule("no-trailing-spaces", {
           comments.push(node);
         }
       },
-      "break, code, inlineCode, text, yaml, toml, json"(node: IgnoreNode) {
+      break(node) {
+        ignoreNodes.push(node);
+
+        const range = sourceCode.getRange(node);
+        let trailingSpaceCount = 0;
+        for (let index = range[1] - 1; index >= range[0]; index--) {
+          const c = sourceCode.text[index];
+          if (c === "\n" || c === "\r") {
+            trailingSpaceCount = 0;
+            continue;
+          }
+          if (!isWhitespace(c)) return;
+
+          trailingSpaceCount++;
+        }
+
+        const extraSpaces = trailingSpaceCount - 2;
+        if (extraSpaces <= 0) return;
+
+        context.report({
+          node,
+          loc: getSourceLocationFromRange(sourceCode, node, [
+            range[0],
+            range[0] + extraSpaces,
+          ]),
+          messageId: "trailingSpace",
+          fix(fixer) {
+            return fixer.removeRange([range[0], range[0] + extraSpaces]);
+          },
+        });
+      },
+      "code, inlineCode, text, yaml, toml, json"(node: IgnoreNode) {
         ignoreNodes.push(node);
       },
       "root:exit"() {

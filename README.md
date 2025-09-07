@@ -110,6 +110,8 @@ The rules with the following star ⭐ are included in the configs.
 
 - Rules related to the formatting and visual style of Markdown.
 
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+
 <!-- prettier-ignore-start -->
 
 | Rule ID | Description | Fixable | RECOMMENDED |
@@ -127,6 +129,7 @@ The rules with the following star ⭐ are included in the configs.
 | [markdown-preferences/level2-heading-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/level2-heading-style.html) | enforce consistent style for level 2 headings | 🔧 |  |
 | [markdown-preferences/list-marker-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/list-marker-alignment.html) | enforce consistent alignment of list markers | 🔧 | ⭐ |
 | [markdown-preferences/no-laziness-blockquotes](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-laziness-blockquotes.html) | disallow laziness in blockquotes |  | ⭐ |
+| [markdown-preferences/no-multi-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multi-spaces.html) | disallow multiple spaces | 🔧 |  |
 | [markdown-preferences/no-multiple-empty-lines](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multiple-empty-lines.html) | disallow multiple empty lines in Markdown files. | 🔧 |  |
 | [markdown-preferences/no-text-backslash-linebreak](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-text-backslash-linebreak.html) | disallow text backslash at the end of a line. |  | ⭐ |
 | [markdown-preferences/no-trailing-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-trailing-spaces.html) | disallow trailing whitespace at the end of lines in Markdown files. | 🔧 |  |
@@ -144,6 +147,8 @@ The rules with the following star ⭐ are included in the configs.
 | [markdown-preferences/thematic-break-sequence-pattern](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-sequence-pattern.html) | enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown. | 🔧 |  |
 
 <!-- prettier-ignore-end -->
+
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
 
 <!--RULES_TABLE_END-->
 

@@ -42,6 +42,32 @@ Output:
 
 
 Test: no-trailing-spaces >> invalid
+Filename: tests/fixtures/rules/no-trailing-spaces/invalid/hard-linebreak-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | foo  \
+  3 | foo       
+    |    ^~~~~ [1]
+  4 | foo
+  5 |
+
+Output:
+  1 |
+  2 | foo  \
+  3 | foo  
+  4 | foo
+  5 |
+
+[1] Trailing spaces not allowed.
+---
+
+
+Test: no-trailing-spaces >> invalid
 Filename: tests/fixtures/rules/no-trailing-spaces/invalid/ignore-comments/example-input.md
 Language: markdown/gfm
 LanguageOptions:
