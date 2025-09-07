@@ -208,7 +208,7 @@ export default createRule<Options>("padding-line-between-blocks", {
     type: "layout",
     docs: {
       description: "require or disallow padding lines between blocks",
-      categories: [],
+      categories: ["standard"],
       listCategory: "Stylistic",
     },
     fixable: "whitespace",
@@ -238,7 +238,27 @@ export default createRule<Options>("padding-line-between-blocks", {
   },
   create(context) {
     const sourceCode = context.sourceCode;
-    const options: Options = [...(context.options || [])].reverse();
+    const originalOptions: Options = context.options?.length
+      ? context.options
+      : [
+          { prev: "*", next: "*", blankLine: "always" },
+          {
+            prev: "link-definition",
+            next: "link-definition",
+            blankLine: "never",
+          },
+          {
+            prev: "footnote-definition",
+            next: "footnote-definition",
+            blankLine: "never",
+          },
+          {
+            prev: "paragraph",
+            next: { type: "list", in: "list" },
+            blankLine: "never",
+          },
+        ];
+    const options: Options = [...originalOptions].reverse();
 
     const containerStack: MDBlockContainer[] = [];
 

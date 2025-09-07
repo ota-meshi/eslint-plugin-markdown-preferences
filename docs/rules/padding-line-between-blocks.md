@@ -10,6 +10,7 @@ since: "v0.16.0"
 
 > require or disallow padding lines between blocks
 
+- ⚙️ This rule is included in `plugin.configs.standard`.
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -56,28 +57,26 @@ This rule accepts an array of objects that define spacing rules between differen
 {
   "markdown-preferences/padding-line-between-blocks": [
     "error",
-    [
-      {
-        "prev": "*",
-        "next": "*",
-        "blankLine": "always"
-      },
-      {
-        "prev": "link-definition",
-        "next": "link-definition",
-        "blankLine": "never"
-      },
-      {
-        "prev": "footnote-definition",
-        "next": "footnote-definition",
-        "blankLine": "never"
-      },
-      {
-        "prev": "paragraph",
-        "next": { "type": "list", "in": "list" },
-        "blankLine": "never"
-      }
-    ]
+    {
+      "prev": "*",
+      "next": "*",
+      "blankLine": "always"
+    },
+    {
+      "prev": "link-definition",
+      "next": "link-definition",
+      "blankLine": "never"
+    },
+    {
+      "prev": "footnote-definition",
+      "next": "footnote-definition",
+      "blankLine": "never"
+    },
+    {
+      "prev": "paragraph",
+      "next": { "type": "list", "in": "list" },
+      "blankLine": "never"
+    }
   ]
 }
 ```
@@ -91,6 +90,34 @@ Each rule object has the following properties:
 - `blankLine`: Spacing requirement between blocks
 
 If multiple configurations match a block pair, the configuration that appears last in the array takes precedence.
+
+Default configuration:
+
+```json
+{
+  "markdown-preferences/padding-line-between-blocks": [
+    "error",
+    { "prev": "*", "next": "*", "blankLine": "always" },
+    {
+      "prev": "link-definition",
+      "next": "link-definition",
+      "blankLine": "never"
+    },
+    {
+      "prev": "footnote-definition",
+      "next": "footnote-definition",
+      "blankLine": "never"
+    },
+    {
+      "prev": "paragraph",
+      "next": { "type": "list", "in": "list" },
+      "blankLine": "never"
+    }
+  ]
+}
+```
+
+This configuration is designed with Prettier compatibility in mind, but it is not perfect.
 
 #### Advanced Block Matching
 
