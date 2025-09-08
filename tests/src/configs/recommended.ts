@@ -1,5 +1,5 @@
 import assert from "assert";
-import * as plugin from "../../../src/index.js";
+import * as plugin from "../../../src/index.ts";
 import { ESLint } from "eslint";
 
 const code = `# Test`;

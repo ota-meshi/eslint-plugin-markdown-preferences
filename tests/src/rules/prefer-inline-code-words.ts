@@ -1,6 +1,6 @@
 import { SnapshotRuleTester } from "eslint-snapshot-rule-tester";
-import rule from "../../../src/rules/prefer-inline-code-words.js";
-import { loadTestCases } from "../../utils/utils.js";
+import rule from "../../../src/rules/prefer-inline-code-words.ts";
+import { loadTestCases } from "../../utils/utils.ts";
 
 const tester = new SnapshotRuleTester();
 
