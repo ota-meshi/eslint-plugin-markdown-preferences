@@ -1,0 +1,4573 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![ foo ](/url)
+  3 | - ![foo](/url)
+    |    ^   ^
+    |    [1] [2]
+  4 | - ![ foo](/url)
+    |         ^ [3]
+  5 | - ![foo ](/url)
+    |    ^ [4]
+  6 | - ![      foo     ](/url)
+  7 | - Starts with `^`
+  8 |     - ![ ^foo ](/url)
+  9 |     - ![^foo](/url)
+    |        ^    ^
+    |        [5]  [6]
+ 10 | - Multi lines
+ 11 |   - ![ foo
+ 12 |       bar ](/url)
+ 13 |   - ![foo
+    |      ^ [7]
+ 14 |       bar](/url)
+    |          ^ [8]
+ 15 |   - ![
+ 16 |       foo
+ 17 |       bar
+ 18 |     ](/url)
+ 19 |   - ![  
+ 20 |       foo
+ 21 |       bar  
+ 22 |     ](/url)
+ 23 | - Empty
+ 24 |   - ![](/url)
+    |      ^ [9]
+    |       ^ [10]
+ 25 |   - ![ ](/url)
+ 26 |   - ![      ](/url)
+ 27 |
+ 28 | [x]: /url
+    | ^ [11]
+    |   ^ [12]
+ 29 |
+
+Output:
+  1 |
+  2 | - ![ foo ](/url)
+  3 | - ![ foo ](/url)
+  4 | - ![ foo ](/url)
+  5 | - ![ foo ](/url)
+  6 | - ![      foo     ](/url)
+  7 | - Starts with `^`
+  8 |     - ![ ^foo ](/url)
+  9 |     - ![ ^foo ](/url)
+ 10 | - Multi lines
+ 11 |   - ![ foo
+ 12 |       bar ](/url)
+ 13 |   - ![ foo
+ 14 |       bar ](/url)
+ 15 |   - ![
+ 16 |       foo
+ 17 |       bar
+ 18 |     ](/url)
+ 19 |   - ![  
+ 20 |       foo
+ 21 |       bar  
+ 22 |     ](/url)
+ 23 | - Empty
+ 24 |   - ![ ](/url)
+ 25 |   - ![ ](/url)
+ 26 |   - ![      ](/url)
+ 27 |
+ 28 | [ x ]: /url
+ 29 |
+
+[1] Expected space after opening bracket.
+[2] Expected space before closing bracket.
+[3] Expected space before closing bracket.
+[4] Expected space after opening bracket.
+[5] Expected space after opening bracket.
+[6] Expected space before closing bracket.
+[7] Expected space after opening bracket.
+[8] Expected space before closing bracket.
+[9] Expected space after opening bracket.
+[10] Expected space before closing bracket.
+[11] Expected space after opening bracket.
+[12] Expected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/image-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![ foo ]
+  3 | - ![foo]
+    |    ^   ^
+    |    [1] [2]
+  4 | - ![ foo]
+    |         ^ [3]
+  5 | - ![foo ]
+    |    ^ [4]
+  6 | - ![      foo     ]
+  7 | - ![ foo ][]
+  8 | - ![foo][]
+    |    ^   ^
+    |    [5] [6]
+  9 | - ![ foo][]
+    |         ^ [7]
+ 10 | - ![foo ][]
+    |    ^ [8]
+ 11 | - ![      foo     ][]
+ 12 | - ![ foo ][x]
+    |           ^ [9]
+    |             ^ [10]
+ 13 | - ![foo][x]
+    |    ^ [11] ^ [14]
+    |        ^ [12]
+    |         ^ [13]
+ 14 | - ![ foo][x]
+    |         ^ [15]
+    |          ^ [16]
+    |            ^ [17]
+ 15 | - ![foo ][x]
+    |    ^ [18]  ^ [20]
+    |          ^ [19]
+ 16 | - ![      foo     ][x]
+    |                    ^ [21]
+    |                      ^ [22]
+ 17 | - ![foo][ x ]
+    |    ^   ^
+    |   [23] [24]
+ 18 | - ![foo][x]
+    |    ^ [25] ^ [28]
+    |        ^ [26]
+    |         ^ [27]
+ 19 | - ![foo][ x]
+    |    ^ [29]  ^ [31]
+    |        ^ [30]
+ 20 | - ![foo][x ]
+    |    ^ [32]
+    |        ^ [33]
+    |         ^ [34]
+ 21 | - ![foo][      x     ]
+    |    ^   ^
+    |   [35] [36]
+ 22 | - Starts with `^`
+ 23 |     - ![ ^foo ][x]
+    |                ^ [37]
+    |                  ^ [38]
+ 24 |     - ![^foo][x]
+    |        ^ [39]  ^ [42]
+    |             ^ [40]
+    |              ^ [41]
+ 25 |     - ![ ^foo ]
+ 26 |     - ![^foo]
+    |        ^    ^
+    |        [43] [44]
+ 27 |     - ![ ^foo ][]
+ 28 |     - ![^foo][]
+    |        ^    ^
+    |        [45] [46]
+ 29 |     - ![x][ ^foo ]
+    |        ^ [47]
+    |          ^ [48]
+ 30 |     - ![x][^foo]
+    |        ^ [49]  ^ [52]
+    |          ^ [50]
+    |           ^ [51]
+ 31 | - Multi lines
+ 32 |   - ![ foo
+ 33 |       bar ][x]
+    |            ^ [53]
+    |              ^ [54]
+ 34 |   - ![foo
+    |      ^ [55]
+ 35 |       bar][x]
+    |          ^ [56]
+    |           ^ [57]
+    |             ^ [58]
+ 36 |   - ![
+ 37 |       foo
+ 38 |       bar
+ 39 |     ][x]
+    |      ^ [59]
+    |        ^ [60]
+ 40 |   - ![  
+ 41 |       foo
+ 42 |       bar  
+ 43 |     ][x]
+    |      ^ [61]
+    |        ^ [62]
+ 44 |   - ![ foo
+ 45 |       bar ]
+ 46 |   - ![foo
+    |      ^ [63]
+ 47 |       bar]
+    |          ^ [64]
+ 48 |   - ![
+ 49 |       foo
+ 50 |       bar
+ 51 |     ]
+ 52 |   - ![  
+ 53 |       foo
+ 54 |       bar  
+ 55 |     ]
+ 56 |   - ![ foo
+ 57 |       bar ][]
+ 58 |   - ![foo
+    |      ^ [65]
+ 59 |       bar][]
+    |          ^ [66]
+ 60 |   - ![
+ 61 |       foo
+ 62 |       bar
+ 63 |     ][]
+ 64 |   - ![  
+ 65 |       foo
+ 66 |       bar  
+ 67 |     ][]
+ 68 |   - ![x][ foo
+    |      ^ [67]
+    |        ^ [68]
+ 69 |       bar ]
+ 70 |   - ![x][foo
+    |      ^ [69]
+    |        ^ [70]
+    |         ^ [71]
+ 71 |       bar]
+    |          ^ [72]
+ 72 |   - ![x][
+    |      ^ [73]
+    |        ^ [74]
+ 73 |       foo
+ 74 |       bar
+ 75 |     ]
+ 76 |   - ![x][  
+    |      ^ [75]
+    |        ^ [76]
+ 77 |       foo
+ 78 |       bar  
+ 79 |     ]
+ 80 | - Empty
+ 81 |   - ![][x]
+    |      ^ [77]
+    |       ^ [78]
+    |        ^ [79]
+    |          ^ [80]
+ 82 |   - ![ ][x]
+    |         ^ [81]
+    |           ^ [82]
+ 83 |   - ![      ][x]
+    |              ^ [83]
+    |                ^ [84]
+ 84 |
+ 85 | [x]: /url
+    | ^ [85]
+    |   ^ [86]
+ 86 | [foo]: /url
+    | ^ [87]
+    |     ^ [88]
+ 87 | [ ^foo ]: /url
+ 88 | [foo bar]: /url
+    | ^ [89]  ^ [90]
+ 89 | [^foo]: footnote
+ 90 |
+
+Output:
+  1 |
+  2 | - ![ foo ]
+  3 | - ![ foo ]
+  4 | - ![ foo ]
+  5 | - ![ foo ]
+  6 | - ![      foo     ]
+  7 | - ![ foo ][]
+  8 | - ![ foo ][]
+  9 | - ![ foo ][]
+ 10 | - ![ foo ][]
+ 11 | - ![      foo     ][]
+ 12 | - ![ foo ][ x ]
+ 13 | - ![ foo ][ x ]
+ 14 | - ![ foo ][ x ]
+ 15 | - ![ foo ][ x ]
+ 16 | - ![      foo     ][ x ]
+ 17 | - ![ foo ][ x ]
+ 18 | - ![ foo ][ x ]
+ 19 | - ![ foo ][ x ]
+ 20 | - ![ foo ][ x ]
+ 21 | - ![ foo ][      x     ]
+ 22 | - Starts with `^`
+ 23 |     - ![ ^foo ][ x ]
+ 24 |     - ![ ^foo ][ x ]
+ 25 |     - ![ ^foo ]
+ 26 |     - ![ ^foo ]
+ 27 |     - ![ ^foo ][]
+ 28 |     - ![ ^foo ][]
+ 29 |     - ![ x ][ ^foo ]
+ 30 |     - ![ x ][ ^foo ]
+ 31 | - Multi lines
+ 32 |   - ![ foo
+ 33 |       bar ][ x ]
+ 34 |   - ![ foo
+ 35 |       bar ][ x ]
+ 36 |   - ![
+ 37 |       foo
+ 38 |       bar
+ 39 |     ][ x ]
+ 40 |   - ![  
+ 41 |       foo
+ 42 |       bar  
+ 43 |     ][ x ]
+ 44 |   - ![ foo
+ 45 |       bar ]
+ 46 |   - ![ foo
+ 47 |       bar ]
+ 48 |   - ![
+ 49 |       foo
+ 50 |       bar
+ 51 |     ]
+ 52 |   - ![  
+ 53 |       foo
+ 54 |       bar  
+ 55 |     ]
+ 56 |   - ![ foo
+ 57 |       bar ][]
+ 58 |   - ![ foo
+ 59 |       bar ][]
+ 60 |   - ![
+ 61 |       foo
+ 62 |       bar
+ 63 |     ][]
+ 64 |   - ![  
+ 65 |       foo
+ 66 |       bar  
+ 67 |     ][]
+ 68 |   - ![ x ][ foo
+ 69 |       bar ]
+ 70 |   - ![ x ][ foo
+ 71 |       bar ]
+ 72 |   - ![ x ][
+ 73 |       foo
+ 74 |       bar
+ 75 |     ]
+ 76 |   - ![ x ][  
+ 77 |       foo
+ 78 |       bar  
+ 79 |     ]
+ 80 | - Empty
+ 81 |   - ![ ][ x ]
+ 82 |   - ![ ][ x ]
+ 83 |   - ![      ][ x ]
+ 84 |
+ 85 | [ x ]: /url
+ 86 | [ foo ]: /url
+ 87 | [ ^foo ]: /url
+ 88 | [ foo bar ]: /url
+ 89 | [^foo]: footnote
+ 90 |
+
+[1] Expected space after opening bracket.
+[2] Expected space before closing bracket.
+[3] Expected space before closing bracket.
+[4] Expected space after opening bracket.
+[5] Expected space after opening bracket.
+[6] Expected space before closing bracket.
+[7] Expected space before closing bracket.
+[8] Expected space after opening bracket.
+[9] Expected space after opening bracket.
+[10] Expected space before closing bracket.
+[11] Expected space after opening bracket.
+[12] Expected space before closing bracket.
+[13] Expected space after opening bracket.
+[14] Expected space before closing bracket.
+[15] Expected space before closing bracket.
+[16] Expected space after opening bracket.
+[17] Expected space before closing bracket.
+[18] Expected space after opening bracket.
+[19] Expected space after opening bracket.
+[20] Expected space before closing bracket.
+[21] Expected space after opening bracket.
+[22] Expected space before closing bracket.
+[23] Expected space after opening bracket.
+[24] Expected space before closing bracket.
+[25] Expected space after opening bracket.
+[26] Expected space before closing bracket.
+[27] Expected space after opening bracket.
+[28] Expected space before closing bracket.
+[29] Expected space after opening bracket.
+[30] Expected space before closing bracket.
+[31] Expected space before closing bracket.
+[32] Expected space after opening bracket.
+[33] Expected space before closing bracket.
+[34] Expected space after opening bracket.
+[35] Expected space after opening bracket.
+[36] Expected space before closing bracket.
+[37] Expected space after opening bracket.
+[38] Expected space before closing bracket.
+[39] Expected space after opening bracket.
+[40] Expected space before closing bracket.
+[41] Expected space after opening bracket.
+[42] Expected space before closing bracket.
+[43] Expected space after opening bracket.
+[44] Expected space before closing bracket.
+[45] Expected space after opening bracket.
+[46] Expected space before closing bracket.
+[47] Expected space after opening bracket.
+[48] Expected space before closing bracket.
+[49] Expected space after opening bracket.
+[50] Expected space before closing bracket.
+[51] Expected space after opening bracket.
+[52] Expected space before closing bracket.
+[53] Expected space after opening bracket.
+[54] Expected space before closing bracket.
+[55] Expected space after opening bracket.
+[56] Expected space before closing bracket.
+[57] Expected space after opening bracket.
+[58] Expected space before closing bracket.
+[59] Expected space after opening bracket.
+[60] Expected space before closing bracket.
+[61] Expected space after opening bracket.
+[62] Expected space before closing bracket.
+[63] Expected space after opening bracket.
+[64] Expected space before closing bracket.
+[65] Expected space after opening bracket.
+[66] Expected space before closing bracket.
+[67] Expected space after opening bracket.
+[68] Expected space before closing bracket.
+[69] Expected space after opening bracket.
+[70] Expected space before closing bracket.
+[71] Expected space after opening bracket.
+[72] Expected space before closing bracket.
+[73] Expected space after opening bracket.
+[74] Expected space before closing bracket.
+[75] Expected space after opening bracket.
+[76] Expected space before closing bracket.
+[77] Expected space after opening bracket.
+[78] Expected space before closing bracket.
+[79] Expected space after opening bracket.
+[80] Expected space before closing bracket.
+[81] Expected space after opening bracket.
+[82] Expected space before closing bracket.
+[83] Expected space after opening bracket.
+[84] Expected space before closing bracket.
+[85] Expected space after opening bracket.
+[86] Expected space before closing bracket.
+[87] Expected space after opening bracket.
+[88] Expected space before closing bracket.
+[89] Expected space after opening bracket.
+[90] Expected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/link-definition-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | [a]: /url
+    | ^ [1]
+    |   ^ [2]
+  3 | [ b ]: /url
+  4 | [ c]: /url
+    |    ^ [3]
+  5 | [d ]: /url
+    | ^ [4]
+  6 | [  e   f  ]: /url
+  7 | [  g
+  8 |   h  ]: /url
+  9 | [  
+ 10 |   i
+ 11 |   j
+ 12 |   ]: /url
+ 13 |
+
+Output:
+  1 |
+  2 | [ a ]: /url
+  3 | [ b ]: /url
+  4 | [ c ]: /url
+  5 | [ d ]: /url
+  6 | [  e   f  ]: /url
+  7 | [  g
+  8 |   h  ]: /url
+  9 | [  
+ 10 |   i
+ 11 |   j
+ 12 |   ]: /url
+ 13 |
+
+[1] Expected space after opening bracket.
+[2] Expected space before closing bracket.
+[3] Expected space before closing bracket.
+[4] Expected space after opening bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [ foo ](/url)
+  3 | - [foo](/url)
+    |   ^   ^
+    |   [1] [2]
+  4 | - [ foo](/url)
+    |        ^ [3]
+  5 | - [foo ](/url)
+    |   ^ [4]
+  6 | - [      foo     ](/url)
+  7 | - Starts with `^`
+  8 |     - [ ^foo ](/url)
+  9 |     - [^foo](/url)
+    |       ^    ^
+    |       [5]  [6]
+ 10 | - Image link
+ 11 |   - [ ![x](x.png) ](/url)
+    |        ^ [7]
+    |          ^ [8]
+ 12 |   - [![x](x.png)](/url)
+    |     ^ [9]       ^ [12]
+    |       ^ [10]
+    |         ^ [11]
+ 13 |   - [ ![x] ](/url)
+    |        ^ [13]
+    |          ^ [14]
+ 14 |   - [![x]](/url)
+    |     ^ [15]
+    |       ^ [16]
+    |         ^ [17]
+    |          ^ [18]
+ 15 | - Multi lines
+ 16 |   - [ foo
+ 17 |       bar ](/url)
+ 18 |   - [foo
+    |     ^ [19]
+ 19 |       bar](/url)
+    |          ^ [20]
+ 20 |   - [
+ 21 |       foo
+ 22 |       bar
+ 23 |     ](/url)
+ 24 |   - [  
+ 25 |       foo
+ 26 |       bar  
+ 27 |     ](/url)
+ 28 | - Empty
+ 29 |   - [](/url)
+ 30 |   - [ ](/url)
+ 31 |   - [      ](/url)
+ 32 |
+ 33 | [x]: /url
+    | ^ [21]
+    |   ^ [22]
+ 34 |
+
+Output:
+  1 |
+  2 | - [ foo ](/url)
+  3 | - [ foo ](/url)
+  4 | - [ foo ](/url)
+  5 | - [ foo ](/url)
+  6 | - [      foo     ](/url)
+  7 | - Starts with `^`
+  8 |     - [ ^foo ](/url)
+  9 |     - [ ^foo ](/url)
+ 10 | - Image link
+ 11 |   - [ ![ x ](x.png) ](/url)
+ 12 |   - [ ![ x ](x.png) ](/url)
+ 13 |   - [ ![ x ] ](/url)
+ 14 |   - [ ![ x ] ](/url)
+ 15 | - Multi lines
+ 16 |   - [ foo
+ 17 |       bar ](/url)
+ 18 |   - [ foo
+ 19 |       bar ](/url)
+ 20 |   - [
+ 21 |       foo
+ 22 |       bar
+ 23 |     ](/url)
+ 24 |   - [  
+ 25 |       foo
+ 26 |       bar  
+ 27 |     ](/url)
+ 28 | - Empty
+ 29 |   - [](/url)
+ 30 |   - [ ](/url)
+ 31 |   - [      ](/url)
+ 32 |
+ 33 | [ x ]: /url
+ 34 |
+
+[1] Expected space after opening bracket.
+[2] Expected space before closing bracket.
+[3] Expected space before closing bracket.
+[4] Expected space after opening bracket.
+[5] Expected space after opening bracket.
+[6] Expected space before closing bracket.
+[7] Expected space after opening bracket.
+[8] Expected space before closing bracket.
+[9] Expected space after opening bracket.
+[10] Expected space after opening bracket.
+[11] Expected space before closing bracket.
+[12] Expected space before closing bracket.
+[13] Expected space after opening bracket.
+[14] Expected space before closing bracket.
+[15] Expected space after opening bracket.
+[16] Expected space after opening bracket.
+[17] Expected space before closing bracket.
+[18] Expected space before closing bracket.
+[19] Expected space after opening bracket.
+[20] Expected space before closing bracket.
+[21] Expected space after opening bracket.
+[22] Expected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/link-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [ foo ]
+  3 | - [foo]
+    |   ^   ^
+    |   [1] [2]
+  4 | - [ foo]
+    |        ^ [3]
+  5 | - [foo ]
+    |   ^ [4]
+  6 | - [      foo     ]
+  7 | - [ foo ][]
+  8 | - [foo][]
+    |   ^   ^
+    |   [5] [6]
+  9 | - [ foo][]
+    |        ^ [7]
+ 10 | - [foo ][]
+    |   ^ [8]
+ 11 | - [      foo     ][]
+ 12 | - [ foo ][x]
+    |          ^ [9]
+    |            ^ [10]
+ 13 | - [foo][x]
+    |   ^ [11] ^ [14]
+    |       ^ [12]
+    |        ^ [13]
+ 14 | - [ foo][x]
+    |        ^ [15]
+    |         ^ [16]
+    |           ^ [17]
+ 15 | - [foo ][x]
+    |   ^ [18]  ^ [20]
+    |         ^ [19]
+ 16 | - [      foo     ][x]
+    |                   ^ [21]
+    |                     ^ [22]
+ 17 | - [foo][ x ]
+    |   ^   ^
+    |  [23] [24]
+ 18 | - [foo][x]
+    |   ^ [25] ^ [28]
+    |       ^ [26]
+    |        ^ [27]
+ 19 | - [foo][ x]
+    |   ^ [29]  ^ [31]
+    |       ^ [30]
+ 20 | - [foo][x ]
+    |   ^ [32]
+    |       ^ [33]
+    |        ^ [34]
+ 21 | - [foo][      x     ]
+    |   ^   ^
+    |  [35] [36]
+ 22 | - Starts with `^`
+ 23 |     - [ ^foo ][x]
+    |               ^ [37]
+    |                 ^ [38]
+ 24 |     - [^foo][x]
+    |             ^ [39]
+    |               ^ [40]
+ 25 |     - [ ^foo ]
+ 26 |     - [^foo]
+ 27 |     - [ ^foo ][]
+ 28 |     - [^foo][]
+ 29 |     - [x][ ^foo ]
+    |       ^ [41]
+    |         ^ [42]
+ 30 |     - [x][^foo]
+    |       ^ [43]  ^ [46]
+    |         ^ [44]
+    |          ^ [45]
+ 31 | - Image link
+ 32 |   - [ ![x](x.png) ][x]
+    |        ^ [47]      ^ [49]
+    |          ^ [48]      ^ [50]
+ 33 |   - [![x](x.png)][x]
+    |     ^ [51]      ^ [54]
+    |       ^ [52]     ^ [55]
+    |         ^ [53]     ^ [56]
+ 34 |   - [ ![x] ][x]
+    |        ^ [57] ^ [60]
+    |          ^ [58]
+    |             ^ [59]
+ 35 |   - [![x]][x]
+    |     ^ [61]  ^ [66]
+    |       ^ [62]
+    |         ^ [63]
+    |          ^ [64]
+    |           ^ [65]
+ 36 | - Multi lines
+ 37 |   - [ foo
+ 38 |       bar ][x]
+    |            ^ [67]
+    |              ^ [68]
+ 39 |   - [foo
+    |     ^ [69]
+ 40 |       bar][x]
+    |          ^ [70]
+    |           ^ [71]
+    |             ^ [72]
+ 41 |   - [
+ 42 |       foo
+ 43 |       bar
+ 44 |     ][x]
+    |      ^ [73]
+    |        ^ [74]
+ 45 |   - [  
+ 46 |       foo
+ 47 |       bar  
+ 48 |     ][x]
+    |      ^ [75]
+    |        ^ [76]
+ 49 |   - [ foo
+ 50 |       bar ]
+ 51 |   - [foo
+    |     ^ [77]
+ 52 |       bar]
+    |          ^ [78]
+ 53 |   - [
+ 54 |       foo
+ 55 |       bar
+ 56 |     ]
+ 57 |   - [  
+ 58 |       foo
+ 59 |       bar  
+ 60 |     ]
+ 61 |   - [ foo
+ 62 |       bar ][]
+ 63 |   - [foo
+    |     ^ [79]
+ 64 |       bar][]
+    |          ^ [80]
+ 65 |   - [
+ 66 |       foo
+ 67 |       bar
+ 68 |     ][]
+ 69 |   - [  
+ 70 |       foo
+ 71 |       bar  
+ 72 |     ][]
+ 73 |   - [x][ foo
+    |     ^ [81]
+    |       ^ [82]
+ 74 |       bar ]
+ 75 |   - [x][foo
+    |     ^ [83]
+    |       ^ [84]
+    |        ^ [85]
+ 76 |       bar]
+    |          ^ [86]
+ 77 |   - [x][
+    |     ^ [87]
+    |       ^ [88]
+ 78 |       foo
+ 79 |       bar
+ 80 |     ]
+ 81 |   - [x][  
+    |     ^ [89]
+    |       ^ [90]
+ 82 |       foo
+ 83 |       bar  
+ 84 |     ]
+ 85 |
+ 86 | [x]: /url
+    | ^ [91]
+    |   ^ [92]
+ 87 | [foo]: /url
+    | ^ [93]
+    |     ^ [94]
+ 88 | [ ^foo ]: /url
+ 89 | [foo bar]: /url
+    | ^ [95]  ^ [96]
+ 90 | [^foo]: footnote
+ 91 |
+
+Output:
+  1 |
+  2 | - [ foo ]
+  3 | - [ foo ]
+  4 | - [ foo ]
+  5 | - [ foo ]
+  6 | - [      foo     ]
+  7 | - [ foo ][]
+  8 | - [ foo ][]
+  9 | - [ foo ][]
+ 10 | - [ foo ][]
+ 11 | - [      foo     ][]
+ 12 | - [ foo ][ x ]
+ 13 | - [ foo ][ x ]
+ 14 | - [ foo ][ x ]
+ 15 | - [ foo ][ x ]
+ 16 | - [      foo     ][ x ]
+ 17 | - [ foo ][ x ]
+ 18 | - [ foo ][ x ]
+ 19 | - [ foo ][ x ]
+ 20 | - [ foo ][ x ]
+ 21 | - [ foo ][      x     ]
+ 22 | - Starts with `^`
+ 23 |     - [ ^foo ][ x ]
+ 24 |     - [^foo][ x ]
+ 25 |     - [ ^foo ]
+ 26 |     - [^foo]
+ 27 |     - [ ^foo ][]
+ 28 |     - [^foo][]
+ 29 |     - [ x ][ ^foo ]
+ 30 |     - [ x ][ ^foo ]
+ 31 | - Image link
+ 32 |   - [ ![ x ](x.png) ][ x ]
+ 33 |   - [ ![ x ](x.png) ][ x ]
+ 34 |   - [ ![ x ] ][ x ]
+ 35 |   - [ ![ x ] ][ x ]
+ 36 | - Multi lines
+ 37 |   - [ foo
+ 38 |       bar ][ x ]
+ 39 |   - [ foo
+ 40 |       bar ][ x ]
+ 41 |   - [
+ 42 |       foo
+ 43 |       bar
+ 44 |     ][ x ]
+ 45 |   - [  
+ 46 |       foo
+ 47 |       bar  
+ 48 |     ][ x ]
+ 49 |   - [ foo
+ 50 |       bar ]
+ 51 |   - [ foo
+ 52 |       bar ]
+ 53 |   - [
+ 54 |       foo
+ 55 |       bar
+ 56 |     ]
+ 57 |   - [  
+ 58 |       foo
+ 59 |       bar  
+ 60 |     ]
+ 61 |   - [ foo
+ 62 |       bar ][]
+ 63 |   - [ foo
+ 64 |       bar ][]
+ 65 |   - [
+ 66 |       foo
+ 67 |       bar
+ 68 |     ][]
+ 69 |   - [  
+ 70 |       foo
+ 71 |       bar  
+ 72 |     ][]
+ 73 |   - [ x ][ foo
+ 74 |       bar ]
+ 75 |   - [ x ][ foo
+ 76 |       bar ]
+ 77 |   - [ x ][
+ 78 |       foo
+ 79 |       bar
+ 80 |     ]
+ 81 |   - [ x ][  
+ 82 |       foo
+ 83 |       bar  
+ 84 |     ]
+ 85 |
+ 86 | [ x ]: /url
+ 87 | [ foo ]: /url
+ 88 | [ ^foo ]: /url
+ 89 | [ foo bar ]: /url
+ 90 | [^foo]: footnote
+ 91 |
+
+[1] Expected space after opening bracket.
+[2] Expected space before closing bracket.
+[3] Expected space before closing bracket.
+[4] Expected space after opening bracket.
+[5] Expected space after opening bracket.
+[6] Expected space before closing bracket.
+[7] Expected space before closing bracket.
+[8] Expected space after opening bracket.
+[9] Expected space after opening bracket.
+[10] Expected space before closing bracket.
+[11] Expected space after opening bracket.
+[12] Expected space before closing bracket.
+[13] Expected space after opening bracket.
+[14] Expected space before closing bracket.
+[15] Expected space before closing bracket.
+[16] Expected space after opening bracket.
+[17] Expected space before closing bracket.
+[18] Expected space after opening bracket.
+[19] Expected space after opening bracket.
+[20] Expected space before closing bracket.
+[21] Expected space after opening bracket.
+[22] Expected space before closing bracket.
+[23] Expected space after opening bracket.
+[24] Expected space before closing bracket.
+[25] Expected space after opening bracket.
+[26] Expected space before closing bracket.
+[27] Expected space after opening bracket.
+[28] Expected space before closing bracket.
+[29] Expected space after opening bracket.
+[30] Expected space before closing bracket.
+[31] Expected space before closing bracket.
+[32] Expected space after opening bracket.
+[33] Expected space before closing bracket.
+[34] Expected space after opening bracket.
+[35] Expected space after opening bracket.
+[36] Expected space before closing bracket.
+[37] Expected space after opening bracket.
+[38] Expected space before closing bracket.
+[39] Expected space after opening bracket.
+[40] Expected space before closing bracket.
+[41] Expected space after opening bracket.
+[42] Expected space before closing bracket.
+[43] Expected space after opening bracket.
+[44] Expected space before closing bracket.
+[45] Expected space after opening bracket.
+[46] Expected space before closing bracket.
+[47] Expected space after opening bracket.
+[48] Expected space before closing bracket.
+[49] Expected space after opening bracket.
+[50] Expected space before closing bracket.
+[51] Expected space after opening bracket.
+[52] Expected space after opening bracket.
+[53] Expected space before closing bracket.
+[54] Expected space before closing bracket.
+[55] Expected space after opening bracket.
+[56] Expected space before closing bracket.
+[57] Expected space after opening bracket.
+[58] Expected space before closing bracket.
+[59] Expected space after opening bracket.
+[60] Expected space before closing bracket.
+[61] Expected space after opening bracket.
+[62] Expected space after opening bracket.
+[63] Expected space before closing bracket.
+[64] Expected space before closing bracket.
+[65] Expected space after opening bracket.
+[66] Expected space before closing bracket.
+[67] Expected space after opening bracket.
+[68] Expected space before closing bracket.
+[69] Expected space after opening bracket.
+[70] Expected space before closing bracket.
+[71] Expected space after opening bracket.
+[72] Expected space before closing bracket.
+[73] Expected space after opening bracket.
+[74] Expected space before closing bracket.
+[75] Expected space after opening bracket.
+[76] Expected space before closing bracket.
+[77] Expected space after opening bracket.
+[78] Expected space before closing bracket.
+[79] Expected space after opening bracket.
+[80] Expected space before closing bracket.
+[81] Expected space after opening bracket.
+[82] Expected space before closing bracket.
+[83] Expected space after opening bracket.
+[84] Expected space before closing bracket.
+[85] Expected space after opening bracket.
+[86] Expected space before closing bracket.
+[87] Expected space after opening bracket.
+[88] Expected space before closing bracket.
+[89] Expected space after opening bracket.
+[90] Expected space before closing bracket.
+[91] Expected space after opening bracket.
+[92] Expected space before closing bracket.
+[93] Expected space after opening bracket.
+[94] Expected space before closing bracket.
+[95] Expected space after opening bracket.
+[96] Expected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/no-spaced-image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo](/url)
+    |    ^   ^
+    |    [1] [2]
+  3 | - Starts with `^`
+  4 |     - ![^foo](/url)
+    |        ^    ^
+    |        [3]  [4]
+  5 | - Multi lines
+  6 |   - ![foo
+    |      ^ [5]
+  7 |       bar](/url)
+    |          ^ [6]
+  8 |   - ![
+  9 |       foo
+ 10 |       bar
+ 11 |     ](/url)
+ 12 |   - ![  
+ 13 |       foo
+ 14 |       bar  
+ 15 |     ](/url)
+ 16 | - Empty
+ 17 |   - ![](/url)
+    |      ^ [7]
+    |       ^ [8]
+ 18 |
+ 19 | [x]: /url
+    | ^ [9]
+    |   ^ [10]
+ 20 |
+
+Output:
+  1 |
+  2 | - ![ foo ](/url)
+  3 | - Starts with `^`
+  4 |     - ![ ^foo ](/url)
+  5 | - Multi lines
+  6 |   - ![ foo
+  7 |       bar ](/url)
+  8 |   - ![
+  9 |       foo
+ 10 |       bar
+ 11 |     ](/url)
+ 12 |   - ![  
+ 13 |       foo
+ 14 |       bar  
+ 15 |     ](/url)
+ 16 | - Empty
+ 17 |   - ![ ](/url)
+ 18 |
+ 19 | [ x ]: /url
+ 20 |
+
+[1] Expected space after opening bracket.
+[2] Expected space before closing bracket.
+[3] Expected space after opening bracket.
+[4] Expected space before closing bracket.
+[5] Expected space after opening bracket.
+[6] Expected space before closing bracket.
+[7] Expected space after opening bracket.
+[8] Expected space before closing bracket.
+[9] Expected space after opening bracket.
+[10] Expected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/no-spaced-image-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo]
+    |    ^   ^
+    |    [1] [2]
+  3 | - ![foo][]
+    |    ^   ^
+    |    [3] [4]
+  4 | - ![foo][x]
+    |    ^ [5]  ^ [8]
+    |        ^ [6]
+    |         ^ [7]
+  5 | - Starts with `^`
+  6 |     - ![^foo][x]
+    |        ^ [9] ^ [11]
+    |             ^ [10]
+    |                ^ [12]
+  7 |     - ![^foo]
+    |        ^    ^
+    |        [13] [14]
+  8 |     - ![^foo][]
+    |        ^    ^
+    |        [15] [16]
+  9 |     - ![x][^foo]
+    |        ^ [17]  ^ [20]
+    |          ^ [18]
+    |           ^ [19]
+ 10 | - Multi lines
+ 11 |   - ![foo
+    |      ^ [21]
+ 12 |       bar][x]
+    |          ^ [22]
+    |           ^ [23]
+    |             ^ [24]
+ 13 |   - ![
+ 14 |       foo
+ 15 |       bar
+ 16 |     ][x]
+    |      ^ [25]
+    |        ^ [26]
+ 17 |   - ![  
+ 18 |       foo
+ 19 |       bar  
+ 20 |     ][x]
+    |      ^ [27]
+    |        ^ [28]
+ 21 |   - ![foo
+    |      ^ [29]
+ 22 |       bar]
+    |          ^ [30]
+ 23 |   - ![
+ 24 |       foo
+ 25 |       bar
+ 26 |     ]
+ 27 |   - ![  
+ 28 |       foo
+ 29 |       bar  
+ 30 |     ]
+ 31 |   - ![foo
+    |      ^ [31]
+ 32 |       bar][]
+    |          ^ [32]
+ 33 |   - ![
+ 34 |       foo
+ 35 |       bar
+ 36 |     ][]
+ 37 |   - ![  
+ 38 |       foo
+ 39 |       bar  
+ 40 |     ][]
+ 41 |   - ![x][foo
+    |      ^ [33]
+    |        ^ [34]
+    |         ^ [35]
+ 42 |       bar]
+    |          ^ [36]
+ 43 |   - ![x][
+    |      ^ [37]
+    |        ^ [38]
+ 44 |       foo
+ 45 |       bar
+ 46 |     ]
+ 47 |   - ![x][  
+    |      ^ [39]
+    |        ^ [40]
+ 48 |       foo
+ 49 |       bar  
+ 50 |     ]
+ 51 | - Empty
+ 52 |   - ![][x]
+    |      ^ [41]
+    |       ^ [42]
+    |        ^ [43]
+    |          ^ [44]
+ 53 |
+ 54 | [x]: /url
+    | ^ [45]
+    |   ^ [46]
+ 55 | [foo]: /url
+    | ^ [47]
+    |     ^ [48]
+ 56 | [ ^foo ]: /url
+ 57 | [foo bar]: /url
+    | ^ [49]  ^ [50]
+ 58 | [^foo]: footnote
+ 59 |
+
+Output:
+  1 |
+  2 | - ![ foo ]
+  3 | - ![ foo ][]
+  4 | - ![ foo ][ x ]
+  5 | - Starts with `^`
+  6 |     - ![ ^foo ][ x ]
+  7 |     - ![ ^foo ]
+  8 |     - ![ ^foo ][]
+  9 |     - ![ x ][ ^foo ]
+ 10 | - Multi lines
+ 11 |   - ![ foo
+ 12 |       bar ][ x ]
+ 13 |   - ![
+ 14 |       foo
+ 15 |       bar
+ 16 |     ][ x ]
+ 17 |   - ![  
+ 18 |       foo
+ 19 |       bar  
+ 20 |     ][ x ]
+ 21 |   - ![ foo
+ 22 |       bar ]
+ 23 |   - ![
+ 24 |       foo
+ 25 |       bar
+ 26 |     ]
+ 27 |   - ![  
+ 28 |       foo
+ 29 |       bar  
+ 30 |     ]
+ 31 |   - ![ foo
+ 32 |       bar ][]
+ 33 |   - ![
+ 34 |       foo
+ 35 |       bar
+ 36 |     ][]
+ 37 |   - ![  
+ 38 |       foo
+ 39 |       bar  
+ 40 |     ][]
+ 41 |   - ![ x ][ foo
+ 42 |       bar ]
+ 43 |   - ![ x ][
+ 44 |       foo
+ 45 |       bar
+ 46 |     ]
+ 47 |   - ![ x ][  
+ 48 |       foo
+ 49 |       bar  
+ 50 |     ]
+ 51 | - Empty
+ 52 |   - ![ ][ x ]
+ 53 |
+ 54 | [ x ]: /url
+ 55 | [ foo ]: /url
+ 56 | [ ^foo ]: /url
+ 57 | [ foo bar ]: /url
+ 58 | [^foo]: footnote
+ 59 |
+
+[1] Expected space after opening bracket.
+[2] Expected space before closing bracket.
+[3] Expected space after opening bracket.
+[4] Expected space before closing bracket.
+[5] Expected space after opening bracket.
+[6] Expected space before closing bracket.
+[7] Expected space after opening bracket.
+[8] Expected space before closing bracket.
+[9] Expected space after opening bracket.
+[10] Expected space before closing bracket.
+[11] Expected space after opening bracket.
+[12] Expected space before closing bracket.
+[13] Expected space after opening bracket.
+[14] Expected space before closing bracket.
+[15] Expected space after opening bracket.
+[16] Expected space before closing bracket.
+[17] Expected space after opening bracket.
+[18] Expected space before closing bracket.
+[19] Expected space after opening bracket.
+[20] Expected space before closing bracket.
+[21] Expected space after opening bracket.
+[22] Expected space before closing bracket.
+[23] Expected space after opening bracket.
+[24] Expected space before closing bracket.
+[25] Expected space after opening bracket.
+[26] Expected space before closing bracket.
+[27] Expected space after opening bracket.
+[28] Expected space before closing bracket.
+[29] Expected space after opening bracket.
+[30] Expected space before closing bracket.
+[31] Expected space after opening bracket.
+[32] Expected space before closing bracket.
+[33] Expected space after opening bracket.
+[34] Expected space before closing bracket.
+[35] Expected space after opening bracket.
+[36] Expected space before closing bracket.
+[37] Expected space after opening bracket.
+[38] Expected space before closing bracket.
+[39] Expected space after opening bracket.
+[40] Expected space before closing bracket.
+[41] Expected space after opening bracket.
+[42] Expected space before closing bracket.
+[43] Expected space after opening bracket.
+[44] Expected space before closing bracket.
+[45] Expected space after opening bracket.
+[46] Expected space before closing bracket.
+[47] Expected space after opening bracket.
+[48] Expected space before closing bracket.
+[49] Expected space after opening bracket.
+[50] Expected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/no-spaced-link-definition-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | [a]: /url
+    | ^ [1]
+    |   ^ [2]
+  3 | [e   f]: /url
+    | ^ [3] ^ [4]
+  4 | [g
+    | ^ [5]
+  5 |   h]: /url
+    |    ^ [6]
+  6 | [  
+  7 |   i
+  8 |   j
+  9 |   ]: /url
+ 10 |
+
+Output:
+  1 |
+  2 | [ a ]: /url
+  3 | [ e   f ]: /url
+  4 | [ g
+  5 |   h ]: /url
+  6 | [  
+  7 |   i
+  8 |   j
+  9 |   ]: /url
+ 10 |
+
+[1] Expected space after opening bracket.
+[2] Expected space before closing bracket.
+[3] Expected space after opening bracket.
+[4] Expected space before closing bracket.
+[5] Expected space after opening bracket.
+[6] Expected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/no-spaced-link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo](/url)
+    |   ^   ^
+    |   [1] [2]
+  3 | - Starts with `^`
+  4 |     - [^foo](/url)
+    |       ^    ^
+    |       [3]  [4]
+  5 | - Image link
+  6 |   - [![x](x.png)](/url)
+    |     ^ [5]       ^ [8]
+    |       ^ [6]
+    |         ^ [7]
+  7 |   - [![x]](/url)
+    |     ^ [9]
+    |       ^ [10]
+    |         ^ [11]
+    |          ^ [12]
+  8 | - Multi lines
+  9 |   - [foo
+    |     ^ [13]
+ 10 |       bar](/url)
+    |          ^ [14]
+ 11 |   - [
+ 12 |       foo
+ 13 |       bar
+ 14 |     ](/url)
+ 15 |   - [  
+ 16 |       foo
+ 17 |       bar  
+ 18 |     ](/url)
+ 19 | - Empty
+ 20 |   - [](/url)
+ 21 |   - [ ](/url)
+ 22 |   - [      ](/url)
+ 23 |
+ 24 | [x]: /url
+    | ^ [15]
+    |   ^ [16]
+ 25 |
+
+Output:
+  1 |
+  2 | - [ foo ](/url)
+  3 | - Starts with `^`
+  4 |     - [ ^foo ](/url)
+  5 | - Image link
+  6 |   - [ ![ x ](x.png) ](/url)
+  7 |   - [ ![ x ] ](/url)
+  8 | - Multi lines
+  9 |   - [ foo
+ 10 |       bar ](/url)
+ 11 |   - [
+ 12 |       foo
+ 13 |       bar
+ 14 |     ](/url)
+ 15 |   - [  
+ 16 |       foo
+ 17 |       bar  
+ 18 |     ](/url)
+ 19 | - Empty
+ 20 |   - [](/url)
+ 21 |   - [ ](/url)
+ 22 |   - [      ](/url)
+ 23 |
+ 24 | [ x ]: /url
+ 25 |
+
+[1] Expected space after opening bracket.
+[2] Expected space before closing bracket.
+[3] Expected space after opening bracket.
+[4] Expected space before closing bracket.
+[5] Expected space after opening bracket.
+[6] Expected space after opening bracket.
+[7] Expected space before closing bracket.
+[8] Expected space before closing bracket.
+[9] Expected space after opening bracket.
+[10] Expected space after opening bracket.
+[11] Expected space before closing bracket.
+[12] Expected space before closing bracket.
+[13] Expected space after opening bracket.
+[14] Expected space before closing bracket.
+[15] Expected space after opening bracket.
+[16] Expected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/no-spaced-link-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo]
+    |   ^   ^
+    |   [1] [2]
+  3 | - [foo][]
+    |   ^   ^
+    |   [3] [4]
+  4 | - [foo][x]
+    |   ^ [5]  ^ [8]
+    |       ^ [6]
+    |        ^ [7]
+  5 | - Starts with `^`
+  6 |     - [ ^foo ][x]
+    |               ^ [9]
+    |                 ^ [10]
+  7 |     - [^foo][x]
+    |             ^ [11]
+    |               ^ [12]
+  8 |     - [ ^foo ]
+  9 |     - [^foo]
+ 10 |     - [ ^foo ][]
+ 11 |     - [^foo][]
+ 12 |     - [x][^foo]
+    |       ^ [13]  ^ [16]
+    |         ^ [14]
+    |          ^ [15]
+ 13 | - Image link
+ 14 |   - [![x](x.png)][x]
+    |     ^ [17]      ^ [20]
+    |       ^ [18]     ^ [21]
+    |         ^ [19]     ^ [22]
+ 15 |   - [![x]][x]
+    |     ^ [23]  ^ [28]
+    |       ^ [24]
+    |         ^ [25]
+    |          ^ [26]
+    |           ^ [27]
+ 16 | - Multi lines
+ 17 |   - [foo
+    |     ^ [29]
+ 18 |       bar][x]
+    |          ^ [30]
+    |           ^ [31]
+    |             ^ [32]
+ 19 |   - [
+ 20 |       foo
+ 21 |       bar
+ 22 |     ][x]
+    |      ^ [33]
+    |        ^ [34]
+ 23 |   - [  
+ 24 |       foo
+ 25 |       bar  
+ 26 |     ][x]
+    |      ^ [35]
+    |        ^ [36]
+ 27 |   - [foo
+    |     ^ [37]
+ 28 |       bar]
+    |          ^ [38]
+ 29 |   - [
+ 30 |       foo
+ 31 |       bar
+ 32 |     ]
+ 33 |   - [  
+ 34 |       foo
+ 35 |       bar  
+ 36 |     ]
+ 37 |   - [foo
+    |     ^ [39]
+ 38 |       bar][]
+    |          ^ [40]
+ 39 |   - [
+ 40 |       foo
+ 41 |       bar
+ 42 |     ][]
+ 43 |   - [  
+ 44 |       foo
+ 45 |       bar  
+ 46 |     ][]
+ 47 |   - [x][foo
+    |     ^ [41]
+    |       ^ [42]
+    |        ^ [43]
+ 48 |       bar]
+    |          ^ [44]
+ 49 |   - [x][
+    |     ^ [45]
+    |       ^ [46]
+ 50 |       foo
+ 51 |       bar
+ 52 |     ]
+ 53 |   - [x][  
+    |     ^ [47]
+    |       ^ [48]
+ 54 |       foo
+ 55 |       bar  
+ 56 |     ]
+ 57 |
+ 58 | [x]: /url
+    | ^ [49]
+    |   ^ [50]
+ 59 | [foo]: /url
+    | ^ [51]
+    |     ^ [52]
+ 60 | [ ^foo ]: /url
+ 61 | [foo bar]: /url
+    | ^ [53]  ^ [54]
+ 62 | [^foo]: footnote
+ 63 |
+
+Output:
+  1 |
+  2 | - [ foo ]
+  3 | - [ foo ][]
+  4 | - [ foo ][ x ]
+  5 | - Starts with `^`
+  6 |     - [ ^foo ][ x ]
+  7 |     - [^foo][ x ]
+  8 |     - [ ^foo ]
+  9 |     - [^foo]
+ 10 |     - [ ^foo ][]
+ 11 |     - [^foo][]
+ 12 |     - [ x ][ ^foo ]
+ 13 | - Image link
+ 14 |   - [ ![ x ](x.png) ][ x ]
+ 15 |   - [ ![ x ] ][ x ]
+ 16 | - Multi lines
+ 17 |   - [ foo
+ 18 |       bar ][ x ]
+ 19 |   - [
+ 20 |       foo
+ 21 |       bar
+ 22 |     ][ x ]
+ 23 |   - [  
+ 24 |       foo
+ 25 |       bar  
+ 26 |     ][ x ]
+ 27 |   - [ foo
+ 28 |       bar ]
+ 29 |   - [
+ 30 |       foo
+ 31 |       bar
+ 32 |     ]
+ 33 |   - [  
+ 34 |       foo
+ 35 |       bar  
+ 36 |     ]
+ 37 |   - [ foo
+ 38 |       bar ][]
+ 39 |   - [
+ 40 |       foo
+ 41 |       bar
+ 42 |     ][]
+ 43 |   - [  
+ 44 |       foo
+ 45 |       bar  
+ 46 |     ][]
+ 47 |   - [ x ][ foo
+ 48 |       bar ]
+ 49 |   - [ x ][
+ 50 |       foo
+ 51 |       bar
+ 52 |     ]
+ 53 |   - [ x ][  
+ 54 |       foo
+ 55 |       bar  
+ 56 |     ]
+ 57 |
+ 58 | [ x ]: /url
+ 59 | [ foo ]: /url
+ 60 | [ ^foo ]: /url
+ 61 | [ foo bar ]: /url
+ 62 | [^foo]: footnote
+ 63 |
+
+[1] Expected space after opening bracket.
+[2] Expected space before closing bracket.
+[3] Expected space after opening bracket.
+[4] Expected space before closing bracket.
+[5] Expected space after opening bracket.
+[6] Expected space before closing bracket.
+[7] Expected space after opening bracket.
+[8] Expected space before closing bracket.
+[9] Expected space after opening bracket.
+[10] Expected space before closing bracket.
+[11] Expected space after opening bracket.
+[12] Expected space before closing bracket.
+[13] Expected space after opening bracket.
+[14] Expected space before closing bracket.
+[15] Expected space after opening bracket.
+[16] Expected space before closing bracket.
+[17] Expected space after opening bracket.
+[18] Expected space after opening bracket.
+[19] Expected space before closing bracket.
+[20] Expected space before closing bracket.
+[21] Expected space after opening bracket.
+[22] Expected space before closing bracket.
+[23] Expected space after opening bracket.
+[24] Expected space after opening bracket.
+[25] Expected space before closing bracket.
+[26] Expected space before closing bracket.
+[27] Expected space after opening bracket.
+[28] Expected space before closing bracket.
+[29] Expected space after opening bracket.
+[30] Expected space before closing bracket.
+[31] Expected space after opening bracket.
+[32] Expected space before closing bracket.
+[33] Expected space after opening bracket.
+[34] Expected space before closing bracket.
+[35] Expected space after opening bracket.
+[36] Expected space before closing bracket.
+[37] Expected space after opening bracket.
+[38] Expected space before closing bracket.
+[39] Expected space after opening bracket.
+[40] Expected space before closing bracket.
+[41] Expected space after opening bracket.
+[42] Expected space before closing bracket.
+[43] Expected space after opening bracket.
+[44] Expected space before closing bracket.
+[45] Expected space after opening bracket.
+[46] Expected space before closing bracket.
+[47] Expected space after opening bracket.
+[48] Expected space before closing bracket.
+[49] Expected space after opening bracket.
+[50] Expected space before closing bracket.
+[51] Expected space after opening bracket.
+[52] Expected space before closing bracket.
+[53] Expected space after opening bracket.
+[54] Expected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/exceptions/always-images-in-links-false/image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+    imagesInLinks: false
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![ foo ](/url)
+  3 | - ![foo](/url)
+    |    ^   ^
+    |    [1] [2]
+  4 |
+
+Output:
+  1 |
+  2 | - ![ foo ](/url)
+  3 | - ![ foo ](/url)
+  4 |
+
+[1] Expected space after opening bracket.
+[2] Expected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/exceptions/always-images-in-links-false/image-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+    imagesInLinks: false
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![ foo ]
+  3 | - ![foo]
+    |    ^   ^
+    |    [1] [2]
+  4 | - ![ foo ][ x ]
+  5 | - ![foo][x]
+    |    ^ [3]  ^ [6]
+    |        ^ [4]
+    |         ^ [5]
+  6 |
+  7 | [x]: /url
+    | ^ [7]
+    |   ^ [8]
+  8 | [foo]: /url
+    | ^   ^
+    | [9] [10]
+  9 |
+
+Output:
+  1 |
+  2 | - ![ foo ]
+  3 | - ![ foo ]
+  4 | - ![ foo ][ x ]
+  5 | - ![ foo ][ x ]
+  6 |
+  7 | [ x ]: /url
+  8 | [ foo ]: /url
+  9 |
+
+[1] Expected space after opening bracket.
+[2] Expected space before closing bracket.
+[3] Expected space after opening bracket.
+[4] Expected space before closing bracket.
+[5] Expected space after opening bracket.
+[6] Expected space before closing bracket.
+[7] Expected space after opening bracket.
+[8] Expected space before closing bracket.
+[9] Expected space after opening bracket.
+[10] Expected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/exceptions/always-images-in-links-false/link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+    imagesInLinks: false
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [ foo ](/url)
+  3 | - [foo](/url)
+    |   ^   ^
+    |   [1] [2]
+  4 | - Image link
+  5 |   - [ ![x](x.png) ](/url)
+    |      ^ [3]       ^ [6]
+    |        ^ [4]
+    |          ^ [5]
+  6 |   - [![x](x.png)](/url)
+    |       ^ [7]
+    |         ^ [8]
+  7 |   - [ ![x] ](/url)
+    |      ^ [9]
+    |        ^ [10]
+    |          ^ [11]
+    |           ^ [12]
+  8 |   - [![x]](/url)
+    |       ^ [13]
+    |         ^ [14]
+  9 |
+ 10 | [x]: /url
+    | ^ [15]
+    |   ^ [16]
+ 11 |
+
+Output:
+  1 |
+  2 | - [ foo ](/url)
+  3 | - [ foo ](/url)
+  4 | - Image link
+  5 |   - [![ x ](x.png)](/url)
+  6 |   - [![ x ](x.png)](/url)
+  7 |   - [![ x ]](/url)
+  8 |   - [![ x ]](/url)
+  9 |
+ 10 | [ x ]: /url
+ 11 |
+
+[1] Expected space after opening bracket.
+[2] Expected space before closing bracket.
+[3] Unexpected space after opening bracket.
+[4] Expected space after opening bracket.
+[5] Expected space before closing bracket.
+[6] Unexpected space before closing bracket.
+[7] Expected space after opening bracket.
+[8] Expected space before closing bracket.
+[9] Unexpected space after opening bracket.
+[10] Expected space after opening bracket.
+[11] Expected space before closing bracket.
+[12] Unexpected space before closing bracket.
+[13] Expected space after opening bracket.
+[14] Expected space before closing bracket.
+[15] Expected space after opening bracket.
+[16] Expected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/exceptions/always-images-in-links-false/link-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+    imagesInLinks: false
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [ foo ]
+  3 | - [foo]
+    |   ^   ^
+    |   [1] [2]
+  4 | - [ foo ][ x ]
+  5 | - [foo][x]
+    |   ^ [3]  ^ [6]
+    |       ^ [4]
+    |        ^ [5]
+  6 | - Image link
+  7 |   - [ ![x](x.png) ][x]
+    |      ^ [7]       ^ [10]
+    |        ^ [8]       ^ [11]
+    |          ^ [9]       ^ [12]
+  8 |   - [![x](x.png)][x]
+    |       ^ [13]     ^ [15]
+    |         ^ [14]     ^ [16]
+  9 |   - [ ![x] ][x]
+    |      ^ [17] ^ [21]
+    |        ^ [18] ^ [22]
+    |          ^ [19]
+    |           ^ [20]
+ 10 |   - [![x]][x]
+    |       ^ [23]
+    |         ^ [24]
+    |           ^ [25]
+    |             ^ [26]
+ 11 |
+ 12 | [x]: /url
+    | ^ [27]
+    |   ^ [28]
+ 13 | [foo]: /url
+    | ^ [29]
+    |     ^ [30]
+ 14 |
+
+Output:
+  1 |
+  2 | - [ foo ]
+  3 | - [ foo ]
+  4 | - [ foo ][ x ]
+  5 | - [ foo ][ x ]
+  6 | - Image link
+  7 |   - [![ x ](x.png)][ x ]
+  8 |   - [![ x ](x.png)][ x ]
+  9 |   - [![ x ]][ x ]
+ 10 |   - [![ x ]][ x ]
+ 11 |
+ 12 | [ x ]: /url
+ 13 | [ foo ]: /url
+ 14 |
+
+[1] Expected space after opening bracket.
+[2] Expected space before closing bracket.
+[3] Expected space after opening bracket.
+[4] Expected space before closing bracket.
+[5] Expected space after opening bracket.
+[6] Expected space before closing bracket.
+[7] Unexpected space after opening bracket.
+[8] Expected space after opening bracket.
+[9] Expected space before closing bracket.
+[10] Unexpected space before closing bracket.
+[11] Expected space after opening bracket.
+[12] Expected space before closing bracket.
+[13] Expected space after opening bracket.
+[14] Expected space before closing bracket.
+[15] Expected space after opening bracket.
+[16] Expected space before closing bracket.
+[17] Unexpected space after opening bracket.
+[18] Expected space after opening bracket.
+[19] Expected space before closing bracket.
+[20] Unexpected space before closing bracket.
+[21] Expected space after opening bracket.
+[22] Expected space before closing bracket.
+[23] Expected space after opening bracket.
+[24] Expected space before closing bracket.
+[25] Expected space after opening bracket.
+[26] Expected space before closing bracket.
+[27] Expected space after opening bracket.
+[28] Expected space before closing bracket.
+[29] Expected space after opening bracket.
+[30] Expected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid >>> "\n- ![ foo ](/url)\n- ![foo](/url)\n 2"
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/exceptions/never-images-in-links-true/image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+    imagesInLinks: true
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![ foo ](/url)
+    |     ^   ^
+    |     [1] [2]
+  3 | - ![foo](/url)
+  4 |
+
+Output:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![foo](/url)
+  4 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid >>> "\n- ![ foo ]\n- ![foo]\n- ![ foo ][ x ]\n- ![foo][x]\n\n[x]: /url\n[foo]: /url\n 2"
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/exceptions/never-images-in-links-true/image-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+    imagesInLinks: true
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![ foo ]
+    |     ^   ^
+    |     [1] [2]
+  3 | - ![foo]
+  4 | - ![ foo ][ x ]
+    |     ^ [3]  ^ [5]
+    |         ^ [4]
+    |              ^ [6]
+  5 | - ![foo][x]
+  6 |
+  7 | [x]: /url
+  8 | [foo]: /url
+  9 |
+
+Output:
+  1 |
+  2 | - ![foo]
+  3 | - ![foo]
+  4 | - ![foo][x]
+  5 | - ![foo][x]
+  6 |
+  7 | [x]: /url
+  8 | [foo]: /url
+  9 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+[3] Unexpected space after opening bracket.
+[4] Unexpected space before closing bracket.
+[5] Unexpected space after opening bracket.
+[6] Unexpected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid >>> "\n- [ foo ](/url)\n- [foo](/url)\n- Image link\n  - [ ![x](x.png) ](/url)\n  - [![x](x.png)](/url)\n  - [ ![x] ](/url)\n  - [![x]](/url)\n\n[x]: /url\n 2"
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/exceptions/never-images-in-links-true/link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+    imagesInLinks: true
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [ foo ](/url)
+    |    ^   ^
+    |    [1] [2]
+  3 | - [foo](/url)
+  4 | - Image link
+  5 |   - [ ![x](x.png) ](/url)
+  6 |   - [![x](x.png)](/url)
+    |     ^ [3]       ^ [4]
+  7 |   - [ ![x] ](/url)
+  8 |   - [![x]](/url)
+    |     ^    ^
+    |     [5]  [6]
+  9 |
+ 10 | [x]: /url
+ 11 |
+
+Output:
+  1 |
+  2 | - [foo](/url)
+  3 | - [foo](/url)
+  4 | - Image link
+  5 |   - [ ![x](x.png) ](/url)
+  6 |   - [ ![x](x.png) ](/url)
+  7 |   - [ ![x] ](/url)
+  8 |   - [ ![x] ](/url)
+  9 |
+ 10 | [x]: /url
+ 11 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+[3] Expected space after opening bracket.
+[4] Expected space before closing bracket.
+[5] Expected space after opening bracket.
+[6] Expected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid >>> "\n- [ foo ]\n- [foo]\n- [ foo ][ x ]\n- [foo][x]\n- Image link\n  - [ ![x](x.png) ][x]\n  - [![x](x.png)][x]\n  - [ ![x] ][x]\n  - [![x]][x]\n\n[x]: /url\n[foo]: /url\n 2"
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/exceptions/never-images-in-links-true/link-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+    imagesInLinks: true
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [ foo ]
+    |    ^   ^
+    |    [1] [2]
+  3 | - [foo]
+  4 | - [ foo ][ x ]
+    |    ^ [3]  ^ [5]
+    |        ^ [4]
+    |             ^ [6]
+  5 | - [foo][x]
+  6 | - Image link
+  7 |   - [ ![x](x.png) ][x]
+  8 |   - [![x](x.png)][x]
+    |     ^ [7]       ^ [8]
+  9 |   - [ ![x] ][x]
+ 10 |   - [![x]][x]
+    |     ^    ^
+    |     [9]  [10]
+ 11 |
+ 12 | [x]: /url
+ 13 | [foo]: /url
+ 14 |
+
+Output:
+  1 |
+  2 | - [foo]
+  3 | - [foo]
+  4 | - [foo][x]
+  5 | - [foo][x]
+  6 | - Image link
+  7 |   - [ ![x](x.png) ][x]
+  8 |   - [ ![x](x.png) ][x]
+  9 |   - [ ![x] ][x]
+ 10 |   - [ ![x] ][x]
+ 11 |
+ 12 | [x]: /url
+ 13 | [foo]: /url
+ 14 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+[3] Unexpected space after opening bracket.
+[4] Unexpected space before closing bracket.
+[5] Unexpected space after opening bracket.
+[6] Unexpected space before closing bracket.
+[7] Expected space after opening bracket.
+[8] Expected space before closing bracket.
+[9] Expected space after opening bracket.
+[10] Expected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid >>> "\n- ![ foo ](/url)\n- ![foo](/url)\n- ![ foo](/url)\n- ![foo ](/url)\n- ![      foo     ](/url)\n- Starts with `^`\n    - ![ ^foo ](/url)\n    - ![^foo](/url)\n- Multi lines\n  - ![ foo\n      bar ](/url)\n  - ![foo\n      bar](/url)\n  - ![\n      foo\n      bar\n    ](/url)\n  - ![  \n      foo\n      bar  \n    ](/url)\n- Empty\n  - ![](/url)\n  - ![ ](/url)\n  - ![      ](/url)\n\n[x]: /url\n 2"
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![ foo ](/url)
+    |     ^   ^
+    |     [1] [2]
+  3 | - ![foo](/url)
+  4 | - ![ foo](/url)
+    |     ^ [3]
+  5 | - ![foo ](/url)
+    |        ^ [4]
+  6 | - ![      foo     ](/url)
+    |     ^~~~~~   ^~~~~
+    |     [5]      [6]
+  7 | - Starts with `^`
+  8 |     - ![ ^foo ](/url)
+    |         ^    ^
+    |         [7]  [8]
+  9 |     - ![^foo](/url)
+ 10 | - Multi lines
+ 11 |   - ![ foo
+    |       ^ [9]
+ 12 |       bar ](/url)
+    |          ^ [10]
+ 13 |   - ![foo
+ 14 |       bar](/url)
+ 15 |   - ![
+ 16 |       foo
+ 17 |       bar
+ 18 |     ](/url)
+ 19 |   - ![  
+ 20 |       foo
+ 21 |       bar  
+ 22 |     ](/url)
+ 23 | - Empty
+ 24 |   - ![](/url)
+ 25 |   - ![ ](/url)
+    |       ^ [11]
+    |       ^ [12]
+ 26 |   - ![      ](/url)
+    |       ^~~~~~ [13]
+    |       ^~~~~~ [14]
+ 27 |
+ 28 | [x]: /url
+ 29 |
+
+Output:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![foo](/url)
+  4 | - ![foo](/url)
+  5 | - ![foo](/url)
+  6 | - ![foo](/url)
+  7 | - Starts with `^`
+  8 |     - ![^foo](/url)
+  9 |     - ![^foo](/url)
+ 10 | - Multi lines
+ 11 |   - ![foo
+ 12 |       bar](/url)
+ 13 |   - ![foo
+ 14 |       bar](/url)
+ 15 |   - ![
+ 16 |       foo
+ 17 |       bar
+ 18 |     ](/url)
+ 19 |   - ![  
+ 20 |       foo
+ 21 |       bar  
+ 22 |     ](/url)
+ 23 | - Empty
+ 24 |   - ![](/url)
+ 25 |   - ![](/url)
+ 26 |   - ![](/url)
+ 27 |
+ 28 | [x]: /url
+ 29 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+[3] Unexpected space after opening bracket.
+[4] Unexpected space before closing bracket.
+[5] Unexpected space after opening bracket.
+[6] Unexpected space before closing bracket.
+[7] Unexpected space after opening bracket.
+[8] Unexpected space before closing bracket.
+[9] Unexpected space after opening bracket.
+[10] Unexpected space before closing bracket.
+[11] Unexpected space after opening bracket.
+[12] Unexpected space before closing bracket.
+[13] Unexpected space after opening bracket.
+[14] Unexpected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid >>> "\n- ![ foo ]\n- ![foo]\n- ![ foo]\n- ![foo ]\n- ![      foo     ]\n- ![ foo ][]\n- ![foo][]\n- ![ foo][]\n- ![foo ][]\n- ![      foo     ][]\n- ![ foo ][x]\n- ![foo][x]\n- ![ foo][x]\n- ![foo ][x]\n- ![      foo     ][x]\n- ![foo][ x ]\n- ![foo][x]\n- ![foo][ x]\n- ![foo][x ]\n- ![foo][      x     ]\n- Starts with `^`\n    - ![ ^foo ][x]\n    - ![^foo][x]\n    - ![ ^foo ]\n    - ![^foo]\n    - ![ ^foo ][]\n    - ![^foo][]\n    - ![x][ ^foo ]\n    - ![x][^foo]\n- Multi lines\n  - ![ foo\n      bar ][x]\n  - ![foo\n      bar][x]\n  - ![\n      foo\n      bar\n    ][x]\n  - ![  \n      foo\n      bar  \n    ][x]\n  - ![ foo\n      bar ]\n  - ![foo\n      bar]\n  - ![\n      foo\n      bar\n    ]\n  - ![  \n      foo\n      bar  \n    ]\n  - ![ foo\n      bar ][]\n  - ![foo\n      bar][]\n  - ![\n      foo\n      bar\n    ][]\n  - ![  \n      foo\n      bar  \n    ][]\n  - ![x][ foo\n      bar ]\n  - ![x][foo\n      bar]\n  - ![x][\n      foo\n      bar\n    ]\n  - ![x][  \n      foo\n      bar  \n    ]\n- Empty\n  - ![][x]\n  - ![ ][x]\n  - ![      ][x]\n\n[x]: /url\n[foo]: /url\n[ ^foo ]: /url\n[foo bar]: /url\n[^foo]: footnote\n 2"
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/image-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![ foo ]
+    |     ^   ^
+    |     [1] [2]
+  3 | - ![foo]
+  4 | - ![ foo]
+    |     ^ [3]
+  5 | - ![foo ]
+    |        ^ [4]
+  6 | - ![      foo     ]
+    |     ^~~~~~   ^~~~~
+    |     [5]      [6]
+  7 | - ![ foo ][]
+    |     ^   ^
+    |     [7] [8]
+  8 | - ![foo][]
+  9 | - ![ foo][]
+    |     ^ [9]
+ 10 | - ![foo ][]
+    |        ^ [10]
+ 11 | - ![      foo     ][]
+    |     ^~~~~~   ^~~~~
+    |     [11]     [12]
+ 12 | - ![ foo ][x]
+    |     ^   ^
+    |    [13] [14]
+ 13 | - ![foo][x]
+ 14 | - ![ foo][x]
+    |     ^ [15]
+ 15 | - ![foo ][x]
+    |        ^ [16]
+ 16 | - ![      foo     ][x]
+    |     ^~~~~~   ^~~~~
+    |     [17]     [18]
+ 17 | - ![foo][ x ]
+    |          ^ [19]
+    |            ^ [20]
+ 18 | - ![foo][x]
+ 19 | - ![foo][ x]
+    |          ^ [21]
+ 20 | - ![foo][x ]
+    |           ^ [22]
+ 21 | - ![foo][      x     ]
+    |          ^~~~~~ ^~~~~
+    |          [23]   [24]
+ 22 | - Starts with `^`
+ 23 |     - ![ ^foo ][x]
+    |         ^    ^
+    |         [25] [26]
+ 24 |     - ![^foo][x]
+ 25 |     - ![ ^foo ]
+    |         ^    ^
+    |         [27] [28]
+ 26 |     - ![^foo]
+ 27 |     - ![ ^foo ][]
+    |         ^    ^
+    |         [29] [30]
+ 28 |     - ![^foo][]
+ 29 |     - ![x][ ^foo ]
+    |            ^    ^
+    |            [31] [32]
+ 30 |     - ![x][^foo]
+ 31 | - Multi lines
+ 32 |   - ![ foo
+    |       ^ [33]
+ 33 |       bar ][x]
+    |          ^ [34]
+ 34 |   - ![foo
+ 35 |       bar][x]
+ 36 |   - ![
+ 37 |       foo
+ 38 |       bar
+ 39 |     ][x]
+ 40 |   - ![  
+ 41 |       foo
+ 42 |       bar  
+ 43 |     ][x]
+ 44 |   - ![ foo
+    |       ^ [35]
+ 45 |       bar ]
+    |          ^ [36]
+ 46 |   - ![foo
+ 47 |       bar]
+ 48 |   - ![
+ 49 |       foo
+ 50 |       bar
+ 51 |     ]
+ 52 |   - ![  
+ 53 |       foo
+ 54 |       bar  
+ 55 |     ]
+ 56 |   - ![ foo
+    |       ^ [37]
+ 57 |       bar ][]
+    |          ^ [38]
+ 58 |   - ![foo
+ 59 |       bar][]
+ 60 |   - ![
+ 61 |       foo
+ 62 |       bar
+ 63 |     ][]
+ 64 |   - ![  
+ 65 |       foo
+ 66 |       bar  
+ 67 |     ][]
+ 68 |   - ![x][ foo
+    |          ^ [39]
+ 69 |       bar ]
+    |          ^ [40]
+ 70 |   - ![x][foo
+ 71 |       bar]
+ 72 |   - ![x][
+ 73 |       foo
+ 74 |       bar
+ 75 |     ]
+ 76 |   - ![x][  
+ 77 |       foo
+ 78 |       bar  
+ 79 |     ]
+ 80 | - Empty
+ 81 |   - ![][x]
+ 82 |   - ![ ][x]
+    |       ^ [41]
+    |       ^ [42]
+ 83 |   - ![      ][x]
+    |       ^~~~~~ [43]
+    |       ^~~~~~ [44]
+ 84 |
+ 85 | [x]: /url
+ 86 | [foo]: /url
+ 87 | [ ^foo ]: /url
+ 88 | [foo bar]: /url
+ 89 | [^foo]: footnote
+ 90 |
+
+Output:
+  1 |
+  2 | - ![foo]
+  3 | - ![foo]
+  4 | - ![foo]
+  5 | - ![foo]
+  6 | - ![foo]
+  7 | - ![foo][]
+  8 | - ![foo][]
+  9 | - ![foo][]
+ 10 | - ![foo][]
+ 11 | - ![foo][]
+ 12 | - ![foo][x]
+ 13 | - ![foo][x]
+ 14 | - ![foo][x]
+ 15 | - ![foo][x]
+ 16 | - ![foo][x]
+ 17 | - ![foo][x]
+ 18 | - ![foo][x]
+ 19 | - ![foo][x]
+ 20 | - ![foo][x]
+ 21 | - ![foo][x]
+ 22 | - Starts with `^`
+ 23 |     - ![^foo][x]
+ 24 |     - ![^foo][x]
+ 25 |     - ![^foo]
+ 26 |     - ![^foo]
+ 27 |     - ![^foo][]
+ 28 |     - ![^foo][]
+ 29 |     - ![x][^foo]
+ 30 |     - ![x][^foo]
+ 31 | - Multi lines
+ 32 |   - ![foo
+ 33 |       bar][x]
+ 34 |   - ![foo
+ 35 |       bar][x]
+ 36 |   - ![
+ 37 |       foo
+ 38 |       bar
+ 39 |     ][x]
+ 40 |   - ![  
+ 41 |       foo
+ 42 |       bar  
+ 43 |     ][x]
+ 44 |   - ![foo
+ 45 |       bar]
+ 46 |   - ![foo
+ 47 |       bar]
+ 48 |   - ![
+ 49 |       foo
+ 50 |       bar
+ 51 |     ]
+ 52 |   - ![  
+ 53 |       foo
+ 54 |       bar  
+ 55 |     ]
+ 56 |   - ![foo
+ 57 |       bar][]
+ 58 |   - ![foo
+ 59 |       bar][]
+ 60 |   - ![
+ 61 |       foo
+ 62 |       bar
+ 63 |     ][]
+ 64 |   - ![  
+ 65 |       foo
+ 66 |       bar  
+ 67 |     ][]
+ 68 |   - ![x][foo
+ 69 |       bar]
+ 70 |   - ![x][foo
+ 71 |       bar]
+ 72 |   - ![x][
+ 73 |       foo
+ 74 |       bar
+ 75 |     ]
+ 76 |   - ![x][  
+ 77 |       foo
+ 78 |       bar  
+ 79 |     ]
+ 80 | - Empty
+ 81 |   - ![][x]
+ 82 |   - ![][x]
+ 83 |   - ![][x]
+ 84 |
+ 85 | [x]: /url
+ 86 | [foo]: /url
+ 87 | [ ^foo ]: /url
+ 88 | [foo bar]: /url
+ 89 | [^foo]: footnote
+ 90 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+[3] Unexpected space after opening bracket.
+[4] Unexpected space before closing bracket.
+[5] Unexpected space after opening bracket.
+[6] Unexpected space before closing bracket.
+[7] Unexpected space after opening bracket.
+[8] Unexpected space before closing bracket.
+[9] Unexpected space after opening bracket.
+[10] Unexpected space before closing bracket.
+[11] Unexpected space after opening bracket.
+[12] Unexpected space before closing bracket.
+[13] Unexpected space after opening bracket.
+[14] Unexpected space before closing bracket.
+[15] Unexpected space after opening bracket.
+[16] Unexpected space before closing bracket.
+[17] Unexpected space after opening bracket.
+[18] Unexpected space before closing bracket.
+[19] Unexpected space after opening bracket.
+[20] Unexpected space before closing bracket.
+[21] Unexpected space after opening bracket.
+[22] Unexpected space before closing bracket.
+[23] Unexpected space after opening bracket.
+[24] Unexpected space before closing bracket.
+[25] Unexpected space after opening bracket.
+[26] Unexpected space before closing bracket.
+[27] Unexpected space after opening bracket.
+[28] Unexpected space before closing bracket.
+[29] Unexpected space after opening bracket.
+[30] Unexpected space before closing bracket.
+[31] Unexpected space after opening bracket.
+[32] Unexpected space before closing bracket.
+[33] Unexpected space after opening bracket.
+[34] Unexpected space before closing bracket.
+[35] Unexpected space after opening bracket.
+[36] Unexpected space before closing bracket.
+[37] Unexpected space after opening bracket.
+[38] Unexpected space before closing bracket.
+[39] Unexpected space after opening bracket.
+[40] Unexpected space before closing bracket.
+[41] Unexpected space after opening bracket.
+[42] Unexpected space before closing bracket.
+[43] Unexpected space after opening bracket.
+[44] Unexpected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid >>> "\n[a]: /url\n[ b ]: /url\n[ c]: /url\n[d ]: /url\n[  e   f  ]: /url\n[  g\n  h  ]: /url\n[  \n  i\n  j\n  ]: /url\n 2"
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/link-definition-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | [a]: /url
+  3 | [ b ]: /url
+    |  ^ [1]
+    |    ^ [2]
+  4 | [ c]: /url
+    |  ^ [3]
+  5 | [d ]: /url
+    |   ^ [4]
+  6 | [  e   f  ]: /url
+    |  ^~ [5] ^~ [6]
+  7 | [  g
+    |  ^~ [7]
+  8 |   h  ]: /url
+    |    ^~ [8]
+  9 | [  
+ 10 |   i
+ 11 |   j
+ 12 |   ]: /url
+ 13 |
+
+Output:
+  1 |
+  2 | [a]: /url
+  3 | [b]: /url
+  4 | [c]: /url
+  5 | [d]: /url
+  6 | [e   f]: /url
+  7 | [g
+  8 |   h]: /url
+  9 | [  
+ 10 |   i
+ 11 |   j
+ 12 |   ]: /url
+ 13 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+[3] Unexpected space after opening bracket.
+[4] Unexpected space before closing bracket.
+[5] Unexpected space after opening bracket.
+[6] Unexpected space before closing bracket.
+[7] Unexpected space after opening bracket.
+[8] Unexpected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid >>> "\n- [ foo ](/url)\n- [foo](/url)\n- [ foo](/url)\n- [foo ](/url)\n- [      foo     ](/url)\n- Starts with `^`\n    - [ ^foo ](/url)\n    - [^foo](/url)\n- Image link\n  - [ ![x](x.png) ](/url)\n  - [![x](x.png)](/url)\n  - [ ![x] ](/url)\n  - [![x]](/url)\n- Multi lines\n  - [ foo\n      bar ](/url)\n  - [foo\n      bar](/url)\n  - [\n      foo\n      bar\n    ](/url)\n  - [  \n      foo\n      bar  \n    ](/url)\n- Empty\n  - [](/url)\n  - [ ](/url)\n  - [      ](/url)\n\n[x]: /url\n 2"
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [ foo ](/url)
+    |    ^   ^
+    |    [1] [2]
+  3 | - [foo](/url)
+  4 | - [ foo](/url)
+    |    ^ [3]
+  5 | - [foo ](/url)
+    |       ^ [4]
+  6 | - [      foo     ](/url)
+    |    ^~~~~~   ^~~~~
+    |    [5]      [6]
+  7 | - Starts with `^`
+  8 |     - [ ^foo ](/url)
+    |        ^    ^
+    |        [7]  [8]
+  9 |     - [^foo](/url)
+ 10 | - Image link
+ 11 |   - [ ![x](x.png) ](/url)
+    |      ^ [9]       ^ [10]
+ 12 |   - [![x](x.png)](/url)
+ 13 |   - [ ![x] ](/url)
+    |      ^    ^
+    |      [11] [12]
+ 14 |   - [![x]](/url)
+ 15 | - Multi lines
+ 16 |   - [ foo
+    |      ^ [13]
+ 17 |       bar ](/url)
+    |          ^ [14]
+ 18 |   - [foo
+ 19 |       bar](/url)
+ 20 |   - [
+ 21 |       foo
+ 22 |       bar
+ 23 |     ](/url)
+ 24 |   - [  
+ 25 |       foo
+ 26 |       bar  
+ 27 |     ](/url)
+ 28 | - Empty
+ 29 |   - [](/url)
+ 30 |   - [ ](/url)
+ 31 |   - [      ](/url)
+ 32 |
+ 33 | [x]: /url
+ 34 |
+
+Output:
+  1 |
+  2 | - [foo](/url)
+  3 | - [foo](/url)
+  4 | - [foo](/url)
+  5 | - [foo](/url)
+  6 | - [foo](/url)
+  7 | - Starts with `^`
+  8 |     - [^foo](/url)
+  9 |     - [^foo](/url)
+ 10 | - Image link
+ 11 |   - [![x](x.png)](/url)
+ 12 |   - [![x](x.png)](/url)
+ 13 |   - [![x]](/url)
+ 14 |   - [![x]](/url)
+ 15 | - Multi lines
+ 16 |   - [foo
+ 17 |       bar](/url)
+ 18 |   - [foo
+ 19 |       bar](/url)
+ 20 |   - [
+ 21 |       foo
+ 22 |       bar
+ 23 |     ](/url)
+ 24 |   - [  
+ 25 |       foo
+ 26 |       bar  
+ 27 |     ](/url)
+ 28 | - Empty
+ 29 |   - [](/url)
+ 30 |   - [ ](/url)
+ 31 |   - [      ](/url)
+ 32 |
+ 33 | [x]: /url
+ 34 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+[3] Unexpected space after opening bracket.
+[4] Unexpected space before closing bracket.
+[5] Unexpected space after opening bracket.
+[6] Unexpected space before closing bracket.
+[7] Unexpected space after opening bracket.
+[8] Unexpected space before closing bracket.
+[9] Unexpected space after opening bracket.
+[10] Unexpected space before closing bracket.
+[11] Unexpected space after opening bracket.
+[12] Unexpected space before closing bracket.
+[13] Unexpected space after opening bracket.
+[14] Unexpected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid >>> "\n- [ foo ]\n- [foo]\n- [ foo]\n- [foo ]\n- [      foo     ]\n- [ foo ][]\n- [foo][]\n- [ foo][]\n- [foo ][]\n- [      foo     ][]\n- [ foo ][x]\n- [foo][x]\n- [ foo][x]\n- [foo ][x]\n- [      foo     ][x]\n- [foo][ x ]\n- [foo][x]\n- [foo][ x]\n- [foo][x ]\n- [foo][      x     ]\n- Starts with `^`\n    - [ ^foo ][x]\n    - [^foo][x]\n    - [ ^foo ]\n    - [^foo]\n    - [ ^foo ][]\n    - [^foo][]\n    - [x][ ^foo ]\n    - [x][^foo]\n- Image link\n  - [ ![x](x.png) ][x]\n  - [![x](x.png)][x]\n  - [ ![x] ][x]\n  - [![x]][x]\n- Multi lines\n  - [ foo\n      bar ][x]\n  - [foo\n      bar][x]\n  - [\n      foo\n      bar\n    ][x]\n  - [  \n      foo\n      bar  \n    ][x]\n  - [ foo\n      bar ]\n  - [foo\n      bar]\n  - [\n      foo\n      bar\n    ]\n  - [  \n      foo\n      bar  \n    ]\n  - [ foo\n      bar ][]\n  - [foo\n      bar][]\n  - [\n      foo\n      bar\n    ][]\n  - [  \n      foo\n      bar  \n    ][]\n  - [x][ foo\n      bar ]\n  - [x][foo\n      bar]\n  - [x][\n      foo\n      bar\n    ]\n  - [x][  \n      foo\n      bar  \n    ]\n\n[x]: /url\n[foo]: /url\n[ ^foo ]: /url\n[foo bar]: /url\n[^foo]: footnote\n 2"
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/link-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [ foo ]
+    |    ^   ^
+    |    [1] [2]
+  3 | - [foo]
+  4 | - [ foo]
+    |    ^ [3]
+  5 | - [foo ]
+    |       ^ [4]
+  6 | - [      foo     ]
+    |    ^~~~~~   ^~~~~
+    |    [5]      [6]
+  7 | - [ foo ][]
+    |    ^   ^
+    |    [7] [8]
+  8 | - [foo][]
+  9 | - [ foo][]
+    |    ^ [9]
+ 10 | - [foo ][]
+    |       ^ [10]
+ 11 | - [      foo     ][]
+    |    ^~~~~~   ^~~~~
+    |    [11]     [12]
+ 12 | - [ foo ][x]
+    |    ^   ^
+    |   [13] [14]
+ 13 | - [foo][x]
+ 14 | - [ foo][x]
+    |    ^ [15]
+ 15 | - [foo ][x]
+    |       ^ [16]
+ 16 | - [      foo     ][x]
+    |    ^~~~~~   ^~~~~
+    |    [17]     [18]
+ 17 | - [foo][ x ]
+    |         ^ [19]
+    |           ^ [20]
+ 18 | - [foo][x]
+ 19 | - [foo][ x]
+    |         ^ [21]
+ 20 | - [foo][x ]
+    |          ^ [22]
+ 21 | - [foo][      x     ]
+    |         ^~~~~~ ^~~~~
+    |         [23]   [24]
+ 22 | - Starts with `^`
+ 23 |     - [ ^foo ][x]
+ 24 |     - [^foo][x]
+ 25 |     - [ ^foo ]
+ 26 |     - [^foo]
+ 27 |     - [ ^foo ][]
+ 28 |     - [^foo][]
+ 29 |     - [x][ ^foo ]
+    |           ^    ^
+    |           [25] [26]
+ 30 |     - [x][^foo]
+ 31 | - Image link
+ 32 |   - [ ![x](x.png) ][x]
+    |      ^ [27]      ^ [28]
+ 33 |   - [![x](x.png)][x]
+ 34 |   - [ ![x] ][x]
+    |      ^    ^
+    |      [29] [30]
+ 35 |   - [![x]][x]
+ 36 | - Multi lines
+ 37 |   - [ foo
+    |      ^ [31]
+ 38 |       bar ][x]
+    |          ^ [32]
+ 39 |   - [foo
+ 40 |       bar][x]
+ 41 |   - [
+ 42 |       foo
+ 43 |       bar
+ 44 |     ][x]
+ 45 |   - [  
+ 46 |       foo
+ 47 |       bar  
+ 48 |     ][x]
+ 49 |   - [ foo
+    |      ^ [33]
+ 50 |       bar ]
+    |          ^ [34]
+ 51 |   - [foo
+ 52 |       bar]
+ 53 |   - [
+ 54 |       foo
+ 55 |       bar
+ 56 |     ]
+ 57 |   - [  
+ 58 |       foo
+ 59 |       bar  
+ 60 |     ]
+ 61 |   - [ foo
+    |      ^ [35]
+ 62 |       bar ][]
+    |          ^ [36]
+ 63 |   - [foo
+ 64 |       bar][]
+ 65 |   - [
+ 66 |       foo
+ 67 |       bar
+ 68 |     ][]
+ 69 |   - [  
+ 70 |       foo
+ 71 |       bar  
+ 72 |     ][]
+ 73 |   - [x][ foo
+    |         ^ [37]
+ 74 |       bar ]
+    |          ^ [38]
+ 75 |   - [x][foo
+ 76 |       bar]
+ 77 |   - [x][
+ 78 |       foo
+ 79 |       bar
+ 80 |     ]
+ 81 |   - [x][  
+ 82 |       foo
+ 83 |       bar  
+ 84 |     ]
+ 85 |
+ 86 | [x]: /url
+ 87 | [foo]: /url
+ 88 | [ ^foo ]: /url
+ 89 | [foo bar]: /url
+ 90 | [^foo]: footnote
+ 91 |
+
+Output:
+  1 |
+  2 | - [foo]
+  3 | - [foo]
+  4 | - [foo]
+  5 | - [foo]
+  6 | - [foo]
+  7 | - [foo][]
+  8 | - [foo][]
+  9 | - [foo][]
+ 10 | - [foo][]
+ 11 | - [foo][]
+ 12 | - [foo][x]
+ 13 | - [foo][x]
+ 14 | - [foo][x]
+ 15 | - [foo][x]
+ 16 | - [foo][x]
+ 17 | - [foo][x]
+ 18 | - [foo][x]
+ 19 | - [foo][x]
+ 20 | - [foo][x]
+ 21 | - [foo][x]
+ 22 | - Starts with `^`
+ 23 |     - [ ^foo ][x]
+ 24 |     - [^foo][x]
+ 25 |     - [ ^foo ]
+ 26 |     - [^foo]
+ 27 |     - [ ^foo ][]
+ 28 |     - [^foo][]
+ 29 |     - [x][^foo]
+ 30 |     - [x][^foo]
+ 31 | - Image link
+ 32 |   - [![x](x.png)][x]
+ 33 |   - [![x](x.png)][x]
+ 34 |   - [![x]][x]
+ 35 |   - [![x]][x]
+ 36 | - Multi lines
+ 37 |   - [foo
+ 38 |       bar][x]
+ 39 |   - [foo
+ 40 |       bar][x]
+ 41 |   - [
+ 42 |       foo
+ 43 |       bar
+ 44 |     ][x]
+ 45 |   - [  
+ 46 |       foo
+ 47 |       bar  
+ 48 |     ][x]
+ 49 |   - [foo
+ 50 |       bar]
+ 51 |   - [foo
+ 52 |       bar]
+ 53 |   - [
+ 54 |       foo
+ 55 |       bar
+ 56 |     ]
+ 57 |   - [  
+ 58 |       foo
+ 59 |       bar  
+ 60 |     ]
+ 61 |   - [foo
+ 62 |       bar][]
+ 63 |   - [foo
+ 64 |       bar][]
+ 65 |   - [
+ 66 |       foo
+ 67 |       bar
+ 68 |     ][]
+ 69 |   - [  
+ 70 |       foo
+ 71 |       bar  
+ 72 |     ][]
+ 73 |   - [x][foo
+ 74 |       bar]
+ 75 |   - [x][foo
+ 76 |       bar]
+ 77 |   - [x][
+ 78 |       foo
+ 79 |       bar
+ 80 |     ]
+ 81 |   - [x][  
+ 82 |       foo
+ 83 |       bar  
+ 84 |     ]
+ 85 |
+ 86 | [x]: /url
+ 87 | [foo]: /url
+ 88 | [ ^foo ]: /url
+ 89 | [foo bar]: /url
+ 90 | [^foo]: footnote
+ 91 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+[3] Unexpected space after opening bracket.
+[4] Unexpected space before closing bracket.
+[5] Unexpected space after opening bracket.
+[6] Unexpected space before closing bracket.
+[7] Unexpected space after opening bracket.
+[8] Unexpected space before closing bracket.
+[9] Unexpected space after opening bracket.
+[10] Unexpected space before closing bracket.
+[11] Unexpected space after opening bracket.
+[12] Unexpected space before closing bracket.
+[13] Unexpected space after opening bracket.
+[14] Unexpected space before closing bracket.
+[15] Unexpected space after opening bracket.
+[16] Unexpected space before closing bracket.
+[17] Unexpected space after opening bracket.
+[18] Unexpected space before closing bracket.
+[19] Unexpected space after opening bracket.
+[20] Unexpected space before closing bracket.
+[21] Unexpected space after opening bracket.
+[22] Unexpected space before closing bracket.
+[23] Unexpected space after opening bracket.
+[24] Unexpected space before closing bracket.
+[25] Unexpected space after opening bracket.
+[26] Unexpected space before closing bracket.
+[27] Unexpected space after opening bracket.
+[28] Unexpected space before closing bracket.
+[29] Unexpected space after opening bracket.
+[30] Unexpected space before closing bracket.
+[31] Unexpected space after opening bracket.
+[32] Unexpected space before closing bracket.
+[33] Unexpected space after opening bracket.
+[34] Unexpected space before closing bracket.
+[35] Unexpected space after opening bracket.
+[36] Unexpected space before closing bracket.
+[37] Unexpected space after opening bracket.
+[38] Unexpected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid >>> "\n- ![ foo ](/url)\n- ![foo](/url)\n- ![ foo](/url)\n- ![foo ](/url)\n- ![      foo     ](/url)\n- Starts with `^`\n    - ![ ^foo ](/url)\n    - ![^foo](/url)\n- Multi lines\n  - ![ foo\n      bar ](/url)\n  - ![foo\n      bar](/url)\n  - ![\n      foo\n      bar\n    ](/url)\n  - ![  \n      foo\n      bar  \n    ](/url)\n- Empty\n  - ![](/url)\n  - ![ ](/url)\n  - ![      ](/url)\n\n[x]: /url\n 3"
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![ foo ](/url)
+    |     ^   ^
+    |     [1] [2]
+  3 | - ![foo](/url)
+  4 | - ![ foo](/url)
+    |     ^ [3]
+  5 | - ![foo ](/url)
+    |        ^ [4]
+  6 | - ![      foo     ](/url)
+    |     ^~~~~~   ^~~~~
+    |     [5]      [6]
+  7 | - Starts with `^`
+  8 |     - ![ ^foo ](/url)
+    |         ^    ^
+    |         [7]  [8]
+  9 |     - ![^foo](/url)
+ 10 | - Multi lines
+ 11 |   - ![ foo
+    |       ^ [9]
+ 12 |       bar ](/url)
+    |          ^ [10]
+ 13 |   - ![foo
+ 14 |       bar](/url)
+ 15 |   - ![
+ 16 |       foo
+ 17 |       bar
+ 18 |     ](/url)
+ 19 |   - ![  
+ 20 |       foo
+ 21 |       bar  
+ 22 |     ](/url)
+ 23 | - Empty
+ 24 |   - ![](/url)
+ 25 |   - ![ ](/url)
+    |       ^ [11]
+    |       ^ [12]
+ 26 |   - ![      ](/url)
+    |       ^~~~~~ [13]
+    |       ^~~~~~ [14]
+ 27 |
+ 28 | [x]: /url
+ 29 |
+
+Output:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![foo](/url)
+  4 | - ![foo](/url)
+  5 | - ![foo](/url)
+  6 | - ![foo](/url)
+  7 | - Starts with `^`
+  8 |     - ![^foo](/url)
+  9 |     - ![^foo](/url)
+ 10 | - Multi lines
+ 11 |   - ![foo
+ 12 |       bar](/url)
+ 13 |   - ![foo
+ 14 |       bar](/url)
+ 15 |   - ![
+ 16 |       foo
+ 17 |       bar
+ 18 |     ](/url)
+ 19 |   - ![  
+ 20 |       foo
+ 21 |       bar  
+ 22 |     ](/url)
+ 23 | - Empty
+ 24 |   - ![](/url)
+ 25 |   - ![](/url)
+ 26 |   - ![](/url)
+ 27 |
+ 28 | [x]: /url
+ 29 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+[3] Unexpected space after opening bracket.
+[4] Unexpected space before closing bracket.
+[5] Unexpected space after opening bracket.
+[6] Unexpected space before closing bracket.
+[7] Unexpected space after opening bracket.
+[8] Unexpected space before closing bracket.
+[9] Unexpected space after opening bracket.
+[10] Unexpected space before closing bracket.
+[11] Unexpected space after opening bracket.
+[12] Unexpected space before closing bracket.
+[13] Unexpected space after opening bracket.
+[14] Unexpected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid >>> "\n- ![ foo ]\n- ![foo]\n- ![ foo]\n- ![foo ]\n- ![      foo     ]\n- ![ foo ][]\n- ![foo][]\n- ![ foo][]\n- ![foo ][]\n- ![      foo     ][]\n- ![ foo ][x]\n- ![foo][x]\n- ![ foo][x]\n- ![foo ][x]\n- ![      foo     ][x]\n- ![foo][ x ]\n- ![foo][x]\n- ![foo][ x]\n- ![foo][x ]\n- ![foo][      x     ]\n- Starts with `^`\n    - ![ ^foo ][x]\n    - ![^foo][x]\n    - ![ ^foo ]\n    - ![^foo]\n    - ![ ^foo ][]\n    - ![^foo][]\n    - ![x][ ^foo ]\n    - ![x][^foo]\n- Multi lines\n  - ![ foo\n      bar ][x]\n  - ![foo\n      bar][x]\n  - ![\n      foo\n      bar\n    ][x]\n  - ![  \n      foo\n      bar  \n    ][x]\n  - ![ foo\n      bar ]\n  - ![foo\n      bar]\n  - ![\n      foo\n      bar\n    ]\n  - ![  \n      foo\n      bar  \n    ]\n  - ![ foo\n      bar ][]\n  - ![foo\n      bar][]\n  - ![\n      foo\n      bar\n    ][]\n  - ![  \n      foo\n      bar  \n    ][]\n  - ![x][ foo\n      bar ]\n  - ![x][foo\n      bar]\n  - ![x][\n      foo\n      bar\n    ]\n  - ![x][  \n      foo\n      bar  \n    ]\n- Empty\n  - ![][x]\n  - ![ ][x]\n  - ![      ][x]\n\n[x]: /url\n[foo]: /url\n[ ^foo ]: /url\n[foo bar]: /url\n[^foo]: footnote\n 3"
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/image-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![ foo ]
+    |     ^   ^
+    |     [1] [2]
+  3 | - ![foo]
+  4 | - ![ foo]
+    |     ^ [3]
+  5 | - ![foo ]
+    |        ^ [4]
+  6 | - ![      foo     ]
+    |     ^~~~~~   ^~~~~
+    |     [5]      [6]
+  7 | - ![ foo ][]
+    |     ^   ^
+    |     [7] [8]
+  8 | - ![foo][]
+  9 | - ![ foo][]
+    |     ^ [9]
+ 10 | - ![foo ][]
+    |        ^ [10]
+ 11 | - ![      foo     ][]
+    |     ^~~~~~   ^~~~~
+    |     [11]     [12]
+ 12 | - ![ foo ][x]
+    |     ^   ^
+    |    [13] [14]
+ 13 | - ![foo][x]
+ 14 | - ![ foo][x]
+    |     ^ [15]
+ 15 | - ![foo ][x]
+    |        ^ [16]
+ 16 | - ![      foo     ][x]
+    |     ^~~~~~   ^~~~~
+    |     [17]     [18]
+ 17 | - ![foo][ x ]
+    |          ^ [19]
+    |            ^ [20]
+ 18 | - ![foo][x]
+ 19 | - ![foo][ x]
+    |          ^ [21]
+ 20 | - ![foo][x ]
+    |           ^ [22]
+ 21 | - ![foo][      x     ]
+    |          ^~~~~~ ^~~~~
+    |          [23]   [24]
+ 22 | - Starts with `^`
+ 23 |     - ![ ^foo ][x]
+    |         ^    ^
+    |         [25] [26]
+ 24 |     - ![^foo][x]
+ 25 |     - ![ ^foo ]
+    |         ^    ^
+    |         [27] [28]
+ 26 |     - ![^foo]
+ 27 |     - ![ ^foo ][]
+    |         ^    ^
+    |         [29] [30]
+ 28 |     - ![^foo][]
+ 29 |     - ![x][ ^foo ]
+    |            ^    ^
+    |            [31] [32]
+ 30 |     - ![x][^foo]
+ 31 | - Multi lines
+ 32 |   - ![ foo
+    |       ^ [33]
+ 33 |       bar ][x]
+    |          ^ [34]
+ 34 |   - ![foo
+ 35 |       bar][x]
+ 36 |   - ![
+ 37 |       foo
+ 38 |       bar
+ 39 |     ][x]
+ 40 |   - ![  
+ 41 |       foo
+ 42 |       bar  
+ 43 |     ][x]
+ 44 |   - ![ foo
+    |       ^ [35]
+ 45 |       bar ]
+    |          ^ [36]
+ 46 |   - ![foo
+ 47 |       bar]
+ 48 |   - ![
+ 49 |       foo
+ 50 |       bar
+ 51 |     ]
+ 52 |   - ![  
+ 53 |       foo
+ 54 |       bar  
+ 55 |     ]
+ 56 |   - ![ foo
+    |       ^ [37]
+ 57 |       bar ][]
+    |          ^ [38]
+ 58 |   - ![foo
+ 59 |       bar][]
+ 60 |   - ![
+ 61 |       foo
+ 62 |       bar
+ 63 |     ][]
+ 64 |   - ![  
+ 65 |       foo
+ 66 |       bar  
+ 67 |     ][]
+ 68 |   - ![x][ foo
+    |          ^ [39]
+ 69 |       bar ]
+    |          ^ [40]
+ 70 |   - ![x][foo
+ 71 |       bar]
+ 72 |   - ![x][
+ 73 |       foo
+ 74 |       bar
+ 75 |     ]
+ 76 |   - ![x][  
+ 77 |       foo
+ 78 |       bar  
+ 79 |     ]
+ 80 | - Empty
+ 81 |   - ![][x]
+ 82 |   - ![ ][x]
+    |       ^ [41]
+    |       ^ [42]
+ 83 |   - ![      ][x]
+    |       ^~~~~~ [43]
+    |       ^~~~~~ [44]
+ 84 |
+ 85 | [x]: /url
+ 86 | [foo]: /url
+ 87 | [ ^foo ]: /url
+ 88 | [foo bar]: /url
+ 89 | [^foo]: footnote
+ 90 |
+
+Output:
+  1 |
+  2 | - ![foo]
+  3 | - ![foo]
+  4 | - ![foo]
+  5 | - ![foo]
+  6 | - ![foo]
+  7 | - ![foo][]
+  8 | - ![foo][]
+  9 | - ![foo][]
+ 10 | - ![foo][]
+ 11 | - ![foo][]
+ 12 | - ![foo][x]
+ 13 | - ![foo][x]
+ 14 | - ![foo][x]
+ 15 | - ![foo][x]
+ 16 | - ![foo][x]
+ 17 | - ![foo][x]
+ 18 | - ![foo][x]
+ 19 | - ![foo][x]
+ 20 | - ![foo][x]
+ 21 | - ![foo][x]
+ 22 | - Starts with `^`
+ 23 |     - ![^foo][x]
+ 24 |     - ![^foo][x]
+ 25 |     - ![^foo]
+ 26 |     - ![^foo]
+ 27 |     - ![^foo][]
+ 28 |     - ![^foo][]
+ 29 |     - ![x][^foo]
+ 30 |     - ![x][^foo]
+ 31 | - Multi lines
+ 32 |   - ![foo
+ 33 |       bar][x]
+ 34 |   - ![foo
+ 35 |       bar][x]
+ 36 |   - ![
+ 37 |       foo
+ 38 |       bar
+ 39 |     ][x]
+ 40 |   - ![  
+ 41 |       foo
+ 42 |       bar  
+ 43 |     ][x]
+ 44 |   - ![foo
+ 45 |       bar]
+ 46 |   - ![foo
+ 47 |       bar]
+ 48 |   - ![
+ 49 |       foo
+ 50 |       bar
+ 51 |     ]
+ 52 |   - ![  
+ 53 |       foo
+ 54 |       bar  
+ 55 |     ]
+ 56 |   - ![foo
+ 57 |       bar][]
+ 58 |   - ![foo
+ 59 |       bar][]
+ 60 |   - ![
+ 61 |       foo
+ 62 |       bar
+ 63 |     ][]
+ 64 |   - ![  
+ 65 |       foo
+ 66 |       bar  
+ 67 |     ][]
+ 68 |   - ![x][foo
+ 69 |       bar]
+ 70 |   - ![x][foo
+ 71 |       bar]
+ 72 |   - ![x][
+ 73 |       foo
+ 74 |       bar
+ 75 |     ]
+ 76 |   - ![x][  
+ 77 |       foo
+ 78 |       bar  
+ 79 |     ]
+ 80 | - Empty
+ 81 |   - ![][x]
+ 82 |   - ![][x]
+ 83 |   - ![][x]
+ 84 |
+ 85 | [x]: /url
+ 86 | [foo]: /url
+ 87 | [ ^foo ]: /url
+ 88 | [foo bar]: /url
+ 89 | [^foo]: footnote
+ 90 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+[3] Unexpected space after opening bracket.
+[4] Unexpected space before closing bracket.
+[5] Unexpected space after opening bracket.
+[6] Unexpected space before closing bracket.
+[7] Unexpected space after opening bracket.
+[8] Unexpected space before closing bracket.
+[9] Unexpected space after opening bracket.
+[10] Unexpected space before closing bracket.
+[11] Unexpected space after opening bracket.
+[12] Unexpected space before closing bracket.
+[13] Unexpected space after opening bracket.
+[14] Unexpected space before closing bracket.
+[15] Unexpected space after opening bracket.
+[16] Unexpected space before closing bracket.
+[17] Unexpected space after opening bracket.
+[18] Unexpected space before closing bracket.
+[19] Unexpected space after opening bracket.
+[20] Unexpected space before closing bracket.
+[21] Unexpected space after opening bracket.
+[22] Unexpected space before closing bracket.
+[23] Unexpected space after opening bracket.
+[24] Unexpected space before closing bracket.
+[25] Unexpected space after opening bracket.
+[26] Unexpected space before closing bracket.
+[27] Unexpected space after opening bracket.
+[28] Unexpected space before closing bracket.
+[29] Unexpected space after opening bracket.
+[30] Unexpected space before closing bracket.
+[31] Unexpected space after opening bracket.
+[32] Unexpected space before closing bracket.
+[33] Unexpected space after opening bracket.
+[34] Unexpected space before closing bracket.
+[35] Unexpected space after opening bracket.
+[36] Unexpected space before closing bracket.
+[37] Unexpected space after opening bracket.
+[38] Unexpected space before closing bracket.
+[39] Unexpected space after opening bracket.
+[40] Unexpected space before closing bracket.
+[41] Unexpected space after opening bracket.
+[42] Unexpected space before closing bracket.
+[43] Unexpected space after opening bracket.
+[44] Unexpected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid >>> "\n[a]: /url\n[ b ]: /url\n[ c]: /url\n[d ]: /url\n[  e   f  ]: /url\n[  g\n  h  ]: /url\n[  \n  i\n  j\n  ]: /url\n 3"
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/link-definition-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | [a]: /url
+  3 | [ b ]: /url
+    |  ^ [1]
+    |    ^ [2]
+  4 | [ c]: /url
+    |  ^ [3]
+  5 | [d ]: /url
+    |   ^ [4]
+  6 | [  e   f  ]: /url
+    |  ^~ [5] ^~ [6]
+  7 | [  g
+    |  ^~ [7]
+  8 |   h  ]: /url
+    |    ^~ [8]
+  9 | [  
+ 10 |   i
+ 11 |   j
+ 12 |   ]: /url
+ 13 |
+
+Output:
+  1 |
+  2 | [a]: /url
+  3 | [b]: /url
+  4 | [c]: /url
+  5 | [d]: /url
+  6 | [e   f]: /url
+  7 | [g
+  8 |   h]: /url
+  9 | [  
+ 10 |   i
+ 11 |   j
+ 12 |   ]: /url
+ 13 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+[3] Unexpected space after opening bracket.
+[4] Unexpected space before closing bracket.
+[5] Unexpected space after opening bracket.
+[6] Unexpected space before closing bracket.
+[7] Unexpected space after opening bracket.
+[8] Unexpected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid >>> "\n- [ foo ](/url)\n- [foo](/url)\n- [ foo](/url)\n- [foo ](/url)\n- [      foo     ](/url)\n- Starts with `^`\n    - [ ^foo ](/url)\n    - [^foo](/url)\n- Image link\n  - [ ![x](x.png) ](/url)\n  - [![x](x.png)](/url)\n  - [ ![x] ](/url)\n  - [![x]](/url)\n- Multi lines\n  - [ foo\n      bar ](/url)\n  - [foo\n      bar](/url)\n  - [\n      foo\n      bar\n    ](/url)\n  - [  \n      foo\n      bar  \n    ](/url)\n- Empty\n  - [](/url)\n  - [ ](/url)\n  - [      ](/url)\n\n[x]: /url\n 3"
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [ foo ](/url)
+    |    ^   ^
+    |    [1] [2]
+  3 | - [foo](/url)
+  4 | - [ foo](/url)
+    |    ^ [3]
+  5 | - [foo ](/url)
+    |       ^ [4]
+  6 | - [      foo     ](/url)
+    |    ^~~~~~   ^~~~~
+    |    [5]      [6]
+  7 | - Starts with `^`
+  8 |     - [ ^foo ](/url)
+    |        ^    ^
+    |        [7]  [8]
+  9 |     - [^foo](/url)
+ 10 | - Image link
+ 11 |   - [ ![x](x.png) ](/url)
+    |      ^ [9]       ^ [10]
+ 12 |   - [![x](x.png)](/url)
+ 13 |   - [ ![x] ](/url)
+    |      ^    ^
+    |      [11] [12]
+ 14 |   - [![x]](/url)
+ 15 | - Multi lines
+ 16 |   - [ foo
+    |      ^ [13]
+ 17 |       bar ](/url)
+    |          ^ [14]
+ 18 |   - [foo
+ 19 |       bar](/url)
+ 20 |   - [
+ 21 |       foo
+ 22 |       bar
+ 23 |     ](/url)
+ 24 |   - [  
+ 25 |       foo
+ 26 |       bar  
+ 27 |     ](/url)
+ 28 | - Empty
+ 29 |   - [](/url)
+ 30 |   - [ ](/url)
+ 31 |   - [      ](/url)
+ 32 |
+ 33 | [x]: /url
+ 34 |
+
+Output:
+  1 |
+  2 | - [foo](/url)
+  3 | - [foo](/url)
+  4 | - [foo](/url)
+  5 | - [foo](/url)
+  6 | - [foo](/url)
+  7 | - Starts with `^`
+  8 |     - [^foo](/url)
+  9 |     - [^foo](/url)
+ 10 | - Image link
+ 11 |   - [![x](x.png)](/url)
+ 12 |   - [![x](x.png)](/url)
+ 13 |   - [![x]](/url)
+ 14 |   - [![x]](/url)
+ 15 | - Multi lines
+ 16 |   - [foo
+ 17 |       bar](/url)
+ 18 |   - [foo
+ 19 |       bar](/url)
+ 20 |   - [
+ 21 |       foo
+ 22 |       bar
+ 23 |     ](/url)
+ 24 |   - [  
+ 25 |       foo
+ 26 |       bar  
+ 27 |     ](/url)
+ 28 | - Empty
+ 29 |   - [](/url)
+ 30 |   - [ ](/url)
+ 31 |   - [      ](/url)
+ 32 |
+ 33 | [x]: /url
+ 34 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+[3] Unexpected space after opening bracket.
+[4] Unexpected space before closing bracket.
+[5] Unexpected space after opening bracket.
+[6] Unexpected space before closing bracket.
+[7] Unexpected space after opening bracket.
+[8] Unexpected space before closing bracket.
+[9] Unexpected space after opening bracket.
+[10] Unexpected space before closing bracket.
+[11] Unexpected space after opening bracket.
+[12] Unexpected space before closing bracket.
+[13] Unexpected space after opening bracket.
+[14] Unexpected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid >>> "\n- [ foo ]\n- [foo]\n- [ foo]\n- [foo ]\n- [      foo     ]\n- [ foo ][]\n- [foo][]\n- [ foo][]\n- [foo ][]\n- [      foo     ][]\n- [ foo ][x]\n- [foo][x]\n- [ foo][x]\n- [foo ][x]\n- [      foo     ][x]\n- [foo][ x ]\n- [foo][x]\n- [foo][ x]\n- [foo][x ]\n- [foo][      x     ]\n- Starts with `^`\n    - [ ^foo ][x]\n    - [^foo][x]\n    - [ ^foo ]\n    - [^foo]\n    - [ ^foo ][]\n    - [^foo][]\n    - [x][ ^foo ]\n    - [x][^foo]\n- Image link\n  - [ ![x](x.png) ][x]\n  - [![x](x.png)][x]\n  - [ ![x] ][x]\n  - [![x]][x]\n- Multi lines\n  - [ foo\n      bar ][x]\n  - [foo\n      bar][x]\n  - [\n      foo\n      bar\n    ][x]\n  - [  \n      foo\n      bar  \n    ][x]\n  - [ foo\n      bar ]\n  - [foo\n      bar]\n  - [\n      foo\n      bar\n    ]\n  - [  \n      foo\n      bar  \n    ]\n  - [ foo\n      bar ][]\n  - [foo\n      bar][]\n  - [\n      foo\n      bar\n    ][]\n  - [  \n      foo\n      bar  \n    ][]\n  - [x][ foo\n      bar ]\n  - [x][foo\n      bar]\n  - [x][\n      foo\n      bar\n    ]\n  - [x][  \n      foo\n      bar  \n    ]\n\n[x]: /url\n[foo]: /url\n[ ^foo ]: /url\n[foo bar]: /url\n[^foo]: footnote\n 3"
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/link-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [ foo ]
+    |    ^   ^
+    |    [1] [2]
+  3 | - [foo]
+  4 | - [ foo]
+    |    ^ [3]
+  5 | - [foo ]
+    |       ^ [4]
+  6 | - [      foo     ]
+    |    ^~~~~~   ^~~~~
+    |    [5]      [6]
+  7 | - [ foo ][]
+    |    ^   ^
+    |    [7] [8]
+  8 | - [foo][]
+  9 | - [ foo][]
+    |    ^ [9]
+ 10 | - [foo ][]
+    |       ^ [10]
+ 11 | - [      foo     ][]
+    |    ^~~~~~   ^~~~~
+    |    [11]     [12]
+ 12 | - [ foo ][x]
+    |    ^   ^
+    |   [13] [14]
+ 13 | - [foo][x]
+ 14 | - [ foo][x]
+    |    ^ [15]
+ 15 | - [foo ][x]
+    |       ^ [16]
+ 16 | - [      foo     ][x]
+    |    ^~~~~~   ^~~~~
+    |    [17]     [18]
+ 17 | - [foo][ x ]
+    |         ^ [19]
+    |           ^ [20]
+ 18 | - [foo][x]
+ 19 | - [foo][ x]
+    |         ^ [21]
+ 20 | - [foo][x ]
+    |          ^ [22]
+ 21 | - [foo][      x     ]
+    |         ^~~~~~ ^~~~~
+    |         [23]   [24]
+ 22 | - Starts with `^`
+ 23 |     - [ ^foo ][x]
+ 24 |     - [^foo][x]
+ 25 |     - [ ^foo ]
+ 26 |     - [^foo]
+ 27 |     - [ ^foo ][]
+ 28 |     - [^foo][]
+ 29 |     - [x][ ^foo ]
+    |           ^    ^
+    |           [25] [26]
+ 30 |     - [x][^foo]
+ 31 | - Image link
+ 32 |   - [ ![x](x.png) ][x]
+    |      ^ [27]      ^ [28]
+ 33 |   - [![x](x.png)][x]
+ 34 |   - [ ![x] ][x]
+    |      ^    ^
+    |      [29] [30]
+ 35 |   - [![x]][x]
+ 36 | - Multi lines
+ 37 |   - [ foo
+    |      ^ [31]
+ 38 |       bar ][x]
+    |          ^ [32]
+ 39 |   - [foo
+ 40 |       bar][x]
+ 41 |   - [
+ 42 |       foo
+ 43 |       bar
+ 44 |     ][x]
+ 45 |   - [  
+ 46 |       foo
+ 47 |       bar  
+ 48 |     ][x]
+ 49 |   - [ foo
+    |      ^ [33]
+ 50 |       bar ]
+    |          ^ [34]
+ 51 |   - [foo
+ 52 |       bar]
+ 53 |   - [
+ 54 |       foo
+ 55 |       bar
+ 56 |     ]
+ 57 |   - [  
+ 58 |       foo
+ 59 |       bar  
+ 60 |     ]
+ 61 |   - [ foo
+    |      ^ [35]
+ 62 |       bar ][]
+    |          ^ [36]
+ 63 |   - [foo
+ 64 |       bar][]
+ 65 |   - [
+ 66 |       foo
+ 67 |       bar
+ 68 |     ][]
+ 69 |   - [  
+ 70 |       foo
+ 71 |       bar  
+ 72 |     ][]
+ 73 |   - [x][ foo
+    |         ^ [37]
+ 74 |       bar ]
+    |          ^ [38]
+ 75 |   - [x][foo
+ 76 |       bar]
+ 77 |   - [x][
+ 78 |       foo
+ 79 |       bar
+ 80 |     ]
+ 81 |   - [x][  
+ 82 |       foo
+ 83 |       bar  
+ 84 |     ]
+ 85 |
+ 86 | [x]: /url
+ 87 | [foo]: /url
+ 88 | [ ^foo ]: /url
+ 89 | [foo bar]: /url
+ 90 | [^foo]: footnote
+ 91 |
+
+Output:
+  1 |
+  2 | - [foo]
+  3 | - [foo]
+  4 | - [foo]
+  5 | - [foo]
+  6 | - [foo]
+  7 | - [foo][]
+  8 | - [foo][]
+  9 | - [foo][]
+ 10 | - [foo][]
+ 11 | - [foo][]
+ 12 | - [foo][x]
+ 13 | - [foo][x]
+ 14 | - [foo][x]
+ 15 | - [foo][x]
+ 16 | - [foo][x]
+ 17 | - [foo][x]
+ 18 | - [foo][x]
+ 19 | - [foo][x]
+ 20 | - [foo][x]
+ 21 | - [foo][x]
+ 22 | - Starts with `^`
+ 23 |     - [ ^foo ][x]
+ 24 |     - [^foo][x]
+ 25 |     - [ ^foo ]
+ 26 |     - [^foo]
+ 27 |     - [ ^foo ][]
+ 28 |     - [^foo][]
+ 29 |     - [x][^foo]
+ 30 |     - [x][^foo]
+ 31 | - Image link
+ 32 |   - [![x](x.png)][x]
+ 33 |   - [![x](x.png)][x]
+ 34 |   - [![x]][x]
+ 35 |   - [![x]][x]
+ 36 | - Multi lines
+ 37 |   - [foo
+ 38 |       bar][x]
+ 39 |   - [foo
+ 40 |       bar][x]
+ 41 |   - [
+ 42 |       foo
+ 43 |       bar
+ 44 |     ][x]
+ 45 |   - [  
+ 46 |       foo
+ 47 |       bar  
+ 48 |     ][x]
+ 49 |   - [foo
+ 50 |       bar]
+ 51 |   - [foo
+ 52 |       bar]
+ 53 |   - [
+ 54 |       foo
+ 55 |       bar
+ 56 |     ]
+ 57 |   - [  
+ 58 |       foo
+ 59 |       bar  
+ 60 |     ]
+ 61 |   - [foo
+ 62 |       bar][]
+ 63 |   - [foo
+ 64 |       bar][]
+ 65 |   - [
+ 66 |       foo
+ 67 |       bar
+ 68 |     ][]
+ 69 |   - [  
+ 70 |       foo
+ 71 |       bar  
+ 72 |     ][]
+ 73 |   - [x][foo
+ 74 |       bar]
+ 75 |   - [x][foo
+ 76 |       bar]
+ 77 |   - [x][
+ 78 |       foo
+ 79 |       bar
+ 80 |     ]
+ 81 |   - [x][  
+ 82 |       foo
+ 83 |       bar  
+ 84 |     ]
+ 85 |
+ 86 | [x]: /url
+ 87 | [foo]: /url
+ 88 | [ ^foo ]: /url
+ 89 | [foo bar]: /url
+ 90 | [^foo]: footnote
+ 91 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+[3] Unexpected space after opening bracket.
+[4] Unexpected space before closing bracket.
+[5] Unexpected space after opening bracket.
+[6] Unexpected space before closing bracket.
+[7] Unexpected space after opening bracket.
+[8] Unexpected space before closing bracket.
+[9] Unexpected space after opening bracket.
+[10] Unexpected space before closing bracket.
+[11] Unexpected space after opening bracket.
+[12] Unexpected space before closing bracket.
+[13] Unexpected space after opening bracket.
+[14] Unexpected space before closing bracket.
+[15] Unexpected space after opening bracket.
+[16] Unexpected space before closing bracket.
+[17] Unexpected space after opening bracket.
+[18] Unexpected space before closing bracket.
+[19] Unexpected space after opening bracket.
+[20] Unexpected space before closing bracket.
+[21] Unexpected space after opening bracket.
+[22] Unexpected space before closing bracket.
+[23] Unexpected space after opening bracket.
+[24] Unexpected space before closing bracket.
+[25] Unexpected space after opening bracket.
+[26] Unexpected space before closing bracket.
+[27] Unexpected space after opening bracket.
+[28] Unexpected space before closing bracket.
+[29] Unexpected space after opening bracket.
+[30] Unexpected space before closing bracket.
+[31] Unexpected space after opening bracket.
+[32] Unexpected space before closing bracket.
+[33] Unexpected space after opening bracket.
+[34] Unexpected space before closing bracket.
+[35] Unexpected space after opening bracket.
+[36] Unexpected space before closing bracket.
+[37] Unexpected space after opening bracket.
+[38] Unexpected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/spaced-image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![ foo ](/url)
+    |     ^   ^
+    |     [1] [2]
+  3 | - ![      foo     ](/url)
+    |     ^~~~~~   ^~~~~
+    |     [3]      [4]
+  4 | - Starts with `^`
+  5 |     - ![ ^foo ](/url)
+    |         ^    ^
+    |         [5]  [6]
+  6 | - Multi lines
+  7 |   - ![ foo
+    |       ^ [7]
+  8 |       bar ](/url)
+    |          ^ [8]
+  9 |   - ![
+ 10 |       foo
+ 11 |       bar
+ 12 |     ](/url)
+ 13 |   - ![  
+ 14 |       foo
+ 15 |       bar  
+ 16 |     ](/url)
+ 17 | - Empty
+ 18 |   - ![ ](/url)
+    |       ^ [9]
+    |       ^ [10]
+ 19 |   - ![      ](/url)
+    |       ^~~~~~ [11]
+    |       ^~~~~~ [12]
+ 20 |
+ 21 | [ x ]: /url
+    |  ^ [13]
+    |    ^ [14]
+ 22 |
+
+Output:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![foo](/url)
+  4 | - Starts with `^`
+  5 |     - ![^foo](/url)
+  6 | - Multi lines
+  7 |   - ![foo
+  8 |       bar](/url)
+  9 |   - ![
+ 10 |       foo
+ 11 |       bar
+ 12 |     ](/url)
+ 13 |   - ![  
+ 14 |       foo
+ 15 |       bar  
+ 16 |     ](/url)
+ 17 | - Empty
+ 18 |   - ![](/url)
+ 19 |   - ![](/url)
+ 20 |
+ 21 | [x]: /url
+ 22 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+[3] Unexpected space after opening bracket.
+[4] Unexpected space before closing bracket.
+[5] Unexpected space after opening bracket.
+[6] Unexpected space before closing bracket.
+[7] Unexpected space after opening bracket.
+[8] Unexpected space before closing bracket.
+[9] Unexpected space after opening bracket.
+[10] Unexpected space before closing bracket.
+[11] Unexpected space after opening bracket.
+[12] Unexpected space before closing bracket.
+[13] Unexpected space after opening bracket.
+[14] Unexpected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/spaced-image-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![ foo ]
+    |     ^   ^
+    |     [1] [2]
+  3 | - ![      foo     ]
+    |     ^~~~~~   ^~~~~
+    |     [3]      [4]
+  4 | - ![ foo ][]
+    |     ^   ^
+    |     [5] [6]
+  5 | - ![      foo     ][]
+    |     ^~~~~~   ^~~~~
+    |     [7]      [8]
+  6 | - ![ foo ][ x ]
+    |     ^ [9]  ^ [11]
+    |         ^ [10]
+    |              ^ [12]
+  7 | - ![      foo     ][ x ]
+    |     ^~~~~~ [13]     ^ [15]
+    |              ^~~~~ [14]
+    |                       ^ [16]
+  8 | - ![ foo ][      x     ]
+    |     ^ [17] ^~~~~~ [19]
+    |         ^ [18]    ^~~~~ [20]
+  9 | - Starts with `^`
+ 10 |     - ![ ^foo ][ x ]
+    |         ^ [21]  ^ [23]
+    |              ^ [22]
+    |                   ^ [24]
+ 11 |     - ![ ^foo ]
+    |         ^    ^
+    |         [25] [26]
+ 12 |     - ![ ^foo ][]
+    |         ^    ^
+    |         [27] [28]
+ 13 |     - ![ x ][ ^foo ]
+    |         ^ [29]    ^ [32]
+    |           ^ [30]
+    |              ^ [31]
+ 14 | - Multi lines
+ 15 |   - ![ foo
+    |       ^ [33]
+ 16 |       bar ][ x ]
+    |          ^ [34]
+    |             ^ [35]
+    |               ^ [36]
+ 17 |   - ![
+ 18 |       foo
+ 19 |       bar
+ 20 |     ][ x ]
+    |       ^ [37]
+    |         ^ [38]
+ 21 |   - ![  
+ 22 |       foo
+ 23 |       bar  
+ 24 |     ][ x ]
+    |       ^ [39]
+    |         ^ [40]
+ 25 |   - ![ foo
+    |       ^ [41]
+ 26 |       bar ]
+    |          ^ [42]
+ 27 |   - ![
+ 28 |       foo
+ 29 |       bar
+ 30 |     ]
+ 31 |   - ![  
+ 32 |       foo
+ 33 |       bar  
+ 34 |     ]
+ 35 |   - ![ foo
+    |       ^ [43]
+ 36 |       bar ][]
+    |          ^ [44]
+ 37 |   - ![
+ 38 |       foo
+ 39 |       bar
+ 40 |     ][]
+ 41 |   - ![  
+ 42 |       foo
+ 43 |       bar  
+ 44 |     ][]
+ 45 |   - ![ x ][ foo
+    |       ^ [45]
+    |         ^ [46]
+    |            ^ [47]
+ 46 |       bar ]
+    |          ^ [48]
+ 47 |   - ![ x ][
+    |       ^ [49]
+    |         ^ [50]
+ 48 |       foo
+ 49 |       bar
+ 50 |     ]
+ 51 |   - ![ x ][  
+    |       ^ [51]
+    |         ^ [52]
+ 52 |       foo
+ 53 |       bar  
+ 54 |     ]
+ 55 | - Empty
+ 56 |   - ![ ][ x ]
+    |       ^ [53]
+    |       ^ [54]
+    |          ^ [55]
+    |            ^ [56]
+ 57 |   - ![      ][ x ]
+    |       ^~~~~~ [57]
+    |       ^~~~~~ [58]
+    |               ^ [59]
+    |                 ^ [60]
+ 58 |
+ 59 | [ x ]: /url
+    |  ^ [61]
+    |    ^ [62]
+ 60 | [ foo ]: /url
+    |  ^   ^
+    | [63] [64]
+ 61 | [ ^foo ]: /url
+ 62 | [ foo bar ]: /url
+    |  ^ [65]  ^ [66]
+ 63 | [^foo]: footnote
+ 64 |
+
+Output:
+  1 |
+  2 | - ![foo]
+  3 | - ![foo]
+  4 | - ![foo][]
+  5 | - ![foo][]
+  6 | - ![foo][x]
+  7 | - ![foo][x]
+  8 | - ![foo][x]
+  9 | - Starts with `^`
+ 10 |     - ![^foo][x]
+ 11 |     - ![^foo]
+ 12 |     - ![^foo][]
+ 13 |     - ![x][^foo]
+ 14 | - Multi lines
+ 15 |   - ![foo
+ 16 |       bar][x]
+ 17 |   - ![
+ 18 |       foo
+ 19 |       bar
+ 20 |     ][x]
+ 21 |   - ![  
+ 22 |       foo
+ 23 |       bar  
+ 24 |     ][x]
+ 25 |   - ![foo
+ 26 |       bar]
+ 27 |   - ![
+ 28 |       foo
+ 29 |       bar
+ 30 |     ]
+ 31 |   - ![  
+ 32 |       foo
+ 33 |       bar  
+ 34 |     ]
+ 35 |   - ![foo
+ 36 |       bar][]
+ 37 |   - ![
+ 38 |       foo
+ 39 |       bar
+ 40 |     ][]
+ 41 |   - ![  
+ 42 |       foo
+ 43 |       bar  
+ 44 |     ][]
+ 45 |   - ![x][foo
+ 46 |       bar]
+ 47 |   - ![x][
+ 48 |       foo
+ 49 |       bar
+ 50 |     ]
+ 51 |   - ![x][  
+ 52 |       foo
+ 53 |       bar  
+ 54 |     ]
+ 55 | - Empty
+ 56 |   - ![][x]
+ 57 |   - ![][x]
+ 58 |
+ 59 | [x]: /url
+ 60 | [foo]: /url
+ 61 | [ ^foo ]: /url
+ 62 | [foo bar]: /url
+ 63 | [^foo]: footnote
+ 64 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+[3] Unexpected space after opening bracket.
+[4] Unexpected space before closing bracket.
+[5] Unexpected space after opening bracket.
+[6] Unexpected space before closing bracket.
+[7] Unexpected space after opening bracket.
+[8] Unexpected space before closing bracket.
+[9] Unexpected space after opening bracket.
+[10] Unexpected space before closing bracket.
+[11] Unexpected space after opening bracket.
+[12] Unexpected space before closing bracket.
+[13] Unexpected space after opening bracket.
+[14] Unexpected space before closing bracket.
+[15] Unexpected space after opening bracket.
+[16] Unexpected space before closing bracket.
+[17] Unexpected space after opening bracket.
+[18] Unexpected space before closing bracket.
+[19] Unexpected space after opening bracket.
+[20] Unexpected space before closing bracket.
+[21] Unexpected space after opening bracket.
+[22] Unexpected space before closing bracket.
+[23] Unexpected space after opening bracket.
+[24] Unexpected space before closing bracket.
+[25] Unexpected space after opening bracket.
+[26] Unexpected space before closing bracket.
+[27] Unexpected space after opening bracket.
+[28] Unexpected space before closing bracket.
+[29] Unexpected space after opening bracket.
+[30] Unexpected space before closing bracket.
+[31] Unexpected space after opening bracket.
+[32] Unexpected space before closing bracket.
+[33] Unexpected space after opening bracket.
+[34] Unexpected space before closing bracket.
+[35] Unexpected space after opening bracket.
+[36] Unexpected space before closing bracket.
+[37] Unexpected space after opening bracket.
+[38] Unexpected space before closing bracket.
+[39] Unexpected space after opening bracket.
+[40] Unexpected space before closing bracket.
+[41] Unexpected space after opening bracket.
+[42] Unexpected space before closing bracket.
+[43] Unexpected space after opening bracket.
+[44] Unexpected space before closing bracket.
+[45] Unexpected space after opening bracket.
+[46] Unexpected space before closing bracket.
+[47] Unexpected space after opening bracket.
+[48] Unexpected space before closing bracket.
+[49] Unexpected space after opening bracket.
+[50] Unexpected space before closing bracket.
+[51] Unexpected space after opening bracket.
+[52] Unexpected space before closing bracket.
+[53] Unexpected space after opening bracket.
+[54] Unexpected space before closing bracket.
+[55] Unexpected space after opening bracket.
+[56] Unexpected space before closing bracket.
+[57] Unexpected space after opening bracket.
+[58] Unexpected space before closing bracket.
+[59] Unexpected space after opening bracket.
+[60] Unexpected space before closing bracket.
+[61] Unexpected space after opening bracket.
+[62] Unexpected space before closing bracket.
+[63] Unexpected space after opening bracket.
+[64] Unexpected space before closing bracket.
+[65] Unexpected space after opening bracket.
+[66] Unexpected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/spaced-link-definition-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | [ b ]: /url
+    |  ^ [1]
+    |    ^ [2]
+  3 | [  e   f  ]: /url
+    |  ^~ [3] ^~ [4]
+  4 | [  g
+    |  ^~ [5]
+  5 |   h  ]: /url
+    |    ^~ [6]
+  6 | [  
+  7 |   i
+  8 |   j
+  9 |   ]: /url
+ 10 |
+
+Output:
+  1 |
+  2 | [b]: /url
+  3 | [e   f]: /url
+  4 | [g
+  5 |   h]: /url
+  6 | [  
+  7 |   i
+  8 |   j
+  9 |   ]: /url
+ 10 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+[3] Unexpected space after opening bracket.
+[4] Unexpected space before closing bracket.
+[5] Unexpected space after opening bracket.
+[6] Unexpected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/spaced-link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [ foo ](/url)
+    |    ^   ^
+    |    [1] [2]
+  3 | - [      foo     ](/url)
+    |    ^~~~~~   ^~~~~
+    |    [3]      [4]
+  4 | - Starts with `^`
+  5 |     - [ ^foo ](/url)
+    |        ^    ^
+    |        [5]  [6]
+  6 | - Image link
+  7 |   - [ ![ x ](x.png) ](/url)
+    |      ^ [7]         ^ [10]
+    |         ^ [8]
+    |           ^ [9]
+  8 |   - [ ![ x ] ](/url)
+    |      ^ [11] ^ [14]
+    |         ^ [12]
+    |           ^ [13]
+  9 | - Multi lines
+ 10 |   - [ foo
+    |      ^ [15]
+ 11 |       bar ](/url)
+    |          ^ [16]
+ 12 |   - [
+ 13 |       foo
+ 14 |       bar
+ 15 |     ](/url)
+ 16 |   - [  
+ 17 |       foo
+ 18 |       bar  
+ 19 |     ](/url)
+ 20 | - Empty
+ 21 |   - [](/url)
+ 22 |   - [ ](/url)
+ 23 |   - [      ](/url)
+ 24 |
+ 25 | [ x ]: /url
+    |  ^ [17]
+    |    ^ [18]
+ 26 |
+
+Output:
+  1 |
+  2 | - [foo](/url)
+  3 | - [foo](/url)
+  4 | - Starts with `^`
+  5 |     - [^foo](/url)
+  6 | - Image link
+  7 |   - [![x](x.png)](/url)
+  8 |   - [![x]](/url)
+  9 | - Multi lines
+ 10 |   - [foo
+ 11 |       bar](/url)
+ 12 |   - [
+ 13 |       foo
+ 14 |       bar
+ 15 |     ](/url)
+ 16 |   - [  
+ 17 |       foo
+ 18 |       bar  
+ 19 |     ](/url)
+ 20 | - Empty
+ 21 |   - [](/url)
+ 22 |   - [ ](/url)
+ 23 |   - [      ](/url)
+ 24 |
+ 25 | [x]: /url
+ 26 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+[3] Unexpected space after opening bracket.
+[4] Unexpected space before closing bracket.
+[5] Unexpected space after opening bracket.
+[6] Unexpected space before closing bracket.
+[7] Unexpected space after opening bracket.
+[8] Unexpected space after opening bracket.
+[9] Unexpected space before closing bracket.
+[10] Unexpected space before closing bracket.
+[11] Unexpected space after opening bracket.
+[12] Unexpected space after opening bracket.
+[13] Unexpected space before closing bracket.
+[14] Unexpected space before closing bracket.
+[15] Unexpected space after opening bracket.
+[16] Unexpected space before closing bracket.
+[17] Unexpected space after opening bracket.
+[18] Unexpected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/spaced-link-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [ foo ]
+    |    ^   ^
+    |    [1] [2]
+  3 | - [      foo     ]
+    |    ^~~~~~   ^~~~~
+    |    [3]      [4]
+  4 | - [ foo ][]
+    |    ^   ^
+    |    [5] [6]
+  5 | - [      foo     ][]
+    |    ^~~~~~   ^~~~~
+    |    [7]      [8]
+  6 | - [ foo ][ x ]
+    |    ^ [9]  ^ [11]
+    |        ^ [10]
+    |             ^ [12]
+  7 | - [      foo     ][ x ]
+    |    ^~~~~~ [13]     ^ [15]
+    |             ^~~~~ [14]
+    |                      ^ [16]
+  8 | - [ foo ][      x     ]
+    |    ^ [17] ^~~~~~ [19]
+    |        ^ [18]    ^~~~~ [20]
+  9 | - Starts with `^`
+ 10 |     - [ ^foo ][ x ]
+    |                ^ [21]
+    |                  ^ [22]
+ 11 |     - [^foo][ x ]
+    |              ^ [23]
+    |                ^ [24]
+ 12 |     - [ ^foo ]
+ 13 |     - [^foo]
+ 14 |     - [ ^foo ][]
+ 15 |     - [^foo][]
+ 16 |     - [ x ][ ^foo ]
+    |        ^ [25]    ^ [28]
+    |          ^ [26]
+    |             ^ [27]
+ 17 | - Image link
+ 18 |   - [ ![ x ](x.png) ][ x ]
+    |      ^ [29]        ^ [32]
+    |         ^ [30]        ^ [33]
+    |           ^ [31]        ^ [34]
+ 19 |   - [ ![ x ] ][ x ]
+    |      ^ [35] ^ [38]
+    |         ^ [36] ^ [39]
+    |           ^ [37] ^ [40]
+ 20 | - Multi lines
+ 21 |   - [ foo
+    |      ^ [41]
+ 22 |       bar ][ x ]
+    |          ^ [42]
+    |             ^ [43]
+    |               ^ [44]
+ 23 |   - [
+ 24 |       foo
+ 25 |       bar
+ 26 |     ][ x ]
+    |       ^ [45]
+    |         ^ [46]
+ 27 |   - [  
+ 28 |       foo
+ 29 |       bar  
+ 30 |     ][ x ]
+    |       ^ [47]
+    |         ^ [48]
+ 31 |   - [ foo
+    |      ^ [49]
+ 32 |       bar ]
+    |          ^ [50]
+ 33 |   - [
+ 34 |       foo
+ 35 |       bar
+ 36 |     ]
+ 37 |   - [  
+ 38 |       foo
+ 39 |       bar  
+ 40 |     ]
+ 41 |   - [ foo
+    |      ^ [51]
+ 42 |       bar ][]
+    |          ^ [52]
+ 43 |   - [
+ 44 |       foo
+ 45 |       bar
+ 46 |     ][]
+ 47 |   - [  
+ 48 |       foo
+ 49 |       bar  
+ 50 |     ][]
+ 51 |   - [ x ][ foo
+    |      ^ [53]
+    |        ^ [54]
+    |           ^ [55]
+ 52 |       bar ]
+    |          ^ [56]
+ 53 |   - [ x ][
+    |      ^ [57]
+    |        ^ [58]
+ 54 |       foo
+ 55 |       bar
+ 56 |     ]
+ 57 |   - [ x ][  
+    |      ^ [59]
+    |        ^ [60]
+ 58 |       foo
+ 59 |       bar  
+ 60 |     ]
+ 61 |
+ 62 | [ x ]: /url
+    |  ^ [61]
+    |    ^ [62]
+ 63 | [ foo ]: /url
+    |  ^   ^
+    | [63] [64]
+ 64 | [ ^foo ]: /url
+ 65 | [ foo bar ]: /url
+    |  ^ [65]  ^ [66]
+ 66 | [^foo]: footnote
+ 67 |
+
+Output:
+  1 |
+  2 | - [foo]
+  3 | - [foo]
+  4 | - [foo][]
+  5 | - [foo][]
+  6 | - [foo][x]
+  7 | - [foo][x]
+  8 | - [foo][x]
+  9 | - Starts with `^`
+ 10 |     - [ ^foo ][x]
+ 11 |     - [^foo][x]
+ 12 |     - [ ^foo ]
+ 13 |     - [^foo]
+ 14 |     - [ ^foo ][]
+ 15 |     - [^foo][]
+ 16 |     - [x][^foo]
+ 17 | - Image link
+ 18 |   - [![x](x.png)][x]
+ 19 |   - [![x]][x]
+ 20 | - Multi lines
+ 21 |   - [foo
+ 22 |       bar][x]
+ 23 |   - [
+ 24 |       foo
+ 25 |       bar
+ 26 |     ][x]
+ 27 |   - [  
+ 28 |       foo
+ 29 |       bar  
+ 30 |     ][x]
+ 31 |   - [foo
+ 32 |       bar]
+ 33 |   - [
+ 34 |       foo
+ 35 |       bar
+ 36 |     ]
+ 37 |   - [  
+ 38 |       foo
+ 39 |       bar  
+ 40 |     ]
+ 41 |   - [foo
+ 42 |       bar][]
+ 43 |   - [
+ 44 |       foo
+ 45 |       bar
+ 46 |     ][]
+ 47 |   - [  
+ 48 |       foo
+ 49 |       bar  
+ 50 |     ][]
+ 51 |   - [x][foo
+ 52 |       bar]
+ 53 |   - [x][
+ 54 |       foo
+ 55 |       bar
+ 56 |     ]
+ 57 |   - [x][  
+ 58 |       foo
+ 59 |       bar  
+ 60 |     ]
+ 61 |
+ 62 | [x]: /url
+ 63 | [foo]: /url
+ 64 | [ ^foo ]: /url
+ 65 | [foo bar]: /url
+ 66 | [^foo]: footnote
+ 67 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+[3] Unexpected space after opening bracket.
+[4] Unexpected space before closing bracket.
+[5] Unexpected space after opening bracket.
+[6] Unexpected space before closing bracket.
+[7] Unexpected space after opening bracket.
+[8] Unexpected space before closing bracket.
+[9] Unexpected space after opening bracket.
+[10] Unexpected space before closing bracket.
+[11] Unexpected space after opening bracket.
+[12] Unexpected space before closing bracket.
+[13] Unexpected space after opening bracket.
+[14] Unexpected space before closing bracket.
+[15] Unexpected space after opening bracket.
+[16] Unexpected space before closing bracket.
+[17] Unexpected space after opening bracket.
+[18] Unexpected space before closing bracket.
+[19] Unexpected space after opening bracket.
+[20] Unexpected space before closing bracket.
+[21] Unexpected space after opening bracket.
+[22] Unexpected space before closing bracket.
+[23] Unexpected space after opening bracket.
+[24] Unexpected space before closing bracket.
+[25] Unexpected space after opening bracket.
+[26] Unexpected space before closing bracket.
+[27] Unexpected space after opening bracket.
+[28] Unexpected space before closing bracket.
+[29] Unexpected space after opening bracket.
+[30] Unexpected space after opening bracket.
+[31] Unexpected space before closing bracket.
+[32] Unexpected space before closing bracket.
+[33] Unexpected space after opening bracket.
+[34] Unexpected space before closing bracket.
+[35] Unexpected space after opening bracket.
+[36] Unexpected space after opening bracket.
+[37] Unexpected space before closing bracket.
+[38] Unexpected space before closing bracket.
+[39] Unexpected space after opening bracket.
+[40] Unexpected space before closing bracket.
+[41] Unexpected space after opening bracket.
+[42] Unexpected space before closing bracket.
+[43] Unexpected space after opening bracket.
+[44] Unexpected space before closing bracket.
+[45] Unexpected space after opening bracket.
+[46] Unexpected space before closing bracket.
+[47] Unexpected space after opening bracket.
+[48] Unexpected space before closing bracket.
+[49] Unexpected space after opening bracket.
+[50] Unexpected space before closing bracket.
+[51] Unexpected space after opening bracket.
+[52] Unexpected space before closing bracket.
+[53] Unexpected space after opening bracket.
+[54] Unexpected space before closing bracket.
+[55] Unexpected space after opening bracket.
+[56] Unexpected space before closing bracket.
+[57] Unexpected space after opening bracket.
+[58] Unexpected space before closing bracket.
+[59] Unexpected space after opening bracket.
+[60] Unexpected space before closing bracket.
+[61] Unexpected space after opening bracket.
+[62] Unexpected space before closing bracket.
+[63] Unexpected space after opening bracket.
+[64] Unexpected space before closing bracket.
+[65] Unexpected space after opening bracket.
+[66] Unexpected space before closing bracket.
+---

@@ -5,7 +5,7 @@ describe("parseImageFromText", () => {
   it("should parse plain destination without title", () => {
     const result = parseImageFromText("![alt](foo.png)");
     assert.deepStrictEqual(result, {
-      label: { range: [1, 6] },
+      text: { range: [1, 6] },
       destination: { type: "plain", text: "foo.png", range: [7, 14] },
       title: null,
     });
@@ -14,7 +14,7 @@ describe("parseImageFromText", () => {
   it("should parse angle-bracketed destination", () => {
     const result = parseImageFromText("![alt](<foo.png>)");
     assert.deepStrictEqual(result, {
-      label: { range: [1, 6] },
+      text: { range: [1, 6] },
       destination: {
         type: "angle-bracketed",
         text: "<foo.png>",
@@ -27,7 +27,7 @@ describe("parseImageFromText", () => {
   it("should parse destination with double-quoted title", () => {
     const result = parseImageFromText('![alt](foo.png "title")');
     assert.deepStrictEqual(result, {
-      label: { range: [1, 6] },
+      text: { range: [1, 6] },
       destination: { type: "plain", text: "foo.png", range: [7, 14] },
       title: { type: "double-quoted", text: '"title"', range: [15, 22] },
     });
@@ -36,7 +36,7 @@ describe("parseImageFromText", () => {
   it("should parse destination with single-quoted title", () => {
     const result = parseImageFromText("![alt](foo.png 'title')");
     assert.deepStrictEqual(result, {
-      label: { range: [1, 6] },
+      text: { range: [1, 6] },
       destination: { type: "plain", text: "foo.png", range: [7, 14] },
       title: { type: "single-quoted", text: "'title'", range: [15, 22] },
     });
@@ -45,7 +45,7 @@ describe("parseImageFromText", () => {
   it("should parse destination with parenthesized title", () => {
     const result = parseImageFromText("![alt](foo.png (title))");
     assert.deepStrictEqual(result, {
-      label: { range: [1, 6] },
+      text: { range: [1, 6] },
       destination: { type: "plain", text: "foo.png", range: [7, 14] },
       title: { type: "parenthesized", text: "(title)", range: [15, 22] },
     });
@@ -62,7 +62,7 @@ describe("parseImageFromText", () => {
   it("should parse destination with escaped parens", () => {
     const result = parseImageFromText("![alt](foo\\(bar\\).png)");
     assert.deepStrictEqual(result, {
-      label: { range: [1, 6] },
+      text: { range: [1, 6] },
       destination: { type: "plain", text: "foo\\(bar\\).png", range: [7, 21] },
       title: null,
     });
