@@ -128,7 +128,7 @@ export default defineConfig([
     files: ["**/*.md", "*.md"],
     extends: [
       markdown.configs.recommended,
-      markdownPreferences.configs.recommended,
+      markdownPreferences.configs.standard,
       markdownLinks.configs.recommended,
     ],
     rules: {
@@ -170,26 +170,6 @@ export default defineConfig([
           ignorePatterns: ["ID", "RECOMMENDED"],
         },
       ],
-      "markdown-preferences/padding-line-between-blocks": [
-        "error",
-        { prev: "*", next: "*", blankLine: "always" },
-        {
-          prev: "link-definition",
-          next: "link-definition",
-          blankLine: "never",
-        },
-        {
-          prev: "footnote-definition",
-          next: "footnote-definition",
-          blankLine: "never",
-        },
-        {
-          prev: "paragraph",
-          next: { type: "list", in: "list" },
-          blankLine: "never",
-        },
-      ],
-
       "markdown-links/no-dead-urls": [
         "error",
         {
