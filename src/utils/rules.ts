@@ -16,6 +16,7 @@ import hardLinebreakStyle from "../rules/hard-linebreak-style.ts";
 import headingCasing from "../rules/heading-casing.ts";
 import level1HeadingStyle from "../rules/level1-heading-style.ts";
 import level2HeadingStyle from "../rules/level2-heading-style.ts";
+import linkBracketNewline from "../rules/link-bracket-newline.ts";
 import linkBracketSpacing from "../rules/link-bracket-spacing.ts";
 import listMarkerAlignment from "../rules/list-marker-alignment.ts";
 import noLazinessBlockquotes from "../rules/no-laziness-blockquotes.ts";
@@ -55,6 +56,7 @@ export const rules = [
   headingCasing,
   level1HeadingStyle,
   level2HeadingStyle,
+  linkBracketNewline,
   linkBracketSpacing,
   listMarkerAlignment,
   noLazinessBlockquotes,

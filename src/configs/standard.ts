@@ -29,6 +29,7 @@ export const rules: Linter.RulesRecord = {
   "markdown-preferences/hard-linebreak-style": "error",
   "markdown-preferences/level1-heading-style": "error",
   "markdown-preferences/level2-heading-style": "error",
+  "markdown-preferences/link-bracket-newline": "error",
   "markdown-preferences/link-bracket-spacing": "error",
   "markdown-preferences/list-marker-alignment": "error",
   "markdown-preferences/no-laziness-blockquotes": "error",
