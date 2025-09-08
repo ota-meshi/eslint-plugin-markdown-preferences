@@ -47,6 +47,7 @@ The rules with the following 💄 are included in the `plugin.configs.standard` 
 | [markdown-preferences/hard-linebreak-style](./hard-linebreak-style.md) | enforce consistent hard linebreak style. | 🔧 | ⭐💄 |
 | [markdown-preferences/level1-heading-style](./level1-heading-style.md) | enforce consistent style for level 1 headings | 🔧 | 💄 |
 | [markdown-preferences/level2-heading-style](./level2-heading-style.md) | enforce consistent style for level 2 headings | 🔧 | 💄 |
+| [markdown-preferences/link-bracket-spacing](./link-bracket-spacing.md) | enforce consistent spacing inside link brackets | 🔧 | 💄 |
 | [markdown-preferences/list-marker-alignment](./list-marker-alignment.md) | enforce consistent alignment of list markers | 🔧 | ⭐💄 |
 | [markdown-preferences/no-laziness-blockquotes](./no-laziness-blockquotes.md) | disallow laziness in blockquotes |  | ⭐💄 |
 | [markdown-preferences/no-multi-spaces](./no-multi-spaces.md) | disallow multiple spaces | 🔧 | 💄 |

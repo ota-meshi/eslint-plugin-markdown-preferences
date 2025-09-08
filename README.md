@@ -112,6 +112,8 @@ The rules with the following 💄 are included in the `standard` config.
 
 - Rules related to the formatting and visual style of Markdown.
 
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+
 <!-- prettier-ignore-start -->
 
 | Rule ID | Description | Fixable | Config      |
@@ -127,6 +129,7 @@ The rules with the following 💄 are included in the `standard` config.
 | [markdown-preferences/hard-linebreak-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/hard-linebreak-style.html) | enforce consistent hard linebreak style. | 🔧 | ⭐💄 |
 | [markdown-preferences/level1-heading-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/level1-heading-style.html) | enforce consistent style for level 1 headings | 🔧 | 💄 |
 | [markdown-preferences/level2-heading-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/level2-heading-style.html) | enforce consistent style for level 2 headings | 🔧 | 💄 |
+| [markdown-preferences/link-bracket-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-bracket-spacing.html) | enforce consistent spacing inside link brackets | 🔧 | 💄 |
 | [markdown-preferences/list-marker-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/list-marker-alignment.html) | enforce consistent alignment of list markers | 🔧 | ⭐💄 |
 | [markdown-preferences/no-laziness-blockquotes](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-laziness-blockquotes.html) | disallow laziness in blockquotes |  | ⭐💄 |
 | [markdown-preferences/no-multi-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multi-spaces.html) | disallow multiple spaces | 🔧 | 💄 |
@@ -147,6 +150,8 @@ The rules with the following 💄 are included in the `standard` config.
 | [markdown-preferences/thematic-break-sequence-pattern](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-sequence-pattern.html) | enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown. | 🔧 | 💄 |
 
 <!-- prettier-ignore-end -->
+
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
 
 <!--RULES_TABLE_END-->
 

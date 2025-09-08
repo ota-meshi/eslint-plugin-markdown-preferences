@@ -198,7 +198,10 @@ export function parseLinkDefinitionFromText(text: string): {
       if (checkEnd(c)) return true;
       index++;
       if (c !== "\\") continue;
-      if (index < text.length && (c === "\\" || checkEnd(text[index]))) {
+      if (
+        index < text.length &&
+        (text[index] === "\\" || checkEnd(text[index]))
+      ) {
         index++;
       }
     }

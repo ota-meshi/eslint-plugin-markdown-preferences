@@ -5,7 +5,7 @@ import { isAsciiControlCharacter, isWhitespace } from "./unicode.ts";
 import { getSourceLocationFromRange } from "./ast.ts";
 
 export type ParsedImage = {
-  label: {
+  text: {
     range: [number, number];
     loc: SourceLocation;
   };
@@ -33,18 +33,18 @@ export function parseImage(
   const parsed = parseImageFromText(text);
   if (!parsed) return null;
   const nodeRange = sourceCode.getRange(node);
-  const labelRange: [number, number] = [
-    nodeRange[0] + parsed.label.range[0],
-    nodeRange[0] + parsed.label.range[1],
+  const textRange: [number, number] = [
+    nodeRange[0] + parsed.text.range[0],
+    nodeRange[0] + parsed.text.range[1],
   ];
   const destinationRange: [number, number] = [
     nodeRange[0] + parsed.destination.range[0],
     nodeRange[0] + parsed.destination.range[1],
   ];
   return {
-    label: {
-      range: labelRange,
-      loc: getSourceLocationFromRange(sourceCode, node, labelRange),
+    text: {
+      range: textRange,
+      loc: getSourceLocationFromRange(sourceCode, node, textRange),
     },
     destination: {
       type: parsed.destination.type,
@@ -73,7 +73,7 @@ export function parseImage(
  * Parse the image from the given text.
  */
 export function parseImageFromText(text: string): {
-  label: {
+  text: {
     range: [number, number];
   };
   destination: {
@@ -150,10 +150,10 @@ export function parseImageFromText(text: string): {
   if (text[index] !== "(") return null;
   index--;
   if (text[index] !== "]") return null;
-  const labelRange: [number, number] = [1, index + 1];
+  const textRange: [number, number] = [1, index + 1];
   return {
-    label: {
-      range: labelRange,
+    text: {
+      range: textRange,
     },
     destination,
     title,

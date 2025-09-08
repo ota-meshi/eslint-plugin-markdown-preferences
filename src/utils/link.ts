@@ -5,7 +5,7 @@ import { isAsciiControlCharacter, isWhitespace } from "./unicode.ts";
 import { getLinkKind, getSourceLocationFromRange } from "./ast.ts";
 
 export type ParsedInlineLink = {
-  label: {
+  text: {
     range: [number, number];
     loc: SourceLocation;
   };
@@ -32,30 +32,30 @@ export function parseInlineLink(
   const kind = getLinkKind(sourceCode, node);
   if (kind !== "inline") return null;
   const nodeRange = sourceCode.getRange(node);
-  let labelRange: [number, number];
+  let textRange: [number, number];
   if (node.children.length === 0) {
-    labelRange = [nodeRange[0], sourceCode.text.indexOf("]", nodeRange[0]) + 1];
+    textRange = [nodeRange[0], sourceCode.text.indexOf("]", nodeRange[0]) + 1];
   } else {
     const lastChildRange = sourceCode.getRange(
       node.children[node.children.length - 1],
     );
-    labelRange = [
+    textRange = [
       nodeRange[0],
       sourceCode.text.indexOf("]", lastChildRange[1]) + 1,
     ];
   }
   const parsed = parseInlineLinkDestAndTitleFromText(
-    sourceCode.text.slice(labelRange[1], nodeRange[1]),
+    sourceCode.text.slice(textRange[1], nodeRange[1]),
   );
   if (!parsed) return null;
   const destinationRange: [number, number] = [
-    labelRange[1] + parsed.destination.range[0],
-    labelRange[1] + parsed.destination.range[1],
+    textRange[1] + parsed.destination.range[0],
+    textRange[1] + parsed.destination.range[1],
   ];
   return {
-    label: {
-      range: labelRange,
-      loc: getSourceLocationFromRange(sourceCode, node, labelRange),
+    text: {
+      range: textRange,
+      loc: getSourceLocationFromRange(sourceCode, node, textRange),
     },
     destination: {
       type: parsed.destination.type,
@@ -68,12 +68,12 @@ export function parseInlineLink(
           type: parsed.title.type,
           text: parsed.title.text,
           range: [
-            labelRange[0] + parsed.title.range[0],
-            labelRange[0] + parsed.title.range[1],
+            textRange[0] + parsed.title.range[0],
+            textRange[0] + parsed.title.range[1],
           ],
           loc: getSourceLocationFromRange(sourceCode, node, [
-            labelRange[0] + parsed.title.range[0],
-            labelRange[0] + parsed.title.range[1],
+            textRange[0] + parsed.title.range[0],
+            textRange[0] + parsed.title.range[1],
           ]),
         }
       : null,
@@ -97,7 +97,7 @@ export function parseInlineLinkDestAndTitleFromText(text: string): {
 } | null {
   let index = 0;
 
-  // Skip initial `()`
+  // Skip initial `(`
   if (text[index] !== "(") return null;
   index++;
   skipSpaces();
@@ -202,7 +202,10 @@ export function parseInlineLinkDestAndTitleFromText(text: string): {
       if (checkEnd(c)) return true;
       index++;
       if (c !== "\\") continue;
-      if (index < text.length && (c === "\\" || checkEnd(text[index]))) {
+      if (
+        index < text.length &&
+        (text[index] === "\\" || checkEnd(text[index]))
+      ) {
         index++;
       }
     }
