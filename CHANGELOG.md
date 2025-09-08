@@ -1,5 +1,17 @@
 # eslint-plugin-markdown-preferences
 
+## 0.21.0
+
+### Minor Changes
+
+- [#102](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/102) [`b48be1c`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/b48be1c3c0c4ef3295866ed84e330322ddca32b2) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat([markdown-preferences/padding-line-between-blocks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/padding-line-between-blocks.html)): improve default options available
+
+- [#99](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/99) [`381bcba`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/381bcbaea590a37cdcac51bbf504afdea5c0d969) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/no-multi-spaces`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multi-spaces.html) rule
+
+- [#99](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/99) [`381bcba`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/381bcbaea590a37cdcac51bbf504afdea5c0d969) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat([`markdown-preferences/no-trailing-spaces`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-trailing-spaces.html)): improve to check for hard line breaks
+
+- [#101](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/101) [`27c651b`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/27c651b97191e8338fbd89fa8de31db6755d3c40) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add standard config
+
 ## 0.20.0
 
 ### Minor Changes
