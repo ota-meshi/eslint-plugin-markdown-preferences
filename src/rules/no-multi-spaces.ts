@@ -12,6 +12,9 @@ import type {
 import { getSourceLocationFromRange } from "../utils/ast.ts";
 import { createRule } from "../utils/index.ts";
 import { isWhitespace } from "../utils/unicode.ts";
+import { parseLinkDefinition } from "../utils/link-definition.ts";
+import { parseLink } from "../utils/link.ts";
+import { parseImage } from "../utils/image.ts";
 
 export default createRule("no-multi-spaces", {
   meta: {
@@ -54,7 +57,11 @@ export default createRule("no-multi-spaces", {
      * Verify a definition node.
      */
     function verifyLinkDefinition(node: Definition) {
-      verifyTextInNode(node);
+      const parsed = parseLinkDefinition(sourceCode, node);
+      if (!parsed) return;
+      const nodeRange = sourceCode.getRange(node);
+      verifyTextInRange(node, [nodeRange[0], parsed.destination.range[0]]);
+      verifyTextInRange(node, [parsed.destination.range[1], nodeRange[1]]);
     }
 
     /**
@@ -75,7 +82,11 @@ export default createRule("no-multi-spaces", {
      * Verify an image node
      */
     function verifyImage(node: Image) {
-      verifyTextInNode(node);
+      const parsed = parseImage(sourceCode, node);
+      if (!parsed) return;
+      const nodeRange = sourceCode.getRange(node);
+      verifyTextInRange(node, [nodeRange[0], parsed.destination.range[0]]);
+      verifyTextInRange(node, [parsed.destination.range[1], nodeRange[1]]);
     }
 
     /**
@@ -89,7 +100,20 @@ export default createRule("no-multi-spaces", {
      * Verify a link node
      */
     function verifyLink(node: Link) {
-      verifyTextOutsideChildren(node);
+      const parsed = parseLink(sourceCode, node);
+      if (!parsed) return;
+      const nodeRange = sourceCode.getRange(node);
+      if (node.children.length > 0) {
+        const first = node.children[0];
+        const last = node.children[node.children.length - 1];
+        const firstRange = sourceCode.getRange(first);
+        const lastRange = sourceCode.getRange(last);
+        verifyTextInRange(node, [nodeRange[0], firstRange[0]]);
+        verifyTextInRange(node, [lastRange[1], parsed.destination.range[0]]);
+      } else {
+        verifyTextInRange(node, [nodeRange[0], parsed.destination.range[0]]);
+      }
+      verifyTextInRange(node, [parsed.destination.range[1], nodeRange[1]]);
     }
 
     /**
@@ -109,9 +133,7 @@ export default createRule("no-multi-spaces", {
     /**
      * Verify spaces in a node
      */
-    function verifyTextInNode(
-      node: Text | Definition | Image | ImageReference,
-    ) {
+    function verifyTextInNode(node: Text | Image | ImageReference) {
       const nodeRange = sourceCode.getRange(node);
       verifyTextInRange(node, nodeRange);
     }
@@ -120,7 +142,7 @@ export default createRule("no-multi-spaces", {
      * Verify spaces in a node excluding children
      */
     function verifyTextOutsideChildren(
-      node: FootnoteDefinition | Heading | Link | LinkReference | ListItem,
+      node: FootnoteDefinition | Heading | LinkReference | ListItem,
     ) {
       const nodeRange = sourceCode.getRange(node);
       if (node.children.length > 0) {

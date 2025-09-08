@@ -2,8 +2,8 @@ import { SnapshotRuleTester } from "eslint-snapshot-rule-tester";
 import type { MarkdownBlockNode } from "../../../src/rules/padding-line-between-blocks.ts";
 import rule, {
   requiresBlankLineBetween,
-} from "../../../src/rules/padding-line-between-blocks.js";
-import { loadTestCases } from "../../utils/utils.js";
+} from "../../../src/rules/padding-line-between-blocks.ts";
+import { loadTestCases } from "../../utils/utils.ts";
 import { parseMarkdown } from "../../utils/markdown-parser/parser.ts";
 import assert from "node:assert";
 import eslintMarkdown from "@eslint/markdown";

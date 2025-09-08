@@ -1,6 +1,6 @@
 import { SnapshotRuleTester } from "eslint-snapshot-rule-tester";
-import rule from "../../../src/rules/prefer-link-reference-definitions.js";
-import { loadTestCases } from "../../utils/utils.js";
+import rule from "../../../src/rules/prefer-link-reference-definitions.ts";
+import { loadTestCases } from "../../utils/utils.ts";
 
 const tester = new SnapshotRuleTester();
 

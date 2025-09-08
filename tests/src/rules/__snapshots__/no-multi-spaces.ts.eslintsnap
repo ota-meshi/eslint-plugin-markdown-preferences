@@ -178,6 +178,12 @@ Code:
  15 | [foo  bar]: /foo
     |     ^~ [29]
  16 |
+ 17 | ![space in url](  <http://example.com?a=1  2  >  )
+    |                 ^~ [30]                        ^~ [31]
+ 18 | ![space in url](  <http://example.com?a=1  2  >  "  title with  spaces  ")
+    |                 ^~ [32]                        ^~ [33]        ^~ [35] ^~ [36]
+    |                                                   ^~ [34]
+ 19 |
 
 Output:
   1 |
@@ -196,6 +202,9 @@ Output:
  14 |
  15 | [foo bar]: /foo
  16 |
+ 17 | ![space in url]( <http://example.com?a=1  2  > )
+ 18 | ![space in url]( <http://example.com?a=1  2  > " title with spaces ")
+ 19 |
 
 [1] Multiple spaces are not allowed.
 [2] Multiple spaces are not allowed.
@@ -226,6 +235,13 @@ Output:
 [27] Multiple spaces are not allowed.
 [28] Multiple spaces are not allowed.
 [29] Multiple spaces are not allowed.
+[30] Multiple spaces are not allowed.
+[31] Multiple spaces are not allowed.
+[32] Multiple spaces are not allowed.
+[33] Multiple spaces are not allowed.
+[34] Multiple spaces are not allowed.
+[35] Multiple spaces are not allowed.
+[36] Multiple spaces are not allowed.
 ---
 
 
@@ -257,6 +273,9 @@ Code:
   9 | [title-with-parentheses]: #title (  title with  spaces  )
     |                                   ^~ [16]     ^~ [17] ^~ [18]
  10 |
+ 11 | [space in url]:   <http://example.com?a=1  2  >  
+    |                ^~~ [19]
+ 12 |
 
 Output:
   1 |
@@ -269,6 +288,8 @@ Output:
   8 | [title-with-single-quote]: #title ' title with spaces '
   9 | [title-with-parentheses]: #title ( title with spaces )
  10 |
+ 11 | [space in url]: <http://example.com?a=1  2  >  
+ 12 |
 
 [1] Multiple spaces are not allowed.
 [2] Multiple spaces are not allowed.
@@ -288,6 +309,7 @@ Output:
 [16] Multiple spaces are not allowed.
 [17] Multiple spaces are not allowed.
 [18] Multiple spaces are not allowed.
+[19] Multiple spaces are not allowed.
 ---
 
 
@@ -331,6 +353,12 @@ Code:
  15 | [foo  bar]: /foo
     |     ^~ [29]
  16 |
+ 17 | [space in url](  <http://example.com?a=1  2  >  )
+    |                ^~ [30]                        ^~ [31]
+ 18 | [space in url](  <http://example.com?a=1  2  >  "  title with  spaces  ")
+    |                ^~ [32]                        ^~ [33]        ^~ [35] ^~ [36]
+    |                                                  ^~ [34]
+ 19 |
 
 Output:
   1 |
@@ -349,6 +377,9 @@ Output:
  14 |
  15 | [foo bar]: /foo
  16 |
+ 17 | [space in url]( <http://example.com?a=1  2  > )
+ 18 | [space in url]( <http://example.com?a=1  2  > " title with spaces ")
+ 19 |
 
 [1] Multiple spaces are not allowed.
 [2] Multiple spaces are not allowed.
@@ -379,6 +410,13 @@ Output:
 [27] Multiple spaces are not allowed.
 [28] Multiple spaces are not allowed.
 [29] Multiple spaces are not allowed.
+[30] Multiple spaces are not allowed.
+[31] Multiple spaces are not allowed.
+[32] Multiple spaces are not allowed.
+[33] Multiple spaces are not allowed.
+[34] Multiple spaces are not allowed.
+[35] Multiple spaces are not allowed.
+[36] Multiple spaces are not allowed.
 ---
 
 

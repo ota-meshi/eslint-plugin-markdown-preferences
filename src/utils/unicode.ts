@@ -18,3 +18,11 @@ export function isSpaceOrTab(string: string): boolean {
 export function isPunctuation(char: string): boolean {
   return /^[\p{P}\p{S}]+$/u.test(char);
 }
+
+/**
+ * Check if the character is an ASCII control character
+ */
+export function isAsciiControlCharacter(char: string): boolean {
+  // eslint-disable-next-line no-control-regex -- Control characters
+  return /^[\x00-\x1f\x7f]+$/u.test(char);
+}

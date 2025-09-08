@@ -82,6 +82,7 @@ export default defineConfig([
       complexity: "off",
       "func-style": "off",
       "n/file-extension-in-import": "off",
+      "one-var": "off",
     },
   },
   {

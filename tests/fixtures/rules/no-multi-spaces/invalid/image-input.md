@@ -13,3 +13,6 @@
 ![     ]( /url  )
 
 [foo  bar]: /foo
+
+![space in url](  <http://example.com?a=1  2  >  )
+![space in url](  <http://example.com?a=1  2  >  "  title with  spaces  ")

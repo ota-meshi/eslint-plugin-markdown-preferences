@@ -66,8 +66,8 @@ export default createRule("${ruleId}", {
   fs.writeFileSync(
     testFile,
     `import { SnapshotRuleTester } from "eslint-snapshot-rule-tester";
-import rule from "../../../src/rules/${ruleId}.js"
-import { loadTestCases } from "../../utils/utils.js"
+import rule from "../../../src/rules/${ruleId}.ts"
+import { loadTestCases } from "../../utils/utils.ts"
 
 const tester = new SnapshotRuleTester()
 
