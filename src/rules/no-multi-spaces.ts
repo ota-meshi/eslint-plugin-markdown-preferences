@@ -13,7 +13,7 @@ import { getSourceLocationFromRange } from "../utils/ast.ts";
 import { createRule } from "../utils/index.ts";
 import { isWhitespace } from "../utils/unicode.ts";
 import { parseLinkDefinition } from "../utils/link-definition.ts";
-import { parseLink } from "../utils/link.ts";
+import { parseInlineLink } from "../utils/link.ts";
 import { parseImage } from "../utils/image.ts";
 
 export default createRule("no-multi-spaces", {
@@ -100,7 +100,7 @@ export default createRule("no-multi-spaces", {
      * Verify a link node
      */
     function verifyLink(node: Link) {
-      const parsed = parseLink(sourceCode, node);
+      const parsed = parseInlineLink(sourceCode, node);
       if (!parsed) return;
       const nodeRange = sourceCode.getRange(node);
       if (node.children.length > 0) {

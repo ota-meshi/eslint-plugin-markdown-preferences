@@ -2,9 +2,9 @@ import type { MarkdownSourceCode } from "@eslint/markdown";
 import type { SourceLocation } from "estree";
 import type { Link } from "mdast";
 import { isAsciiControlCharacter, isWhitespace } from "./unicode.ts";
-import { getSourceLocationFromRange } from "./ast.ts";
+import { getLinkKind, getSourceLocationFromRange } from "./ast.ts";
 
-export type ParsedLink = {
+export type ParsedInlineLink = {
   label: {
     range: [number, number];
     loc: SourceLocation;
@@ -23,12 +23,14 @@ export type ParsedLink = {
   } | null;
 };
 /**
- * Parse the link.
+ * Parse the inline link.
  */
-export function parseLink(
+export function parseInlineLink(
   sourceCode: MarkdownSourceCode,
   node: Link,
-): ParsedLink | null {
+): ParsedInlineLink | null {
+  const kind = getLinkKind(sourceCode, node);
+  if (kind !== "inline") return null;
   const nodeRange = sourceCode.getRange(node);
   let labelRange: [number, number];
   if (node.children.length === 0) {
@@ -42,7 +44,7 @@ export function parseLink(
       sourceCode.text.indexOf("]", lastChildRange[1]) + 1,
     ];
   }
-  const parsed = parseLinkDestAndTitleFromText(
+  const parsed = parseInlineLinkDestAndTitleFromText(
     sourceCode.text.slice(labelRange[1], nodeRange[1]),
   );
   if (!parsed) return null;
@@ -79,9 +81,9 @@ export function parseLink(
 }
 
 /**
- * Parse the link destination and link title from the given text.
+ * Parse the inline link destination and link title from the given text.
  */
-export function parseLinkDestAndTitleFromText(text: string): {
+export function parseInlineLinkDestAndTitleFromText(text: string): {
   destination: {
     type: "angle-bracketed" | "plain";
     text: string;
@@ -101,7 +103,7 @@ export function parseLinkDestAndTitleFromText(text: string): {
   skipSpaces();
 
   let destination: NonNullable<
-    ReturnType<typeof parseLinkDestAndTitleFromText>
+    ReturnType<typeof parseInlineLinkDestAndTitleFromText>
   >["destination"];
   const destinationStartIndex = index;
   if (text[index] === "<") {
@@ -145,7 +147,7 @@ export function parseLinkDestAndTitleFromText(text: string): {
   }
 
   let title: NonNullable<
-    ReturnType<typeof parseLinkDestAndTitleFromText>
+    ReturnType<typeof parseInlineLinkDestAndTitleFromText>
   >["title"];
   const titleStartIndex = index;
   const startChar = text[index];
