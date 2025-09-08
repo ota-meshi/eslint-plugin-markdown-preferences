@@ -1,0 +1,6356 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: link-bracket-newline >> invalid
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo](/url)
+    |    ^   ^
+    |    [1] [2]
+  3 | - ![ foo ](/url)
+    |    ^ [3] ^ [4]
+  4 | - ![
+  5 |     foo
+  6 |   ](/url)
+  7 | - ![foo
+    |    ^ [5]
+  8 |     ](/url)
+  9 | - ![
+ 10 |     foo](/url)
+    |        ^ [6]
+ 11 | - Multi lines
+ 12 |   - ![foo
+    |      ^ [7]
+ 13 |       bar](/url)
+    |          ^ [8]
+ 14 |   - ![ foo
+    |      ^ [9]
+ 15 |       bar ](/url)
+    |           ^ [10]
+ 16 |   - ![
+ 17 |       foo
+ 18 |       bar
+ 19 |     ](/url)
+ 20 | - Empty
+ 21 |   - ![](/url)
+    |      ^ [11]
+ 22 |   - ![ ](/url)
+    |      ^ [12]
+ 23 |   - ![
+ 24 |       ](/url)
+ 25 |
+
+Output:
+  1 |
+  2 | - ![
+  3 |     foo
+  4 |     ](/url)
+  5 | - ![
+  6 |       foo 
+  7 |     ](/url)
+  8 | - ![
+  9 |     foo
+ 10 |   ](/url)
+ 11 | - ![
+ 12 |     foo
+ 13 |     ](/url)
+ 14 | - ![
+ 15 |     foo
+ 16 |     ](/url)
+ 17 | - Multi lines
+ 18 |   - ![
+ 19 |       foo
+ 20 |       bar
+ 21 |       ](/url)
+ 22 |   - ![
+ 23 |         foo
+ 24 |       bar 
+ 25 |       ](/url)
+ 26 |   - ![
+ 27 |       foo
+ 28 |       bar
+ 29 |     ](/url)
+ 30 | - Empty
+ 31 |   - ![
+ 32 |       ](/url)
+ 33 |   - ![
+ 34 |         ](/url)
+ 35 |   - ![
+ 36 |       ](/url)
+ 37 |
+
+[1] Expected a linebreak after this opening bracket.
+[2] Expected a linebreak before this closing bracket.
+[3] Expected a linebreak after this opening bracket.
+[4] Expected a linebreak before this closing bracket.
+[5] Expected a linebreak after this opening bracket.
+[6] Expected a linebreak before this closing bracket.
+[7] Expected a linebreak after this opening bracket.
+[8] Expected a linebreak before this closing bracket.
+[9] Expected a linebreak after this opening bracket.
+[10] Expected a linebreak before this closing bracket.
+[11] Expected a linebreak after this opening bracket.
+[12] Expected a linebreak after this opening bracket.
+---
+
+
+Test: link-bracket-newline >> invalid
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/image-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo]
+    |    ^   ^
+    |    [1] [2]
+  3 | - ![ foo ]
+    |    ^ [3] ^ [4]
+  4 | - ![
+  5 |     foo
+  6 |     ]
+  7 | - ![foo
+    |    ^ [5]
+  8 |     ]
+  9 | - ![
+ 10 |     foo]
+    |        ^ [6]
+ 11 | - ![foo][]
+    |    ^   ^
+    |    [7] [8]
+ 12 | - ![ foo ][]
+    |    ^ [9] ^ [10]
+ 13 | - ![
+ 14 |     foo
+ 15 |     ][]
+ 16 | - ![foo
+    |    ^ [11]
+ 17 |     ][]
+ 18 | - ![
+ 19 |     foo][]
+    |        ^ [12]
+ 20 | - ![foo][x]
+    |    ^ [13] ^ [16]
+    |        ^ [14]
+    |         ^ [15]
+ 21 | - ![ foo ][x]
+    |    ^ [17] ^ [19]
+    |          ^ [18]
+    |             ^ [20]
+ 22 | - ![
+ 23 |     foo
+ 24 |     ][x]
+    |      ^ [21]
+    |        ^ [22]
+ 25 | - ![foo
+    |    ^ [23]
+ 26 |     ][x]
+    |      ^ [24]
+    |        ^ [25]
+ 27 | - ![
+ 28 |     foo][x]
+    |        ^ [26]
+    |         ^ [27]
+    |           ^ [28]
+ 29 | - ![x][foo]
+    |    ^ [29] ^ [32]
+    |      ^ [30]
+    |       ^ [31]
+ 30 | - ![x][ foo ]
+    |    ^ [33]   ^ [36]
+    |      ^ [34]
+    |       ^ [35]
+ 31 | - ![x][
+    |    ^ [37]
+    |      ^ [38]
+ 32 |     foo
+ 33 |     ]
+ 34 | - ![x][foo
+    |    ^ [39]
+    |      ^ [40]
+    |       ^ [41]
+ 35 |     ]
+ 36 | - ![x][
+    |    ^ [42]
+    |      ^ [43]
+ 37 |     foo]
+    |        ^ [44]
+ 38 | - Multi lines
+ 39 |   - ![foo
+    |      ^ [45]
+ 40 |       bar]
+    |          ^ [46]
+ 41 |   - ![ foo
+    |      ^ [47]
+ 42 |       bar ]
+    |           ^ [48]
+ 43 |   - ![
+ 44 |       foo
+ 45 |       bar
+ 46 |     ]
+ 47 |   - ![foo
+    |      ^ [49]
+ 48 |       bar][]
+    |          ^ [50]
+ 49 |   - ![ foo
+    |      ^ [51]
+ 50 |       bar ][]
+    |           ^ [52]
+ 51 |   - ![
+ 52 |       foo
+ 53 |       bar
+ 54 |     ][]
+ 55 |   - ![foo
+    |      ^ [53]
+ 56 |       bar][x]
+    |          ^ [54]
+    |           ^ [55]
+    |             ^ [56]
+ 57 |   - ![ foo
+    |      ^ [57]
+ 58 |       bar ][x]
+    |           ^ [58]
+    |            ^ [59]
+    |              ^ [60]
+ 59 |   - ![
+ 60 |       foo
+ 61 |       bar
+ 62 |     ][x]
+    |      ^ [61]
+    |        ^ [62]
+ 63 |   - ![x][foo
+    |      ^ [63]
+    |        ^ [64]
+    |         ^ [65]
+ 64 |       bar]
+    |          ^ [66]
+ 65 |   - ![x][ foo
+    |      ^ [67]
+    |        ^ [68]
+    |         ^ [69]
+ 66 |       bar ]
+    |           ^ [70]
+ 67 |   - ![x][
+    |      ^ [71]
+    |        ^ [72]
+ 68 |       foo
+ 69 |       bar
+ 70 |     ]
+ 71 | - Empty
+ 72 |   - ![][x]
+    |      ^ [73]
+    |        ^ [74]
+    |          ^ [75]
+ 73 |   - ![ ][x]
+    |      ^ [76]
+    |         ^ [77]
+    |           ^ [78]
+ 74 |   - ![
+ 75 |       ][x]
+    |        ^ [79]
+    |          ^ [80]
+ 76 |
+ 77 | [x]: /url
+    | ^ [81]
+    |   ^ [82]
+ 78 | [foo]: /url
+    | ^ [83]
+    |     ^ [84]
+ 79 | [foo bar]: /url
+    | ^ [85]  ^ [86]
+ 80 |
+
+Output:
+  1 |
+  2 | - ![
+  3 |     foo
+  4 |     ]
+  5 | - ![
+  6 |       foo 
+  7 |     ]
+  8 | - ![
+  9 |     foo
+ 10 |     ]
+ 11 | - ![
+ 12 |     foo
+ 13 |     ]
+ 14 | - ![
+ 15 |     foo
+ 16 |     ]
+ 17 | - ![
+ 18 |     foo
+ 19 |     ][]
+ 20 | - ![
+ 21 |       foo 
+ 22 |     ][]
+ 23 | - ![
+ 24 |     foo
+ 25 |     ][]
+ 26 | - ![
+ 27 |     foo
+ 28 |     ][]
+ 29 | - ![
+ 30 |     foo
+ 31 |     ][]
+ 32 | - ![
+ 33 |     foo
+ 34 |     ][
+ 35 |          x
+ 36 |          ]
+ 37 | - ![
+ 38 |       foo 
+ 39 |     ][
+ 40 |            x
+ 41 |            ]
+ 42 | - ![
+ 43 |     foo
+ 44 |     ][
+ 45 |       x
+ 46 |       ]
+ 47 | - ![
+ 48 |     foo
+ 49 |     ][
+ 50 |       x
+ 51 |       ]
+ 52 | - ![
+ 53 |     foo
+ 54 |     ][
+ 55 |          x
+ 56 |          ]
+ 57 | - ![
+ 58 |     x
+ 59 |     ][
+ 60 |        foo
+ 61 |        ]
+ 62 | - ![
+ 63 |     x
+ 64 |     ][
+ 65 |          foo 
+ 66 |        ]
+ 67 | - ![
+ 68 |     x
+ 69 |     ][
+ 70 |     foo
+ 71 |     ]
+ 72 | - ![
+ 73 |     x
+ 74 |     ][
+ 75 |        foo
+ 76 |     ]
+ 77 | - ![
+ 78 |     x
+ 79 |     ][
+ 80 |     foo
+ 81 |        ]
+ 82 | - Multi lines
+ 83 |   - ![
+ 84 |       foo
+ 85 |       bar
+ 86 |       ]
+ 87 |   - ![
+ 88 |         foo
+ 89 |       bar 
+ 90 |       ]
+ 91 |   - ![
+ 92 |       foo
+ 93 |       bar
+ 94 |     ]
+ 95 |   - ![
+ 96 |       foo
+ 97 |       bar
+ 98 |       ][]
+ 99 |   - ![
+100 |         foo
+101 |       bar 
+102 |       ][]
+103 |   - ![
+104 |       foo
+105 |       bar
+106 |     ][]
+107 |   - ![
+108 |       foo
+109 |       bar
+110 |       ][
+111 |            x
+112 |            ]
+113 |   - ![
+114 |         foo
+115 |       bar 
+116 |       ][
+117 |             x
+118 |             ]
+119 |   - ![
+120 |       foo
+121 |       bar
+122 |     ][
+123 |       x
+124 |       ]
+125 |   - ![
+126 |       x
+127 |       ][
+128 |          foo
+129 |       bar
+130 |          ]
+131 |   - ![
+132 |       x
+133 |       ][
+134 |            foo
+135 |       bar 
+136 |          ]
+137 |   - ![
+138 |       x
+139 |       ][
+140 |       foo
+141 |       bar
+142 |     ]
+143 | - Empty
+144 |   - ![
+145 |       ][
+146 |         x
+147 |         ]
+148 |   - ![
+149 |         ][
+150 |          x
+151 |          ]
+152 |   - ![
+153 |       ][
+154 |         x
+155 |         ]
+156 |
+157 | [
+158 |  x
+159 |  ]: /url
+160 | [
+161 |  foo
+162 |  ]: /url
+163 | [
+164 |  foo bar
+165 |  ]: /url
+166 |
+
+[1] Expected a linebreak after this opening bracket.
+[2] Expected a linebreak before this closing bracket.
+[3] Expected a linebreak after this opening bracket.
+[4] Expected a linebreak before this closing bracket.
+[5] Expected a linebreak after this opening bracket.
+[6] Expected a linebreak before this closing bracket.
+[7] Expected a linebreak after this opening bracket.
+[8] Expected a linebreak before this closing bracket.
+[9] Expected a linebreak after this opening bracket.
+[10] Expected a linebreak before this closing bracket.
+[11] Expected a linebreak after this opening bracket.
+[12] Expected a linebreak before this closing bracket.
+[13] Expected a linebreak after this opening bracket.
+[14] Expected a linebreak before this closing bracket.
+[15] Expected a linebreak after this opening bracket.
+[16] Expected a linebreak before this closing bracket.
+[17] Expected a linebreak after this opening bracket.
+[18] Expected a linebreak before this closing bracket.
+[19] Expected a linebreak after this opening bracket.
+[20] Expected a linebreak before this closing bracket.
+[21] Expected a linebreak after this opening bracket.
+[22] Expected a linebreak before this closing bracket.
+[23] Expected a linebreak after this opening bracket.
+[24] Expected a linebreak after this opening bracket.
+[25] Expected a linebreak before this closing bracket.
+[26] Expected a linebreak before this closing bracket.
+[27] Expected a linebreak after this opening bracket.
+[28] Expected a linebreak before this closing bracket.
+[29] Expected a linebreak after this opening bracket.
+[30] Expected a linebreak before this closing bracket.
+[31] Expected a linebreak after this opening bracket.
+[32] Expected a linebreak before this closing bracket.
+[33] Expected a linebreak after this opening bracket.
+[34] Expected a linebreak before this closing bracket.
+[35] Expected a linebreak after this opening bracket.
+[36] Expected a linebreak before this closing bracket.
+[37] Expected a linebreak after this opening bracket.
+[38] Expected a linebreak before this closing bracket.
+[39] Expected a linebreak after this opening bracket.
+[40] Expected a linebreak before this closing bracket.
+[41] Expected a linebreak after this opening bracket.
+[42] Expected a linebreak after this opening bracket.
+[43] Expected a linebreak before this closing bracket.
+[44] Expected a linebreak before this closing bracket.
+[45] Expected a linebreak after this opening bracket.
+[46] Expected a linebreak before this closing bracket.
+[47] Expected a linebreak after this opening bracket.
+[48] Expected a linebreak before this closing bracket.
+[49] Expected a linebreak after this opening bracket.
+[50] Expected a linebreak before this closing bracket.
+[51] Expected a linebreak after this opening bracket.
+[52] Expected a linebreak before this closing bracket.
+[53] Expected a linebreak after this opening bracket.
+[54] Expected a linebreak before this closing bracket.
+[55] Expected a linebreak after this opening bracket.
+[56] Expected a linebreak before this closing bracket.
+[57] Expected a linebreak after this opening bracket.
+[58] Expected a linebreak before this closing bracket.
+[59] Expected a linebreak after this opening bracket.
+[60] Expected a linebreak before this closing bracket.
+[61] Expected a linebreak after this opening bracket.
+[62] Expected a linebreak before this closing bracket.
+[63] Expected a linebreak after this opening bracket.
+[64] Expected a linebreak before this closing bracket.
+[65] Expected a linebreak after this opening bracket.
+[66] Expected a linebreak before this closing bracket.
+[67] Expected a linebreak after this opening bracket.
+[68] Expected a linebreak before this closing bracket.
+[69] Expected a linebreak after this opening bracket.
+[70] Expected a linebreak before this closing bracket.
+[71] Expected a linebreak after this opening bracket.
+[72] Expected a linebreak before this closing bracket.
+[73] Expected a linebreak after this opening bracket.
+[74] Expected a linebreak after this opening bracket.
+[75] Expected a linebreak before this closing bracket.
+[76] Expected a linebreak after this opening bracket.
+[77] Expected a linebreak after this opening bracket.
+[78] Expected a linebreak before this closing bracket.
+[79] Expected a linebreak after this opening bracket.
+[80] Expected a linebreak before this closing bracket.
+[81] Expected a linebreak after this opening bracket.
+[82] Expected a linebreak before this closing bracket.
+[83] Expected a linebreak after this opening bracket.
+[84] Expected a linebreak before this closing bracket.
+[85] Expected a linebreak after this opening bracket.
+[86] Expected a linebreak before this closing bracket.
+---
+
+
+Test: link-bracket-newline >> invalid
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/link-definition-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | [a]: /url
+    | ^ [1]
+    |   ^ [2]
+  3 | [ b ]: /url
+    | ^   ^
+    | [3] [4]
+  4 | [
+  5 |   c
+  6 |   ]: /url
+  7 | [d
+    | ^ [5]
+  8 |   ]: /url
+  9 | [
+ 10 |   e]: /url
+    |    ^ [6]
+ 11 | [ f
+    | ^ [7]
+ 12 |   g ]: /url
+    |     ^ [8]
+ 13 | [ h
+    | ^ [9]
+ 14 |   i
+ 15 | ]: /url
+ 16 | [
+ 17 |   j
+ 18 |   k ]: /url
+    |     ^ [10]
+ 19 | [
+ 20 |   l
+ 21 |   m
+ 22 |   ]: /url
+ 23 |
+
+Output:
+  1 |
+  2 | [
+  3 |  a
+  4 |  ]: /url
+  5 | [
+  6 |    b 
+  7 |  ]: /url
+  8 | [
+  9 |   c
+ 10 |   ]: /url
+ 11 | [
+ 12 |  d
+ 13 |   ]: /url
+ 14 | [
+ 15 |   e
+ 16 |  ]: /url
+ 17 | [
+ 18 |    f
+ 19 |   g 
+ 20 |  ]: /url
+ 21 | [
+ 22 |    h
+ 23 |   i
+ 24 | ]: /url
+ 25 | [
+ 26 |   j
+ 27 |   k 
+ 28 |  ]: /url
+ 29 | [
+ 30 |   l
+ 31 |   m
+ 32 |   ]: /url
+ 33 |
+
+[1] Expected a linebreak after this opening bracket.
+[2] Expected a linebreak before this closing bracket.
+[3] Expected a linebreak after this opening bracket.
+[4] Expected a linebreak before this closing bracket.
+[5] Expected a linebreak after this opening bracket.
+[6] Expected a linebreak before this closing bracket.
+[7] Expected a linebreak after this opening bracket.
+[8] Expected a linebreak before this closing bracket.
+[9] Expected a linebreak after this opening bracket.
+[10] Expected a linebreak before this closing bracket.
+---
+
+
+Test: link-bracket-newline >> invalid
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo](/url)
+    |   ^   ^
+    |   [1] [2]
+  3 | - [ foo ](/url)
+    |   ^ [3] ^ [4]
+  4 | - [
+  5 |     foo
+  6 |   ](/url)
+  7 | - [foo
+    |   ^ [5]
+  8 |     ](/url)
+  9 | - [
+ 10 |     foo](/url)
+    |        ^ [6]
+ 11 | - Multi lines
+ 12 |   - [foo
+    |     ^ [7]
+ 13 |       bar](/url)
+    |          ^ [8]
+ 14 |   - [ foo
+    |     ^ [9]
+ 15 |       bar ](/url)
+    |           ^ [10]
+ 16 |   - [
+ 17 |       foo
+ 18 |       bar
+ 19 |     ](/url)
+ 20 | - Empty
+ 21 |   - [](/url)
+    |     ^ [11]
+ 22 |   - [ ](/url)
+    |     ^ [12]
+ 23 |   - [      ](/url)
+    |     ^ [13]
+ 24 |   - [
+ 25 |       ](/url)
+ 26 |
+
+Output:
+  1 |
+  2 | - [
+  3 |    foo
+  4 |    ](/url)
+  5 | - [
+  6 |      foo 
+  7 |    ](/url)
+  8 | - [
+  9 |     foo
+ 10 |   ](/url)
+ 11 | - [
+ 12 |    foo
+ 13 |     ](/url)
+ 14 | - [
+ 15 |     foo
+ 16 |    ](/url)
+ 17 | - Multi lines
+ 18 |   - [
+ 19 |      foo
+ 20 |       bar
+ 21 |      ](/url)
+ 22 |   - [
+ 23 |        foo
+ 24 |       bar 
+ 25 |      ](/url)
+ 26 |   - [
+ 27 |       foo
+ 28 |       bar
+ 29 |     ](/url)
+ 30 | - Empty
+ 31 |   - [
+ 32 |      ](/url)
+ 33 |   - [
+ 34 |        ](/url)
+ 35 |   - [
+ 36 |                  ](/url)
+ 37 |   - [
+ 38 |       ](/url)
+ 39 |
+
+[1] Expected a linebreak after this opening bracket.
+[2] Expected a linebreak before this closing bracket.
+[3] Expected a linebreak after this opening bracket.
+[4] Expected a linebreak before this closing bracket.
+[5] Expected a linebreak after this opening bracket.
+[6] Expected a linebreak before this closing bracket.
+[7] Expected a linebreak after this opening bracket.
+[8] Expected a linebreak before this closing bracket.
+[9] Expected a linebreak after this opening bracket.
+[10] Expected a linebreak before this closing bracket.
+[11] Expected a linebreak after this opening bracket.
+[12] Expected a linebreak after this opening bracket.
+[13] Expected a linebreak after this opening bracket.
+---
+
+
+Test: link-bracket-newline >> invalid
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/link-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo]
+    |   ^   ^
+    |   [1] [2]
+  3 | - [ foo ]
+    |   ^ [3] ^ [4]
+  4 | - [
+  5 |     foo
+  6 |     ]
+  7 | - [foo
+    |   ^ [5]
+  8 |     ]
+  9 | - [
+ 10 |     foo]
+    |        ^ [6]
+ 11 | - [foo][]
+    |   ^   ^
+    |   [7] [8]
+ 12 | - [ foo ][]
+    |   ^ [9] ^ [10]
+ 13 | - [
+ 14 |     foo
+ 15 |     ][]
+ 16 | - [foo
+    |   ^ [11]
+ 17 |     ][]
+ 18 | - [
+ 19 |     foo][]
+    |        ^ [12]
+ 20 | - [foo][x]
+    |   ^ [13] ^ [16]
+    |       ^ [14]
+    |        ^ [15]
+ 21 | - [ foo ][x]
+    |   ^ [17] ^ [19]
+    |         ^ [18]
+    |            ^ [20]
+ 22 | - [
+ 23 |     foo
+ 24 |     ][x]
+    |      ^ [21]
+    |        ^ [22]
+ 25 | - [foo
+    |   ^ [23]
+ 26 |     ][x]
+    |      ^ [24]
+    |        ^ [25]
+ 27 | - [
+ 28 |     foo][x]
+    |        ^ [26]
+    |         ^ [27]
+    |           ^ [28]
+ 29 | - [x][foo]
+    |   ^ [29] ^ [32]
+    |     ^ [30]
+    |      ^ [31]
+ 30 | - [x][ foo ]
+    |   ^ [33]   ^ [36]
+    |     ^ [34]
+    |      ^ [35]
+ 31 | - [x][
+    |   ^ [37]
+    |     ^ [38]
+ 32 |     foo
+ 33 |     ]
+ 34 | - [x][foo
+    |   ^ [39]
+    |     ^ [40]
+    |      ^ [41]
+ 35 |     ]
+ 36 | - [x][
+    |   ^ [42]
+    |     ^ [43]
+ 37 |     foo]
+    |        ^ [44]
+ 38 | - Multi lines
+ 39 |   - [foo
+    |     ^ [45]
+ 40 |       bar]
+    |          ^ [46]
+ 41 |   - [ foo
+    |     ^ [47]
+ 42 |       bar ]
+    |           ^ [48]
+ 43 |   - [
+ 44 |       foo
+ 45 |       bar
+ 46 |     ]
+ 47 |   - [foo
+    |     ^ [49]
+ 48 |       bar][]
+    |          ^ [50]
+ 49 |   - [ foo
+    |     ^ [51]
+ 50 |       bar ][]
+    |           ^ [52]
+ 51 |   - [
+ 52 |       foo
+ 53 |       bar
+ 54 |     ][]
+ 55 |   - [foo
+    |     ^ [53]
+ 56 |       bar][x]
+    |          ^ [54]
+    |           ^ [55]
+    |             ^ [56]
+ 57 |   - [ foo
+    |     ^ [57]
+ 58 |       bar ][x]
+    |           ^ [58]
+    |            ^ [59]
+    |              ^ [60]
+ 59 |   - [
+ 60 |       foo
+ 61 |       bar
+ 62 |     ][x]
+    |      ^ [61]
+    |        ^ [62]
+ 63 |   - [x][foo
+    |     ^ [63]
+    |       ^ [64]
+    |        ^ [65]
+ 64 |       bar]
+    |          ^ [66]
+ 65 |   - [x][ foo
+    |     ^ [67]
+    |       ^ [68]
+    |        ^ [69]
+ 66 |       bar ]
+    |           ^ [70]
+ 67 |   - [x][
+    |     ^ [71]
+    |       ^ [72]
+ 68 |       foo
+ 69 |       bar
+ 70 |     ]
+ 71 | - Empty
+ 72 |   - [][x]
+    |     ^ [73]
+    |       ^ [74]
+    |         ^ [75]
+ 73 |   - [ ][x]
+    |     ^ [76]
+    |        ^ [77]
+    |          ^ [78]
+ 74 |   - [
+ 75 |       ][x]
+    |        ^ [79]
+    |          ^ [80]
+ 76 |
+ 77 | [x]: /url
+    | ^ [81]
+    |   ^ [82]
+ 78 | [foo]: /url
+    | ^ [83]
+    |     ^ [84]
+ 79 | [foo bar]: /url
+    | ^ [85]  ^ [86]
+ 80 |
+
+Output:
+  1 |
+  2 | - [
+  3 |    foo
+  4 |    ]
+  5 | - [
+  6 |      foo 
+  7 |    ]
+  8 | - [
+  9 |     foo
+ 10 |     ]
+ 11 | - [
+ 12 |    foo
+ 13 |     ]
+ 14 | - [
+ 15 |     foo
+ 16 |    ]
+ 17 | - [
+ 18 |    foo
+ 19 |    ][]
+ 20 | - [
+ 21 |      foo 
+ 22 |    ][]
+ 23 | - [
+ 24 |     foo
+ 25 |     ][]
+ 26 | - [
+ 27 |    foo
+ 28 |     ][]
+ 29 | - [
+ 30 |     foo
+ 31 |    ][]
+ 32 | - [
+ 33 |    foo
+ 34 |    ][
+ 35 |         x
+ 36 |         ]
+ 37 | - [
+ 38 |      foo 
+ 39 |    ][
+ 40 |           x
+ 41 |           ]
+ 42 | - [
+ 43 |     foo
+ 44 |     ][
+ 45 |       x
+ 46 |       ]
+ 47 | - [
+ 48 |    foo
+ 49 |     ][
+ 50 |       x
+ 51 |       ]
+ 52 | - [
+ 53 |     foo
+ 54 |    ][
+ 55 |          x
+ 56 |          ]
+ 57 | - [
+ 58 |    x
+ 59 |    ][
+ 60 |       foo
+ 61 |       ]
+ 62 | - [
+ 63 |    x
+ 64 |    ][
+ 65 |         foo 
+ 66 |       ]
+ 67 | - [
+ 68 |    x
+ 69 |    ][
+ 70 |     foo
+ 71 |     ]
+ 72 | - [
+ 73 |    x
+ 74 |    ][
+ 75 |       foo
+ 76 |     ]
+ 77 | - [
+ 78 |    x
+ 79 |    ][
+ 80 |     foo
+ 81 |       ]
+ 82 | - Multi lines
+ 83 |   - [
+ 84 |      foo
+ 85 |       bar
+ 86 |      ]
+ 87 |   - [
+ 88 |        foo
+ 89 |       bar 
+ 90 |      ]
+ 91 |   - [
+ 92 |       foo
+ 93 |       bar
+ 94 |     ]
+ 95 |   - [
+ 96 |      foo
+ 97 |       bar
+ 98 |      ][]
+ 99 |   - [
+100 |        foo
+101 |       bar 
+102 |      ][]
+103 |   - [
+104 |       foo
+105 |       bar
+106 |     ][]
+107 |   - [
+108 |      foo
+109 |       bar
+110 |      ][
+111 |            x
+112 |            ]
+113 |   - [
+114 |        foo
+115 |       bar 
+116 |      ][
+117 |             x
+118 |             ]
+119 |   - [
+120 |       foo
+121 |       bar
+122 |     ][
+123 |       x
+124 |       ]
+125 |   - [
+126 |      x
+127 |      ][
+128 |         foo
+129 |       bar
+130 |         ]
+131 |   - [
+132 |      x
+133 |      ][
+134 |           foo
+135 |       bar 
+136 |         ]
+137 |   - [
+138 |      x
+139 |      ][
+140 |       foo
+141 |       bar
+142 |     ]
+143 | - Empty
+144 |   - [
+145 |      ][
+146 |        x
+147 |        ]
+148 |   - [
+149 |        ][
+150 |         x
+151 |         ]
+152 |   - [
+153 |       ][
+154 |         x
+155 |         ]
+156 |
+157 | [
+158 |  x
+159 |  ]: /url
+160 | [
+161 |  foo
+162 |  ]: /url
+163 | [
+164 |  foo bar
+165 |  ]: /url
+166 |
+
+[1] Expected a linebreak after this opening bracket.
+[2] Expected a linebreak before this closing bracket.
+[3] Expected a linebreak after this opening bracket.
+[4] Expected a linebreak before this closing bracket.
+[5] Expected a linebreak after this opening bracket.
+[6] Expected a linebreak before this closing bracket.
+[7] Expected a linebreak after this opening bracket.
+[8] Expected a linebreak before this closing bracket.
+[9] Expected a linebreak after this opening bracket.
+[10] Expected a linebreak before this closing bracket.
+[11] Expected a linebreak after this opening bracket.
+[12] Expected a linebreak before this closing bracket.
+[13] Expected a linebreak after this opening bracket.
+[14] Expected a linebreak before this closing bracket.
+[15] Expected a linebreak after this opening bracket.
+[16] Expected a linebreak before this closing bracket.
+[17] Expected a linebreak after this opening bracket.
+[18] Expected a linebreak before this closing bracket.
+[19] Expected a linebreak after this opening bracket.
+[20] Expected a linebreak before this closing bracket.
+[21] Expected a linebreak after this opening bracket.
+[22] Expected a linebreak before this closing bracket.
+[23] Expected a linebreak after this opening bracket.
+[24] Expected a linebreak after this opening bracket.
+[25] Expected a linebreak before this closing bracket.
+[26] Expected a linebreak before this closing bracket.
+[27] Expected a linebreak after this opening bracket.
+[28] Expected a linebreak before this closing bracket.
+[29] Expected a linebreak after this opening bracket.
+[30] Expected a linebreak before this closing bracket.
+[31] Expected a linebreak after this opening bracket.
+[32] Expected a linebreak before this closing bracket.
+[33] Expected a linebreak after this opening bracket.
+[34] Expected a linebreak before this closing bracket.
+[35] Expected a linebreak after this opening bracket.
+[36] Expected a linebreak before this closing bracket.
+[37] Expected a linebreak after this opening bracket.
+[38] Expected a linebreak before this closing bracket.
+[39] Expected a linebreak after this opening bracket.
+[40] Expected a linebreak before this closing bracket.
+[41] Expected a linebreak after this opening bracket.
+[42] Expected a linebreak after this opening bracket.
+[43] Expected a linebreak before this closing bracket.
+[44] Expected a linebreak before this closing bracket.
+[45] Expected a linebreak after this opening bracket.
+[46] Expected a linebreak before this closing bracket.
+[47] Expected a linebreak after this opening bracket.
+[48] Expected a linebreak before this closing bracket.
+[49] Expected a linebreak after this opening bracket.
+[50] Expected a linebreak before this closing bracket.
+[51] Expected a linebreak after this opening bracket.
+[52] Expected a linebreak before this closing bracket.
+[53] Expected a linebreak after this opening bracket.
+[54] Expected a linebreak before this closing bracket.
+[55] Expected a linebreak after this opening bracket.
+[56] Expected a linebreak before this closing bracket.
+[57] Expected a linebreak after this opening bracket.
+[58] Expected a linebreak before this closing bracket.
+[59] Expected a linebreak after this opening bracket.
+[60] Expected a linebreak before this closing bracket.
+[61] Expected a linebreak after this opening bracket.
+[62] Expected a linebreak before this closing bracket.
+[63] Expected a linebreak after this opening bracket.
+[64] Expected a linebreak before this closing bracket.
+[65] Expected a linebreak after this opening bracket.
+[66] Expected a linebreak before this closing bracket.
+[67] Expected a linebreak after this opening bracket.
+[68] Expected a linebreak before this closing bracket.
+[69] Expected a linebreak after this opening bracket.
+[70] Expected a linebreak before this closing bracket.
+[71] Expected a linebreak after this opening bracket.
+[72] Expected a linebreak before this closing bracket.
+[73] Expected a linebreak after this opening bracket.
+[74] Expected a linebreak after this opening bracket.
+[75] Expected a linebreak before this closing bracket.
+[76] Expected a linebreak after this opening bracket.
+[77] Expected a linebreak after this opening bracket.
+[78] Expected a linebreak before this closing bracket.
+[79] Expected a linebreak after this opening bracket.
+[80] Expected a linebreak before this closing bracket.
+[81] Expected a linebreak after this opening bracket.
+[82] Expected a linebreak before this closing bracket.
+[83] Expected a linebreak after this opening bracket.
+[84] Expected a linebreak before this closing bracket.
+[85] Expected a linebreak after this opening bracket.
+[86] Expected a linebreak before this closing bracket.
+---
+
+
+Test: link-bracket-newline >> invalid
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/no-newline-image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo](/url)
+    |    ^   ^
+    |    [1] [2]
+  3 | - ![ foo ](/url)
+    |    ^ [3] ^ [4]
+  4 | - ![foo ](/url)
+    |    ^    ^
+    |    [5]  [6]
+  5 | - ![ foo](/url)
+    |    ^    ^
+    |    [7]  [8]
+  6 | - Multi lines
+  7 |   - ![foo
+    |      ^ [9]
+  8 |       bar](/url)
+    |          ^ [10]
+  9 |   - ![ foo
+    |      ^ [11]
+ 10 |       bar ](/url)
+    |           ^ [12]
+ 11 | - Empty
+ 12 |   - ![](/url)
+    |      ^ [13]
+ 13 |   - ![ ](/url)
+    |      ^ [14]
+ 14 |
+
+Output:
+  1 |
+  2 | - ![
+  3 |     foo
+  4 |     ](/url)
+  5 | - ![
+  6 |       foo 
+  7 |     ](/url)
+  8 | - ![
+  9 |     foo 
+ 10 |     ](/url)
+ 11 | - ![
+ 12 |       foo
+ 13 |     ](/url)
+ 14 | - Multi lines
+ 15 |   - ![
+ 16 |       foo
+ 17 |       bar
+ 18 |       ](/url)
+ 19 |   - ![
+ 20 |         foo
+ 21 |       bar 
+ 22 |       ](/url)
+ 23 | - Empty
+ 24 |   - ![
+ 25 |       ](/url)
+ 26 |   - ![
+ 27 |         ](/url)
+ 28 |
+
+[1] Expected a linebreak after this opening bracket.
+[2] Expected a linebreak before this closing bracket.
+[3] Expected a linebreak after this opening bracket.
+[4] Expected a linebreak before this closing bracket.
+[5] Expected a linebreak after this opening bracket.
+[6] Expected a linebreak before this closing bracket.
+[7] Expected a linebreak after this opening bracket.
+[8] Expected a linebreak before this closing bracket.
+[9] Expected a linebreak after this opening bracket.
+[10] Expected a linebreak before this closing bracket.
+[11] Expected a linebreak after this opening bracket.
+[12] Expected a linebreak before this closing bracket.
+[13] Expected a linebreak after this opening bracket.
+[14] Expected a linebreak after this opening bracket.
+---
+
+
+Test: link-bracket-newline >> invalid
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/no-newline-image-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo]
+    |    ^   ^
+    |    [1] [2]
+  3 | - ![ foo ]
+    |    ^ [3] ^ [4]
+  4 | - ![foo ]
+    |    ^    ^
+    |    [5]  [6]
+  5 | - ![ foo]
+    |    ^    ^
+    |    [7]  [8]
+  6 | - ![foo][]
+    |    ^   ^
+    |    [9] [10]
+  7 | - ![ foo ][]
+    |    ^     ^
+    |    [11]  [12]
+  8 | - ![foo ][]
+    |    ^    ^
+    |    [13] [14]
+  9 | - ![ foo][]
+    |    ^    ^
+    |    [15] [16]
+ 10 | - ![foo][x]
+    |    ^ [17] ^ [20]
+    |        ^ [18]
+    |         ^ [19]
+ 11 | - ![ foo ][x]
+    |    ^ [21] ^ [23]
+    |          ^ [22]
+    |             ^ [24]
+ 12 | - ![foo ][x]
+    |    ^ [25]  ^ [28]
+    |         ^ [26]
+    |          ^ [27]
+ 13 | - ![ foo][x]
+    |    ^ [29]  ^ [32]
+    |         ^ [30]
+    |          ^ [31]
+ 14 | - ![x][foo]
+    |    ^ [33] ^ [36]
+    |      ^ [34]
+    |       ^ [35]
+ 15 | - ![x][ foo ]
+    |    ^ [37]   ^ [40]
+    |      ^ [38]
+    |       ^ [39]
+ 16 | - ![x][foo ]
+    |    ^ [41]  ^ [44]
+    |      ^ [42]
+    |       ^ [43]
+ 17 | - ![x][ foo]
+    |    ^ [45]  ^ [48]
+    |      ^ [46]
+    |       ^ [47]
+ 18 | - Multi lines
+ 19 |   - ![foo
+    |      ^ [49]
+ 20 |       bar]
+    |          ^ [50]
+ 21 |   - ![ foo
+    |      ^ [51]
+ 22 |       bar ]
+    |           ^ [52]
+ 23 |   - ![foo
+    |      ^ [53]
+ 24 |       bar][]
+    |          ^ [54]
+ 25 |   - ![ foo
+    |      ^ [55]
+ 26 |       bar ][]
+    |           ^ [56]
+ 27 |   - ![foo
+    |      ^ [57]
+ 28 |       bar][x]
+    |          ^ [58]
+    |           ^ [59]
+    |             ^ [60]
+ 29 |   - ![ foo
+    |      ^ [61]
+ 30 |       bar ][x]
+    |           ^ [62]
+    |            ^ [63]
+    |              ^ [64]
+ 31 |   - ![x][foo
+    |      ^ [65]
+    |        ^ [66]
+    |         ^ [67]
+ 32 |       bar]
+    |          ^ [68]
+ 33 |   - ![x][ foo
+    |      ^ [69]
+    |        ^ [70]
+    |         ^ [71]
+ 34 |       bar ]
+    |           ^ [72]
+ 35 | - Empty
+ 36 |   - ![][x]
+    |      ^ [73]
+    |        ^ [74]
+    |          ^ [75]
+ 37 |   - ![ ][x]
+    |      ^ [76]
+    |         ^ [77]
+    |           ^ [78]
+ 38 |
+ 39 | [x]: /url
+    | ^ [79]
+    |   ^ [80]
+ 40 | [foo]: /url
+    | ^ [81]
+    |     ^ [82]
+ 41 | [foo bar]: /url
+    | ^ [83]  ^ [84]
+ 42 |
+
+Output:
+  1 |
+  2 | - ![
+  3 |     foo
+  4 |     ]
+  5 | - ![
+  6 |       foo 
+  7 |     ]
+  8 | - ![
+  9 |     foo 
+ 10 |     ]
+ 11 | - ![
+ 12 |       foo
+ 13 |     ]
+ 14 | - ![
+ 15 |     foo
+ 16 |     ][]
+ 17 | - ![
+ 18 |       foo 
+ 19 |     ][]
+ 20 | - ![
+ 21 |     foo 
+ 22 |     ][]
+ 23 | - ![
+ 24 |       foo
+ 25 |     ][]
+ 26 | - ![
+ 27 |     foo
+ 28 |     ][
+ 29 |          x
+ 30 |          ]
+ 31 | - ![
+ 32 |       foo 
+ 33 |     ][
+ 34 |            x
+ 35 |            ]
+ 36 | - ![
+ 37 |     foo 
+ 38 |     ][
+ 39 |           x
+ 40 |           ]
+ 41 | - ![
+ 42 |       foo
+ 43 |     ][
+ 44 |           x
+ 45 |           ]
+ 46 | - ![
+ 47 |     x
+ 48 |     ][
+ 49 |        foo
+ 50 |        ]
+ 51 | - ![
+ 52 |     x
+ 53 |     ][
+ 54 |          foo 
+ 55 |        ]
+ 56 | - ![
+ 57 |     x
+ 58 |     ][
+ 59 |        foo 
+ 60 |        ]
+ 61 | - ![
+ 62 |     x
+ 63 |     ][
+ 64 |          foo
+ 65 |        ]
+ 66 | - Multi lines
+ 67 |   - ![
+ 68 |       foo
+ 69 |       bar
+ 70 |       ]
+ 71 |   - ![
+ 72 |         foo
+ 73 |       bar 
+ 74 |       ]
+ 75 |   - ![
+ 76 |       foo
+ 77 |       bar
+ 78 |       ][]
+ 79 |   - ![
+ 80 |         foo
+ 81 |       bar 
+ 82 |       ][]
+ 83 |   - ![
+ 84 |       foo
+ 85 |       bar
+ 86 |       ][
+ 87 |            x
+ 88 |            ]
+ 89 |   - ![
+ 90 |         foo
+ 91 |       bar 
+ 92 |       ][
+ 93 |             x
+ 94 |             ]
+ 95 |   - ![
+ 96 |       x
+ 97 |       ][
+ 98 |          foo
+ 99 |       bar
+100 |          ]
+101 |   - ![
+102 |       x
+103 |       ][
+104 |            foo
+105 |       bar 
+106 |          ]
+107 | - Empty
+108 |   - ![
+109 |       ][
+110 |         x
+111 |         ]
+112 |   - ![
+113 |         ][
+114 |          x
+115 |          ]
+116 |
+117 | [
+118 |  x
+119 |  ]: /url
+120 | [
+121 |  foo
+122 |  ]: /url
+123 | [
+124 |  foo bar
+125 |  ]: /url
+126 |
+
+[1] Expected a linebreak after this opening bracket.
+[2] Expected a linebreak before this closing bracket.
+[3] Expected a linebreak after this opening bracket.
+[4] Expected a linebreak before this closing bracket.
+[5] Expected a linebreak after this opening bracket.
+[6] Expected a linebreak before this closing bracket.
+[7] Expected a linebreak after this opening bracket.
+[8] Expected a linebreak before this closing bracket.
+[9] Expected a linebreak after this opening bracket.
+[10] Expected a linebreak before this closing bracket.
+[11] Expected a linebreak after this opening bracket.
+[12] Expected a linebreak before this closing bracket.
+[13] Expected a linebreak after this opening bracket.
+[14] Expected a linebreak before this closing bracket.
+[15] Expected a linebreak after this opening bracket.
+[16] Expected a linebreak before this closing bracket.
+[17] Expected a linebreak after this opening bracket.
+[18] Expected a linebreak before this closing bracket.
+[19] Expected a linebreak after this opening bracket.
+[20] Expected a linebreak before this closing bracket.
+[21] Expected a linebreak after this opening bracket.
+[22] Expected a linebreak before this closing bracket.
+[23] Expected a linebreak after this opening bracket.
+[24] Expected a linebreak before this closing bracket.
+[25] Expected a linebreak after this opening bracket.
+[26] Expected a linebreak before this closing bracket.
+[27] Expected a linebreak after this opening bracket.
+[28] Expected a linebreak before this closing bracket.
+[29] Expected a linebreak after this opening bracket.
+[30] Expected a linebreak before this closing bracket.
+[31] Expected a linebreak after this opening bracket.
+[32] Expected a linebreak before this closing bracket.
+[33] Expected a linebreak after this opening bracket.
+[34] Expected a linebreak before this closing bracket.
+[35] Expected a linebreak after this opening bracket.
+[36] Expected a linebreak before this closing bracket.
+[37] Expected a linebreak after this opening bracket.
+[38] Expected a linebreak before this closing bracket.
+[39] Expected a linebreak after this opening bracket.
+[40] Expected a linebreak before this closing bracket.
+[41] Expected a linebreak after this opening bracket.
+[42] Expected a linebreak before this closing bracket.
+[43] Expected a linebreak after this opening bracket.
+[44] Expected a linebreak before this closing bracket.
+[45] Expected a linebreak after this opening bracket.
+[46] Expected a linebreak before this closing bracket.
+[47] Expected a linebreak after this opening bracket.
+[48] Expected a linebreak before this closing bracket.
+[49] Expected a linebreak after this opening bracket.
+[50] Expected a linebreak before this closing bracket.
+[51] Expected a linebreak after this opening bracket.
+[52] Expected a linebreak before this closing bracket.
+[53] Expected a linebreak after this opening bracket.
+[54] Expected a linebreak before this closing bracket.
+[55] Expected a linebreak after this opening bracket.
+[56] Expected a linebreak before this closing bracket.
+[57] Expected a linebreak after this opening bracket.
+[58] Expected a linebreak before this closing bracket.
+[59] Expected a linebreak after this opening bracket.
+[60] Expected a linebreak before this closing bracket.
+[61] Expected a linebreak after this opening bracket.
+[62] Expected a linebreak before this closing bracket.
+[63] Expected a linebreak after this opening bracket.
+[64] Expected a linebreak before this closing bracket.
+[65] Expected a linebreak after this opening bracket.
+[66] Expected a linebreak before this closing bracket.
+[67] Expected a linebreak after this opening bracket.
+[68] Expected a linebreak before this closing bracket.
+[69] Expected a linebreak after this opening bracket.
+[70] Expected a linebreak before this closing bracket.
+[71] Expected a linebreak after this opening bracket.
+[72] Expected a linebreak before this closing bracket.
+[73] Expected a linebreak after this opening bracket.
+[74] Expected a linebreak after this opening bracket.
+[75] Expected a linebreak before this closing bracket.
+[76] Expected a linebreak after this opening bracket.
+[77] Expected a linebreak after this opening bracket.
+[78] Expected a linebreak before this closing bracket.
+[79] Expected a linebreak after this opening bracket.
+[80] Expected a linebreak before this closing bracket.
+[81] Expected a linebreak after this opening bracket.
+[82] Expected a linebreak before this closing bracket.
+[83] Expected a linebreak after this opening bracket.
+[84] Expected a linebreak before this closing bracket.
+---
+
+
+Test: link-bracket-newline >> invalid
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/no-newline-link-definition-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | [a]: /url
+    | ^ [1]
+    |   ^ [2]
+  3 | [ b ]: /url
+    | ^   ^
+    | [3] [4]
+  4 | [d ]: /url
+    | ^ [5]
+    |    ^ [6]
+  5 | [ e]: /url
+    | ^ [7]
+    |    ^ [8]
+  6 | [ f
+    | ^ [9]
+  7 |   g ]: /url
+    |     ^ [10]
+  8 |
+
+Output:
+  1 |
+  2 | [
+  3 |  a
+  4 |  ]: /url
+  5 | [
+  6 |    b 
+  7 |  ]: /url
+  8 | [
+  9 |  d 
+ 10 |  ]: /url
+ 11 | [
+ 12 |    e
+ 13 |  ]: /url
+ 14 | [
+ 15 |    f
+ 16 |   g 
+ 17 |  ]: /url
+ 18 |
+
+[1] Expected a linebreak after this opening bracket.
+[2] Expected a linebreak before this closing bracket.
+[3] Expected a linebreak after this opening bracket.
+[4] Expected a linebreak before this closing bracket.
+[5] Expected a linebreak after this opening bracket.
+[6] Expected a linebreak before this closing bracket.
+[7] Expected a linebreak after this opening bracket.
+[8] Expected a linebreak before this closing bracket.
+[9] Expected a linebreak after this opening bracket.
+[10] Expected a linebreak before this closing bracket.
+---
+
+
+Test: link-bracket-newline >> invalid
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/no-newline-link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo](/url)
+    |   ^   ^
+    |   [1] [2]
+  3 | - [ foo ](/url)
+    |   ^ [3] ^ [4]
+  4 | - [foo ](/url)
+    |   ^    ^
+    |   [5]  [6]
+  5 | - [ foo](/url)
+    |   ^    ^
+    |   [7]  [8]
+  6 | - Multi lines
+  7 |   - [foo
+    |     ^ [9]
+  8 |       bar](/url)
+    |          ^ [10]
+  9 |   - [ foo
+    |     ^ [11]
+ 10 |       bar ](/url)
+    |           ^ [12]
+ 11 | - Empty
+ 12 |   - [](/url)
+    |     ^ [13]
+ 13 |   - [ ](/url)
+    |     ^ [14]
+ 14 |   - [      ](/url)
+    |     ^ [15]
+ 15 |
+
+Output:
+  1 |
+  2 | - [
+  3 |    foo
+  4 |    ](/url)
+  5 | - [
+  6 |      foo 
+  7 |    ](/url)
+  8 | - [
+  9 |    foo 
+ 10 |    ](/url)
+ 11 | - [
+ 12 |      foo
+ 13 |    ](/url)
+ 14 | - Multi lines
+ 15 |   - [
+ 16 |      foo
+ 17 |       bar
+ 18 |      ](/url)
+ 19 |   - [
+ 20 |        foo
+ 21 |       bar 
+ 22 |      ](/url)
+ 23 | - Empty
+ 24 |   - [
+ 25 |      ](/url)
+ 26 |   - [
+ 27 |        ](/url)
+ 28 |   - [
+ 29 |                  ](/url)
+ 30 |
+
+[1] Expected a linebreak after this opening bracket.
+[2] Expected a linebreak before this closing bracket.
+[3] Expected a linebreak after this opening bracket.
+[4] Expected a linebreak before this closing bracket.
+[5] Expected a linebreak after this opening bracket.
+[6] Expected a linebreak before this closing bracket.
+[7] Expected a linebreak after this opening bracket.
+[8] Expected a linebreak before this closing bracket.
+[9] Expected a linebreak after this opening bracket.
+[10] Expected a linebreak before this closing bracket.
+[11] Expected a linebreak after this opening bracket.
+[12] Expected a linebreak before this closing bracket.
+[13] Expected a linebreak after this opening bracket.
+[14] Expected a linebreak after this opening bracket.
+[15] Expected a linebreak after this opening bracket.
+---
+
+
+Test: link-bracket-newline >> invalid
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/no-newline-link-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo]
+    |   ^   ^
+    |   [1] [2]
+  3 | - [ foo ]
+    |   ^ [3] ^ [4]
+  4 | - [foo ]
+    |   ^    ^
+    |   [5]  [6]
+  5 | - [ foo]
+    |   ^    ^
+    |   [7]  [8]
+  6 | - [foo][]
+    |   ^   ^
+    |   [9] [10]
+  7 | - [ foo ][]
+    |   ^     ^
+    |   [11]  [12]
+  8 | - [foo ][]
+    |   ^    ^
+    |   [13] [14]
+  9 | - [ foo][]
+    |   ^    ^
+    |   [15] [16]
+ 10 | - [foo][x]
+    |   ^ [17] ^ [20]
+    |       ^ [18]
+    |        ^ [19]
+ 11 | - [ foo ][x]
+    |   ^ [21] ^ [23]
+    |         ^ [22]
+    |            ^ [24]
+ 12 | - [foo ][x]
+    |   ^ [25]  ^ [28]
+    |        ^ [26]
+    |         ^ [27]
+ 13 | - [ foo][x]
+    |   ^ [29]  ^ [32]
+    |        ^ [30]
+    |         ^ [31]
+ 14 | - [x][foo]
+    |   ^ [33] ^ [36]
+    |     ^ [34]
+    |      ^ [35]
+ 15 | - [x][ foo ]
+    |   ^ [37]   ^ [40]
+    |     ^ [38]
+    |      ^ [39]
+ 16 | - [x][foo ]
+    |   ^ [41]  ^ [44]
+    |     ^ [42]
+    |      ^ [43]
+ 17 | - [x][ foo]
+    |   ^ [45]  ^ [48]
+    |     ^ [46]
+    |      ^ [47]
+ 18 | - Multi lines
+ 19 |   - [foo
+    |     ^ [49]
+ 20 |       bar]
+    |          ^ [50]
+ 21 |   - [ foo
+    |     ^ [51]
+ 22 |       bar ]
+    |           ^ [52]
+ 23 |   - [foo
+    |     ^ [53]
+ 24 |       bar][]
+    |          ^ [54]
+ 25 |   - [ foo
+    |     ^ [55]
+ 26 |       bar ][]
+    |           ^ [56]
+ 27 |   - [foo
+    |     ^ [57]
+ 28 |       bar][x]
+    |          ^ [58]
+    |           ^ [59]
+    |             ^ [60]
+ 29 |   - [ foo
+    |     ^ [61]
+ 30 |       bar ][x]
+    |           ^ [62]
+    |            ^ [63]
+    |              ^ [64]
+ 31 |   - [x][foo
+    |     ^ [65]
+    |       ^ [66]
+    |        ^ [67]
+ 32 |       bar]
+    |          ^ [68]
+ 33 |   - [x][ foo
+    |     ^ [69]
+    |       ^ [70]
+    |        ^ [71]
+ 34 |       bar ]
+    |           ^ [72]
+ 35 | - Empty
+ 36 |   - [][x]
+    |     ^ [73]
+    |       ^ [74]
+    |         ^ [75]
+ 37 |   - [ ][x]
+    |     ^ [76]
+    |        ^ [77]
+    |          ^ [78]
+ 38 |
+ 39 | [x]: /url
+    | ^ [79]
+    |   ^ [80]
+ 40 | [foo]: /url
+    | ^ [81]
+    |     ^ [82]
+ 41 | [foo bar]: /url
+    | ^ [83]  ^ [84]
+ 42 |
+
+Output:
+  1 |
+  2 | - [
+  3 |    foo
+  4 |    ]
+  5 | - [
+  6 |      foo 
+  7 |    ]
+  8 | - [
+  9 |    foo 
+ 10 |    ]
+ 11 | - [
+ 12 |      foo
+ 13 |    ]
+ 14 | - [
+ 15 |    foo
+ 16 |    ][]
+ 17 | - [
+ 18 |      foo 
+ 19 |    ][]
+ 20 | - [
+ 21 |    foo 
+ 22 |    ][]
+ 23 | - [
+ 24 |      foo
+ 25 |    ][]
+ 26 | - [
+ 27 |    foo
+ 28 |    ][
+ 29 |         x
+ 30 |         ]
+ 31 | - [
+ 32 |      foo 
+ 33 |    ][
+ 34 |           x
+ 35 |           ]
+ 36 | - [
+ 37 |    foo 
+ 38 |    ][
+ 39 |          x
+ 40 |          ]
+ 41 | - [
+ 42 |      foo
+ 43 |    ][
+ 44 |          x
+ 45 |          ]
+ 46 | - [
+ 47 |    x
+ 48 |    ][
+ 49 |       foo
+ 50 |       ]
+ 51 | - [
+ 52 |    x
+ 53 |    ][
+ 54 |         foo 
+ 55 |       ]
+ 56 | - [
+ 57 |    x
+ 58 |    ][
+ 59 |       foo 
+ 60 |       ]
+ 61 | - [
+ 62 |    x
+ 63 |    ][
+ 64 |         foo
+ 65 |       ]
+ 66 | - Multi lines
+ 67 |   - [
+ 68 |      foo
+ 69 |       bar
+ 70 |      ]
+ 71 |   - [
+ 72 |        foo
+ 73 |       bar 
+ 74 |      ]
+ 75 |   - [
+ 76 |      foo
+ 77 |       bar
+ 78 |      ][]
+ 79 |   - [
+ 80 |        foo
+ 81 |       bar 
+ 82 |      ][]
+ 83 |   - [
+ 84 |      foo
+ 85 |       bar
+ 86 |      ][
+ 87 |            x
+ 88 |            ]
+ 89 |   - [
+ 90 |        foo
+ 91 |       bar 
+ 92 |      ][
+ 93 |             x
+ 94 |             ]
+ 95 |   - [
+ 96 |      x
+ 97 |      ][
+ 98 |         foo
+ 99 |       bar
+100 |         ]
+101 |   - [
+102 |      x
+103 |      ][
+104 |           foo
+105 |       bar 
+106 |         ]
+107 | - Empty
+108 |   - [
+109 |      ][
+110 |        x
+111 |        ]
+112 |   - [
+113 |        ][
+114 |         x
+115 |         ]
+116 |
+117 | [
+118 |  x
+119 |  ]: /url
+120 | [
+121 |  foo
+122 |  ]: /url
+123 | [
+124 |  foo bar
+125 |  ]: /url
+126 |
+
+[1] Expected a linebreak after this opening bracket.
+[2] Expected a linebreak before this closing bracket.
+[3] Expected a linebreak after this opening bracket.
+[4] Expected a linebreak before this closing bracket.
+[5] Expected a linebreak after this opening bracket.
+[6] Expected a linebreak before this closing bracket.
+[7] Expected a linebreak after this opening bracket.
+[8] Expected a linebreak before this closing bracket.
+[9] Expected a linebreak after this opening bracket.
+[10] Expected a linebreak before this closing bracket.
+[11] Expected a linebreak after this opening bracket.
+[12] Expected a linebreak before this closing bracket.
+[13] Expected a linebreak after this opening bracket.
+[14] Expected a linebreak before this closing bracket.
+[15] Expected a linebreak after this opening bracket.
+[16] Expected a linebreak before this closing bracket.
+[17] Expected a linebreak after this opening bracket.
+[18] Expected a linebreak before this closing bracket.
+[19] Expected a linebreak after this opening bracket.
+[20] Expected a linebreak before this closing bracket.
+[21] Expected a linebreak after this opening bracket.
+[22] Expected a linebreak before this closing bracket.
+[23] Expected a linebreak after this opening bracket.
+[24] Expected a linebreak before this closing bracket.
+[25] Expected a linebreak after this opening bracket.
+[26] Expected a linebreak before this closing bracket.
+[27] Expected a linebreak after this opening bracket.
+[28] Expected a linebreak before this closing bracket.
+[29] Expected a linebreak after this opening bracket.
+[30] Expected a linebreak before this closing bracket.
+[31] Expected a linebreak after this opening bracket.
+[32] Expected a linebreak before this closing bracket.
+[33] Expected a linebreak after this opening bracket.
+[34] Expected a linebreak before this closing bracket.
+[35] Expected a linebreak after this opening bracket.
+[36] Expected a linebreak before this closing bracket.
+[37] Expected a linebreak after this opening bracket.
+[38] Expected a linebreak before this closing bracket.
+[39] Expected a linebreak after this opening bracket.
+[40] Expected a linebreak before this closing bracket.
+[41] Expected a linebreak after this opening bracket.
+[42] Expected a linebreak before this closing bracket.
+[43] Expected a linebreak after this opening bracket.
+[44] Expected a linebreak before this closing bracket.
+[45] Expected a linebreak after this opening bracket.
+[46] Expected a linebreak before this closing bracket.
+[47] Expected a linebreak after this opening bracket.
+[48] Expected a linebreak before this closing bracket.
+[49] Expected a linebreak after this opening bracket.
+[50] Expected a linebreak before this closing bracket.
+[51] Expected a linebreak after this opening bracket.
+[52] Expected a linebreak before this closing bracket.
+[53] Expected a linebreak after this opening bracket.
+[54] Expected a linebreak before this closing bracket.
+[55] Expected a linebreak after this opening bracket.
+[56] Expected a linebreak before this closing bracket.
+[57] Expected a linebreak after this opening bracket.
+[58] Expected a linebreak before this closing bracket.
+[59] Expected a linebreak after this opening bracket.
+[60] Expected a linebreak before this closing bracket.
+[61] Expected a linebreak after this opening bracket.
+[62] Expected a linebreak before this closing bracket.
+[63] Expected a linebreak after this opening bracket.
+[64] Expected a linebreak before this closing bracket.
+[65] Expected a linebreak after this opening bracket.
+[66] Expected a linebreak before this closing bracket.
+[67] Expected a linebreak after this opening bracket.
+[68] Expected a linebreak before this closing bracket.
+[69] Expected a linebreak after this opening bracket.
+[70] Expected a linebreak before this closing bracket.
+[71] Expected a linebreak after this opening bracket.
+[72] Expected a linebreak before this closing bracket.
+[73] Expected a linebreak after this opening bracket.
+[74] Expected a linebreak after this opening bracket.
+[75] Expected a linebreak before this closing bracket.
+[76] Expected a linebreak after this opening bracket.
+[77] Expected a linebreak after this opening bracket.
+[78] Expected a linebreak before this closing bracket.
+[79] Expected a linebreak after this opening bracket.
+[80] Expected a linebreak before this closing bracket.
+[81] Expected a linebreak after this opening bracket.
+[82] Expected a linebreak before this closing bracket.
+[83] Expected a linebreak after this opening bracket.
+[84] Expected a linebreak before this closing bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n- ![foo](/url)\n- ![ foo ](/url)\n- ![\n    foo\n  ](/url)\n- ![foo\n    ](/url)\n- ![\n    foo](/url)\n- Multi lines\n  - ![foo\n      bar](/url)\n  - ![ foo\n      bar ](/url)\n  - ![\n      foo\n      bar\n    ](/url)\n- Empty\n  - ![](/url)\n  - ![ ](/url)\n  - ![\n      ](/url)\n 2"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/consistent/image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: consistent
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![ foo ](/url)
+  4 | - ![
+  5 |     foo
+  6 |   ](/url)
+  7 | - ![foo
+    |        ^\ [1]
+  8 |     ](/url)
+    | ~~~~ [1]
+  9 | - ![
+ 10 |     foo](/url)
+    |        ^ [2]
+ 11 | - Multi lines
+ 12 |   - ![foo
+ 13 |       bar](/url)
+ 14 |   - ![ foo
+ 15 |       bar ](/url)
+ 16 |   - ![
+ 17 |       foo
+ 18 |       bar
+ 19 |     ](/url)
+ 20 | - Empty
+ 21 |   - ![](/url)
+ 22 |   - ![ ](/url)
+ 23 |   - ![
+ 24 |       ](/url)
+ 25 |
+
+Output:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![ foo ](/url)
+  4 | - ![
+  5 |     foo
+  6 |   ](/url)
+  7 | - ![foo ](/url)
+  8 | - ![
+  9 |     foo
+ 10 |     ](/url)
+ 11 | - Multi lines
+ 12 |   - ![foo
+ 13 |       bar](/url)
+ 14 |   - ![ foo
+ 15 |       bar ](/url)
+ 16 |   - ![
+ 17 |       foo
+ 18 |       bar
+ 19 |     ](/url)
+ 20 | - Empty
+ 21 |   - ![](/url)
+ 22 |   - ![ ](/url)
+ 23 |   - ![
+ 24 |       ](/url)
+ 25 |
+
+[1] Unexpected linebreak before this closing bracket.
+[2] Expected a linebreak before this closing bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n- ![foo]\n- ![ foo ]\n- ![\n    foo\n    ]\n- ![foo\n    ]\n- ![\n    foo]\n- ![foo][]\n- ![ foo ][]\n- ![\n    foo\n    ][]\n- ![foo\n    ][]\n- ![\n    foo][]\n- ![foo][x]\n- ![ foo ][x]\n- ![\n    foo\n    ][x]\n- ![foo\n    ][x]\n- ![\n    foo][x]\n- ![x][foo]\n- ![x][ foo ]\n- ![x][\n    foo\n    ]\n- ![x][foo\n    ]\n- ![x][\n    foo]\n- Multi lines\n  - ![foo\n      bar]\n  - ![ foo\n      bar ]\n  - ![\n      foo\n      bar\n    ]\n  - ![foo\n      bar][]\n  - ![ foo\n      bar ][]\n  - ![\n      foo\n      bar\n    ][]\n  - ![foo\n      bar][x]\n  - ![ foo\n      bar ][x]\n  - ![\n      foo\n      bar\n    ][x]\n  - ![x][foo\n      bar]\n  - ![x][ foo\n      bar ]\n  - ![x][\n      foo\n      bar\n    ]\n- Empty\n  - ![][x]\n  - ![ ][x]\n  - ![\n      ][x]\n\n[x]: /url\n[foo]: /url\n[foo bar]: /url\n 2"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/consistent/image-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: consistent
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo]
+  3 | - ![ foo ]
+  4 | - ![
+  5 |     foo
+  6 |     ]
+  7 | - ![foo
+    |        ^\ [1]
+  8 |     ]
+    | ~~~~ [1]
+  9 | - ![
+ 10 |     foo]
+    |        ^ [2]
+ 11 | - ![foo][]
+ 12 | - ![ foo ][]
+ 13 | - ![
+ 14 |     foo
+ 15 |     ][]
+ 16 | - ![foo
+    |        ^\ [3]
+ 17 |     ][]
+    | ~~~~ [3]
+ 18 | - ![
+ 19 |     foo][]
+    |        ^ [4]
+ 20 | - ![foo][x]
+ 21 | - ![ foo ][x]
+ 22 | - ![
+ 23 |     foo
+ 24 |     ][x]
+ 25 | - ![foo
+    |        ^\ [5]
+ 26 |     ][x]
+    | ~~~~ [5]
+ 27 | - ![
+ 28 |     foo][x]
+    |        ^ [6]
+ 29 | - ![x][foo]
+ 30 | - ![x][ foo ]
+ 31 | - ![x][
+ 32 |     foo
+ 33 |     ]
+ 34 | - ![x][foo
+    |           ^\ [7]
+ 35 |     ]
+    | ~~~~ [7]
+ 36 | - ![x][
+ 37 |     foo]
+    |        ^ [8]
+ 38 | - Multi lines
+ 39 |   - ![foo
+ 40 |       bar]
+ 41 |   - ![ foo
+ 42 |       bar ]
+ 43 |   - ![
+ 44 |       foo
+ 45 |       bar
+ 46 |     ]
+ 47 |   - ![foo
+ 48 |       bar][]
+ 49 |   - ![ foo
+ 50 |       bar ][]
+ 51 |   - ![
+ 52 |       foo
+ 53 |       bar
+ 54 |     ][]
+ 55 |   - ![foo
+ 56 |       bar][x]
+ 57 |   - ![ foo
+ 58 |       bar ][x]
+ 59 |   - ![
+ 60 |       foo
+ 61 |       bar
+ 62 |     ][x]
+ 63 |   - ![x][foo
+ 64 |       bar]
+ 65 |   - ![x][ foo
+ 66 |       bar ]
+ 67 |   - ![x][
+ 68 |       foo
+ 69 |       bar
+ 70 |     ]
+ 71 | - Empty
+ 72 |   - ![][x]
+ 73 |   - ![ ][x]
+ 74 |   - ![
+ 75 |       ][x]
+ 76 |
+ 77 | [x]: /url
+ 78 | [foo]: /url
+ 79 | [foo bar]: /url
+ 80 |
+
+Output:
+  1 |
+  2 | - ![foo]
+  3 | - ![ foo ]
+  4 | - ![
+  5 |     foo
+  6 |     ]
+  7 | - ![foo ]
+  8 | - ![
+  9 |     foo
+ 10 |     ]
+ 11 | - ![foo][]
+ 12 | - ![ foo ][]
+ 13 | - ![
+ 14 |     foo
+ 15 |     ][]
+ 16 | - ![foo ][]
+ 17 | - ![
+ 18 |     foo
+ 19 |     ][]
+ 20 | - ![foo][x]
+ 21 | - ![ foo ][x]
+ 22 | - ![
+ 23 |     foo
+ 24 |     ][x]
+ 25 | - ![foo ][x]
+ 26 | - ![
+ 27 |     foo
+ 28 |     ][x]
+ 29 | - ![x][foo]
+ 30 | - ![x][ foo ]
+ 31 | - ![x][
+ 32 |     foo
+ 33 |     ]
+ 34 | - ![x][foo ]
+ 35 | - ![x][
+ 36 |     foo
+ 37 |        ]
+ 38 | - Multi lines
+ 39 |   - ![foo
+ 40 |       bar]
+ 41 |   - ![ foo
+ 42 |       bar ]
+ 43 |   - ![
+ 44 |       foo
+ 45 |       bar
+ 46 |     ]
+ 47 |   - ![foo
+ 48 |       bar][]
+ 49 |   - ![ foo
+ 50 |       bar ][]
+ 51 |   - ![
+ 52 |       foo
+ 53 |       bar
+ 54 |     ][]
+ 55 |   - ![foo
+ 56 |       bar][x]
+ 57 |   - ![ foo
+ 58 |       bar ][x]
+ 59 |   - ![
+ 60 |       foo
+ 61 |       bar
+ 62 |     ][x]
+ 63 |   - ![x][foo
+ 64 |       bar]
+ 65 |   - ![x][ foo
+ 66 |       bar ]
+ 67 |   - ![x][
+ 68 |       foo
+ 69 |       bar
+ 70 |     ]
+ 71 | - Empty
+ 72 |   - ![][x]
+ 73 |   - ![ ][x]
+ 74 |   - ![
+ 75 |       ][x]
+ 76 |
+ 77 | [x]: /url
+ 78 | [foo]: /url
+ 79 | [foo bar]: /url
+ 80 |
+
+[1] Unexpected linebreak before this closing bracket.
+[2] Expected a linebreak before this closing bracket.
+[3] Unexpected linebreak before this closing bracket.
+[4] Expected a linebreak before this closing bracket.
+[5] Unexpected linebreak before this closing bracket.
+[6] Expected a linebreak before this closing bracket.
+[7] Unexpected linebreak before this closing bracket.
+[8] Expected a linebreak before this closing bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n[a]: /url\n[ b ]: /url\n[\n  c\n  ]: /url\n[d\n  ]: /url\n[\n  e]: /url\n[ f\n  g ]: /url\n[ h\n  i\n]: /url\n[\n  j\n  k ]: /url\n[\n  l\n  m\n  ]: /url\n 2"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/consistent/link-definition-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: consistent
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | [a]: /url
+  3 | [ b ]: /url
+  4 | [
+  5 |   c
+  6 |   ]: /url
+  7 | [d
+    |   ^\ [1]
+  8 |   ]: /url
+    | ~~ [1]
+  9 | [
+ 10 |   e]: /url
+    |    ^ [2]
+ 11 | [ f
+ 12 |   g ]: /url
+ 13 | [ h
+ 14 |   i
+    |    ^\ [3]
+ 15 | ]: /url
+    | ~ [3]
+ 16 | [
+ 17 |   j
+ 18 |   k ]: /url
+    |     ^ [4]
+ 19 | [
+ 20 |   l
+ 21 |   m
+ 22 |   ]: /url
+ 23 |
+
+Output:
+  1 |
+  2 | [a]: /url
+  3 | [ b ]: /url
+  4 | [
+  5 |   c
+  6 |   ]: /url
+  7 | [d ]: /url
+  8 | [
+  9 |   e
+ 10 |  ]: /url
+ 11 | [ f
+ 12 |   g ]: /url
+ 13 | [ h
+ 14 |   i ]: /url
+ 15 | [
+ 16 |   j
+ 17 |   k 
+ 18 |  ]: /url
+ 19 | [
+ 20 |   l
+ 21 |   m
+ 22 |   ]: /url
+ 23 |
+
+[1] Unexpected linebreak before this closing bracket.
+[2] Expected a linebreak before this closing bracket.
+[3] Unexpected linebreak before this closing bracket.
+[4] Expected a linebreak before this closing bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n- [foo](/url)\n- [ foo ](/url)\n- [\n    foo\n  ](/url)\n- [foo\n    ](/url)\n- [\n    foo](/url)\n- Multi lines\n  - [foo\n      bar](/url)\n  - [ foo\n      bar ](/url)\n  - [\n      foo\n      bar\n    ](/url)\n- Empty\n  - [](/url)\n  - [ ](/url)\n  - [      ](/url)\n  - [\n      ](/url)\n 2"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/consistent/link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: consistent
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo](/url)
+  3 | - [ foo ](/url)
+  4 | - [
+  5 |     foo
+  6 |   ](/url)
+  7 | - [foo
+    |       ^\ [1]
+  8 |     ](/url)
+    | ~~~~ [1]
+  9 | - [
+ 10 |     foo](/url)
+    |        ^ [2]
+ 11 | - Multi lines
+ 12 |   - [foo
+ 13 |       bar](/url)
+ 14 |   - [ foo
+ 15 |       bar ](/url)
+ 16 |   - [
+ 17 |       foo
+ 18 |       bar
+ 19 |     ](/url)
+ 20 | - Empty
+ 21 |   - [](/url)
+ 22 |   - [ ](/url)
+ 23 |   - [      ](/url)
+ 24 |   - [
+ 25 |       ](/url)
+ 26 |
+
+Output:
+  1 |
+  2 | - [foo](/url)
+  3 | - [ foo ](/url)
+  4 | - [
+  5 |     foo
+  6 |   ](/url)
+  7 | - [foo ](/url)
+  8 | - [
+  9 |     foo
+ 10 |    ](/url)
+ 11 | - Multi lines
+ 12 |   - [foo
+ 13 |       bar](/url)
+ 14 |   - [ foo
+ 15 |       bar ](/url)
+ 16 |   - [
+ 17 |       foo
+ 18 |       bar
+ 19 |     ](/url)
+ 20 | - Empty
+ 21 |   - [](/url)
+ 22 |   - [ ](/url)
+ 23 |   - [      ](/url)
+ 24 |   - [
+ 25 |       ](/url)
+ 26 |
+
+[1] Unexpected linebreak before this closing bracket.
+[2] Expected a linebreak before this closing bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n- [foo]\n- [ foo ]\n- [\n    foo\n    ]\n- [foo\n    ]\n- [\n    foo]\n- [foo][]\n- [ foo ][]\n- [\n    foo\n    ][]\n- [foo\n    ][]\n- [\n    foo][]\n- [foo][x]\n- [ foo ][x]\n- [\n    foo\n    ][x]\n- [foo\n    ][x]\n- [\n    foo][x]\n- [x][foo]\n- [x][ foo ]\n- [x][\n    foo\n    ]\n- [x][foo\n    ]\n- [x][\n    foo]\n- Multi lines\n  - [foo\n      bar]\n  - [ foo\n      bar ]\n  - [\n      foo\n      bar\n    ]\n  - [foo\n      bar][]\n  - [ foo\n      bar ][]\n  - [\n      foo\n      bar\n    ][]\n  - [foo\n      bar][x]\n  - [ foo\n      bar ][x]\n  - [\n      foo\n      bar\n    ][x]\n  - [x][foo\n      bar]\n  - [x][ foo\n      bar ]\n  - [x][\n      foo\n      bar\n    ]\n- Empty\n  - [][x]\n  - [ ][x]\n  - [\n      ][x]\n\n[x]: /url\n[foo]: /url\n[foo bar]: /url\n 2"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/consistent/link-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: consistent
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo]
+  3 | - [ foo ]
+  4 | - [
+  5 |     foo
+  6 |     ]
+  7 | - [foo
+    |       ^\ [1]
+  8 |     ]
+    | ~~~~ [1]
+  9 | - [
+ 10 |     foo]
+    |        ^ [2]
+ 11 | - [foo][]
+ 12 | - [ foo ][]
+ 13 | - [
+ 14 |     foo
+ 15 |     ][]
+ 16 | - [foo
+    |       ^\ [3]
+ 17 |     ][]
+    | ~~~~ [3]
+ 18 | - [
+ 19 |     foo][]
+    |        ^ [4]
+ 20 | - [foo][x]
+ 21 | - [ foo ][x]
+ 22 | - [
+ 23 |     foo
+ 24 |     ][x]
+ 25 | - [foo
+    |       ^\ [5]
+ 26 |     ][x]
+    | ~~~~ [5]
+ 27 | - [
+ 28 |     foo][x]
+    |        ^ [6]
+ 29 | - [x][foo]
+ 30 | - [x][ foo ]
+ 31 | - [x][
+ 32 |     foo
+ 33 |     ]
+ 34 | - [x][foo
+    |          ^\ [7]
+ 35 |     ]
+    | ~~~~ [7]
+ 36 | - [x][
+ 37 |     foo]
+    |        ^ [8]
+ 38 | - Multi lines
+ 39 |   - [foo
+ 40 |       bar]
+ 41 |   - [ foo
+ 42 |       bar ]
+ 43 |   - [
+ 44 |       foo
+ 45 |       bar
+ 46 |     ]
+ 47 |   - [foo
+ 48 |       bar][]
+ 49 |   - [ foo
+ 50 |       bar ][]
+ 51 |   - [
+ 52 |       foo
+ 53 |       bar
+ 54 |     ][]
+ 55 |   - [foo
+ 56 |       bar][x]
+ 57 |   - [ foo
+ 58 |       bar ][x]
+ 59 |   - [
+ 60 |       foo
+ 61 |       bar
+ 62 |     ][x]
+ 63 |   - [x][foo
+ 64 |       bar]
+ 65 |   - [x][ foo
+ 66 |       bar ]
+ 67 |   - [x][
+ 68 |       foo
+ 69 |       bar
+ 70 |     ]
+ 71 | - Empty
+ 72 |   - [][x]
+ 73 |   - [ ][x]
+ 74 |   - [
+ 75 |       ][x]
+ 76 |
+ 77 | [x]: /url
+ 78 | [foo]: /url
+ 79 | [foo bar]: /url
+ 80 |
+
+Output:
+  1 |
+  2 | - [foo]
+  3 | - [ foo ]
+  4 | - [
+  5 |     foo
+  6 |     ]
+  7 | - [foo ]
+  8 | - [
+  9 |     foo
+ 10 |    ]
+ 11 | - [foo][]
+ 12 | - [ foo ][]
+ 13 | - [
+ 14 |     foo
+ 15 |     ][]
+ 16 | - [foo ][]
+ 17 | - [
+ 18 |     foo
+ 19 |    ][]
+ 20 | - [foo][x]
+ 21 | - [ foo ][x]
+ 22 | - [
+ 23 |     foo
+ 24 |     ][x]
+ 25 | - [foo ][x]
+ 26 | - [
+ 27 |     foo
+ 28 |    ][x]
+ 29 | - [x][foo]
+ 30 | - [x][ foo ]
+ 31 | - [x][
+ 32 |     foo
+ 33 |     ]
+ 34 | - [x][foo ]
+ 35 | - [x][
+ 36 |     foo
+ 37 |       ]
+ 38 | - Multi lines
+ 39 |   - [foo
+ 40 |       bar]
+ 41 |   - [ foo
+ 42 |       bar ]
+ 43 |   - [
+ 44 |       foo
+ 45 |       bar
+ 46 |     ]
+ 47 |   - [foo
+ 48 |       bar][]
+ 49 |   - [ foo
+ 50 |       bar ][]
+ 51 |   - [
+ 52 |       foo
+ 53 |       bar
+ 54 |     ][]
+ 55 |   - [foo
+ 56 |       bar][x]
+ 57 |   - [ foo
+ 58 |       bar ][x]
+ 59 |   - [
+ 60 |       foo
+ 61 |       bar
+ 62 |     ][x]
+ 63 |   - [x][foo
+ 64 |       bar]
+ 65 |   - [x][ foo
+ 66 |       bar ]
+ 67 |   - [x][
+ 68 |       foo
+ 69 |       bar
+ 70 |     ]
+ 71 | - Empty
+ 72 |   - [][x]
+ 73 |   - [ ][x]
+ 74 |   - [
+ 75 |       ][x]
+ 76 |
+ 77 | [x]: /url
+ 78 | [foo]: /url
+ 79 | [foo bar]: /url
+ 80 |
+
+[1] Unexpected linebreak before this closing bracket.
+[2] Expected a linebreak before this closing bracket.
+[3] Unexpected linebreak before this closing bracket.
+[4] Expected a linebreak before this closing bracket.
+[5] Unexpected linebreak before this closing bracket.
+[6] Expected a linebreak before this closing bracket.
+[7] Unexpected linebreak before this closing bracket.
+[8] Expected a linebreak before this closing bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n- ![foo](/url)\n- ![ foo ](/url)\n- ![\n    foo\n  ](/url)\n- ![foo\n    ](/url)\n- ![\n    foo](/url)\n- Multi lines\n  - ![foo\n      bar](/url)\n  - ![ foo\n      bar ](/url)\n  - ![\n      foo\n      bar\n    ](/url)\n- Empty\n  - ![](/url)\n  - ![ ](/url)\n  - ![\n      ](/url)\n 3"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![ foo ](/url)
+  4 | - ![
+    |     ^\ [1]
+  5 |     foo
+    | ~~~~ [1]
+    |        ^\ [2]
+  6 |   ](/url)
+    | ~~ [2]
+  7 | - ![foo
+    |        ^\ [3]
+  8 |     ](/url)
+    | ~~~~ [3]
+  9 | - ![
+    |     ^\ [4]
+ 10 |     foo](/url)
+    | ~~~~ [4]
+ 11 | - Multi lines
+ 12 |   - ![foo
+ 13 |       bar](/url)
+ 14 |   - ![ foo
+ 15 |       bar ](/url)
+ 16 |   - ![
+    |       ^\ [5]
+ 17 |       foo
+    | ~~~~~~ [5]
+ 18 |       bar
+    |          ^\ [6]
+ 19 |     ](/url)
+    | ~~~~ [6]
+ 20 | - Empty
+ 21 |   - ![](/url)
+ 22 |   - ![ ](/url)
+ 23 |   - ![
+    |       ^\ [7]
+ 24 |       ](/url)
+    | ~~~~~~ [7]
+ 25 |
+
+Output:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![ foo ](/url)
+  4 | - ![ foo ](/url)
+  5 | - ![foo ](/url)
+  6 | - ![ foo](/url)
+  7 | - Multi lines
+  8 |   - ![foo
+  9 |       bar](/url)
+ 10 |   - ![ foo
+ 11 |       bar ](/url)
+ 12 |   - ![ foo
+ 13 |       bar ](/url)
+ 14 | - Empty
+ 15 |   - ![](/url)
+ 16 |   - ![ ](/url)
+ 17 |   - ![ ](/url)
+ 18 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak before this closing bracket.
+[4] Unexpected linebreak after this opening bracket.
+[5] Unexpected linebreak after this opening bracket.
+[6] Unexpected linebreak before this closing bracket.
+[7] Unexpected linebreak after this opening bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n- ![foo]\n- ![ foo ]\n- ![\n    foo\n    ]\n- ![foo\n    ]\n- ![\n    foo]\n- ![foo][]\n- ![ foo ][]\n- ![\n    foo\n    ][]\n- ![foo\n    ][]\n- ![\n    foo][]\n- ![foo][x]\n- ![ foo ][x]\n- ![\n    foo\n    ][x]\n- ![foo\n    ][x]\n- ![\n    foo][x]\n- ![x][foo]\n- ![x][ foo ]\n- ![x][\n    foo\n    ]\n- ![x][foo\n    ]\n- ![x][\n    foo]\n- Multi lines\n  - ![foo\n      bar]\n  - ![ foo\n      bar ]\n  - ![\n      foo\n      bar\n    ]\n  - ![foo\n      bar][]\n  - ![ foo\n      bar ][]\n  - ![\n      foo\n      bar\n    ][]\n  - ![foo\n      bar][x]\n  - ![ foo\n      bar ][x]\n  - ![\n      foo\n      bar\n    ][x]\n  - ![x][foo\n      bar]\n  - ![x][ foo\n      bar ]\n  - ![x][\n      foo\n      bar\n    ]\n- Empty\n  - ![][x]\n  - ![ ][x]\n  - ![\n      ][x]\n\n[x]: /url\n[foo]: /url\n[foo bar]: /url\n 3"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/image-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo]
+  3 | - ![ foo ]
+  4 | - ![
+    |     ^\ [1]
+  5 |     foo
+    | ~~~~ [1]
+    |        ^\ [2]
+  6 |     ]
+    | ~~~~ [2]
+  7 | - ![foo
+    |        ^\ [3]
+  8 |     ]
+    | ~~~~ [3]
+  9 | - ![
+    |     ^\ [4]
+ 10 |     foo]
+    | ~~~~ [4]
+ 11 | - ![foo][]
+ 12 | - ![ foo ][]
+ 13 | - ![
+    |     ^\ [5]
+ 14 |     foo
+    | ~~~~ [5]
+    |        ^\ [6]
+ 15 |     ][]
+    | ~~~~ [6]
+ 16 | - ![foo
+    |        ^\ [7]
+ 17 |     ][]
+    | ~~~~ [7]
+ 18 | - ![
+    |     ^\ [8]
+ 19 |     foo][]
+    | ~~~~ [8]
+ 20 | - ![foo][x]
+ 21 | - ![ foo ][x]
+ 22 | - ![
+    |     ^\ [9]
+ 23 |     foo
+    | ~~~~ [9]
+    |        ^\ [10]
+ 24 |     ][x]
+    | ~~~~ [10]
+ 25 | - ![foo
+    |        ^\ [11]
+ 26 |     ][x]
+    | ~~~~ [11]
+ 27 | - ![
+    |     ^\ [12]
+ 28 |     foo][x]
+    | ~~~~ [12]
+ 29 | - ![x][foo]
+ 30 | - ![x][ foo ]
+ 31 | - ![x][
+    |        ^\ [13]
+ 32 |     foo
+    | ~~~~ [13]
+    |        ^\ [14]
+ 33 |     ]
+    | ~~~~ [14]
+ 34 | - ![x][foo
+    |           ^\ [15]
+ 35 |     ]
+    | ~~~~ [15]
+ 36 | - ![x][
+    |        ^\ [16]
+ 37 |     foo]
+    | ~~~~ [16]
+ 38 | - Multi lines
+ 39 |   - ![foo
+ 40 |       bar]
+ 41 |   - ![ foo
+ 42 |       bar ]
+ 43 |   - ![
+    |       ^\ [17]
+ 44 |       foo
+    | ~~~~~~ [17]
+ 45 |       bar
+    |          ^\ [18]
+ 46 |     ]
+    | ~~~~ [18]
+ 47 |   - ![foo
+ 48 |       bar][]
+ 49 |   - ![ foo
+ 50 |       bar ][]
+ 51 |   - ![
+    |       ^\ [19]
+ 52 |       foo
+    | ~~~~~~ [19]
+ 53 |       bar
+    |          ^\ [20]
+ 54 |     ][]
+    | ~~~~ [20]
+ 55 |   - ![foo
+ 56 |       bar][x]
+ 57 |   - ![ foo
+ 58 |       bar ][x]
+ 59 |   - ![
+    |       ^\ [21]
+ 60 |       foo
+    | ~~~~~~ [21]
+ 61 |       bar
+    |          ^\ [22]
+ 62 |     ][x]
+    | ~~~~ [22]
+ 63 |   - ![x][foo
+ 64 |       bar]
+ 65 |   - ![x][ foo
+ 66 |       bar ]
+ 67 |   - ![x][
+    |          ^\ [23]
+ 68 |       foo
+    | ~~~~~~ [23]
+ 69 |       bar
+    |          ^\ [24]
+ 70 |     ]
+    | ~~~~ [24]
+ 71 | - Empty
+ 72 |   - ![][x]
+ 73 |   - ![ ][x]
+ 74 |   - ![
+    |       ^\ [25]
+ 75 |       ][x]
+    | ~~~~~~ [25]
+ 76 |
+ 77 | [x]: /url
+ 78 | [foo]: /url
+ 79 | [foo bar]: /url
+ 80 |
+
+Output:
+  1 |
+  2 | - ![foo]
+  3 | - ![ foo ]
+  4 | - ![ foo ]
+  5 | - ![foo ]
+  6 | - ![ foo]
+  7 | - ![foo][]
+  8 | - ![ foo ][]
+  9 | - ![ foo ][]
+ 10 | - ![foo ][]
+ 11 | - ![ foo][]
+ 12 | - ![foo][x]
+ 13 | - ![ foo ][x]
+ 14 | - ![ foo ][x]
+ 15 | - ![foo ][x]
+ 16 | - ![ foo][x]
+ 17 | - ![x][foo]
+ 18 | - ![x][ foo ]
+ 19 | - ![x][ foo ]
+ 20 | - ![x][foo ]
+ 21 | - ![x][ foo]
+ 22 | - Multi lines
+ 23 |   - ![foo
+ 24 |       bar]
+ 25 |   - ![ foo
+ 26 |       bar ]
+ 27 |   - ![ foo
+ 28 |       bar ]
+ 29 |   - ![foo
+ 30 |       bar][]
+ 31 |   - ![ foo
+ 32 |       bar ][]
+ 33 |   - ![ foo
+ 34 |       bar ][]
+ 35 |   - ![foo
+ 36 |       bar][x]
+ 37 |   - ![ foo
+ 38 |       bar ][x]
+ 39 |   - ![ foo
+ 40 |       bar ][x]
+ 41 |   - ![x][foo
+ 42 |       bar]
+ 43 |   - ![x][ foo
+ 44 |       bar ]
+ 45 |   - ![x][ foo
+ 46 |       bar ]
+ 47 | - Empty
+ 48 |   - ![][x]
+ 49 |   - ![ ][x]
+ 50 |   - ![ ][x]
+ 51 |
+ 52 | [x]: /url
+ 53 | [foo]: /url
+ 54 | [foo bar]: /url
+ 55 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak before this closing bracket.
+[4] Unexpected linebreak after this opening bracket.
+[5] Unexpected linebreak after this opening bracket.
+[6] Unexpected linebreak before this closing bracket.
+[7] Unexpected linebreak before this closing bracket.
+[8] Unexpected linebreak after this opening bracket.
+[9] Unexpected linebreak after this opening bracket.
+[10] Unexpected linebreak before this closing bracket.
+[11] Unexpected linebreak before this closing bracket.
+[12] Unexpected linebreak after this opening bracket.
+[13] Unexpected linebreak after this opening bracket.
+[14] Unexpected linebreak before this closing bracket.
+[15] Unexpected linebreak before this closing bracket.
+[16] Unexpected linebreak after this opening bracket.
+[17] Unexpected linebreak after this opening bracket.
+[18] Unexpected linebreak before this closing bracket.
+[19] Unexpected linebreak after this opening bracket.
+[20] Unexpected linebreak before this closing bracket.
+[21] Unexpected linebreak after this opening bracket.
+[22] Unexpected linebreak before this closing bracket.
+[23] Unexpected linebreak after this opening bracket.
+[24] Unexpected linebreak before this closing bracket.
+[25] Unexpected linebreak after this opening bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n[a]: /url\n[ b ]: /url\n[\n  c\n  ]: /url\n[d\n  ]: /url\n[\n  e]: /url\n[ f\n  g ]: /url\n[ h\n  i\n]: /url\n[\n  j\n  k ]: /url\n[\n  l\n  m\n  ]: /url\n 3"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/link-definition-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | [a]: /url
+  3 | [ b ]: /url
+  4 | [
+    |  ^\ [1]
+  5 |   c
+    | ~~ [1]
+    |    ^\ [2]
+  6 |   ]: /url
+    | ~~ [2]
+  7 | [d
+    |   ^\ [3]
+  8 |   ]: /url
+    | ~~ [3]
+  9 | [
+    |  ^\ [4]
+ 10 |   e]: /url
+    | ~~ [4]
+ 11 | [ f
+ 12 |   g ]: /url
+ 13 | [ h
+ 14 |   i
+    |    ^\ [5]
+ 15 | ]: /url
+    | ~ [5]
+ 16 | [
+    |  ^\ [6]
+ 17 |   j
+    | ~~ [6]
+ 18 |   k ]: /url
+ 19 | [
+    |  ^\ [7]
+ 20 |   l
+    | ~~ [7]
+ 21 |   m
+    |    ^\ [8]
+ 22 |   ]: /url
+    | ~~ [8]
+ 23 |
+
+Output:
+  1 |
+  2 | [a]: /url
+  3 | [ b ]: /url
+  4 | [ c ]: /url
+  5 | [d ]: /url
+  6 | [ e]: /url
+  7 | [ f
+  8 |   g ]: /url
+  9 | [ h
+ 10 |   i ]: /url
+ 11 | [ j
+ 12 |   k ]: /url
+ 13 | [ l
+ 14 |   m ]: /url
+ 15 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak before this closing bracket.
+[4] Unexpected linebreak after this opening bracket.
+[5] Unexpected linebreak before this closing bracket.
+[6] Unexpected linebreak after this opening bracket.
+[7] Unexpected linebreak after this opening bracket.
+[8] Unexpected linebreak before this closing bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n- [foo](/url)\n- [ foo ](/url)\n- [\n    foo\n  ](/url)\n- [foo\n    ](/url)\n- [\n    foo](/url)\n- Multi lines\n  - [foo\n      bar](/url)\n  - [ foo\n      bar ](/url)\n  - [\n      foo\n      bar\n    ](/url)\n- Empty\n  - [](/url)\n  - [ ](/url)\n  - [      ](/url)\n  - [\n      ](/url)\n 3"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo](/url)
+  3 | - [ foo ](/url)
+  4 | - [
+    |    ^\ [1]
+  5 |     foo
+    | ~~~~ [1]
+    |        ^\ [2]
+  6 |   ](/url)
+    | ~~ [2]
+  7 | - [foo
+    |       ^\ [3]
+  8 |     ](/url)
+    | ~~~~ [3]
+  9 | - [
+    |    ^\ [4]
+ 10 |     foo](/url)
+    | ~~~~ [4]
+ 11 | - Multi lines
+ 12 |   - [foo
+ 13 |       bar](/url)
+ 14 |   - [ foo
+ 15 |       bar ](/url)
+ 16 |   - [
+    |      ^\ [5]
+ 17 |       foo
+    | ~~~~~~ [5]
+ 18 |       bar
+    |          ^\ [6]
+ 19 |     ](/url)
+    | ~~~~ [6]
+ 20 | - Empty
+ 21 |   - [](/url)
+ 22 |   - [ ](/url)
+ 23 |   - [      ](/url)
+ 24 |   - [
+    |      ^\ [7]
+ 25 |       ](/url)
+    | ~~~~~~ [7]
+ 26 |
+
+Output:
+  1 |
+  2 | - [foo](/url)
+  3 | - [ foo ](/url)
+  4 | - [ foo ](/url)
+  5 | - [foo ](/url)
+  6 | - [ foo](/url)
+  7 | - Multi lines
+  8 |   - [foo
+  9 |       bar](/url)
+ 10 |   - [ foo
+ 11 |       bar ](/url)
+ 12 |   - [ foo
+ 13 |       bar ](/url)
+ 14 | - Empty
+ 15 |   - [](/url)
+ 16 |   - [ ](/url)
+ 17 |   - [      ](/url)
+ 18 |   - [ ](/url)
+ 19 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak before this closing bracket.
+[4] Unexpected linebreak after this opening bracket.
+[5] Unexpected linebreak after this opening bracket.
+[6] Unexpected linebreak before this closing bracket.
+[7] Unexpected linebreak after this opening bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n- [foo]\n- [ foo ]\n- [\n    foo\n    ]\n- [foo\n    ]\n- [\n    foo]\n- [foo][]\n- [ foo ][]\n- [\n    foo\n    ][]\n- [foo\n    ][]\n- [\n    foo][]\n- [foo][x]\n- [ foo ][x]\n- [\n    foo\n    ][x]\n- [foo\n    ][x]\n- [\n    foo][x]\n- [x][foo]\n- [x][ foo ]\n- [x][\n    foo\n    ]\n- [x][foo\n    ]\n- [x][\n    foo]\n- Multi lines\n  - [foo\n      bar]\n  - [ foo\n      bar ]\n  - [\n      foo\n      bar\n    ]\n  - [foo\n      bar][]\n  - [ foo\n      bar ][]\n  - [\n      foo\n      bar\n    ][]\n  - [foo\n      bar][x]\n  - [ foo\n      bar ][x]\n  - [\n      foo\n      bar\n    ][x]\n  - [x][foo\n      bar]\n  - [x][ foo\n      bar ]\n  - [x][\n      foo\n      bar\n    ]\n- Empty\n  - [][x]\n  - [ ][x]\n  - [\n      ][x]\n\n[x]: /url\n[foo]: /url\n[foo bar]: /url\n 3"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/link-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo]
+  3 | - [ foo ]
+  4 | - [
+    |    ^\ [1]
+  5 |     foo
+    | ~~~~ [1]
+    |        ^\ [2]
+  6 |     ]
+    | ~~~~ [2]
+  7 | - [foo
+    |       ^\ [3]
+  8 |     ]
+    | ~~~~ [3]
+  9 | - [
+    |    ^\ [4]
+ 10 |     foo]
+    | ~~~~ [4]
+ 11 | - [foo][]
+ 12 | - [ foo ][]
+ 13 | - [
+    |    ^\ [5]
+ 14 |     foo
+    | ~~~~ [5]
+    |        ^\ [6]
+ 15 |     ][]
+    | ~~~~ [6]
+ 16 | - [foo
+    |       ^\ [7]
+ 17 |     ][]
+    | ~~~~ [7]
+ 18 | - [
+    |    ^\ [8]
+ 19 |     foo][]
+    | ~~~~ [8]
+ 20 | - [foo][x]
+ 21 | - [ foo ][x]
+ 22 | - [
+    |    ^\ [9]
+ 23 |     foo
+    | ~~~~ [9]
+    |        ^\ [10]
+ 24 |     ][x]
+    | ~~~~ [10]
+ 25 | - [foo
+    |       ^\ [11]
+ 26 |     ][x]
+    | ~~~~ [11]
+ 27 | - [
+    |    ^\ [12]
+ 28 |     foo][x]
+    | ~~~~ [12]
+ 29 | - [x][foo]
+ 30 | - [x][ foo ]
+ 31 | - [x][
+    |       ^\ [13]
+ 32 |     foo
+    | ~~~~ [13]
+    |        ^\ [14]
+ 33 |     ]
+    | ~~~~ [14]
+ 34 | - [x][foo
+    |          ^\ [15]
+ 35 |     ]
+    | ~~~~ [15]
+ 36 | - [x][
+    |       ^\ [16]
+ 37 |     foo]
+    | ~~~~ [16]
+ 38 | - Multi lines
+ 39 |   - [foo
+ 40 |       bar]
+ 41 |   - [ foo
+ 42 |       bar ]
+ 43 |   - [
+    |      ^\ [17]
+ 44 |       foo
+    | ~~~~~~ [17]
+ 45 |       bar
+    |          ^\ [18]
+ 46 |     ]
+    | ~~~~ [18]
+ 47 |   - [foo
+ 48 |       bar][]
+ 49 |   - [ foo
+ 50 |       bar ][]
+ 51 |   - [
+    |      ^\ [19]
+ 52 |       foo
+    | ~~~~~~ [19]
+ 53 |       bar
+    |          ^\ [20]
+ 54 |     ][]
+    | ~~~~ [20]
+ 55 |   - [foo
+ 56 |       bar][x]
+ 57 |   - [ foo
+ 58 |       bar ][x]
+ 59 |   - [
+    |      ^\ [21]
+ 60 |       foo
+    | ~~~~~~ [21]
+ 61 |       bar
+    |          ^\ [22]
+ 62 |     ][x]
+    | ~~~~ [22]
+ 63 |   - [x][foo
+ 64 |       bar]
+ 65 |   - [x][ foo
+ 66 |       bar ]
+ 67 |   - [x][
+    |         ^\ [23]
+ 68 |       foo
+    | ~~~~~~ [23]
+ 69 |       bar
+    |          ^\ [24]
+ 70 |     ]
+    | ~~~~ [24]
+ 71 | - Empty
+ 72 |   - [][x]
+ 73 |   - [ ][x]
+ 74 |   - [
+    |      ^\ [25]
+ 75 |       ][x]
+    | ~~~~~~ [25]
+ 76 |
+ 77 | [x]: /url
+ 78 | [foo]: /url
+ 79 | [foo bar]: /url
+ 80 |
+
+Output:
+  1 |
+  2 | - [foo]
+  3 | - [ foo ]
+  4 | - [ foo ]
+  5 | - [foo ]
+  6 | - [ foo]
+  7 | - [foo][]
+  8 | - [ foo ][]
+  9 | - [ foo ][]
+ 10 | - [foo ][]
+ 11 | - [ foo][]
+ 12 | - [foo][x]
+ 13 | - [ foo ][x]
+ 14 | - [ foo ][x]
+ 15 | - [foo ][x]
+ 16 | - [ foo][x]
+ 17 | - [x][foo]
+ 18 | - [x][ foo ]
+ 19 | - [x][ foo ]
+ 20 | - [x][foo ]
+ 21 | - [x][ foo]
+ 22 | - Multi lines
+ 23 |   - [foo
+ 24 |       bar]
+ 25 |   - [ foo
+ 26 |       bar ]
+ 27 |   - [ foo
+ 28 |       bar ]
+ 29 |   - [foo
+ 30 |       bar][]
+ 31 |   - [ foo
+ 32 |       bar ][]
+ 33 |   - [ foo
+ 34 |       bar ][]
+ 35 |   - [foo
+ 36 |       bar][x]
+ 37 |   - [ foo
+ 38 |       bar ][x]
+ 39 |   - [ foo
+ 40 |       bar ][x]
+ 41 |   - [x][foo
+ 42 |       bar]
+ 43 |   - [x][ foo
+ 44 |       bar ]
+ 45 |   - [x][ foo
+ 46 |       bar ]
+ 47 | - Empty
+ 48 |   - [][x]
+ 49 |   - [ ][x]
+ 50 |   - [ ][x]
+ 51 |
+ 52 | [x]: /url
+ 53 | [foo]: /url
+ 54 | [foo bar]: /url
+ 55 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak before this closing bracket.
+[4] Unexpected linebreak after this opening bracket.
+[5] Unexpected linebreak after this opening bracket.
+[6] Unexpected linebreak before this closing bracket.
+[7] Unexpected linebreak before this closing bracket.
+[8] Unexpected linebreak after this opening bracket.
+[9] Unexpected linebreak after this opening bracket.
+[10] Unexpected linebreak before this closing bracket.
+[11] Unexpected linebreak before this closing bracket.
+[12] Unexpected linebreak after this opening bracket.
+[13] Unexpected linebreak after this opening bracket.
+[14] Unexpected linebreak before this closing bracket.
+[15] Unexpected linebreak before this closing bracket.
+[16] Unexpected linebreak after this opening bracket.
+[17] Unexpected linebreak after this opening bracket.
+[18] Unexpected linebreak before this closing bracket.
+[19] Unexpected linebreak after this opening bracket.
+[20] Unexpected linebreak before this closing bracket.
+[21] Unexpected linebreak after this opening bracket.
+[22] Unexpected linebreak before this closing bracket.
+[23] Unexpected linebreak after this opening bracket.
+[24] Unexpected linebreak before this closing bracket.
+[25] Unexpected linebreak after this opening bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n- ![foo](/url)\n- ![ foo ](/url)\n- ![\n    foo\n  ](/url)\n- ![foo\n    ](/url)\n- ![\n    foo](/url)\n- Multi lines\n  - ![foo\n      bar](/url)\n  - ![ foo\n      bar ](/url)\n  - ![\n      foo\n      bar\n    ](/url)\n- Empty\n  - ![](/url)\n  - ![ ](/url)\n  - ![\n      ](/url)\n 4"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![ foo ](/url)
+  4 | - ![
+    |     ^\ [1]
+  5 |     foo
+    | ~~~~ [1]
+    |        ^\ [2]
+  6 |   ](/url)
+    | ~~ [2]
+  7 | - ![foo
+    |        ^\ [3]
+  8 |     ](/url)
+    | ~~~~ [3]
+  9 | - ![
+    |     ^\ [4]
+ 10 |     foo](/url)
+    | ~~~~ [4]
+ 11 | - Multi lines
+ 12 |   - ![foo
+ 13 |       bar](/url)
+ 14 |   - ![ foo
+ 15 |       bar ](/url)
+ 16 |   - ![
+    |       ^\ [5]
+ 17 |       foo
+    | ~~~~~~ [5]
+ 18 |       bar
+    |          ^\ [6]
+ 19 |     ](/url)
+    | ~~~~ [6]
+ 20 | - Empty
+ 21 |   - ![](/url)
+ 22 |   - ![ ](/url)
+ 23 |   - ![
+    |       ^\ [7]
+ 24 |       ](/url)
+    | ~~~~~~ [7]
+ 25 |
+
+Output:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![ foo ](/url)
+  4 | - ![ foo ](/url)
+  5 | - ![foo ](/url)
+  6 | - ![ foo](/url)
+  7 | - Multi lines
+  8 |   - ![foo
+  9 |       bar](/url)
+ 10 |   - ![ foo
+ 11 |       bar ](/url)
+ 12 |   - ![ foo
+ 13 |       bar ](/url)
+ 14 | - Empty
+ 15 |   - ![](/url)
+ 16 |   - ![ ](/url)
+ 17 |   - ![ ](/url)
+ 18 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak before this closing bracket.
+[4] Unexpected linebreak after this opening bracket.
+[5] Unexpected linebreak after this opening bracket.
+[6] Unexpected linebreak before this closing bracket.
+[7] Unexpected linebreak after this opening bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n- ![foo]\n- ![ foo ]\n- ![\n    foo\n    ]\n- ![foo\n    ]\n- ![\n    foo]\n- ![foo][]\n- ![ foo ][]\n- ![\n    foo\n    ][]\n- ![foo\n    ][]\n- ![\n    foo][]\n- ![foo][x]\n- ![ foo ][x]\n- ![\n    foo\n    ][x]\n- ![foo\n    ][x]\n- ![\n    foo][x]\n- ![x][foo]\n- ![x][ foo ]\n- ![x][\n    foo\n    ]\n- ![x][foo\n    ]\n- ![x][\n    foo]\n- Multi lines\n  - ![foo\n      bar]\n  - ![ foo\n      bar ]\n  - ![\n      foo\n      bar\n    ]\n  - ![foo\n      bar][]\n  - ![ foo\n      bar ][]\n  - ![\n      foo\n      bar\n    ][]\n  - ![foo\n      bar][x]\n  - ![ foo\n      bar ][x]\n  - ![\n      foo\n      bar\n    ][x]\n  - ![x][foo\n      bar]\n  - ![x][ foo\n      bar ]\n  - ![x][\n      foo\n      bar\n    ]\n- Empty\n  - ![][x]\n  - ![ ][x]\n  - ![\n      ][x]\n\n[x]: /url\n[foo]: /url\n[foo bar]: /url\n 4"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/image-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo]
+  3 | - ![ foo ]
+  4 | - ![
+    |     ^\ [1]
+  5 |     foo
+    | ~~~~ [1]
+    |        ^\ [2]
+  6 |     ]
+    | ~~~~ [2]
+  7 | - ![foo
+    |        ^\ [3]
+  8 |     ]
+    | ~~~~ [3]
+  9 | - ![
+    |     ^\ [4]
+ 10 |     foo]
+    | ~~~~ [4]
+ 11 | - ![foo][]
+ 12 | - ![ foo ][]
+ 13 | - ![
+    |     ^\ [5]
+ 14 |     foo
+    | ~~~~ [5]
+    |        ^\ [6]
+ 15 |     ][]
+    | ~~~~ [6]
+ 16 | - ![foo
+    |        ^\ [7]
+ 17 |     ][]
+    | ~~~~ [7]
+ 18 | - ![
+    |     ^\ [8]
+ 19 |     foo][]
+    | ~~~~ [8]
+ 20 | - ![foo][x]
+ 21 | - ![ foo ][x]
+ 22 | - ![
+    |     ^\ [9]
+ 23 |     foo
+    | ~~~~ [9]
+    |        ^\ [10]
+ 24 |     ][x]
+    | ~~~~ [10]
+ 25 | - ![foo
+    |        ^\ [11]
+ 26 |     ][x]
+    | ~~~~ [11]
+ 27 | - ![
+    |     ^\ [12]
+ 28 |     foo][x]
+    | ~~~~ [12]
+ 29 | - ![x][foo]
+ 30 | - ![x][ foo ]
+ 31 | - ![x][
+    |        ^\ [13]
+ 32 |     foo
+    | ~~~~ [13]
+    |        ^\ [14]
+ 33 |     ]
+    | ~~~~ [14]
+ 34 | - ![x][foo
+    |           ^\ [15]
+ 35 |     ]
+    | ~~~~ [15]
+ 36 | - ![x][
+    |        ^\ [16]
+ 37 |     foo]
+    | ~~~~ [16]
+ 38 | - Multi lines
+ 39 |   - ![foo
+ 40 |       bar]
+ 41 |   - ![ foo
+ 42 |       bar ]
+ 43 |   - ![
+    |       ^\ [17]
+ 44 |       foo
+    | ~~~~~~ [17]
+ 45 |       bar
+    |          ^\ [18]
+ 46 |     ]
+    | ~~~~ [18]
+ 47 |   - ![foo
+ 48 |       bar][]
+ 49 |   - ![ foo
+ 50 |       bar ][]
+ 51 |   - ![
+    |       ^\ [19]
+ 52 |       foo
+    | ~~~~~~ [19]
+ 53 |       bar
+    |          ^\ [20]
+ 54 |     ][]
+    | ~~~~ [20]
+ 55 |   - ![foo
+ 56 |       bar][x]
+ 57 |   - ![ foo
+ 58 |       bar ][x]
+ 59 |   - ![
+    |       ^\ [21]
+ 60 |       foo
+    | ~~~~~~ [21]
+ 61 |       bar
+    |          ^\ [22]
+ 62 |     ][x]
+    | ~~~~ [22]
+ 63 |   - ![x][foo
+ 64 |       bar]
+ 65 |   - ![x][ foo
+ 66 |       bar ]
+ 67 |   - ![x][
+    |          ^\ [23]
+ 68 |       foo
+    | ~~~~~~ [23]
+ 69 |       bar
+    |          ^\ [24]
+ 70 |     ]
+    | ~~~~ [24]
+ 71 | - Empty
+ 72 |   - ![][x]
+ 73 |   - ![ ][x]
+ 74 |   - ![
+    |       ^\ [25]
+ 75 |       ][x]
+    | ~~~~~~ [25]
+ 76 |
+ 77 | [x]: /url
+ 78 | [foo]: /url
+ 79 | [foo bar]: /url
+ 80 |
+
+Output:
+  1 |
+  2 | - ![foo]
+  3 | - ![ foo ]
+  4 | - ![ foo ]
+  5 | - ![foo ]
+  6 | - ![ foo]
+  7 | - ![foo][]
+  8 | - ![ foo ][]
+  9 | - ![ foo ][]
+ 10 | - ![foo ][]
+ 11 | - ![ foo][]
+ 12 | - ![foo][x]
+ 13 | - ![ foo ][x]
+ 14 | - ![ foo ][x]
+ 15 | - ![foo ][x]
+ 16 | - ![ foo][x]
+ 17 | - ![x][foo]
+ 18 | - ![x][ foo ]
+ 19 | - ![x][ foo ]
+ 20 | - ![x][foo ]
+ 21 | - ![x][ foo]
+ 22 | - Multi lines
+ 23 |   - ![foo
+ 24 |       bar]
+ 25 |   - ![ foo
+ 26 |       bar ]
+ 27 |   - ![ foo
+ 28 |       bar ]
+ 29 |   - ![foo
+ 30 |       bar][]
+ 31 |   - ![ foo
+ 32 |       bar ][]
+ 33 |   - ![ foo
+ 34 |       bar ][]
+ 35 |   - ![foo
+ 36 |       bar][x]
+ 37 |   - ![ foo
+ 38 |       bar ][x]
+ 39 |   - ![ foo
+ 40 |       bar ][x]
+ 41 |   - ![x][foo
+ 42 |       bar]
+ 43 |   - ![x][ foo
+ 44 |       bar ]
+ 45 |   - ![x][ foo
+ 46 |       bar ]
+ 47 | - Empty
+ 48 |   - ![][x]
+ 49 |   - ![ ][x]
+ 50 |   - ![ ][x]
+ 51 |
+ 52 | [x]: /url
+ 53 | [foo]: /url
+ 54 | [foo bar]: /url
+ 55 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak before this closing bracket.
+[4] Unexpected linebreak after this opening bracket.
+[5] Unexpected linebreak after this opening bracket.
+[6] Unexpected linebreak before this closing bracket.
+[7] Unexpected linebreak before this closing bracket.
+[8] Unexpected linebreak after this opening bracket.
+[9] Unexpected linebreak after this opening bracket.
+[10] Unexpected linebreak before this closing bracket.
+[11] Unexpected linebreak before this closing bracket.
+[12] Unexpected linebreak after this opening bracket.
+[13] Unexpected linebreak after this opening bracket.
+[14] Unexpected linebreak before this closing bracket.
+[15] Unexpected linebreak before this closing bracket.
+[16] Unexpected linebreak after this opening bracket.
+[17] Unexpected linebreak after this opening bracket.
+[18] Unexpected linebreak before this closing bracket.
+[19] Unexpected linebreak after this opening bracket.
+[20] Unexpected linebreak before this closing bracket.
+[21] Unexpected linebreak after this opening bracket.
+[22] Unexpected linebreak before this closing bracket.
+[23] Unexpected linebreak after this opening bracket.
+[24] Unexpected linebreak before this closing bracket.
+[25] Unexpected linebreak after this opening bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n[a]: /url\n[ b ]: /url\n[\n  c\n  ]: /url\n[d\n  ]: /url\n[\n  e]: /url\n[ f\n  g ]: /url\n[ h\n  i\n]: /url\n[\n  j\n  k ]: /url\n[\n  l\n  m\n  ]: /url\n 4"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/link-definition-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | [a]: /url
+  3 | [ b ]: /url
+  4 | [
+    |  ^\ [1]
+  5 |   c
+    | ~~ [1]
+    |    ^\ [2]
+  6 |   ]: /url
+    | ~~ [2]
+  7 | [d
+    |   ^\ [3]
+  8 |   ]: /url
+    | ~~ [3]
+  9 | [
+    |  ^\ [4]
+ 10 |   e]: /url
+    | ~~ [4]
+ 11 | [ f
+ 12 |   g ]: /url
+ 13 | [ h
+ 14 |   i
+    |    ^\ [5]
+ 15 | ]: /url
+    | ~ [5]
+ 16 | [
+    |  ^\ [6]
+ 17 |   j
+    | ~~ [6]
+ 18 |   k ]: /url
+ 19 | [
+    |  ^\ [7]
+ 20 |   l
+    | ~~ [7]
+ 21 |   m
+    |    ^\ [8]
+ 22 |   ]: /url
+    | ~~ [8]
+ 23 |
+
+Output:
+  1 |
+  2 | [a]: /url
+  3 | [ b ]: /url
+  4 | [ c ]: /url
+  5 | [d ]: /url
+  6 | [ e]: /url
+  7 | [ f
+  8 |   g ]: /url
+  9 | [ h
+ 10 |   i ]: /url
+ 11 | [ j
+ 12 |   k ]: /url
+ 13 | [ l
+ 14 |   m ]: /url
+ 15 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak before this closing bracket.
+[4] Unexpected linebreak after this opening bracket.
+[5] Unexpected linebreak before this closing bracket.
+[6] Unexpected linebreak after this opening bracket.
+[7] Unexpected linebreak after this opening bracket.
+[8] Unexpected linebreak before this closing bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n- [foo](/url)\n- [ foo ](/url)\n- [\n    foo\n  ](/url)\n- [foo\n    ](/url)\n- [\n    foo](/url)\n- Multi lines\n  - [foo\n      bar](/url)\n  - [ foo\n      bar ](/url)\n  - [\n      foo\n      bar\n    ](/url)\n- Empty\n  - [](/url)\n  - [ ](/url)\n  - [      ](/url)\n  - [\n      ](/url)\n 4"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo](/url)
+  3 | - [ foo ](/url)
+  4 | - [
+    |    ^\ [1]
+  5 |     foo
+    | ~~~~ [1]
+    |        ^\ [2]
+  6 |   ](/url)
+    | ~~ [2]
+  7 | - [foo
+    |       ^\ [3]
+  8 |     ](/url)
+    | ~~~~ [3]
+  9 | - [
+    |    ^\ [4]
+ 10 |     foo](/url)
+    | ~~~~ [4]
+ 11 | - Multi lines
+ 12 |   - [foo
+ 13 |       bar](/url)
+ 14 |   - [ foo
+ 15 |       bar ](/url)
+ 16 |   - [
+    |      ^\ [5]
+ 17 |       foo
+    | ~~~~~~ [5]
+ 18 |       bar
+    |          ^\ [6]
+ 19 |     ](/url)
+    | ~~~~ [6]
+ 20 | - Empty
+ 21 |   - [](/url)
+ 22 |   - [ ](/url)
+ 23 |   - [      ](/url)
+ 24 |   - [
+    |      ^\ [7]
+ 25 |       ](/url)
+    | ~~~~~~ [7]
+ 26 |
+
+Output:
+  1 |
+  2 | - [foo](/url)
+  3 | - [ foo ](/url)
+  4 | - [ foo ](/url)
+  5 | - [foo ](/url)
+  6 | - [ foo](/url)
+  7 | - Multi lines
+  8 |   - [foo
+  9 |       bar](/url)
+ 10 |   - [ foo
+ 11 |       bar ](/url)
+ 12 |   - [ foo
+ 13 |       bar ](/url)
+ 14 | - Empty
+ 15 |   - [](/url)
+ 16 |   - [ ](/url)
+ 17 |   - [      ](/url)
+ 18 |   - [ ](/url)
+ 19 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak before this closing bracket.
+[4] Unexpected linebreak after this opening bracket.
+[5] Unexpected linebreak after this opening bracket.
+[6] Unexpected linebreak before this closing bracket.
+[7] Unexpected linebreak after this opening bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n- [foo]\n- [ foo ]\n- [\n    foo\n    ]\n- [foo\n    ]\n- [\n    foo]\n- [foo][]\n- [ foo ][]\n- [\n    foo\n    ][]\n- [foo\n    ][]\n- [\n    foo][]\n- [foo][x]\n- [ foo ][x]\n- [\n    foo\n    ][x]\n- [foo\n    ][x]\n- [\n    foo][x]\n- [x][foo]\n- [x][ foo ]\n- [x][\n    foo\n    ]\n- [x][foo\n    ]\n- [x][\n    foo]\n- Multi lines\n  - [foo\n      bar]\n  - [ foo\n      bar ]\n  - [\n      foo\n      bar\n    ]\n  - [foo\n      bar][]\n  - [ foo\n      bar ][]\n  - [\n      foo\n      bar\n    ][]\n  - [foo\n      bar][x]\n  - [ foo\n      bar ][x]\n  - [\n      foo\n      bar\n    ][x]\n  - [x][foo\n      bar]\n  - [x][ foo\n      bar ]\n  - [x][\n      foo\n      bar\n    ]\n- Empty\n  - [][x]\n  - [ ][x]\n  - [\n      ][x]\n\n[x]: /url\n[foo]: /url\n[foo bar]: /url\n 4"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/link-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo]
+  3 | - [ foo ]
+  4 | - [
+    |    ^\ [1]
+  5 |     foo
+    | ~~~~ [1]
+    |        ^\ [2]
+  6 |     ]
+    | ~~~~ [2]
+  7 | - [foo
+    |       ^\ [3]
+  8 |     ]
+    | ~~~~ [3]
+  9 | - [
+    |    ^\ [4]
+ 10 |     foo]
+    | ~~~~ [4]
+ 11 | - [foo][]
+ 12 | - [ foo ][]
+ 13 | - [
+    |    ^\ [5]
+ 14 |     foo
+    | ~~~~ [5]
+    |        ^\ [6]
+ 15 |     ][]
+    | ~~~~ [6]
+ 16 | - [foo
+    |       ^\ [7]
+ 17 |     ][]
+    | ~~~~ [7]
+ 18 | - [
+    |    ^\ [8]
+ 19 |     foo][]
+    | ~~~~ [8]
+ 20 | - [foo][x]
+ 21 | - [ foo ][x]
+ 22 | - [
+    |    ^\ [9]
+ 23 |     foo
+    | ~~~~ [9]
+    |        ^\ [10]
+ 24 |     ][x]
+    | ~~~~ [10]
+ 25 | - [foo
+    |       ^\ [11]
+ 26 |     ][x]
+    | ~~~~ [11]
+ 27 | - [
+    |    ^\ [12]
+ 28 |     foo][x]
+    | ~~~~ [12]
+ 29 | - [x][foo]
+ 30 | - [x][ foo ]
+ 31 | - [x][
+    |       ^\ [13]
+ 32 |     foo
+    | ~~~~ [13]
+    |        ^\ [14]
+ 33 |     ]
+    | ~~~~ [14]
+ 34 | - [x][foo
+    |          ^\ [15]
+ 35 |     ]
+    | ~~~~ [15]
+ 36 | - [x][
+    |       ^\ [16]
+ 37 |     foo]
+    | ~~~~ [16]
+ 38 | - Multi lines
+ 39 |   - [foo
+ 40 |       bar]
+ 41 |   - [ foo
+ 42 |       bar ]
+ 43 |   - [
+    |      ^\ [17]
+ 44 |       foo
+    | ~~~~~~ [17]
+ 45 |       bar
+    |          ^\ [18]
+ 46 |     ]
+    | ~~~~ [18]
+ 47 |   - [foo
+ 48 |       bar][]
+ 49 |   - [ foo
+ 50 |       bar ][]
+ 51 |   - [
+    |      ^\ [19]
+ 52 |       foo
+    | ~~~~~~ [19]
+ 53 |       bar
+    |          ^\ [20]
+ 54 |     ][]
+    | ~~~~ [20]
+ 55 |   - [foo
+ 56 |       bar][x]
+ 57 |   - [ foo
+ 58 |       bar ][x]
+ 59 |   - [
+    |      ^\ [21]
+ 60 |       foo
+    | ~~~~~~ [21]
+ 61 |       bar
+    |          ^\ [22]
+ 62 |     ][x]
+    | ~~~~ [22]
+ 63 |   - [x][foo
+ 64 |       bar]
+ 65 |   - [x][ foo
+ 66 |       bar ]
+ 67 |   - [x][
+    |         ^\ [23]
+ 68 |       foo
+    | ~~~~~~ [23]
+ 69 |       bar
+    |          ^\ [24]
+ 70 |     ]
+    | ~~~~ [24]
+ 71 | - Empty
+ 72 |   - [][x]
+ 73 |   - [ ][x]
+ 74 |   - [
+    |      ^\ [25]
+ 75 |       ][x]
+    | ~~~~~~ [25]
+ 76 |
+ 77 | [x]: /url
+ 78 | [foo]: /url
+ 79 | [foo bar]: /url
+ 80 |
+
+Output:
+  1 |
+  2 | - [foo]
+  3 | - [ foo ]
+  4 | - [ foo ]
+  5 | - [foo ]
+  6 | - [ foo]
+  7 | - [foo][]
+  8 | - [ foo ][]
+  9 | - [ foo ][]
+ 10 | - [foo ][]
+ 11 | - [ foo][]
+ 12 | - [foo][x]
+ 13 | - [ foo ][x]
+ 14 | - [ foo ][x]
+ 15 | - [foo ][x]
+ 16 | - [ foo][x]
+ 17 | - [x][foo]
+ 18 | - [x][ foo ]
+ 19 | - [x][ foo ]
+ 20 | - [x][foo ]
+ 21 | - [x][ foo]
+ 22 | - Multi lines
+ 23 |   - [foo
+ 24 |       bar]
+ 25 |   - [ foo
+ 26 |       bar ]
+ 27 |   - [ foo
+ 28 |       bar ]
+ 29 |   - [foo
+ 30 |       bar][]
+ 31 |   - [ foo
+ 32 |       bar ][]
+ 33 |   - [ foo
+ 34 |       bar ][]
+ 35 |   - [foo
+ 36 |       bar][x]
+ 37 |   - [ foo
+ 38 |       bar ][x]
+ 39 |   - [ foo
+ 40 |       bar ][x]
+ 41 |   - [x][foo
+ 42 |       bar]
+ 43 |   - [x][ foo
+ 44 |       bar ]
+ 45 |   - [x][ foo
+ 46 |       bar ]
+ 47 | - Empty
+ 48 |   - [][x]
+ 49 |   - [ ][x]
+ 50 |   - [ ][x]
+ 51 |
+ 52 | [x]: /url
+ 53 | [foo]: /url
+ 54 | [foo bar]: /url
+ 55 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak before this closing bracket.
+[4] Unexpected linebreak after this opening bracket.
+[5] Unexpected linebreak after this opening bracket.
+[6] Unexpected linebreak before this closing bracket.
+[7] Unexpected linebreak before this closing bracket.
+[8] Unexpected linebreak after this opening bracket.
+[9] Unexpected linebreak after this opening bracket.
+[10] Unexpected linebreak before this closing bracket.
+[11] Unexpected linebreak before this closing bracket.
+[12] Unexpected linebreak after this opening bracket.
+[13] Unexpected linebreak after this opening bracket.
+[14] Unexpected linebreak before this closing bracket.
+[15] Unexpected linebreak before this closing bracket.
+[16] Unexpected linebreak after this opening bracket.
+[17] Unexpected linebreak after this opening bracket.
+[18] Unexpected linebreak before this closing bracket.
+[19] Unexpected linebreak after this opening bracket.
+[20] Unexpected linebreak before this closing bracket.
+[21] Unexpected linebreak after this opening bracket.
+[22] Unexpected linebreak before this closing bracket.
+[23] Unexpected linebreak after this opening bracket.
+[24] Unexpected linebreak before this closing bracket.
+[25] Unexpected linebreak after this opening bracket.
+---
+
+
+Test: link-bracket-newline >> invalid
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/newline-image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![
+    |     ^\ [1]
+  3 |     foo
+    | ~~~~ [1]
+    |        ^\ [2]
+  4 |     ](/url)
+    | ~~~~ [2]
+  5 | - ![
+    |     ^\ [3]
+  6 |       foo 
+    | ~~~~~~ [3]
+    |          ^\ [4]
+  7 |     ](/url)
+    | ~~~~ [4]
+  8 | - ![
+    |     ^\ [5]
+  9 |     foo
+    | ~~~~ [5]
+    |        ^\ [6]
+ 10 |   ](/url)
+    | ~~ [6]
+ 11 | - ![
+    |     ^\ [7]
+ 12 |     foo
+    | ~~~~ [7]
+    |        ^\ [8]
+ 13 |     ](/url)
+    | ~~~~ [8]
+ 14 | - ![
+    |     ^\ [9]
+ 15 |     foo
+    | ~~~~ [9]
+    |        ^\ [10]
+ 16 |     ](/url)
+    | ~~~~ [10]
+ 17 | - Multi lines
+ 18 |   - ![
+    |       ^\ [11]
+ 19 |       foo
+    | ~~~~~~ [11]
+ 20 |       bar
+    |          ^\ [12]
+ 21 |       ](/url)
+    | ~~~~~~ [12]
+ 22 |   - ![
+    |       ^\ [13]
+ 23 |         foo
+    | ~~~~~~~~ [13]
+ 24 |       bar 
+    |          ^\ [14]
+ 25 |       ](/url)
+    | ~~~~~~ [14]
+ 26 |   - ![
+    |       ^\ [15]
+ 27 |       foo
+    | ~~~~~~ [15]
+ 28 |       bar
+    |          ^\ [16]
+ 29 |     ](/url)
+    | ~~~~ [16]
+ 30 | - Empty
+ 31 |   - ![
+    |       ^\ [17]
+ 32 |       ](/url)
+    | ~~~~~~ [17]
+ 33 |   - ![
+    |       ^\ [18]
+ 34 |         ](/url)
+    | ~~~~~~~~ [18]
+ 35 |   - ![
+    |       ^\ [19]
+ 36 |       ](/url)
+    | ~~~~~~ [19]
+ 37 |
+
+Output:
+  1 |
+  2 | - ![ foo ](/url)
+  3 | - ![ foo ](/url)
+  4 | - ![ foo ](/url)
+  5 | - ![ foo ](/url)
+  6 | - ![ foo ](/url)
+  7 | - Multi lines
+  8 |   - ![ foo
+  9 |       bar ](/url)
+ 10 |   - ![ foo
+ 11 |       bar ](/url)
+ 12 |   - ![ foo
+ 13 |       bar ](/url)
+ 14 | - Empty
+ 15 |   - ![ ](/url)
+ 16 |   - ![ ](/url)
+ 17 |   - ![ ](/url)
+ 18 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak after this opening bracket.
+[4] Unexpected linebreak before this closing bracket.
+[5] Unexpected linebreak after this opening bracket.
+[6] Unexpected linebreak before this closing bracket.
+[7] Unexpected linebreak after this opening bracket.
+[8] Unexpected linebreak before this closing bracket.
+[9] Unexpected linebreak after this opening bracket.
+[10] Unexpected linebreak before this closing bracket.
+[11] Unexpected linebreak after this opening bracket.
+[12] Unexpected linebreak before this closing bracket.
+[13] Unexpected linebreak after this opening bracket.
+[14] Unexpected linebreak before this closing bracket.
+[15] Unexpected linebreak after this opening bracket.
+[16] Unexpected linebreak before this closing bracket.
+[17] Unexpected linebreak after this opening bracket.
+[18] Unexpected linebreak after this opening bracket.
+[19] Unexpected linebreak after this opening bracket.
+---
+
+
+Test: link-bracket-newline >> invalid
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/newline-image-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![
+    |     ^\ [1]
+  3 |     foo
+    | ~~~~ [1]
+    |        ^\ [2]
+  4 |     ]
+    | ~~~~ [2]
+  5 | - ![
+    |     ^\ [3]
+  6 |       foo 
+    | ~~~~~~ [3]
+    |          ^\ [4]
+  7 |     ]
+    | ~~~~ [4]
+  8 | - ![
+    |     ^\ [5]
+  9 |     foo
+    | ~~~~ [5]
+    |        ^\ [6]
+ 10 |     ]
+    | ~~~~ [6]
+ 11 | - ![
+    |     ^\ [7]
+ 12 |     foo
+    | ~~~~ [7]
+    |        ^\ [8]
+ 13 |     ]
+    | ~~~~ [8]
+ 14 | - ![
+    |     ^\ [9]
+ 15 |     foo
+    | ~~~~ [9]
+    |        ^\ [10]
+ 16 |     ]
+    | ~~~~ [10]
+ 17 | - ![
+    |     ^\ [11]
+ 18 |     foo
+    | ~~~~ [11]
+    |        ^\ [12]
+ 19 |     ][]
+    | ~~~~ [12]
+ 20 | - ![
+    |     ^\ [13]
+ 21 |       foo 
+    | ~~~~~~ [13]
+    |          ^\ [14]
+ 22 |     ][]
+    | ~~~~ [14]
+ 23 | - ![
+    |     ^\ [15]
+ 24 |     foo
+    | ~~~~ [15]
+    |        ^\ [16]
+ 25 |     ][]
+    | ~~~~ [16]
+ 26 | - ![
+    |     ^\ [17]
+ 27 |     foo
+    | ~~~~ [17]
+    |        ^\ [18]
+ 28 |     ][]
+    | ~~~~ [18]
+ 29 | - ![
+    |     ^\ [19]
+ 30 |     foo
+    | ~~~~ [19]
+    |        ^\ [20]
+ 31 |     ][]
+    | ~~~~ [20]
+ 32 | - ![
+    |     ^\ [21]
+ 33 |     foo
+    | ~~~~ [21]
+    |        ^\ [22]
+ 34 |     ][
+    | ~~~~ [22]
+    |       ^\ [23]
+ 35 |          x
+    | ~~~~~~~~~ [23]
+    |           ^\ [24]
+ 36 |          ]
+    | ~~~~~~~~~ [24]
+ 37 | - ![
+    |     ^\ [25]
+ 38 |       foo 
+    | ~~~~~~ [25]
+    |          ^\ [26]
+ 39 |     ][
+    | ~~~~ [26]
+    |       ^\ [27]
+ 40 |            x
+    | ~~~~~~~~~~~ [27]
+    |             ^\ [28]
+ 41 |            ]
+    | ~~~~~~~~~~~ [28]
+ 42 | - ![
+    |     ^\ [29]
+ 43 |     foo
+    | ~~~~ [29]
+    |        ^\ [30]
+ 44 |     ][
+    | ~~~~ [30]
+    |       ^\ [31]
+ 45 |       x
+    | ~~~~~~ [31]
+    |        ^\ [32]
+ 46 |       ]
+    | ~~~~~~ [32]
+ 47 | - ![
+    |     ^\ [33]
+ 48 |     foo
+    | ~~~~ [33]
+    |        ^\ [34]
+ 49 |     ][
+    | ~~~~ [34]
+    |       ^\ [35]
+ 50 |       x
+    | ~~~~~~ [35]
+    |        ^\ [36]
+ 51 |       ]
+    | ~~~~~~ [36]
+ 52 | - ![
+    |     ^\ [37]
+ 53 |     foo
+    | ~~~~ [37]
+    |        ^\ [38]
+ 54 |     ][
+    | ~~~~ [38]
+    |       ^\ [39]
+ 55 |          x
+    | ~~~~~~~~~ [39]
+    |           ^\ [40]
+ 56 |          ]
+    | ~~~~~~~~~ [40]
+ 57 | - ![
+    |     ^\ [41]
+ 58 |     x
+    | ~~~~ [41]
+    |      ^\ [42]
+ 59 |     ][
+    | ~~~~ [42]
+    |       ^\ [43]
+ 60 |        foo
+    | ~~~~~~~ [43]
+    |           ^\ [44]
+ 61 |        ]
+    | ~~~~~~~ [44]
+ 62 | - ![
+    |     ^\ [45]
+ 63 |     x
+    | ~~~~ [45]
+    |      ^\ [46]
+ 64 |     ][
+    | ~~~~ [46]
+    |       ^\ [47]
+ 65 |          foo 
+    | ~~~~~~~~~ [47]
+    |             ^\ [48]
+ 66 |        ]
+    | ~~~~~~~ [48]
+ 67 | - ![
+    |     ^\ [49]
+ 68 |     x
+    | ~~~~ [49]
+    |      ^\ [50]
+ 69 |     ][
+    | ~~~~ [50]
+    |       ^\ [51]
+ 70 |     foo
+    | ~~~~ [51]
+    |        ^\ [52]
+ 71 |     ]
+    | ~~~~ [52]
+ 72 | - ![
+    |     ^\ [53]
+ 73 |     x
+    | ~~~~ [53]
+    |      ^\ [54]
+ 74 |     ][
+    | ~~~~ [54]
+    |       ^\ [55]
+ 75 |        foo
+    | ~~~~~~~ [55]
+    |           ^\ [56]
+ 76 |     ]
+    | ~~~~ [56]
+ 77 | - ![
+    |     ^\ [57]
+ 78 |     x
+    | ~~~~ [57]
+    |      ^\ [58]
+ 79 |     ][
+    | ~~~~ [58]
+    |       ^\ [59]
+ 80 |     foo
+    | ~~~~ [59]
+    |        ^\ [60]
+ 81 |        ]
+    | ~~~~~~~ [60]
+ 82 | - Multi lines
+ 83 |   - ![
+    |       ^\ [61]
+ 84 |       foo
+    | ~~~~~~ [61]
+ 85 |       bar
+    |          ^\ [62]
+ 86 |       ]
+    | ~~~~~~ [62]
+ 87 |   - ![
+    |       ^\ [63]
+ 88 |         foo
+    | ~~~~~~~~ [63]
+ 89 |       bar 
+    |          ^\ [64]
+ 90 |       ]
+    | ~~~~~~ [64]
+ 91 |   - ![
+    |       ^\ [65]
+ 92 |       foo
+    | ~~~~~~ [65]
+ 93 |       bar
+    |          ^\ [66]
+ 94 |     ]
+    | ~~~~ [66]
+ 95 |   - ![
+    |       ^\ [67]
+ 96 |       foo
+    | ~~~~~~ [67]
+ 97 |       bar
+    |          ^\ [68]
+ 98 |       ][]
+    | ~~~~~~ [68]
+ 99 |   - ![
+    |       ^\ [69]
+100 |         foo
+    | ~~~~~~~~ [69]
+101 |       bar 
+    |          ^\ [70]
+102 |       ][]
+    | ~~~~~~ [70]
+103 |   - ![
+    |       ^\ [71]
+104 |       foo
+    | ~~~~~~ [71]
+105 |       bar
+    |          ^\ [72]
+106 |     ][]
+    | ~~~~ [72]
+107 |   - ![
+    |       ^\ [73]
+108 |       foo
+    | ~~~~~~ [73]
+109 |       bar
+    |          ^\ [74]
+110 |       ][
+    | ~~~~~~ [74]
+    |         ^\ [75]
+111 |            x
+    | ~~~~~~~~~~~ [75]
+    |             ^\ [76]
+112 |            ]
+    | ~~~~~~~~~~~ [76]
+113 |   - ![
+    |       ^\ [77]
+114 |         foo
+    | ~~~~~~~~ [77]
+115 |       bar 
+    |          ^\ [78]
+116 |       ][
+    | ~~~~~~ [78]
+    |         ^\ [79]
+117 |             x
+    | ~~~~~~~~~~~~ [79]
+    |              ^\ [80]
+118 |             ]
+    | ~~~~~~~~~~~~ [80]
+119 |   - ![
+    |       ^\ [81]
+120 |       foo
+    | ~~~~~~ [81]
+121 |       bar
+    |          ^\ [82]
+122 |     ][
+    | ~~~~ [82]
+    |       ^\ [83]
+123 |       x
+    | ~~~~~~ [83]
+    |        ^\ [84]
+124 |       ]
+    | ~~~~~~ [84]
+125 |   - ![
+    |       ^\ [85]
+126 |       x
+    | ~~~~~~ [85]
+    |        ^\ [86]
+127 |       ][
+    | ~~~~~~ [86]
+    |         ^\ [87]
+128 |          foo
+    | ~~~~~~~~~ [87]
+129 |       bar
+    |          ^\ [88]
+130 |          ]
+    | ~~~~~~~~~ [88]
+131 |   - ![
+    |       ^\ [89]
+132 |       x
+    | ~~~~~~ [89]
+    |        ^\ [90]
+133 |       ][
+    | ~~~~~~ [90]
+    |         ^\ [91]
+134 |            foo
+    | ~~~~~~~~~~~ [91]
+135 |       bar 
+    |          ^\ [92]
+136 |          ]
+    | ~~~~~~~~~ [92]
+137 |   - ![
+    |       ^\ [93]
+138 |       x
+    | ~~~~~~ [93]
+    |        ^\ [94]
+139 |       ][
+    | ~~~~~~ [94]
+    |         ^\ [95]
+140 |       foo
+    | ~~~~~~ [95]
+141 |       bar
+    |          ^\ [96]
+142 |     ]
+    | ~~~~ [96]
+143 | - Empty
+144 |   - ![
+    |       ^\ [97]
+145 |       ][
+    | ~~~~~~ [97]
+    |         ^\ [98]
+146 |         x
+    | ~~~~~~~~ [98]
+    |          ^\ [99]
+147 |         ]
+    | ~~~~~~~~ [99]
+148 |   - ![
+    |       ^\ [100]
+149 |         ][
+    | ~~~~~~~~ [100]
+    |           ^\ [101]
+150 |          x
+    | ~~~~~~~~~ [101]
+    |           ^\ [102]
+151 |          ]
+    | ~~~~~~~~~ [102]
+152 |   - ![
+    |       ^\ [103]
+153 |       ][
+    | ~~~~~~ [103]
+    |         ^\ [104]
+154 |         x
+    | ~~~~~~~~ [104]
+    |          ^\ [105]
+155 |         ]
+    | ~~~~~~~~ [105]
+156 |
+157 | [
+    |  ^\ [106]
+158 |  x
+    | ~ [106]
+    |   ^\ [107]
+159 |  ]: /url
+    | ~ [107]
+160 | [
+    |  ^\ [108]
+161 |  foo
+    | ~ [108]
+    |     ^\ [109]
+162 |  ]: /url
+    | ~ [109]
+163 | [
+    |  ^\ [110]
+164 |  foo bar
+    | ~ [110] ^\ [111]
+165 |  ]: /url
+    | ~ [111]
+166 |
+
+Output:
+  1 |
+  2 | - ![ foo ]
+  3 | - ![ foo ]
+  4 | - ![ foo ]
+  5 | - ![ foo ]
+  6 | - ![ foo ]
+  7 | - ![ foo ][]
+  8 | - ![ foo ][]
+  9 | - ![ foo ][]
+ 10 | - ![ foo ][]
+ 11 | - ![ foo ][]
+ 12 | - ![ foo ][ x ]
+ 13 | - ![ foo ][ x ]
+ 14 | - ![ foo ][ x ]
+ 15 | - ![ foo ][ x ]
+ 16 | - ![ foo ][ x ]
+ 17 | - ![ x ][ foo ]
+ 18 | - ![ x ][ foo ]
+ 19 | - ![ x ][ foo ]
+ 20 | - ![ x ][ foo ]
+ 21 | - ![ x ][ foo ]
+ 22 | - Multi lines
+ 23 |   - ![ foo
+ 24 |       bar ]
+ 25 |   - ![ foo
+ 26 |       bar ]
+ 27 |   - ![ foo
+ 28 |       bar ]
+ 29 |   - ![ foo
+ 30 |       bar ][]
+ 31 |   - ![ foo
+ 32 |       bar ][]
+ 33 |   - ![ foo
+ 34 |       bar ][]
+ 35 |   - ![ foo
+ 36 |       bar ][ x ]
+ 37 |   - ![ foo
+ 38 |       bar ][ x ]
+ 39 |   - ![ foo
+ 40 |       bar ][ x ]
+ 41 |   - ![ x ][ foo
+ 42 |       bar ]
+ 43 |   - ![ x ][ foo
+ 44 |       bar ]
+ 45 |   - ![ x ][ foo
+ 46 |       bar ]
+ 47 | - Empty
+ 48 |   - ![ ][ x ]
+ 49 |   - ![ ][ x ]
+ 50 |   - ![ ][ x ]
+ 51 |
+ 52 | [ x ]: /url
+ 53 | [ foo ]: /url
+ 54 | [ foo bar ]: /url
+ 55 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak after this opening bracket.
+[4] Unexpected linebreak before this closing bracket.
+[5] Unexpected linebreak after this opening bracket.
+[6] Unexpected linebreak before this closing bracket.
+[7] Unexpected linebreak after this opening bracket.
+[8] Unexpected linebreak before this closing bracket.
+[9] Unexpected linebreak after this opening bracket.
+[10] Unexpected linebreak before this closing bracket.
+[11] Unexpected linebreak after this opening bracket.
+[12] Unexpected linebreak before this closing bracket.
+[13] Unexpected linebreak after this opening bracket.
+[14] Unexpected linebreak before this closing bracket.
+[15] Unexpected linebreak after this opening bracket.
+[16] Unexpected linebreak before this closing bracket.
+[17] Unexpected linebreak after this opening bracket.
+[18] Unexpected linebreak before this closing bracket.
+[19] Unexpected linebreak after this opening bracket.
+[20] Unexpected linebreak before this closing bracket.
+[21] Unexpected linebreak after this opening bracket.
+[22] Unexpected linebreak before this closing bracket.
+[23] Unexpected linebreak after this opening bracket.
+[24] Unexpected linebreak before this closing bracket.
+[25] Unexpected linebreak after this opening bracket.
+[26] Unexpected linebreak before this closing bracket.
+[27] Unexpected linebreak after this opening bracket.
+[28] Unexpected linebreak before this closing bracket.
+[29] Unexpected linebreak after this opening bracket.
+[30] Unexpected linebreak before this closing bracket.
+[31] Unexpected linebreak after this opening bracket.
+[32] Unexpected linebreak before this closing bracket.
+[33] Unexpected linebreak after this opening bracket.
+[34] Unexpected linebreak before this closing bracket.
+[35] Unexpected linebreak after this opening bracket.
+[36] Unexpected linebreak before this closing bracket.
+[37] Unexpected linebreak after this opening bracket.
+[38] Unexpected linebreak before this closing bracket.
+[39] Unexpected linebreak after this opening bracket.
+[40] Unexpected linebreak before this closing bracket.
+[41] Unexpected linebreak after this opening bracket.
+[42] Unexpected linebreak before this closing bracket.
+[43] Unexpected linebreak after this opening bracket.
+[44] Unexpected linebreak before this closing bracket.
+[45] Unexpected linebreak after this opening bracket.
+[46] Unexpected linebreak before this closing bracket.
+[47] Unexpected linebreak after this opening bracket.
+[48] Unexpected linebreak before this closing bracket.
+[49] Unexpected linebreak after this opening bracket.
+[50] Unexpected linebreak before this closing bracket.
+[51] Unexpected linebreak after this opening bracket.
+[52] Unexpected linebreak before this closing bracket.
+[53] Unexpected linebreak after this opening bracket.
+[54] Unexpected linebreak before this closing bracket.
+[55] Unexpected linebreak after this opening bracket.
+[56] Unexpected linebreak before this closing bracket.
+[57] Unexpected linebreak after this opening bracket.
+[58] Unexpected linebreak before this closing bracket.
+[59] Unexpected linebreak after this opening bracket.
+[60] Unexpected linebreak before this closing bracket.
+[61] Unexpected linebreak after this opening bracket.
+[62] Unexpected linebreak before this closing bracket.
+[63] Unexpected linebreak after this opening bracket.
+[64] Unexpected linebreak before this closing bracket.
+[65] Unexpected linebreak after this opening bracket.
+[66] Unexpected linebreak before this closing bracket.
+[67] Unexpected linebreak after this opening bracket.
+[68] Unexpected linebreak before this closing bracket.
+[69] Unexpected linebreak after this opening bracket.
+[70] Unexpected linebreak before this closing bracket.
+[71] Unexpected linebreak after this opening bracket.
+[72] Unexpected linebreak before this closing bracket.
+[73] Unexpected linebreak after this opening bracket.
+[74] Unexpected linebreak before this closing bracket.
+[75] Unexpected linebreak after this opening bracket.
+[76] Unexpected linebreak before this closing bracket.
+[77] Unexpected linebreak after this opening bracket.
+[78] Unexpected linebreak before this closing bracket.
+[79] Unexpected linebreak after this opening bracket.
+[80] Unexpected linebreak before this closing bracket.
+[81] Unexpected linebreak after this opening bracket.
+[82] Unexpected linebreak before this closing bracket.
+[83] Unexpected linebreak after this opening bracket.
+[84] Unexpected linebreak before this closing bracket.
+[85] Unexpected linebreak after this opening bracket.
+[86] Unexpected linebreak before this closing bracket.
+[87] Unexpected linebreak after this opening bracket.
+[88] Unexpected linebreak before this closing bracket.
+[89] Unexpected linebreak after this opening bracket.
+[90] Unexpected linebreak before this closing bracket.
+[91] Unexpected linebreak after this opening bracket.
+[92] Unexpected linebreak before this closing bracket.
+[93] Unexpected linebreak after this opening bracket.
+[94] Unexpected linebreak before this closing bracket.
+[95] Unexpected linebreak after this opening bracket.
+[96] Unexpected linebreak before this closing bracket.
+[97] Unexpected linebreak after this opening bracket.
+[98] Unexpected linebreak after this opening bracket.
+[99] Unexpected linebreak before this closing bracket.
+[100] Unexpected linebreak after this opening bracket.
+[101] Unexpected linebreak after this opening bracket.
+[102] Unexpected linebreak before this closing bracket.
+[103] Unexpected linebreak after this opening bracket.
+[104] Unexpected linebreak after this opening bracket.
+[105] Unexpected linebreak before this closing bracket.
+[106] Unexpected linebreak after this opening bracket.
+[107] Unexpected linebreak before this closing bracket.
+[108] Unexpected linebreak after this opening bracket.
+[109] Unexpected linebreak before this closing bracket.
+[110] Unexpected linebreak after this opening bracket.
+[111] Unexpected linebreak before this closing bracket.
+---
+
+
+Test: link-bracket-newline >> invalid
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/newline-link-definition-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | [
+    |  ^\ [1]
+  3 |  a
+    | ~ [1]
+    |   ^\ [2]
+  4 |  ]: /url
+    | ~ [2]
+  5 | [
+    |  ^\ [3]
+  6 |    b 
+    | ~~~ [3]
+    |     ^\ [4]
+  7 |  ]: /url
+    | ~ [4]
+  8 | [
+    |  ^\ [5]
+  9 |   c
+    | ~~ [5]
+    |    ^\ [6]
+ 10 |   ]: /url
+    | ~~ [6]
+ 11 | [
+    |  ^\ [7]
+ 12 |  d
+    | ~ [7]
+    |   ^\ [8]
+ 13 |   ]: /url
+    | ~~ [8]
+ 14 | [
+    |  ^\ [9]
+ 15 |   e
+    | ~~ [9]
+    |    ^\ [10]
+ 16 |  ]: /url
+    | ~ [10]
+ 17 | [
+    |  ^\ [11]
+ 18 |    f
+    | ~~~ [11]
+ 19 |   g 
+    |    ^\ [12]
+ 20 |  ]: /url
+    | ~ [12]
+ 21 | [
+    |  ^\ [13]
+ 22 |    h
+    | ~~~ [13]
+ 23 |   i
+    |    ^\ [14]
+ 24 | ]: /url
+    | ~ [14]
+ 25 | [
+    |  ^\ [15]
+ 26 |   j
+    | ~~ [15]
+ 27 |   k 
+    |    ^\ [16]
+ 28 |  ]: /url
+    | ~ [16]
+ 29 | [
+    |  ^\ [17]
+ 30 |   l
+    | ~~ [17]
+ 31 |   m
+    |    ^\ [18]
+ 32 |   ]: /url
+    | ~~ [18]
+ 33 |
+
+Output:
+  1 |
+  2 | [ a ]: /url
+  3 | [ b ]: /url
+  4 | [ c ]: /url
+  5 | [ d ]: /url
+  6 | [ e ]: /url
+  7 | [ f
+  8 |   g ]: /url
+  9 | [ h
+ 10 |   i ]: /url
+ 11 | [ j
+ 12 |   k ]: /url
+ 13 | [ l
+ 14 |   m ]: /url
+ 15 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak after this opening bracket.
+[4] Unexpected linebreak before this closing bracket.
+[5] Unexpected linebreak after this opening bracket.
+[6] Unexpected linebreak before this closing bracket.
+[7] Unexpected linebreak after this opening bracket.
+[8] Unexpected linebreak before this closing bracket.
+[9] Unexpected linebreak after this opening bracket.
+[10] Unexpected linebreak before this closing bracket.
+[11] Unexpected linebreak after this opening bracket.
+[12] Unexpected linebreak before this closing bracket.
+[13] Unexpected linebreak after this opening bracket.
+[14] Unexpected linebreak before this closing bracket.
+[15] Unexpected linebreak after this opening bracket.
+[16] Unexpected linebreak before this closing bracket.
+[17] Unexpected linebreak after this opening bracket.
+[18] Unexpected linebreak before this closing bracket.
+---
+
+
+Test: link-bracket-newline >> invalid
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/newline-link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [
+    |    ^\ [1]
+  3 |    foo
+    | ~~~ [1]
+    |       ^\ [2]
+  4 |    ](/url)
+    | ~~~ [2]
+  5 | - [
+    |    ^\ [3]
+  6 |      foo 
+    | ~~~~~ [3]
+    |         ^\ [4]
+  7 |    ](/url)
+    | ~~~ [4]
+  8 | - [
+    |    ^\ [5]
+  9 |     foo
+    | ~~~~ [5]
+    |        ^\ [6]
+ 10 |   ](/url)
+    | ~~ [6]
+ 11 | - [
+    |    ^\ [7]
+ 12 |    foo
+    | ~~~ [7]
+    |       ^\ [8]
+ 13 |     ](/url)
+    | ~~~~ [8]
+ 14 | - [
+    |    ^\ [9]
+ 15 |     foo
+    | ~~~~ [9]
+    |        ^\ [10]
+ 16 |    ](/url)
+    | ~~~ [10]
+ 17 | - Multi lines
+ 18 |   - [
+    |      ^\ [11]
+ 19 |      foo
+    | ~~~~~ [11]
+ 20 |       bar
+    |          ^\ [12]
+ 21 |      ](/url)
+    | ~~~~~ [12]
+ 22 |   - [
+    |      ^\ [13]
+ 23 |        foo
+    | ~~~~~~~ [13]
+ 24 |       bar 
+    |          ^\ [14]
+ 25 |      ](/url)
+    | ~~~~~ [14]
+ 26 |   - [
+    |      ^\ [15]
+ 27 |       foo
+    | ~~~~~~ [15]
+ 28 |       bar
+    |          ^\ [16]
+ 29 |     ](/url)
+    | ~~~~ [16]
+ 30 | - Empty
+ 31 |   - [
+    |      ^\ [17]
+ 32 |      ](/url)
+    | ~~~~~ [17]
+ 33 |   - [
+    |      ^\ [18]
+ 34 |        ](/url)
+    | ~~~~~~~ [18]
+ 35 |   - [
+    |      ^\ [19]
+ 36 |                  ](/url)
+    | ~~~~~~~~~~~~~~~~~ [19]
+ 37 |   - [
+    |      ^\ [20]
+ 38 |       ](/url)
+    | ~~~~~~ [20]
+ 39 |
+
+Output:
+  1 |
+  2 | - [ foo ](/url)
+  3 | - [ foo ](/url)
+  4 | - [ foo ](/url)
+  5 | - [ foo ](/url)
+  6 | - [ foo ](/url)
+  7 | - Multi lines
+  8 |   - [ foo
+  9 |       bar ](/url)
+ 10 |   - [ foo
+ 11 |       bar ](/url)
+ 12 |   - [ foo
+ 13 |       bar ](/url)
+ 14 | - Empty
+ 15 |   - [ ](/url)
+ 16 |   - [ ](/url)
+ 17 |   - [ ](/url)
+ 18 |   - [ ](/url)
+ 19 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak after this opening bracket.
+[4] Unexpected linebreak before this closing bracket.
+[5] Unexpected linebreak after this opening bracket.
+[6] Unexpected linebreak before this closing bracket.
+[7] Unexpected linebreak after this opening bracket.
+[8] Unexpected linebreak before this closing bracket.
+[9] Unexpected linebreak after this opening bracket.
+[10] Unexpected linebreak before this closing bracket.
+[11] Unexpected linebreak after this opening bracket.
+[12] Unexpected linebreak before this closing bracket.
+[13] Unexpected linebreak after this opening bracket.
+[14] Unexpected linebreak before this closing bracket.
+[15] Unexpected linebreak after this opening bracket.
+[16] Unexpected linebreak before this closing bracket.
+[17] Unexpected linebreak after this opening bracket.
+[18] Unexpected linebreak after this opening bracket.
+[19] Unexpected linebreak after this opening bracket.
+[20] Unexpected linebreak after this opening bracket.
+---
+
+
+Test: link-bracket-newline >> invalid
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/newline-link-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [
+    |    ^\ [1]
+  3 |    foo
+    | ~~~ [1]
+    |       ^\ [2]
+  4 |    ]
+    | ~~~ [2]
+  5 | - [
+    |    ^\ [3]
+  6 |      foo 
+    | ~~~~~ [3]
+    |         ^\ [4]
+  7 |    ]
+    | ~~~ [4]
+  8 | - [
+    |    ^\ [5]
+  9 |     foo
+    | ~~~~ [5]
+    |        ^\ [6]
+ 10 |     ]
+    | ~~~~ [6]
+ 11 | - [
+    |    ^\ [7]
+ 12 |    foo
+    | ~~~ [7]
+    |       ^\ [8]
+ 13 |     ]
+    | ~~~~ [8]
+ 14 | - [
+    |    ^\ [9]
+ 15 |     foo
+    | ~~~~ [9]
+    |        ^\ [10]
+ 16 |    ]
+    | ~~~ [10]
+ 17 | - [
+    |    ^\ [11]
+ 18 |    foo
+    | ~~~ [11]
+    |       ^\ [12]
+ 19 |    ][]
+    | ~~~ [12]
+ 20 | - [
+    |    ^\ [13]
+ 21 |      foo 
+    | ~~~~~ [13]
+    |         ^\ [14]
+ 22 |    ][]
+    | ~~~ [14]
+ 23 | - [
+    |    ^\ [15]
+ 24 |     foo
+    | ~~~~ [15]
+    |        ^\ [16]
+ 25 |     ][]
+    | ~~~~ [16]
+ 26 | - [
+    |    ^\ [17]
+ 27 |    foo
+    | ~~~ [17]
+    |       ^\ [18]
+ 28 |     ][]
+    | ~~~~ [18]
+ 29 | - [
+    |    ^\ [19]
+ 30 |     foo
+    | ~~~~ [19]
+    |        ^\ [20]
+ 31 |    ][]
+    | ~~~ [20]
+ 32 | - [
+    |    ^\ [21]
+ 33 |    foo
+    | ~~~ [21]
+    |       ^\ [22]
+ 34 |    ][
+    | ~~~ [22]
+    |      ^\ [23]
+ 35 |         x
+    | ~~~~~~~~ [23]
+    |          ^\ [24]
+ 36 |         ]
+    | ~~~~~~~~ [24]
+ 37 | - [
+    |    ^\ [25]
+ 38 |      foo 
+    | ~~~~~ [25]
+    |         ^\ [26]
+ 39 |    ][
+    | ~~~ [26]
+    |      ^\ [27]
+ 40 |           x
+    | ~~~~~~~~~~ [27]
+    |            ^\ [28]
+ 41 |           ]
+    | ~~~~~~~~~~ [28]
+ 42 | - [
+    |    ^\ [29]
+ 43 |     foo
+    | ~~~~ [29]
+    |        ^\ [30]
+ 44 |     ][
+    | ~~~~ [30]
+    |       ^\ [31]
+ 45 |       x
+    | ~~~~~~ [31]
+    |        ^\ [32]
+ 46 |       ]
+    | ~~~~~~ [32]
+ 47 | - [
+    |    ^\ [33]
+ 48 |    foo
+    | ~~~ [33]
+    |       ^\ [34]
+ 49 |     ][
+    | ~~~~ [34]
+    |       ^\ [35]
+ 50 |       x
+    | ~~~~~~ [35]
+    |        ^\ [36]
+ 51 |       ]
+    | ~~~~~~ [36]
+ 52 | - [
+    |    ^\ [37]
+ 53 |     foo
+    | ~~~~ [37]
+    |        ^\ [38]
+ 54 |    ][
+    | ~~~ [38]
+    |      ^\ [39]
+ 55 |          x
+    | ~~~~~~~~~ [39]
+    |           ^\ [40]
+ 56 |          ]
+    | ~~~~~~~~~ [40]
+ 57 | - [
+    |    ^\ [41]
+ 58 |    x
+    | ~~~ [41]
+    |     ^\ [42]
+ 59 |    ][
+    | ~~~ [42]
+    |      ^\ [43]
+ 60 |       foo
+    | ~~~~~~ [43]
+    |          ^\ [44]
+ 61 |       ]
+    | ~~~~~~ [44]
+ 62 | - [
+    |    ^\ [45]
+ 63 |    x
+    | ~~~ [45]
+    |     ^\ [46]
+ 64 |    ][
+    | ~~~ [46]
+    |      ^\ [47]
+ 65 |         foo 
+    | ~~~~~~~~ [47]
+    |            ^\ [48]
+ 66 |       ]
+    | ~~~~~~ [48]
+ 67 | - [
+    |    ^\ [49]
+ 68 |    x
+    | ~~~ [49]
+    |     ^\ [50]
+ 69 |    ][
+    | ~~~ [50]
+    |      ^\ [51]
+ 70 |     foo
+    | ~~~~ [51]
+    |        ^\ [52]
+ 71 |     ]
+    | ~~~~ [52]
+ 72 | - [
+    |    ^\ [53]
+ 73 |    x
+    | ~~~ [53]
+    |     ^\ [54]
+ 74 |    ][
+    | ~~~ [54]
+    |      ^\ [55]
+ 75 |       foo
+    | ~~~~~~ [55]
+    |          ^\ [56]
+ 76 |     ]
+    | ~~~~ [56]
+ 77 | - [
+    |    ^\ [57]
+ 78 |    x
+    | ~~~ [57]
+    |     ^\ [58]
+ 79 |    ][
+    | ~~~ [58]
+    |      ^\ [59]
+ 80 |     foo
+    | ~~~~ [59]
+    |        ^\ [60]
+ 81 |       ]
+    | ~~~~~~ [60]
+ 82 | - Multi lines
+ 83 |   - [
+    |      ^\ [61]
+ 84 |      foo
+    | ~~~~~ [61]
+ 85 |       bar
+    |          ^\ [62]
+ 86 |      ]
+    | ~~~~~ [62]
+ 87 |   - [
+    |      ^\ [63]
+ 88 |        foo
+    | ~~~~~~~ [63]
+ 89 |       bar 
+    |          ^\ [64]
+ 90 |      ]
+    | ~~~~~ [64]
+ 91 |   - [
+    |      ^\ [65]
+ 92 |       foo
+    | ~~~~~~ [65]
+ 93 |       bar
+    |          ^\ [66]
+ 94 |     ]
+    | ~~~~ [66]
+ 95 |   - [
+    |      ^\ [67]
+ 96 |      foo
+    | ~~~~~ [67]
+ 97 |       bar
+    |          ^\ [68]
+ 98 |      ][]
+    | ~~~~~ [68]
+ 99 |   - [
+    |      ^\ [69]
+100 |        foo
+    | ~~~~~~~ [69]
+101 |       bar 
+    |          ^\ [70]
+102 |      ][]
+    | ~~~~~ [70]
+103 |   - [
+    |      ^\ [71]
+104 |       foo
+    | ~~~~~~ [71]
+105 |       bar
+    |          ^\ [72]
+106 |     ][]
+    | ~~~~ [72]
+107 |   - [
+    |      ^\ [73]
+108 |      foo
+    | ~~~~~ [73]
+109 |       bar
+    |          ^\ [74]
+110 |      ][
+    | ~~~~~ [74]
+    |        ^\ [75]
+111 |            x
+    | ~~~~~~~~~~~ [75]
+    |             ^\ [76]
+112 |            ]
+    | ~~~~~~~~~~~ [76]
+113 |   - [
+    |      ^\ [77]
+114 |        foo
+    | ~~~~~~~ [77]
+115 |       bar 
+    |          ^\ [78]
+116 |      ][
+    | ~~~~~ [78]
+    |        ^\ [79]
+117 |             x
+    | ~~~~~~~~~~~~ [79]
+    |              ^\ [80]
+118 |             ]
+    | ~~~~~~~~~~~~ [80]
+119 |   - [
+    |      ^\ [81]
+120 |       foo
+    | ~~~~~~ [81]
+121 |       bar
+    |          ^\ [82]
+122 |     ][
+    | ~~~~ [82]
+    |       ^\ [83]
+123 |       x
+    | ~~~~~~ [83]
+    |        ^\ [84]
+124 |       ]
+    | ~~~~~~ [84]
+125 |   - [
+    |      ^\ [85]
+126 |      x
+    | ~~~~~ [85]
+    |       ^\ [86]
+127 |      ][
+    | ~~~~~ [86]
+    |        ^\ [87]
+128 |         foo
+    | ~~~~~~~~ [87]
+129 |       bar
+    |          ^\ [88]
+130 |         ]
+    | ~~~~~~~~ [88]
+131 |   - [
+    |      ^\ [89]
+132 |      x
+    | ~~~~~ [89]
+    |       ^\ [90]
+133 |      ][
+    | ~~~~~ [90]
+    |        ^\ [91]
+134 |           foo
+    | ~~~~~~~~~~ [91]
+135 |       bar 
+    |          ^\ [92]
+136 |         ]
+    | ~~~~~~~~ [92]
+137 |   - [
+    |      ^\ [93]
+138 |      x
+    | ~~~~~ [93]
+    |       ^\ [94]
+139 |      ][
+    | ~~~~~ [94]
+    |        ^\ [95]
+140 |       foo
+    | ~~~~~~ [95]
+141 |       bar
+    |          ^\ [96]
+142 |     ]
+    | ~~~~ [96]
+143 | - Empty
+144 |   - [
+    |      ^\ [97]
+145 |      ][
+    | ~~~~~ [97]
+    |        ^\ [98]
+146 |        x
+    | ~~~~~~~ [98]
+    |         ^\ [99]
+147 |        ]
+    | ~~~~~~~ [99]
+148 |   - [
+    |      ^\ [100]
+149 |        ][
+    | ~~~~~~~ [100]
+    |          ^\ [101]
+150 |         x
+    | ~~~~~~~~ [101]
+    |          ^\ [102]
+151 |         ]
+    | ~~~~~~~~ [102]
+152 |   - [
+    |      ^\ [103]
+153 |       ][
+    | ~~~~~~ [103]
+    |         ^\ [104]
+154 |         x
+    | ~~~~~~~~ [104]
+    |          ^\ [105]
+155 |         ]
+    | ~~~~~~~~ [105]
+156 |
+157 | [
+    |  ^\ [106]
+158 |  x
+    | ~ [106]
+    |   ^\ [107]
+159 |  ]: /url
+    | ~ [107]
+160 | [
+    |  ^\ [108]
+161 |  foo
+    | ~ [108]
+    |     ^\ [109]
+162 |  ]: /url
+    | ~ [109]
+163 | [
+    |  ^\ [110]
+164 |  foo bar
+    | ~ [110] ^\ [111]
+165 |  ]: /url
+    | ~ [111]
+166 |
+
+Output:
+  1 |
+  2 | - [ foo ]
+  3 | - [ foo ]
+  4 | - [ foo ]
+  5 | - [ foo ]
+  6 | - [ foo ]
+  7 | - [ foo ][]
+  8 | - [ foo ][]
+  9 | - [ foo ][]
+ 10 | - [ foo ][]
+ 11 | - [ foo ][]
+ 12 | - [ foo ][ x ]
+ 13 | - [ foo ][ x ]
+ 14 | - [ foo ][ x ]
+ 15 | - [ foo ][ x ]
+ 16 | - [ foo ][ x ]
+ 17 | - [ x ][ foo ]
+ 18 | - [ x ][ foo ]
+ 19 | - [ x ][ foo ]
+ 20 | - [ x ][ foo ]
+ 21 | - [ x ][ foo ]
+ 22 | - Multi lines
+ 23 |   - [ foo
+ 24 |       bar ]
+ 25 |   - [ foo
+ 26 |       bar ]
+ 27 |   - [ foo
+ 28 |       bar ]
+ 29 |   - [ foo
+ 30 |       bar ][]
+ 31 |   - [ foo
+ 32 |       bar ][]
+ 33 |   - [ foo
+ 34 |       bar ][]
+ 35 |   - [ foo
+ 36 |       bar ][ x ]
+ 37 |   - [ foo
+ 38 |       bar ][ x ]
+ 39 |   - [ foo
+ 40 |       bar ][ x ]
+ 41 |   - [ x ][ foo
+ 42 |       bar ]
+ 43 |   - [ x ][ foo
+ 44 |       bar ]
+ 45 |   - [ x ][ foo
+ 46 |       bar ]
+ 47 | - Empty
+ 48 |   - [ ][ x ]
+ 49 |   - [ ][ x ]
+ 50 |   - [ ][ x ]
+ 51 |
+ 52 | [ x ]: /url
+ 53 | [ foo ]: /url
+ 54 | [ foo bar ]: /url
+ 55 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak after this opening bracket.
+[4] Unexpected linebreak before this closing bracket.
+[5] Unexpected linebreak after this opening bracket.
+[6] Unexpected linebreak before this closing bracket.
+[7] Unexpected linebreak after this opening bracket.
+[8] Unexpected linebreak before this closing bracket.
+[9] Unexpected linebreak after this opening bracket.
+[10] Unexpected linebreak before this closing bracket.
+[11] Unexpected linebreak after this opening bracket.
+[12] Unexpected linebreak before this closing bracket.
+[13] Unexpected linebreak after this opening bracket.
+[14] Unexpected linebreak before this closing bracket.
+[15] Unexpected linebreak after this opening bracket.
+[16] Unexpected linebreak before this closing bracket.
+[17] Unexpected linebreak after this opening bracket.
+[18] Unexpected linebreak before this closing bracket.
+[19] Unexpected linebreak after this opening bracket.
+[20] Unexpected linebreak before this closing bracket.
+[21] Unexpected linebreak after this opening bracket.
+[22] Unexpected linebreak before this closing bracket.
+[23] Unexpected linebreak after this opening bracket.
+[24] Unexpected linebreak before this closing bracket.
+[25] Unexpected linebreak after this opening bracket.
+[26] Unexpected linebreak before this closing bracket.
+[27] Unexpected linebreak after this opening bracket.
+[28] Unexpected linebreak before this closing bracket.
+[29] Unexpected linebreak after this opening bracket.
+[30] Unexpected linebreak before this closing bracket.
+[31] Unexpected linebreak after this opening bracket.
+[32] Unexpected linebreak before this closing bracket.
+[33] Unexpected linebreak after this opening bracket.
+[34] Unexpected linebreak before this closing bracket.
+[35] Unexpected linebreak after this opening bracket.
+[36] Unexpected linebreak before this closing bracket.
+[37] Unexpected linebreak after this opening bracket.
+[38] Unexpected linebreak before this closing bracket.
+[39] Unexpected linebreak after this opening bracket.
+[40] Unexpected linebreak before this closing bracket.
+[41] Unexpected linebreak after this opening bracket.
+[42] Unexpected linebreak before this closing bracket.
+[43] Unexpected linebreak after this opening bracket.
+[44] Unexpected linebreak before this closing bracket.
+[45] Unexpected linebreak after this opening bracket.
+[46] Unexpected linebreak before this closing bracket.
+[47] Unexpected linebreak after this opening bracket.
+[48] Unexpected linebreak before this closing bracket.
+[49] Unexpected linebreak after this opening bracket.
+[50] Unexpected linebreak before this closing bracket.
+[51] Unexpected linebreak after this opening bracket.
+[52] Unexpected linebreak before this closing bracket.
+[53] Unexpected linebreak after this opening bracket.
+[54] Unexpected linebreak before this closing bracket.
+[55] Unexpected linebreak after this opening bracket.
+[56] Unexpected linebreak before this closing bracket.
+[57] Unexpected linebreak after this opening bracket.
+[58] Unexpected linebreak before this closing bracket.
+[59] Unexpected linebreak after this opening bracket.
+[60] Unexpected linebreak before this closing bracket.
+[61] Unexpected linebreak after this opening bracket.
+[62] Unexpected linebreak before this closing bracket.
+[63] Unexpected linebreak after this opening bracket.
+[64] Unexpected linebreak before this closing bracket.
+[65] Unexpected linebreak after this opening bracket.
+[66] Unexpected linebreak before this closing bracket.
+[67] Unexpected linebreak after this opening bracket.
+[68] Unexpected linebreak before this closing bracket.
+[69] Unexpected linebreak after this opening bracket.
+[70] Unexpected linebreak before this closing bracket.
+[71] Unexpected linebreak after this opening bracket.
+[72] Unexpected linebreak before this closing bracket.
+[73] Unexpected linebreak after this opening bracket.
+[74] Unexpected linebreak before this closing bracket.
+[75] Unexpected linebreak after this opening bracket.
+[76] Unexpected linebreak before this closing bracket.
+[77] Unexpected linebreak after this opening bracket.
+[78] Unexpected linebreak before this closing bracket.
+[79] Unexpected linebreak after this opening bracket.
+[80] Unexpected linebreak before this closing bracket.
+[81] Unexpected linebreak after this opening bracket.
+[82] Unexpected linebreak before this closing bracket.
+[83] Unexpected linebreak after this opening bracket.
+[84] Unexpected linebreak before this closing bracket.
+[85] Unexpected linebreak after this opening bracket.
+[86] Unexpected linebreak before this closing bracket.
+[87] Unexpected linebreak after this opening bracket.
+[88] Unexpected linebreak before this closing bracket.
+[89] Unexpected linebreak after this opening bracket.
+[90] Unexpected linebreak before this closing bracket.
+[91] Unexpected linebreak after this opening bracket.
+[92] Unexpected linebreak before this closing bracket.
+[93] Unexpected linebreak after this opening bracket.
+[94] Unexpected linebreak before this closing bracket.
+[95] Unexpected linebreak after this opening bracket.
+[96] Unexpected linebreak before this closing bracket.
+[97] Unexpected linebreak after this opening bracket.
+[98] Unexpected linebreak after this opening bracket.
+[99] Unexpected linebreak before this closing bracket.
+[100] Unexpected linebreak after this opening bracket.
+[101] Unexpected linebreak after this opening bracket.
+[102] Unexpected linebreak before this closing bracket.
+[103] Unexpected linebreak after this opening bracket.
+[104] Unexpected linebreak after this opening bracket.
+[105] Unexpected linebreak before this closing bracket.
+[106] Unexpected linebreak after this opening bracket.
+[107] Unexpected linebreak before this closing bracket.
+[108] Unexpected linebreak after this opening bracket.
+[109] Unexpected linebreak before this closing bracket.
+[110] Unexpected linebreak after this opening bracket.
+[111] Unexpected linebreak before this closing bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n- ![foo](/url)\n- ![ foo ](/url)\n- ![\n    foo\n  ](/url)\n- ![foo\n    ](/url)\n- ![\n    foo](/url)\n- Multi lines\n  - ![foo\n      bar](/url)\n  - ![ foo\n      bar ](/url)\n  - ![\n      foo\n      bar\n    ](/url)\n- Empty\n  - ![](/url)\n  - ![ ](/url)\n  - ![\n      ](/url)\n 5"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/never-with-multiline-true/image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: never
+    multiline: true
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![ foo ](/url)
+  4 | - ![
+    |     ^\ [1]
+  5 |     foo
+    | ~~~~ [1]
+    |        ^\ [2]
+  6 |   ](/url)
+    | ~~ [2]
+  7 | - ![foo
+    |        ^\ [3]
+  8 |     ](/url)
+    | ~~~~ [3]
+  9 | - ![
+    |     ^\ [4]
+ 10 |     foo](/url)
+    | ~~~~ [4]
+ 11 | - Multi lines
+ 12 |   - ![foo
+    |      ^ [5]
+ 13 |       bar](/url)
+    |          ^ [6]
+ 14 |   - ![ foo
+    |      ^ [7]
+ 15 |       bar ](/url)
+    |           ^ [8]
+ 16 |   - ![
+ 17 |       foo
+ 18 |       bar
+ 19 |     ](/url)
+ 20 | - Empty
+ 21 |   - ![](/url)
+ 22 |   - ![ ](/url)
+ 23 |   - ![
+    |       ^\ [9]
+ 24 |       ](/url)
+    | ~~~~~~ [9]
+ 25 |
+
+Output:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![ foo ](/url)
+  4 | - ![ foo ](/url)
+  5 | - ![foo ](/url)
+  6 | - ![ foo](/url)
+  7 | - Multi lines
+  8 |   - ![
+  9 |       foo
+ 10 |       bar
+ 11 |       ](/url)
+ 12 |   - ![
+ 13 |         foo
+ 14 |       bar 
+ 15 |       ](/url)
+ 16 |   - ![
+ 17 |       foo
+ 18 |       bar
+ 19 |     ](/url)
+ 20 | - Empty
+ 21 |   - ![](/url)
+ 22 |   - ![ ](/url)
+ 23 |   - ![ ](/url)
+ 24 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak before this closing bracket.
+[4] Unexpected linebreak after this opening bracket.
+[5] Expected a linebreak after this opening bracket.
+[6] Expected a linebreak before this closing bracket.
+[7] Expected a linebreak after this opening bracket.
+[8] Expected a linebreak before this closing bracket.
+[9] Unexpected linebreak after this opening bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n- ![foo]\n- ![ foo ]\n- ![\n    foo\n    ]\n- ![foo\n    ]\n- ![\n    foo]\n- ![foo][]\n- ![ foo ][]\n- ![\n    foo\n    ][]\n- ![foo\n    ][]\n- ![\n    foo][]\n- ![foo][x]\n- ![ foo ][x]\n- ![\n    foo\n    ][x]\n- ![foo\n    ][x]\n- ![\n    foo][x]\n- ![x][foo]\n- ![x][ foo ]\n- ![x][\n    foo\n    ]\n- ![x][foo\n    ]\n- ![x][\n    foo]\n- Multi lines\n  - ![foo\n      bar]\n  - ![ foo\n      bar ]\n  - ![\n      foo\n      bar\n    ]\n  - ![foo\n      bar][]\n  - ![ foo\n      bar ][]\n  - ![\n      foo\n      bar\n    ][]\n  - ![foo\n      bar][x]\n  - ![ foo\n      bar ][x]\n  - ![\n      foo\n      bar\n    ][x]\n  - ![x][foo\n      bar]\n  - ![x][ foo\n      bar ]\n  - ![x][\n      foo\n      bar\n    ]\n- Empty\n  - ![][x]\n  - ![ ][x]\n  - ![\n      ][x]\n\n[x]: /url\n[foo]: /url\n[foo bar]: /url\n 5"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/never-with-multiline-true/image-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: never
+    multiline: true
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo]
+  3 | - ![ foo ]
+  4 | - ![
+    |     ^\ [1]
+  5 |     foo
+    | ~~~~ [1]
+    |        ^\ [2]
+  6 |     ]
+    | ~~~~ [2]
+  7 | - ![foo
+    |        ^\ [3]
+  8 |     ]
+    | ~~~~ [3]
+  9 | - ![
+    |     ^\ [4]
+ 10 |     foo]
+    | ~~~~ [4]
+ 11 | - ![foo][]
+ 12 | - ![ foo ][]
+ 13 | - ![
+    |     ^\ [5]
+ 14 |     foo
+    | ~~~~ [5]
+    |        ^\ [6]
+ 15 |     ][]
+    | ~~~~ [6]
+ 16 | - ![foo
+    |        ^\ [7]
+ 17 |     ][]
+    | ~~~~ [7]
+ 18 | - ![
+    |     ^\ [8]
+ 19 |     foo][]
+    | ~~~~ [8]
+ 20 | - ![foo][x]
+ 21 | - ![ foo ][x]
+ 22 | - ![
+    |     ^\ [9]
+ 23 |     foo
+    | ~~~~ [9]
+    |        ^\ [10]
+ 24 |     ][x]
+    | ~~~~ [10]
+ 25 | - ![foo
+    |        ^\ [11]
+ 26 |     ][x]
+    | ~~~~ [11]
+ 27 | - ![
+    |     ^\ [12]
+ 28 |     foo][x]
+    | ~~~~ [12]
+ 29 | - ![x][foo]
+ 30 | - ![x][ foo ]
+ 31 | - ![x][
+    |        ^\ [13]
+ 32 |     foo
+    | ~~~~ [13]
+    |        ^\ [14]
+ 33 |     ]
+    | ~~~~ [14]
+ 34 | - ![x][foo
+    |           ^\ [15]
+ 35 |     ]
+    | ~~~~ [15]
+ 36 | - ![x][
+    |        ^\ [16]
+ 37 |     foo]
+    | ~~~~ [16]
+ 38 | - Multi lines
+ 39 |   - ![foo
+    |      ^ [17]
+ 40 |       bar]
+    |          ^ [18]
+ 41 |   - ![ foo
+    |      ^ [19]
+ 42 |       bar ]
+    |           ^ [20]
+ 43 |   - ![
+ 44 |       foo
+ 45 |       bar
+ 46 |     ]
+ 47 |   - ![foo
+    |      ^ [21]
+ 48 |       bar][]
+    |          ^ [22]
+ 49 |   - ![ foo
+    |      ^ [23]
+ 50 |       bar ][]
+    |           ^ [24]
+ 51 |   - ![
+ 52 |       foo
+ 53 |       bar
+ 54 |     ][]
+ 55 |   - ![foo
+    |      ^ [25]
+ 56 |       bar][x]
+    |          ^ [26]
+ 57 |   - ![ foo
+    |      ^ [27]
+ 58 |       bar ][x]
+    |           ^ [28]
+ 59 |   - ![
+ 60 |       foo
+ 61 |       bar
+ 62 |     ][x]
+ 63 |   - ![x][foo
+    |         ^ [29]
+ 64 |       bar]
+    |          ^ [30]
+ 65 |   - ![x][ foo
+    |         ^ [31]
+ 66 |       bar ]
+    |           ^ [32]
+ 67 |   - ![x][
+ 68 |       foo
+ 69 |       bar
+ 70 |     ]
+ 71 | - Empty
+ 72 |   - ![][x]
+ 73 |   - ![ ][x]
+ 74 |   - ![
+    |       ^\ [33]
+ 75 |       ][x]
+    | ~~~~~~ [33]
+ 76 |
+ 77 | [x]: /url
+ 78 | [foo]: /url
+ 79 | [foo bar]: /url
+ 80 |
+
+Output:
+  1 |
+  2 | - ![foo]
+  3 | - ![ foo ]
+  4 | - ![ foo ]
+  5 | - ![foo ]
+  6 | - ![ foo]
+  7 | - ![foo][]
+  8 | - ![ foo ][]
+  9 | - ![ foo ][]
+ 10 | - ![foo ][]
+ 11 | - ![ foo][]
+ 12 | - ![foo][x]
+ 13 | - ![ foo ][x]
+ 14 | - ![ foo ][x]
+ 15 | - ![foo ][x]
+ 16 | - ![ foo][x]
+ 17 | - ![x][foo]
+ 18 | - ![x][ foo ]
+ 19 | - ![x][ foo ]
+ 20 | - ![x][foo ]
+ 21 | - ![x][ foo]
+ 22 | - Multi lines
+ 23 |   - ![
+ 24 |       foo
+ 25 |       bar
+ 26 |       ]
+ 27 |   - ![
+ 28 |         foo
+ 29 |       bar 
+ 30 |       ]
+ 31 |   - ![
+ 32 |       foo
+ 33 |       bar
+ 34 |     ]
+ 35 |   - ![
+ 36 |       foo
+ 37 |       bar
+ 38 |       ][]
+ 39 |   - ![
+ 40 |         foo
+ 41 |       bar 
+ 42 |       ][]
+ 43 |   - ![
+ 44 |       foo
+ 45 |       bar
+ 46 |     ][]
+ 47 |   - ![
+ 48 |       foo
+ 49 |       bar
+ 50 |       ][x]
+ 51 |   - ![
+ 52 |         foo
+ 53 |       bar 
+ 54 |       ][x]
+ 55 |   - ![
+ 56 |       foo
+ 57 |       bar
+ 58 |     ][x]
+ 59 |   - ![x][
+ 60 |          foo
+ 61 |       bar
+ 62 |          ]
+ 63 |   - ![x][
+ 64 |            foo
+ 65 |       bar 
+ 66 |          ]
+ 67 |   - ![x][
+ 68 |       foo
+ 69 |       bar
+ 70 |     ]
+ 71 | - Empty
+ 72 |   - ![][x]
+ 73 |   - ![ ][x]
+ 74 |   - ![ ][x]
+ 75 |
+ 76 | [x]: /url
+ 77 | [foo]: /url
+ 78 | [foo bar]: /url
+ 79 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak before this closing bracket.
+[4] Unexpected linebreak after this opening bracket.
+[5] Unexpected linebreak after this opening bracket.
+[6] Unexpected linebreak before this closing bracket.
+[7] Unexpected linebreak before this closing bracket.
+[8] Unexpected linebreak after this opening bracket.
+[9] Unexpected linebreak after this opening bracket.
+[10] Unexpected linebreak before this closing bracket.
+[11] Unexpected linebreak before this closing bracket.
+[12] Unexpected linebreak after this opening bracket.
+[13] Unexpected linebreak after this opening bracket.
+[14] Unexpected linebreak before this closing bracket.
+[15] Unexpected linebreak before this closing bracket.
+[16] Unexpected linebreak after this opening bracket.
+[17] Expected a linebreak after this opening bracket.
+[18] Expected a linebreak before this closing bracket.
+[19] Expected a linebreak after this opening bracket.
+[20] Expected a linebreak before this closing bracket.
+[21] Expected a linebreak after this opening bracket.
+[22] Expected a linebreak before this closing bracket.
+[23] Expected a linebreak after this opening bracket.
+[24] Expected a linebreak before this closing bracket.
+[25] Expected a linebreak after this opening bracket.
+[26] Expected a linebreak before this closing bracket.
+[27] Expected a linebreak after this opening bracket.
+[28] Expected a linebreak before this closing bracket.
+[29] Expected a linebreak after this opening bracket.
+[30] Expected a linebreak before this closing bracket.
+[31] Expected a linebreak after this opening bracket.
+[32] Expected a linebreak before this closing bracket.
+[33] Unexpected linebreak after this opening bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n[a]: /url\n[ b ]: /url\n[\n  c\n  ]: /url\n[d\n  ]: /url\n[\n  e]: /url\n[ f\n  g ]: /url\n[ h\n  i\n]: /url\n[\n  j\n  k ]: /url\n[\n  l\n  m\n  ]: /url\n 5"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/never-with-multiline-true/link-definition-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: never
+    multiline: true
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | [a]: /url
+  3 | [ b ]: /url
+  4 | [
+    |  ^\ [1]
+  5 |   c
+    | ~~ [1]
+    |    ^\ [2]
+  6 |   ]: /url
+    | ~~ [2]
+  7 | [d
+    |   ^\ [3]
+  8 |   ]: /url
+    | ~~ [3]
+  9 | [
+    |  ^\ [4]
+ 10 |   e]: /url
+    | ~~ [4]
+ 11 | [ f
+    | ^ [5]
+ 12 |   g ]: /url
+    |     ^ [6]
+ 13 | [ h
+    | ^ [7]
+ 14 |   i
+ 15 | ]: /url
+ 16 | [
+ 17 |   j
+ 18 |   k ]: /url
+    |     ^ [8]
+ 19 | [
+ 20 |   l
+ 21 |   m
+ 22 |   ]: /url
+ 23 |
+
+Output:
+  1 |
+  2 | [a]: /url
+  3 | [ b ]: /url
+  4 | [ c ]: /url
+  5 | [d ]: /url
+  6 | [ e]: /url
+  7 | [
+  8 |    f
+  9 |   g 
+ 10 |  ]: /url
+ 11 | [
+ 12 |    h
+ 13 |   i
+ 14 | ]: /url
+ 15 | [
+ 16 |   j
+ 17 |   k 
+ 18 |  ]: /url
+ 19 | [
+ 20 |   l
+ 21 |   m
+ 22 |   ]: /url
+ 23 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak before this closing bracket.
+[4] Unexpected linebreak after this opening bracket.
+[5] Expected a linebreak after this opening bracket.
+[6] Expected a linebreak before this closing bracket.
+[7] Expected a linebreak after this opening bracket.
+[8] Expected a linebreak before this closing bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n- [foo](/url)\n- [ foo ](/url)\n- [\n    foo\n  ](/url)\n- [foo\n    ](/url)\n- [\n    foo](/url)\n- Multi lines\n  - [foo\n      bar](/url)\n  - [ foo\n      bar ](/url)\n  - [\n      foo\n      bar\n    ](/url)\n- Empty\n  - [](/url)\n  - [ ](/url)\n  - [      ](/url)\n  - [\n      ](/url)\n 5"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/never-with-multiline-true/link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: never
+    multiline: true
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo](/url)
+  3 | - [ foo ](/url)
+  4 | - [
+    |    ^\ [1]
+  5 |     foo
+    | ~~~~ [1]
+    |        ^\ [2]
+  6 |   ](/url)
+    | ~~ [2]
+  7 | - [foo
+    |       ^\ [3]
+  8 |     ](/url)
+    | ~~~~ [3]
+  9 | - [
+    |    ^\ [4]
+ 10 |     foo](/url)
+    | ~~~~ [4]
+ 11 | - Multi lines
+ 12 |   - [foo
+    |     ^ [5]
+ 13 |       bar](/url)
+    |          ^ [6]
+ 14 |   - [ foo
+    |     ^ [7]
+ 15 |       bar ](/url)
+    |           ^ [8]
+ 16 |   - [
+ 17 |       foo
+ 18 |       bar
+ 19 |     ](/url)
+ 20 | - Empty
+ 21 |   - [](/url)
+ 22 |   - [ ](/url)
+ 23 |   - [      ](/url)
+ 24 |   - [
+    |      ^\ [9]
+ 25 |       ](/url)
+    | ~~~~~~ [9]
+ 26 |
+
+Output:
+  1 |
+  2 | - [foo](/url)
+  3 | - [ foo ](/url)
+  4 | - [ foo ](/url)
+  5 | - [foo ](/url)
+  6 | - [ foo](/url)
+  7 | - Multi lines
+  8 |   - [
+  9 |      foo
+ 10 |       bar
+ 11 |      ](/url)
+ 12 |   - [
+ 13 |        foo
+ 14 |       bar 
+ 15 |      ](/url)
+ 16 |   - [
+ 17 |       foo
+ 18 |       bar
+ 19 |     ](/url)
+ 20 | - Empty
+ 21 |   - [](/url)
+ 22 |   - [ ](/url)
+ 23 |   - [      ](/url)
+ 24 |   - [ ](/url)
+ 25 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak before this closing bracket.
+[4] Unexpected linebreak after this opening bracket.
+[5] Expected a linebreak after this opening bracket.
+[6] Expected a linebreak before this closing bracket.
+[7] Expected a linebreak after this opening bracket.
+[8] Expected a linebreak before this closing bracket.
+[9] Unexpected linebreak after this opening bracket.
+---
+
+
+Test: link-bracket-newline >> invalid >>> "\n- [foo]\n- [ foo ]\n- [\n    foo\n    ]\n- [foo\n    ]\n- [\n    foo]\n- [foo][]\n- [ foo ][]\n- [\n    foo\n    ][]\n- [foo\n    ][]\n- [\n    foo][]\n- [foo][x]\n- [ foo ][x]\n- [\n    foo\n    ][x]\n- [foo\n    ][x]\n- [\n    foo][x]\n- [x][foo]\n- [x][ foo ]\n- [x][\n    foo\n    ]\n- [x][foo\n    ]\n- [x][\n    foo]\n- Multi lines\n  - [foo\n      bar]\n  - [ foo\n      bar ]\n  - [\n      foo\n      bar\n    ]\n  - [foo\n      bar][]\n  - [ foo\n      bar ][]\n  - [\n      foo\n      bar\n    ][]\n  - [foo\n      bar][x]\n  - [ foo\n      bar ][x]\n  - [\n      foo\n      bar\n    ][x]\n  - [x][foo\n      bar]\n  - [x][ foo\n      bar ]\n  - [x][\n      foo\n      bar\n    ]\n- Empty\n  - [][x]\n  - [ ][x]\n  - [\n      ][x]\n\n[x]: /url\n[foo]: /url\n[foo bar]: /url\n 5"
+Filename: tests/fixtures/rules/link-bracket-newline/invalid/never-with-multiline-true/link-reference-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: never
+    multiline: true
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo]
+  3 | - [ foo ]
+  4 | - [
+    |    ^\ [1]
+  5 |     foo
+    | ~~~~ [1]
+    |        ^\ [2]
+  6 |     ]
+    | ~~~~ [2]
+  7 | - [foo
+    |       ^\ [3]
+  8 |     ]
+    | ~~~~ [3]
+  9 | - [
+    |    ^\ [4]
+ 10 |     foo]
+    | ~~~~ [4]
+ 11 | - [foo][]
+ 12 | - [ foo ][]
+ 13 | - [
+    |    ^\ [5]
+ 14 |     foo
+    | ~~~~ [5]
+    |        ^\ [6]
+ 15 |     ][]
+    | ~~~~ [6]
+ 16 | - [foo
+    |       ^\ [7]
+ 17 |     ][]
+    | ~~~~ [7]
+ 18 | - [
+    |    ^\ [8]
+ 19 |     foo][]
+    | ~~~~ [8]
+ 20 | - [foo][x]
+ 21 | - [ foo ][x]
+ 22 | - [
+    |    ^\ [9]
+ 23 |     foo
+    | ~~~~ [9]
+    |        ^\ [10]
+ 24 |     ][x]
+    | ~~~~ [10]
+ 25 | - [foo
+    |       ^\ [11]
+ 26 |     ][x]
+    | ~~~~ [11]
+ 27 | - [
+    |    ^\ [12]
+ 28 |     foo][x]
+    | ~~~~ [12]
+ 29 | - [x][foo]
+ 30 | - [x][ foo ]
+ 31 | - [x][
+    |       ^\ [13]
+ 32 |     foo
+    | ~~~~ [13]
+    |        ^\ [14]
+ 33 |     ]
+    | ~~~~ [14]
+ 34 | - [x][foo
+    |          ^\ [15]
+ 35 |     ]
+    | ~~~~ [15]
+ 36 | - [x][
+    |       ^\ [16]
+ 37 |     foo]
+    | ~~~~ [16]
+ 38 | - Multi lines
+ 39 |   - [foo
+    |     ^ [17]
+ 40 |       bar]
+    |          ^ [18]
+ 41 |   - [ foo
+    |     ^ [19]
+ 42 |       bar ]
+    |           ^ [20]
+ 43 |   - [
+ 44 |       foo
+ 45 |       bar
+ 46 |     ]
+ 47 |   - [foo
+    |     ^ [21]
+ 48 |       bar][]
+    |          ^ [22]
+ 49 |   - [ foo
+    |     ^ [23]
+ 50 |       bar ][]
+    |           ^ [24]
+ 51 |   - [
+ 52 |       foo
+ 53 |       bar
+ 54 |     ][]
+ 55 |   - [foo
+    |     ^ [25]
+ 56 |       bar][x]
+    |          ^ [26]
+ 57 |   - [ foo
+    |     ^ [27]
+ 58 |       bar ][x]
+    |           ^ [28]
+ 59 |   - [
+ 60 |       foo
+ 61 |       bar
+ 62 |     ][x]
+ 63 |   - [x][foo
+    |        ^ [29]
+ 64 |       bar]
+    |          ^ [30]
+ 65 |   - [x][ foo
+    |        ^ [31]
+ 66 |       bar ]
+    |           ^ [32]
+ 67 |   - [x][
+ 68 |       foo
+ 69 |       bar
+ 70 |     ]
+ 71 | - Empty
+ 72 |   - [][x]
+ 73 |   - [ ][x]
+ 74 |   - [
+    |      ^\ [33]
+ 75 |       ][x]
+    | ~~~~~~ [33]
+ 76 |
+ 77 | [x]: /url
+ 78 | [foo]: /url
+ 79 | [foo bar]: /url
+ 80 |
+
+Output:
+  1 |
+  2 | - [foo]
+  3 | - [ foo ]
+  4 | - [ foo ]
+  5 | - [foo ]
+  6 | - [ foo]
+  7 | - [foo][]
+  8 | - [ foo ][]
+  9 | - [ foo ][]
+ 10 | - [foo ][]
+ 11 | - [ foo][]
+ 12 | - [foo][x]
+ 13 | - [ foo ][x]
+ 14 | - [ foo ][x]
+ 15 | - [foo ][x]
+ 16 | - [ foo][x]
+ 17 | - [x][foo]
+ 18 | - [x][ foo ]
+ 19 | - [x][ foo ]
+ 20 | - [x][foo ]
+ 21 | - [x][ foo]
+ 22 | - Multi lines
+ 23 |   - [
+ 24 |      foo
+ 25 |       bar
+ 26 |      ]
+ 27 |   - [
+ 28 |        foo
+ 29 |       bar 
+ 30 |      ]
+ 31 |   - [
+ 32 |       foo
+ 33 |       bar
+ 34 |     ]
+ 35 |   - [
+ 36 |      foo
+ 37 |       bar
+ 38 |      ][]
+ 39 |   - [
+ 40 |        foo
+ 41 |       bar 
+ 42 |      ][]
+ 43 |   - [
+ 44 |       foo
+ 45 |       bar
+ 46 |     ][]
+ 47 |   - [
+ 48 |      foo
+ 49 |       bar
+ 50 |      ][x]
+ 51 |   - [
+ 52 |        foo
+ 53 |       bar 
+ 54 |      ][x]
+ 55 |   - [
+ 56 |       foo
+ 57 |       bar
+ 58 |     ][x]
+ 59 |   - [x][
+ 60 |         foo
+ 61 |       bar
+ 62 |         ]
+ 63 |   - [x][
+ 64 |           foo
+ 65 |       bar 
+ 66 |         ]
+ 67 |   - [x][
+ 68 |       foo
+ 69 |       bar
+ 70 |     ]
+ 71 | - Empty
+ 72 |   - [][x]
+ 73 |   - [ ][x]
+ 74 |   - [ ][x]
+ 75 |
+ 76 | [x]: /url
+ 77 | [foo]: /url
+ 78 | [foo bar]: /url
+ 79 |
+
+[1] Unexpected linebreak after this opening bracket.
+[2] Unexpected linebreak before this closing bracket.
+[3] Unexpected linebreak before this closing bracket.
+[4] Unexpected linebreak after this opening bracket.
+[5] Unexpected linebreak after this opening bracket.
+[6] Unexpected linebreak before this closing bracket.
+[7] Unexpected linebreak before this closing bracket.
+[8] Unexpected linebreak after this opening bracket.
+[9] Unexpected linebreak after this opening bracket.
+[10] Unexpected linebreak before this closing bracket.
+[11] Unexpected linebreak before this closing bracket.
+[12] Unexpected linebreak after this opening bracket.
+[13] Unexpected linebreak after this opening bracket.
+[14] Unexpected linebreak before this closing bracket.
+[15] Unexpected linebreak before this closing bracket.
+[16] Unexpected linebreak after this opening bracket.
+[17] Expected a linebreak after this opening bracket.
+[18] Expected a linebreak before this closing bracket.
+[19] Expected a linebreak after this opening bracket.
+[20] Expected a linebreak before this closing bracket.
+[21] Expected a linebreak after this opening bracket.
+[22] Expected a linebreak before this closing bracket.
+[23] Expected a linebreak after this opening bracket.
+[24] Expected a linebreak before this closing bracket.
+[25] Expected a linebreak after this opening bracket.
+[26] Expected a linebreak before this closing bracket.
+[27] Expected a linebreak after this opening bracket.
+[28] Expected a linebreak before this closing bracket.
+[29] Expected a linebreak after this opening bracket.
+[30] Expected a linebreak before this closing bracket.
+[31] Expected a linebreak after this opening bracket.
+[32] Expected a linebreak before this closing bracket.
+[33] Unexpected linebreak after this opening bracket.
+---

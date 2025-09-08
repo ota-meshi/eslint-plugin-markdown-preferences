@@ -84,6 +84,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/level2-heading-style'?: Linter.RuleEntry<MarkdownPreferencesLevel2HeadingStyle>
   /**
+   * enforce consistent spacing inside link brackets
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-bracket-spacing.html
+   */
+  'markdown-preferences/link-bracket-spacing'?: Linter.RuleEntry<MarkdownPreferencesLinkBracketSpacing>
+  /**
    * enforce consistent alignment of list markers
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/list-marker-alignment.html
    */
@@ -286,6 +291,11 @@ type MarkdownPreferencesLevel1HeadingStyle = []|[{
 type MarkdownPreferencesLevel2HeadingStyle = []|[{
   style?: ("atx" | "setext")
   allowMultilineSetext?: boolean
+}]
+// ----- markdown-preferences/link-bracket-spacing -----
+type MarkdownPreferencesLinkBracketSpacing = []|[{
+  space?: ("always" | "never")
+  imagesInLinks?: boolean
 }]
 // ----- markdown-preferences/list-marker-alignment -----
 type MarkdownPreferencesListMarkerAlignment = []|[{

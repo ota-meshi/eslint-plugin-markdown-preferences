@@ -15,13 +15,15 @@ import { parseImage } from "../utils/image.ts";
 import { parseImageReference } from "../utils/image-reference.ts";
 import { parseLinkDefinition } from "../utils/link-definition.ts";
 
+type Options = {
+  space?: "always" | "never";
+  imagesInLinks?: boolean;
+};
+
 /**
  * The basic option for links and images.
  */
-function parseOptions(option?: {
-  space?: "always" | "never";
-  imagesInLinks?: boolean;
-}) {
+function parseOptions(option?: Options) {
   const space = option?.space ?? "never";
   const imagesInLinks = option?.imagesInLinks;
   return {
@@ -73,14 +75,7 @@ function parseOptions(option?: {
   }
 }
 
-export default createRule<
-  [
-    {
-      space?: "always" | "never";
-      imagesInLinks?: boolean;
-    }?,
-  ]
->("link-bracket-spacing", {
+export default createRule<[Options?]>("link-bracket-spacing", {
   meta: {
     type: "layout",
     docs: {
@@ -166,10 +161,15 @@ export default createRule<
      */
     function verifySpaceBeforeClosingBracket(
       node: Link | LinkReference | Image | ImageReference | Definition,
+      openingBracketIndex: number,
       closingBracketIndex: number,
       spaceOption: "always" | "never",
     ) {
       const space = getSpaceBeforeClosingBracket(closingBracketIndex);
+      if (openingBracketIndex + 1 === closingBracketIndex - space.length) {
+        // It space is already checked by `verifySpaceAfterOpeningBracket()`.
+        return;
+      }
       if (space.includes("\n")) return;
       if (spaceOption === "always") {
         if (space.length > 0) return;
@@ -219,6 +219,7 @@ export default createRule<
         );
         verifySpaceBeforeClosingBracket(
           node,
+          parsed.text.range[0],
           parsed.text.range[1] - 1,
           spaceForText,
         );
@@ -246,6 +247,7 @@ export default createRule<
             );
             verifySpaceBeforeClosingBracket(
               node,
+              parsed.text.range[0],
               parsed.text.range[1] - 1,
               spaceForText,
             );
@@ -259,6 +261,7 @@ export default createRule<
           );
           verifySpaceBeforeClosingBracket(
             node,
+            parsed.label.range[0],
             parsed.label.range[1] - 1,
             options.space,
           );
@@ -274,6 +277,7 @@ export default createRule<
         );
         verifySpaceBeforeClosingBracket(
           node,
+          parsed.text.range[0],
           parsed.text.range[1] - 1,
           options.space,
         );
@@ -288,6 +292,7 @@ export default createRule<
         );
         verifySpaceBeforeClosingBracket(
           node,
+          parsed.text.range[0],
           parsed.text.range[1] - 1,
           options.space,
         );
@@ -299,6 +304,7 @@ export default createRule<
           );
           verifySpaceBeforeClosingBracket(
             node,
+            parsed.label.range[0],
             parsed.label.range[1] - 1,
             options.space,
           );
@@ -326,6 +332,7 @@ export default createRule<
           );
           verifySpaceBeforeClosingBracket(
             node,
+            parsed.label.range[0],
             parsed.label.range[1] - 1,
             options.space,
           );

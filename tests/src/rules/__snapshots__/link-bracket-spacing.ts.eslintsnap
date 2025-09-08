@@ -44,13 +44,12 @@ Code:
  23 | - Empty
  24 |   - ![](/url)
     |      ^ [9]
-    |       ^ [10]
  25 |   - ![ ](/url)
  26 |   - ![      ](/url)
  27 |
  28 | [x]: /url
-    | ^ [11]
-    |   ^ [12]
+    | ^ [10]
+    |   ^ [11]
  29 |
 
 Output:
@@ -93,9 +92,8 @@ Output:
 [7] Expected space after opening bracket.
 [8] Expected space before closing bracket.
 [9] Expected space after opening bracket.
-[10] Expected space before closing bracket.
-[11] Expected space after opening bracket.
-[12] Expected space before closing bracket.
+[10] Expected space after opening bracket.
+[11] Expected space before closing bracket.
 ---
 
 
@@ -261,25 +259,24 @@ Code:
  80 | - Empty
  81 |   - ![][x]
     |      ^ [77]
-    |       ^ [78]
-    |        ^ [79]
-    |          ^ [80]
+    |        ^ [78]
+    |          ^ [79]
  82 |   - ![ ][x]
-    |         ^ [81]
-    |           ^ [82]
+    |         ^ [80]
+    |           ^ [81]
  83 |   - ![      ][x]
-    |              ^ [83]
-    |                ^ [84]
+    |              ^ [82]
+    |                ^ [83]
  84 |
  85 | [x]: /url
-    | ^ [85]
-    |   ^ [86]
+    | ^ [84]
+    |   ^ [85]
  86 | [foo]: /url
-    | ^ [87]
-    |     ^ [88]
+    | ^ [86]
+    |     ^ [87]
  87 | [ ^foo ]: /url
  88 | [foo bar]: /url
-    | ^ [89]  ^ [90]
+    | ^ [88]  ^ [89]
  89 | [^foo]: footnote
  90 |
 
@@ -452,19 +449,18 @@ Output:
 [75] Expected space after opening bracket.
 [76] Expected space before closing bracket.
 [77] Expected space after opening bracket.
-[78] Expected space before closing bracket.
-[79] Expected space after opening bracket.
-[80] Expected space before closing bracket.
-[81] Expected space after opening bracket.
-[82] Expected space before closing bracket.
-[83] Expected space after opening bracket.
-[84] Expected space before closing bracket.
-[85] Expected space after opening bracket.
-[86] Expected space before closing bracket.
-[87] Expected space after opening bracket.
-[88] Expected space before closing bracket.
-[89] Expected space after opening bracket.
-[90] Expected space before closing bracket.
+[78] Expected space after opening bracket.
+[79] Expected space before closing bracket.
+[80] Expected space after opening bracket.
+[81] Expected space before closing bracket.
+[82] Expected space after opening bracket.
+[83] Expected space before closing bracket.
+[84] Expected space after opening bracket.
+[85] Expected space before closing bracket.
+[86] Expected space after opening bracket.
+[87] Expected space before closing bracket.
+[88] Expected space after opening bracket.
+[89] Expected space before closing bracket.
 ---
 
 
@@ -1056,11 +1052,10 @@ Code:
  16 | - Empty
  17 |   - ![](/url)
     |      ^ [7]
-    |       ^ [8]
  18 |
  19 | [x]: /url
-    | ^ [9]
-    |   ^ [10]
+    | ^ [8]
+    |   ^ [9]
  20 |
 
 Output:
@@ -1092,9 +1087,8 @@ Output:
 [5] Expected space after opening bracket.
 [6] Expected space before closing bracket.
 [7] Expected space after opening bracket.
-[8] Expected space before closing bracket.
-[9] Expected space after opening bracket.
-[10] Expected space before closing bracket.
+[8] Expected space after opening bracket.
+[9] Expected space before closing bracket.
 ---
 
 
@@ -1198,19 +1192,18 @@ Code:
  51 | - Empty
  52 |   - ![][x]
     |      ^ [41]
-    |       ^ [42]
-    |        ^ [43]
-    |          ^ [44]
+    |        ^ [42]
+    |          ^ [43]
  53 |
  54 | [x]: /url
-    | ^ [45]
-    |   ^ [46]
+    | ^ [44]
+    |   ^ [45]
  55 | [foo]: /url
-    | ^ [47]
-    |     ^ [48]
+    | ^ [46]
+    |     ^ [47]
  56 | [ ^foo ]: /url
  57 | [foo bar]: /url
-    | ^ [49]  ^ [50]
+    | ^ [48]  ^ [49]
  58 | [^foo]: footnote
  59 |
 
@@ -1316,15 +1309,14 @@ Output:
 [39] Expected space after opening bracket.
 [40] Expected space before closing bracket.
 [41] Expected space after opening bracket.
-[42] Expected space before closing bracket.
-[43] Expected space after opening bracket.
-[44] Expected space before closing bracket.
-[45] Expected space after opening bracket.
-[46] Expected space before closing bracket.
-[47] Expected space after opening bracket.
-[48] Expected space before closing bracket.
-[49] Expected space after opening bracket.
-[50] Expected space before closing bracket.
+[42] Expected space after opening bracket.
+[43] Expected space before closing bracket.
+[44] Expected space after opening bracket.
+[45] Expected space before closing bracket.
+[46] Expected space after opening bracket.
+[47] Expected space before closing bracket.
+[48] Expected space after opening bracket.
+[49] Expected space before closing bracket.
 ---
 
 
@@ -2197,10 +2189,8 @@ Code:
  24 |   - ![](/url)
  25 |   - ![ ](/url)
     |       ^ [11]
-    |       ^ [12]
  26 |   - ![      ](/url)
-    |       ^~~~~~ [13]
-    |       ^~~~~~ [14]
+    |       ^~~~~~ [12]
  27 |
  28 | [x]: /url
  29 |
@@ -2247,9 +2237,7 @@ Output:
 [9] Unexpected space after opening bracket.
 [10] Unexpected space before closing bracket.
 [11] Unexpected space after opening bracket.
-[12] Unexpected space before closing bracket.
-[13] Unexpected space after opening bracket.
-[14] Unexpected space before closing bracket.
+[12] Unexpected space after opening bracket.
 ---
 
 
@@ -2384,10 +2372,8 @@ Code:
  81 |   - ![][x]
  82 |   - ![ ][x]
     |       ^ [41]
-    |       ^ [42]
  83 |   - ![      ][x]
-    |       ^~~~~~ [43]
-    |       ^~~~~~ [44]
+    |       ^~~~~~ [42]
  84 |
  85 | [x]: /url
  86 | [foo]: /url
@@ -2529,9 +2515,7 @@ Output:
 [39] Unexpected space after opening bracket.
 [40] Unexpected space before closing bracket.
 [41] Unexpected space after opening bracket.
-[42] Unexpected space before closing bracket.
-[43] Unexpected space after opening bracket.
-[44] Unexpected space before closing bracket.
+[42] Unexpected space after opening bracket.
 ---
 
 
@@ -3016,10 +3000,8 @@ Code:
  24 |   - ![](/url)
  25 |   - ![ ](/url)
     |       ^ [11]
-    |       ^ [12]
  26 |   - ![      ](/url)
-    |       ^~~~~~ [13]
-    |       ^~~~~~ [14]
+    |       ^~~~~~ [12]
  27 |
  28 | [x]: /url
  29 |
@@ -3066,9 +3048,7 @@ Output:
 [9] Unexpected space after opening bracket.
 [10] Unexpected space before closing bracket.
 [11] Unexpected space after opening bracket.
-[12] Unexpected space before closing bracket.
-[13] Unexpected space after opening bracket.
-[14] Unexpected space before closing bracket.
+[12] Unexpected space after opening bracket.
 ---
 
 
@@ -3205,10 +3185,8 @@ Code:
  81 |   - ![][x]
  82 |   - ![ ][x]
     |       ^ [41]
-    |       ^ [42]
  83 |   - ![      ][x]
-    |       ^~~~~~ [43]
-    |       ^~~~~~ [44]
+    |       ^~~~~~ [42]
  84 |
  85 | [x]: /url
  86 | [foo]: /url
@@ -3350,9 +3328,7 @@ Output:
 [39] Unexpected space after opening bracket.
 [40] Unexpected space before closing bracket.
 [41] Unexpected space after opening bracket.
-[42] Unexpected space before closing bracket.
-[43] Unexpected space after opening bracket.
-[44] Unexpected space before closing bracket.
+[42] Unexpected space after opening bracket.
 ---
 
 
@@ -3834,14 +3810,12 @@ Code:
  17 | - Empty
  18 |   - ![ ](/url)
     |       ^ [9]
-    |       ^ [10]
  19 |   - ![      ](/url)
-    |       ^~~~~~ [11]
-    |       ^~~~~~ [12]
+    |       ^~~~~~ [10]
  20 |
  21 | [ x ]: /url
-    |  ^ [13]
-    |    ^ [14]
+    |  ^ [11]
+    |    ^ [12]
  22 |
 
 Output:
@@ -3877,11 +3851,9 @@ Output:
 [7] Unexpected space after opening bracket.
 [8] Unexpected space before closing bracket.
 [9] Unexpected space after opening bracket.
-[10] Unexpected space before closing bracket.
+[10] Unexpected space after opening bracket.
 [11] Unexpected space after opening bracket.
 [12] Unexpected space before closing bracket.
-[13] Unexpected space after opening bracket.
-[14] Unexpected space before closing bracket.
 ---
 
 
@@ -3998,24 +3970,22 @@ Code:
  55 | - Empty
  56 |   - ![ ][ x ]
     |       ^ [53]
-    |       ^ [54]
-    |          ^ [55]
-    |            ^ [56]
+    |          ^ [54]
+    |            ^ [55]
  57 |   - ![      ][ x ]
-    |       ^~~~~~ [57]
-    |       ^~~~~~ [58]
-    |               ^ [59]
-    |                 ^ [60]
+    |       ^~~~~~ [56]
+    |               ^ [57]
+    |                 ^ [58]
  58 |
  59 | [ x ]: /url
-    |  ^ [61]
-    |    ^ [62]
+    |  ^ [59]
+    |    ^ [60]
  60 | [ foo ]: /url
     |  ^   ^
-    | [63] [64]
+    | [61] [62]
  61 | [ ^foo ]: /url
  62 | [ foo bar ]: /url
-    |  ^ [65]  ^ [66]
+    |  ^ [63]  ^ [64]
  63 | [^foo]: footnote
  64 |
 
@@ -4138,9 +4108,9 @@ Output:
 [51] Unexpected space after opening bracket.
 [52] Unexpected space before closing bracket.
 [53] Unexpected space after opening bracket.
-[54] Unexpected space before closing bracket.
-[55] Unexpected space after opening bracket.
-[56] Unexpected space before closing bracket.
+[54] Unexpected space after opening bracket.
+[55] Unexpected space before closing bracket.
+[56] Unexpected space after opening bracket.
 [57] Unexpected space after opening bracket.
 [58] Unexpected space before closing bracket.
 [59] Unexpected space after opening bracket.
@@ -4149,8 +4119,6 @@ Output:
 [62] Unexpected space before closing bracket.
 [63] Unexpected space after opening bracket.
 [64] Unexpected space before closing bracket.
-[65] Unexpected space after opening bracket.
-[66] Unexpected space before closing bracket.
 ---
 
 
