@@ -11,12 +11,12 @@ describe("parseImageFromText", () => {
     });
   });
 
-  it("should parse angle-bracketed destination", () => {
+  it("should parse pointy-bracketed destination", () => {
     const result = parseImageFromText("![alt](<foo.png>)");
     assert.deepStrictEqual(result, {
       text: { range: [1, 6] },
       destination: {
-        type: "angle-bracketed",
+        type: "pointy-bracketed",
         text: "<foo.png>",
         range: [7, 16],
       },

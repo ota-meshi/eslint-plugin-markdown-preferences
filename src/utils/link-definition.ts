@@ -11,7 +11,7 @@ export type ParsedLinkDefinition = {
     loc: SourceLocation;
   };
   destination: {
-    type: "angle-bracketed" | "plain";
+    type: "pointy-bracketed" | "plain";
     text: string;
     range: [number, number];
     loc: SourceLocation;
@@ -80,7 +80,7 @@ export function parseLinkDefinitionFromText(text: string): {
     range: [number, number];
   };
   destination: {
-    type: "angle-bracketed" | "plain";
+    type: "pointy-bracketed" | "plain";
     text: string;
     range: [number, number];
   };
@@ -115,13 +115,13 @@ export function parseLinkDefinitionFromText(text: string): {
   >["destination"];
   const destinationStartIndex = index;
   if (text[index] === "<") {
-    // Angle-bracketed destination
+    // Pointy-bracketed destination
     index++;
     if (!skipUntilEnd((c) => c === ">")) return null;
     index++;
     const destinationRange: [number, number] = [destinationStartIndex, index];
     destination = {
-      type: "angle-bracketed",
+      type: "pointy-bracketed",
       text: text.slice(...destinationRange),
       range: destinationRange,
     };

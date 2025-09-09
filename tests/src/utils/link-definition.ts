@@ -2,14 +2,14 @@ import assert from "node:assert";
 import { parseLinkDefinitionFromText } from "../../../src/utils/link-definition.ts";
 
 describe("parseLinkDefinitionFromText", () => {
-  it("parses angle-bracketed destination with double-quoted title", () => {
+  it("parses pointy-bracketed destination with double-quoted title", () => {
     const result = parseLinkDefinitionFromText(
       '[label]: <https://example.com> "Title"',
     );
     assert.deepStrictEqual(result, {
       label: { text: "[label]", range: [0, 7] },
       destination: {
-        type: "angle-bracketed",
+        type: "pointy-bracketed",
         text: "<https://example.com>",
         range: [9, 30],
       },
@@ -256,11 +256,11 @@ describe("parseLinkDefinitionFromText", () => {
     assert.strictEqual(parseLinkDefinitionFromText("[a]:"), null);
   });
 
-  it("parses angle-bracketed destination without title", () => {
+  it("parses pointy-bracketed destination without title", () => {
     const result = parseLinkDefinitionFromText("[a]: <b>");
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "angle-bracketed", text: "<b>", range: [5, 8] },
+      destination: { type: "pointy-bracketed", text: "<b>", range: [5, 8] },
       title: null,
     });
   });
@@ -317,7 +317,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result3 = parseLinkDefinitionFromText("[a]: <b\nc> 't'");
     assert.deepStrictEqual(result3, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "angle-bracketed", text: "<b\nc>", range: [5, 10] },
+      destination: { type: "pointy-bracketed", text: "<b\nc>", range: [5, 10] },
       title: { type: "single-quoted", text: "'t'", range: [11, 14] },
     });
     const result4 = parseLinkDefinitionFromText("[a]: b\n\n 't'");
@@ -333,7 +333,7 @@ describe("parseLinkDefinitionFromText", () => {
     assert.deepStrictEqual(result, null);
   });
 
-  it("returns null for double angle-bracketed destination", () => {
+  it("returns null for double pointy-bracketed destination", () => {
     assert.strictEqual(parseLinkDefinitionFromText("[a]: <<b>>"), null);
   });
 
@@ -437,7 +437,11 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[a]: <b\\>c> 't'");
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "angle-bracketed", text: "<b\\>c>", range: [5, 11] },
+      destination: {
+        type: "pointy-bracketed",
+        text: "<b\\>c>",
+        range: [5, 11],
+      },
       title: { type: "single-quoted", text: "'t'", range: [12, 15] },
     });
   });
@@ -450,20 +454,20 @@ describe("parseLinkDefinitionFromText", () => {
       title: null,
     });
   });
-  it("parses angle-bracketed destination and single-quoted title with escaped close characters", () => {
+  it("parses pointy-bracketed destination and single-quoted title with escaped close characters", () => {
     const result = parseLinkDefinitionFromText("[a]: <b\\>> 't\\'>'");
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "angle-bracketed", text: "<b\\>>", range: [5, 10] },
+      destination: { type: "pointy-bracketed", text: "<b\\>>", range: [5, 10] },
       title: { type: "single-quoted", text: "'t\\'>'", range: [11, 17] },
     });
   });
 
-  it("parses angle-bracketed destination with only space and single-quoted title", () => {
+  it("parses pointy-bracketed destination with only space and single-quoted title", () => {
     const result = parseLinkDefinitionFromText("[a]: < > ''");
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "angle-bracketed", text: "< >", range: [5, 8] },
+      destination: { type: "pointy-bracketed", text: "< >", range: [5, 8] },
       title: { type: "single-quoted", text: "''", range: [9, 11] },
     });
   });
