@@ -1,5 +1,17 @@
 # eslint-plugin-markdown-preferences
 
+## 0.22.0
+
+### Minor Changes
+
+- [#106](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/106) [`3b68b06`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/3b68b06eb47522e98496c6be4c30d9ff33c173d2) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/link-bracket-newline`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-bracket-newline.html) rule
+
+- [#104](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/104) [`c7d9e1a`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/c7d9e1a9767f11e41e383bbf803dfb63bfad368a) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/link-bracket-spacing`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-bracket-spacing.html) rule
+
+- [#109](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/109) [`3d339c1`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/3d339c1c7979c36218c78fe85e3e5ca1a039f483) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/link-destination-style`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-destination-style.html) rule
+
+- [#108](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/108) [`256b174`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/256b174582c18ffa216ede4b7b718c0a4be31fad) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/link-title-style`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-title-style.html) rule
+
 ## 0.21.0
 
 ### Minor Changes

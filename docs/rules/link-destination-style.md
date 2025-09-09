@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/link-destination-style"
 description: "enforce a consistent style for link destinations"
+since: "v0.22.0"
 ---
 
 # markdown-preferences/link-destination-style
 
 > enforce a consistent style for link destinations
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - ⚙️ This rule is included in `plugin.configs.standard`.
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
@@ -133,12 +133,12 @@ If `true`, the rule will not enforce a style if it would require escaping whites
 - [markdown-preferences/link-bracket-newline](./link-bracket-newline.md)
 - [markdown-preferences/link-bracket-spacing](./link-bracket-spacing.md)
 
-## 🔍 Implementation
+## 🚀 Version
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+This rule was introduced in eslint-plugin-markdown-preferences v0.22.0
+
+## 🔍 Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/link-destination-style.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/link-destination-style.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/link-destination-style)
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
