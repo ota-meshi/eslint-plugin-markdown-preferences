@@ -94,6 +94,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/link-bracket-spacing'?: Linter.RuleEntry<MarkdownPreferencesLinkBracketSpacing>
   /**
+   * enforce a consistent style for link destinations
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-destination-style.html
+   */
+  'markdown-preferences/link-destination-style'?: Linter.RuleEntry<MarkdownPreferencesLinkDestinationStyle>
+  /**
    * enforce a consistent style for link titles
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-title-style.html
    */
@@ -311,6 +316,12 @@ type MarkdownPreferencesLinkBracketNewline = []|[{
 type MarkdownPreferencesLinkBracketSpacing = []|[{
   space?: ("always" | "never")
   imagesInLinks?: boolean
+}]
+// ----- markdown-preferences/link-destination-style -----
+type MarkdownPreferencesLinkDestinationStyle = []|[{
+  style?: ("bare" | "pointy-brackets")
+  avoidEscape?: boolean
+  [k: string]: unknown | undefined
 }]
 // ----- markdown-preferences/link-title-style -----
 type MarkdownPreferencesLinkTitleStyle = []|[{
