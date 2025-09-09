@@ -1,0 +1,1068 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: link-title-style >> invalid
+Filename: tests/fixtures/rules/link-title-style/invalid/double/fource/titles-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: double
+    avoidEscape: false
+Plugins: unable to serialize
+
+Code:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url "double")
+  6 | - [foo](/url 'single')
+    |              ^~~~~~~~ [1]
+  7 | - [foo](/url (parenthesis))
+    |              ^~~~~~~~~~~~~ [2]
+  8 | - [foo](/url "double \" in double")
+  9 | - [foo](/url "single ' in double")
+ 10 | - [foo](/url "parenthesis () in double")
+ 11 | - [foo](/url 'double " in single')
+    |              ^~~~~~~~~~~~~~~~~~~~ [3]
+ 12 | - [foo](/url 'single \'  in single')
+    |              ^~~~~~~~~~~~~~~~~~~~~~ [4]
+ 13 | - [foo](/url 'parenthesis () in single')
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~~ [5]
+ 14 | - [foo](/url (double " in parenthesis))
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~ [6]
+ 15 | - [foo](/url (single ' in parenthesis))
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~ [7]
+ 16 | - [foo](/url (parenthesis \(\) in parenthesis))
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [8]
+ 17 |
+ 18 | ## Images
+ 19 |
+ 20 | - ![foo](/url "double")
+ 21 | - ![foo](/url 'single')
+    |               ^~~~~~~~ [9]
+ 22 | - ![foo](/url (parenthesis))
+    |               ^~~~~~~~~~~~~ [10]
+ 23 |
+ 24 | ## Definitions
+ 25 |
+ 26 | [x]: /url "double"
+ 27 | [y]: /url 'single'
+    |           ^~~~~~~~ [11]
+ 28 | [z]: /url (parenthesis)
+    |           ^~~~~~~~~~~~~ [12]
+ 29 |
+
+Output:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url "double")
+  6 | - [foo](/url "single")
+  7 | - [foo](/url "parenthesis")
+  8 | - [foo](/url "double \" in double")
+  9 | - [foo](/url "single ' in double")
+ 10 | - [foo](/url "parenthesis () in double")
+ 11 | - [foo](/url "double \" in single")
+ 12 | - [foo](/url "single \'  in single")
+ 13 | - [foo](/url "parenthesis () in single")
+ 14 | - [foo](/url "double \" in parenthesis")
+ 15 | - [foo](/url "single ' in parenthesis")
+ 16 | - [foo](/url "parenthesis \(\) in parenthesis")
+ 17 |
+ 18 | ## Images
+ 19 |
+ 20 | - ![foo](/url "double")
+ 21 | - ![foo](/url "single")
+ 22 | - ![foo](/url "parenthesis")
+ 23 |
+ 24 | ## Definitions
+ 25 |
+ 26 | [x]: /url "double"
+ 27 | [y]: /url "single"
+ 28 | [z]: /url "parenthesis"
+ 29 |
+
+[1] Expected link title to be double quoted.
+[2] Expected link title to be double quoted.
+[3] Expected link title to be double quoted.
+[4] Expected link title to be double quoted.
+[5] Expected link title to be double quoted.
+[6] Expected link title to be double quoted.
+[7] Expected link title to be double quoted.
+[8] Expected link title to be double quoted.
+[9] Expected link title to be double quoted.
+[10] Expected link title to be double quoted.
+[11] Expected link title to be double quoted.
+[12] Expected link title to be double quoted.
+---
+
+
+Test: link-title-style >> invalid
+Filename: tests/fixtures/rules/link-title-style/invalid/double/parenthesis-titles-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: double
+Plugins: unable to serialize
+
+Code:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url (parenthesis))
+    |              ^~~~~~~~~~~~~ [1]
+  6 | - [foo](/url "parenthesis () in double")
+  7 | - [foo](/url 'parenthesis () in single')
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  8 | - [foo](/url (double " in parenthesis))
+  9 | - [foo](/url (single ' in parenthesis))
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+ 10 | - [foo](/url (parenthesis \(\) in parenthesis))
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+ 11 |
+ 12 | ## Images
+ 13 |
+ 14 | - ![foo](/url (parenthesis))
+    |               ^~~~~~~~~~~~~ [5]
+ 15 |
+ 16 | ## Definitions
+ 17 |
+ 18 | [z]: /url (parenthesis)
+    |           ^~~~~~~~~~~~~ [6]
+ 19 |
+
+Output:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url "parenthesis")
+  6 | - [foo](/url "parenthesis () in double")
+  7 | - [foo](/url "parenthesis () in single")
+  8 | - [foo](/url (double " in parenthesis))
+  9 | - [foo](/url "single ' in parenthesis")
+ 10 | - [foo](/url "parenthesis \(\) in parenthesis")
+ 11 |
+ 12 | ## Images
+ 13 |
+ 14 | - ![foo](/url "parenthesis")
+ 15 |
+ 16 | ## Definitions
+ 17 |
+ 18 | [z]: /url "parenthesis"
+ 19 |
+
+[1] Expected link title to be double quoted.
+[2] Expected link title to be double quoted.
+[3] Expected link title to be double quoted.
+[4] Expected link title to be double quoted.
+[5] Expected link title to be double quoted.
+[6] Expected link title to be double quoted.
+---
+
+
+Test: link-title-style >> invalid
+Filename: tests/fixtures/rules/link-title-style/invalid/double/single-quoted-titles-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: double
+Plugins: unable to serialize
+
+Code:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url 'single')
+    |              ^~~~~~~~ [1]
+  6 | - [foo](/url "single ' in double")
+  7 | - [foo](/url 'double " in single')
+  8 | - [foo](/url 'single \'  in single')
+    |              ^~~~~~~~~~~~~~~~~~~~~~ [2]
+  9 | - [foo](/url 'parenthesis () in single')
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+ 10 | - [foo](/url (single ' in parenthesis))
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+ 11 |
+ 12 | ## Images
+ 13 |
+ 14 | - ![foo](/url 'single')
+    |               ^~~~~~~~ [5]
+ 15 |
+ 16 | ## Definitions
+ 17 |
+ 18 | [y]: /url 'single'
+    |           ^~~~~~~~ [6]
+ 19 |
+
+Output:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url "single")
+  6 | - [foo](/url "single ' in double")
+  7 | - [foo](/url 'double " in single')
+  8 | - [foo](/url "single \'  in single")
+  9 | - [foo](/url "parenthesis () in single")
+ 10 | - [foo](/url "single ' in parenthesis")
+ 11 |
+ 12 | ## Images
+ 13 |
+ 14 | - ![foo](/url "single")
+ 15 |
+ 16 | ## Definitions
+ 17 |
+ 18 | [y]: /url "single"
+ 19 |
+
+[1] Expected link title to be double quoted.
+[2] Expected link title to be double quoted.
+[3] Expected link title to be double quoted.
+[4] Expected link title to be double quoted.
+[5] Expected link title to be double quoted.
+[6] Expected link title to be double quoted.
+---
+
+
+Test: link-title-style >> invalid >>> "# Title styles\n\n## Links\n\n- [foo](/url \"double\")\n- [foo](/url 'single')\n- [foo](/url (parenthesis))\n- [foo](/url \"double \\\" in double\")\n- [foo](/url \"single ' in double\")\n- [foo](/url \"parenthesis () in double\")\n- [foo](/url 'double \" in single')\n- [foo](/url 'single \\'  in single')\n- [foo](/url 'parenthesis () in single')\n- [foo](/url (double \" in parenthesis))\n- [foo](/url (single ' in parenthesis))\n- [foo](/url (parenthesis \\(\\) in parenthesis))\n\n## Images\n\n- ![foo](/url \"double\")\n- ![foo](/url 'single')\n- ![foo](/url (parenthesis))\n\n## Definitions\n\n[x]: /url \"double\"\n[y]: /url 'single'\n[z]: /url (parenthesis)\n 2"
+Filename: tests/fixtures/rules/link-title-style/invalid/double/titles-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: double
+Plugins: unable to serialize
+
+Code:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url "double")
+  6 | - [foo](/url 'single')
+    |              ^~~~~~~~ [1]
+  7 | - [foo](/url (parenthesis))
+    |              ^~~~~~~~~~~~~ [2]
+  8 | - [foo](/url "double \" in double")
+  9 | - [foo](/url "single ' in double")
+ 10 | - [foo](/url "parenthesis () in double")
+ 11 | - [foo](/url 'double " in single')
+ 12 | - [foo](/url 'single \'  in single')
+    |              ^~~~~~~~~~~~~~~~~~~~~~ [3]
+ 13 | - [foo](/url 'parenthesis () in single')
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+ 14 | - [foo](/url (double " in parenthesis))
+ 15 | - [foo](/url (single ' in parenthesis))
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~ [5]
+ 16 | - [foo](/url (parenthesis \(\) in parenthesis))
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [6]
+ 17 |
+ 18 | ## Images
+ 19 |
+ 20 | - ![foo](/url "double")
+ 21 | - ![foo](/url 'single')
+    |               ^~~~~~~~ [7]
+ 22 | - ![foo](/url (parenthesis))
+    |               ^~~~~~~~~~~~~ [8]
+ 23 |
+ 24 | ## Definitions
+ 25 |
+ 26 | [x]: /url "double"
+ 27 | [y]: /url 'single'
+    |           ^~~~~~~~ [9]
+ 28 | [z]: /url (parenthesis)
+    |           ^~~~~~~~~~~~~ [10]
+ 29 |
+
+Output:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url "double")
+  6 | - [foo](/url "single")
+  7 | - [foo](/url "parenthesis")
+  8 | - [foo](/url "double \" in double")
+  9 | - [foo](/url "single ' in double")
+ 10 | - [foo](/url "parenthesis () in double")
+ 11 | - [foo](/url 'double " in single')
+ 12 | - [foo](/url "single \'  in single")
+ 13 | - [foo](/url "parenthesis () in single")
+ 14 | - [foo](/url (double " in parenthesis))
+ 15 | - [foo](/url "single ' in parenthesis")
+ 16 | - [foo](/url "parenthesis \(\) in parenthesis")
+ 17 |
+ 18 | ## Images
+ 19 |
+ 20 | - ![foo](/url "double")
+ 21 | - ![foo](/url "single")
+ 22 | - ![foo](/url "parenthesis")
+ 23 |
+ 24 | ## Definitions
+ 25 |
+ 26 | [x]: /url "double"
+ 27 | [y]: /url "single"
+ 28 | [z]: /url "parenthesis"
+ 29 |
+
+[1] Expected link title to be double quoted.
+[2] Expected link title to be double quoted.
+[3] Expected link title to be double quoted.
+[4] Expected link title to be double quoted.
+[5] Expected link title to be double quoted.
+[6] Expected link title to be double quoted.
+[7] Expected link title to be double quoted.
+[8] Expected link title to be double quoted.
+[9] Expected link title to be double quoted.
+[10] Expected link title to be double quoted.
+---
+
+
+Test: link-title-style >> invalid
+Filename: tests/fixtures/rules/link-title-style/invalid/parenthesis/double-quoted-titles-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: parenthesis
+Plugins: unable to serialize
+
+Code:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url "double")
+    |              ^~~~~~~~ [1]
+  6 | - [foo](/url "double \" in double")
+    |              ^~~~~~~~~~~~~~~~~~~~~ [2]
+  7 | - [foo](/url "single ' in double")
+    |              ^~~~~~~~~~~~~~~~~~~~ [3]
+  8 | - [foo](/url "parenthesis () in double")
+  9 | - [foo](/url 'double " in single')
+    |              ^~~~~~~~~~~~~~~~~~~~ [4]
+ 10 | - [foo](/url (double " in parenthesis))
+ 11 |
+ 12 | ## Images
+ 13 |
+ 14 | - ![foo](/url "double")
+    |               ^~~~~~~~ [5]
+ 15 |
+ 16 | ## Definitions
+ 17 |
+ 18 | [x]: /url "double"
+    |           ^~~~~~~~ [6]
+ 19 |
+
+Output:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url (double))
+  6 | - [foo](/url (double \" in double))
+  7 | - [foo](/url (single ' in double))
+  8 | - [foo](/url "parenthesis () in double")
+  9 | - [foo](/url (double " in single))
+ 10 | - [foo](/url (double " in parenthesis))
+ 11 |
+ 12 | ## Images
+ 13 |
+ 14 | - ![foo](/url (double))
+ 15 |
+ 16 | ## Definitions
+ 17 |
+ 18 | [x]: /url (double)
+ 19 |
+
+[1] Expected link title to be parenthesized.
+[2] Expected link title to be parenthesized.
+[3] Expected link title to be parenthesized.
+[4] Expected link title to be parenthesized.
+[5] Expected link title to be parenthesized.
+[6] Expected link title to be parenthesized.
+---
+
+
+Test: link-title-style >> invalid >>> "# Title styles\n\n## Links\n\n- [foo](/url \"double\")\n- [foo](/url 'single')\n- [foo](/url (parenthesis))\n- [foo](/url \"double \\\" in double\")\n- [foo](/url \"single ' in double\")\n- [foo](/url \"parenthesis () in double\")\n- [foo](/url 'double \" in single')\n- [foo](/url 'single \\'  in single')\n- [foo](/url 'parenthesis () in single')\n- [foo](/url (double \" in parenthesis))\n- [foo](/url (single ' in parenthesis))\n- [foo](/url (parenthesis \\(\\) in parenthesis))\n\n## Images\n\n- ![foo](/url \"double\")\n- ![foo](/url 'single')\n- ![foo](/url (parenthesis))\n\n## Definitions\n\n[x]: /url \"double\"\n[y]: /url 'single'\n[z]: /url (parenthesis)\n 3"
+Filename: tests/fixtures/rules/link-title-style/invalid/parenthesis/fource/titles-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: parenthesis
+    avoidEscape: false
+Plugins: unable to serialize
+
+Code:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url "double")
+    |              ^~~~~~~~ [1]
+  6 | - [foo](/url 'single')
+    |              ^~~~~~~~ [2]
+  7 | - [foo](/url (parenthesis))
+  8 | - [foo](/url "double \" in double")
+    |              ^~~~~~~~~~~~~~~~~~~~~ [3]
+  9 | - [foo](/url "single ' in double")
+    |              ^~~~~~~~~~~~~~~~~~~~ [4]
+ 10 | - [foo](/url "parenthesis () in double")
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~~ [5]
+ 11 | - [foo](/url 'double " in single')
+    |              ^~~~~~~~~~~~~~~~~~~~ [6]
+ 12 | - [foo](/url 'single \'  in single')
+    |              ^~~~~~~~~~~~~~~~~~~~~~ [7]
+ 13 | - [foo](/url 'parenthesis () in single')
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~~ [8]
+ 14 | - [foo](/url (double " in parenthesis))
+ 15 | - [foo](/url (single ' in parenthesis))
+ 16 | - [foo](/url (parenthesis \(\) in parenthesis))
+ 17 |
+ 18 | ## Images
+ 19 |
+ 20 | - ![foo](/url "double")
+    |               ^~~~~~~~ [9]
+ 21 | - ![foo](/url 'single')
+    |               ^~~~~~~~ [10]
+ 22 | - ![foo](/url (parenthesis))
+ 23 |
+ 24 | ## Definitions
+ 25 |
+ 26 | [x]: /url "double"
+    |           ^~~~~~~~ [11]
+ 27 | [y]: /url 'single'
+    |           ^~~~~~~~ [12]
+ 28 | [z]: /url (parenthesis)
+ 29 |
+
+Output:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url (double))
+  6 | - [foo](/url (single))
+  7 | - [foo](/url (parenthesis))
+  8 | - [foo](/url (double \" in double))
+  9 | - [foo](/url (single ' in double))
+ 10 | - [foo](/url (parenthesis (\) in double))
+ 11 | - [foo](/url (double " in single))
+ 12 | - [foo](/url (single \'  in single))
+ 13 | - [foo](/url (parenthesis (\) in single))
+ 14 | - [foo](/url (double " in parenthesis))
+ 15 | - [foo](/url (single ' in parenthesis))
+ 16 | - [foo](/url (parenthesis \(\) in parenthesis))
+ 17 |
+ 18 | ## Images
+ 19 |
+ 20 | - ![foo](/url (double))
+ 21 | - ![foo](/url (single))
+ 22 | - ![foo](/url (parenthesis))
+ 23 |
+ 24 | ## Definitions
+ 25 |
+ 26 | [x]: /url (double)
+ 27 | [y]: /url (single)
+ 28 | [z]: /url (parenthesis)
+ 29 |
+
+[1] Expected link title to be parenthesized.
+[2] Expected link title to be parenthesized.
+[3] Expected link title to be parenthesized.
+[4] Expected link title to be parenthesized.
+[5] Expected link title to be parenthesized.
+[6] Expected link title to be parenthesized.
+[7] Expected link title to be parenthesized.
+[8] Expected link title to be parenthesized.
+[9] Expected link title to be parenthesized.
+[10] Expected link title to be parenthesized.
+[11] Expected link title to be parenthesized.
+[12] Expected link title to be parenthesized.
+---
+
+
+Test: link-title-style >> invalid >>> "# Title styles\n\n## Links\n\n- [foo](/url 'single')\n- [foo](/url \"single ' in double\")\n- [foo](/url 'double \" in single')\n- [foo](/url 'single \\'  in single')\n- [foo](/url 'parenthesis () in single')\n- [foo](/url (single ' in parenthesis))\n\n## Images\n\n- ![foo](/url 'single')\n\n## Definitions\n\n[y]: /url 'single'\n 2"
+Filename: tests/fixtures/rules/link-title-style/invalid/parenthesis/single-quoted-titles-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: parenthesis
+Plugins: unable to serialize
+
+Code:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url 'single')
+    |              ^~~~~~~~ [1]
+  6 | - [foo](/url "single ' in double")
+    |              ^~~~~~~~~~~~~~~~~~~~ [2]
+  7 | - [foo](/url 'double " in single')
+    |              ^~~~~~~~~~~~~~~~~~~~ [3]
+  8 | - [foo](/url 'single \'  in single')
+    |              ^~~~~~~~~~~~~~~~~~~~~~ [4]
+  9 | - [foo](/url 'parenthesis () in single')
+ 10 | - [foo](/url (single ' in parenthesis))
+ 11 |
+ 12 | ## Images
+ 13 |
+ 14 | - ![foo](/url 'single')
+    |               ^~~~~~~~ [5]
+ 15 |
+ 16 | ## Definitions
+ 17 |
+ 18 | [y]: /url 'single'
+    |           ^~~~~~~~ [6]
+ 19 |
+
+Output:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url (single))
+  6 | - [foo](/url (single ' in double))
+  7 | - [foo](/url (double " in single))
+  8 | - [foo](/url (single \'  in single))
+  9 | - [foo](/url 'parenthesis () in single')
+ 10 | - [foo](/url (single ' in parenthesis))
+ 11 |
+ 12 | ## Images
+ 13 |
+ 14 | - ![foo](/url (single))
+ 15 |
+ 16 | ## Definitions
+ 17 |
+ 18 | [y]: /url (single)
+ 19 |
+
+[1] Expected link title to be parenthesized.
+[2] Expected link title to be parenthesized.
+[3] Expected link title to be parenthesized.
+[4] Expected link title to be parenthesized.
+[5] Expected link title to be parenthesized.
+[6] Expected link title to be parenthesized.
+---
+
+
+Test: link-title-style >> invalid >>> "# Title styles\n\n## Links\n\n- [foo](/url \"double\")\n- [foo](/url 'single')\n- [foo](/url (parenthesis))\n- [foo](/url \"double \\\" in double\")\n- [foo](/url \"single ' in double\")\n- [foo](/url \"parenthesis () in double\")\n- [foo](/url 'double \" in single')\n- [foo](/url 'single \\'  in single')\n- [foo](/url 'parenthesis () in single')\n- [foo](/url (double \" in parenthesis))\n- [foo](/url (single ' in parenthesis))\n- [foo](/url (parenthesis \\(\\) in parenthesis))\n\n## Images\n\n- ![foo](/url \"double\")\n- ![foo](/url 'single')\n- ![foo](/url (parenthesis))\n\n## Definitions\n\n[x]: /url \"double\"\n[y]: /url 'single'\n[z]: /url (parenthesis)\n 4"
+Filename: tests/fixtures/rules/link-title-style/invalid/parenthesis/titles-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: parenthesis
+Plugins: unable to serialize
+
+Code:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url "double")
+    |              ^~~~~~~~ [1]
+  6 | - [foo](/url 'single')
+    |              ^~~~~~~~ [2]
+  7 | - [foo](/url (parenthesis))
+  8 | - [foo](/url "double \" in double")
+    |              ^~~~~~~~~~~~~~~~~~~~~ [3]
+  9 | - [foo](/url "single ' in double")
+    |              ^~~~~~~~~~~~~~~~~~~~ [4]
+ 10 | - [foo](/url "parenthesis () in double")
+ 11 | - [foo](/url 'double " in single')
+    |              ^~~~~~~~~~~~~~~~~~~~ [5]
+ 12 | - [foo](/url 'single \'  in single')
+    |              ^~~~~~~~~~~~~~~~~~~~~~ [6]
+ 13 | - [foo](/url 'parenthesis () in single')
+ 14 | - [foo](/url (double " in parenthesis))
+ 15 | - [foo](/url (single ' in parenthesis))
+ 16 | - [foo](/url (parenthesis \(\) in parenthesis))
+ 17 |
+ 18 | ## Images
+ 19 |
+ 20 | - ![foo](/url "double")
+    |               ^~~~~~~~ [7]
+ 21 | - ![foo](/url 'single')
+    |               ^~~~~~~~ [8]
+ 22 | - ![foo](/url (parenthesis))
+ 23 |
+ 24 | ## Definitions
+ 25 |
+ 26 | [x]: /url "double"
+    |           ^~~~~~~~ [9]
+ 27 | [y]: /url 'single'
+    |           ^~~~~~~~ [10]
+ 28 | [z]: /url (parenthesis)
+ 29 |
+
+Output:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url (double))
+  6 | - [foo](/url (single))
+  7 | - [foo](/url (parenthesis))
+  8 | - [foo](/url (double \" in double))
+  9 | - [foo](/url (single ' in double))
+ 10 | - [foo](/url "parenthesis () in double")
+ 11 | - [foo](/url (double " in single))
+ 12 | - [foo](/url (single \'  in single))
+ 13 | - [foo](/url 'parenthesis () in single')
+ 14 | - [foo](/url (double " in parenthesis))
+ 15 | - [foo](/url (single ' in parenthesis))
+ 16 | - [foo](/url (parenthesis \(\) in parenthesis))
+ 17 |
+ 18 | ## Images
+ 19 |
+ 20 | - ![foo](/url (double))
+ 21 | - ![foo](/url (single))
+ 22 | - ![foo](/url (parenthesis))
+ 23 |
+ 24 | ## Definitions
+ 25 |
+ 26 | [x]: /url (double)
+ 27 | [y]: /url (single)
+ 28 | [z]: /url (parenthesis)
+ 29 |
+
+[1] Expected link title to be parenthesized.
+[2] Expected link title to be parenthesized.
+[3] Expected link title to be parenthesized.
+[4] Expected link title to be parenthesized.
+[5] Expected link title to be parenthesized.
+[6] Expected link title to be parenthesized.
+[7] Expected link title to be parenthesized.
+[8] Expected link title to be parenthesized.
+[9] Expected link title to be parenthesized.
+[10] Expected link title to be parenthesized.
+---
+
+
+Test: link-title-style >> invalid >>> "# Title styles\n\n## Links\n\n- [foo](/url \"double\")\n- [foo](/url \"double \\\" in double\")\n- [foo](/url \"single ' in double\")\n- [foo](/url \"parenthesis () in double\")\n- [foo](/url 'double \" in single')\n- [foo](/url (double \" in parenthesis))\n\n## Images\n\n- ![foo](/url \"double\")\n\n## Definitions\n\n[x]: /url \"double\"\n 2"
+Filename: tests/fixtures/rules/link-title-style/invalid/single/double-quoted-titles-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: single
+Plugins: unable to serialize
+
+Code:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url "double")
+    |              ^~~~~~~~ [1]
+  6 | - [foo](/url "double \" in double")
+    |              ^~~~~~~~~~~~~~~~~~~~~ [2]
+  7 | - [foo](/url "single ' in double")
+  8 | - [foo](/url "parenthesis () in double")
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+  9 | - [foo](/url 'double " in single')
+ 10 | - [foo](/url (double " in parenthesis))
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+ 11 |
+ 12 | ## Images
+ 13 |
+ 14 | - ![foo](/url "double")
+    |               ^~~~~~~~ [5]
+ 15 |
+ 16 | ## Definitions
+ 17 |
+ 18 | [x]: /url "double"
+    |           ^~~~~~~~ [6]
+ 19 |
+
+Output:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url 'double')
+  6 | - [foo](/url 'double \" in double')
+  7 | - [foo](/url "single ' in double")
+  8 | - [foo](/url 'parenthesis () in double')
+  9 | - [foo](/url 'double " in single')
+ 10 | - [foo](/url 'double " in parenthesis')
+ 11 |
+ 12 | ## Images
+ 13 |
+ 14 | - ![foo](/url 'double')
+ 15 |
+ 16 | ## Definitions
+ 17 |
+ 18 | [x]: /url 'double'
+ 19 |
+
+[1] Expected link title to be single quoted.
+[2] Expected link title to be single quoted.
+[3] Expected link title to be single quoted.
+[4] Expected link title to be single quoted.
+[5] Expected link title to be single quoted.
+[6] Expected link title to be single quoted.
+---
+
+
+Test: link-title-style >> invalid >>> "# Title styles\n\n## Links\n\n- [foo](/url \"double\")\n- [foo](/url 'single')\n- [foo](/url (parenthesis))\n- [foo](/url \"double \\\" in double\")\n- [foo](/url \"single ' in double\")\n- [foo](/url \"parenthesis () in double\")\n- [foo](/url 'double \" in single')\n- [foo](/url 'single \\'  in single')\n- [foo](/url 'parenthesis () in single')\n- [foo](/url (double \" in parenthesis))\n- [foo](/url (single ' in parenthesis))\n- [foo](/url (parenthesis \\(\\) in parenthesis))\n\n## Images\n\n- ![foo](/url \"double\")\n- ![foo](/url 'single')\n- ![foo](/url (parenthesis))\n\n## Definitions\n\n[x]: /url \"double\"\n[y]: /url 'single'\n[z]: /url (parenthesis)\n 5"
+Filename: tests/fixtures/rules/link-title-style/invalid/single/fource/titles-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: single
+    avoidEscape: false
+Plugins: unable to serialize
+
+Code:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url "double")
+    |              ^~~~~~~~ [1]
+  6 | - [foo](/url 'single')
+  7 | - [foo](/url (parenthesis))
+    |              ^~~~~~~~~~~~~ [2]
+  8 | - [foo](/url "double \" in double")
+    |              ^~~~~~~~~~~~~~~~~~~~~ [3]
+  9 | - [foo](/url "single ' in double")
+    |              ^~~~~~~~~~~~~~~~~~~~ [4]
+ 10 | - [foo](/url "parenthesis () in double")
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~~ [5]
+ 11 | - [foo](/url 'double " in single')
+ 12 | - [foo](/url 'single \'  in single')
+ 13 | - [foo](/url 'parenthesis () in single')
+ 14 | - [foo](/url (double " in parenthesis))
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~ [6]
+ 15 | - [foo](/url (single ' in parenthesis))
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~ [7]
+ 16 | - [foo](/url (parenthesis \(\) in parenthesis))
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [8]
+ 17 |
+ 18 | ## Images
+ 19 |
+ 20 | - ![foo](/url "double")
+    |               ^~~~~~~~ [9]
+ 21 | - ![foo](/url 'single')
+ 22 | - ![foo](/url (parenthesis))
+    |               ^~~~~~~~~~~~~ [10]
+ 23 |
+ 24 | ## Definitions
+ 25 |
+ 26 | [x]: /url "double"
+    |           ^~~~~~~~ [11]
+ 27 | [y]: /url 'single'
+ 28 | [z]: /url (parenthesis)
+    |           ^~~~~~~~~~~~~ [12]
+ 29 |
+
+Output:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url 'double')
+  6 | - [foo](/url 'single')
+  7 | - [foo](/url 'parenthesis')
+  8 | - [foo](/url 'double \" in double')
+  9 | - [foo](/url 'single \' in double')
+ 10 | - [foo](/url 'parenthesis () in double')
+ 11 | - [foo](/url 'double " in single')
+ 12 | - [foo](/url 'single \'  in single')
+ 13 | - [foo](/url 'parenthesis () in single')
+ 14 | - [foo](/url 'double " in parenthesis')
+ 15 | - [foo](/url 'single \' in parenthesis')
+ 16 | - [foo](/url 'parenthesis \(\) in parenthesis')
+ 17 |
+ 18 | ## Images
+ 19 |
+ 20 | - ![foo](/url 'double')
+ 21 | - ![foo](/url 'single')
+ 22 | - ![foo](/url 'parenthesis')
+ 23 |
+ 24 | ## Definitions
+ 25 |
+ 26 | [x]: /url 'double'
+ 27 | [y]: /url 'single'
+ 28 | [z]: /url 'parenthesis'
+ 29 |
+
+[1] Expected link title to be single quoted.
+[2] Expected link title to be single quoted.
+[3] Expected link title to be single quoted.
+[4] Expected link title to be single quoted.
+[5] Expected link title to be single quoted.
+[6] Expected link title to be single quoted.
+[7] Expected link title to be single quoted.
+[8] Expected link title to be single quoted.
+[9] Expected link title to be single quoted.
+[10] Expected link title to be single quoted.
+[11] Expected link title to be single quoted.
+[12] Expected link title to be single quoted.
+---
+
+
+Test: link-title-style >> invalid >>> "# Title styles\n\n## Links\n\n- [foo](/url (parenthesis))\n- [foo](/url \"parenthesis () in double\")\n- [foo](/url 'parenthesis () in single')\n- [foo](/url (double \" in parenthesis))\n- [foo](/url (single ' in parenthesis))\n- [foo](/url (parenthesis \\(\\) in parenthesis))\n\n## Images\n\n- ![foo](/url (parenthesis))\n\n## Definitions\n\n[z]: /url (parenthesis)\n 2"
+Filename: tests/fixtures/rules/link-title-style/invalid/single/parenthesis-titles-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: single
+Plugins: unable to serialize
+
+Code:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url (parenthesis))
+    |              ^~~~~~~~~~~~~ [1]
+  6 | - [foo](/url "parenthesis () in double")
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  7 | - [foo](/url 'parenthesis () in single')
+  8 | - [foo](/url (double " in parenthesis))
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+  9 | - [foo](/url (single ' in parenthesis))
+ 10 | - [foo](/url (parenthesis \(\) in parenthesis))
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+ 11 |
+ 12 | ## Images
+ 13 |
+ 14 | - ![foo](/url (parenthesis))
+    |               ^~~~~~~~~~~~~ [5]
+ 15 |
+ 16 | ## Definitions
+ 17 |
+ 18 | [z]: /url (parenthesis)
+    |           ^~~~~~~~~~~~~ [6]
+ 19 |
+
+Output:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url 'parenthesis')
+  6 | - [foo](/url 'parenthesis () in double')
+  7 | - [foo](/url 'parenthesis () in single')
+  8 | - [foo](/url 'double " in parenthesis')
+  9 | - [foo](/url (single ' in parenthesis))
+ 10 | - [foo](/url 'parenthesis \(\) in parenthesis')
+ 11 |
+ 12 | ## Images
+ 13 |
+ 14 | - ![foo](/url 'parenthesis')
+ 15 |
+ 16 | ## Definitions
+ 17 |
+ 18 | [z]: /url 'parenthesis'
+ 19 |
+
+[1] Expected link title to be single quoted.
+[2] Expected link title to be single quoted.
+[3] Expected link title to be single quoted.
+[4] Expected link title to be single quoted.
+[5] Expected link title to be single quoted.
+[6] Expected link title to be single quoted.
+---
+
+
+Test: link-title-style >> invalid >>> "# Title styles\n\n## Links\n\n- [foo](/url \"double\")\n- [foo](/url 'single')\n- [foo](/url (parenthesis))\n- [foo](/url \"double \\\" in double\")\n- [foo](/url \"single ' in double\")\n- [foo](/url \"parenthesis () in double\")\n- [foo](/url 'double \" in single')\n- [foo](/url 'single \\'  in single')\n- [foo](/url 'parenthesis () in single')\n- [foo](/url (double \" in parenthesis))\n- [foo](/url (single ' in parenthesis))\n- [foo](/url (parenthesis \\(\\) in parenthesis))\n\n## Images\n\n- ![foo](/url \"double\")\n- ![foo](/url 'single')\n- ![foo](/url (parenthesis))\n\n## Definitions\n\n[x]: /url \"double\"\n[y]: /url 'single'\n[z]: /url (parenthesis)\n 6"
+Filename: tests/fixtures/rules/link-title-style/invalid/single/titles-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: single
+Plugins: unable to serialize
+
+Code:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url "double")
+    |              ^~~~~~~~ [1]
+  6 | - [foo](/url 'single')
+  7 | - [foo](/url (parenthesis))
+    |              ^~~~~~~~~~~~~ [2]
+  8 | - [foo](/url "double \" in double")
+    |              ^~~~~~~~~~~~~~~~~~~~~ [3]
+  9 | - [foo](/url "single ' in double")
+ 10 | - [foo](/url "parenthesis () in double")
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+ 11 | - [foo](/url 'double " in single')
+ 12 | - [foo](/url 'single \'  in single')
+ 13 | - [foo](/url 'parenthesis () in single')
+ 14 | - [foo](/url (double " in parenthesis))
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~ [5]
+ 15 | - [foo](/url (single ' in parenthesis))
+ 16 | - [foo](/url (parenthesis \(\) in parenthesis))
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [6]
+ 17 |
+ 18 | ## Images
+ 19 |
+ 20 | - ![foo](/url "double")
+    |               ^~~~~~~~ [7]
+ 21 | - ![foo](/url 'single')
+ 22 | - ![foo](/url (parenthesis))
+    |               ^~~~~~~~~~~~~ [8]
+ 23 |
+ 24 | ## Definitions
+ 25 |
+ 26 | [x]: /url "double"
+    |           ^~~~~~~~ [9]
+ 27 | [y]: /url 'single'
+ 28 | [z]: /url (parenthesis)
+    |           ^~~~~~~~~~~~~ [10]
+ 29 |
+
+Output:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url 'double')
+  6 | - [foo](/url 'single')
+  7 | - [foo](/url 'parenthesis')
+  8 | - [foo](/url 'double \" in double')
+  9 | - [foo](/url "single ' in double")
+ 10 | - [foo](/url 'parenthesis () in double')
+ 11 | - [foo](/url 'double " in single')
+ 12 | - [foo](/url 'single \'  in single')
+ 13 | - [foo](/url 'parenthesis () in single')
+ 14 | - [foo](/url 'double " in parenthesis')
+ 15 | - [foo](/url (single ' in parenthesis))
+ 16 | - [foo](/url 'parenthesis \(\) in parenthesis')
+ 17 |
+ 18 | ## Images
+ 19 |
+ 20 | - ![foo](/url 'double')
+ 21 | - ![foo](/url 'single')
+ 22 | - ![foo](/url 'parenthesis')
+ 23 |
+ 24 | ## Definitions
+ 25 |
+ 26 | [x]: /url 'double'
+ 27 | [y]: /url 'single'
+ 28 | [z]: /url 'parenthesis'
+ 29 |
+
+[1] Expected link title to be single quoted.
+[2] Expected link title to be single quoted.
+[3] Expected link title to be single quoted.
+[4] Expected link title to be single quoted.
+[5] Expected link title to be single quoted.
+[6] Expected link title to be single quoted.
+[7] Expected link title to be single quoted.
+[8] Expected link title to be single quoted.
+[9] Expected link title to be single quoted.
+[10] Expected link title to be single quoted.
+---
+
+
+Test: link-title-style >> invalid >>> "# Title styles\n\n## Links\n\n- [foo](/url \"double\")\n- [foo](/url 'single')\n- [foo](/url (parenthesis))\n- [foo](/url \"double \\\" in double\")\n- [foo](/url \"single ' in double\")\n- [foo](/url \"parenthesis () in double\")\n- [foo](/url 'double \" in single')\n- [foo](/url 'single \\'  in single')\n- [foo](/url 'parenthesis () in single')\n- [foo](/url (double \" in parenthesis))\n- [foo](/url (single ' in parenthesis))\n- [foo](/url (parenthesis \\(\\) in parenthesis))\n\n## Images\n\n- ![foo](/url \"double\")\n- ![foo](/url 'single')\n- ![foo](/url (parenthesis))\n\n## Definitions\n\n[x]: /url \"double\"\n[y]: /url 'single'\n[z]: /url (parenthesis)\n 7"
+Filename: tests/fixtures/rules/link-title-style/invalid/titles-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url "double")
+  6 | - [foo](/url 'single')
+    |              ^~~~~~~~ [1]
+  7 | - [foo](/url (parenthesis))
+    |              ^~~~~~~~~~~~~ [2]
+  8 | - [foo](/url "double \" in double")
+  9 | - [foo](/url "single ' in double")
+ 10 | - [foo](/url "parenthesis () in double")
+ 11 | - [foo](/url 'double " in single')
+ 12 | - [foo](/url 'single \'  in single')
+    |              ^~~~~~~~~~~~~~~~~~~~~~ [3]
+ 13 | - [foo](/url 'parenthesis () in single')
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+ 14 | - [foo](/url (double " in parenthesis))
+ 15 | - [foo](/url (single ' in parenthesis))
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~ [5]
+ 16 | - [foo](/url (parenthesis \(\) in parenthesis))
+    |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [6]
+ 17 |
+ 18 | ## Images
+ 19 |
+ 20 | - ![foo](/url "double")
+ 21 | - ![foo](/url 'single')
+    |               ^~~~~~~~ [7]
+ 22 | - ![foo](/url (parenthesis))
+    |               ^~~~~~~~~~~~~ [8]
+ 23 |
+ 24 | ## Definitions
+ 25 |
+ 26 | [x]: /url "double"
+ 27 | [y]: /url 'single'
+    |           ^~~~~~~~ [9]
+ 28 | [z]: /url (parenthesis)
+    |           ^~~~~~~~~~~~~ [10]
+ 29 |
+
+Output:
+  1 | # Title styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/url "double")
+  6 | - [foo](/url "single")
+  7 | - [foo](/url "parenthesis")
+  8 | - [foo](/url "double \" in double")
+  9 | - [foo](/url "single ' in double")
+ 10 | - [foo](/url "parenthesis () in double")
+ 11 | - [foo](/url 'double " in single')
+ 12 | - [foo](/url "single \'  in single")
+ 13 | - [foo](/url "parenthesis () in single")
+ 14 | - [foo](/url (double " in parenthesis))
+ 15 | - [foo](/url "single ' in parenthesis")
+ 16 | - [foo](/url "parenthesis \(\) in parenthesis")
+ 17 |
+ 18 | ## Images
+ 19 |
+ 20 | - ![foo](/url "double")
+ 21 | - ![foo](/url "single")
+ 22 | - ![foo](/url "parenthesis")
+ 23 |
+ 24 | ## Definitions
+ 25 |
+ 26 | [x]: /url "double"
+ 27 | [y]: /url "single"
+ 28 | [z]: /url "parenthesis"
+ 29 |
+
+[1] Expected link title to be double quoted.
+[2] Expected link title to be double quoted.
+[3] Expected link title to be double quoted.
+[4] Expected link title to be double quoted.
+[5] Expected link title to be double quoted.
+[6] Expected link title to be double quoted.
+[7] Expected link title to be double quoted.
+[8] Expected link title to be double quoted.
+[9] Expected link title to be double quoted.
+[10] Expected link title to be double quoted.
+---

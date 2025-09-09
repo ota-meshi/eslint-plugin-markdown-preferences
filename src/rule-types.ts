@@ -84,6 +84,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/level2-heading-style'?: Linter.RuleEntry<MarkdownPreferencesLevel2HeadingStyle>
   /**
+   * enforce linebreaks after opening and before closing link brackets
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-bracket-newline.html
+   */
+  'markdown-preferences/link-bracket-newline'?: Linter.RuleEntry<MarkdownPreferencesLinkBracketNewline>
+  /**
    * enforce consistent spacing inside link brackets
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-bracket-spacing.html
    */
@@ -291,6 +296,11 @@ type MarkdownPreferencesLevel1HeadingStyle = []|[{
 type MarkdownPreferencesLevel2HeadingStyle = []|[{
   style?: ("atx" | "setext")
   allowMultilineSetext?: boolean
+}]
+// ----- markdown-preferences/link-bracket-newline -----
+type MarkdownPreferencesLinkBracketNewline = []|[{
+  newline?: ("always" | "never" | "consistent")
+  multiline?: boolean
 }]
 // ----- markdown-preferences/link-bracket-spacing -----
 type MarkdownPreferencesLinkBracketSpacing = []|[{

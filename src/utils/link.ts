@@ -68,12 +68,12 @@ export function parseInlineLink(
           type: parsed.title.type,
           text: parsed.title.text,
           range: [
-            textRange[0] + parsed.title.range[0],
-            textRange[0] + parsed.title.range[1],
+            textRange[1] + parsed.title.range[0],
+            textRange[1] + parsed.title.range[1],
           ],
           loc: getSourceLocationFromRange(sourceCode, node, [
-            textRange[0] + parsed.title.range[0],
-            textRange[0] + parsed.title.range[1],
+            textRange[1] + parsed.title.range[0],
+            textRange[1] + parsed.title.range[1],
           ]),
         }
       : null,
