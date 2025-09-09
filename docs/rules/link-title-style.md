@@ -59,14 +59,14 @@ By default, double quotes are enforced. If the title contains the enforced delim
 
 <!-- prettier-ignore-end -->
 
-#### With `"parenthesis"` Option
+#### With `"parentheses"` Option
 
 <!-- prettier-ignore-start -->
 
 <!-- eslint-skip -->
 
 ```md
-<!-- eslint markdown-preferences/link-title-style: ["error", { "style": "parenthesis" }] -->
+<!-- eslint markdown-preferences/link-title-style: ["error", { "style": "parentheses" }] -->
 
 <!-- ✓ GOOD -->
 - [example](/url (title))
@@ -94,14 +94,14 @@ By default, double quotes are enforced. If the title contains the enforced delim
 
 ### `style`
 
-Type: `"double" | "single" | "parenthesis"`\
+Type: `"double" | "single" | "parentheses"`\
 Default: `"double"`
 
 Specify the style of the link title:
 
 - `"double"`: Enforce double quotes (`"title"`)
 - `"single"`: Enforce single quotes (`'title'`)
-- `"parenthesis"`: Enforce parentheses (`(title)`)
+- `"parentheses"`: Enforce parentheses (`(title)`)
 
 ### `avoidEscape`
 
@@ -120,7 +120,7 @@ If `true`, the rule will not enforce a style if it would require escaping the de
 <!-- ✓ GOOD -->
 - [example](/url "title")
 - [example](/url '"double" quotes inside single quotes')
-- [example](/url ("double" quotes inside parenthesis))
+- [example](/url ("double" quotes inside parentheses))
 
 <!-- ✗ BAD -->
 - [example](/url 'title')
@@ -142,10 +142,6 @@ If `true`, the rule will not enforce a style if it would require escaping the de
 
 ## 🔍 Implementation
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
-
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/link-title-style.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/link-title-style.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/link-title-style)
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->

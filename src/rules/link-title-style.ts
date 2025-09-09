@@ -6,7 +6,7 @@ import { parseLinkDefinition } from "../utils/link-definition.ts";
 import { parseInlineLink } from "../utils/link.ts";
 
 type Options = {
-  style?: "double" | "single" | "parenthesis";
+  style?: "double" | "single" | "parentheses";
   avoidEscape?: boolean;
 };
 
@@ -21,7 +21,7 @@ const STYLES = {
     open: "'",
     close: "'",
   },
-  parenthesis: {
+  parentheses: {
     name: "parenthesized",
     open: "(",
     close: ")",
@@ -43,7 +43,7 @@ export default createRule<[Options?]>("link-title-style", {
         type: "object",
         properties: {
           style: {
-            enum: ["double", "single", "parenthesis"],
+            enum: ["double", "single", "parentheses"],
           },
           avoidEscape: {
             type: "boolean",
