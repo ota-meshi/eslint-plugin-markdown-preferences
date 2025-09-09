@@ -1,0 +1,925 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: link-destination-style >> invalid
+Filename: tests/fixtures/rules/link-destination-style/invalid/bare/destinations-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: bare
+Plugins: unable to serialize
+
+Code:
+  1 | # Destination styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/bare-url)
+  6 | - [foo](/bare-url 'with title')
+  7 | - [foo](</pointy-bracketed-url>)
+    |         ^~~~~~~~~~~~~~~~~~~~~~~ [1]
+  8 | - [foo](</pointy-bracketed-url> 'with title')
+    |         ^~~~~~~~~~~~~~~~~~~~~~~ [2]
+  9 |
+ 10 | ### Empty
+ 11 |
+ 12 | - [foo]()
+ 13 | - [foo](<>)
+    |         ^~ [3]
+ 14 |
+ 15 | ### Bare destination with special characters
+ 16 |
+ 17 | - [foo](/bare-url/with-last-backslash\ 'with title')
+ 18 | - [foo](/bare-url/with-last-backslashs\\ 'with title')
+ 19 | - [foo](/bare-url/with-last-backslashs\\\ 'with title')
+ 20 |
+ 21 | ### Pointy bracketed destination with special characters
+ 22 |
+ 23 | - [foo](</pointy-bracketed-url/ with whitespaces>)
+ 24 | - [foo](</pointy-bracketed-url/with-balanced-parentheses()>)
+    |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+ 25 | - [foo](</pointy-bracketed-url/with-single-opening-paren(>)
+ 26 | - [foo](</pointy-bracketed-url/with-single-closing-paren)>)
+ 27 | - [foo](</pointy-bracketed-url/with-balanced-(parentheses)()>)
+    |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [5]
+ 28 | - [foo](</pointy-bracketed-url/with-(balanced-(parentheses)())>)
+    |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [6]
+ 29 | - [foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)
+ 30 | - [foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)
+ 31 |
+ 32 | ## Images
+ 33 |
+ 34 | - ![foo](/bare-url)
+ 35 | - ![foo](/bare-url 'with title')
+ 36 | - ![foo](</pointy-bracketed-url>)
+    |          ^~~~~~~~~~~~~~~~~~~~~~~ [7]
+ 37 | - ![foo](</pointy-bracketed-url> 'with title')
+    |          ^~~~~~~~~~~~~~~~~~~~~~~ [8]
+ 38 |
+ 39 | ### Empty
+ 40 |
+ 41 | - ![foo]()
+ 42 | - ![foo](<>)
+    |          ^~ [9]
+ 43 |
+ 44 | ### Bare destination with special characters
+ 45 |
+ 46 | - ![foo](/bare-url/with-last-backslash\ 'with title')
+ 47 | - ![foo](/bare-url/with-last-backslashs\\ 'with title')
+ 48 | - ![foo](/bare-url/with-last-backslashs\\\ 'with title')
+ 49 |
+ 50 | ### Pointy bracketed destination with special characters
+ 51 |
+ 52 | - ![foo](</pointy-bracketed-url/ with whitespaces>)
+ 53 | - ![foo](</pointy-bracketed-url/with-balanced-parentheses()>)
+    |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [10]
+ 54 | - ![foo](</pointy-bracketed-url/with-single-opening-paren(>)
+ 55 | - ![foo](</pointy-bracketed-url/with-single-closing-paren)>)
+ 56 | - ![foo](</pointy-bracketed-url/with-balanced-(parentheses)()>)
+    |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [11]
+ 57 | - ![foo](</pointy-bracketed-url/with-(balanced-(parentheses)())>)
+    |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [12]
+ 58 | - ![foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)
+ 59 | - ![foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)
+ 60 |
+ 61 | ## Definitions
+ 62 |
+ 63 | [a]: /bare-url
+ 64 | [b]: /bare-url 'with title'
+ 65 | [c]: </pointy-bracketed-url>
+    |      ^~~~~~~~~~~~~~~~~~~~~~~ [13]
+ 66 | [d]: </pointy-bracketed-url> 'with title'
+    |      ^~~~~~~~~~~~~~~~~~~~~~~ [14]
+ 67 |
+ 68 | ### Empty
+ 69 |
+ 70 | [empty]: <>
+ 71 |
+ 72 | ### Bare definitions destination with special characters
+ 73 |
+ 74 | [e]: /bare-url/with-last-backslash\ 'with title'
+ 75 | [f]: /bare-url/with-last-backslashs\\ 'with title'
+ 76 | [g]: /bare-url/with-last-backslashs\\\ 'with title'
+ 77 |
+ 78 | ### Pointy bracketed destination with special characters
+ 79 |
+ 80 | [h]: </pointy-bracketed-url/ with whitespaces>
+ 81 | [i]: </pointy-bracketed-url/with-balanced-parentheses()>
+    |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [15]
+ 82 | [j]: </pointy-bracketed-url/with-single-opening-paren(>
+ 83 | [k]: </pointy-bracketed-url/with-single-closing-paren)>
+ 84 | [l]: </pointy-bracketed-url/with-balanced-(parentheses)()>
+    |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [16]
+ 85 | [m]: </pointy-bracketed-url/with-(balanced-(parentheses)())>
+    |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [17]
+ 86 | [n]: </pointy-bracketed-url/with-(unbalanced-(parentheses)>
+ 87 | [o]: </pointy-bracketed-url/with-(unbalanced))-(parentheses))>
+ 88 |
+
+Output:
+  1 | # Destination styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/bare-url)
+  6 | - [foo](/bare-url 'with title')
+  7 | - [foo](/pointy-bracketed-url)
+  8 | - [foo](/pointy-bracketed-url 'with title')
+  9 |
+ 10 | ### Empty
+ 11 |
+ 12 | - [foo]()
+ 13 | - [foo]()
+ 14 |
+ 15 | ### Bare destination with special characters
+ 16 |
+ 17 | - [foo](/bare-url/with-last-backslash\ 'with title')
+ 18 | - [foo](/bare-url/with-last-backslashs\\ 'with title')
+ 19 | - [foo](/bare-url/with-last-backslashs\\\ 'with title')
+ 20 |
+ 21 | ### Pointy bracketed destination with special characters
+ 22 |
+ 23 | - [foo](</pointy-bracketed-url/ with whitespaces>)
+ 24 | - [foo](/pointy-bracketed-url/with-balanced-parentheses())
+ 25 | - [foo](</pointy-bracketed-url/with-single-opening-paren(>)
+ 26 | - [foo](</pointy-bracketed-url/with-single-closing-paren)>)
+ 27 | - [foo](/pointy-bracketed-url/with-balanced-(parentheses)())
+ 28 | - [foo](/pointy-bracketed-url/with-(balanced-(parentheses)()))
+ 29 | - [foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)
+ 30 | - [foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)
+ 31 |
+ 32 | ## Images
+ 33 |
+ 34 | - ![foo](/bare-url)
+ 35 | - ![foo](/bare-url 'with title')
+ 36 | - ![foo](/pointy-bracketed-url)
+ 37 | - ![foo](/pointy-bracketed-url 'with title')
+ 38 |
+ 39 | ### Empty
+ 40 |
+ 41 | - ![foo]()
+ 42 | - ![foo]()
+ 43 |
+ 44 | ### Bare destination with special characters
+ 45 |
+ 46 | - ![foo](/bare-url/with-last-backslash\ 'with title')
+ 47 | - ![foo](/bare-url/with-last-backslashs\\ 'with title')
+ 48 | - ![foo](/bare-url/with-last-backslashs\\\ 'with title')
+ 49 |
+ 50 | ### Pointy bracketed destination with special characters
+ 51 |
+ 52 | - ![foo](</pointy-bracketed-url/ with whitespaces>)
+ 53 | - ![foo](/pointy-bracketed-url/with-balanced-parentheses())
+ 54 | - ![foo](</pointy-bracketed-url/with-single-opening-paren(>)
+ 55 | - ![foo](</pointy-bracketed-url/with-single-closing-paren)>)
+ 56 | - ![foo](/pointy-bracketed-url/with-balanced-(parentheses)())
+ 57 | - ![foo](/pointy-bracketed-url/with-(balanced-(parentheses)()))
+ 58 | - ![foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)
+ 59 | - ![foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)
+ 60 |
+ 61 | ## Definitions
+ 62 |
+ 63 | [a]: /bare-url
+ 64 | [b]: /bare-url 'with title'
+ 65 | [c]: /pointy-bracketed-url
+ 66 | [d]: /pointy-bracketed-url 'with title'
+ 67 |
+ 68 | ### Empty
+ 69 |
+ 70 | [empty]: <>
+ 71 |
+ 72 | ### Bare definitions destination with special characters
+ 73 |
+ 74 | [e]: /bare-url/with-last-backslash\ 'with title'
+ 75 | [f]: /bare-url/with-last-backslashs\\ 'with title'
+ 76 | [g]: /bare-url/with-last-backslashs\\\ 'with title'
+ 77 |
+ 78 | ### Pointy bracketed destination with special characters
+ 79 |
+ 80 | [h]: </pointy-bracketed-url/ with whitespaces>
+ 81 | [i]: /pointy-bracketed-url/with-balanced-parentheses()
+ 82 | [j]: </pointy-bracketed-url/with-single-opening-paren(>
+ 83 | [k]: </pointy-bracketed-url/with-single-closing-paren)>
+ 84 | [l]: /pointy-bracketed-url/with-balanced-(parentheses)()
+ 85 | [m]: /pointy-bracketed-url/with-(balanced-(parentheses)())
+ 86 | [n]: </pointy-bracketed-url/with-(unbalanced-(parentheses)>
+ 87 | [o]: </pointy-bracketed-url/with-(unbalanced))-(parentheses))>
+ 88 |
+
+[1] Link destination should not be enclosed in pointy brackets.
+[2] Link destination should not be enclosed in pointy brackets.
+[3] Link destination should not be enclosed in pointy brackets.
+[4] Link destination should not be enclosed in pointy brackets.
+[5] Link destination should not be enclosed in pointy brackets.
+[6] Link destination should not be enclosed in pointy brackets.
+[7] Link destination should not be enclosed in pointy brackets.
+[8] Link destination should not be enclosed in pointy brackets.
+[9] Link destination should not be enclosed in pointy brackets.
+[10] Link destination should not be enclosed in pointy brackets.
+[11] Link destination should not be enclosed in pointy brackets.
+[12] Link destination should not be enclosed in pointy brackets.
+[13] Link destination should not be enclosed in pointy brackets.
+[14] Link destination should not be enclosed in pointy brackets.
+[15] Link destination should not be enclosed in pointy brackets.
+[16] Link destination should not be enclosed in pointy brackets.
+[17] Link destination should not be enclosed in pointy brackets.
+---
+
+
+Test: link-destination-style >> invalid >>> "# Destination styles\n\n## Links\n\n- [foo](/bare-url)\n- [foo](/bare-url 'with title')\n- [foo](</pointy-bracketed-url>)\n- [foo](</pointy-bracketed-url> 'with title')\n\n### Empty\n\n- [foo]()\n- [foo](<>)\n\n### Bare destination with special characters\n\n- [foo](/bare-url/with-last-backslash\\ 'with title')\n- [foo](/bare-url/with-last-backslashs\\\\ 'with title')\n- [foo](/bare-url/with-last-backslashs\\\\\\ 'with title')\n\n### Pointy bracketed destination with special characters\n\n- [foo](</pointy-bracketed-url/ with whitespaces>)\n- [foo](</pointy-bracketed-url/with-balanced-parentheses()>)\n- [foo](</pointy-bracketed-url/with-single-opening-paren(>)\n- [foo](</pointy-bracketed-url/with-single-closing-paren)>)\n- [foo](</pointy-bracketed-url/with-balanced-(parentheses)()>)\n- [foo](</pointy-bracketed-url/with-(balanced-(parentheses)())>)\n- [foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)\n- [foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)\n\n## Images\n\n- ![foo](/bare-url)\n- ![foo](/bare-url 'with title')\n- ![foo](</pointy-bracketed-url>)\n- ![foo](</pointy-bracketed-url> 'with title')\n\n### Empty\n\n- ![foo]()\n- ![foo](<>)\n\n### Bare destination with special characters\n\n- ![foo](/bare-url/with-last-backslash\\ 'with title')\n- ![foo](/bare-url/with-last-backslashs\\\\ 'with title')\n- ![foo](/bare-url/with-last-backslashs\\\\\\ 'with title')\n\n### Pointy bracketed destination with special characters\n\n- ![foo](</pointy-bracketed-url/ with whitespaces>)\n- ![foo](</pointy-bracketed-url/with-balanced-parentheses()>)\n- ![foo](</pointy-bracketed-url/with-single-opening-paren(>)\n- ![foo](</pointy-bracketed-url/with-single-closing-paren)>)\n- ![foo](</pointy-bracketed-url/with-balanced-(parentheses)()>)\n- ![foo](</pointy-bracketed-url/with-(balanced-(parentheses)())>)\n- ![foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)\n- ![foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)\n\n## Definitions\n\n[a]: /bare-url\n[b]: /bare-url 'with title'\n[c]: </pointy-bracketed-url>\n[d]: </pointy-bracketed-url> 'with title'\n\n### Empty\n\n[empty]: <>\n\n### Bare definitions destination with special characters\n\n[e]: /bare-url/with-last-backslash\\ 'with title'\n[f]: /bare-url/with-last-backslashs\\\\ 'with title'\n[g]: /bare-url/with-last-backslashs\\\\\\ 'with title'\n\n### Pointy bracketed destination with special characters\n\n[h]: </pointy-bracketed-url/ with whitespaces>\n[i]: </pointy-bracketed-url/with-balanced-parentheses()>\n[j]: </pointy-bracketed-url/with-single-opening-paren(>\n[k]: </pointy-bracketed-url/with-single-closing-paren)>\n[l]: </pointy-bracketed-url/with-balanced-(parentheses)()>\n[m]: </pointy-bracketed-url/with-(balanced-(parentheses)())>\n[n]: </pointy-bracketed-url/with-(unbalanced-(parentheses)>\n[o]: </pointy-bracketed-url/with-(unbalanced))-(parentheses))>\n 2"
+Filename: tests/fixtures/rules/link-destination-style/invalid/bare/fource/destinations-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: bare
+    avoidEscape: false
+Plugins: unable to serialize
+
+Code:
+  1 | # Destination styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/bare-url)
+  6 | - [foo](/bare-url 'with title')
+  7 | - [foo](</pointy-bracketed-url>)
+    |         ^~~~~~~~~~~~~~~~~~~~~~~ [1]
+  8 | - [foo](</pointy-bracketed-url> 'with title')
+    |         ^~~~~~~~~~~~~~~~~~~~~~~ [2]
+  9 |
+ 10 | ### Empty
+ 11 |
+ 12 | - [foo]()
+ 13 | - [foo](<>)
+    |         ^~ [3]
+ 14 |
+ 15 | ### Bare destination with special characters
+ 16 |
+ 17 | - [foo](/bare-url/with-last-backslash\ 'with title')
+ 18 | - [foo](/bare-url/with-last-backslashs\\ 'with title')
+ 19 | - [foo](/bare-url/with-last-backslashs\\\ 'with title')
+ 20 |
+ 21 | ### Pointy bracketed destination with special characters
+ 22 |
+ 23 | - [foo](</pointy-bracketed-url/ with whitespaces>)
+    |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+ 24 | - [foo](</pointy-bracketed-url/with-balanced-parentheses()>)
+    |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [5]
+ 25 | - [foo](</pointy-bracketed-url/with-single-opening-paren(>)
+    |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [6]
+ 26 | - [foo](</pointy-bracketed-url/with-single-closing-paren)>)
+    |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [7]
+ 27 | - [foo](</pointy-bracketed-url/with-balanced-(parentheses)()>)
+    |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [8]
+ 28 | - [foo](</pointy-bracketed-url/with-(balanced-(parentheses)())>)
+    |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [9]
+ 29 | - [foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)
+    |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [10]
+ 30 | - [foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)
+    |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [11]
+ 31 |
+ 32 | ## Images
+ 33 |
+ 34 | - ![foo](/bare-url)
+ 35 | - ![foo](/bare-url 'with title')
+ 36 | - ![foo](</pointy-bracketed-url>)
+    |          ^~~~~~~~~~~~~~~~~~~~~~~ [12]
+ 37 | - ![foo](</pointy-bracketed-url> 'with title')
+    |          ^~~~~~~~~~~~~~~~~~~~~~~ [13]
+ 38 |
+ 39 | ### Empty
+ 40 |
+ 41 | - ![foo]()
+ 42 | - ![foo](<>)
+    |          ^~ [14]
+ 43 |
+ 44 | ### Bare destination with special characters
+ 45 |
+ 46 | - ![foo](/bare-url/with-last-backslash\ 'with title')
+ 47 | - ![foo](/bare-url/with-last-backslashs\\ 'with title')
+ 48 | - ![foo](/bare-url/with-last-backslashs\\\ 'with title')
+ 49 |
+ 50 | ### Pointy bracketed destination with special characters
+ 51 |
+ 52 | - ![foo](</pointy-bracketed-url/ with whitespaces>)
+    |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [15]
+ 53 | - ![foo](</pointy-bracketed-url/with-balanced-parentheses()>)
+    |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [16]
+ 54 | - ![foo](</pointy-bracketed-url/with-single-opening-paren(>)
+    |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [17]
+ 55 | - ![foo](</pointy-bracketed-url/with-single-closing-paren)>)
+    |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [18]
+ 56 | - ![foo](</pointy-bracketed-url/with-balanced-(parentheses)()>)
+    |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [19]
+ 57 | - ![foo](</pointy-bracketed-url/with-(balanced-(parentheses)())>)
+    |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [20]
+ 58 | - ![foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)
+    |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [21]
+ 59 | - ![foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)
+    |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [22]
+ 60 |
+ 61 | ## Definitions
+ 62 |
+ 63 | [a]: /bare-url
+ 64 | [b]: /bare-url 'with title'
+ 65 | [c]: </pointy-bracketed-url>
+    |      ^~~~~~~~~~~~~~~~~~~~~~~ [23]
+ 66 | [d]: </pointy-bracketed-url> 'with title'
+    |      ^~~~~~~~~~~~~~~~~~~~~~~ [24]
+ 67 |
+ 68 | ### Empty
+ 69 |
+ 70 | [empty]: <>
+ 71 |
+ 72 | ### Bare definitions destination with special characters
+ 73 |
+ 74 | [e]: /bare-url/with-last-backslash\ 'with title'
+ 75 | [f]: /bare-url/with-last-backslashs\\ 'with title'
+ 76 | [g]: /bare-url/with-last-backslashs\\\ 'with title'
+ 77 |
+ 78 | ### Pointy bracketed destination with special characters
+ 79 |
+ 80 | [h]: </pointy-bracketed-url/ with whitespaces>
+    |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [25]
+ 81 | [i]: </pointy-bracketed-url/with-balanced-parentheses()>
+    |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [26]
+ 82 | [j]: </pointy-bracketed-url/with-single-opening-paren(>
+    |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [27]
+ 83 | [k]: </pointy-bracketed-url/with-single-closing-paren)>
+    |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [28]
+ 84 | [l]: </pointy-bracketed-url/with-balanced-(parentheses)()>
+    |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [29]
+ 85 | [m]: </pointy-bracketed-url/with-(balanced-(parentheses)())>
+    |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [30]
+ 86 | [n]: </pointy-bracketed-url/with-(unbalanced-(parentheses)>
+    |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [31]
+ 87 | [o]: </pointy-bracketed-url/with-(unbalanced))-(parentheses))>
+    |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [32]
+ 88 |
+
+Output:
+  1 | # Destination styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/bare-url)
+  6 | - [foo](/bare-url 'with title')
+  7 | - [foo](/pointy-bracketed-url)
+  8 | - [foo](/pointy-bracketed-url 'with title')
+  9 |
+ 10 | ### Empty
+ 11 |
+ 12 | - [foo]()
+ 13 | - [foo]()
+ 14 |
+ 15 | ### Bare destination with special characters
+ 16 |
+ 17 | - [foo](/bare-url/with-last-backslash\ 'with title')
+ 18 | - [foo](/bare-url/with-last-backslashs\\ 'with title')
+ 19 | - [foo](/bare-url/with-last-backslashs\\\ 'with title')
+ 20 |
+ 21 | ### Pointy bracketed destination with special characters
+ 22 |
+ 23 | - [foo](/pointy-bracketed-url/%20with%20whitespaces)
+ 24 | - [foo](/pointy-bracketed-url/with-balanced-parentheses())
+ 25 | - [foo](/pointy-bracketed-url/with-single-opening-paren\()
+ 26 | - [foo](/pointy-bracketed-url/with-single-closing-paren\))
+ 27 | - [foo](/pointy-bracketed-url/with-balanced-(parentheses)())
+ 28 | - [foo](/pointy-bracketed-url/with-(balanced-(parentheses)()))
+ 29 | - [foo](/pointy-bracketed-url/with-\(unbalanced-\(parentheses\))
+ 30 | - [foo](/pointy-bracketed-url/with-\(unbalanced\)\)-\(parentheses\)\))
+ 31 |
+ 32 | ## Images
+ 33 |
+ 34 | - ![foo](/bare-url)
+ 35 | - ![foo](/bare-url 'with title')
+ 36 | - ![foo](/pointy-bracketed-url)
+ 37 | - ![foo](/pointy-bracketed-url 'with title')
+ 38 |
+ 39 | ### Empty
+ 40 |
+ 41 | - ![foo]()
+ 42 | - ![foo]()
+ 43 |
+ 44 | ### Bare destination with special characters
+ 45 |
+ 46 | - ![foo](/bare-url/with-last-backslash\ 'with title')
+ 47 | - ![foo](/bare-url/with-last-backslashs\\ 'with title')
+ 48 | - ![foo](/bare-url/with-last-backslashs\\\ 'with title')
+ 49 |
+ 50 | ### Pointy bracketed destination with special characters
+ 51 |
+ 52 | - ![foo](/pointy-bracketed-url/%20with%20whitespaces)
+ 53 | - ![foo](/pointy-bracketed-url/with-balanced-parentheses())
+ 54 | - ![foo](/pointy-bracketed-url/with-single-opening-paren\()
+ 55 | - ![foo](/pointy-bracketed-url/with-single-closing-paren\))
+ 56 | - ![foo](/pointy-bracketed-url/with-balanced-(parentheses)())
+ 57 | - ![foo](/pointy-bracketed-url/with-(balanced-(parentheses)()))
+ 58 | - ![foo](/pointy-bracketed-url/with-\(unbalanced-\(parentheses\))
+ 59 | - ![foo](/pointy-bracketed-url/with-\(unbalanced\)\)-\(parentheses\)\))
+ 60 |
+ 61 | ## Definitions
+ 62 |
+ 63 | [a]: /bare-url
+ 64 | [b]: /bare-url 'with title'
+ 65 | [c]: /pointy-bracketed-url
+ 66 | [d]: /pointy-bracketed-url 'with title'
+ 67 |
+ 68 | ### Empty
+ 69 |
+ 70 | [empty]: <>
+ 71 |
+ 72 | ### Bare definitions destination with special characters
+ 73 |
+ 74 | [e]: /bare-url/with-last-backslash\ 'with title'
+ 75 | [f]: /bare-url/with-last-backslashs\\ 'with title'
+ 76 | [g]: /bare-url/with-last-backslashs\\\ 'with title'
+ 77 |
+ 78 | ### Pointy bracketed destination with special characters
+ 79 |
+ 80 | [h]: /pointy-bracketed-url/%20with%20whitespaces
+ 81 | [i]: /pointy-bracketed-url/with-balanced-parentheses()
+ 82 | [j]: /pointy-bracketed-url/with-single-opening-paren\(
+ 83 | [k]: /pointy-bracketed-url/with-single-closing-paren\)
+ 84 | [l]: /pointy-bracketed-url/with-balanced-(parentheses)()
+ 85 | [m]: /pointy-bracketed-url/with-(balanced-(parentheses)())
+ 86 | [n]: /pointy-bracketed-url/with-\(unbalanced-\(parentheses\)
+ 87 | [o]: /pointy-bracketed-url/with-\(unbalanced\)\)-\(parentheses\)\)
+ 88 |
+
+[1] Link destination should not be enclosed in pointy brackets.
+[2] Link destination should not be enclosed in pointy brackets.
+[3] Link destination should not be enclosed in pointy brackets.
+[4] Link destination should not be enclosed in pointy brackets.
+[5] Link destination should not be enclosed in pointy brackets.
+[6] Link destination should not be enclosed in pointy brackets.
+[7] Link destination should not be enclosed in pointy brackets.
+[8] Link destination should not be enclosed in pointy brackets.
+[9] Link destination should not be enclosed in pointy brackets.
+[10] Link destination should not be enclosed in pointy brackets.
+[11] Link destination should not be enclosed in pointy brackets.
+[12] Link destination should not be enclosed in pointy brackets.
+[13] Link destination should not be enclosed in pointy brackets.
+[14] Link destination should not be enclosed in pointy brackets.
+[15] Link destination should not be enclosed in pointy brackets.
+[16] Link destination should not be enclosed in pointy brackets.
+[17] Link destination should not be enclosed in pointy brackets.
+[18] Link destination should not be enclosed in pointy brackets.
+[19] Link destination should not be enclosed in pointy brackets.
+[20] Link destination should not be enclosed in pointy brackets.
+[21] Link destination should not be enclosed in pointy brackets.
+[22] Link destination should not be enclosed in pointy brackets.
+[23] Link destination should not be enclosed in pointy brackets.
+[24] Link destination should not be enclosed in pointy brackets.
+[25] Link destination should not be enclosed in pointy brackets.
+[26] Link destination should not be enclosed in pointy brackets.
+[27] Link destination should not be enclosed in pointy brackets.
+[28] Link destination should not be enclosed in pointy brackets.
+[29] Link destination should not be enclosed in pointy brackets.
+[30] Link destination should not be enclosed in pointy brackets.
+[31] Link destination should not be enclosed in pointy brackets.
+[32] Link destination should not be enclosed in pointy brackets.
+---
+
+
+Test: link-destination-style >> invalid >>> "# Destination styles\n\n## Links\n\n- [foo](/bare-url)\n- [foo](/bare-url 'with title')\n- [foo](</pointy-bracketed-url>)\n- [foo](</pointy-bracketed-url> 'with title')\n\n### Empty\n\n- [foo]()\n- [foo](<>)\n\n### Bare destination with special characters\n\n- [foo](/bare-url/with-last-backslash\\ 'with title')\n- [foo](/bare-url/with-last-backslashs\\\\ 'with title')\n- [foo](/bare-url/with-last-backslashs\\\\\\ 'with title')\n\n### Pointy bracketed destination with special characters\n\n- [foo](</pointy-bracketed-url/ with whitespaces>)\n- [foo](</pointy-bracketed-url/with-balanced-parentheses()>)\n- [foo](</pointy-bracketed-url/with-single-opening-paren(>)\n- [foo](</pointy-bracketed-url/with-single-closing-paren)>)\n- [foo](</pointy-bracketed-url/with-balanced-(parentheses)()>)\n- [foo](</pointy-bracketed-url/with-(balanced-(parentheses)())>)\n- [foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)\n- [foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)\n\n## Images\n\n- ![foo](/bare-url)\n- ![foo](/bare-url 'with title')\n- ![foo](</pointy-bracketed-url>)\n- ![foo](</pointy-bracketed-url> 'with title')\n\n### Empty\n\n- ![foo]()\n- ![foo](<>)\n\n### Bare destination with special characters\n\n- ![foo](/bare-url/with-last-backslash\\ 'with title')\n- ![foo](/bare-url/with-last-backslashs\\\\ 'with title')\n- ![foo](/bare-url/with-last-backslashs\\\\\\ 'with title')\n\n### Pointy bracketed destination with special characters\n\n- ![foo](</pointy-bracketed-url/ with whitespaces>)\n- ![foo](</pointy-bracketed-url/with-balanced-parentheses()>)\n- ![foo](</pointy-bracketed-url/with-single-opening-paren(>)\n- ![foo](</pointy-bracketed-url/with-single-closing-paren)>)\n- ![foo](</pointy-bracketed-url/with-balanced-(parentheses)()>)\n- ![foo](</pointy-bracketed-url/with-(balanced-(parentheses)())>)\n- ![foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)\n- ![foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)\n\n## Definitions\n\n[a]: /bare-url\n[b]: /bare-url 'with title'\n[c]: </pointy-bracketed-url>\n[d]: </pointy-bracketed-url> 'with title'\n\n### Empty\n\n[empty]: <>\n\n### Bare definitions destination with special characters\n\n[e]: /bare-url/with-last-backslash\\ 'with title'\n[f]: /bare-url/with-last-backslashs\\\\ 'with title'\n[g]: /bare-url/with-last-backslashs\\\\\\ 'with title'\n\n### Pointy bracketed destination with special characters\n\n[h]: </pointy-bracketed-url/ with whitespaces>\n[i]: </pointy-bracketed-url/with-balanced-parentheses()>\n[j]: </pointy-bracketed-url/with-single-opening-paren(>\n[k]: </pointy-bracketed-url/with-single-closing-paren)>\n[l]: </pointy-bracketed-url/with-balanced-(parentheses)()>\n[m]: </pointy-bracketed-url/with-(balanced-(parentheses)())>\n[n]: </pointy-bracketed-url/with-(unbalanced-(parentheses)>\n[o]: </pointy-bracketed-url/with-(unbalanced))-(parentheses))>\n 3"
+Filename: tests/fixtures/rules/link-destination-style/invalid/pointy-brackets/destinations-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: pointy-brackets
+Plugins: unable to serialize
+
+Code:
+  1 | # Destination styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/bare-url)
+    |         ^~~~~~~~~ [1]
+  6 | - [foo](/bare-url 'with title')
+    |         ^~~~~~~~~ [2]
+  7 | - [foo](</pointy-bracketed-url>)
+  8 | - [foo](</pointy-bracketed-url> 'with title')
+  9 |
+ 10 | ### Empty
+ 11 |
+ 12 | - [foo]()
+    |         ^ [3]
+ 13 | - [foo](<>)
+ 14 |
+ 15 | ### Bare destination with special characters
+ 16 |
+ 17 | - [foo](/bare-url/with-last-backslash\ 'with title')
+ 18 | - [foo](/bare-url/with-last-backslashs\\ 'with title')
+    |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+ 19 | - [foo](/bare-url/with-last-backslashs\\\ 'with title')
+ 20 |
+ 21 | ### Pointy bracketed destination with special characters
+ 22 |
+ 23 | - [foo](</pointy-bracketed-url/ with whitespaces>)
+ 24 | - [foo](</pointy-bracketed-url/with-balanced-parentheses()>)
+ 25 | - [foo](</pointy-bracketed-url/with-single-opening-paren(>)
+ 26 | - [foo](</pointy-bracketed-url/with-single-closing-paren)>)
+ 27 | - [foo](</pointy-bracketed-url/with-balanced-(parentheses)()>)
+ 28 | - [foo](</pointy-bracketed-url/with-(balanced-(parentheses)())>)
+ 29 | - [foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)
+ 30 | - [foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)
+ 31 |
+ 32 | ## Images
+ 33 |
+ 34 | - ![foo](/bare-url)
+    |          ^~~~~~~~~ [5]
+ 35 | - ![foo](/bare-url 'with title')
+    |          ^~~~~~~~~ [6]
+ 36 | - ![foo](</pointy-bracketed-url>)
+ 37 | - ![foo](</pointy-bracketed-url> 'with title')
+ 38 |
+ 39 | ### Empty
+ 40 |
+ 41 | - ![foo]()
+    |          ^ [7]
+ 42 | - ![foo](<>)
+ 43 |
+ 44 | ### Bare destination with special characters
+ 45 |
+ 46 | - ![foo](/bare-url/with-last-backslash\ 'with title')
+ 47 | - ![foo](/bare-url/with-last-backslashs\\ 'with title')
+    |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [8]
+ 48 | - ![foo](/bare-url/with-last-backslashs\\\ 'with title')
+ 49 |
+ 50 | ### Pointy bracketed destination with special characters
+ 51 |
+ 52 | - ![foo](</pointy-bracketed-url/ with whitespaces>)
+ 53 | - ![foo](</pointy-bracketed-url/with-balanced-parentheses()>)
+ 54 | - ![foo](</pointy-bracketed-url/with-single-opening-paren(>)
+ 55 | - ![foo](</pointy-bracketed-url/with-single-closing-paren)>)
+ 56 | - ![foo](</pointy-bracketed-url/with-balanced-(parentheses)()>)
+ 57 | - ![foo](</pointy-bracketed-url/with-(balanced-(parentheses)())>)
+ 58 | - ![foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)
+ 59 | - ![foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)
+ 60 |
+ 61 | ## Definitions
+ 62 |
+ 63 | [a]: /bare-url
+    |      ^~~~~~~~~ [9]
+ 64 | [b]: /bare-url 'with title'
+    |      ^~~~~~~~~ [10]
+ 65 | [c]: </pointy-bracketed-url>
+ 66 | [d]: </pointy-bracketed-url> 'with title'
+ 67 |
+ 68 | ### Empty
+ 69 |
+ 70 | [empty]: <>
+ 71 |
+ 72 | ### Bare definitions destination with special characters
+ 73 |
+ 74 | [e]: /bare-url/with-last-backslash\ 'with title'
+ 75 | [f]: /bare-url/with-last-backslashs\\ 'with title'
+    |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [11]
+ 76 | [g]: /bare-url/with-last-backslashs\\\ 'with title'
+ 77 |
+ 78 | ### Pointy bracketed destination with special characters
+ 79 |
+ 80 | [h]: </pointy-bracketed-url/ with whitespaces>
+ 81 | [i]: </pointy-bracketed-url/with-balanced-parentheses()>
+ 82 | [j]: </pointy-bracketed-url/with-single-opening-paren(>
+ 83 | [k]: </pointy-bracketed-url/with-single-closing-paren)>
+ 84 | [l]: </pointy-bracketed-url/with-balanced-(parentheses)()>
+ 85 | [m]: </pointy-bracketed-url/with-(balanced-(parentheses)())>
+ 86 | [n]: </pointy-bracketed-url/with-(unbalanced-(parentheses)>
+ 87 | [o]: </pointy-bracketed-url/with-(unbalanced))-(parentheses))>
+ 88 |
+
+Output:
+  1 | # Destination styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](</bare-url>)
+  6 | - [foo](</bare-url> 'with title')
+  7 | - [foo](</pointy-bracketed-url>)
+  8 | - [foo](</pointy-bracketed-url> 'with title')
+  9 |
+ 10 | ### Empty
+ 11 |
+ 12 | - [foo](<>)
+ 13 | - [foo](<>)
+ 14 |
+ 15 | ### Bare destination with special characters
+ 16 |
+ 17 | - [foo](/bare-url/with-last-backslash\ 'with title')
+ 18 | - [foo](</bare-url/with-last-backslashs\\> 'with title')
+ 19 | - [foo](/bare-url/with-last-backslashs\\\ 'with title')
+ 20 |
+ 21 | ### Pointy bracketed destination with special characters
+ 22 |
+ 23 | - [foo](</pointy-bracketed-url/ with whitespaces>)
+ 24 | - [foo](</pointy-bracketed-url/with-balanced-parentheses()>)
+ 25 | - [foo](</pointy-bracketed-url/with-single-opening-paren(>)
+ 26 | - [foo](</pointy-bracketed-url/with-single-closing-paren)>)
+ 27 | - [foo](</pointy-bracketed-url/with-balanced-(parentheses)()>)
+ 28 | - [foo](</pointy-bracketed-url/with-(balanced-(parentheses)())>)
+ 29 | - [foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)
+ 30 | - [foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)
+ 31 |
+ 32 | ## Images
+ 33 |
+ 34 | - ![foo](</bare-url>)
+ 35 | - ![foo](</bare-url> 'with title')
+ 36 | - ![foo](</pointy-bracketed-url>)
+ 37 | - ![foo](</pointy-bracketed-url> 'with title')
+ 38 |
+ 39 | ### Empty
+ 40 |
+ 41 | - ![foo](<>)
+ 42 | - ![foo](<>)
+ 43 |
+ 44 | ### Bare destination with special characters
+ 45 |
+ 46 | - ![foo](/bare-url/with-last-backslash\ 'with title')
+ 47 | - ![foo](</bare-url/with-last-backslashs\\> 'with title')
+ 48 | - ![foo](/bare-url/with-last-backslashs\\\ 'with title')
+ 49 |
+ 50 | ### Pointy bracketed destination with special characters
+ 51 |
+ 52 | - ![foo](</pointy-bracketed-url/ with whitespaces>)
+ 53 | - ![foo](</pointy-bracketed-url/with-balanced-parentheses()>)
+ 54 | - ![foo](</pointy-bracketed-url/with-single-opening-paren(>)
+ 55 | - ![foo](</pointy-bracketed-url/with-single-closing-paren)>)
+ 56 | - ![foo](</pointy-bracketed-url/with-balanced-(parentheses)()>)
+ 57 | - ![foo](</pointy-bracketed-url/with-(balanced-(parentheses)())>)
+ 58 | - ![foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)
+ 59 | - ![foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)
+ 60 |
+ 61 | ## Definitions
+ 62 |
+ 63 | [a]: </bare-url>
+ 64 | [b]: </bare-url> 'with title'
+ 65 | [c]: </pointy-bracketed-url>
+ 66 | [d]: </pointy-bracketed-url> 'with title'
+ 67 |
+ 68 | ### Empty
+ 69 |
+ 70 | [empty]: <>
+ 71 |
+ 72 | ### Bare definitions destination with special characters
+ 73 |
+ 74 | [e]: /bare-url/with-last-backslash\ 'with title'
+ 75 | [f]: </bare-url/with-last-backslashs\\> 'with title'
+ 76 | [g]: /bare-url/with-last-backslashs\\\ 'with title'
+ 77 |
+ 78 | ### Pointy bracketed destination with special characters
+ 79 |
+ 80 | [h]: </pointy-bracketed-url/ with whitespaces>
+ 81 | [i]: </pointy-bracketed-url/with-balanced-parentheses()>
+ 82 | [j]: </pointy-bracketed-url/with-single-opening-paren(>
+ 83 | [k]: </pointy-bracketed-url/with-single-closing-paren)>
+ 84 | [l]: </pointy-bracketed-url/with-balanced-(parentheses)()>
+ 85 | [m]: </pointy-bracketed-url/with-(balanced-(parentheses)())>
+ 86 | [n]: </pointy-bracketed-url/with-(unbalanced-(parentheses)>
+ 87 | [o]: </pointy-bracketed-url/with-(unbalanced))-(parentheses))>
+ 88 |
+
+[1] Expected link destination to be pointy bracketed.
+[2] Expected link destination to be pointy bracketed.
+[3] Expected link destination to be pointy bracketed.
+[4] Expected link destination to be pointy bracketed.
+[5] Expected link destination to be pointy bracketed.
+[6] Expected link destination to be pointy bracketed.
+[7] Expected link destination to be pointy bracketed.
+[8] Expected link destination to be pointy bracketed.
+[9] Expected link destination to be pointy bracketed.
+[10] Expected link destination to be pointy bracketed.
+[11] Expected link destination to be pointy bracketed.
+---
+
+
+Test: link-destination-style >> invalid >>> "# Destination styles\n\n## Links\n\n- [foo](/bare-url)\n- [foo](/bare-url 'with title')\n- [foo](</pointy-bracketed-url>)\n- [foo](</pointy-bracketed-url> 'with title')\n\n### Empty\n\n- [foo]()\n- [foo](<>)\n\n### Bare destination with special characters\n\n- [foo](/bare-url/with-last-backslash\\ 'with title')\n- [foo](/bare-url/with-last-backslashs\\\\ 'with title')\n- [foo](/bare-url/with-last-backslashs\\\\\\ 'with title')\n\n### Pointy bracketed destination with special characters\n\n- [foo](</pointy-bracketed-url/ with whitespaces>)\n- [foo](</pointy-bracketed-url/with-balanced-parentheses()>)\n- [foo](</pointy-bracketed-url/with-single-opening-paren(>)\n- [foo](</pointy-bracketed-url/with-single-closing-paren)>)\n- [foo](</pointy-bracketed-url/with-balanced-(parentheses)()>)\n- [foo](</pointy-bracketed-url/with-(balanced-(parentheses)())>)\n- [foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)\n- [foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)\n\n## Images\n\n- ![foo](/bare-url)\n- ![foo](/bare-url 'with title')\n- ![foo](</pointy-bracketed-url>)\n- ![foo](</pointy-bracketed-url> 'with title')\n\n### Empty\n\n- ![foo]()\n- ![foo](<>)\n\n### Bare destination with special characters\n\n- ![foo](/bare-url/with-last-backslash\\ 'with title')\n- ![foo](/bare-url/with-last-backslashs\\\\ 'with title')\n- ![foo](/bare-url/with-last-backslashs\\\\\\ 'with title')\n\n### Pointy bracketed destination with special characters\n\n- ![foo](</pointy-bracketed-url/ with whitespaces>)\n- ![foo](</pointy-bracketed-url/with-balanced-parentheses()>)\n- ![foo](</pointy-bracketed-url/with-single-opening-paren(>)\n- ![foo](</pointy-bracketed-url/with-single-closing-paren)>)\n- ![foo](</pointy-bracketed-url/with-balanced-(parentheses)()>)\n- ![foo](</pointy-bracketed-url/with-(balanced-(parentheses)())>)\n- ![foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)\n- ![foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)\n\n## Definitions\n\n[a]: /bare-url\n[b]: /bare-url 'with title'\n[c]: </pointy-bracketed-url>\n[d]: </pointy-bracketed-url> 'with title'\n\n### Empty\n\n[empty]: <>\n\n### Bare definitions destination with special characters\n\n[e]: /bare-url/with-last-backslash\\ 'with title'\n[f]: /bare-url/with-last-backslashs\\\\ 'with title'\n[g]: /bare-url/with-last-backslashs\\\\\\ 'with title'\n\n### Pointy bracketed destination with special characters\n\n[h]: </pointy-bracketed-url/ with whitespaces>\n[i]: </pointy-bracketed-url/with-balanced-parentheses()>\n[j]: </pointy-bracketed-url/with-single-opening-paren(>\n[k]: </pointy-bracketed-url/with-single-closing-paren)>\n[l]: </pointy-bracketed-url/with-balanced-(parentheses)()>\n[m]: </pointy-bracketed-url/with-(balanced-(parentheses)())>\n[n]: </pointy-bracketed-url/with-(unbalanced-(parentheses)>\n[o]: </pointy-bracketed-url/with-(unbalanced))-(parentheses))>\n 4"
+Filename: tests/fixtures/rules/link-destination-style/invalid/pointy-brackets/fource/destinations-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: pointy-brackets
+    avoidEscape: false
+Plugins: unable to serialize
+
+Code:
+  1 | # Destination styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](/bare-url)
+    |         ^~~~~~~~~ [1]
+  6 | - [foo](/bare-url 'with title')
+    |         ^~~~~~~~~ [2]
+  7 | - [foo](</pointy-bracketed-url>)
+  8 | - [foo](</pointy-bracketed-url> 'with title')
+  9 |
+ 10 | ### Empty
+ 11 |
+ 12 | - [foo]()
+    |         ^ [3]
+ 13 | - [foo](<>)
+ 14 |
+ 15 | ### Bare destination with special characters
+ 16 |
+ 17 | - [foo](/bare-url/with-last-backslash\ 'with title')
+    |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+ 18 | - [foo](/bare-url/with-last-backslashs\\ 'with title')
+    |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [5]
+ 19 | - [foo](/bare-url/with-last-backslashs\\\ 'with title')
+    |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [6]
+ 20 |
+ 21 | ### Pointy bracketed destination with special characters
+ 22 |
+ 23 | - [foo](</pointy-bracketed-url/ with whitespaces>)
+ 24 | - [foo](</pointy-bracketed-url/with-balanced-parentheses()>)
+ 25 | - [foo](</pointy-bracketed-url/with-single-opening-paren(>)
+ 26 | - [foo](</pointy-bracketed-url/with-single-closing-paren)>)
+ 27 | - [foo](</pointy-bracketed-url/with-balanced-(parentheses)()>)
+ 28 | - [foo](</pointy-bracketed-url/with-(balanced-(parentheses)())>)
+ 29 | - [foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)
+ 30 | - [foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)
+ 31 |
+ 32 | ## Images
+ 33 |
+ 34 | - ![foo](/bare-url)
+    |          ^~~~~~~~~ [7]
+ 35 | - ![foo](/bare-url 'with title')
+    |          ^~~~~~~~~ [8]
+ 36 | - ![foo](</pointy-bracketed-url>)
+ 37 | - ![foo](</pointy-bracketed-url> 'with title')
+ 38 |
+ 39 | ### Empty
+ 40 |
+ 41 | - ![foo]()
+    |          ^ [9]
+ 42 | - ![foo](<>)
+ 43 |
+ 44 | ### Bare destination with special characters
+ 45 |
+ 46 | - ![foo](/bare-url/with-last-backslash\ 'with title')
+    |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [10]
+ 47 | - ![foo](/bare-url/with-last-backslashs\\ 'with title')
+    |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [11]
+ 48 | - ![foo](/bare-url/with-last-backslashs\\\ 'with title')
+    |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [12]
+ 49 |
+ 50 | ### Pointy bracketed destination with special characters
+ 51 |
+ 52 | - ![foo](</pointy-bracketed-url/ with whitespaces>)
+ 53 | - ![foo](</pointy-bracketed-url/with-balanced-parentheses()>)
+ 54 | - ![foo](</pointy-bracketed-url/with-single-opening-paren(>)
+ 55 | - ![foo](</pointy-bracketed-url/with-single-closing-paren)>)
+ 56 | - ![foo](</pointy-bracketed-url/with-balanced-(parentheses)()>)
+ 57 | - ![foo](</pointy-bracketed-url/with-(balanced-(parentheses)())>)
+ 58 | - ![foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)
+ 59 | - ![foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)
+ 60 |
+ 61 | ## Definitions
+ 62 |
+ 63 | [a]: /bare-url
+    |      ^~~~~~~~~ [13]
+ 64 | [b]: /bare-url 'with title'
+    |      ^~~~~~~~~ [14]
+ 65 | [c]: </pointy-bracketed-url>
+ 66 | [d]: </pointy-bracketed-url> 'with title'
+ 67 |
+ 68 | ### Empty
+ 69 |
+ 70 | [empty]: <>
+ 71 |
+ 72 | ### Bare definitions destination with special characters
+ 73 |
+ 74 | [e]: /bare-url/with-last-backslash\ 'with title'
+    |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [15]
+ 75 | [f]: /bare-url/with-last-backslashs\\ 'with title'
+    |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [16]
+ 76 | [g]: /bare-url/with-last-backslashs\\\ 'with title'
+    |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [17]
+ 77 |
+ 78 | ### Pointy bracketed destination with special characters
+ 79 |
+ 80 | [h]: </pointy-bracketed-url/ with whitespaces>
+ 81 | [i]: </pointy-bracketed-url/with-balanced-parentheses()>
+ 82 | [j]: </pointy-bracketed-url/with-single-opening-paren(>
+ 83 | [k]: </pointy-bracketed-url/with-single-closing-paren)>
+ 84 | [l]: </pointy-bracketed-url/with-balanced-(parentheses)()>
+ 85 | [m]: </pointy-bracketed-url/with-(balanced-(parentheses)())>
+ 86 | [n]: </pointy-bracketed-url/with-(unbalanced-(parentheses)>
+ 87 | [o]: </pointy-bracketed-url/with-(unbalanced))-(parentheses))>
+ 88 |
+
+Output:
+  1 | # Destination styles
+  2 |
+  3 | ## Links
+  4 |
+  5 | - [foo](</bare-url>)
+  6 | - [foo](</bare-url> 'with title')
+  7 | - [foo](</pointy-bracketed-url>)
+  8 | - [foo](</pointy-bracketed-url> 'with title')
+  9 |
+ 10 | ### Empty
+ 11 |
+ 12 | - [foo](<>)
+ 13 | - [foo](<>)
+ 14 |
+ 15 | ### Bare destination with special characters
+ 16 |
+ 17 | - [foo](</bare-url/with-last-backslash\\> 'with title')
+ 18 | - [foo](</bare-url/with-last-backslashs\\> 'with title')
+ 19 | - [foo](</bare-url/with-last-backslashs\\\\> 'with title')
+ 20 |
+ 21 | ### Pointy bracketed destination with special characters
+ 22 |
+ 23 | - [foo](</pointy-bracketed-url/ with whitespaces>)
+ 24 | - [foo](</pointy-bracketed-url/with-balanced-parentheses()>)
+ 25 | - [foo](</pointy-bracketed-url/with-single-opening-paren(>)
+ 26 | - [foo](</pointy-bracketed-url/with-single-closing-paren)>)
+ 27 | - [foo](</pointy-bracketed-url/with-balanced-(parentheses)()>)
+ 28 | - [foo](</pointy-bracketed-url/with-(balanced-(parentheses)())>)
+ 29 | - [foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)
+ 30 | - [foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)
+ 31 |
+ 32 | ## Images
+ 33 |
+ 34 | - ![foo](</bare-url>)
+ 35 | - ![foo](</bare-url> 'with title')
+ 36 | - ![foo](</pointy-bracketed-url>)
+ 37 | - ![foo](</pointy-bracketed-url> 'with title')
+ 38 |
+ 39 | ### Empty
+ 40 |
+ 41 | - ![foo](<>)
+ 42 | - ![foo](<>)
+ 43 |
+ 44 | ### Bare destination with special characters
+ 45 |
+ 46 | - ![foo](</bare-url/with-last-backslash\\> 'with title')
+ 47 | - ![foo](</bare-url/with-last-backslashs\\> 'with title')
+ 48 | - ![foo](</bare-url/with-last-backslashs\\\\> 'with title')
+ 49 |
+ 50 | ### Pointy bracketed destination with special characters
+ 51 |
+ 52 | - ![foo](</pointy-bracketed-url/ with whitespaces>)
+ 53 | - ![foo](</pointy-bracketed-url/with-balanced-parentheses()>)
+ 54 | - ![foo](</pointy-bracketed-url/with-single-opening-paren(>)
+ 55 | - ![foo](</pointy-bracketed-url/with-single-closing-paren)>)
+ 56 | - ![foo](</pointy-bracketed-url/with-balanced-(parentheses)()>)
+ 57 | - ![foo](</pointy-bracketed-url/with-(balanced-(parentheses)())>)
+ 58 | - ![foo](</pointy-bracketed-url/with-(unbalanced-(parentheses)>)
+ 59 | - ![foo](</pointy-bracketed-url/with-(unbalanced))-(parentheses))>)
+ 60 |
+ 61 | ## Definitions
+ 62 |
+ 63 | [a]: </bare-url>
+ 64 | [b]: </bare-url> 'with title'
+ 65 | [c]: </pointy-bracketed-url>
+ 66 | [d]: </pointy-bracketed-url> 'with title'
+ 67 |
+ 68 | ### Empty
+ 69 |
+ 70 | [empty]: <>
+ 71 |
+ 72 | ### Bare definitions destination with special characters
+ 73 |
+ 74 | [e]: </bare-url/with-last-backslash\\> 'with title'
+ 75 | [f]: </bare-url/with-last-backslashs\\> 'with title'
+ 76 | [g]: </bare-url/with-last-backslashs\\\\> 'with title'
+ 77 |
+ 78 | ### Pointy bracketed destination with special characters
+ 79 |
+ 80 | [h]: </pointy-bracketed-url/ with whitespaces>
+ 81 | [i]: </pointy-bracketed-url/with-balanced-parentheses()>
+ 82 | [j]: </pointy-bracketed-url/with-single-opening-paren(>
+ 83 | [k]: </pointy-bracketed-url/with-single-closing-paren)>
+ 84 | [l]: </pointy-bracketed-url/with-balanced-(parentheses)()>
+ 85 | [m]: </pointy-bracketed-url/with-(balanced-(parentheses)())>
+ 86 | [n]: </pointy-bracketed-url/with-(unbalanced-(parentheses)>
+ 87 | [o]: </pointy-bracketed-url/with-(unbalanced))-(parentheses))>
+ 88 |
+
+[1] Expected link destination to be pointy bracketed.
+[2] Expected link destination to be pointy bracketed.
+[3] Expected link destination to be pointy bracketed.
+[4] Expected link destination to be pointy bracketed.
+[5] Expected link destination to be pointy bracketed.
+[6] Expected link destination to be pointy bracketed.
+[7] Expected link destination to be pointy bracketed.
+[8] Expected link destination to be pointy bracketed.
+[9] Expected link destination to be pointy bracketed.
+[10] Expected link destination to be pointy bracketed.
+[11] Expected link destination to be pointy bracketed.
+[12] Expected link destination to be pointy bracketed.
+[13] Expected link destination to be pointy bracketed.
+[14] Expected link destination to be pointy bracketed.
+[15] Expected link destination to be pointy bracketed.
+[16] Expected link destination to be pointy bracketed.
+[17] Expected link destination to be pointy bracketed.
+---

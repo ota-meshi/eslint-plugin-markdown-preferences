@@ -137,6 +137,7 @@ If `true`, the rule will not enforce a style if it would require escaping the de
 
 ## 👫 Related Rules
 
+- [markdown-preferences/link-destination-style](./link-destination-style.md)
 - [markdown-preferences/link-bracket-newline](./link-bracket-newline.md)
 - [markdown-preferences/link-bracket-spacing](./link-bracket-spacing.md)
 

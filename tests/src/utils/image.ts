@@ -6,7 +6,7 @@ describe("parseImageFromText", () => {
     const result = parseImageFromText("![alt](foo.png)");
     assert.deepStrictEqual(result, {
       text: { range: [1, 6] },
-      destination: { type: "plain", text: "foo.png", range: [7, 14] },
+      destination: { type: "bare", text: "foo.png", range: [7, 14] },
       title: null,
     });
   });
@@ -28,7 +28,7 @@ describe("parseImageFromText", () => {
     const result = parseImageFromText('![alt](foo.png "title")');
     assert.deepStrictEqual(result, {
       text: { range: [1, 6] },
-      destination: { type: "plain", text: "foo.png", range: [7, 14] },
+      destination: { type: "bare", text: "foo.png", range: [7, 14] },
       title: { type: "double-quoted", text: '"title"', range: [15, 22] },
     });
   });
@@ -37,7 +37,7 @@ describe("parseImageFromText", () => {
     const result = parseImageFromText("![alt](foo.png 'title')");
     assert.deepStrictEqual(result, {
       text: { range: [1, 6] },
-      destination: { type: "plain", text: "foo.png", range: [7, 14] },
+      destination: { type: "bare", text: "foo.png", range: [7, 14] },
       title: { type: "single-quoted", text: "'title'", range: [15, 22] },
     });
   });
@@ -46,7 +46,7 @@ describe("parseImageFromText", () => {
     const result = parseImageFromText("![alt](foo.png (title))");
     assert.deepStrictEqual(result, {
       text: { range: [1, 6] },
-      destination: { type: "plain", text: "foo.png", range: [7, 14] },
+      destination: { type: "bare", text: "foo.png", range: [7, 14] },
       title: { type: "parenthesized", text: "(title)", range: [15, 22] },
     });
   });
@@ -63,7 +63,7 @@ describe("parseImageFromText", () => {
     const result = parseImageFromText("![alt](foo\\(bar\\).png)");
     assert.deepStrictEqual(result, {
       text: { range: [1, 6] },
-      destination: { type: "plain", text: "foo\\(bar\\).png", range: [7, 21] },
+      destination: { type: "bare", text: "foo\\(bar\\).png", range: [7, 21] },
       title: null,
     });
   });

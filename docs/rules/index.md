@@ -49,6 +49,7 @@ The rules with the following 💄 are included in the `plugin.configs.standard` 
 | [markdown-preferences/level2-heading-style](./level2-heading-style.md) | enforce consistent style for level 2 headings | 🔧 | 💄 |
 | [markdown-preferences/link-bracket-newline](./link-bracket-newline.md) | enforce linebreaks after opening and before closing link brackets | 🔧 | 💄 |
 | [markdown-preferences/link-bracket-spacing](./link-bracket-spacing.md) | enforce consistent spacing inside link brackets | 🔧 | 💄 |
+| [markdown-preferences/link-destination-style](./link-destination-style.md) | enforce a consistent style for link destinations | 🔧 | 💄 |
 | [markdown-preferences/link-title-style](./link-title-style.md) | enforce a consistent style for link titles | 🔧 | 💄 |
 | [markdown-preferences/list-marker-alignment](./list-marker-alignment.md) | enforce consistent alignment of list markers | 🔧 | ⭐💄 |
 | [markdown-preferences/no-laziness-blockquotes](./no-laziness-blockquotes.md) | disallow laziness in blockquotes |  | ⭐💄 |

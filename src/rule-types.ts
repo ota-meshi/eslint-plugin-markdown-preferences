@@ -94,6 +94,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/link-bracket-spacing'?: Linter.RuleEntry<MarkdownPreferencesLinkBracketSpacing>
   /**
+   * enforce a consistent style for link titles
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-title-style.html
+   */
+  'markdown-preferences/link-title-style'?: Linter.RuleEntry<MarkdownPreferencesLinkTitleStyle>
+  /**
    * enforce consistent alignment of list markers
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/list-marker-alignment.html
    */
@@ -306,6 +311,12 @@ type MarkdownPreferencesLinkBracketNewline = []|[{
 type MarkdownPreferencesLinkBracketSpacing = []|[{
   space?: ("always" | "never")
   imagesInLinks?: boolean
+}]
+// ----- markdown-preferences/link-title-style -----
+type MarkdownPreferencesLinkTitleStyle = []|[{
+  style?: ("double" | "single" | "parentheses")
+  avoidEscape?: boolean
+  [k: string]: unknown | undefined
 }]
 // ----- markdown-preferences/list-marker-alignment -----
 type MarkdownPreferencesListMarkerAlignment = []|[{

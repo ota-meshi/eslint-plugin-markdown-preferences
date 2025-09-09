@@ -21,7 +21,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[l\\]abel]: bar 'ti\\'tle'");
     assert.deepStrictEqual(result, {
       label: { text: "[l\\]abel]", range: [0, 9] },
-      destination: { type: "plain", text: "bar", range: [11, 14] },
+      destination: { type: "bare", text: "bar", range: [11, 14] },
       title: { type: "single-quoted", text: "'ti\\'tle'", range: [15, 24] },
     });
   });
@@ -30,7 +30,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[日本語]: bar 'タイトル'");
     assert.deepStrictEqual(result, {
       label: { text: "[日本語]", range: [0, 5] },
-      destination: { type: "plain", text: "bar", range: [7, 10] },
+      destination: { type: "bare", text: "bar", range: [7, 10] },
       title: { type: "single-quoted", text: "'タイトル'", range: [11, 17] },
     });
   });
@@ -39,7 +39,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[a\nb]: bar 'baz'");
     assert.deepStrictEqual(result, {
       label: { text: "[a\nb]", range: [0, 5] },
-      destination: { type: "plain", text: "bar", range: [7, 10] },
+      destination: { type: "bare", text: "bar", range: [7, 10] },
       title: { type: "single-quoted", text: "'baz'", range: [11, 16] },
     });
   });
@@ -48,7 +48,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[a\u0000b]: bar 'baz'");
     assert.deepStrictEqual(result, {
       label: { text: "[a\u0000b]", range: [0, 5] },
-      destination: { type: "plain", text: "bar", range: [7, 10] },
+      destination: { type: "bare", text: "bar", range: [7, 10] },
       title: { type: "single-quoted", text: "'baz'", range: [11, 16] },
     });
   });
@@ -57,7 +57,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[l\\[abel]: bar 't'");
     assert.deepStrictEqual(result, {
       label: { text: "[l\\[abel]", range: [0, 9] },
-      destination: { type: "plain", text: "bar", range: [11, 14] },
+      destination: { type: "bare", text: "bar", range: [11, 14] },
       title: { type: "single-quoted", text: "'t'", range: [15, 18] },
     });
   });
@@ -66,7 +66,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[label😀]: bar 'emoji😀'");
     assert.deepStrictEqual(result, {
       label: { text: "[label😀]", range: [0, 9] },
-      destination: { type: "plain", text: "bar", range: [11, 14] },
+      destination: { type: "bare", text: "bar", range: [11, 14] },
       title: { type: "single-quoted", text: "'emoji😀'", range: [15, 24] },
     });
   });
@@ -75,7 +75,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[l\\[a\\]bel]: bar 't'");
     assert.deepStrictEqual(result, {
       label: { text: "[l\\[a\\]bel]", range: [0, 11] },
-      destination: { type: "plain", text: "bar", range: [13, 16] },
+      destination: { type: "bare", text: "bar", range: [13, 16] },
       title: { type: "single-quoted", text: "'t'", range: [17, 20] },
     });
   });
@@ -84,7 +84,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[a]: b '\"t\"'");
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "b", range: [5, 6] },
+      destination: { type: "bare", text: "b", range: [5, 6] },
       title: { type: "single-quoted", text: "'\"t\"'", range: [7, 12] },
     });
   });
@@ -93,7 +93,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[a]: b 'a\u0300😀'");
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "b", range: [5, 6] },
+      destination: { type: "bare", text: "b", range: [5, 6] },
       title: { type: "single-quoted", text: "'a\u0300😀'", range: [7, 13] },
     });
   });
@@ -102,7 +102,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[foo]: bar 'baz'");
     assert.deepStrictEqual(result, {
       label: { text: "[foo]", range: [0, 5] },
-      destination: { type: "plain", text: "bar", range: [7, 10] },
+      destination: { type: "bare", text: "bar", range: [7, 10] },
       title: { type: "single-quoted", text: "'baz'", range: [11, 16] },
     });
   });
@@ -111,19 +111,19 @@ describe("parseLinkDefinitionFromText", () => {
     const result1 = parseLinkDefinitionFromText("[a]: b ''");
     assert.deepStrictEqual(result1, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "b", range: [5, 6] },
+      destination: { type: "bare", text: "b", range: [5, 6] },
       title: { type: "single-quoted", text: "''", range: [7, 9] },
     });
     const result2 = parseLinkDefinitionFromText('[a]: b ""');
     assert.deepStrictEqual(result2, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "b", range: [5, 6] },
+      destination: { type: "bare", text: "b", range: [5, 6] },
       title: { type: "double-quoted", text: '""', range: [7, 9] },
     });
     const result3 = parseLinkDefinitionFromText("[a]: b ()");
     assert.deepStrictEqual(result3, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "b", range: [5, 6] },
+      destination: { type: "bare", text: "b", range: [5, 6] },
       title: { type: "parenthesized", text: "()", range: [7, 9] },
     });
   });
@@ -132,19 +132,19 @@ describe("parseLinkDefinitionFromText", () => {
     const result1 = parseLinkDefinitionFromText("[ foo ]: bar 'baz'");
     assert.deepStrictEqual(result1, {
       label: { text: "[ foo ]", range: [0, 7] },
-      destination: { type: "plain", text: "bar", range: [9, 12] },
+      destination: { type: "bare", text: "bar", range: [9, 12] },
       title: { type: "single-quoted", text: "'baz'", range: [13, 18] },
     });
     const result2 = parseLinkDefinitionFromText("[foo ]: bar 'baz'");
     assert.deepStrictEqual(result2, {
       label: { text: "[foo ]", range: [0, 6] },
-      destination: { type: "plain", text: "bar", range: [8, 11] },
+      destination: { type: "bare", text: "bar", range: [8, 11] },
       title: { type: "single-quoted", text: "'baz'", range: [12, 17] },
     });
     const result3 = parseLinkDefinitionFromText("[ foo]: bar 'baz'");
     assert.deepStrictEqual(result3, {
       label: { text: "[ foo]", range: [0, 6] },
-      destination: { type: "plain", text: "bar", range: [8, 11] },
+      destination: { type: "bare", text: "bar", range: [8, 11] },
       title: { type: "single-quoted", text: "'baz'", range: [12, 17] },
     });
   });
@@ -157,7 +157,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[a]: b (c)");
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "b", range: [5, 6] },
+      destination: { type: "bare", text: "b", range: [5, 6] },
       title: { type: "parenthesized", text: "(c)", range: [7, 10] },
     });
   });
@@ -166,7 +166,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[a]: b   't'");
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "b", range: [5, 6] },
+      destination: { type: "bare", text: "b", range: [5, 6] },
       title: { type: "single-quoted", text: "'t'", range: [9, 12] },
     });
   });
@@ -175,7 +175,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[a]:    b\t\t'c'");
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "b", range: [8, 9] },
+      destination: { type: "bare", text: "b", range: [8, 9] },
       title: { type: "single-quoted", text: "'c'", range: [11, 14] },
     });
   });
@@ -185,14 +185,14 @@ describe("parseLinkDefinitionFromText", () => {
     const result1 = parseLinkDefinitionFromText("[a]: bar\u3000'baz'");
     assert.deepStrictEqual(result1, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "bar", range: [5, 8] },
+      destination: { type: "bare", text: "bar", range: [5, 8] },
       title: { type: "single-quoted", text: "'baz'", range: [9, 14] },
     });
     //  Zero-width space (U+200B)
     const result2 = parseLinkDefinitionFromText("[a]: bar '\u200bbaz'");
     assert.deepStrictEqual(result2, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "bar", range: [5, 8] },
+      destination: { type: "bare", text: "bar", range: [5, 8] },
       title: { type: "single-quoted", text: "'\u200bbaz'", range: [9, 15] },
     });
   });
@@ -201,7 +201,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[a]: bar '😀😀'");
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "bar", range: [5, 8] },
+      destination: { type: "bare", text: "bar", range: [5, 8] },
       title: { type: "single-quoted", text: "'😀😀'", range: [9, 15] },
     });
   });
@@ -210,7 +210,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[a]: bar 't*e_s[t]()'");
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "bar", range: [5, 8] },
+      destination: { type: "bare", text: "bar", range: [5, 8] },
       title: { type: "single-quoted", text: "'t*e_s[t]()'", range: [9, 21] },
     });
   });
@@ -224,7 +224,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[a]: bar '\u200b'");
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "bar", range: [5, 8] },
+      destination: { type: "bare", text: "bar", range: [5, 8] },
       title: { type: "single-quoted", text: "'\u200b'", range: [9, 12] },
     });
   });
@@ -233,7 +233,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[a]: bar 'b\u0000z'");
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "bar", range: [5, 8] },
+      destination: { type: "bare", text: "bar", range: [5, 8] },
       title: { type: "single-quoted", text: "'b\u0000z'", range: [9, 14] },
     });
   });
@@ -242,7 +242,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[a]: b");
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "b", range: [5, 6] },
+      destination: { type: "bare", text: "b", range: [5, 6] },
       title: null,
     });
   });
@@ -278,7 +278,7 @@ describe("parseLinkDefinitionFromText", () => {
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
       destination: {
-        type: "plain",
+        type: "bare",
         text: "https://example.com/path?foo=1&bar=2",
         range: [5, 41],
       },
@@ -293,7 +293,7 @@ describe("parseLinkDefinitionFromText", () => {
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
       destination: {
-        type: "plain",
+        type: "bare",
         text: "https://example.com/%E3%81%82",
         range: [5, 34],
       },
@@ -305,13 +305,13 @@ describe("parseLinkDefinitionFromText", () => {
     const result1 = parseLinkDefinitionFromText("[a]: b\n 't'");
     assert.deepStrictEqual(result1, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "b", range: [5, 6] },
+      destination: { type: "bare", text: "b", range: [5, 6] },
       title: { type: "single-quoted", text: "'t'", range: [8, 11] },
     });
     const result2 = parseLinkDefinitionFromText("[a]: b '\nt'");
     assert.deepStrictEqual(result2, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "b", range: [5, 6] },
+      destination: { type: "bare", text: "b", range: [5, 6] },
       title: { type: "single-quoted", text: "'\nt'", range: [7, 11] },
     });
     const result3 = parseLinkDefinitionFromText("[a]: <b\nc> 't'");
@@ -323,7 +323,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result4 = parseLinkDefinitionFromText("[a]: b\n\n 't'");
     assert.deepStrictEqual(result4, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "b", range: [5, 6] },
+      destination: { type: "bare", text: "b", range: [5, 6] },
       title: { type: "single-quoted", text: "'t'", range: [9, 12] },
     });
   });
@@ -344,7 +344,7 @@ describe("parseLinkDefinitionFromText", () => {
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
       destination: {
-        type: "plain",
+        type: "bare",
         text: "https://example.com/foo#bar",
         range: [5, 32],
       },
@@ -389,28 +389,28 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[a]: ba\\\\r 't'");
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "ba\\\\r", range: [5, 10] },
+      destination: { type: "bare", text: "ba\\\\r", range: [5, 10] },
       title: { type: "single-quoted", text: "'t'", range: [11, 14] },
     });
     //  Multiple backslashes in title (valid)
     const result2 = parseLinkDefinitionFromText("[a]: bar 'ba\\\\z'");
     assert.deepStrictEqual(result2, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "bar", range: [5, 8] },
+      destination: { type: "bare", text: "bar", range: [5, 8] },
       title: { type: "single-quoted", text: "'ba\\\\z'", range: [9, 16] },
     });
     //  Colon in label (valid)
     const result3 = parseLinkDefinitionFromText("[foo:bar]: baz 'title'");
     assert.deepStrictEqual(result3, {
       label: { text: "[foo:bar]", range: [0, 9] },
-      destination: { type: "plain", text: "baz", range: [11, 14] },
+      destination: { type: "bare", text: "baz", range: [11, 14] },
       title: { type: "single-quoted", text: "'title'", range: [15, 22] },
     });
     //  Multiple escapes in label (valid)
     const result4 = parseLinkDefinitionFromText("[l\\[a\\]b\\]el]: bar 't'");
     assert.deepStrictEqual(result4, {
       label: { text: "[l\\[a\\]b\\]el]", range: [0, 13] },
-      destination: { type: "plain", text: "bar", range: [15, 18] },
+      destination: { type: "bare", text: "bar", range: [15, 18] },
       title: { type: "single-quoted", text: "'t'", range: [19, 22] },
     });
   });
@@ -419,7 +419,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[a]: bar '   '");
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "bar", range: [5, 8] },
+      destination: { type: "bare", text: "bar", range: [5, 8] },
       title: { type: "single-quoted", text: "'   '", range: [9, 14] },
     });
   });
@@ -428,7 +428,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[FOO-bar_123]: baz 'title'");
     assert.deepStrictEqual(result, {
       label: { text: "[FOO-bar_123]", range: [0, 13] },
-      destination: { type: "plain", text: "baz", range: [15, 18] },
+      destination: { type: "bare", text: "baz", range: [15, 18] },
       title: { type: "single-quoted", text: "'title'", range: [19, 26] },
     });
   });
@@ -450,7 +450,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[a]: ''");
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "''", range: [5, 7] },
+      destination: { type: "bare", text: "''", range: [5, 7] },
       title: null,
     });
   });
@@ -476,7 +476,7 @@ describe("parseLinkDefinitionFromText", () => {
     const result = parseLinkDefinitionFromText("[a]: \u200b");
     assert.deepStrictEqual(result, {
       label: { text: "[a]", range: [0, 3] },
-      destination: { type: "plain", text: "\u200b", range: [5, 6] },
+      destination: { type: "bare", text: "\u200b", range: [5, 6] },
       title: null,
     });
   });
