@@ -4,7 +4,6 @@ import { parseImage } from "../utils/image.ts";
 import { createRule } from "../utils/index.ts";
 import { parseLinkDefinition } from "../utils/link-definition.ts";
 import { parseInlineLink } from "../utils/link.ts";
-import { name } from "../meta.ts";
 
 type Options = {
   style?: "double" | "single" | "parenthesis";
