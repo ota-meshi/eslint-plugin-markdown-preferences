@@ -64,6 +64,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 | Enforce specific words to be links            | --                                                                                                | --                                                                                                   | [markdown-preferences/prefer-linked-words]<br>enforce the specified word to be a link                            |
 | Spaces around the brackets in links/images    | --                                                                                                | --                                                                                                   | [markdown-preferences/link-bracket-spacing]<br>enforce consistent spacing inside link brackets                   |
 | Newlines around the brackets in links/images  | --                                                                                                | --                                                                                                   | [markdown-preferences/link-bracket-newline]<br>enforce linebreaks after opening and before closing link brackets |
+| Link destination style                        | --                                                                                                | --                                                                                                   | [markdown-preferences/link-destination-style]<br>enforce a consistent style for link destinations                |
 | Link title style                              | --                                                                                                | --                                                                                                   | [markdown-preferences/link-title-style]<br>enforce a consistent style for link titles                            |
 
 ## Rules Related to Link Definitions and Footnote Definitions
@@ -237,6 +238,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 [markdown-preferences/level2-heading-style]: ./../rules/level2-heading-style.md
 [markdown-preferences/link-bracket-newline]: ./../rules/link-bracket-newline.md
 [markdown-preferences/link-bracket-spacing]: ./../rules/link-bracket-spacing.md
+[markdown-preferences/link-destination-style]: ./../rules/link-destination-style.md
 [markdown-preferences/link-title-style]: ./../rules/link-title-style.md
 [markdown-preferences/list-marker-alignment]: ../rules/list-marker-alignment.md
 [markdown-preferences/no-laziness-blockquotes]: ../rules/no-laziness-blockquotes.md

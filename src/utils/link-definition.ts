@@ -11,7 +11,7 @@ export type ParsedLinkDefinition = {
     loc: SourceLocation;
   };
   destination: {
-    type: "pointy-bracketed" | "plain";
+    type: "pointy-bracketed" | "bare";
     text: string;
     range: [number, number];
     loc: SourceLocation;
@@ -80,7 +80,7 @@ export function parseLinkDefinitionFromText(text: string): {
     range: [number, number];
   };
   destination: {
-    type: "pointy-bracketed" | "plain";
+    type: "pointy-bracketed" | "bare";
     text: string;
     range: [number, number];
   };
@@ -130,7 +130,7 @@ export function parseLinkDefinitionFromText(text: string): {
     skipUntilEnd((c) => isWhitespace(c) || isAsciiControlCharacter(c));
     const destinationRange: [number, number] = [destinationStartIndex, index];
     destination = {
-      type: "plain",
+      type: "bare",
       text: text.slice(...destinationRange),
       range: destinationRange,
     };
@@ -200,7 +200,8 @@ export function parseLinkDefinitionFromText(text: string): {
       if (c !== "\\") continue;
       if (
         index < text.length &&
-        (text[index] === "\\" || checkEnd(text[index]))
+        (text[index] === "\\" || checkEnd(text[index])) &&
+        !isWhitespace(text[index])
       ) {
         index++;
       }

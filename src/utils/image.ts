@@ -10,7 +10,7 @@ export type ParsedImage = {
     loc: SourceLocation;
   };
   destination: {
-    type: "pointy-bracketed" | "plain";
+    type: "pointy-bracketed" | "bare";
     text: string;
     range: [number, number];
     loc: SourceLocation;
@@ -77,7 +77,7 @@ export function parseImageFromText(text: string): {
     range: [number, number];
   };
   destination: {
-    type: "pointy-bracketed" | "plain";
+    type: "pointy-bracketed" | "bare";
     text: string;
     range: [number, number];
   };
@@ -141,7 +141,7 @@ export function parseImageFromText(text: string): {
     );
     const destinationRange: [number, number] = [index + 1, destinationEndIndex];
     destination = {
-      type: "plain",
+      type: "bare",
       text: text.slice(...destinationRange),
       range: destinationRange,
     };
@@ -175,7 +175,7 @@ export function parseImageFromText(text: string): {
     while (index >= 0) {
       const c = text[index];
       if (checkStart(c)) {
-        if (index > 1) {
+        if (index > 1 && !isWhitespace(c)) {
           let escapeText = "";
           while (text.endsWith(`${escapeText}\\`, index)) {
             escapeText += "\\";

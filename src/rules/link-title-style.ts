@@ -1,9 +1,10 @@
 import type { Definition, Image, Link } from "mdast";
-import { getLinkKind, getSourceLocationFromRange } from "../utils/ast.ts";
+import { getLinkKind } from "../utils/ast.ts";
 import { parseImage } from "../utils/image.ts";
 import { createRule } from "../utils/index.ts";
 import { parseLinkDefinition } from "../utils/link-definition.ts";
 import { parseInlineLink } from "../utils/link.ts";
+import type { SourceLocation } from "estree";
 
 type Options = {
   style?: "double" | "single" | "parentheses";
@@ -12,21 +13,24 @@ type Options = {
 
 const STYLES = {
   double: {
-    name: "double quoted",
+    messageId: "expectedDouble",
     open: '"',
     close: '"',
+    typeName: "double-quoted",
   },
   single: {
-    name: "single quoted",
+    messageId: "expectedSingle",
     open: "'",
     close: "'",
+    typeName: "single-quoted",
   },
   parentheses: {
-    name: "parenthesized",
+    messageId: "expectedParentheses",
     open: "(",
     close: ")",
+    typeName: "parenthesized",
   },
-};
+} as const;
 
 export default createRule<[Options?]>("link-title-style", {
   meta: {
@@ -52,13 +56,15 @@ export default createRule<[Options?]>("link-title-style", {
       },
     ],
     messages: {
-      expectedTitleStyle: "Expected link title to be {{styleName}}.",
+      expectedDouble: "Expected link title to be double quoted.",
+      expectedSingle: "Expected link title to be single quoted.",
+      expectedParentheses: "Expected link title to be parenthesized.",
     },
   },
   create(context) {
     const sourceCode = context.sourceCode;
     const options = context.options[0] || {};
-    const style = STYLES[options.style || "double"];
+    const preferStyle = STYLES[options.style || "double"];
     const avoidEscape = options.avoidEscape ?? true;
 
     /**
@@ -66,42 +72,43 @@ export default createRule<[Options?]>("link-title-style", {
      */
     function verifyTitle(
       node: Link | Image | Definition,
-      titleRange: [number, number],
+      title: {
+        type: "double-quoted" | "single-quoted" | "parenthesized";
+        text: string;
+        range: [number, number];
+        loc: SourceLocation;
+      },
     ) {
-      const title = sourceCode.text.slice(...titleRange);
-      const isValid =
-        title.startsWith(style.open) && title.endsWith(style.close);
-      if (isValid) return;
+      if (preferStyle.typeName === title.type) return;
       if (avoidEscape) {
         // Check if the title can be written in the specified style without escaping.
-        if (title.slice(1, -1).includes(style.close)) return;
+        if (title.text.slice(1, -1).includes(preferStyle.close)) return;
       }
 
       context.report({
         node,
-        loc: getSourceLocationFromRange(sourceCode, node, titleRange),
-        messageId: "expectedTitleStyle",
-        data: { styleName: style.name },
+        loc: title.loc,
+        messageId: preferStyle.messageId,
         *fix(fixer) {
           yield fixer.replaceTextRange(
-            [titleRange[0], titleRange[0] + 1],
-            style.open,
+            [title.range[0], title.range[0] + 1],
+            preferStyle.open,
           );
           for (
-            let index = titleRange[0] + 1;
-            index < titleRange[1] - 1;
+            let index = title.range[0] + 1;
+            index < title.range[1] - 1;
             index++
           ) {
             const c = sourceCode.text[index];
-            if (c === style.close) {
+            if (c === preferStyle.close) {
               yield fixer.insertTextBeforeRange([index, index], "\\");
             } else if (c === "\\") {
               index++;
             }
           }
           yield fixer.replaceTextRange(
-            [titleRange[1] - 1, titleRange[1]],
-            style.close,
+            [title.range[1] - 1, title.range[1]],
+            preferStyle.close,
           );
         },
       });
@@ -113,17 +120,17 @@ export default createRule<[Options?]>("link-title-style", {
         if (kind !== "inline") return;
         const parsed = parseInlineLink(sourceCode, node);
         if (!parsed || !parsed.title) return;
-        verifyTitle(node, parsed.title.range);
+        verifyTitle(node, parsed.title);
       },
       image(node) {
         const parsed = parseImage(sourceCode, node);
         if (!parsed || !parsed.title) return;
-        verifyTitle(node, parsed.title.range);
+        verifyTitle(node, parsed.title);
       },
       definition(node) {
         const parsed = parseLinkDefinition(sourceCode, node);
         if (!parsed || !parsed.title) return;
-        verifyTitle(node, parsed.title.range);
+        verifyTitle(node, parsed.title);
       },
     };
   },

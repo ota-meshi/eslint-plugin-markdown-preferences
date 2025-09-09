@@ -274,6 +274,9 @@ export default defineConfig([
       "markdown-links/no-dead-urls": "off",
       "markdown-links/no-missing-path": "off",
       "markdown/require-alt-text": "off",
+      "markdown/no-empty-links": "off",
+      "markdown/no-empty-images": "off",
+      "markdown/no-empty-definitions": "off",
       ...Object.fromEntries(
         rules.map((rule) => [rule.meta.docs.ruleId, "off"]),
       ),
