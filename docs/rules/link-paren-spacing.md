@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/link-paren-spacing"
 description: "enforce consistent spacing inside link parentheses"
+since: "v0.23.0"
 ---
 
 # markdown-preferences/link-paren-spacing
 
 > enforce consistent spacing inside link parentheses
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - ⚙️ This rule is included in `plugin.configs.standard`.
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
@@ -115,6 +115,10 @@ Consistent parentheses spacing:
 
 - [markdown-preferences/link-bracket-spacing](./link-bracket-spacing.md)
 - [markdown-preferences/no-multi-spaces](./no-multi-spaces.md)
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.23.0
 
 ## 🔍 Implementation
 
