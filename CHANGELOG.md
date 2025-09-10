@@ -1,5 +1,13 @@
 # eslint-plugin-markdown-preferences
 
+## 0.23.0
+
+### Minor Changes
+
+- [#115](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/115) [`96983c5`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/96983c5fcf58071ebc7a82a84b7f012cc94e5181) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/link-paren-newline`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-paren-newline.html) rule
+
+- [#112](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/112) [`ddacf48`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/ddacf488bdbc19d6607154385b8c1e346483adda) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/link-paren-spacing`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-paren-spacing.html) rule
+
 ## 0.22.0
 
 ### Minor Changes
