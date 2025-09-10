@@ -114,6 +114,7 @@ Consistent bracket linebreaks:
 ## 👫 Related Rules
 
 - [markdown-preferences/link-bracket-spacing](./link-bracket-spacing.md)
+- [markdown-preferences/link-paren-newline](./link-paren-newline.md)
 
 ## 🚀 Version
 
