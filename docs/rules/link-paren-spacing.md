@@ -15,7 +15,35 @@ description: "enforce consistent spacing inside link parentheses"
 
 ## 📖 Rule Details
 
-This rule reports ???.
+This rule enforces consistent spacing inside the parentheses of links and images in Markdown documents. It helps maintain a uniform style for link and image syntax, improving readability and reducing accidental formatting inconsistencies.
+
+### What Does This Rule Check?
+
+- **Links**: Ensures that there are either always spaces or never spaces just inside the parentheses of link destinations and link titles, according to your configuration.
+  - Example: `[foo](/url)` vs `[foo]( /url )`
+- **Images**: Applies the same rule to image link destinations and image titles (the text inside `![ ... ]`).
+
+### Why Is This Important?
+
+Consistent parentheses spacing:
+
+- Makes Markdown easier to read and maintain.
+- Prevents accidental formatting issues, especially when copying or editing links/images.
+- Aligns with team or project style preferences.
+
+### How Does It Work?
+
+- By default, the rule is set to `space: "never"`, disallowing spaces just inside the parentheses.
+- You can set it to `space: "always"` to require spaces inside the parentheses.
+
+### When Should You Use This Rule?
+
+- When you want all Markdown links and images to have a consistent parenthesis spacing style.
+- When enforcing a style guide for documentation or collaborative writing.
+
+### Examples
+
+#### With `never` Option (Default)
 
 <!-- prettier-ignore-start -->
 
@@ -26,36 +54,67 @@ This rule reports ???.
 
 <!-- ✓ GOOD -->
 
+[foo](/url)
+![foo](/url)
 
 <!-- ✗ BAD -->
 
+[foo]( /url )
+![foo]( /url )
+```
+
+<!-- prettier-ignore-end -->
+
+#### With `always` Option
+
+<!-- prettier-ignore-start -->
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/link-paren-spacing: 'error' -->
+
+<!-- ✓ GOOD -->
+
+[foo]( /url )
+![foo]( /url )
+
+<!-- ✗ BAD -->
+
+[foo](/url)
+![foo](/url)
 ```
 
 <!-- prettier-ignore-end -->
 
 ## 🔧 Options
 
-This rule has no options.
-
-<!-- or -->
-
 ```json
 {
-  "markdown-preferences/link-paren-spacing": ["error", {}]
+  "markdown-preferences/link-paren-spacing": [
+    "error",
+    {
+      "space": "never",
+      "imagesInLinks": false
+    }
+  ]
 }
 ```
 
--
+- `space`
+  - `"never"` (Default) - No spaces allowed just inside the parentheses.
+  - `"always"` - Spaces required just inside the parentheses.
 
 ## 📚 Further Reading
 
--
+- [CommonMark Spec: Links](https://spec.commonmark.org/0.31.2/#links)
+- [CommonMark Spec: Images](https://spec.commonmark.org/0.31.2/#images)
+- [CommonMark Spec: Link reference definitions](https://spec.commonmark.org/0.31.2/#link-reference-definitions)
 
 ## 👫 Related Rules
 
-- [xxx]
-
-[xxx]: https://xxx
+- [markdown-preferences/link-bracket-spacing](./link-bracket-spacing.md)
+- [markdown-preferences/no-multi-spaces](./no-multi-spaces.md)
 
 ## 🔍 Implementation
 
