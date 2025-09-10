@@ -9,13 +9,6 @@ export type BaseParsedATXHeading = {
     text: string;
     range: [number, number];
     loc: SourceLocation;
-    raws: {
-      spaceAfter: {
-        text: string;
-        range: [number, number];
-        loc: SourceLocation;
-      };
-    };
   };
   content: {
     text: string;
@@ -26,18 +19,11 @@ export type BaseParsedATXHeading = {
     text: string;
     range: [number, number];
     loc: SourceLocation;
-    raws: {
-      spaceBefore: {
-        text: string;
-        range: [number, number];
-        loc: SourceLocation;
-      };
-      spaceAfter: {
-        text: string;
-        range: [number, number];
-        loc: SourceLocation;
-      };
-    };
+  } | null;
+  after: {
+    text: string;
+    range: [number, number];
+    loc: SourceLocation;
   } | null;
 };
 export type ParsedATXHeadingWithClosingSequence = BaseParsedATXHeading & {
@@ -78,54 +64,54 @@ export function parseATXHeading(
       },
     },
   };
-  const spaceAfterOpening: {
-    text: string;
-    range: [number, number];
-    loc: SourceLocation;
-  } = {
-    text: parsedOpening.rawAfter,
-    range: [
-      openingSequence.range[1],
-      openingSequence.range[1] + parsedOpening.rawAfter.length,
-    ],
-    loc: {
-      start: openingSequence.loc.end,
-      end: {
-        line: openingSequence.loc.end.line,
-        column: openingSequence.loc.end.column + parsedOpening.rawAfter.length,
-      },
-    },
+  const contentLocStart = {
+    line: openingSequence.loc.end.line,
+    column: openingSequence.loc.end.column + parsedOpening.after.length,
   };
   const parsedClosing = parseATXHeadingClosingSequenceFromText(text);
   if (parsedClosing == null) {
     const textAfterOpening = sourceCode.text.slice(
-      spaceAfterOpening.range[1],
+      openingSequence.range[1] + parsedOpening.after.length,
       range[1],
     );
     const contentText = textAfterOpening.trimEnd();
+    const contentRange: [number, number] = [
+      openingSequence.range[1] + parsedOpening.after.length,
+      openingSequence.range[1] +
+        parsedOpening.after.length +
+        contentText.length,
+    ];
+    const contentLocEnd = {
+      line: loc.end.line,
+      column: loc.end.column - (textAfterOpening.length - contentText.length),
+    };
+    const after: {
+      text: string;
+      range: [number, number];
+      loc: SourceLocation;
+    } | null =
+      contentText === textAfterOpening
+        ? null
+        : {
+            text: textAfterOpening.slice(contentText.length),
+            range: [contentRange[1], range[1]],
+            loc: {
+              start: contentLocEnd,
+              end: loc.end,
+            },
+          };
     return {
-      openingSequence: {
-        ...openingSequence,
-        raws: {
-          spaceAfter: spaceAfterOpening,
-        },
-      },
+      openingSequence,
       content: {
         text: contentText,
-        range: [
-          spaceAfterOpening.range[1],
-          spaceAfterOpening.range[1] + contentText.length,
-        ],
+        range: contentRange,
         loc: {
-          start: spaceAfterOpening.loc.end,
-          end: {
-            line: loc.end.line,
-            column:
-              loc.end.column - (textAfterOpening.length - contentText.length),
-          },
+          start: contentLocStart,
+          end: contentLocEnd,
         },
       },
       closingSequence: null,
+      after,
     };
   }
   const spaceAfterClosing: {
@@ -133,12 +119,12 @@ export function parseATXHeading(
     range: [number, number];
     loc: SourceLocation;
   } = {
-    text: parsedClosing.rawAfter,
-    range: [range[1] - parsedClosing.rawAfter.length, range[1]],
+    text: parsedClosing.after,
+    range: [range[1] - parsedClosing.after.length, range[1]],
     loc: {
       start: {
         line: loc.end.line,
-        column: loc.end.column - parsedClosing.rawAfter.length,
+        column: loc.end.column - parsedClosing.after.length,
       },
       end: loc.end,
     },
@@ -163,51 +149,30 @@ export function parseATXHeading(
       end: spaceAfterClosing.loc.start,
     },
   };
-  const spaceBeforeClosing: {
-    text: string;
-    range: [number, number];
-    loc: SourceLocation;
-  } = {
-    text: parsedClosing.rawBefore,
-    range: [
-      closingSequence.range[0] - parsedClosing.rawBefore.length,
-      closingSequence.range[0],
-    ],
-    loc: {
-      start: {
-        line: closingSequence.loc.start.line,
-        column:
-          closingSequence.loc.start.column - parsedClosing.rawBefore.length,
-      },
-      end: closingSequence.loc.start,
-    },
-  };
-  const contentText = sourceCode.text.slice(
-    spaceAfterOpening.range[1],
-    spaceBeforeClosing.range[0],
-  );
+  const contentRange: [number, number] = [
+    openingSequence.range[1] + parsedOpening.after.length,
+    closingSequence.range[0] - parsedClosing.before.length,
+  ];
+  const contentText = sourceCode.text.slice(...contentRange);
   return {
-    openingSequence: {
-      ...openingSequence,
-      raws: {
-        spaceAfter: spaceAfterOpening,
-      },
-    },
+    openingSequence,
     content: {
       text: contentText,
-      range: [spaceAfterOpening.range[1], spaceBeforeClosing.range[0]],
+      range: contentRange,
       loc: {
-        start: spaceAfterOpening.loc.end,
-        end: spaceBeforeClosing.loc.start,
+        start: contentLocStart,
+        end: {
+          line: closingSequence.loc.start.line,
+          column:
+            closingSequence.loc.start.column - parsedClosing.before.length,
+        },
       },
     },
-    closingSequence: {
-      ...closingSequence,
-      raws: {
-        spaceBefore: spaceBeforeClosing,
-        spaceAfter: spaceAfterClosing,
-      },
-    },
+    closingSequence,
+    after:
+      spaceAfterClosing.range[0] < spaceAfterClosing.range[1]
+        ? spaceAfterClosing
+        : null,
   };
 }
 
@@ -216,7 +181,7 @@ export function parseATXHeading(
  */
 export function parseATXHeadingOpeningSequenceFromText(text: string): {
   openingSequence: string;
-  rawAfter: string;
+  after: string;
 } | null {
   if (!text.startsWith("#")) {
     return null;
@@ -235,7 +200,7 @@ export function parseATXHeadingOpeningSequenceFromText(text: string): {
 
   return {
     openingSequence: text.slice(0, openingSequenceAfterOffset),
-    rawAfter: text.slice(openingSequenceAfterOffset, afterOffset),
+    after: text.slice(openingSequenceAfterOffset, afterOffset),
   };
 
   /**
@@ -256,8 +221,8 @@ export function parseATXHeadingOpeningSequenceFromText(text: string): {
  */
 export function parseATXHeadingClosingSequenceFromText(text: string): {
   closingSequence: string;
-  rawBefore: string;
-  rawAfter: string;
+  before: string;
+  after: string;
 } | null {
   const trimmedEndOffset = skipEndWhitespace(text.length - 1) + 1;
   if (trimmedEndOffset <= 0 || text[trimmedEndOffset - 1] !== "#") {
@@ -276,12 +241,12 @@ export function parseATXHeadingClosingSequenceFromText(text: string): {
     return null;
 
   return {
-    rawBefore: text.slice(beforeOffset + 1, closingSequenceBeforeOffset + 1),
+    before: text.slice(beforeOffset + 1, closingSequenceBeforeOffset + 1),
     closingSequence: text.slice(
       closingSequenceBeforeOffset + 1,
       trimmedEndOffset,
     ),
-    rawAfter: text.slice(trimmedEndOffset),
+    after: text.slice(trimmedEndOffset),
   };
 
   /**
