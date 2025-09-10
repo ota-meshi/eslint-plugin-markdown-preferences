@@ -19,6 +19,7 @@ import level2HeadingStyle from "../rules/level2-heading-style.ts";
 import linkBracketNewline from "../rules/link-bracket-newline.ts";
 import linkBracketSpacing from "../rules/link-bracket-spacing.ts";
 import linkDestinationStyle from "../rules/link-destination-style.ts";
+import linkParenSpacing from "../rules/link-paren-spacing.ts";
 import linkTitleStyle from "../rules/link-title-style.ts";
 import listMarkerAlignment from "../rules/list-marker-alignment.ts";
 import noLazinessBlockquotes from "../rules/no-laziness-blockquotes.ts";
@@ -61,6 +62,7 @@ export const rules = [
   linkBracketNewline,
   linkBracketSpacing,
   linkDestinationStyle,
+  linkParenSpacing,
   linkTitleStyle,
   listMarkerAlignment,
   noLazinessBlockquotes,

@@ -112,6 +112,8 @@ The rules with the following 💄 are included in the `standard` config.
 
 - Rules related to the formatting and visual style of Markdown.
 
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+
 <!-- prettier-ignore-start -->
 
 | Rule ID | Description | Fixable | Config      |
@@ -130,6 +132,7 @@ The rules with the following 💄 are included in the `standard` config.
 | [markdown-preferences/link-bracket-newline](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-bracket-newline.html) | enforce linebreaks after opening and before closing link brackets | 🔧 | 💄 |
 | [markdown-preferences/link-bracket-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-bracket-spacing.html) | enforce consistent spacing inside link brackets | 🔧 | 💄 |
 | [markdown-preferences/link-destination-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-destination-style.html) | enforce a consistent style for link destinations | 🔧 | 💄 |
+| [markdown-preferences/link-paren-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-paren-spacing.html) | enforce consistent spacing inside link parentheses | 🔧 | 💄 |
 | [markdown-preferences/link-title-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-title-style.html) | enforce a consistent style for link titles | 🔧 | 💄 |
 | [markdown-preferences/list-marker-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/list-marker-alignment.html) | enforce consistent alignment of list markers | 🔧 | ⭐💄 |
 | [markdown-preferences/no-laziness-blockquotes](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-laziness-blockquotes.html) | disallow laziness in blockquotes |  | ⭐💄 |
@@ -151,6 +154,8 @@ The rules with the following 💄 are included in the `standard` config.
 | [markdown-preferences/thematic-break-sequence-pattern](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-sequence-pattern.html) | enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown. | 🔧 | 💄 |
 
 <!-- prettier-ignore-end -->
+
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
 
 <!--RULES_TABLE_END-->
 
