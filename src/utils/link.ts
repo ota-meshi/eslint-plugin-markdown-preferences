@@ -9,6 +9,10 @@ export type ParsedInlineLink = {
     range: [number, number];
     loc: SourceLocation;
   };
+  openingParen: {
+    range: [number, number];
+    loc: SourceLocation;
+  };
   destination: {
     type: "pointy-bracketed" | "bare";
     text: string;
@@ -21,6 +25,10 @@ export type ParsedInlineLink = {
     range: [number, number];
     loc: SourceLocation;
   } | null;
+  closingParen: {
+    range: [number, number];
+    loc: SourceLocation;
+  };
 };
 /**
  * Parse the inline link.
@@ -48,14 +56,26 @@ export function parseInlineLink(
     sourceCode.text.slice(textRange[1], nodeRange[1]),
   );
   if (!parsed) return null;
+  const openingParenRange: [number, number] = [
+    textRange[1] + parsed.openingParen.range[0],
+    textRange[1] + parsed.openingParen.range[1],
+  ];
   const destinationRange: [number, number] = [
     textRange[1] + parsed.destination.range[0],
     textRange[1] + parsed.destination.range[1],
+  ];
+  const closingParenRange: [number, number] = [
+    textRange[1] + parsed.closingParen.range[0],
+    textRange[1] + parsed.closingParen.range[1],
   ];
   return {
     text: {
       range: textRange,
       loc: getSourceLocationFromRange(sourceCode, node, textRange),
+    },
+    openingParen: {
+      range: openingParenRange,
+      loc: getSourceLocationFromRange(sourceCode, node, openingParenRange),
     },
     destination: {
       type: parsed.destination.type,
@@ -77,6 +97,10 @@ export function parseInlineLink(
           ]),
         }
       : null,
+    closingParen: {
+      range: closingParenRange,
+      loc: getSourceLocationFromRange(sourceCode, node, closingParenRange),
+    },
   };
 }
 
@@ -84,6 +108,9 @@ export function parseInlineLink(
  * Parse the inline link destination and link title from the given text.
  */
 export function parseInlineLinkDestAndTitleFromText(text: string): {
+  openingParen: {
+    range: [number, number];
+  };
   destination: {
     type: "pointy-bracketed" | "bare";
     text: string;
@@ -94,6 +121,9 @@ export function parseInlineLinkDestAndTitleFromText(text: string): {
     text: string;
     range: [number, number];
   } | null;
+  closingParen: {
+    range: [number, number];
+  };
 } | null {
   let index = 0;
 
@@ -131,6 +161,7 @@ export function parseInlineLinkDestAndTitleFromText(text: string): {
   }
   skipSpaces();
   if (text[index] === ")") {
+    const closingParenStartIndex = index;
     index++;
     skipSpaces();
     if (index < text.length) {
@@ -138,8 +169,14 @@ export function parseInlineLinkDestAndTitleFromText(text: string): {
       return null;
     }
     return {
+      openingParen: {
+        range: [0, 1],
+      },
       destination,
       title: null,
+      closingParen: {
+        range: [closingParenStartIndex, index],
+      },
     };
   }
   if (text.length <= index) {
@@ -172,6 +209,7 @@ export function parseInlineLinkDestAndTitleFromText(text: string): {
   }
   skipSpaces();
   if (text[index] !== ")") return null;
+  const closingParenStartIndex = index;
   index++;
   skipSpaces();
   if (index < text.length) {
@@ -180,8 +218,14 @@ export function parseInlineLinkDestAndTitleFromText(text: string): {
   }
 
   return {
+    openingParen: {
+      range: [0, 1],
+    },
     destination,
     title,
+    closingParen: {
+      range: [closingParenStartIndex, index],
+    },
   };
 
   /**

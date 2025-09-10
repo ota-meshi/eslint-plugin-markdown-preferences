@@ -1,0 +1,1117 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: link-paren-spacing >> invalid
+Filename: tests/fixtures/rules/link-paren-spacing/invalid/always/image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo]( /url )
+  3 | - ![foo](/url)
+    |         ^    ^
+    |         [1]  [2]
+  4 | - ![foo]( /url)
+    |               ^ [3]
+  5 | - ![foo](/url )
+    |         ^ [4]
+  6 | - ![foo](     /url     )
+  7 | - ![foo]( </url> )
+  8 | - ![foo](</url>)
+    |         ^ [5]  ^ [6]
+  9 | - ![foo]( </url>)
+    |                 ^ [7]
+ 10 | - ![foo](</url> )
+    |         ^ [8]
+ 11 | - ![foo](     </url>     )
+ 12 | - ![foo]( /url "title" )
+ 13 | - ![foo](/url "title")
+    |         ^ [9]        ^ [10]
+ 14 | - ![foo]( /url "title")
+    |                       ^ [11]
+ 15 | - ![foo](/url "title" )
+    |         ^ [12]
+ 16 | - ![foo](     /url "title"     )
+ 17 | - ![foo]( </url> "title" )
+ 18 | - ![foo](</url> "title")
+    |         ^ [13]         ^ [14]
+ 19 | - ![foo]( </url> "title")
+    |                         ^ [15]
+ 20 | - ![foo](</url> "title" )
+    |         ^ [16]
+ 21 | - ![foo](     </url> "title"     )
+ 22 | - Multi lines
+ 23 |   - ![foo](
+ 24 |       /url
+ 25 |     )
+ 26 |   - ![foo](
+ 27 |       /url
+ 28 |       "title"
+ 29 |     )
+ 30 |   - ![foo](/url
+    |           ^ [17]
+ 31 |     )
+ 32 |   - ![foo]( /url
+ 33 |     )
+ 34 |   - ![foo](/url
+    |           ^ [18]
+ 35 |       "title"
+ 36 |     )
+ 37 |   - ![foo]( /url
+ 38 |       "title"
+ 39 |     )
+ 40 |   - ![foo](
+ 41 |       /url)
+    |           ^ [19]
+ 42 |   - ![foo](
+ 43 |       /url )
+ 44 |   - ![foo](
+ 45 |       /url
+ 46 |       "title")
+    |              ^ [20]
+ 47 |   - ![foo](
+ 48 |       /url
+ 49 |       "title" )
+ 50 | - Empty
+ 51 |   - ![foo]()
+    |           ^ [21]
+    |            ^ [22]
+ 52 |   - ![foo](<>)
+    |           ^ [23]
+    |              ^ [24]
+ 53 |   - ![foo]( <> )
+ 54 |   - ![foo](   )
+ 55 |   - ![foo](<#foo>)
+    |           ^ [25] ^ [26]
+ 56 |   - ![foo]( <#foo> )
+ 57 |
+
+Output:
+  1 |
+  2 | - ![foo]( /url )
+  3 | - ![foo]( /url )
+  4 | - ![foo]( /url )
+  5 | - ![foo]( /url )
+  6 | - ![foo](     /url     )
+  7 | - ![foo]( </url> )
+  8 | - ![foo]( </url> )
+  9 | - ![foo]( </url> )
+ 10 | - ![foo]( </url> )
+ 11 | - ![foo](     </url>     )
+ 12 | - ![foo]( /url "title" )
+ 13 | - ![foo]( /url "title" )
+ 14 | - ![foo]( /url "title" )
+ 15 | - ![foo]( /url "title" )
+ 16 | - ![foo](     /url "title"     )
+ 17 | - ![foo]( </url> "title" )
+ 18 | - ![foo]( </url> "title" )
+ 19 | - ![foo]( </url> "title" )
+ 20 | - ![foo]( </url> "title" )
+ 21 | - ![foo](     </url> "title"     )
+ 22 | - Multi lines
+ 23 |   - ![foo](
+ 24 |       /url
+ 25 |     )
+ 26 |   - ![foo](
+ 27 |       /url
+ 28 |       "title"
+ 29 |     )
+ 30 |   - ![foo]( /url
+ 31 |     )
+ 32 |   - ![foo]( /url
+ 33 |     )
+ 34 |   - ![foo]( /url
+ 35 |       "title"
+ 36 |     )
+ 37 |   - ![foo]( /url
+ 38 |       "title"
+ 39 |     )
+ 40 |   - ![foo](
+ 41 |       /url )
+ 42 |   - ![foo](
+ 43 |       /url )
+ 44 |   - ![foo](
+ 45 |       /url
+ 46 |       "title" )
+ 47 |   - ![foo](
+ 48 |       /url
+ 49 |       "title" )
+ 50 | - Empty
+ 51 |   - ![foo]( )
+ 52 |   - ![foo]( <> )
+ 53 |   - ![foo]( <> )
+ 54 |   - ![foo](   )
+ 55 |   - ![foo]( <#foo> )
+ 56 |   - ![foo]( <#foo> )
+ 57 |
+
+[1] Expected space after opening parenthesis.
+[2] Expected space before closing parenthesis.
+[3] Expected space before closing parenthesis.
+[4] Expected space after opening parenthesis.
+[5] Expected space after opening parenthesis.
+[6] Expected space before closing parenthesis.
+[7] Expected space before closing parenthesis.
+[8] Expected space after opening parenthesis.
+[9] Expected space after opening parenthesis.
+[10] Expected space before closing parenthesis.
+[11] Expected space before closing parenthesis.
+[12] Expected space after opening parenthesis.
+[13] Expected space after opening parenthesis.
+[14] Expected space before closing parenthesis.
+[15] Expected space before closing parenthesis.
+[16] Expected space after opening parenthesis.
+[17] Expected space after opening parenthesis.
+[18] Expected space after opening parenthesis.
+[19] Expected space before closing parenthesis.
+[20] Expected space before closing parenthesis.
+[21] Expected space after opening parenthesis.
+[22] Expected space before closing parenthesis.
+[23] Expected space after opening parenthesis.
+[24] Expected space before closing parenthesis.
+[25] Expected space after opening parenthesis.
+[26] Expected space before closing parenthesis.
+---
+
+
+Test: link-paren-spacing >> invalid
+Filename: tests/fixtures/rules/link-paren-spacing/invalid/always/link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo]( /url )
+  3 | - [foo](/url)
+    |        ^    ^
+    |        [1]  [2]
+  4 | - [foo]( /url)
+    |              ^ [3]
+  5 | - [foo](/url )
+    |        ^ [4]
+  6 | - [foo](     /url     )
+  7 | - [foo]( </url> )
+  8 | - [foo](</url>)
+    |        ^ [5]  ^ [6]
+  9 | - [foo]( </url>)
+    |                ^ [7]
+ 10 | - [foo](</url> )
+    |        ^ [8]
+ 11 | - [foo](     </url>     )
+ 12 | - [foo]( /url "title" )
+ 13 | - [foo](/url "title")
+    |        ^ [9]        ^ [10]
+ 14 | - [foo]( /url "title")
+    |                      ^ [11]
+ 15 | - [foo](/url "title" )
+    |        ^ [12]
+ 16 | - [foo](     /url "title"     )
+ 17 | - [foo]( </url> "title" )
+ 18 | - [foo](</url> "title")
+    |        ^ [13]         ^ [14]
+ 19 | - [foo]( </url> "title")
+    |                        ^ [15]
+ 20 | - [foo](</url> "title" )
+    |        ^ [16]
+ 21 | - [foo](     </url> "title"     )
+ 22 | - Multi lines
+ 23 |   - [foo](
+ 24 |       /url
+ 25 |     )
+ 26 |   - [foo](
+ 27 |       /url
+ 28 |       "title"
+ 29 |     )
+ 30 |   - [foo](/url
+    |          ^ [17]
+ 31 |     )
+ 32 |   - [foo]( /url
+ 33 |     )
+ 34 |   - [foo](/url
+    |          ^ [18]
+ 35 |       "title"
+ 36 |     )
+ 37 |   - [foo]( /url
+ 38 |       "title"
+ 39 |     )
+ 40 |   - [foo](
+ 41 |       /url)
+    |           ^ [19]
+ 42 |   - [foo](
+ 43 |       /url )
+ 44 |   - [foo](
+ 45 |       /url
+ 46 |       "title")
+    |              ^ [20]
+ 47 |   - [foo](
+ 48 |       /url
+ 49 |       "title" )
+ 50 | - Empty
+ 51 |   - [foo]()
+    |          ^ [21]
+    |           ^ [22]
+ 52 |   - [foo](<>)
+    |          ^ [23]
+    |             ^ [24]
+ 53 |   - [foo]( <> )
+ 54 |   - [foo](   )
+ 55 |   - [foo](<#foo>)
+    |          ^ [25] ^ [26]
+ 56 |   - [foo]( <#foo> )
+ 57 |
+
+Output:
+  1 |
+  2 | - [foo]( /url )
+  3 | - [foo]( /url )
+  4 | - [foo]( /url )
+  5 | - [foo]( /url )
+  6 | - [foo](     /url     )
+  7 | - [foo]( </url> )
+  8 | - [foo]( </url> )
+  9 | - [foo]( </url> )
+ 10 | - [foo]( </url> )
+ 11 | - [foo](     </url>     )
+ 12 | - [foo]( /url "title" )
+ 13 | - [foo]( /url "title" )
+ 14 | - [foo]( /url "title" )
+ 15 | - [foo]( /url "title" )
+ 16 | - [foo](     /url "title"     )
+ 17 | - [foo]( </url> "title" )
+ 18 | - [foo]( </url> "title" )
+ 19 | - [foo]( </url> "title" )
+ 20 | - [foo]( </url> "title" )
+ 21 | - [foo](     </url> "title"     )
+ 22 | - Multi lines
+ 23 |   - [foo](
+ 24 |       /url
+ 25 |     )
+ 26 |   - [foo](
+ 27 |       /url
+ 28 |       "title"
+ 29 |     )
+ 30 |   - [foo]( /url
+ 31 |     )
+ 32 |   - [foo]( /url
+ 33 |     )
+ 34 |   - [foo]( /url
+ 35 |       "title"
+ 36 |     )
+ 37 |   - [foo]( /url
+ 38 |       "title"
+ 39 |     )
+ 40 |   - [foo](
+ 41 |       /url )
+ 42 |   - [foo](
+ 43 |       /url )
+ 44 |   - [foo](
+ 45 |       /url
+ 46 |       "title" )
+ 47 |   - [foo](
+ 48 |       /url
+ 49 |       "title" )
+ 50 | - Empty
+ 51 |   - [foo]( )
+ 52 |   - [foo]( <> )
+ 53 |   - [foo]( <> )
+ 54 |   - [foo](   )
+ 55 |   - [foo]( <#foo> )
+ 56 |   - [foo]( <#foo> )
+ 57 |
+
+[1] Expected space after opening parenthesis.
+[2] Expected space before closing parenthesis.
+[3] Expected space before closing parenthesis.
+[4] Expected space after opening parenthesis.
+[5] Expected space after opening parenthesis.
+[6] Expected space before closing parenthesis.
+[7] Expected space before closing parenthesis.
+[8] Expected space after opening parenthesis.
+[9] Expected space after opening parenthesis.
+[10] Expected space before closing parenthesis.
+[11] Expected space before closing parenthesis.
+[12] Expected space after opening parenthesis.
+[13] Expected space after opening parenthesis.
+[14] Expected space before closing parenthesis.
+[15] Expected space before closing parenthesis.
+[16] Expected space after opening parenthesis.
+[17] Expected space after opening parenthesis.
+[18] Expected space after opening parenthesis.
+[19] Expected space before closing parenthesis.
+[20] Expected space before closing parenthesis.
+[21] Expected space after opening parenthesis.
+[22] Expected space before closing parenthesis.
+[23] Expected space after opening parenthesis.
+[24] Expected space before closing parenthesis.
+[25] Expected space after opening parenthesis.
+[26] Expected space before closing parenthesis.
+---
+
+
+Test: link-paren-spacing >> invalid >>> "\n- ![foo]( /url )\n- ![foo](/url)\n- ![foo]( /url)\n- ![foo](/url )\n- ![foo](     /url     )\n- ![foo]( </url> )\n- ![foo](</url>)\n- ![foo]( </url>)\n- ![foo](</url> )\n- ![foo](     </url>     )\n- ![foo]( /url \"title\" )\n- ![foo](/url \"title\")\n- ![foo]( /url \"title\")\n- ![foo](/url \"title\" )\n- ![foo](     /url \"title\"     )\n- ![foo]( </url> \"title\" )\n- ![foo](</url> \"title\")\n- ![foo]( </url> \"title\")\n- ![foo](</url> \"title\" )\n- ![foo](     </url> \"title\"     )\n- Multi lines\n  - ![foo](\n      /url\n    )\n  - ![foo](\n      /url\n      \"title\"\n    )\n  - ![foo](/url\n    )\n  - ![foo]( /url\n    )\n  - ![foo](/url\n      \"title\"\n    )\n  - ![foo]( /url\n      \"title\"\n    )\n  - ![foo](\n      /url)\n  - ![foo](\n      /url )\n  - ![foo](\n      /url\n      \"title\")\n  - ![foo](\n      /url\n      \"title\" )\n- Empty\n  - ![foo]()\n  - ![foo](<>)\n  - ![foo]( <> )\n  - ![foo](   )\n  - ![foo](<#foo>)\n  - ![foo]( <#foo> )\n 2"
+Filename: tests/fixtures/rules/link-paren-spacing/invalid/image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo]( /url )
+    |          ^    ^
+    |          [1]  [2]
+  3 | - ![foo](/url)
+  4 | - ![foo]( /url)
+    |          ^ [3]
+  5 | - ![foo](/url )
+    |              ^ [4]
+  6 | - ![foo](     /url     )
+    |          ^~~~~    ^~~~~
+    |          [5]      [6]
+  7 | - ![foo]( </url> )
+    |          ^ [7]  ^ [8]
+  8 | - ![foo](</url>)
+  9 | - ![foo]( </url>)
+    |          ^ [9]
+ 10 | - ![foo](</url> )
+    |                ^ [10]
+ 11 | - ![foo](     </url>     )
+    |          ^~~~~ [11] ^~~~~ [12]
+ 12 | - ![foo]( /url "title" )
+    |          ^ [13]       ^ [14]
+ 13 | - ![foo](/url "title")
+ 14 | - ![foo]( /url "title")
+    |          ^ [15]
+ 15 | - ![foo](/url "title" )
+    |                      ^ [16]
+ 16 | - ![foo](     /url "title"     )
+    |          ^~~~~ [17]       ^~~~~ [18]
+ 17 | - ![foo]( </url> "title" )
+    |          ^ [19]         ^ [20]
+ 18 | - ![foo](</url> "title")
+ 19 | - ![foo]( </url> "title")
+    |          ^ [21]
+ 20 | - ![foo](</url> "title" )
+    |                        ^ [22]
+ 21 | - ![foo](     </url> "title"     )
+    |          ^~~~~ [23]         ^~~~~ [24]
+ 22 | - Multi lines
+ 23 |   - ![foo](
+ 24 |       /url
+ 25 |     )
+ 26 |   - ![foo](
+ 27 |       /url
+ 28 |       "title"
+ 29 |     )
+ 30 |   - ![foo](/url
+ 31 |     )
+ 32 |   - ![foo]( /url
+    |            ^ [25]
+ 33 |     )
+ 34 |   - ![foo](/url
+ 35 |       "title"
+ 36 |     )
+ 37 |   - ![foo]( /url
+    |            ^ [26]
+ 38 |       "title"
+ 39 |     )
+ 40 |   - ![foo](
+ 41 |       /url)
+ 42 |   - ![foo](
+ 43 |       /url )
+    |           ^ [27]
+ 44 |   - ![foo](
+ 45 |       /url
+ 46 |       "title")
+ 47 |   - ![foo](
+ 48 |       /url
+ 49 |       "title" )
+    |              ^ [28]
+ 50 | - Empty
+ 51 |   - ![foo]()
+ 52 |   - ![foo](<>)
+ 53 |   - ![foo]( <> )
+    |            ^ [29]
+    |               ^ [30]
+ 54 |   - ![foo](   )
+    |            ^~~ [31]
+    |            ^~~ [32]
+ 55 |   - ![foo](<#foo>)
+ 56 |   - ![foo]( <#foo> )
+    |            ^ [33] ^ [34]
+ 57 |
+
+Output:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![foo](/url)
+  4 | - ![foo](/url)
+  5 | - ![foo](/url)
+  6 | - ![foo](/url)
+  7 | - ![foo](</url>)
+  8 | - ![foo](</url>)
+  9 | - ![foo](</url>)
+ 10 | - ![foo](</url>)
+ 11 | - ![foo](</url>)
+ 12 | - ![foo](/url "title")
+ 13 | - ![foo](/url "title")
+ 14 | - ![foo](/url "title")
+ 15 | - ![foo](/url "title")
+ 16 | - ![foo](/url "title")
+ 17 | - ![foo](</url> "title")
+ 18 | - ![foo](</url> "title")
+ 19 | - ![foo](</url> "title")
+ 20 | - ![foo](</url> "title")
+ 21 | - ![foo](</url> "title")
+ 22 | - Multi lines
+ 23 |   - ![foo](
+ 24 |       /url
+ 25 |     )
+ 26 |   - ![foo](
+ 27 |       /url
+ 28 |       "title"
+ 29 |     )
+ 30 |   - ![foo](/url
+ 31 |     )
+ 32 |   - ![foo](/url
+ 33 |     )
+ 34 |   - ![foo](/url
+ 35 |       "title"
+ 36 |     )
+ 37 |   - ![foo](/url
+ 38 |       "title"
+ 39 |     )
+ 40 |   - ![foo](
+ 41 |       /url)
+ 42 |   - ![foo](
+ 43 |       /url)
+ 44 |   - ![foo](
+ 45 |       /url
+ 46 |       "title")
+ 47 |   - ![foo](
+ 48 |       /url
+ 49 |       "title")
+ 50 | - Empty
+ 51 |   - ![foo]()
+ 52 |   - ![foo](<>)
+ 53 |   - ![foo](<>)
+ 54 |   - ![foo]()
+ 55 |   - ![foo](<#foo>)
+ 56 |   - ![foo](<#foo>)
+ 57 |
+
+[1] Unexpected space after opening parenthesis.
+[2] Unexpected space before closing parenthesis.
+[3] Unexpected space after opening parenthesis.
+[4] Unexpected space before closing parenthesis.
+[5] Unexpected space after opening parenthesis.
+[6] Unexpected space before closing parenthesis.
+[7] Unexpected space after opening parenthesis.
+[8] Unexpected space before closing parenthesis.
+[9] Unexpected space after opening parenthesis.
+[10] Unexpected space before closing parenthesis.
+[11] Unexpected space after opening parenthesis.
+[12] Unexpected space before closing parenthesis.
+[13] Unexpected space after opening parenthesis.
+[14] Unexpected space before closing parenthesis.
+[15] Unexpected space after opening parenthesis.
+[16] Unexpected space before closing parenthesis.
+[17] Unexpected space after opening parenthesis.
+[18] Unexpected space before closing parenthesis.
+[19] Unexpected space after opening parenthesis.
+[20] Unexpected space before closing parenthesis.
+[21] Unexpected space after opening parenthesis.
+[22] Unexpected space before closing parenthesis.
+[23] Unexpected space after opening parenthesis.
+[24] Unexpected space before closing parenthesis.
+[25] Unexpected space after opening parenthesis.
+[26] Unexpected space after opening parenthesis.
+[27] Unexpected space before closing parenthesis.
+[28] Unexpected space before closing parenthesis.
+[29] Unexpected space after opening parenthesis.
+[30] Unexpected space before closing parenthesis.
+[31] Unexpected space after opening parenthesis.
+[32] Unexpected space before closing parenthesis.
+[33] Unexpected space after opening parenthesis.
+[34] Unexpected space before closing parenthesis.
+---
+
+
+Test: link-paren-spacing >> invalid >>> "\n- [foo]( /url )\n- [foo](/url)\n- [foo]( /url)\n- [foo](/url )\n- [foo](     /url     )\n- [foo]( </url> )\n- [foo](</url>)\n- [foo]( </url>)\n- [foo](</url> )\n- [foo](     </url>     )\n- [foo]( /url \"title\" )\n- [foo](/url \"title\")\n- [foo]( /url \"title\")\n- [foo](/url \"title\" )\n- [foo](     /url \"title\"     )\n- [foo]( </url> \"title\" )\n- [foo](</url> \"title\")\n- [foo]( </url> \"title\")\n- [foo](</url> \"title\" )\n- [foo](     </url> \"title\"     )\n- Multi lines\n  - [foo](\n      /url\n    )\n  - [foo](\n      /url\n      \"title\"\n    )\n  - [foo](/url\n    )\n  - [foo]( /url\n    )\n  - [foo](/url\n      \"title\"\n    )\n  - [foo]( /url\n      \"title\"\n    )\n  - [foo](\n      /url)\n  - [foo](\n      /url )\n  - [foo](\n      /url\n      \"title\")\n  - [foo](\n      /url\n      \"title\" )\n- Empty\n  - [foo]()\n  - [foo](<>)\n  - [foo]( <> )\n  - [foo](   )\n  - [foo](<#foo>)\n  - [foo]( <#foo> )\n 2"
+Filename: tests/fixtures/rules/link-paren-spacing/invalid/link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo]( /url )
+    |         ^    ^
+    |         [1]  [2]
+  3 | - [foo](/url)
+  4 | - [foo]( /url)
+    |         ^ [3]
+  5 | - [foo](/url )
+    |             ^ [4]
+  6 | - [foo](     /url     )
+    |         ^~~~~    ^~~~~
+    |         [5]      [6]
+  7 | - [foo]( </url> )
+    |         ^ [7]  ^ [8]
+  8 | - [foo](</url>)
+  9 | - [foo]( </url>)
+    |         ^ [9]
+ 10 | - [foo](</url> )
+    |               ^ [10]
+ 11 | - [foo](     </url>     )
+    |         ^~~~~ [11] ^~~~~ [12]
+ 12 | - [foo]( /url "title" )
+    |         ^ [13]       ^ [14]
+ 13 | - [foo](/url "title")
+ 14 | - [foo]( /url "title")
+    |         ^ [15]
+ 15 | - [foo](/url "title" )
+    |                     ^ [16]
+ 16 | - [foo](     /url "title"     )
+    |         ^~~~~ [17]       ^~~~~ [18]
+ 17 | - [foo]( </url> "title" )
+    |         ^ [19]         ^ [20]
+ 18 | - [foo](</url> "title")
+ 19 | - [foo]( </url> "title")
+    |         ^ [21]
+ 20 | - [foo](</url> "title" )
+    |                       ^ [22]
+ 21 | - [foo](     </url> "title"     )
+    |         ^~~~~ [23]         ^~~~~ [24]
+ 22 | - Multi lines
+ 23 |   - [foo](
+ 24 |       /url
+ 25 |     )
+ 26 |   - [foo](
+ 27 |       /url
+ 28 |       "title"
+ 29 |     )
+ 30 |   - [foo](/url
+ 31 |     )
+ 32 |   - [foo]( /url
+    |           ^ [25]
+ 33 |     )
+ 34 |   - [foo](/url
+ 35 |       "title"
+ 36 |     )
+ 37 |   - [foo]( /url
+    |           ^ [26]
+ 38 |       "title"
+ 39 |     )
+ 40 |   - [foo](
+ 41 |       /url)
+ 42 |   - [foo](
+ 43 |       /url )
+    |           ^ [27]
+ 44 |   - [foo](
+ 45 |       /url
+ 46 |       "title")
+ 47 |   - [foo](
+ 48 |       /url
+ 49 |       "title" )
+    |              ^ [28]
+ 50 | - Empty
+ 51 |   - [foo]()
+ 52 |   - [foo](<>)
+ 53 |   - [foo]( <> )
+    |           ^ [29]
+    |              ^ [30]
+ 54 |   - [foo](   )
+    |           ^~~ [31]
+    |           ^~~ [32]
+ 55 |   - [foo](<#foo>)
+ 56 |   - [foo]( <#foo> )
+    |           ^ [33] ^ [34]
+ 57 |
+
+Output:
+  1 |
+  2 | - [foo](/url)
+  3 | - [foo](/url)
+  4 | - [foo](/url)
+  5 | - [foo](/url)
+  6 | - [foo](/url)
+  7 | - [foo](</url>)
+  8 | - [foo](</url>)
+  9 | - [foo](</url>)
+ 10 | - [foo](</url>)
+ 11 | - [foo](</url>)
+ 12 | - [foo](/url "title")
+ 13 | - [foo](/url "title")
+ 14 | - [foo](/url "title")
+ 15 | - [foo](/url "title")
+ 16 | - [foo](/url "title")
+ 17 | - [foo](</url> "title")
+ 18 | - [foo](</url> "title")
+ 19 | - [foo](</url> "title")
+ 20 | - [foo](</url> "title")
+ 21 | - [foo](</url> "title")
+ 22 | - Multi lines
+ 23 |   - [foo](
+ 24 |       /url
+ 25 |     )
+ 26 |   - [foo](
+ 27 |       /url
+ 28 |       "title"
+ 29 |     )
+ 30 |   - [foo](/url
+ 31 |     )
+ 32 |   - [foo](/url
+ 33 |     )
+ 34 |   - [foo](/url
+ 35 |       "title"
+ 36 |     )
+ 37 |   - [foo](/url
+ 38 |       "title"
+ 39 |     )
+ 40 |   - [foo](
+ 41 |       /url)
+ 42 |   - [foo](
+ 43 |       /url)
+ 44 |   - [foo](
+ 45 |       /url
+ 46 |       "title")
+ 47 |   - [foo](
+ 48 |       /url
+ 49 |       "title")
+ 50 | - Empty
+ 51 |   - [foo]()
+ 52 |   - [foo](<>)
+ 53 |   - [foo](<>)
+ 54 |   - [foo]()
+ 55 |   - [foo](<#foo>)
+ 56 |   - [foo](<#foo>)
+ 57 |
+
+[1] Unexpected space after opening parenthesis.
+[2] Unexpected space before closing parenthesis.
+[3] Unexpected space after opening parenthesis.
+[4] Unexpected space before closing parenthesis.
+[5] Unexpected space after opening parenthesis.
+[6] Unexpected space before closing parenthesis.
+[7] Unexpected space after opening parenthesis.
+[8] Unexpected space before closing parenthesis.
+[9] Unexpected space after opening parenthesis.
+[10] Unexpected space before closing parenthesis.
+[11] Unexpected space after opening parenthesis.
+[12] Unexpected space before closing parenthesis.
+[13] Unexpected space after opening parenthesis.
+[14] Unexpected space before closing parenthesis.
+[15] Unexpected space after opening parenthesis.
+[16] Unexpected space before closing parenthesis.
+[17] Unexpected space after opening parenthesis.
+[18] Unexpected space before closing parenthesis.
+[19] Unexpected space after opening parenthesis.
+[20] Unexpected space before closing parenthesis.
+[21] Unexpected space after opening parenthesis.
+[22] Unexpected space before closing parenthesis.
+[23] Unexpected space after opening parenthesis.
+[24] Unexpected space before closing parenthesis.
+[25] Unexpected space after opening parenthesis.
+[26] Unexpected space after opening parenthesis.
+[27] Unexpected space before closing parenthesis.
+[28] Unexpected space before closing parenthesis.
+[29] Unexpected space after opening parenthesis.
+[30] Unexpected space before closing parenthesis.
+[31] Unexpected space after opening parenthesis.
+[32] Unexpected space before closing parenthesis.
+[33] Unexpected space after opening parenthesis.
+[34] Unexpected space before closing parenthesis.
+---
+
+
+Test: link-paren-spacing >> invalid >>> "\n- ![foo]( /url )\n- ![foo](/url)\n- ![foo]( /url)\n- ![foo](/url )\n- ![foo](     /url     )\n- ![foo]( </url> )\n- ![foo](</url>)\n- ![foo]( </url>)\n- ![foo](</url> )\n- ![foo](     </url>     )\n- ![foo]( /url \"title\" )\n- ![foo](/url \"title\")\n- ![foo]( /url \"title\")\n- ![foo](/url \"title\" )\n- ![foo](     /url \"title\"     )\n- ![foo]( </url> \"title\" )\n- ![foo](</url> \"title\")\n- ![foo]( </url> \"title\")\n- ![foo](</url> \"title\" )\n- ![foo](     </url> \"title\"     )\n- Multi lines\n  - ![foo](\n      /url\n    )\n  - ![foo](\n      /url\n      \"title\"\n    )\n  - ![foo](/url\n    )\n  - ![foo]( /url\n    )\n  - ![foo](/url\n      \"title\"\n    )\n  - ![foo]( /url\n      \"title\"\n    )\n  - ![foo](\n      /url)\n  - ![foo](\n      /url )\n  - ![foo](\n      /url\n      \"title\")\n  - ![foo](\n      /url\n      \"title\" )\n- Empty\n  - ![foo]()\n  - ![foo](<>)\n  - ![foo]( <> )\n  - ![foo](   )\n  - ![foo](<#foo>)\n  - ![foo]( <#foo> )\n 3"
+Filename: tests/fixtures/rules/link-paren-spacing/invalid/never/image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo]( /url )
+    |          ^    ^
+    |          [1]  [2]
+  3 | - ![foo](/url)
+  4 | - ![foo]( /url)
+    |          ^ [3]
+  5 | - ![foo](/url )
+    |              ^ [4]
+  6 | - ![foo](     /url     )
+    |          ^~~~~    ^~~~~
+    |          [5]      [6]
+  7 | - ![foo]( </url> )
+    |          ^ [7]  ^ [8]
+  8 | - ![foo](</url>)
+  9 | - ![foo]( </url>)
+    |          ^ [9]
+ 10 | - ![foo](</url> )
+    |                ^ [10]
+ 11 | - ![foo](     </url>     )
+    |          ^~~~~ [11] ^~~~~ [12]
+ 12 | - ![foo]( /url "title" )
+    |          ^ [13]       ^ [14]
+ 13 | - ![foo](/url "title")
+ 14 | - ![foo]( /url "title")
+    |          ^ [15]
+ 15 | - ![foo](/url "title" )
+    |                      ^ [16]
+ 16 | - ![foo](     /url "title"     )
+    |          ^~~~~ [17]       ^~~~~ [18]
+ 17 | - ![foo]( </url> "title" )
+    |          ^ [19]         ^ [20]
+ 18 | - ![foo](</url> "title")
+ 19 | - ![foo]( </url> "title")
+    |          ^ [21]
+ 20 | - ![foo](</url> "title" )
+    |                        ^ [22]
+ 21 | - ![foo](     </url> "title"     )
+    |          ^~~~~ [23]         ^~~~~ [24]
+ 22 | - Multi lines
+ 23 |   - ![foo](
+ 24 |       /url
+ 25 |     )
+ 26 |   - ![foo](
+ 27 |       /url
+ 28 |       "title"
+ 29 |     )
+ 30 |   - ![foo](/url
+ 31 |     )
+ 32 |   - ![foo]( /url
+    |            ^ [25]
+ 33 |     )
+ 34 |   - ![foo](/url
+ 35 |       "title"
+ 36 |     )
+ 37 |   - ![foo]( /url
+    |            ^ [26]
+ 38 |       "title"
+ 39 |     )
+ 40 |   - ![foo](
+ 41 |       /url)
+ 42 |   - ![foo](
+ 43 |       /url )
+    |           ^ [27]
+ 44 |   - ![foo](
+ 45 |       /url
+ 46 |       "title")
+ 47 |   - ![foo](
+ 48 |       /url
+ 49 |       "title" )
+    |              ^ [28]
+ 50 | - Empty
+ 51 |   - ![foo]()
+ 52 |   - ![foo](<>)
+ 53 |   - ![foo]( <> )
+    |            ^ [29]
+    |               ^ [30]
+ 54 |   - ![foo](   )
+    |            ^~~ [31]
+    |            ^~~ [32]
+ 55 |   - ![foo](<#foo>)
+ 56 |   - ![foo]( <#foo> )
+    |            ^ [33] ^ [34]
+ 57 |
+
+Output:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![foo](/url)
+  4 | - ![foo](/url)
+  5 | - ![foo](/url)
+  6 | - ![foo](/url)
+  7 | - ![foo](</url>)
+  8 | - ![foo](</url>)
+  9 | - ![foo](</url>)
+ 10 | - ![foo](</url>)
+ 11 | - ![foo](</url>)
+ 12 | - ![foo](/url "title")
+ 13 | - ![foo](/url "title")
+ 14 | - ![foo](/url "title")
+ 15 | - ![foo](/url "title")
+ 16 | - ![foo](/url "title")
+ 17 | - ![foo](</url> "title")
+ 18 | - ![foo](</url> "title")
+ 19 | - ![foo](</url> "title")
+ 20 | - ![foo](</url> "title")
+ 21 | - ![foo](</url> "title")
+ 22 | - Multi lines
+ 23 |   - ![foo](
+ 24 |       /url
+ 25 |     )
+ 26 |   - ![foo](
+ 27 |       /url
+ 28 |       "title"
+ 29 |     )
+ 30 |   - ![foo](/url
+ 31 |     )
+ 32 |   - ![foo](/url
+ 33 |     )
+ 34 |   - ![foo](/url
+ 35 |       "title"
+ 36 |     )
+ 37 |   - ![foo](/url
+ 38 |       "title"
+ 39 |     )
+ 40 |   - ![foo](
+ 41 |       /url)
+ 42 |   - ![foo](
+ 43 |       /url)
+ 44 |   - ![foo](
+ 45 |       /url
+ 46 |       "title")
+ 47 |   - ![foo](
+ 48 |       /url
+ 49 |       "title")
+ 50 | - Empty
+ 51 |   - ![foo]()
+ 52 |   - ![foo](<>)
+ 53 |   - ![foo](<>)
+ 54 |   - ![foo]()
+ 55 |   - ![foo](<#foo>)
+ 56 |   - ![foo](<#foo>)
+ 57 |
+
+[1] Unexpected space after opening parenthesis.
+[2] Unexpected space before closing parenthesis.
+[3] Unexpected space after opening parenthesis.
+[4] Unexpected space before closing parenthesis.
+[5] Unexpected space after opening parenthesis.
+[6] Unexpected space before closing parenthesis.
+[7] Unexpected space after opening parenthesis.
+[8] Unexpected space before closing parenthesis.
+[9] Unexpected space after opening parenthesis.
+[10] Unexpected space before closing parenthesis.
+[11] Unexpected space after opening parenthesis.
+[12] Unexpected space before closing parenthesis.
+[13] Unexpected space after opening parenthesis.
+[14] Unexpected space before closing parenthesis.
+[15] Unexpected space after opening parenthesis.
+[16] Unexpected space before closing parenthesis.
+[17] Unexpected space after opening parenthesis.
+[18] Unexpected space before closing parenthesis.
+[19] Unexpected space after opening parenthesis.
+[20] Unexpected space before closing parenthesis.
+[21] Unexpected space after opening parenthesis.
+[22] Unexpected space before closing parenthesis.
+[23] Unexpected space after opening parenthesis.
+[24] Unexpected space before closing parenthesis.
+[25] Unexpected space after opening parenthesis.
+[26] Unexpected space after opening parenthesis.
+[27] Unexpected space before closing parenthesis.
+[28] Unexpected space before closing parenthesis.
+[29] Unexpected space after opening parenthesis.
+[30] Unexpected space before closing parenthesis.
+[31] Unexpected space after opening parenthesis.
+[32] Unexpected space before closing parenthesis.
+[33] Unexpected space after opening parenthesis.
+[34] Unexpected space before closing parenthesis.
+---
+
+
+Test: link-paren-spacing >> invalid >>> "\n- [foo]( /url )\n- [foo](/url)\n- [foo]( /url)\n- [foo](/url )\n- [foo](     /url     )\n- [foo]( </url> )\n- [foo](</url>)\n- [foo]( </url>)\n- [foo](</url> )\n- [foo](     </url>     )\n- [foo]( /url \"title\" )\n- [foo](/url \"title\")\n- [foo]( /url \"title\")\n- [foo](/url \"title\" )\n- [foo](     /url \"title\"     )\n- [foo]( </url> \"title\" )\n- [foo](</url> \"title\")\n- [foo]( </url> \"title\")\n- [foo](</url> \"title\" )\n- [foo](     </url> \"title\"     )\n- Multi lines\n  - [foo](\n      /url\n    )\n  - [foo](\n      /url\n      \"title\"\n    )\n  - [foo](/url\n    )\n  - [foo]( /url\n    )\n  - [foo](/url\n      \"title\"\n    )\n  - [foo]( /url\n      \"title\"\n    )\n  - [foo](\n      /url)\n  - [foo](\n      /url )\n  - [foo](\n      /url\n      \"title\")\n  - [foo](\n      /url\n      \"title\" )\n- Empty\n  - [foo]()\n  - [foo](<>)\n  - [foo]( <> )\n  - [foo](   )\n  - [foo](<#foo>)\n  - [foo]( <#foo> )\n 3"
+Filename: tests/fixtures/rules/link-paren-spacing/invalid/never/link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo]( /url )
+    |         ^    ^
+    |         [1]  [2]
+  3 | - [foo](/url)
+  4 | - [foo]( /url)
+    |         ^ [3]
+  5 | - [foo](/url )
+    |             ^ [4]
+  6 | - [foo](     /url     )
+    |         ^~~~~    ^~~~~
+    |         [5]      [6]
+  7 | - [foo]( </url> )
+    |         ^ [7]  ^ [8]
+  8 | - [foo](</url>)
+  9 | - [foo]( </url>)
+    |         ^ [9]
+ 10 | - [foo](</url> )
+    |               ^ [10]
+ 11 | - [foo](     </url>     )
+    |         ^~~~~ [11] ^~~~~ [12]
+ 12 | - [foo]( /url "title" )
+    |         ^ [13]       ^ [14]
+ 13 | - [foo](/url "title")
+ 14 | - [foo]( /url "title")
+    |         ^ [15]
+ 15 | - [foo](/url "title" )
+    |                     ^ [16]
+ 16 | - [foo](     /url "title"     )
+    |         ^~~~~ [17]       ^~~~~ [18]
+ 17 | - [foo]( </url> "title" )
+    |         ^ [19]         ^ [20]
+ 18 | - [foo](</url> "title")
+ 19 | - [foo]( </url> "title")
+    |         ^ [21]
+ 20 | - [foo](</url> "title" )
+    |                       ^ [22]
+ 21 | - [foo](     </url> "title"     )
+    |         ^~~~~ [23]         ^~~~~ [24]
+ 22 | - Multi lines
+ 23 |   - [foo](
+ 24 |       /url
+ 25 |     )
+ 26 |   - [foo](
+ 27 |       /url
+ 28 |       "title"
+ 29 |     )
+ 30 |   - [foo](/url
+ 31 |     )
+ 32 |   - [foo]( /url
+    |           ^ [25]
+ 33 |     )
+ 34 |   - [foo](/url
+ 35 |       "title"
+ 36 |     )
+ 37 |   - [foo]( /url
+    |           ^ [26]
+ 38 |       "title"
+ 39 |     )
+ 40 |   - [foo](
+ 41 |       /url)
+ 42 |   - [foo](
+ 43 |       /url )
+    |           ^ [27]
+ 44 |   - [foo](
+ 45 |       /url
+ 46 |       "title")
+ 47 |   - [foo](
+ 48 |       /url
+ 49 |       "title" )
+    |              ^ [28]
+ 50 | - Empty
+ 51 |   - [foo]()
+ 52 |   - [foo](<>)
+ 53 |   - [foo]( <> )
+    |           ^ [29]
+    |              ^ [30]
+ 54 |   - [foo](   )
+    |           ^~~ [31]
+    |           ^~~ [32]
+ 55 |   - [foo](<#foo>)
+ 56 |   - [foo]( <#foo> )
+    |           ^ [33] ^ [34]
+ 57 |
+
+Output:
+  1 |
+  2 | - [foo](/url)
+  3 | - [foo](/url)
+  4 | - [foo](/url)
+  5 | - [foo](/url)
+  6 | - [foo](/url)
+  7 | - [foo](</url>)
+  8 | - [foo](</url>)
+  9 | - [foo](</url>)
+ 10 | - [foo](</url>)
+ 11 | - [foo](</url>)
+ 12 | - [foo](/url "title")
+ 13 | - [foo](/url "title")
+ 14 | - [foo](/url "title")
+ 15 | - [foo](/url "title")
+ 16 | - [foo](/url "title")
+ 17 | - [foo](</url> "title")
+ 18 | - [foo](</url> "title")
+ 19 | - [foo](</url> "title")
+ 20 | - [foo](</url> "title")
+ 21 | - [foo](</url> "title")
+ 22 | - Multi lines
+ 23 |   - [foo](
+ 24 |       /url
+ 25 |     )
+ 26 |   - [foo](
+ 27 |       /url
+ 28 |       "title"
+ 29 |     )
+ 30 |   - [foo](/url
+ 31 |     )
+ 32 |   - [foo](/url
+ 33 |     )
+ 34 |   - [foo](/url
+ 35 |       "title"
+ 36 |     )
+ 37 |   - [foo](/url
+ 38 |       "title"
+ 39 |     )
+ 40 |   - [foo](
+ 41 |       /url)
+ 42 |   - [foo](
+ 43 |       /url)
+ 44 |   - [foo](
+ 45 |       /url
+ 46 |       "title")
+ 47 |   - [foo](
+ 48 |       /url
+ 49 |       "title")
+ 50 | - Empty
+ 51 |   - [foo]()
+ 52 |   - [foo](<>)
+ 53 |   - [foo](<>)
+ 54 |   - [foo]()
+ 55 |   - [foo](<#foo>)
+ 56 |   - [foo](<#foo>)
+ 57 |
+
+[1] Unexpected space after opening parenthesis.
+[2] Unexpected space before closing parenthesis.
+[3] Unexpected space after opening parenthesis.
+[4] Unexpected space before closing parenthesis.
+[5] Unexpected space after opening parenthesis.
+[6] Unexpected space before closing parenthesis.
+[7] Unexpected space after opening parenthesis.
+[8] Unexpected space before closing parenthesis.
+[9] Unexpected space after opening parenthesis.
+[10] Unexpected space before closing parenthesis.
+[11] Unexpected space after opening parenthesis.
+[12] Unexpected space before closing parenthesis.
+[13] Unexpected space after opening parenthesis.
+[14] Unexpected space before closing parenthesis.
+[15] Unexpected space after opening parenthesis.
+[16] Unexpected space before closing parenthesis.
+[17] Unexpected space after opening parenthesis.
+[18] Unexpected space before closing parenthesis.
+[19] Unexpected space after opening parenthesis.
+[20] Unexpected space before closing parenthesis.
+[21] Unexpected space after opening parenthesis.
+[22] Unexpected space before closing parenthesis.
+[23] Unexpected space after opening parenthesis.
+[24] Unexpected space before closing parenthesis.
+[25] Unexpected space after opening parenthesis.
+[26] Unexpected space after opening parenthesis.
+[27] Unexpected space before closing parenthesis.
+[28] Unexpected space before closing parenthesis.
+[29] Unexpected space after opening parenthesis.
+[30] Unexpected space before closing parenthesis.
+[31] Unexpected space after opening parenthesis.
+[32] Unexpected space before closing parenthesis.
+[33] Unexpected space after opening parenthesis.
+[34] Unexpected space before closing parenthesis.
+---

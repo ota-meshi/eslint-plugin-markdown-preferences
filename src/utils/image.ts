@@ -9,6 +9,10 @@ export type ParsedImage = {
     range: [number, number];
     loc: SourceLocation;
   };
+  openingParen: {
+    range: [number, number];
+    loc: SourceLocation;
+  };
   destination: {
     type: "pointy-bracketed" | "bare";
     text: string;
@@ -21,6 +25,10 @@ export type ParsedImage = {
     range: [number, number];
     loc: SourceLocation;
   } | null;
+  closingParen: {
+    range: [number, number];
+    loc: SourceLocation;
+  };
 };
 /**
  * Parse the image.
@@ -37,14 +45,26 @@ export function parseImage(
     nodeRange[0] + parsed.text.range[0],
     nodeRange[0] + parsed.text.range[1],
   ];
+  const openingParenRange: [number, number] = [
+    nodeRange[0] + parsed.openingParen.range[0],
+    nodeRange[0] + parsed.openingParen.range[1],
+  ];
   const destinationRange: [number, number] = [
     nodeRange[0] + parsed.destination.range[0],
     nodeRange[0] + parsed.destination.range[1],
+  ];
+  const closingParenRange: [number, number] = [
+    nodeRange[0] + parsed.closingParen.range[0],
+    nodeRange[0] + parsed.closingParen.range[1],
   ];
   return {
     text: {
       range: textRange,
       loc: getSourceLocationFromRange(sourceCode, node, textRange),
+    },
+    openingParen: {
+      range: openingParenRange,
+      loc: getSourceLocationFromRange(sourceCode, node, openingParenRange),
     },
     destination: {
       type: parsed.destination.type,
@@ -66,6 +86,10 @@ export function parseImage(
           ]),
         }
       : null,
+    closingParen: {
+      range: closingParenRange,
+      loc: getSourceLocationFromRange(sourceCode, node, closingParenRange),
+    },
   };
 }
 
@@ -74,6 +98,9 @@ export function parseImage(
  */
 export function parseImageFromText(text: string): {
   text: {
+    range: [number, number];
+  };
+  openingParen: {
     range: [number, number];
   };
   destination: {
@@ -86,11 +113,15 @@ export function parseImageFromText(text: string): {
     text: string;
     range: [number, number];
   } | null;
+  closingParen: {
+    range: [number, number];
+  };
 } | null {
   if (!text.startsWith("![")) return null;
   let index = text.length - 1;
   skipSpaces();
   if (text[index] !== ")") return null;
+  const closingParenStartIndex = index;
   index--;
   skipSpaces();
   let title: NonNullable<ReturnType<typeof parseImageFromText>>["title"] = null;
@@ -148,15 +179,22 @@ export function parseImageFromText(text: string): {
   }
   skipSpaces();
   if (text[index] !== "(") return null;
+  const openingParenStartIndex = index;
   index--;
   if (text[index] !== "]") return null;
   const textRange: [number, number] = [1, index + 1];
   return {
+    openingParen: {
+      range: [openingParenStartIndex, openingParenStartIndex + 1],
+    },
     text: {
       range: textRange,
     },
     destination,
     title,
+    closingParen: {
+      range: [closingParenStartIndex, closingParenStartIndex + 1],
+    },
   };
 
   /**
