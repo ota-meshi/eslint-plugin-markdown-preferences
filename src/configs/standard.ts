@@ -32,6 +32,7 @@ export const rules: Linter.RulesRecord = {
   "markdown-preferences/link-bracket-newline": "error",
   "markdown-preferences/link-bracket-spacing": "error",
   "markdown-preferences/link-destination-style": "error",
+  "markdown-preferences/link-paren-newline": "error",
   "markdown-preferences/link-paren-spacing": "error",
   "markdown-preferences/link-title-style": "error",
   "markdown-preferences/list-marker-alignment": "error",

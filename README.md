@@ -132,6 +132,7 @@ The rules with the following 💄 are included in the `standard` config.
 | [markdown-preferences/link-bracket-newline](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-bracket-newline.html) | enforce linebreaks after opening and before closing link brackets | 🔧 | 💄 |
 | [markdown-preferences/link-bracket-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-bracket-spacing.html) | enforce consistent spacing inside link brackets | 🔧 | 💄 |
 | [markdown-preferences/link-destination-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-destination-style.html) | enforce a consistent style for link destinations | 🔧 | 💄 |
+| [markdown-preferences/link-paren-newline](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-paren-newline.html) | enforce linebreaks after opening and before closing link parentheses | 🔧 | 💄 |
 | [markdown-preferences/link-paren-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-paren-spacing.html) | enforce consistent spacing inside link parentheses | 🔧 | 💄 |
 | [markdown-preferences/link-title-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-title-style.html) | enforce a consistent style for link titles | 🔧 | 💄 |
 | [markdown-preferences/list-marker-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/list-marker-alignment.html) | enforce consistent alignment of list markers | 🔧 | ⭐💄 |

@@ -1,0 +1,1113 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: link-paren-newline >> invalid
+Filename: tests/fixtures/rules/link-paren-newline/invalid/always/image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo](/url)
+    |         ^    ^
+    |         [1]  [2]
+  3 | - ![foo]( /url )
+    |         ^ [3]  ^ [4]
+  4 | - ![foo](
+  5 |     /url
+  6 |   )
+  7 | - ![foo](/url
+    |         ^ [5]
+  8 |   )
+  9 | - ![foo](
+ 10 |     /url)
+    |         ^ [6]
+ 11 | - Multi lines
+ 12 |   - ![foo](/url
+    |           ^ [7]
+ 13 |     "title")
+    |            ^ [8]
+ 14 |   - ![foo]( /url
+    |           ^ [9]
+ 15 |     "title" )
+    |             ^ [10]
+ 16 |   - ![foo](
+ 17 |       /url
+ 18 |       "title"
+ 19 |     )
+ 20 | - Empty
+ 21 |   - ![foo]()
+    |           ^ [11]
+ 22 |   - ![foo](<>)
+    |           ^ [12]
+    |              ^ [13]
+ 23 |   - ![foo]( )
+    |           ^ [14]
+ 24 |   - ![foo]( <> )
+    |           ^    ^
+    |           [15] [16]
+ 25 |   - ![foo](
+ 26 |     )
+ 27 |   - ![foo](
+ 28 |       <>
+ 29 |     )
+ 30 |   - ![foo](<>
+    |           ^ [17]
+ 31 |     )
+ 32 |   - ![foo](
+ 33 |       <>)
+    |         ^ [18]
+ 34 |
+
+Output:
+  1 |
+  2 | - ![foo](
+  3 |          /url
+  4 |          )
+  5 | - ![foo](
+  6 |            /url 
+  7 |          )
+  8 | - ![foo](
+  9 |     /url
+ 10 |   )
+ 11 | - ![foo](
+ 12 |          /url
+ 13 |   )
+ 14 | - ![foo](
+ 15 |     /url
+ 16 |          )
+ 17 | - Multi lines
+ 18 |   - ![foo](
+ 19 |            /url
+ 20 |     "title"
+ 21 |            )
+ 22 |   - ![foo](
+ 23 |              /url
+ 24 |     "title" 
+ 25 |            )
+ 26 |   - ![foo](
+ 27 |       /url
+ 28 |       "title"
+ 29 |     )
+ 30 | - Empty
+ 31 |   - ![foo](
+ 32 |            )
+ 33 |   - ![foo](
+ 34 |            <>
+ 35 |            )
+ 36 |   - ![foo](
+ 37 |              )
+ 38 |   - ![foo](
+ 39 |              <> 
+ 40 |            )
+ 41 |   - ![foo](
+ 42 |     )
+ 43 |   - ![foo](
+ 44 |       <>
+ 45 |     )
+ 46 |   - ![foo](
+ 47 |            <>
+ 48 |     )
+ 49 |   - ![foo](
+ 50 |       <>
+ 51 |            )
+ 52 |
+
+[1] Expected a linebreak after this opening parenthesis.
+[2] Expected a linebreak before this closing parenthesis.
+[3] Expected a linebreak after this opening parenthesis.
+[4] Expected a linebreak before this closing parenthesis.
+[5] Expected a linebreak after this opening parenthesis.
+[6] Expected a linebreak before this closing parenthesis.
+[7] Expected a linebreak after this opening parenthesis.
+[8] Expected a linebreak before this closing parenthesis.
+[9] Expected a linebreak after this opening parenthesis.
+[10] Expected a linebreak before this closing parenthesis.
+[11] Expected a linebreak after this opening parenthesis.
+[12] Expected a linebreak after this opening parenthesis.
+[13] Expected a linebreak before this closing parenthesis.
+[14] Expected a linebreak after this opening parenthesis.
+[15] Expected a linebreak after this opening parenthesis.
+[16] Expected a linebreak before this closing parenthesis.
+[17] Expected a linebreak after this opening parenthesis.
+[18] Expected a linebreak before this closing parenthesis.
+---
+
+
+Test: link-paren-newline >> invalid
+Filename: tests/fixtures/rules/link-paren-newline/invalid/always/link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: always
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo](/url)
+    |        ^    ^
+    |        [1]  [2]
+  3 | - [foo]( /url )
+    |        ^ [3]  ^ [4]
+  4 | - [foo](
+  5 |     /url
+  6 |   )
+  7 | - [foo](/url
+    |        ^ [5]
+  8 |   )
+  9 | - [foo](
+ 10 |     /url)
+    |         ^ [6]
+ 11 | - Multi lines
+ 12 |   - [foo](/url
+    |          ^ [7]
+ 13 |     "title")
+    |            ^ [8]
+ 14 |   - [foo]( /url
+    |          ^ [9]
+ 15 |     "title" )
+    |             ^ [10]
+ 16 |   - [foo](
+ 17 |       /url
+ 18 |       "title"
+ 19 |     )
+ 20 | - Empty
+ 21 |   - [foo]()
+    |          ^ [11]
+ 22 |   - [foo](<>)
+    |          ^ [12]
+    |             ^ [13]
+ 23 |   - [foo]( )
+    |          ^ [14]
+ 24 |   - [foo]( <> )
+    |          ^    ^
+    |          [15] [16]
+ 25 |   - [foo](
+ 26 |     )
+ 27 |   - [foo](
+ 28 |       <>
+ 29 |     )
+ 30 |   - [foo](<>
+    |          ^ [17]
+ 31 |     )
+ 32 |   - [foo](
+ 33 |       <>)
+    |         ^ [18]
+ 34 |
+
+Output:
+  1 |
+  2 | - [foo](
+  3 |         /url
+  4 |         )
+  5 | - [foo](
+  6 |           /url 
+  7 |         )
+  8 | - [foo](
+  9 |     /url
+ 10 |   )
+ 11 | - [foo](
+ 12 |         /url
+ 13 |   )
+ 14 | - [foo](
+ 15 |     /url
+ 16 |         )
+ 17 | - Multi lines
+ 18 |   - [foo](
+ 19 |           /url
+ 20 |     "title"
+ 21 |           )
+ 22 |   - [foo](
+ 23 |             /url
+ 24 |     "title" 
+ 25 |           )
+ 26 |   - [foo](
+ 27 |       /url
+ 28 |       "title"
+ 29 |     )
+ 30 | - Empty
+ 31 |   - [foo](
+ 32 |           )
+ 33 |   - [foo](
+ 34 |           <>
+ 35 |           )
+ 36 |   - [foo](
+ 37 |             )
+ 38 |   - [foo](
+ 39 |             <> 
+ 40 |           )
+ 41 |   - [foo](
+ 42 |     )
+ 43 |   - [foo](
+ 44 |       <>
+ 45 |     )
+ 46 |   - [foo](
+ 47 |           <>
+ 48 |     )
+ 49 |   - [foo](
+ 50 |       <>
+ 51 |           )
+ 52 |
+
+[1] Expected a linebreak after this opening parenthesis.
+[2] Expected a linebreak before this closing parenthesis.
+[3] Expected a linebreak after this opening parenthesis.
+[4] Expected a linebreak before this closing parenthesis.
+[5] Expected a linebreak after this opening parenthesis.
+[6] Expected a linebreak before this closing parenthesis.
+[7] Expected a linebreak after this opening parenthesis.
+[8] Expected a linebreak before this closing parenthesis.
+[9] Expected a linebreak after this opening parenthesis.
+[10] Expected a linebreak before this closing parenthesis.
+[11] Expected a linebreak after this opening parenthesis.
+[12] Expected a linebreak after this opening parenthesis.
+[13] Expected a linebreak before this closing parenthesis.
+[14] Expected a linebreak after this opening parenthesis.
+[15] Expected a linebreak after this opening parenthesis.
+[16] Expected a linebreak before this closing parenthesis.
+[17] Expected a linebreak after this opening parenthesis.
+[18] Expected a linebreak before this closing parenthesis.
+---
+
+
+Test: link-paren-newline >> invalid >>> "\n- ![foo](/url)\n- ![foo]( /url )\n- ![foo](\n    /url\n  )\n- ![foo](/url\n  )\n- ![foo](\n    /url)\n- Multi lines\n  - ![foo](/url\n    \"title\")\n  - ![foo]( /url\n    \"title\" )\n  - ![foo](\n      /url\n      \"title\"\n    )\n- Empty\n  - ![foo]()\n  - ![foo](<>)\n  - ![foo]( )\n  - ![foo]( <> )\n  - ![foo](\n    )\n  - ![foo](\n      <>\n    )\n  - ![foo](<>\n    )\n  - ![foo](\n      <>)\n 2"
+Filename: tests/fixtures/rules/link-paren-newline/invalid/consistent/image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: consistent
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![foo]( /url )
+  4 | - ![foo](
+  5 |     /url
+  6 |   )
+  7 | - ![foo](/url
+    |              ^\ [1]
+  8 |   )
+    | ~~ [1]
+  9 | - ![foo](
+ 10 |     /url)
+    |         ^ [2]
+ 11 | - Multi lines
+ 12 |   - ![foo](/url
+ 13 |     "title")
+ 14 |   - ![foo]( /url
+ 15 |     "title" )
+ 16 |   - ![foo](
+ 17 |       /url
+ 18 |       "title"
+ 19 |     )
+ 20 | - Empty
+ 21 |   - ![foo]()
+ 22 |   - ![foo](<>)
+ 23 |   - ![foo]( )
+ 24 |   - ![foo]( <> )
+ 25 |   - ![foo](
+ 26 |     )
+ 27 |   - ![foo](
+ 28 |       <>
+ 29 |     )
+ 30 |   - ![foo](<>
+    |              ^\ [3]
+ 31 |     )
+    | ~~~~ [3]
+ 32 |   - ![foo](
+ 33 |       <>)
+    |         ^ [4]
+ 34 |
+
+Output:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![foo]( /url )
+  4 | - ![foo](
+  5 |     /url
+  6 |   )
+  7 | - ![foo](/url )
+  8 | - ![foo](
+  9 |     /url
+ 10 |          )
+ 11 | - Multi lines
+ 12 |   - ![foo](/url
+ 13 |     "title")
+ 14 |   - ![foo]( /url
+ 15 |     "title" )
+ 16 |   - ![foo](
+ 17 |       /url
+ 18 |       "title"
+ 19 |     )
+ 20 | - Empty
+ 21 |   - ![foo]()
+ 22 |   - ![foo](<>)
+ 23 |   - ![foo]( )
+ 24 |   - ![foo]( <> )
+ 25 |   - ![foo](
+ 26 |     )
+ 27 |   - ![foo](
+ 28 |       <>
+ 29 |     )
+ 30 |   - ![foo](<> )
+ 31 |   - ![foo](
+ 32 |       <>
+ 33 |            )
+ 34 |
+
+[1] Unexpected linebreak before this closing parenthesis.
+[2] Expected a linebreak before this closing parenthesis.
+[3] Unexpected linebreak before this closing parenthesis.
+[4] Expected a linebreak before this closing parenthesis.
+---
+
+
+Test: link-paren-newline >> invalid >>> "\n- [foo](/url)\n- [foo]( /url )\n- [foo](\n    /url\n  )\n- [foo](/url\n  )\n- [foo](\n    /url)\n- Multi lines\n  - [foo](/url\n    \"title\")\n  - [foo]( /url\n    \"title\" )\n  - [foo](\n      /url\n      \"title\"\n    )\n- Empty\n  - [foo]()\n  - [foo](<>)\n  - [foo]( )\n  - [foo]( <> )\n  - [foo](\n    )\n  - [foo](\n      <>\n    )\n  - [foo](<>\n    )\n  - [foo](\n      <>)\n 2"
+Filename: tests/fixtures/rules/link-paren-newline/invalid/consistent/link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: consistent
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo](/url)
+  3 | - [foo]( /url )
+  4 | - [foo](
+  5 |     /url
+  6 |   )
+  7 | - [foo](/url
+    |             ^\ [1]
+  8 |   )
+    | ~~ [1]
+  9 | - [foo](
+ 10 |     /url)
+    |         ^ [2]
+ 11 | - Multi lines
+ 12 |   - [foo](/url
+ 13 |     "title")
+ 14 |   - [foo]( /url
+ 15 |     "title" )
+ 16 |   - [foo](
+ 17 |       /url
+ 18 |       "title"
+ 19 |     )
+ 20 | - Empty
+ 21 |   - [foo]()
+ 22 |   - [foo](<>)
+ 23 |   - [foo]( )
+ 24 |   - [foo]( <> )
+ 25 |   - [foo](
+ 26 |     )
+ 27 |   - [foo](
+ 28 |       <>
+ 29 |     )
+ 30 |   - [foo](<>
+    |             ^\ [3]
+ 31 |     )
+    | ~~~~ [3]
+ 32 |   - [foo](
+ 33 |       <>)
+    |         ^ [4]
+ 34 |
+
+Output:
+  1 |
+  2 | - [foo](/url)
+  3 | - [foo]( /url )
+  4 | - [foo](
+  5 |     /url
+  6 |   )
+  7 | - [foo](/url )
+  8 | - [foo](
+  9 |     /url
+ 10 |         )
+ 11 | - Multi lines
+ 12 |   - [foo](/url
+ 13 |     "title")
+ 14 |   - [foo]( /url
+ 15 |     "title" )
+ 16 |   - [foo](
+ 17 |       /url
+ 18 |       "title"
+ 19 |     )
+ 20 | - Empty
+ 21 |   - [foo]()
+ 22 |   - [foo](<>)
+ 23 |   - [foo]( )
+ 24 |   - [foo]( <> )
+ 25 |   - [foo](
+ 26 |     )
+ 27 |   - [foo](
+ 28 |       <>
+ 29 |     )
+ 30 |   - [foo](<> )
+ 31 |   - [foo](
+ 32 |       <>
+ 33 |           )
+ 34 |
+
+[1] Unexpected linebreak before this closing parenthesis.
+[2] Expected a linebreak before this closing parenthesis.
+[3] Unexpected linebreak before this closing parenthesis.
+[4] Expected a linebreak before this closing parenthesis.
+---
+
+
+Test: link-paren-newline >> invalid >>> "\n- ![foo](/url)\n- ![foo]( /url )\n- ![foo](\n    /url\n  )\n- ![foo](/url\n  )\n- ![foo](\n    /url)\n- Multi lines\n  - ![foo](/url\n    \"title\")\n  - ![foo]( /url\n    \"title\" )\n  - ![foo](\n      /url\n      \"title\"\n    )\n- Empty\n  - ![foo]()\n  - ![foo](<>)\n  - ![foo]( )\n  - ![foo]( <> )\n  - ![foo](\n    )\n  - ![foo](\n      <>\n    )\n  - ![foo](<>\n    )\n  - ![foo](\n      <>)\n 3"
+Filename: tests/fixtures/rules/link-paren-newline/invalid/image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![foo]( /url )
+  4 | - ![foo](
+    |          ^\ [1]
+  5 |     /url
+    | ~~~~ [1]
+    |         ^\ [2]
+  6 |   )
+    | ~~ [2]
+  7 | - ![foo](/url
+    |              ^\ [3]
+  8 |   )
+    | ~~ [3]
+  9 | - ![foo](
+    |          ^\ [4]
+ 10 |     /url)
+    | ~~~~ [4]
+ 11 | - Multi lines
+ 12 |   - ![foo](/url
+ 13 |     "title")
+ 14 |   - ![foo]( /url
+ 15 |     "title" )
+ 16 |   - ![foo](
+    |            ^\ [5]
+ 17 |       /url
+    | ~~~~~~ [5]
+ 18 |       "title"
+    |              ^\ [6]
+ 19 |     )
+    | ~~~~ [6]
+ 20 | - Empty
+ 21 |   - ![foo]()
+ 22 |   - ![foo](<>)
+ 23 |   - ![foo]( )
+ 24 |   - ![foo]( <> )
+ 25 |   - ![foo](
+    |            ^\ [7]
+ 26 |     )
+    | ~~~~ [7]
+ 27 |   - ![foo](
+    |            ^\ [8]
+ 28 |       <>
+    | ~~~~~~ [8]
+    |         ^\ [9]
+ 29 |     )
+    | ~~~~ [9]
+ 30 |   - ![foo](<>
+    |              ^\ [10]
+ 31 |     )
+    | ~~~~ [10]
+ 32 |   - ![foo](
+    |            ^\ [11]
+ 33 |       <>)
+    | ~~~~~~ [11]
+ 34 |
+
+Output:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![foo]( /url )
+  4 | - ![foo]( /url )
+  5 | - ![foo](/url )
+  6 | - ![foo]( /url)
+  7 | - Multi lines
+  8 |   - ![foo](/url
+  9 |     "title")
+ 10 |   - ![foo]( /url
+ 11 |     "title" )
+ 12 |   - ![foo]( /url
+ 13 |       "title" )
+ 14 | - Empty
+ 15 |   - ![foo]()
+ 16 |   - ![foo](<>)
+ 17 |   - ![foo]( )
+ 18 |   - ![foo]( <> )
+ 19 |   - ![foo]( )
+ 20 |   - ![foo]( <> )
+ 21 |   - ![foo](<> )
+ 22 |   - ![foo]( <>)
+ 23 |
+
+[1] Unexpected linebreak after this opening parenthesis.
+[2] Unexpected linebreak before this closing parenthesis.
+[3] Unexpected linebreak before this closing parenthesis.
+[4] Unexpected linebreak after this opening parenthesis.
+[5] Unexpected linebreak after this opening parenthesis.
+[6] Unexpected linebreak before this closing parenthesis.
+[7] Unexpected linebreak after this opening parenthesis.
+[8] Unexpected linebreak after this opening parenthesis.
+[9] Unexpected linebreak before this closing parenthesis.
+[10] Unexpected linebreak before this closing parenthesis.
+[11] Unexpected linebreak after this opening parenthesis.
+---
+
+
+Test: link-paren-newline >> invalid >>> "\n- [foo](/url)\n- [foo]( /url )\n- [foo](\n    /url\n  )\n- [foo](/url\n  )\n- [foo](\n    /url)\n- Multi lines\n  - [foo](/url\n    \"title\")\n  - [foo]( /url\n    \"title\" )\n  - [foo](\n      /url\n      \"title\"\n    )\n- Empty\n  - [foo]()\n  - [foo](<>)\n  - [foo]( )\n  - [foo]( <> )\n  - [foo](\n    )\n  - [foo](\n      <>\n    )\n  - [foo](<>\n    )\n  - [foo](\n      <>)\n 3"
+Filename: tests/fixtures/rules/link-paren-newline/invalid/link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo](/url)
+  3 | - [foo]( /url )
+  4 | - [foo](
+    |         ^\ [1]
+  5 |     /url
+    | ~~~~ [1]
+    |         ^\ [2]
+  6 |   )
+    | ~~ [2]
+  7 | - [foo](/url
+    |             ^\ [3]
+  8 |   )
+    | ~~ [3]
+  9 | - [foo](
+    |         ^\ [4]
+ 10 |     /url)
+    | ~~~~ [4]
+ 11 | - Multi lines
+ 12 |   - [foo](/url
+ 13 |     "title")
+ 14 |   - [foo]( /url
+ 15 |     "title" )
+ 16 |   - [foo](
+    |           ^\ [5]
+ 17 |       /url
+    | ~~~~~~ [5]
+ 18 |       "title"
+    |              ^\ [6]
+ 19 |     )
+    | ~~~~ [6]
+ 20 | - Empty
+ 21 |   - [foo]()
+ 22 |   - [foo](<>)
+ 23 |   - [foo]( )
+ 24 |   - [foo]( <> )
+ 25 |   - [foo](
+    |           ^\ [7]
+ 26 |     )
+    | ~~~~ [7]
+ 27 |   - [foo](
+    |           ^\ [8]
+ 28 |       <>
+    | ~~~~~~ [8]
+    |         ^\ [9]
+ 29 |     )
+    | ~~~~ [9]
+ 30 |   - [foo](<>
+    |             ^\ [10]
+ 31 |     )
+    | ~~~~ [10]
+ 32 |   - [foo](
+    |           ^\ [11]
+ 33 |       <>)
+    | ~~~~~~ [11]
+ 34 |
+
+Output:
+  1 |
+  2 | - [foo](/url)
+  3 | - [foo]( /url )
+  4 | - [foo]( /url )
+  5 | - [foo](/url )
+  6 | - [foo]( /url)
+  7 | - Multi lines
+  8 |   - [foo](/url
+  9 |     "title")
+ 10 |   - [foo]( /url
+ 11 |     "title" )
+ 12 |   - [foo]( /url
+ 13 |       "title" )
+ 14 | - Empty
+ 15 |   - [foo]()
+ 16 |   - [foo](<>)
+ 17 |   - [foo]( )
+ 18 |   - [foo]( <> )
+ 19 |   - [foo]( )
+ 20 |   - [foo]( <> )
+ 21 |   - [foo](<> )
+ 22 |   - [foo]( <>)
+ 23 |
+
+[1] Unexpected linebreak after this opening parenthesis.
+[2] Unexpected linebreak before this closing parenthesis.
+[3] Unexpected linebreak before this closing parenthesis.
+[4] Unexpected linebreak after this opening parenthesis.
+[5] Unexpected linebreak after this opening parenthesis.
+[6] Unexpected linebreak before this closing parenthesis.
+[7] Unexpected linebreak after this opening parenthesis.
+[8] Unexpected linebreak after this opening parenthesis.
+[9] Unexpected linebreak before this closing parenthesis.
+[10] Unexpected linebreak before this closing parenthesis.
+[11] Unexpected linebreak after this opening parenthesis.
+---
+
+
+Test: link-paren-newline >> invalid >>> "\n- ![foo](/url)\n- ![foo]( /url )\n- ![foo](\n    /url\n  )\n- ![foo](/url\n  )\n- ![foo](\n    /url)\n- Multi lines\n  - ![foo](/url\n    \"title\")\n  - ![foo]( /url\n    \"title\" )\n  - ![foo](\n      /url\n      \"title\"\n    )\n- Empty\n  - ![foo]()\n  - ![foo](<>)\n  - ![foo]( )\n  - ![foo]( <> )\n  - ![foo](\n    )\n  - ![foo](\n      <>\n    )\n  - ![foo](<>\n    )\n  - ![foo](\n      <>)\n 4"
+Filename: tests/fixtures/rules/link-paren-newline/invalid/never/image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![foo]( /url )
+  4 | - ![foo](
+    |          ^\ [1]
+  5 |     /url
+    | ~~~~ [1]
+    |         ^\ [2]
+  6 |   )
+    | ~~ [2]
+  7 | - ![foo](/url
+    |              ^\ [3]
+  8 |   )
+    | ~~ [3]
+  9 | - ![foo](
+    |          ^\ [4]
+ 10 |     /url)
+    | ~~~~ [4]
+ 11 | - Multi lines
+ 12 |   - ![foo](/url
+ 13 |     "title")
+ 14 |   - ![foo]( /url
+ 15 |     "title" )
+ 16 |   - ![foo](
+    |            ^\ [5]
+ 17 |       /url
+    | ~~~~~~ [5]
+ 18 |       "title"
+    |              ^\ [6]
+ 19 |     )
+    | ~~~~ [6]
+ 20 | - Empty
+ 21 |   - ![foo]()
+ 22 |   - ![foo](<>)
+ 23 |   - ![foo]( )
+ 24 |   - ![foo]( <> )
+ 25 |   - ![foo](
+    |            ^\ [7]
+ 26 |     )
+    | ~~~~ [7]
+ 27 |   - ![foo](
+    |            ^\ [8]
+ 28 |       <>
+    | ~~~~~~ [8]
+    |         ^\ [9]
+ 29 |     )
+    | ~~~~ [9]
+ 30 |   - ![foo](<>
+    |              ^\ [10]
+ 31 |     )
+    | ~~~~ [10]
+ 32 |   - ![foo](
+    |            ^\ [11]
+ 33 |       <>)
+    | ~~~~~~ [11]
+ 34 |
+
+Output:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![foo]( /url )
+  4 | - ![foo]( /url )
+  5 | - ![foo](/url )
+  6 | - ![foo]( /url)
+  7 | - Multi lines
+  8 |   - ![foo](/url
+  9 |     "title")
+ 10 |   - ![foo]( /url
+ 11 |     "title" )
+ 12 |   - ![foo]( /url
+ 13 |       "title" )
+ 14 | - Empty
+ 15 |   - ![foo]()
+ 16 |   - ![foo](<>)
+ 17 |   - ![foo]( )
+ 18 |   - ![foo]( <> )
+ 19 |   - ![foo]( )
+ 20 |   - ![foo]( <> )
+ 21 |   - ![foo](<> )
+ 22 |   - ![foo]( <>)
+ 23 |
+
+[1] Unexpected linebreak after this opening parenthesis.
+[2] Unexpected linebreak before this closing parenthesis.
+[3] Unexpected linebreak before this closing parenthesis.
+[4] Unexpected linebreak after this opening parenthesis.
+[5] Unexpected linebreak after this opening parenthesis.
+[6] Unexpected linebreak before this closing parenthesis.
+[7] Unexpected linebreak after this opening parenthesis.
+[8] Unexpected linebreak after this opening parenthesis.
+[9] Unexpected linebreak before this closing parenthesis.
+[10] Unexpected linebreak before this closing parenthesis.
+[11] Unexpected linebreak after this opening parenthesis.
+---
+
+
+Test: link-paren-newline >> invalid >>> "\n- [foo](/url)\n- [foo]( /url )\n- [foo](\n    /url\n  )\n- [foo](/url\n  )\n- [foo](\n    /url)\n- Multi lines\n  - [foo](/url\n    \"title\")\n  - [foo]( /url\n    \"title\" )\n  - [foo](\n      /url\n      \"title\"\n    )\n- Empty\n  - [foo]()\n  - [foo](<>)\n  - [foo]( )\n  - [foo]( <> )\n  - [foo](\n    )\n  - [foo](\n      <>\n    )\n  - [foo](<>\n    )\n  - [foo](\n      <>)\n 4"
+Filename: tests/fixtures/rules/link-paren-newline/invalid/never/link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: never
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo](/url)
+  3 | - [foo]( /url )
+  4 | - [foo](
+    |         ^\ [1]
+  5 |     /url
+    | ~~~~ [1]
+    |         ^\ [2]
+  6 |   )
+    | ~~ [2]
+  7 | - [foo](/url
+    |             ^\ [3]
+  8 |   )
+    | ~~ [3]
+  9 | - [foo](
+    |         ^\ [4]
+ 10 |     /url)
+    | ~~~~ [4]
+ 11 | - Multi lines
+ 12 |   - [foo](/url
+ 13 |     "title")
+ 14 |   - [foo]( /url
+ 15 |     "title" )
+ 16 |   - [foo](
+    |           ^\ [5]
+ 17 |       /url
+    | ~~~~~~ [5]
+ 18 |       "title"
+    |              ^\ [6]
+ 19 |     )
+    | ~~~~ [6]
+ 20 | - Empty
+ 21 |   - [foo]()
+ 22 |   - [foo](<>)
+ 23 |   - [foo]( )
+ 24 |   - [foo]( <> )
+ 25 |   - [foo](
+    |           ^\ [7]
+ 26 |     )
+    | ~~~~ [7]
+ 27 |   - [foo](
+    |           ^\ [8]
+ 28 |       <>
+    | ~~~~~~ [8]
+    |         ^\ [9]
+ 29 |     )
+    | ~~~~ [9]
+ 30 |   - [foo](<>
+    |             ^\ [10]
+ 31 |     )
+    | ~~~~ [10]
+ 32 |   - [foo](
+    |           ^\ [11]
+ 33 |       <>)
+    | ~~~~~~ [11]
+ 34 |
+
+Output:
+  1 |
+  2 | - [foo](/url)
+  3 | - [foo]( /url )
+  4 | - [foo]( /url )
+  5 | - [foo](/url )
+  6 | - [foo]( /url)
+  7 | - Multi lines
+  8 |   - [foo](/url
+  9 |     "title")
+ 10 |   - [foo]( /url
+ 11 |     "title" )
+ 12 |   - [foo]( /url
+ 13 |       "title" )
+ 14 | - Empty
+ 15 |   - [foo]()
+ 16 |   - [foo](<>)
+ 17 |   - [foo]( )
+ 18 |   - [foo]( <> )
+ 19 |   - [foo]( )
+ 20 |   - [foo]( <> )
+ 21 |   - [foo](<> )
+ 22 |   - [foo]( <>)
+ 23 |
+
+[1] Unexpected linebreak after this opening parenthesis.
+[2] Unexpected linebreak before this closing parenthesis.
+[3] Unexpected linebreak before this closing parenthesis.
+[4] Unexpected linebreak after this opening parenthesis.
+[5] Unexpected linebreak after this opening parenthesis.
+[6] Unexpected linebreak before this closing parenthesis.
+[7] Unexpected linebreak after this opening parenthesis.
+[8] Unexpected linebreak after this opening parenthesis.
+[9] Unexpected linebreak before this closing parenthesis.
+[10] Unexpected linebreak before this closing parenthesis.
+[11] Unexpected linebreak after this opening parenthesis.
+---
+
+
+Test: link-paren-newline >> invalid >>> "\n- ![foo](/url)\n- ![foo]( /url )\n- ![foo](\n    /url\n  )\n- ![foo](/url\n  )\n- ![foo](\n    /url)\n- Multi lines\n  - ![foo](/url\n    \"title\")\n  - ![foo]( /url\n    \"title\" )\n  - ![foo](\n      /url\n      \"title\"\n    )\n- Empty\n  - ![foo]()\n  - ![foo](<>)\n  - ![foo]( )\n  - ![foo]( <> )\n  - ![foo](\n    )\n  - ![foo](\n      <>\n    )\n  - ![foo](<>\n    )\n  - ![foo](\n      <>)\n 5"
+Filename: tests/fixtures/rules/link-paren-newline/invalid/never-with-multiline-true/image-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: never
+    multiline: true
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![foo]( /url )
+  4 | - ![foo](
+    |          ^\ [1]
+  5 |     /url
+    | ~~~~ [1]
+    |         ^\ [2]
+  6 |   )
+    | ~~ [2]
+  7 | - ![foo](/url
+    |              ^\ [3]
+  8 |   )
+    | ~~ [3]
+  9 | - ![foo](
+    |          ^\ [4]
+ 10 |     /url)
+    | ~~~~ [4]
+ 11 | - Multi lines
+ 12 |   - ![foo](/url
+    |           ^ [5]
+ 13 |     "title")
+    |            ^ [6]
+ 14 |   - ![foo]( /url
+    |           ^ [7]
+ 15 |     "title" )
+    |             ^ [8]
+ 16 |   - ![foo](
+ 17 |       /url
+ 18 |       "title"
+ 19 |     )
+ 20 | - Empty
+ 21 |   - ![foo]()
+ 22 |   - ![foo](<>)
+ 23 |   - ![foo]( )
+ 24 |   - ![foo]( <> )
+ 25 |   - ![foo](
+    |            ^\ [9]
+ 26 |     )
+    | ~~~~ [9]
+ 27 |   - ![foo](
+    |            ^\ [10]
+ 28 |       <>
+    | ~~~~~~ [10]
+    |         ^\ [11]
+ 29 |     )
+    | ~~~~ [11]
+ 30 |   - ![foo](<>
+    |              ^\ [12]
+ 31 |     )
+    | ~~~~ [12]
+ 32 |   - ![foo](
+    |            ^\ [13]
+ 33 |       <>)
+    | ~~~~~~ [13]
+ 34 |
+
+Output:
+  1 |
+  2 | - ![foo](/url)
+  3 | - ![foo]( /url )
+  4 | - ![foo]( /url )
+  5 | - ![foo](/url )
+  6 | - ![foo]( /url)
+  7 | - Multi lines
+  8 |   - ![foo](
+  9 |            /url
+ 10 |     "title"
+ 11 |            )
+ 12 |   - ![foo](
+ 13 |              /url
+ 14 |     "title" 
+ 15 |            )
+ 16 |   - ![foo](
+ 17 |       /url
+ 18 |       "title"
+ 19 |     )
+ 20 | - Empty
+ 21 |   - ![foo]()
+ 22 |   - ![foo](<>)
+ 23 |   - ![foo]( )
+ 24 |   - ![foo]( <> )
+ 25 |   - ![foo]( )
+ 26 |   - ![foo]( <> )
+ 27 |   - ![foo](<> )
+ 28 |   - ![foo]( <>)
+ 29 |
+
+[1] Unexpected linebreak after this opening parenthesis.
+[2] Unexpected linebreak before this closing parenthesis.
+[3] Unexpected linebreak before this closing parenthesis.
+[4] Unexpected linebreak after this opening parenthesis.
+[5] Expected a linebreak after this opening parenthesis.
+[6] Expected a linebreak before this closing parenthesis.
+[7] Expected a linebreak after this opening parenthesis.
+[8] Expected a linebreak before this closing parenthesis.
+[9] Unexpected linebreak after this opening parenthesis.
+[10] Unexpected linebreak after this opening parenthesis.
+[11] Unexpected linebreak before this closing parenthesis.
+[12] Unexpected linebreak before this closing parenthesis.
+[13] Unexpected linebreak after this opening parenthesis.
+---
+
+
+Test: link-paren-newline >> invalid >>> "\n- [foo](/url)\n- [foo]( /url )\n- [foo](\n    /url\n  )\n- [foo](/url\n  )\n- [foo](\n    /url)\n- Multi lines\n  - [foo](/url\n    \"title\")\n  - [foo]( /url\n    \"title\" )\n  - [foo](\n      /url\n      \"title\"\n    )\n- Empty\n  - [foo]()\n  - [foo](<>)\n  - [foo]( )\n  - [foo]( <> )\n  - [foo](\n    )\n  - [foo](\n      <>\n    )\n  - [foo](<>\n    )\n  - [foo](\n      <>)\n 5"
+Filename: tests/fixtures/rules/link-paren-newline/invalid/never-with-multiline-true/link-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - newline: never
+    multiline: true
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | - [foo](/url)
+  3 | - [foo]( /url )
+  4 | - [foo](
+    |         ^\ [1]
+  5 |     /url
+    | ~~~~ [1]
+    |         ^\ [2]
+  6 |   )
+    | ~~ [2]
+  7 | - [foo](/url
+    |             ^\ [3]
+  8 |   )
+    | ~~ [3]
+  9 | - [foo](
+    |         ^\ [4]
+ 10 |     /url)
+    | ~~~~ [4]
+ 11 | - Multi lines
+ 12 |   - [foo](/url
+    |          ^ [5]
+ 13 |     "title")
+    |            ^ [6]
+ 14 |   - [foo]( /url
+    |          ^ [7]
+ 15 |     "title" )
+    |             ^ [8]
+ 16 |   - [foo](
+ 17 |       /url
+ 18 |       "title"
+ 19 |     )
+ 20 | - Empty
+ 21 |   - [foo]()
+ 22 |   - [foo](<>)
+ 23 |   - [foo]( )
+ 24 |   - [foo]( <> )
+ 25 |   - [foo](
+    |           ^\ [9]
+ 26 |     )
+    | ~~~~ [9]
+ 27 |   - [foo](
+    |           ^\ [10]
+ 28 |       <>
+    | ~~~~~~ [10]
+    |         ^\ [11]
+ 29 |     )
+    | ~~~~ [11]
+ 30 |   - [foo](<>
+    |             ^\ [12]
+ 31 |     )
+    | ~~~~ [12]
+ 32 |   - [foo](
+    |           ^\ [13]
+ 33 |       <>)
+    | ~~~~~~ [13]
+ 34 |
+
+Output:
+  1 |
+  2 | - [foo](/url)
+  3 | - [foo]( /url )
+  4 | - [foo]( /url )
+  5 | - [foo](/url )
+  6 | - [foo]( /url)
+  7 | - Multi lines
+  8 |   - [foo](
+  9 |           /url
+ 10 |     "title"
+ 11 |           )
+ 12 |   - [foo](
+ 13 |             /url
+ 14 |     "title" 
+ 15 |           )
+ 16 |   - [foo](
+ 17 |       /url
+ 18 |       "title"
+ 19 |     )
+ 20 | - Empty
+ 21 |   - [foo]()
+ 22 |   - [foo](<>)
+ 23 |   - [foo]( )
+ 24 |   - [foo]( <> )
+ 25 |   - [foo]( )
+ 26 |   - [foo]( <> )
+ 27 |   - [foo](<> )
+ 28 |   - [foo]( <>)
+ 29 |
+
+[1] Unexpected linebreak after this opening parenthesis.
+[2] Unexpected linebreak before this closing parenthesis.
+[3] Unexpected linebreak before this closing parenthesis.
+[4] Unexpected linebreak after this opening parenthesis.
+[5] Expected a linebreak after this opening parenthesis.
+[6] Expected a linebreak before this closing parenthesis.
+[7] Expected a linebreak after this opening parenthesis.
+[8] Expected a linebreak before this closing parenthesis.
+[9] Unexpected linebreak after this opening parenthesis.
+[10] Unexpected linebreak after this opening parenthesis.
+[11] Unexpected linebreak before this closing parenthesis.
+[12] Unexpected linebreak before this closing parenthesis.
+[13] Unexpected linebreak after this opening parenthesis.
+---

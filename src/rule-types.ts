@@ -99,6 +99,16 @@ export interface RuleOptions {
    */
   'markdown-preferences/link-destination-style'?: Linter.RuleEntry<MarkdownPreferencesLinkDestinationStyle>
   /**
+   * enforce linebreaks after opening and before closing link parentheses
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-paren-newline.html
+   */
+  'markdown-preferences/link-paren-newline'?: Linter.RuleEntry<MarkdownPreferencesLinkParenNewline>
+  /**
+   * enforce consistent spacing inside link parentheses
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-paren-spacing.html
+   */
+  'markdown-preferences/link-paren-spacing'?: Linter.RuleEntry<MarkdownPreferencesLinkParenSpacing>
+  /**
    * enforce a consistent style for link titles
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-title-style.html
    */
@@ -322,6 +332,15 @@ type MarkdownPreferencesLinkDestinationStyle = []|[{
   style?: ("bare" | "pointy-brackets")
   avoidEscape?: boolean
   [k: string]: unknown | undefined
+}]
+// ----- markdown-preferences/link-paren-newline -----
+type MarkdownPreferencesLinkParenNewline = []|[{
+  newline?: ("always" | "never" | "consistent")
+  multiline?: boolean
+}]
+// ----- markdown-preferences/link-paren-spacing -----
+type MarkdownPreferencesLinkParenSpacing = []|[{
+  space?: ("always" | "never")
 }]
 // ----- markdown-preferences/link-title-style -----
 type MarkdownPreferencesLinkTitleStyle = []|[{

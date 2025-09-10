@@ -131,6 +131,7 @@ Consistent bracket spacing:
 ## 👫 Related Rules
 
 - [markdown-preferences/link-bracket-newline](./link-bracket-newline.md)
+- [markdown-preferences/link-paren-spacing](./link-paren-spacing.md)
 - [markdown-preferences/no-multi-spaces](./no-multi-spaces.md)
 
 ## 🚀 Version
