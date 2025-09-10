@@ -74,13 +74,13 @@ export default createRule<[Option?]>("atx-heading-closing-sequence", {
           context.report({
             node,
             loc: {
-              start: parsed.closingSequence.raws.spaceBefore.loc.start,
+              start: parsed.content.loc.end,
               end: parsed.closingSequence.loc.end,
             },
             messageId: "forbidClosing",
             *fix(fixer) {
               const removeRange = [
-                parsed.closingSequence.raws.spaceBefore.range[0],
+                parsed.content.range[1],
                 parsed.closingSequence.range[1],
               ] as [number, number];
               const newHeadingText = sourceCode.text.slice(
@@ -91,7 +91,7 @@ export default createRule<[Option?]>("atx-heading-closing-sequence", {
                 parseATXHeadingClosingSequenceFromText(newHeadingText);
               if (newHeadingParsed) {
                 const escapeIndex =
-                  removeRange[0] - newHeadingParsed.rawAfter.length - 1;
+                  removeRange[0] - newHeadingParsed.after.length - 1;
                 yield fixer.insertTextBeforeRange(
                   [escapeIndex, escapeIndex],
                   "\\",

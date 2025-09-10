@@ -102,12 +102,12 @@ export default createRule<[Option?]>("level1-heading-style", {
 
               yield fixer.removeRange([
                 parsed.openingSequence.range[0],
-                parsed.openingSequence.raws.spaceAfter.range[1],
+                parsed.content.range[0],
               ]);
               if (parsed.closingSequence) {
                 yield fixer.removeRange([
-                  parsed.closingSequence.raws.spaceBefore.range[0],
-                  parsed.closingSequence.raws.spaceAfter.range[1],
+                  parsed.content.range[1],
+                  parsed.after?.range[1] ?? parsed.closingSequence.range[1],
                 ]);
               }
               const lines = getParsedLines(sourceCode);

@@ -7,30 +7,30 @@ describe("parseATXHeadingClosingSequenceFromText", () => {
       parseATXHeadingClosingSequenceFromText("# Heading ###   "),
       {
         closingSequence: "###",
-        rawBefore: " ",
-        rawAfter: "   ",
+        before: " ",
+        after: "   ",
       },
     );
     assert.deepStrictEqual(
       parseATXHeadingClosingSequenceFromText("## Foo ##\t\t"),
       {
         closingSequence: "##",
-        rawBefore: " ",
-        rawAfter: "\t\t",
+        before: " ",
+        after: "\t\t",
       },
     );
     // Cases where trailing # is interpreted as a closing sequence
     assert.deepStrictEqual(parseATXHeadingClosingSequenceFromText("# # # #"), {
       closingSequence: "#",
-      rawBefore: " ",
-      rawAfter: "",
+      before: " ",
+      after: "",
     });
     assert.deepStrictEqual(
       parseATXHeadingClosingSequenceFromText("# Heading #"),
       {
         closingSequence: "#",
-        rawBefore: " ",
-        rawAfter: "",
+        before: " ",
+        after: "",
       },
     );
   });
@@ -55,8 +55,8 @@ describe("parseATXHeadingClosingSequenceFromText", () => {
       parseATXHeadingClosingSequenceFromText("# Foo \t### \t "),
       {
         closingSequence: "###",
-        rawBefore: " \t",
-        rawAfter: " \t ",
+        before: " \t",
+        after: " \t ",
       },
     );
   });
