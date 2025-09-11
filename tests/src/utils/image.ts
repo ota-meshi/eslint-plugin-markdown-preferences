@@ -8,8 +8,8 @@ describe("parseImageFromText", () => {
       text: { range: [1, 6] },
       openingParen: { range: [6, 7] },
       destination: { type: "bare", text: "foo.png", range: [7, 14] },
-      closingParen: { range: [14, 15] },
       title: null,
+      closingParen: { range: [14, 15] },
     });
   });
 
@@ -23,8 +23,8 @@ describe("parseImageFromText", () => {
         text: "<foo.png>",
         range: [7, 16],
       },
-      closingParen: { range: [16, 17] },
       title: null,
+      closingParen: { range: [16, 17] },
     });
   });
 
@@ -75,8 +75,8 @@ describe("parseImageFromText", () => {
       text: { range: [1, 6] },
       openingParen: { range: [6, 7] },
       destination: { type: "bare", text: "foo\\(bar\\).png", range: [7, 21] },
-      closingParen: { range: [21, 22] },
       title: null,
+      closingParen: { range: [21, 22] },
     });
   });
 
@@ -87,8 +87,8 @@ describe("parseImageFromText", () => {
       text: { range: [1, 6] },
       openingParen: { range: [6, 7] },
       destination: { type: "bare", text: "foo.png", range: [7, 14] },
-      closingParen: { range: [15, 16] },
       title: null,
+      closingParen: { range: [15, 16] },
     });
 
     // space after opening paren
@@ -97,8 +97,8 @@ describe("parseImageFromText", () => {
       text: { range: [1, 6] },
       openingParen: { range: [6, 7] },
       destination: { type: "bare", text: "foo.png", range: [8, 15] },
-      closingParen: { range: [15, 16] },
       title: null,
+      closingParen: { range: [15, 16] },
     });
 
     // spaces both sides
@@ -107,8 +107,8 @@ describe("parseImageFromText", () => {
       text: { range: [1, 6] },
       openingParen: { range: [6, 7] },
       destination: { type: "bare", text: "foo.png", range: [8, 15] },
-      closingParen: { range: [16, 17] },
       title: null,
+      closingParen: { range: [16, 17] },
     });
   });
 
@@ -116,5 +116,26 @@ describe("parseImageFromText", () => {
     // space after [alt]
     const result1 = parseImageFromText("![alt] (foo.png)");
     assert.deepStrictEqual(result1, null);
+  });
+
+  it("should parse image with blockquotes", () => {
+    const result1 = parseImageFromText("![alt](\n> foo.png)");
+    assert.deepStrictEqual(result1, {
+      text: { range: [1, 6] },
+      openingParen: { range: [6, 7] },
+      destination: { type: "bare", text: "foo.png", range: [10, 17] },
+      title: null,
+      closingParen: { range: [17, 18] },
+    });
+  });
+  it("should parse image with blockquotes without spaces", () => {
+    const result1 = parseImageFromText("![alt](\n>foo.png)");
+    assert.deepStrictEqual(result1, {
+      text: { range: [1, 6] },
+      openingParen: { range: [6, 7] },
+      destination: { type: "bare", text: "foo.png", range: [9, 16] },
+      title: null,
+      closingParen: { range: [16, 17] },
+    });
   });
 });

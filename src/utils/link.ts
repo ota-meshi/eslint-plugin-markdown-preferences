@@ -1,8 +1,9 @@
 import type { MarkdownSourceCode } from "@eslint/markdown";
 import type { SourceLocation } from "estree";
 import type { Link } from "mdast";
-import { isAsciiControlCharacter, isWhitespace } from "./unicode.ts";
+import { isAsciiControlCharacter } from "./unicode.ts";
 import { getLinkKind, getSourceLocationFromRange } from "./ast.ts";
+import { ForwardCharacterCursor } from "./character-cursor.ts";
 
 export type ParsedInlineLink = {
   text: {
@@ -125,46 +126,52 @@ export function parseInlineLinkDestAndTitleFromText(text: string): {
     range: [number, number];
   };
 } | null {
-  let index = 0;
-
   // Skip initial `(`
-  if (text[index] !== "(") return null;
-  index++;
-  skipSpaces();
+  if (!text.startsWith("(")) return null;
+  const cursor = new ForwardCharacterCursor(text);
+  cursor.next();
+  cursor.skipSpaces();
 
   let destination: NonNullable<
     ReturnType<typeof parseInlineLinkDestAndTitleFromText>
   >["destination"];
-  const destinationStartIndex = index;
-  if (text[index] === "<") {
+  const destinationStartIndex = cursor.currIndex();
+  if (cursor.curr() === "<") {
     // Pointy-bracketed destination
-    index++;
-    if (!skipUntilEnd((c) => c === ">")) return null;
-    index++;
-    const destinationRange: [number, number] = [destinationStartIndex, index];
+    cursor.next();
+    if (!cursor.skipUntilEnd((c) => c === ">")) return null;
+    cursor.next();
+    const destinationRange: [number, number] = [
+      destinationStartIndex,
+      cursor.currIndex(),
+    ];
     destination = {
       type: "pointy-bracketed",
       text: text.slice(...destinationRange),
       range: destinationRange,
     };
   } else {
-    if (text.length <= index) return null;
-    skipUntilEnd(
-      (c) => isWhitespace(c) || isAsciiControlCharacter(c) || c === ")",
+    if (cursor.finished()) return null;
+    cursor.skipUntilEnd(
+      (c, i) =>
+        cursor.isWhitespace(i) || isAsciiControlCharacter(c) || c === ")",
     );
-    const destinationRange: [number, number] = [destinationStartIndex, index];
+    const destinationRange: [number, number] = [
+      destinationStartIndex,
+      cursor.currIndex(),
+    ];
     destination = {
       type: "bare",
       text: text.slice(...destinationRange),
       range: destinationRange,
     };
   }
-  skipSpaces();
-  if (text[index] === ")") {
-    const closingParenStartIndex = index;
-    index++;
-    skipSpaces();
-    if (index < text.length) {
+  cursor.skipSpaces();
+  if (cursor.curr() === ")") {
+    const closingParenStartIndex = cursor.currIndex();
+    cursor.next();
+    cursor.skipSpaces();
+    if (!cursor.finished()) {
       // There should be no other characters.
       return null;
     }
@@ -175,25 +182,25 @@ export function parseInlineLinkDestAndTitleFromText(text: string): {
       destination,
       title: null,
       closingParen: {
-        range: [closingParenStartIndex, index],
+        range: [closingParenStartIndex, closingParenStartIndex + 1],
       },
     };
   }
-  if (text.length <= index) {
+  if (cursor.finished()) {
     return null;
   }
 
   let title: NonNullable<
     ReturnType<typeof parseInlineLinkDestAndTitleFromText>
   >["title"];
-  const titleStartIndex = index;
-  const startChar = text[index];
+  const titleStartIndex = cursor.currIndex();
+  const startChar = cursor.curr();
   if (startChar === "'" || startChar === '"' || startChar === "(") {
-    index++;
+    cursor.next();
     const endChar = startChar === "(" ? ")" : startChar;
-    if (!skipUntilEnd((c) => c === endChar)) return null;
-    index++;
-    const titleRange: [number, number] = [titleStartIndex, index];
+    if (!cursor.skipUntilEnd((c) => c === endChar)) return null;
+    cursor.next();
+    const titleRange: [number, number] = [titleStartIndex, cursor.currIndex()];
     title = {
       type:
         startChar === "'"
@@ -207,12 +214,12 @@ export function parseInlineLinkDestAndTitleFromText(text: string): {
   } else {
     return null;
   }
-  skipSpaces();
-  if (text[index] !== ")") return null;
-  const closingParenStartIndex = index;
-  index++;
-  skipSpaces();
-  if (index < text.length) {
+  cursor.skipSpaces();
+  if (cursor.curr() !== ")") return null;
+  const closingParenStartIndex = cursor.currIndex();
+  cursor.next();
+  cursor.skipSpaces();
+  if (!cursor.finished()) {
     // There should be no other characters.
     return null;
   }
@@ -224,36 +231,7 @@ export function parseInlineLinkDestAndTitleFromText(text: string): {
     destination,
     title,
     closingParen: {
-      range: [closingParenStartIndex, index],
+      range: [closingParenStartIndex, closingParenStartIndex + 1],
     },
   };
-
-  /**
-   * Skip spaces
-   */
-  function skipSpaces() {
-    while (index < text.length && isWhitespace(text[index])) {
-      index++;
-    }
-  }
-
-  /**
-   * Skip until the end by the given condition
-   */
-  function skipUntilEnd(checkEnd: (c: string) => boolean) {
-    while (index < text.length) {
-      const c = text[index];
-      if (checkEnd(c)) return true;
-      index++;
-      if (c !== "\\") continue;
-      if (
-        index < text.length &&
-        (text[index] === "\\" || checkEnd(text[index])) &&
-        !isWhitespace(text[index])
-      ) {
-        index++;
-      }
-    }
-    return false;
-  }
 }

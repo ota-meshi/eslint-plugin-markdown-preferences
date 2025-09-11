@@ -1,8 +1,9 @@
 import type { MarkdownSourceCode } from "@eslint/markdown";
 import type { SourceLocation } from "estree";
 import type { Image } from "mdast";
-import { isAsciiControlCharacter, isWhitespace } from "./unicode.ts";
+import { isAsciiControlCharacter } from "./unicode.ts";
 import { getSourceLocationFromRange } from "./ast.ts";
+import { BackwardCharacterCursor } from "./character-cursor.ts";
 
 export type ParsedImage = {
   text: {
@@ -118,21 +119,21 @@ export function parseImageFromText(text: string): {
   };
 } | null {
   if (!text.startsWith("![")) return null;
-  let index = text.length - 1;
-  skipSpaces();
-  if (text[index] !== ")") return null;
-  const closingParenStartIndex = index;
-  index--;
-  skipSpaces();
+  const cursor = new BackwardCharacterCursor(text);
+  cursor.skipSpaces();
+  if (cursor.curr() !== ")") return null;
+  const closingParenStartIndex = cursor.currIndex();
+  cursor.prev();
+  cursor.skipSpaces();
   let title: NonNullable<ReturnType<typeof parseImageFromText>>["title"] = null;
-  const titleEndIndex = index + 1;
-  const endChar = text[index];
+  const titleEndIndex = cursor.currIndex() + 1;
+  const endChar = cursor.curr();
   if (endChar === "'" || endChar === '"' || endChar === ")") {
-    index--;
+    cursor.prev();
     const startChar = endChar === ")" ? "(" : endChar;
-    if (skipUntilStart((c) => c === startChar)) {
-      const titleRange: [number, number] = [index, titleEndIndex];
-      index--;
+    if (cursor.skipUntilStart((c) => c === startChar)) {
+      const titleRange: [number, number] = [cursor.currIndex(), titleEndIndex];
+      cursor.prev();
       title = {
         type:
           startChar === "'"
@@ -143,46 +144,52 @@ export function parseImageFromText(text: string): {
         text: text.slice(...titleRange),
         range: titleRange,
       };
-      skipSpaces();
+      cursor.skipSpaces();
     }
   }
   if (title == null) {
-    index = titleEndIndex - 1;
+    cursor.setCurrIndex(titleEndIndex - 1);
   }
 
   let destination: NonNullable<
     ReturnType<typeof parseImageFromText>
   >["destination"];
-  const destinationEndIndex = index + 1;
-  if (text[index] === ">") {
+  const destinationEndIndex = cursor.currIndex() + 1;
+  if (cursor.curr() === ">") {
     // Pointy-bracketed destination
-    index--;
-    if (!skipUntilStart((c) => c === "<")) return null;
-    const destinationRange: [number, number] = [index, destinationEndIndex];
-    index--;
+    cursor.prev();
+    if (!cursor.skipUntilStart((c) => c === "<")) return null;
+    const destinationRange: [number, number] = [
+      cursor.currIndex(),
+      destinationEndIndex,
+    ];
+    cursor.prev();
     destination = {
       type: "pointy-bracketed",
       text: text.slice(...destinationRange),
       range: destinationRange,
     };
   } else {
-    if (text.length <= index) return null;
-    skipUntilStart(
-      (c) => isWhitespace(c) || isAsciiControlCharacter(c) || c === "(",
+    if (cursor.finished()) return null;
+    cursor.skipUntilStart(
+      (c, i) =>
+        cursor.isWhitespace(i) || isAsciiControlCharacter(c) || c === "(",
     );
-    const destinationRange: [number, number] = [index + 1, destinationEndIndex];
+    const destinationRange: [number, number] = [
+      cursor.currIndex() + 1,
+      destinationEndIndex,
+    ];
     destination = {
       type: "bare",
       text: text.slice(...destinationRange),
       range: destinationRange,
     };
   }
-  skipSpaces();
-  if (text[index] !== "(") return null;
-  const openingParenStartIndex = index;
-  index--;
-  if (text[index] !== "]") return null;
-  const textRange: [number, number] = [1, index + 1];
+  cursor.skipSpaces();
+  if (cursor.curr() !== "(") return null;
+  const openingParenStartIndex = cursor.currIndex();
+  if (cursor.prev() !== "]") return null;
+  const textRange: [number, number] = [1, cursor.currIndex() + 1];
   return {
     openingParen: {
       range: [openingParenStartIndex, openingParenStartIndex + 1],
@@ -196,38 +203,4 @@ export function parseImageFromText(text: string): {
       range: [closingParenStartIndex, closingParenStartIndex + 1],
     },
   };
-
-  /**
-   * Skip spaces
-   */
-  function skipSpaces() {
-    while (index >= 0 && isWhitespace(text[index])) {
-      index--;
-    }
-  }
-
-  /**
-   * Skip until the start by the given condition
-   */
-  function skipUntilStart(checkStart: (c: string) => boolean) {
-    while (index >= 0) {
-      const c = text[index];
-      if (checkStart(c)) {
-        if (index > 1 && !isWhitespace(c)) {
-          let escapeText = "";
-          while (text.endsWith(`${escapeText}\\`, index)) {
-            escapeText += "\\";
-          }
-          // An odd number of backslashes acts as an escape.
-          if (escapeText.length % 2 === 1) {
-            index -= escapeText.length + 1;
-            continue;
-          }
-        }
-        return true;
-      }
-      index--;
-    }
-    return false;
-  }
 }

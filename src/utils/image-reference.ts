@@ -2,7 +2,7 @@ import type { MarkdownSourceCode } from "@eslint/markdown";
 import type { SourceLocation } from "estree";
 import type { ImageReference } from "mdast";
 import { getSourceLocationFromRange } from "./ast.ts";
-import { isWhitespace } from "./unicode.ts";
+import { BackwardCharacterCursor } from "./character-cursor.ts";
 
 export type ParsedImageReference = {
   text: {
@@ -98,15 +98,14 @@ export function parseFullImageReferenceFromText(text: string): {
   };
 } | null {
   if (!text.startsWith("![")) return null;
-  let index = text.length - 1;
-  skipSpaces();
-  if (text[index] !== "]") return null;
-  const labelEndIndex = index + 1;
-  index--;
-  skipSpaces();
-  if (!skipUntilStart((c) => c === "[")) return null;
-  const labelRange: [number, number] = [index, labelEndIndex];
-  index--;
+  const cursor = new BackwardCharacterCursor(text);
+  cursor.skipSpaces();
+  if (cursor.curr() !== "]") return null;
+  const labelEndIndex = cursor.currIndex() + 1;
+  cursor.prev();
+  cursor.skipSpaces();
+  if (!cursor.skipUntilStart((c) => c === "[")) return null;
+  const labelRange: [number, number] = [cursor.currIndex(), labelEndIndex];
   const label: NonNullable<
     ReturnType<typeof parseFullImageReferenceFromText>
   >["label"] = {
@@ -114,8 +113,8 @@ export function parseFullImageReferenceFromText(text: string): {
     range: labelRange,
   };
 
-  if (text[index] !== "]") return null;
-  const textRange: [number, number] = [1, index + 1];
+  if (cursor.prev() !== "]") return null;
+  const textRange: [number, number] = [1, cursor.currIndex() + 1];
   return {
     text: {
       text: text.slice(...textRange),
@@ -123,38 +122,4 @@ export function parseFullImageReferenceFromText(text: string): {
     },
     label,
   };
-
-  /**
-   * Skip spaces
-   */
-  function skipSpaces() {
-    while (index >= 0 && isWhitespace(text[index])) {
-      index--;
-    }
-  }
-
-  /**
-   * Skip until the start by the given condition
-   */
-  function skipUntilStart(checkStart: (c: string) => boolean) {
-    while (index >= 0) {
-      const c = text[index];
-      if (checkStart(c)) {
-        if (index > 1) {
-          let escapeText = "";
-          while (text.endsWith(`${escapeText}\\`, index)) {
-            escapeText += "\\";
-          }
-          // An odd number of backslashes acts as an escape.
-          if (escapeText.length % 2 === 1) {
-            index -= escapeText.length + 1;
-            continue;
-          }
-        }
-        return true;
-      }
-      index--;
-    }
-    return false;
-  }
 }
