@@ -138,4 +138,44 @@ describe("parseImageFromText", () => {
       closingParen: { range: [16, 17] },
     });
   });
+  it("should parse image with `>` with 4 spaces", () => {
+    const result1 = parseImageFromText("![alt](\n    >foo.png)");
+    assert.deepStrictEqual(result1, {
+      text: { range: [1, 6] },
+      openingParen: { range: [6, 7] },
+      destination: { type: "bare", text: ">foo.png", range: [12, 20] },
+      title: null,
+      closingParen: { range: [20, 21] },
+    });
+  });
+  it("should parse image with `> >` with 5 spaces", () => {
+    const result1 = parseImageFromText("![alt](\n>     >foo.png)");
+    assert.deepStrictEqual(result1, {
+      text: { range: [1, 6] },
+      openingParen: { range: [6, 7] },
+      destination: { type: "bare", text: ">foo.png", range: [14, 22] },
+      title: null,
+      closingParen: { range: [22, 23] },
+    });
+  });
+  it("should parse image with `>>` with 4 spaces", () => {
+    const result1 = parseImageFromText("![alt](\n    >>foo.png)");
+    assert.deepStrictEqual(result1, {
+      text: { range: [1, 6] },
+      openingParen: { range: [6, 7] },
+      destination: { type: "bare", text: ">>foo.png", range: [12, 21] },
+      title: null,
+      closingParen: { range: [21, 22] },
+    });
+  });
+  it("should parse image with `> >` with 5 width space and tab", () => {
+    const result1 = parseImageFromText("![alt](\n>\t  >foo.png)");
+    assert.deepStrictEqual(result1, {
+      text: { range: [1, 6] },
+      openingParen: { range: [6, 7] },
+      destination: { type: "bare", text: ">foo.png", range: [12, 20] },
+      title: null,
+      closingParen: { range: [20, 21] },
+    });
+  });
 });

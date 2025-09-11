@@ -26,11 +26,34 @@ export abstract class CharacterCursor {
     const ch = this.text[index];
     if (isWhitespace(ch)) return true;
     if (ch !== ">") return false;
+    const prefix: string[] = [ch];
     for (let prev = index - 1; prev >= 0; prev--) {
       const prevCh = this.text[prev];
-      if (prevCh === "\n") return true;
-      if (isSpaceOrTab(prevCh)) continue;
+      if (prevCh === "\n") break;
+      if (isSpaceOrTab(prevCh) || prevCh === ">") {
+        prefix.unshift(prevCh);
+        continue;
+      }
       return false;
+    }
+
+    let width = 0;
+    let leadingMarkerOffset = 0;
+    let prevCh: string | undefined;
+    for (const currCh of prefix) {
+      if (currCh === ">") {
+        if (width - leadingMarkerOffset > 3) return false;
+        leadingMarkerOffset = width + 1;
+      }
+      if (currCh === "\t") {
+        width += 4 - (width % 4);
+      } else {
+        width++;
+      }
+      if (prevCh === ">" && isSpaceOrTab(currCh)) {
+        leadingMarkerOffset++;
+      }
+      prevCh = currCh;
     }
     return true;
   }
