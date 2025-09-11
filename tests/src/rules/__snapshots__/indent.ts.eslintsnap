@@ -1,0 +1,37 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/atx-headings-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |  # Heading
+    | ^ [1]
+  2 |   ## Heading
+    | ^~ [2]
+  3 |  ### Heading
+    | ^ [3]
+  4 |
+  5 | > ## Heading in blockquotes
+  6 | >  ### Heading in blockquotes
+  7 | >#### Heading in blockquotes
+  8 |
+
+Output:
+  1 | # Heading
+  2 | ## Heading
+  3 | ### Heading
+  4 |
+  5 | > ## Heading in blockquotes
+  6 | >  ### Heading in blockquotes
+  7 | >#### Heading in blockquotes
+  8 |
+
+[1] Top-level headings should not be indented.
+[2] Top-level headings should not be indented.
+[3] Top-level headings should not be indented.
+---

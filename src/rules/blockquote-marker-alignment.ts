@@ -67,52 +67,52 @@ export default createRule("blockquote-marker-alignment", {
 
           if (!marker) continue;
 
-          if (base.index === marker.index) continue;
+          if (base.loc.start.column === marker.loc.start.column) continue;
 
           blockquoteStack.reported = true;
           context.report({
             node,
-            loc: {
-              start: {
-                line: lineNumber,
-                column: marker.index + 1,
-              },
-              end: {
-                line: lineNumber,
-                column: marker.index + 2,
-              },
-            },
+            loc: marker.loc,
             messageId: "inconsistentAlignment",
             fix(fixer) {
               const lines = getParsedLines(sourceCode);
               const line = lines.get(lineNumber);
-              if (marker.index < base.index) {
-                const addSpaces = " ".repeat(base.index - marker.index);
+              if (marker.loc.start.column < base.loc.start.column) {
+                const addSpaces = " ".repeat(
+                  base.loc.start.column - marker.loc.start.column,
+                );
                 return fixer.insertTextBeforeRange(
-                  [line.range[0] + marker.index, line.range[0] + marker.index],
+                  [
+                    line.range[0] + marker.loc.start.column - 1,
+                    line.range[0] + marker.loc.start.column - 1,
+                  ],
                   addSpaces,
                 );
               }
               if (blockquoteLevel === 1) {
-                const expectedSpaces = " ".repeat(base.index);
+                const expectedSpaces = " ".repeat(base.loc.start.column - 1);
                 return fixer.replaceTextRange(
-                  [line.range[0], line.range[0] + marker.index],
+                  [line.range[0], line.range[0] + marker.loc.start.column - 1],
                   expectedSpaces,
                 );
               }
               const itemBefore = line.text.slice(
                 0,
-                line.range[0] + marker.index,
+                line.range[0] + marker.loc.start.column - 1,
               );
               if (itemBefore.includes("\t")) return null; // Ignore tab
 
-              let removeStartIndex = marker.index;
-              for (; removeStartIndex > base.index; removeStartIndex--) {
+              let removeStartIndex = marker.loc.start.column - 1;
+              for (
+                ;
+                removeStartIndex > base.loc.start.column - 1;
+                removeStartIndex--
+              ) {
                 if (line.text[removeStartIndex - 1] !== " ") break;
               }
               return fixer.removeRange([
                 line.range[0] + removeStartIndex,
-                line.range[0] + marker.index,
+                line.range[0] + marker.loc.start.column - 1,
               ]);
             },
           });
