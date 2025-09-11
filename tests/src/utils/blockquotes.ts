@@ -51,17 +51,17 @@ describe("utils/blockquotes", () => {
   it("should handle line with tab before blockquote", () => {
     const src = getSrc("\t> text");
     const info = getBlockquoteLevelFromLine(src, 1);
-    assert.strictEqual(info.level, 1);
-    assert.strictEqual(info.prefix, "\t> ");
-    assert.deepStrictEqual([...info.blockquoteMarkers], [[1, { index: 1 }]]);
+    assert.strictEqual(info.level, 0);
+    assert.strictEqual(info.prefix, "\t");
+    assert.deepStrictEqual([...info.blockquoteMarkers], []);
   });
 
   it("should handle line with multiple spaces and tabs before blockquote", () => {
     const src = getSrc(" \t  > text");
     const info = getBlockquoteLevelFromLine(src, 1);
-    assert.strictEqual(info.level, 1);
-    assert.strictEqual(info.prefix, " \t  > ");
-    assert.deepStrictEqual([...info.blockquoteMarkers], [[1, { index: 4 }]]);
+    assert.strictEqual(info.level, 0);
+    assert.strictEqual(info.prefix, " \t  ");
+    assert.deepStrictEqual([...info.blockquoteMarkers], []);
   });
 
   it("should stop at first non-space non-> character", () => {
@@ -122,6 +122,36 @@ describe("utils/blockquotes", () => {
     assert.strictEqual(info.level, 1);
     assert.strictEqual(info.prefix, "   > ");
     assert.deepStrictEqual([...info.blockquoteMarkers], [[1, { index: 3 }]]);
+  });
+
+  it("should handle blockquote with leading 4 spaces", () => {
+    const src = getSrc("    > text");
+    const info = getBlockquoteLevelFromLine(src, 1);
+    assert.strictEqual(info.level, 0);
+    assert.strictEqual(info.prefix, "    ");
+    assert.deepStrictEqual([...info.blockquoteMarkers], []);
+  });
+
+  it("should handle blockquote with 4 spaces between markers", () => {
+    const src = getSrc(">    > text");
+    const info = getBlockquoteLevelFromLine(src, 1);
+    assert.strictEqual(info.level, 2);
+    assert.strictEqual(info.prefix, ">    > ");
+    assert.deepStrictEqual(
+      [...info.blockquoteMarkers],
+      [
+        [1, { index: 0 }],
+        [2, { index: 5 }],
+      ],
+    );
+  });
+
+  it("should handle blockquote with 5 spaces between markers", () => {
+    const src = getSrc(">     > text");
+    const info = getBlockquoteLevelFromLine(src, 1);
+    assert.strictEqual(info.level, 1);
+    assert.strictEqual(info.prefix, ">     ");
+    assert.deepStrictEqual([...info.blockquoteMarkers], [[1, { index: 0 }]]);
   });
 
   it("should handle deeply nested blockquotes", () => {
