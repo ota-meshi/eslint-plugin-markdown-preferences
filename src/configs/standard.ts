@@ -27,6 +27,7 @@ export const rules: Linter.RulesRecord = {
   "markdown-preferences/code-fence-style": "error",
   "markdown-preferences/emphasis-delimiters-style": "error",
   "markdown-preferences/hard-linebreak-style": "error",
+  "markdown-preferences/indent": "error",
   "markdown-preferences/level1-heading-style": "error",
   "markdown-preferences/level2-heading-style": "error",
   "markdown-preferences/link-bracket-newline": "error",

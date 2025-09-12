@@ -45,6 +45,7 @@ The rules with the following 💄 are included in the `plugin.configs.standard` 
 | [markdown-preferences/definitions-last](./definitions-last.md) | require link definitions and footnote definitions to be placed at the end of the document | 🔧 |  |
 | [markdown-preferences/emphasis-delimiters-style](./emphasis-delimiters-style.md) | enforce a consistent delimiter style for emphasis and strong emphasis | 🔧 | 💄 |
 | [markdown-preferences/hard-linebreak-style](./hard-linebreak-style.md) | enforce consistent hard linebreak style. | 🔧 | ⭐💄 |
+| [markdown-preferences/indent](./indent.md) | enforce consistent indentation in Markdown files | 🔧 | 💄 |
 | [markdown-preferences/level1-heading-style](./level1-heading-style.md) | enforce consistent style for level 1 headings | 🔧 | 💄 |
 | [markdown-preferences/level2-heading-style](./level2-heading-style.md) | enforce consistent style for level 2 headings | 🔧 | 💄 |
 | [markdown-preferences/link-bracket-newline](./link-bracket-newline.md) | enforce linebreaks after opening and before closing link brackets | 🔧 | 💄 |

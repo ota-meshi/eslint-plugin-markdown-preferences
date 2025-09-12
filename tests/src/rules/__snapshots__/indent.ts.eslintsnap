@@ -9,29 +9,469 @@ LanguageOptions:
 Plugins: unable to serialize
 
 Code:
-  1 |  # Heading
-    | ^ [1]
+  1 | # Heading
   2 |   ## Heading
-    | ^~ [2]
+    | ^~ [1]
   3 |  ### Heading
-    | ^ [3]
-  4 |
-  5 | > ## Heading in blockquotes
-  6 | >  ### Heading in blockquotes
-  7 | >#### Heading in blockquotes
-  8 |
+    | ^ [2]
+  4 |    ### Heading
+    | ^~~ [3]
+  5 |
+  6 | > ## Heading in blockquotes
+  7 | >  ### Heading in blockquotes
+    |  ^~ [4]
+  8 | >    ### Heading in blockquotes
+    |  ^~~~ [5]
+  9 | >#### Heading in blockquotes
+    |  ^ [6]
+ 10 |
+ 11 | - ## Heading
+ 12 | -   ## Heading
+    |  ^~~ [7]
+ 13 | -  ## Heading
+    |  ^~ [8]
+ 14 |     ## Heading
+    | ^~~~ [9]
+ 15 |
+ 16 | > - ## Heading
+ 17 | > -   ## Heading
+    |    ^~~ [10]
+ 18 | > -  ## Heading
+    |    ^~ [11]
+ 19 | >     ## Heading L2
+    |  ^~~~~ [12]
+ 20 |
 
 Output:
   1 | # Heading
   2 | ## Heading
   3 | ### Heading
-  4 |
-  5 | > ## Heading in blockquotes
-  6 | >  ### Heading in blockquotes
-  7 | >#### Heading in blockquotes
-  8 |
+  4 | ### Heading
+  5 |
+  6 | > ## Heading in blockquotes
+  7 | > ### Heading in blockquotes
+  8 | > ### Heading in blockquotes
+  9 | > #### Heading in blockquotes
+ 10 |
+ 11 | - ## Heading
+ 12 | - ## Heading
+ 13 | - ## Heading
+ 14 |   ## Heading
+ 15 |
+ 16 | > - ## Heading
+ 17 | > - ## Heading
+ 18 | > - ## Heading
+ 19 | >   ## Heading L2
+ 20 |
 
-[1] Top-level headings should not be indented.
-[2] Top-level headings should not be indented.
-[3] Top-level headings should not be indented.
+[1] Expected indentation of 0 but found 2.
+[2] Expected indentation of 0 but found 1.
+[3] Expected indentation of 0 but found 3.
+[4] Expected indentation of 1 from the blockquote marker but found 2.
+[5] Expected indentation of 1 from the blockquote marker but found 4.
+[6] Expected indentation of 1 from the blockquote marker but found 0.
+[7] Expected indentation of 1 from the list marker but found 3.
+[8] Expected indentation of 1 from the list marker but found 2.
+[9] Expected indentation of 2 but found 4.
+[10] Expected indentation of 1 from the list marker but found 3.
+[11] Expected indentation of 1 from the list marker but found 2.
+[12] Expected indentation of 3 from the blockquote marker but found 5.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/fenced-code-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Indented Code Blocks
+  2 |
+  3 | ```js
+  4 |     console.log('code block')
+  5 |       console.log('code block')
+  6 |          console.log('code block')
+  7 | ```
+  8 |
+  9 |  ```js
+    | ^ [1]
+ 10 |     console.log('code block')
+ 11 |       console.log('code block')
+ 12 |          console.log('code block')
+ 13 |  ```
+    | ^ [2]
+ 14 |
+ 15 | ```js
+ 16 |     console.log('code block')
+ 17 |   ```
+    | ^~ [3]
+ 18 |
+ 19 |    ```js
+    | ^~~ [4]
+ 20 |    console.log('code block')
+ 21 |    ```
+    | ^~~ [5]
+ 22 |
+ 23 | >```js
+    |  ^ [6]
+ 24 | >   console.log('code block')
+ 25 | >     console.log('code block')
+ 26 | >        console.log('code block')
+ 27 | >```
+    |  ^ [7]
+ 28 | >
+ 29 | >  ```js
+    |  ^~ [8]
+ 30 | >     console.log('code block')
+ 31 | >       console.log('code block')
+ 32 | >          console.log('code block')
+ 33 | >  ```
+    |  ^~ [9]
+ 34 | >
+ 35 | > ```js
+ 36 | >     console.log('code block')
+ 37 | >   ```
+    |  ^~~ [10]
+ 38 | >
+ 39 | >    ```js
+    |  ^~~~ [11]
+ 40 | >    console.log('code block')
+ 41 | >    ```
+    |  ^~~~ [12]
+ 42 |
+ 43 | - ```js
+ 44 |       console.log('code block')
+ 45 |         console.log('code block')
+ 46 |            console.log('code block')
+ 47 |   ```
+ 48 |
+ 49 | -   ```js
+    |  ^~~ [13]
+ 50 |       console.log('code block')
+ 51 |         console.log('code block')
+ 52 |            console.log('code block')
+ 53 |     ```
+    | ^~~~ [14]
+ 54 |
+ 55 | -  ```js
+    |  ^~ [15]
+ 56 |       console.log('code block')
+ 57 |     ```
+    | ^~~~ [16]
+ 58 |
+ 59 |      ```js
+    | ^~~~~ [17]
+ 60 |      console.log('code block')
+ 61 |      ```
+    | ^~~~~ [18]
+ 62 |
+ 63 | > - ```js
+ 64 | >       console.log('code block')
+ 65 | >         console.log('code block')
+ 66 | >            console.log('code block')
+ 67 | >   ```
+ 68 | >
+ 69 | > -   ```js
+    |    ^~~ [19]
+ 70 | >       console.log('code block')
+ 71 | >         console.log('code block')
+ 72 | >            console.log('code block')
+ 73 | >     ```
+    |  ^~~~~ [20]
+ 74 | >
+ 75 | > -  ```js
+    |    ^~ [21]
+ 76 | >       console.log('code block')
+ 77 | >     ```
+    |  ^~~~~ [22]
+ 78 | >
+ 79 | >      ```js
+    |  ^~~~~~ [23]
+ 80 | >      console.log('code block')
+ 81 | >      ```
+    |  ^~~~~~ [24]
+ 82 |
+
+Output:
+  1 | # Indented Code Blocks
+  2 |
+  3 | ```js
+  4 |     console.log('code block')
+  5 |       console.log('code block')
+  6 |          console.log('code block')
+  7 | ```
+  8 |
+  9 | ```js
+ 10 |    console.log('code block')
+ 11 |      console.log('code block')
+ 12 |         console.log('code block')
+ 13 | ```
+ 14 |
+ 15 | ```js
+ 16 |     console.log('code block')
+ 17 | ```
+ 18 |
+ 19 | ```js
+ 20 | console.log('code block')
+ 21 | ```
+ 22 |
+ 23 | > ```js
+ 24 | >    console.log('code block')
+ 25 | >      console.log('code block')
+ 26 | >         console.log('code block')
+ 27 | > ```
+ 28 | >
+ 29 | > ```js
+ 30 | >    console.log('code block')
+ 31 | >      console.log('code block')
+ 32 | >         console.log('code block')
+ 33 | > ```
+ 34 | >
+ 35 | > ```js
+ 36 | >     console.log('code block')
+ 37 | > ```
+ 38 | >
+ 39 | > ```js
+ 40 | > console.log('code block')
+ 41 | > ```
+ 42 |
+ 43 | - ```js
+ 44 |       console.log('code block')
+ 45 |         console.log('code block')
+ 46 |            console.log('code block')
+ 47 |   ```
+ 48 |
+ 49 | - ```js
+ 50 |     console.log('code block')
+ 51 |       console.log('code block')
+ 52 |          console.log('code block')
+ 53 |   ```
+ 54 |
+ 55 | - ```js
+ 56 |      console.log('code block')
+ 57 |   ```
+ 58 |
+ 59 |   ```js
+ 60 |   console.log('code block')
+ 61 |   ```
+ 62 |
+ 63 | > - ```js
+ 64 | >       console.log('code block')
+ 65 | >         console.log('code block')
+ 66 | >            console.log('code block')
+ 67 | >   ```
+ 68 | >
+ 69 | > - ```js
+ 70 | >     console.log('code block')
+ 71 | >       console.log('code block')
+ 72 | >          console.log('code block')
+ 73 | >   ```
+ 74 | >
+ 75 | > - ```js
+ 76 | >      console.log('code block')
+ 77 | >   ```
+ 78 | >
+ 79 | >   ```js
+ 80 | >   console.log('code block')
+ 81 | >   ```
+ 82 |
+
+[1] Expected indentation of 0 but found 1.
+[2] Expected indentation of 0 but found 1.
+[3] Expected indentation of 0 but found 2.
+[4] Expected indentation of 0 but found 3.
+[5] Expected indentation of 0 but found 3.
+[6] Expected indentation of 1 from the blockquote marker but found 0.
+[7] Expected indentation of 1 from the blockquote marker but found 0.
+[8] Expected indentation of 1 from the blockquote marker but found 2.
+[9] Expected indentation of 1 from the blockquote marker but found 2.
+[10] Expected indentation of 1 from the blockquote marker but found 3.
+[11] Expected indentation of 1 from the blockquote marker but found 4.
+[12] Expected indentation of 1 from the blockquote marker but found 4.
+[13] Expected indentation of 1 from the list marker but found 3.
+[14] Expected indentation of 2 but found 4.
+[15] Expected indentation of 1 from the list marker but found 2.
+[16] Expected indentation of 2 but found 4.
+[17] Expected indentation of 2 but found 5.
+[18] Expected indentation of 2 but found 5.
+[19] Expected indentation of 1 from the list marker but found 3.
+[20] Expected indentation of 3 from the blockquote marker but found 5.
+[21] Expected indentation of 1 from the list marker but found 2.
+[22] Expected indentation of 3 from the blockquote marker but found 5.
+[23] Expected indentation of 3 from the blockquote marker but found 6.
+[24] Expected indentation of 3 from the blockquote marker but found 6.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/setext-headings-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | Setext Heading
+  2 | ==============
+  3 |
+  4 |   Heading
+    | ^~ [1]
+  5 |   --------------
+    | ^~ [2]
+  6 |  Heading
+    | ^ [3]
+  7 |  --------------
+    | ^ [4]
+  8 |    Heading
+    | ^~~ [5]
+  9 |    --------------
+    | ^~~ [6]
+ 10 |   Heading
+    | ^~ [7]
+ 11 |    --------------
+    | ^~~ [8]
+ 12 | Heading
+ 13 |  --------------
+    | ^ [9]
+ 14 |  Heading
+    | ^ [10]
+ 15 | --------------
+ 16 |
+ 17 | > Heading
+ 18 | > --------------
+ 19 | >Heading
+    |  ^ [11]
+ 20 | >--------------
+    |  ^ [12]
+ 21 | >  Heading
+    |  ^~ [13]
+ 22 | >  --------------
+    |  ^~ [14]
+ 23 | > Heading
+ 24 | > --------------
+ 25 | >   Heading
+    |  ^~~ [15]
+ 26 | >   --------------
+    |  ^~~ [16]
+ 27 | >  Heading
+    |  ^~ [17]
+ 28 | >   --------------
+    |  ^~~ [18]
+ 29 | >Heading
+    |  ^ [19]
+ 30 | > --------------
+ 31 | > Heading
+ 32 | >--------------
+    |  ^ [20]
+ 33 |
+
+Output:
+  1 | Setext Heading
+  2 | ==============
+  3 |
+  4 | Heading
+  5 | --------------
+  6 | Heading
+  7 | --------------
+  8 | Heading
+  9 | --------------
+ 10 | Heading
+ 11 | --------------
+ 12 | Heading
+ 13 | --------------
+ 14 | Heading
+ 15 | --------------
+ 16 |
+ 17 | > Heading
+ 18 | > --------------
+ 19 | > Heading
+ 20 | > --------------
+ 21 | > Heading
+ 22 | > --------------
+ 23 | > Heading
+ 24 | > --------------
+ 25 | > Heading
+ 26 | > --------------
+ 27 | > Heading
+ 28 | > --------------
+ 29 | > Heading
+ 30 | > --------------
+ 31 | > Heading
+ 32 | > --------------
+ 33 |
+
+[1] Expected indentation of 0 but found 2.
+[2] Expected indentation of 0 but found 2.
+[3] Expected indentation of 0 but found 1.
+[4] Expected indentation of 0 but found 1.
+[5] Expected indentation of 0 but found 3.
+[6] Expected indentation of 0 but found 3.
+[7] Expected indentation of 0 but found 2.
+[8] Expected indentation of 0 but found 3.
+[9] Expected indentation of 0 but found 1.
+[10] Expected indentation of 0 but found 1.
+[11] Expected indentation of 1 from the blockquote marker but found 0.
+[12] Expected indentation of 1 from the blockquote marker but found 0.
+[13] Expected indentation of 1 from the blockquote marker but found 2.
+[14] Expected indentation of 1 from the blockquote marker but found 2.
+[15] Expected indentation of 1 from the blockquote marker but found 3.
+[16] Expected indentation of 1 from the blockquote marker but found 3.
+[17] Expected indentation of 1 from the blockquote marker but found 2.
+[18] Expected indentation of 1 from the blockquote marker but found 3.
+[19] Expected indentation of 1 from the blockquote marker but found 0.
+[20] Expected indentation of 1 from the blockquote marker but found 0.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/thematic-breaks-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Thematic Breaks
+  2 |
+  3 | ---
+  4 |
+  5 |   ---
+    | ^~ [1]
+  6 |  ---
+    | ^ [2]
+  7 |    ---
+    | ^~~ [3]
+  8 |
+  9 | > ---
+ 10 | >  ---
+    |  ^~ [4]
+ 11 | >    ---
+    |  ^~~~ [5]
+ 12 | >---
+    |  ^ [6]
+ 13 |
+
+Output:
+  1 | # Thematic Breaks
+  2 |
+  3 | ---
+  4 |
+  5 | ---
+  6 | ---
+  7 | ---
+  8 |
+  9 | > ---
+ 10 | > ---
+ 11 | > ---
+ 12 | > ---
+ 13 |
+
+[1] Expected indentation of 0 but found 2.
+[2] Expected indentation of 0 but found 1.
+[3] Expected indentation of 0 but found 3.
+[4] Expected indentation of 1 from the blockquote marker but found 2.
+[5] Expected indentation of 1 from the blockquote marker but found 4.
+[6] Expected indentation of 1 from the blockquote marker but found 0.
 ---
