@@ -1,5 +1,14 @@
 # eslint-plugin-markdown-preferences
 
+## 0.24.0
+
+### Minor Changes
+
+- [#118](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/118) [`b721492`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/b721492f13e67bea509dbf06e019e1da1d2e91bf) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/indent`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/indent.html) rule
+
+- [#120](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/120) [`8ecd8e7`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/8ecd8e75fe0ac741b6a8515df7c7948b5369765b) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat([markdown-preferences/no-multi-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multi-spaces.html)): drop the check for multiple spaces around list markers, except for the space between a list marker and a task list marker.
+  (this will be handled by the new indent rule.)
+
 ## 0.23.0
 
 ### Minor Changes
