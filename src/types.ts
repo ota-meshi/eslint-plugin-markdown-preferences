@@ -24,7 +24,11 @@ export interface RuleModule extends MarkdownRuleDefinition {
   create(context: RuleContext<unknown[]>): MarkdownRuleVisitor;
 }
 
-export type ListCategory = "Preference" | "Stylistic";
+export type ListCategory =
+  | "Preference"
+  | "Whitespace"
+  | "Notation"
+  | "Decorative";
 
 export interface RuleMetaData {
   docs: {

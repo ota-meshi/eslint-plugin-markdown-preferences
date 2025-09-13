@@ -17,7 +17,7 @@ export default createRule<[Option?]>("atx-heading-closing-sequence", {
       description:
         "enforce consistent use of closing sequence in ATX headings.",
       categories: ["standard"],
-      listCategory: "Stylistic",
+      listCategory: "Decorative",
     },
     fixable: "code",
     hasSuggestions: false,

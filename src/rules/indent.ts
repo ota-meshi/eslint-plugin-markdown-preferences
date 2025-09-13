@@ -74,7 +74,7 @@ export default createRule<[Options?]>("indent", {
     docs: {
       description: "enforce consistent indentation in Markdown files",
       categories: ["standard"],
-      listCategory: "Stylistic",
+      listCategory: "Whitespace",
     },
     fixable: "whitespace",
     hasSuggestions: false,

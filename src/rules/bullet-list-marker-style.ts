@@ -89,7 +89,7 @@ export default createRule<[Options?]>("bullet-list-marker-style", {
       description:
         "enforce consistent bullet list (unordered list) marker style",
       categories: ["standard"],
-      listCategory: "Stylistic",
+      listCategory: "Notation",
     },
     fixable: "code",
     hasSuggestions: false,

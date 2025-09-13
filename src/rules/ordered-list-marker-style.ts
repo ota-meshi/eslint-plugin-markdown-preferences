@@ -97,7 +97,7 @@ export default createRule("ordered-list-marker-style", {
     docs: {
       description: "enforce consistent ordered list marker style",
       categories: ["standard"],
-      listCategory: "Stylistic",
+      listCategory: "Notation",
     },
     fixable: "code",
     hasSuggestions: false,

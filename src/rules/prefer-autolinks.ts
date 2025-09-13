@@ -8,7 +8,7 @@ export default createRule("prefer-autolinks", {
     docs: {
       description: "enforce the use of autolinks for URLs",
       categories: ["recommended", "standard"],
-      listCategory: "Stylistic",
+      listCategory: "Notation",
     },
     fixable: "code",
     hasSuggestions: false,

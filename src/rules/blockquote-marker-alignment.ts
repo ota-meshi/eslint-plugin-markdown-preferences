@@ -11,7 +11,7 @@ export default createRule("blockquote-marker-alignment", {
     docs: {
       description: "enforce consistent alignment of blockquote markers",
       categories: ["recommended", "standard"],
-      listCategory: "Stylistic",
+      listCategory: "Whitespace",
     },
     fixable: "whitespace",
     hasSuggestions: false,

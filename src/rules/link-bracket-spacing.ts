@@ -81,7 +81,7 @@ export default createRule<[Options?]>("link-bracket-spacing", {
     docs: {
       description: "enforce consistent spacing inside link brackets",
       categories: ["standard"],
-      listCategory: "Stylistic",
+      listCategory: "Whitespace",
     },
     fixable: "whitespace",
     hasSuggestions: false,

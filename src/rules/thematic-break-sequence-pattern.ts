@@ -15,7 +15,7 @@ export default createRule<[{ pattern?: string }?]>(
         description:
           "enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown.",
         categories: ["standard"],
-        listCategory: "Stylistic",
+        listCategory: "Decorative",
       },
       fixable: "code",
       hasSuggestions: false,

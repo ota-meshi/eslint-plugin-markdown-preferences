@@ -18,7 +18,7 @@ export default createRule<[{ minLinks?: number }?]>(
         description:
           "enforce using link reference definitions instead of inline links",
         categories: [],
-        listCategory: "Stylistic",
+        listCategory: "Notation",
       },
       fixable: "code",
       hasSuggestions: false,

@@ -10,7 +10,7 @@ export default createRule("prefer-fenced-code-blocks", {
       description:
         "enforce the use of fenced code blocks over indented code blocks",
       categories: ["recommended", "standard"],
-      listCategory: "Stylistic",
+      listCategory: "Notation",
     },
     fixable: "code",
     hasSuggestions: false,

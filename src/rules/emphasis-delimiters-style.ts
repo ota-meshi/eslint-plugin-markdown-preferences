@@ -50,7 +50,7 @@ export default createRule<[EmphasisDelimitersStyleOption?]>(
         description:
           "enforce a consistent delimiter style for emphasis and strong emphasis",
         categories: ["standard"],
-        listCategory: "Stylistic",
+        listCategory: "Notation",
       },
       fixable: "code",
       hasSuggestions: false,

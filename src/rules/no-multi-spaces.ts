@@ -24,7 +24,7 @@ export default createRule("no-multi-spaces", {
     docs: {
       description: "disallow multiple spaces",
       categories: ["standard"],
-      listCategory: "Stylistic",
+      listCategory: "Whitespace",
     },
     fixable: "whitespace",
     hasSuggestions: false,

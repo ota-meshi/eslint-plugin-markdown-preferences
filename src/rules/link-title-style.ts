@@ -38,7 +38,7 @@ export default createRule<[Options?]>("link-title-style", {
     docs: {
       description: "enforce a consistent style for link titles",
       categories: ["standard"],
-      listCategory: "Stylistic",
+      listCategory: "Notation",
     },
     fixable: "code",
     hasSuggestions: false,

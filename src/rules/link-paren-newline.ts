@@ -22,7 +22,7 @@ export default createRule<[Options?]>("link-paren-newline", {
       description:
         "enforce linebreaks after opening and before closing link parentheses",
       categories: ["standard"],
-      listCategory: "Stylistic",
+      listCategory: "Whitespace",
     },
     fixable: "whitespace",
     hasSuggestions: false,

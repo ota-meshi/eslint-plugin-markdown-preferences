@@ -108,9 +108,58 @@ The rules with the following 💄 are included in the `standard` config.
 
 <!-- prettier-ignore-end -->
 
-### Stylistic Rules
+### Notation Rules
 
-- Rules related to the formatting and visual style of Markdown.
+- Rules related to notation styles in Markdown.
+
+<!-- prettier-ignore-start -->
+
+| Rule ID | Description | Fixable | Config      |
+|:--------|:------------|:-------:|:-----------:|
+| [markdown-preferences/bullet-list-marker-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/bullet-list-marker-style.html) | enforce consistent bullet list (unordered list) marker style | 🔧 | 💄 |
+| [markdown-preferences/code-fence-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/code-fence-style.html) | enforce a consistent code fence style (backtick or tilde) in Markdown fenced code blocks. | 🔧 | 💄 |
+| [markdown-preferences/definitions-last](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/definitions-last.html) | require link definitions and footnote definitions to be placed at the end of the document | 🔧 |  |
+| [markdown-preferences/emphasis-delimiters-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/emphasis-delimiters-style.html) | enforce a consistent delimiter style for emphasis and strong emphasis | 🔧 | 💄 |
+| [markdown-preferences/hard-linebreak-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/hard-linebreak-style.html) | enforce consistent hard linebreak style. | 🔧 | ⭐💄 |
+| [markdown-preferences/level1-heading-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/level1-heading-style.html) | enforce consistent style for level 1 headings | 🔧 | 💄 |
+| [markdown-preferences/level2-heading-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/level2-heading-style.html) | enforce consistent style for level 2 headings | 🔧 | 💄 |
+| [markdown-preferences/link-destination-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-destination-style.html) | enforce a consistent style for link destinations | 🔧 | 💄 |
+| [markdown-preferences/link-title-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-title-style.html) | enforce a consistent style for link titles | 🔧 | 💄 |
+| [markdown-preferences/no-text-backslash-linebreak](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-text-backslash-linebreak.html) | disallow text backslash at the end of a line. |  | ⭐💄 |
+| [markdown-preferences/ordered-list-marker-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-style.html) | enforce consistent ordered list marker style | 🔧 | 💄 |
+| [markdown-preferences/prefer-autolinks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-autolinks.html) | enforce the use of autolinks for URLs | 🔧 | ⭐💄 |
+| [markdown-preferences/prefer-fenced-code-blocks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-fenced-code-blocks.html) | enforce the use of fenced code blocks over indented code blocks | 🔧 | ⭐💄 |
+| [markdown-preferences/prefer-link-reference-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-link-reference-definitions.html) | enforce using link reference definitions instead of inline links | 🔧 |  |
+| [markdown-preferences/strikethrough-delimiters-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/strikethrough-delimiters-style.html) | enforce a consistent delimiter style for strikethrough | 🔧 | 💄 |
+| [markdown-preferences/thematic-break-character-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-character-style.html) | enforce consistent character style for thematic breaks (horizontal rules) in Markdown. | 🔧 | 💄 |
+
+<!-- prettier-ignore-end -->
+
+### Whitespace Rules
+
+- Rules related to whitespace styles in Markdown.
+
+<!-- prettier-ignore-start -->
+
+| Rule ID | Description | Fixable | Config      |
+|:--------|:------------|:-------:|:-----------:|
+| [markdown-preferences/blockquote-marker-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/blockquote-marker-alignment.html) | enforce consistent alignment of blockquote markers | 🔧 | ⭐💄 |
+| [markdown-preferences/indent](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/indent.html) | enforce consistent indentation in Markdown files | 🔧 | 💄 |
+| [markdown-preferences/link-bracket-newline](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-bracket-newline.html) | enforce linebreaks after opening and before closing link brackets | 🔧 | 💄 |
+| [markdown-preferences/link-bracket-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-bracket-spacing.html) | enforce consistent spacing inside link brackets | 🔧 | 💄 |
+| [markdown-preferences/link-paren-newline](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-paren-newline.html) | enforce linebreaks after opening and before closing link parentheses | 🔧 | 💄 |
+| [markdown-preferences/link-paren-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-paren-spacing.html) | enforce consistent spacing inside link parentheses | 🔧 | 💄 |
+| [markdown-preferences/list-marker-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/list-marker-alignment.html) | enforce consistent alignment of list markers | 🔧 | ⭐💄 |
+| [markdown-preferences/no-multi-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multi-spaces.html) | disallow multiple spaces | 🔧 | 💄 |
+| [markdown-preferences/no-multiple-empty-lines](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multiple-empty-lines.html) | disallow multiple empty lines in Markdown files. | 🔧 | 💄 |
+| [markdown-preferences/no-trailing-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-trailing-spaces.html) | disallow trailing whitespace at the end of lines in Markdown files. | 🔧 | 💄 |
+| [markdown-preferences/padding-line-between-blocks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/padding-line-between-blocks.html) | require or disallow padding lines between blocks | 🔧 | 💄 |
+
+<!-- prettier-ignore-end -->
+
+### Decorative Rules
+
+- Rules related to visual or stylistic decorations in Markdown.
 
 <!-- prettier-ignore-start -->
 
@@ -118,38 +167,11 @@ The rules with the following 💄 are included in the `standard` config.
 |:--------|:------------|:-------:|:-----------:|
 | [markdown-preferences/atx-heading-closing-sequence-length](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-heading-closing-sequence-length.html) | enforce consistent length for the closing sequence (trailing #s) in ATX headings. | 🔧 | 💄 |
 | [markdown-preferences/atx-heading-closing-sequence](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-heading-closing-sequence.html) | enforce consistent use of closing sequence in ATX headings. | 🔧 | 💄 |
-| [markdown-preferences/blockquote-marker-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/blockquote-marker-alignment.html) | enforce consistent alignment of blockquote markers | 🔧 | ⭐💄 |
-| [markdown-preferences/bullet-list-marker-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/bullet-list-marker-style.html) | enforce consistent bullet list (unordered list) marker style | 🔧 | 💄 |
 | [markdown-preferences/code-fence-length](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/code-fence-length.html) | enforce consistent code fence length in fenced code blocks. | 🔧 | 💄 |
-| [markdown-preferences/code-fence-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/code-fence-style.html) | enforce a consistent code fence style (backtick or tilde) in Markdown fenced code blocks. | 🔧 | 💄 |
-| [markdown-preferences/definitions-last](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/definitions-last.html) | require link definitions and footnote definitions to be placed at the end of the document | 🔧 |  |
-| [markdown-preferences/emphasis-delimiters-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/emphasis-delimiters-style.html) | enforce a consistent delimiter style for emphasis and strong emphasis | 🔧 | 💄 |
-| [markdown-preferences/hard-linebreak-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/hard-linebreak-style.html) | enforce consistent hard linebreak style. | 🔧 | ⭐💄 |
-| [markdown-preferences/indent](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/indent.html) | enforce consistent indentation in Markdown files | 🔧 | 💄 |
-| [markdown-preferences/level1-heading-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/level1-heading-style.html) | enforce consistent style for level 1 headings | 🔧 | 💄 |
-| [markdown-preferences/level2-heading-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/level2-heading-style.html) | enforce consistent style for level 2 headings | 🔧 | 💄 |
-| [markdown-preferences/link-bracket-newline](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-bracket-newline.html) | enforce linebreaks after opening and before closing link brackets | 🔧 | 💄 |
-| [markdown-preferences/link-bracket-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-bracket-spacing.html) | enforce consistent spacing inside link brackets | 🔧 | 💄 |
-| [markdown-preferences/link-destination-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-destination-style.html) | enforce a consistent style for link destinations | 🔧 | 💄 |
-| [markdown-preferences/link-paren-newline](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-paren-newline.html) | enforce linebreaks after opening and before closing link parentheses | 🔧 | 💄 |
-| [markdown-preferences/link-paren-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-paren-spacing.html) | enforce consistent spacing inside link parentheses | 🔧 | 💄 |
-| [markdown-preferences/link-title-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-title-style.html) | enforce a consistent style for link titles | 🔧 | 💄 |
-| [markdown-preferences/list-marker-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/list-marker-alignment.html) | enforce consistent alignment of list markers | 🔧 | ⭐💄 |
 | [markdown-preferences/no-laziness-blockquotes](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-laziness-blockquotes.html) | disallow laziness in blockquotes |  | ⭐💄 |
-| [markdown-preferences/no-multi-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multi-spaces.html) | disallow multiple spaces | 🔧 | 💄 |
-| [markdown-preferences/no-multiple-empty-lines](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multiple-empty-lines.html) | disallow multiple empty lines in Markdown files. | 🔧 | 💄 |
-| [markdown-preferences/no-text-backslash-linebreak](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-text-backslash-linebreak.html) | disallow text backslash at the end of a line. |  | ⭐💄 |
-| [markdown-preferences/no-trailing-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-trailing-spaces.html) | disallow trailing whitespace at the end of lines in Markdown files. | 🔧 | 💄 |
 | [markdown-preferences/ordered-list-marker-sequence](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-sequence.html) | enforce that ordered list markers use sequential numbers | 🔧 | 💄 |
-| [markdown-preferences/ordered-list-marker-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-style.html) | enforce consistent ordered list marker style | 🔧 | 💄 |
-| [markdown-preferences/padding-line-between-blocks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/padding-line-between-blocks.html) | require or disallow padding lines between blocks | 🔧 | 💄 |
-| [markdown-preferences/prefer-autolinks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-autolinks.html) | enforce the use of autolinks for URLs | 🔧 | ⭐💄 |
-| [markdown-preferences/prefer-fenced-code-blocks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-fenced-code-blocks.html) | enforce the use of fenced code blocks over indented code blocks | 🔧 | ⭐💄 |
-| [markdown-preferences/prefer-link-reference-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-link-reference-definitions.html) | enforce using link reference definitions instead of inline links | 🔧 |  |
 | [markdown-preferences/setext-heading-underline-length](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/setext-heading-underline-length.html) | enforce setext heading underline length | 🔧 | 💄 |
 | [markdown-preferences/sort-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/sort-definitions.html) | enforce a specific order for link definitions and footnote definitions | 🔧 | 💄 |
-| [markdown-preferences/strikethrough-delimiters-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/strikethrough-delimiters-style.html) | enforce a consistent delimiter style for strikethrough | 🔧 | 💄 |
-| [markdown-preferences/thematic-break-character-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-character-style.html) | enforce consistent character style for thematic breaks (horizontal rules) in Markdown. | 🔧 | 💄 |
 | [markdown-preferences/thematic-break-length](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-length.html) | enforce consistent length for thematic breaks (horizontal rules) in Markdown. | 🔧 | 💄 |
 | [markdown-preferences/thematic-break-sequence-pattern](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-sequence-pattern.html) | enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown. | 🔧 | 💄 |
 

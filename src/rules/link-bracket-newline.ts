@@ -25,7 +25,7 @@ export default createRule<[Options?]>("link-bracket-newline", {
       description:
         "enforce linebreaks after opening and before closing link brackets",
       categories: ["standard"],
-      listCategory: "Stylistic",
+      listCategory: "Whitespace",
     },
     fixable: "whitespace",
     hasSuggestions: false,

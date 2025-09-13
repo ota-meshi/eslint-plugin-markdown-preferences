@@ -8,7 +8,7 @@ export default createRule("definitions-last", {
       description:
         "require link definitions and footnote definitions to be placed at the end of the document",
       categories: [],
-      listCategory: "Stylistic",
+      listCategory: "Notation",
     },
     fixable: "code",
     hasSuggestions: false,

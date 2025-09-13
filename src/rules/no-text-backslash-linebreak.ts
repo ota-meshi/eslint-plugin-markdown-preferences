@@ -7,7 +7,7 @@ export default createRule("no-text-backslash-linebreak", {
     docs: {
       description: "disallow text backslash at the end of a line.",
       categories: ["recommended", "standard"],
-      listCategory: "Stylistic",
+      listCategory: "Notation",
     },
     fixable: undefined,
     hasSuggestions: true,

@@ -23,7 +23,7 @@ export default createRule<[Options?]>("atx-heading-closing-sequence-length", {
       description:
         "enforce consistent length for the closing sequence (trailing #s) in ATX headings.",
       categories: ["standard"],
-      listCategory: "Stylistic",
+      listCategory: "Decorative",
     },
     fixable: "code",
     hasSuggestions: false,

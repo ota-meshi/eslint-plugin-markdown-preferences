@@ -1,4 +1,4 @@
-import type { RuleModule } from "../src/types.js";
+import type { ListCategory, RuleModule } from "../src/types.js";
 import { CATEGORY_DESCRIPTIONS, compareCategories } from "./lib/categories.ts";
 import { rules } from "./lib/load-rules.js";
 
@@ -12,7 +12,9 @@ export default function renderRulesTableContent(
   const deprecatedRules = rules.filter((rule) => rule.meta.deprecated);
 
   const categories = [
-    ...new Set<string>(pluginRules.map((rule) => rule.meta.docs.listCategory)),
+    ...new Set<ListCategory>(
+      pluginRules.map((rule) => rule.meta.docs.listCategory),
+    ),
   ].sort(compareCategories);
 
   // -----------------------------------------------------------------------------

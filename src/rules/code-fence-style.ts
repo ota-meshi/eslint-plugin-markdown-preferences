@@ -8,7 +8,7 @@ export default createRule("code-fence-style", {
       description:
         "enforce a consistent code fence style (backtick or tilde) in Markdown fenced code blocks.",
       categories: ["standard"],
-      listCategory: "Stylistic",
+      listCategory: "Notation",
     },
     fixable: "code",
     hasSuggestions: false,

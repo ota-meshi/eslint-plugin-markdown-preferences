@@ -19,9 +19,9 @@ export default createRule<
     docs: {
       description: "enforce setext heading underline length",
       categories: ["standard"],
-      listCategory: "Stylistic",
+      listCategory: "Decorative",
     },
-    fixable: "whitespace",
+    fixable: "code",
     schema: [
       {
         type: "object",

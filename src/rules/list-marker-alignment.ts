@@ -18,7 +18,7 @@ export default createRule<[{ align?: "left" | "right" }?]>(
       docs: {
         description: "enforce consistent alignment of list markers",
         categories: ["recommended", "standard"],
-        listCategory: "Stylistic",
+        listCategory: "Whitespace",
       },
       fixable: "whitespace",
       hasSuggestions: false,

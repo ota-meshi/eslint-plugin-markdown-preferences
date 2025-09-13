@@ -19,7 +19,7 @@ export default createRule<[Options?]>("code-fence-length", {
       description:
         "enforce consistent code fence length in fenced code blocks.",
       categories: ["standard"],
-      listCategory: "Stylistic",
+      listCategory: "Decorative",
     },
     fixable: "code",
     hasSuggestions: false,

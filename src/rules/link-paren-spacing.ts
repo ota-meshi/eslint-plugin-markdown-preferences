@@ -16,7 +16,7 @@ export default createRule<[Options?]>("link-paren-spacing", {
     docs: {
       description: "enforce consistent spacing inside link parentheses",
       categories: ["standard"],
-      listCategory: "Stylistic",
+      listCategory: "Whitespace",
     },
     fixable: "whitespace",
     hasSuggestions: false,

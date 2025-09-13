@@ -29,7 +29,7 @@ export default createRule<[Options?]>("link-destination-style", {
     docs: {
       description: "enforce a consistent style for link destinations",
       categories: ["standard"],
-      listCategory: "Stylistic",
+      listCategory: "Notation",
     },
     fixable: "code",
     hasSuggestions: false,

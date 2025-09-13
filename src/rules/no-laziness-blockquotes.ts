@@ -10,7 +10,7 @@ export default createRule("no-laziness-blockquotes", {
     docs: {
       description: "disallow laziness in blockquotes",
       categories: ["recommended", "standard"],
-      listCategory: "Stylistic",
+      listCategory: "Decorative",
     },
     fixable: undefined,
     hasSuggestions: true,
