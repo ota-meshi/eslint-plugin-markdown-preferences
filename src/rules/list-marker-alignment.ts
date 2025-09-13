@@ -2,6 +2,8 @@ import type { List, ListItem } from "mdast";
 import { createRule } from "../utils/index.ts";
 import { getParsedLines } from "../utils/lines.ts";
 import { getListItemMarker } from "../utils/ast.ts";
+import { getWidth } from "../utils/width.ts";
+import { isWhitespace } from "../utils/unicode.ts";
 
 const ALIGN_TO_POSITION_NAME = {
   left: "start",
@@ -68,15 +70,45 @@ export default createRule<[{ align?: "left" | "right" }?]>(
 
         // Get the marker location of the first item as the reference
         const referenceMarkerLocation = getMarkerLocation(items[0]);
+        const expectedWidth = getWidth(
+          sourceCode.lines[referenceMarkerLocation.line - 1].slice(
+            0,
+            referenceMarkerLocation[alignPositionName],
+          ),
+        );
 
         for (const item of items.slice(1)) {
           const markerLocation = getMarkerLocation(item);
-          const diff =
-            markerLocation[alignPositionName] -
-            referenceMarkerLocation[alignPositionName];
+          const actualWidth = getWidth(
+            sourceCode.lines[markerLocation.line - 1].slice(
+              0,
+              markerLocation[alignPositionName],
+            ),
+          );
+          const diff = actualWidth - expectedWidth;
           if (diff === 0) {
             continue;
           }
+
+          const messageData =
+            alignPositionName === "start"
+              ? {
+                  expected: String(expectedWidth),
+                  actual: String(actualWidth),
+                }
+              : (() => {
+                  const start = getWidth(
+                    sourceCode.lines[markerLocation.line - 1].slice(
+                      0,
+                      markerLocation.start,
+                    ),
+                  );
+
+                  return {
+                    expected: String(start - diff),
+                    actual: String(start),
+                  };
+                })();
           context.report({
             node: item,
             loc: {
@@ -90,10 +122,7 @@ export default createRule<[{ align?: "left" | "right" }?]>(
               },
             },
             messageId: "incorrectAlignment",
-            data: {
-              expected: String(markerLocation.start - diff),
-              actual: String(markerLocation.start),
-            },
+            data: messageData,
             fix(fixer) {
               const lines = getParsedLines(sourceCode);
               const line = lines.get(markerLocation.line);
@@ -109,22 +138,38 @@ export default createRule<[{ align?: "left" | "right" }?]>(
                 );
               }
 
-              const itemBefore = line.text.slice(
-                0,
-                markerLocation.start - diff,
-              );
-              if (itemBefore.includes("\t")) return null; // Ignore tab
-              const referenceMarkerBefore = lines
+              const beforeItemMarker = line.text.slice(0, markerLocation.start);
+              const currentWidth = getWidth(beforeItemMarker);
+              const newWidth = currentWidth - diff;
+
+              let newBeforeItemMarker = beforeItemMarker;
+              while (getWidth(newBeforeItemMarker) > newWidth) {
+                const last = newBeforeItemMarker.at(-1);
+                if (last && isWhitespace(last)) {
+                  newBeforeItemMarker = newBeforeItemMarker.slice(0, -1);
+                } else {
+                  return null; // Cannot fix if there's no whitespace to remove
+                }
+              }
+              if (getWidth(newBeforeItemMarker) < newWidth) {
+                newBeforeItemMarker += " ".repeat(
+                  newWidth - getWidth(newBeforeItemMarker),
+                );
+              }
+              const referenceBeforeItemMarker = lines
                 .get(referenceMarkerLocation.line)
                 .text.slice(0, referenceMarkerLocation.start);
-
-              if (referenceMarkerBefore === itemBefore) {
-                const removeEndIndex = line.range[0] + markerLocation.start;
-                const removeStartIndex = removeEndIndex - diff;
-                return fixer.removeRange([removeStartIndex, removeEndIndex]);
+              if (
+                !referenceBeforeItemMarker.includes(">") ||
+                referenceBeforeItemMarker === newBeforeItemMarker
+              ) {
+                return fixer.replaceTextRange(
+                  [line.range[0], line.range[0] + markerLocation.start],
+                  newBeforeItemMarker,
+                );
               }
 
-              // Maybe includes a blockquote
+              // Maybe includes a mismatched blockquote
               return null;
             },
           });

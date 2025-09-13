@@ -1,8 +1,9 @@
 import type { MarkdownSourceCode } from "@eslint/markdown";
 import { isSpaceOrTab } from "./unicode.ts";
+import type { SourceLocation } from "estree";
 
 export type BlockquoteMarkerInfo = {
-  index: number;
+  loc: SourceLocation;
 };
 export type BlockquoteLevelInfo = {
   line: number;
@@ -44,7 +45,10 @@ export function getBlockquoteLevelFromLine(
 
       level++;
       blockquoteMarkers.set(level, {
-        index: prefix.length,
+        loc: {
+          start: { line: lineNumber, column: prefix.length + 1 },
+          end: { line: lineNumber, column: prefix.length + 2 },
+        },
       });
     } else if (!isSpaceOrTab(c)) {
       break;

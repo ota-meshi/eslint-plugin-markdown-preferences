@@ -1,0 +1,2436 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/atx-headings-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Heading
+  2 |   ## Heading
+    | ^~ [1]
+  3 |  ### Heading
+    | ^ [2]
+  4 |    ### Heading
+    | ^~~ [3]
+  5 |
+  6 | > ## Heading in blockquotes
+  7 | >  ### Heading in blockquotes
+    |  ^~ [4]
+  8 | >    ### Heading in blockquotes
+    |  ^~~~ [5]
+  9 | >#### Heading in blockquotes
+    |  ^ [6]
+ 10 |
+ 11 | - ## Heading
+ 12 | -   ## Heading
+    |  ^~~ [7]
+ 13 | -  ## Heading
+    |  ^~ [8]
+ 14 |     ## Heading
+    | ^~~~ [9]
+ 15 |
+ 16 | > - ## Heading
+ 17 | > -   ## Heading
+    |    ^~~ [10]
+ 18 | > -  ## Heading
+    |    ^~ [11]
+ 19 | >     ## Heading L2
+    |  ^~~~~ [12]
+ 20 |
+
+Output:
+  1 | # Heading
+  2 | ## Heading
+  3 | ### Heading
+  4 | ### Heading
+  5 |
+  6 | > ## Heading in blockquotes
+  7 | > ### Heading in blockquotes
+  8 | > ### Heading in blockquotes
+  9 | > #### Heading in blockquotes
+ 10 |
+ 11 | - ## Heading
+ 12 | - ## Heading
+ 13 | - ## Heading
+ 14 |   ## Heading
+ 15 |
+ 16 | > - ## Heading
+ 17 | > - ## Heading
+ 18 | > - ## Heading
+ 19 | >   ## Heading L2
+ 20 |
+
+[1] Expected indentation of 0 but found 2.
+[2] Expected indentation of 0 but found 1.
+[3] Expected indentation of 0 but found 3.
+[4] Expected indentation of 1 from the blockquote marker but found 2.
+[5] Expected indentation of 1 from the blockquote marker but found 4.
+[6] Expected indentation of 1 from the blockquote marker but found 0.
+[7] Expected indentation of 1 from the list marker but found 3.
+[8] Expected indentation of 1 from the list marker but found 2.
+[9] Expected indentation of 2 but found 4.
+[10] Expected indentation of 1 from the list marker but found 3.
+[11] Expected indentation of 1 from the list marker but found 2.
+[12] Expected indentation of 3 from the blockquote marker but found 5.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/blockquotes-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |  > blockquote
+    | ^ [1]
+  2 |  > blockquote
+    | ^ [2]
+  3 |  > blockquote
+    | ^ [3]
+  4 |  > blockquote
+    | ^ [4]
+  5 |  > blockquote
+    | ^ [5]
+  6 |
+  7 | >  >  blockquote
+    |  ^~ ^~
+    | [6] [7]
+  8 | > >  blockquote
+  9 | > > blockquote
+ 10 | >   > blockquote
+    |  ^~~ [8]
+ 11 | >    > blockquote
+    |  ^~~~ [9]
+ 12 |
+ 13 | -   > blockquote
+    |  ^~~ [10]
+ 14 |     >  blockquote
+    | ^~~~ ^~
+    | [11] [12]
+ 15 |     >   blockquote
+    | ^~~~ ^~~
+    | [13] [14]
+ 16 |     >    blockquote
+    | ^~~~ ^~~~
+    | [15] [16]
+ 17 |     >     blockquote
+    | ^~~~ ^~~~~
+    | [17] [18]
+ 18 |     >      blockquote
+    | ^~~~ ^~~~~~
+    | [19] [20]
+ 19 |
+
+Output:
+  1 | > blockquote
+  2 | > blockquote
+  3 | > blockquote
+  4 | > blockquote
+  5 | > blockquote
+  6 |
+  7 | > > blockquote
+  8 | > > blockquote
+  9 | > > blockquote
+ 10 | > > blockquote
+ 11 | > > blockquote
+ 12 |
+ 13 | - > blockquote
+ 14 |   > blockquote
+ 15 |   > blockquote
+ 16 |   > blockquote
+ 17 |   > blockquote
+ 18 |   > blockquote
+ 19 |
+
+[1] Expected indentation of 0 but found 1.
+[2] Expected indentation of 0 but found 1.
+[3] Expected indentation of 0 but found 1.
+[4] Expected indentation of 0 but found 1.
+[5] Expected indentation of 0 but found 1.
+[6] Expected indentation of 1 from the blockquote marker but found 2.
+[7] Expected indentation of 1 from the blockquote marker but found 2.
+[8] Expected indentation of 1 from the blockquote marker but found 3.
+[9] Expected indentation of 1 from the blockquote marker but found 4.
+[10] Expected indentation of 1 from the list marker but found 3.
+[11] Expected indentation of 2 but found 4.
+[12] Expected indentation of 1 from the blockquote marker but found 2.
+[13] Expected indentation of 2 but found 4.
+[14] Expected indentation of 1 from the blockquote marker but found 3.
+[15] Expected indentation of 2 but found 4.
+[16] Expected indentation of 1 from the blockquote marker but found 4.
+[17] Expected indentation of 2 but found 4.
+[18] Expected indentation of 1 from the blockquote marker but found 5.
+[19] Expected indentation of 2 but found 4.
+[20] Expected indentation of 1 from the blockquote marker but found 6.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/emphasis-strong-delete-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | *emphasis*
+  3 | **strong**
+  4 | ~~delete~~
+  5 |
+  6 |    *emphasis*
+    | ^~~ [1]
+  7 |    **strong**
+    | ^~~ [2]
+  8 |    ~~delete~~
+    | ^~~ [3]
+  9 |
+ 10 | - *emphasis*
+ 11 | - **strong**
+ 12 | - ~~delete~~
+ 13 | -  *emphasis*
+    |  ^~ [4]
+ 14 | -    **strong**
+    |  ^~~~ [5]
+ 15 | -    ~~delete~~
+    |  ^~~~ [6]
+ 16 |
+ 17 | >*emphasis*
+    |  ^ [7]
+ 18 | >**strong**
+    |  ^ [8]
+ 19 | >~~delete~~
+    |  ^ [9]
+ 20 | > *emphasis*
+ 21 | > **strong**
+ 22 | > ~~delete~~
+ 23 | >   *emphasis*
+    |  ^~~ [10]
+ 24 | >   **strong**
+    |  ^~~ [11]
+ 25 | >   ~~delete~~
+    |  ^~~ [12]
+ 26 |
+
+Output:
+  1 |
+  2 | *emphasis*
+  3 | **strong**
+  4 | ~~delete~~
+  5 |
+  6 | *emphasis*
+  7 | **strong**
+  8 | ~~delete~~
+  9 |
+ 10 | - *emphasis*
+ 11 | - **strong**
+ 12 | - ~~delete~~
+ 13 | - *emphasis*
+ 14 | - **strong**
+ 15 | - ~~delete~~
+ 16 |
+ 17 | > *emphasis*
+ 18 | > **strong**
+ 19 | > ~~delete~~
+ 20 | > *emphasis*
+ 21 | > **strong**
+ 22 | > ~~delete~~
+ 23 | > *emphasis*
+ 24 | > **strong**
+ 25 | > ~~delete~~
+ 26 |
+
+[1] Expected indentation of 0 but found 3.
+[2] Expected indentation of 0 but found 3.
+[3] Expected indentation of 0 but found 3.
+[4] Expected indentation of 1 from the list marker but found 2.
+[5] Expected indentation of 1 from the list marker but found 4.
+[6] Expected indentation of 1 from the list marker but found 4.
+[7] Expected indentation of 1 from the blockquote marker but found 0.
+[8] Expected indentation of 1 from the blockquote marker but found 0.
+[9] Expected indentation of 1 from the blockquote marker but found 0.
+[10] Expected indentation of 1 from the blockquote marker but found 3.
+[11] Expected indentation of 1 from the blockquote marker but found 3.
+[12] Expected indentation of 1 from the blockquote marker but found 3.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/fenced-code-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Indented Code Blocks
+  2 |
+  3 | ```js
+  4 |     console.log('code block')
+  5 |       console.log('code block')
+  6 |          console.log('code block')
+  7 | ```
+  8 |
+  9 |  ```js
+    | ^ [1]
+ 10 |     console.log('code block')
+ 11 |       console.log('code block')
+ 12 |          console.log('code block')
+ 13 |  ```
+    | ^ [2]
+ 14 |
+ 15 | ```js
+ 16 |     console.log('code block')
+ 17 |   ```
+    | ^~ [3]
+ 18 |
+ 19 |    ```js
+    | ^~~ [4]
+ 20 |    console.log('code block')
+ 21 |    ```
+    | ^~~ [5]
+ 22 |
+ 23 | >```js
+    |  ^ [6]
+ 24 | >   console.log('code block')
+ 25 | >     console.log('code block')
+ 26 | >        console.log('code block')
+ 27 | >```
+    |  ^ [7]
+ 28 | >
+ 29 | >  ```js
+    |  ^~ [8]
+ 30 | >     console.log('code block')
+ 31 | >       console.log('code block')
+ 32 | >          console.log('code block')
+ 33 | >  ```
+    |  ^~ [9]
+ 34 | >
+ 35 | > ```js
+ 36 | >     console.log('code block')
+ 37 | >   ```
+    |  ^~~ [10]
+ 38 | >
+ 39 | >    ```js
+    |  ^~~~ [11]
+ 40 | >    console.log('code block')
+ 41 | >    ```
+    |  ^~~~ [12]
+ 42 |
+ 43 | - ```js
+ 44 |       console.log('code block')
+ 45 |         console.log('code block')
+ 46 |            console.log('code block')
+ 47 |   ```
+ 48 |
+ 49 | -   ```js
+    |  ^~~ [13]
+ 50 |       console.log('code block')
+ 51 |         console.log('code block')
+ 52 |            console.log('code block')
+ 53 |     ```
+    | ^~~~ [14]
+ 54 |
+ 55 | -  ```js
+    |  ^~ [15]
+ 56 |       console.log('code block')
+ 57 |     ```
+    | ^~~~ [16]
+ 58 |
+ 59 |      ```js
+    | ^~~~~ [17]
+ 60 |      console.log('code block')
+ 61 |      ```
+    | ^~~~~ [18]
+ 62 |
+ 63 | > - ```js
+ 64 | >       console.log('code block')
+ 65 | >         console.log('code block')
+ 66 | >            console.log('code block')
+ 67 | >   ```
+ 68 | >
+ 69 | > -   ```js
+    |    ^~~ [19]
+ 70 | >       console.log('code block')
+ 71 | >         console.log('code block')
+ 72 | >            console.log('code block')
+ 73 | >     ```
+    |  ^~~~~ [20]
+ 74 | >
+ 75 | > -  ```js
+    |    ^~ [21]
+ 76 | >       console.log('code block')
+ 77 | >     ```
+    |  ^~~~~ [22]
+ 78 | >
+ 79 | >      ```js
+    |  ^~~~~~ [23]
+ 80 | >      console.log('code block')
+ 81 | >      ```
+    |  ^~~~~~ [24]
+ 82 |
+
+Output:
+  1 | # Indented Code Blocks
+  2 |
+  3 | ```js
+  4 |     console.log('code block')
+  5 |       console.log('code block')
+  6 |          console.log('code block')
+  7 | ```
+  8 |
+  9 | ```js
+ 10 |    console.log('code block')
+ 11 |      console.log('code block')
+ 12 |         console.log('code block')
+ 13 | ```
+ 14 |
+ 15 | ```js
+ 16 |     console.log('code block')
+ 17 | ```
+ 18 |
+ 19 | ```js
+ 20 | console.log('code block')
+ 21 | ```
+ 22 |
+ 23 | > ```js
+ 24 | >    console.log('code block')
+ 25 | >      console.log('code block')
+ 26 | >         console.log('code block')
+ 27 | > ```
+ 28 | >
+ 29 | > ```js
+ 30 | >    console.log('code block')
+ 31 | >      console.log('code block')
+ 32 | >         console.log('code block')
+ 33 | > ```
+ 34 | >
+ 35 | > ```js
+ 36 | >     console.log('code block')
+ 37 | > ```
+ 38 | >
+ 39 | > ```js
+ 40 | > console.log('code block')
+ 41 | > ```
+ 42 |
+ 43 | - ```js
+ 44 |       console.log('code block')
+ 45 |         console.log('code block')
+ 46 |            console.log('code block')
+ 47 |   ```
+ 48 |
+ 49 | - ```js
+ 50 |     console.log('code block')
+ 51 |       console.log('code block')
+ 52 |          console.log('code block')
+ 53 |   ```
+ 54 |
+ 55 | - ```js
+ 56 |      console.log('code block')
+ 57 |   ```
+ 58 |
+ 59 |   ```js
+ 60 |   console.log('code block')
+ 61 |   ```
+ 62 |
+ 63 | > - ```js
+ 64 | >       console.log('code block')
+ 65 | >         console.log('code block')
+ 66 | >            console.log('code block')
+ 67 | >   ```
+ 68 | >
+ 69 | > - ```js
+ 70 | >     console.log('code block')
+ 71 | >       console.log('code block')
+ 72 | >          console.log('code block')
+ 73 | >   ```
+ 74 | >
+ 75 | > - ```js
+ 76 | >      console.log('code block')
+ 77 | >   ```
+ 78 | >
+ 79 | >   ```js
+ 80 | >   console.log('code block')
+ 81 | >   ```
+ 82 |
+
+[1] Expected indentation of 0 but found 1.
+[2] Expected indentation of 0 but found 1.
+[3] Expected indentation of 0 but found 2.
+[4] Expected indentation of 0 but found 3.
+[5] Expected indentation of 0 but found 3.
+[6] Expected indentation of 1 from the blockquote marker but found 0.
+[7] Expected indentation of 1 from the blockquote marker but found 0.
+[8] Expected indentation of 1 from the blockquote marker but found 2.
+[9] Expected indentation of 1 from the blockquote marker but found 2.
+[10] Expected indentation of 1 from the blockquote marker but found 3.
+[11] Expected indentation of 1 from the blockquote marker but found 4.
+[12] Expected indentation of 1 from the blockquote marker but found 4.
+[13] Expected indentation of 1 from the list marker but found 3.
+[14] Expected indentation of 2 but found 4.
+[15] Expected indentation of 1 from the list marker but found 2.
+[16] Expected indentation of 2 but found 4.
+[17] Expected indentation of 2 but found 5.
+[18] Expected indentation of 2 but found 5.
+[19] Expected indentation of 1 from the list marker but found 3.
+[20] Expected indentation of 3 from the blockquote marker but found 5.
+[21] Expected indentation of 1 from the list marker but found 2.
+[22] Expected indentation of 3 from the blockquote marker but found 5.
+[23] Expected indentation of 3 from the blockquote marker but found 6.
+[24] Expected indentation of 3 from the blockquote marker but found 6.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/footnotes-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Footnotes
+  2 |
+  3 | [^label1]
+  4 |  [^label2]
+    | ^ [1]
+  5 |   [^label3]
+    | ^~ [2]
+  6 |    [^label4]
+    | ^~~ [3]
+  7 |  [^label5]
+    | ^ [4]
+  8 |  [^label6]
+    | ^ [5]
+  9 |
+ 10 | >[^label7]
+    |  ^ [6]
+ 11 | > [^label8]
+ 12 | >  [^label9]
+    |  ^~ [7]
+ 13 | >   [^label10]
+    |  ^~~ [8]
+ 14 | >    [^label11]
+    |  ^~~~ [9]
+ 15 | > [^label12]
+ 16 |
+ 17 | [^label1]: Text
+ 18 |  [^label2]: Text
+    | ^ [10]
+ 19 |   [^label3]: Text
+    | ^~ [11]
+ 20 |
+ 21 |   [^label4]:
+    | ^~ [12]
+ 22 |     Text
+    | ^~~~ [13]
+ 23 |
+ 24 |  [^label5]: Multiline
+    | ^ [14]
+ 25 |     Text
+    | ^~~~ [15]
+ 26 |
+ 27 |  [^label6]:
+    | ^ [16]
+ 28 |      Multiline
+ 29 |        Text
+    | ^~~~~~~ [17]
+ 30 |
+ 31 | >[^label7]: Text
+    |  ^ [18]
+ 32 | > [^label8]: Text
+ 33 | >  [^label9]: Text
+    |  ^~ [19]
+ 34 | >
+ 35 | >  [^label10]:
+    |  ^~ [20]
+ 36 | >     Text
+    |  ^~~~~ [21]
+ 37 | >
+ 38 | > [^label11]: Multiline
+ 39 | >    Text
+    |  ^~~~ [22]
+ 40 | >
+ 41 | > [^label12]:
+ 42 | >     Multiline
+ 43 | >       Text
+    |  ^~~~~~~ [23]
+ 44 |
+
+Output:
+  1 | # Footnotes
+  2 |
+  3 | [^label1]
+  4 | [^label2]
+  5 | [^label3]
+  6 | [^label4]
+  7 | [^label5]
+  8 | [^label6]
+  9 |
+ 10 | > [^label7]
+ 11 | > [^label8]
+ 12 | > [^label9]
+ 13 | > [^label10]
+ 14 | > [^label11]
+ 15 | > [^label12]
+ 16 |
+ 17 | [^label1]: Text
+ 18 | [^label2]: Text
+ 19 | [^label3]: Text
+ 20 |
+ 21 | [^label4]:
+ 22 |     Text
+ 23 |
+ 24 | [^label5]: Multiline
+ 25 |     Text
+ 26 |
+ 27 | [^label6]:
+ 28 |     Multiline
+ 29 |     Text
+ 30 |
+ 31 | > [^label7]: Text
+ 32 | > [^label8]: Text
+ 33 | > [^label9]: Text
+ 34 | >
+ 35 | > [^label10]:
+ 36 | >     Text
+ 37 | >
+ 38 | > [^label11]: Multiline
+ 39 | >     Text
+ 40 | >
+ 41 | > [^label12]:
+ 42 | >     Multiline
+ 43 | >     Text
+ 44 |
+
+[1] Expected indentation of 0 but found 1.
+[2] Expected indentation of 0 but found 2.
+[3] Expected indentation of 0 but found 3.
+[4] Expected indentation of 0 but found 1.
+[5] Expected indentation of 0 but found 1.
+[6] Expected indentation of 1 from the blockquote marker but found 0.
+[7] Expected indentation of 1 from the blockquote marker but found 2.
+[8] Expected indentation of 1 from the blockquote marker but found 3.
+[9] Expected indentation of 1 from the blockquote marker but found 4.
+[10] Expected indentation of 0 but found 1.
+[11] Expected indentation of 0 but found 2.
+[12] Expected indentation of 0 but found 2.
+[13] Expected indentation of 6 but found 4.
+[14] Expected indentation of 0 but found 1.
+[15] Expected indentation of 5 but found 4.
+[16] Expected indentation of 0 but found 1.
+[17] Expected indentation of 5 but found 7.
+[18] Expected indentation of 1 from the blockquote marker but found 0.
+[19] Expected indentation of 1 from the blockquote marker but found 2.
+[20] Expected indentation of 1 from the blockquote marker but found 2.
+[21] Expected indentation of 6 from the blockquote marker but found 5.
+[22] Expected indentation of 5 from the blockquote marker but found 4.
+[23] Expected indentation of 5 from the blockquote marker but found 7.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/html-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | <div></div>
+  2 |
+  3 |   <div></div>
+    | ^~ [1]
+  4 |
+  5 |  <div></div>
+    | ^ [2]
+  6 |
+  7 |    <div></div>
+    | ^~~ [3]
+  8 |
+  9 | > <div> in blockquotes </div>
+ 10 | >
+ 11 | >  <div> in blockquotes </div>
+    |  ^~ [4]
+ 12 | >
+ 13 | >    <div> in blockquotes </div>
+    |  ^~~~ [5]
+ 14 | >
+ 15 | ><div> in blockquotes </div>
+    |  ^ [6]
+ 16 |
+ 17 | - <div></div>
+ 18 | -   <div></div>
+    |  ^~~ [7]
+ 19 | -  <div></div>
+    |  ^~ [8]
+ 20 |     <div></div>
+ 21 |
+ 22 | > - <div></div>
+ 23 | > -   <div></div>
+    |    ^~~ [9]
+ 24 | > -  <div></div>
+    |    ^~ [10]
+ 25 | >
+ 26 | >     <div></div>
+    |  ^~~~~ [11]
+ 27 | > -  <div>
+    |    ^~ [12]
+ 28 | >     </div>
+ 29 |
+ 30 |  <div>
+    | ^ [13]
+ 31 |  </div>
+ 32 |
+ 33 | Text <div></div> Text
+ 34 |  Text <div></div> Text
+    | ^ [14]
+ 35 |
+
+Output:
+  1 | <div></div>
+  2 |
+  3 | <div></div>
+  4 |
+  5 | <div></div>
+  6 |
+  7 | <div></div>
+  8 |
+  9 | > <div> in blockquotes </div>
+ 10 | >
+ 11 | > <div> in blockquotes </div>
+ 12 | >
+ 13 | > <div> in blockquotes </div>
+ 14 | >
+ 15 | > <div> in blockquotes </div>
+ 16 |
+ 17 | - <div></div>
+ 18 | - <div></div>
+ 19 | - <div></div>
+ 20 |     <div></div>
+ 21 |
+ 22 | > - <div></div>
+ 23 | > - <div></div>
+ 24 | > - <div></div>
+ 25 | >
+ 26 | >   <div></div>
+ 27 | > - <div>
+ 28 | >     </div>
+ 29 |
+ 30 | <div>
+ 31 |  </div>
+ 32 |
+ 33 | Text <div></div> Text
+ 34 | Text <div></div> Text
+ 35 |
+
+[1] Expected indentation of 0 but found 2.
+[2] Expected indentation of 0 but found 1.
+[3] Expected indentation of 0 but found 3.
+[4] Expected indentation of 1 from the blockquote marker but found 2.
+[5] Expected indentation of 1 from the blockquote marker but found 4.
+[6] Expected indentation of 1 from the blockquote marker but found 0.
+[7] Expected indentation of 1 from the list marker but found 3.
+[8] Expected indentation of 1 from the list marker but found 2.
+[9] Expected indentation of 1 from the list marker but found 3.
+[10] Expected indentation of 1 from the list marker but found 2.
+[11] Expected indentation of 3 from the blockquote marker but found 5.
+[12] Expected indentation of 1 from the list marker but found 2.
+[13] Expected indentation of 0 but found 1.
+[14] Expected indentation of 0 but found 1.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/image-references-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Image References
+  2 |
+  3 | ![alt][foo]
+  4 | ![foo]
+  5 | ![foo][]
+  6 |
+  7 |   ![alt][foo]
+    | ^~ [1]
+  8 |   ![foo]
+    | ^~ [2]
+  9 |   ![foo][]
+    | ^~ [3]
+ 10 |
+ 11 | ![
+ 12 | alt
+    | ^ [4]
+ 13 | ][
+ 14 | foo
+    | ^ [5]
+ 15 | ]
+ 16 |
+ 17 | ![
+ 18 | alt][
+    | ^ [6]
+ 19 | foo]
+    | ^ [7]
+ 20 |
+ 21 | ![alt
+ 22 | ][foo
+ 23 | ]
+ 24 |
+ 25 | ![
+ 26 | foo
+    | ^ [8]
+ 27 | ]
+ 28 |
+ 29 | ![
+ 30 | foo]
+    | ^ [9]
+ 31 |
+ 32 | ![foo
+ 33 | ]
+ 34 |
+ 35 | ![
+ 36 | foo
+    | ^ [10]
+ 37 | ][]
+ 38 |
+ 39 | ![
+ 40 | foo][]
+    | ^ [11]
+ 41 |
+ 42 | ![foo
+ 43 | ][]
+ 44 |
+ 45 | >![alt][foo]
+    |  ^ [12]
+ 46 | >![foo]
+    |  ^ [13]
+ 47 | >![foo][]
+    |  ^ [14]
+ 48 | > ![alt][foo]
+ 49 | > ![foo]
+ 50 | > ![foo][]
+ 51 | > 
+ 52 | >   ![alt][foo]
+    |  ^~~ [15]
+ 53 | >   ![foo]
+    |  ^~~ [16]
+ 54 | >   ![foo][]
+    |  ^~~ [17]
+ 55 | > 
+ 56 | > ![
+ 57 | > alt
+    |  ^ [18]
+ 58 | > ][
+ 59 | > foo
+    |  ^ [19]
+ 60 | > ]
+ 61 | > 
+ 62 | > ![
+ 63 | > alt][
+    |  ^ [20]
+ 64 | > foo]
+    |  ^ [21]
+ 65 | > 
+ 66 | > ![alt
+ 67 | > ][foo
+ 68 | > ]
+ 69 | > 
+ 70 | > ![
+ 71 | > foo
+    |  ^ [22]
+ 72 | > ]
+ 73 | > 
+ 74 | > ![
+ 75 | > foo]
+    |  ^ [23]
+ 76 | > 
+ 77 | > ![foo
+ 78 | > ]
+ 79 | > 
+ 80 | > ![
+ 81 | > foo
+    |  ^ [24]
+ 82 | > ][]
+ 83 | > 
+ 84 | > ![
+ 85 | > foo][]
+    |  ^ [25]
+ 86 | > 
+ 87 | > ![foo
+ 88 | > ][]
+ 89 |
+ 90 | [foo]: /image.png
+ 91 |
+
+Output:
+  1 | # Image References
+  2 |
+  3 | ![alt][foo]
+  4 | ![foo]
+  5 | ![foo][]
+  6 |
+  7 | ![alt][foo]
+  8 | ![foo]
+  9 | ![foo][]
+ 10 |
+ 11 | ![
+ 12 |   alt
+ 13 | ][
+ 14 |   foo
+ 15 | ]
+ 16 |
+ 17 | ![
+ 18 |   alt][
+ 19 |   foo]
+ 20 |
+ 21 | ![alt
+ 22 | ][foo
+ 23 | ]
+ 24 |
+ 25 | ![
+ 26 |   foo
+ 27 | ]
+ 28 |
+ 29 | ![
+ 30 |   foo]
+ 31 |
+ 32 | ![foo
+ 33 | ]
+ 34 |
+ 35 | ![
+ 36 |   foo
+ 37 | ][]
+ 38 |
+ 39 | ![
+ 40 |   foo][]
+ 41 |
+ 42 | ![foo
+ 43 | ][]
+ 44 |
+ 45 | > ![alt][foo]
+ 46 | > ![foo]
+ 47 | > ![foo][]
+ 48 | > ![alt][foo]
+ 49 | > ![foo]
+ 50 | > ![foo][]
+ 51 | > 
+ 52 | > ![alt][foo]
+ 53 | > ![foo]
+ 54 | > ![foo][]
+ 55 | > 
+ 56 | > ![
+ 57 | >   alt
+ 58 | > ][
+ 59 | >   foo
+ 60 | > ]
+ 61 | > 
+ 62 | > ![
+ 63 | >   alt][
+ 64 | >   foo]
+ 65 | > 
+ 66 | > ![alt
+ 67 | > ][foo
+ 68 | > ]
+ 69 | > 
+ 70 | > ![
+ 71 | >   foo
+ 72 | > ]
+ 73 | > 
+ 74 | > ![
+ 75 | >   foo]
+ 76 | > 
+ 77 | > ![foo
+ 78 | > ]
+ 79 | > 
+ 80 | > ![
+ 81 | >   foo
+ 82 | > ][]
+ 83 | > 
+ 84 | > ![
+ 85 | >   foo][]
+ 86 | > 
+ 87 | > ![foo
+ 88 | > ][]
+ 89 |
+ 90 | [foo]: /image.png
+ 91 |
+
+[1] Expected indentation of 0 but found 2.
+[2] Expected indentation of 0 but found 2.
+[3] Expected indentation of 0 but found 2.
+[4] Expected indentation of 2 but found 0.
+[5] Expected indentation of 2 but found 0.
+[6] Expected indentation of 2 but found 0.
+[7] Expected indentation of 2 but found 0.
+[8] Expected indentation of 2 but found 0.
+[9] Expected indentation of 2 but found 0.
+[10] Expected indentation of 2 but found 0.
+[11] Expected indentation of 2 but found 0.
+[12] Expected indentation of 1 from the blockquote marker but found 0.
+[13] Expected indentation of 1 from the blockquote marker but found 0.
+[14] Expected indentation of 1 from the blockquote marker but found 0.
+[15] Expected indentation of 1 from the blockquote marker but found 3.
+[16] Expected indentation of 1 from the blockquote marker but found 3.
+[17] Expected indentation of 1 from the blockquote marker but found 3.
+[18] Expected indentation of 3 from the blockquote marker but found 1.
+[19] Expected indentation of 3 from the blockquote marker but found 1.
+[20] Expected indentation of 3 from the blockquote marker but found 1.
+[21] Expected indentation of 3 from the blockquote marker but found 1.
+[22] Expected indentation of 3 from the blockquote marker but found 1.
+[23] Expected indentation of 3 from the blockquote marker but found 1.
+[24] Expected indentation of 3 from the blockquote marker but found 1.
+[25] Expected indentation of 3 from the blockquote marker but found 1.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/images-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Images
+  2 |
+  3 | ![alt](/image.png)
+  4 |
+  5 |   ![alt](/image.png)
+    | ^~ [1]
+  6 |
+  7 | ![
+  8 | alt
+    | ^ [2]
+  9 | ](
+ 10 | </image.png>
+    | ^ [3]
+ 11 | "
+    | ^ [4]
+ 12 | title
+    | ^ [5]
+ 13 | "
+    | ^ [6]
+ 14 | )
+ 15 |
+ 16 | ![alt
+ 17 | ](</image.png>
+ 18 | "title
+    | ^ [7]
+ 19 | "
+    | ^ [8]
+ 20 | )
+ 21 |
+ 22 | ![
+ 23 | alt](
+    | ^ [9]
+ 24 | </image.png>
+    | ^ [10]
+ 25 | "
+    | ^ [11]
+ 26 | title")
+    | ^ [12]
+ 27 |
+ 28 | >![alt](/image.png)
+    |  ^ [13]
+ 29 | >
+ 30 | > ![alt](/image.png)
+ 31 | >
+ 32 | >  ![alt](/image.png)
+    |  ^~ [14]
+ 33 | >
+ 34 | >![
+    |  ^ [15]
+ 35 | >alt
+    |  ^ [16]
+ 36 | >](
+    |  ^ [17]
+ 37 | ></image.png>
+    |  ^ [18]
+ 38 | >"
+    |  ^ [19]
+ 39 | >title
+    |  ^ [20]
+ 40 | >"
+    |  ^ [21]
+ 41 | >)
+    |  ^ [22]
+ 42 | >
+ 43 | >![alt
+    |  ^ [23]
+ 44 | >](</image.png>
+    |  ^ [24]
+ 45 | >"title
+    |  ^ [25]
+ 46 | >"
+    |  ^ [26]
+ 47 | >)
+    |  ^ [27]
+ 48 | >
+ 49 | >![
+    |  ^ [28]
+ 50 | >alt](
+    |  ^ [29]
+ 51 | ></image.png>
+    |  ^ [30]
+ 52 | >"
+    |  ^ [31]
+ 53 | >title")
+    |  ^ [32]
+ 54 |
+
+Output:
+  1 | # Images
+  2 |
+  3 | ![alt](/image.png)
+  4 |
+  5 | ![alt](/image.png)
+  6 |
+  7 | ![
+  8 |   alt
+  9 | ](
+ 10 |   </image.png>
+ 11 |   "
+ 12 |     title
+ 13 |   "
+ 14 | )
+ 15 |
+ 16 | ![alt
+ 17 | ](</image.png>
+ 18 |   "title
+ 19 |   "
+ 20 | )
+ 21 |
+ 22 | ![
+ 23 |   alt](
+ 24 |   </image.png>
+ 25 |   "
+ 26 |     title")
+ 27 |
+ 28 | > ![alt](/image.png)
+ 29 | >
+ 30 | > ![alt](/image.png)
+ 31 | >
+ 32 | > ![alt](/image.png)
+ 33 | >
+ 34 | > ![
+ 35 | >   alt
+ 36 | > ](
+ 37 | >   </image.png>
+ 38 | >   "
+ 39 | >     title
+ 40 | >   "
+ 41 | > )
+ 42 | >
+ 43 | > ![alt
+ 44 | > ](</image.png>
+ 45 | >   "title
+ 46 | >   "
+ 47 | > )
+ 48 | >
+ 49 | > ![
+ 50 | >   alt](
+ 51 | >   </image.png>
+ 52 | >   "
+ 53 | >     title")
+ 54 |
+
+[1] Expected indentation of 0 but found 2.
+[2] Expected indentation of 2 but found 0.
+[3] Expected indentation of 2 but found 0.
+[4] Expected indentation of 2 but found 0.
+[5] Expected indentation of 4 but found 0.
+[6] Expected indentation of 2 but found 0.
+[7] Expected indentation of 2 but found 0.
+[8] Expected indentation of 2 but found 0.
+[9] Expected indentation of 2 but found 0.
+[10] Expected indentation of 2 but found 0.
+[11] Expected indentation of 2 but found 0.
+[12] Expected indentation of 4 but found 0.
+[13] Expected indentation of 1 from the blockquote marker but found 0.
+[14] Expected indentation of 1 from the blockquote marker but found 2.
+[15] Expected indentation of 1 from the blockquote marker but found 0.
+[16] Expected indentation of 3 from the blockquote marker but found 0.
+[17] Expected indentation of 1 from the blockquote marker but found 0.
+[18] Expected indentation of 3 from the blockquote marker but found 0.
+[19] Expected indentation of 3 from the blockquote marker but found 0.
+[20] Expected indentation of 5 from the blockquote marker but found 0.
+[21] Expected indentation of 3 from the blockquote marker but found 0.
+[22] Expected indentation of 1 from the blockquote marker but found 0.
+[23] Expected indentation of 1 from the blockquote marker but found 0.
+[24] Expected indentation of 1 from the blockquote marker but found 0.
+[25] Expected indentation of 3 from the blockquote marker but found 0.
+[26] Expected indentation of 3 from the blockquote marker but found 0.
+[27] Expected indentation of 1 from the blockquote marker but found 0.
+[28] Expected indentation of 1 from the blockquote marker but found 0.
+[29] Expected indentation of 3 from the blockquote marker but found 0.
+[30] Expected indentation of 3 from the blockquote marker but found 0.
+[31] Expected indentation of 3 from the blockquote marker but found 0.
+[32] Expected indentation of 5 from the blockquote marker but found 0.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/link-definitions-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | [label1]: #link
+  2 |  [label2]: #link
+    | ^ [1]
+  3 |   [label3]: #link
+    | ^~ [2]
+  4 |
+  5 |   [
+    | ^~ [3]
+  6 |    label4
+    | ^~~ [4]
+  7 |   ]: 
+    | ^~ [5]
+  8 |   #link
+    | ^~ [6]
+  9 |   "
+    | ^~ [7]
+ 10 |   title
+    | ^~ [8]
+ 11 |   "
+    | ^~ [9]
+ 12 |
+ 13 |   [
+    | ^~ [10]
+ 14 |    label5]: 
+    | ^~~ [11]
+ 15 |   #link
+    | ^~ [12]
+ 16 |   "
+    | ^~ [13]
+ 17 |   title"
+    | ^~ [14]
+ 18 |
+ 19 |   [label6
+    | ^~ [15]
+ 20 |   ]: 
+    | ^~ [16]
+ 21 |   #link
+    | ^~ [17]
+ 22 |   "title
+    | ^~ [18]
+ 23 |   "
+    | ^~ [19]
+ 24 |
+ 25 | >[label7]: #link
+    |  ^ [20]
+ 26 | > [label8]: #link
+ 27 | >  [label9]: #link
+    |  ^~ [21]
+ 28 | >
+ 29 | >  [
+    |  ^~ [22]
+ 30 | >   label10
+ 31 | >  ]: 
+    |  ^~ [23]
+ 32 | >  #link
+    |  ^~ [24]
+ 33 | >  "
+    |  ^~ [25]
+ 34 | >  title
+    |  ^~ [26]
+ 35 | >  "
+    |  ^~ [27]
+ 36 | >
+ 37 | >  [
+    |  ^~ [28]
+ 38 | >   label11]: 
+ 39 | >  #link
+    |  ^~ [29]
+ 40 | >  "
+    |  ^~ [30]
+ 41 | >  title"
+    |  ^~ [31]
+ 42 | >
+ 43 | >  [label12
+    |  ^~ [32]
+ 44 | >  ]: 
+    |  ^~ [33]
+ 45 | >  #link
+    |  ^~ [34]
+ 46 | >  "title
+    |  ^~ [35]
+ 47 | >  "
+    |  ^~ [36]
+ 48 |
+
+Output:
+  1 | [label1]: #link
+  2 | [label2]: #link
+  3 | [label3]: #link
+  4 |
+  5 | [
+  6 |   label4
+  7 | ]: 
+  8 |     #link
+  9 |     "
+ 10 |       title
+ 11 |     "
+ 12 |
+ 13 | [
+ 14 |   label5]: 
+ 15 |     #link
+ 16 |     "
+ 17 |       title"
+ 18 |
+ 19 | [label6
+ 20 | ]: 
+ 21 |     #link
+ 22 |     "title
+ 23 |     "
+ 24 |
+ 25 | > [label7]: #link
+ 26 | > [label8]: #link
+ 27 | > [label9]: #link
+ 28 | >
+ 29 | > [
+ 30 | >   label10
+ 31 | > ]: 
+ 32 | >     #link
+ 33 | >     "
+ 34 | >       title
+ 35 | >     "
+ 36 | >
+ 37 | > [
+ 38 | >   label11]: 
+ 39 | >     #link
+ 40 | >     "
+ 41 | >       title"
+ 42 | >
+ 43 | > [label12
+ 44 | > ]: 
+ 45 | >     #link
+ 46 | >     "title
+ 47 | >     "
+ 48 |
+
+[1] Expected indentation of 0 but found 1.
+[2] Expected indentation of 0 but found 2.
+[3] Expected indentation of 0 but found 2.
+[4] Expected indentation of 2 but found 3.
+[5] Expected indentation of 0 but found 2.
+[6] Expected indentation of 4 but found 2.
+[7] Expected indentation of 4 but found 2.
+[8] Expected indentation of 6 but found 2.
+[9] Expected indentation of 4 but found 2.
+[10] Expected indentation of 0 but found 2.
+[11] Expected indentation of 2 but found 3.
+[12] Expected indentation of 4 but found 2.
+[13] Expected indentation of 4 but found 2.
+[14] Expected indentation of 6 but found 2.
+[15] Expected indentation of 0 but found 2.
+[16] Expected indentation of 0 but found 2.
+[17] Expected indentation of 4 but found 2.
+[18] Expected indentation of 4 but found 2.
+[19] Expected indentation of 4 but found 2.
+[20] Expected indentation of 1 from the blockquote marker but found 0.
+[21] Expected indentation of 1 from the blockquote marker but found 2.
+[22] Expected indentation of 1 from the blockquote marker but found 2.
+[23] Expected indentation of 1 from the blockquote marker but found 2.
+[24] Expected indentation of 5 from the blockquote marker but found 2.
+[25] Expected indentation of 5 from the blockquote marker but found 2.
+[26] Expected indentation of 7 from the blockquote marker but found 2.
+[27] Expected indentation of 5 from the blockquote marker but found 2.
+[28] Expected indentation of 1 from the blockquote marker but found 2.
+[29] Expected indentation of 5 from the blockquote marker but found 2.
+[30] Expected indentation of 5 from the blockquote marker but found 2.
+[31] Expected indentation of 7 from the blockquote marker but found 2.
+[32] Expected indentation of 1 from the blockquote marker but found 2.
+[33] Expected indentation of 1 from the blockquote marker but found 2.
+[34] Expected indentation of 5 from the blockquote marker but found 2.
+[35] Expected indentation of 5 from the blockquote marker but found 2.
+[36] Expected indentation of 5 from the blockquote marker but found 2.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/link-references-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Link References
+  2 |
+  3 | [label][foo]
+  4 | [foo]
+  5 | [foo][]
+  6 |
+  7 |   [label][foo]
+    | ^~ [1]
+  8 |   [foo]
+    | ^~ [2]
+  9 |   [foo][]
+    | ^~ [3]
+ 10 |
+ 11 | [
+ 12 | label
+    | ^ [4]
+ 13 | ][
+ 14 | foo
+    | ^ [5]
+ 15 | ]
+ 16 |
+ 17 | [
+ 18 | label][
+    | ^ [6]
+ 19 | foo]
+    | ^ [7]
+ 20 |
+ 21 | [label
+ 22 | ][foo
+ 23 | ]
+ 24 |
+ 25 | [
+ 26 | foo
+    | ^ [8]
+ 27 | ]
+ 28 |
+ 29 | [
+ 30 | foo]
+    | ^ [9]
+ 31 |
+ 32 | [foo
+ 33 | ]
+ 34 |
+ 35 | [
+ 36 | foo
+    | ^ [10]
+ 37 | ][]
+ 38 |
+ 39 | [
+ 40 | foo][]
+    | ^ [11]
+ 41 |
+ 42 | [foo
+ 43 | ][]
+ 44 |
+ 45 | >[label][foo]
+    |  ^ [12]
+ 46 | >[foo]
+    |  ^ [13]
+ 47 | >[foo][]
+    |  ^ [14]
+ 48 | > [label][foo]
+ 49 | > [foo]
+ 50 | > [foo][]
+ 51 | > 
+ 52 | >   [label][foo]
+    |  ^~~ [15]
+ 53 | >   [foo]
+    |  ^~~ [16]
+ 54 | >   [foo][]
+    |  ^~~ [17]
+ 55 | > 
+ 56 | > [
+ 57 | > label
+    |  ^ [18]
+ 58 | > ][
+ 59 | > foo
+    |  ^ [19]
+ 60 | > ]
+ 61 | > 
+ 62 | > [
+ 63 | > label][
+    |  ^ [20]
+ 64 | > foo]
+    |  ^ [21]
+ 65 | > 
+ 66 | > [label
+ 67 | > ][foo
+ 68 | > ]
+ 69 | > 
+ 70 | > [
+ 71 | > foo
+    |  ^ [22]
+ 72 | > ]
+ 73 | > 
+ 74 | > [
+ 75 | > foo]
+    |  ^ [23]
+ 76 | > 
+ 77 | > [foo
+ 78 | > ]
+ 79 | > 
+ 80 | > [
+ 81 | > foo
+    |  ^ [24]
+ 82 | > ][]
+ 83 | > 
+ 84 | > [
+ 85 | > foo][]
+    |  ^ [25]
+ 86 | > 
+ 87 | > [foo
+ 88 | > ][]
+ 89 |
+ 90 | [foo]: #link
+ 91 |
+
+Output:
+  1 | # Link References
+  2 |
+  3 | [label][foo]
+  4 | [foo]
+  5 | [foo][]
+  6 |
+  7 | [label][foo]
+  8 | [foo]
+  9 | [foo][]
+ 10 |
+ 11 | [
+ 12 |   label
+ 13 | ][
+ 14 |   foo
+ 15 | ]
+ 16 |
+ 17 | [
+ 18 |   label][
+ 19 |   foo]
+ 20 |
+ 21 | [label
+ 22 | ][foo
+ 23 | ]
+ 24 |
+ 25 | [
+ 26 |   foo
+ 27 | ]
+ 28 |
+ 29 | [
+ 30 |   foo]
+ 31 |
+ 32 | [foo
+ 33 | ]
+ 34 |
+ 35 | [
+ 36 |   foo
+ 37 | ][]
+ 38 |
+ 39 | [
+ 40 |   foo][]
+ 41 |
+ 42 | [foo
+ 43 | ][]
+ 44 |
+ 45 | > [label][foo]
+ 46 | > [foo]
+ 47 | > [foo][]
+ 48 | > [label][foo]
+ 49 | > [foo]
+ 50 | > [foo][]
+ 51 | > 
+ 52 | > [label][foo]
+ 53 | > [foo]
+ 54 | > [foo][]
+ 55 | > 
+ 56 | > [
+ 57 | >   label
+ 58 | > ][
+ 59 | >   foo
+ 60 | > ]
+ 61 | > 
+ 62 | > [
+ 63 | >   label][
+ 64 | >   foo]
+ 65 | > 
+ 66 | > [label
+ 67 | > ][foo
+ 68 | > ]
+ 69 | > 
+ 70 | > [
+ 71 | >   foo
+ 72 | > ]
+ 73 | > 
+ 74 | > [
+ 75 | >   foo]
+ 76 | > 
+ 77 | > [foo
+ 78 | > ]
+ 79 | > 
+ 80 | > [
+ 81 | >   foo
+ 82 | > ][]
+ 83 | > 
+ 84 | > [
+ 85 | >   foo][]
+ 86 | > 
+ 87 | > [foo
+ 88 | > ][]
+ 89 |
+ 90 | [foo]: #link
+ 91 |
+
+[1] Expected indentation of 0 but found 2.
+[2] Expected indentation of 0 but found 2.
+[3] Expected indentation of 0 but found 2.
+[4] Expected indentation of 2 but found 0.
+[5] Expected indentation of 2 but found 0.
+[6] Expected indentation of 2 but found 0.
+[7] Expected indentation of 2 but found 0.
+[8] Expected indentation of 2 but found 0.
+[9] Expected indentation of 2 but found 0.
+[10] Expected indentation of 2 but found 0.
+[11] Expected indentation of 2 but found 0.
+[12] Expected indentation of 1 from the blockquote marker but found 0.
+[13] Expected indentation of 1 from the blockquote marker but found 0.
+[14] Expected indentation of 1 from the blockquote marker but found 0.
+[15] Expected indentation of 1 from the blockquote marker but found 3.
+[16] Expected indentation of 1 from the blockquote marker but found 3.
+[17] Expected indentation of 1 from the blockquote marker but found 3.
+[18] Expected indentation of 3 from the blockquote marker but found 1.
+[19] Expected indentation of 3 from the blockquote marker but found 1.
+[20] Expected indentation of 3 from the blockquote marker but found 1.
+[21] Expected indentation of 3 from the blockquote marker but found 1.
+[22] Expected indentation of 3 from the blockquote marker but found 1.
+[23] Expected indentation of 3 from the blockquote marker but found 1.
+[24] Expected indentation of 3 from the blockquote marker but found 1.
+[25] Expected indentation of 3 from the blockquote marker but found 1.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/links-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Links
+  2 |
+  3 | [label](#link)
+  4 | <https://spec.commonmark.org/0.31.2/#autolinks>
+  5 | https://github.github.com/gfm/#autolinks-extension-
+  6 |
+  7 |   [label](#link)
+    | ^~ [1]
+  8 |   <https://spec.commonmark.org/0.31.2/#autolinks>
+    | ^~ [2]
+  9 |   https://github.github.com/gfm/#autolinks-extension-
+    | ^~ [3]
+ 10 |
+ 11 | [
+ 12 | label
+    | ^ [4]
+ 13 | ](
+ 14 | <#link>
+    | ^ [5]
+ 15 | "
+    | ^ [6]
+ 16 | title
+    | ^ [7]
+ 17 | "
+    | ^ [8]
+ 18 | )
+ 19 |
+ 20 | [label
+ 21 | ](<#link>
+ 22 | "title
+    | ^ [9]
+ 23 | "
+    | ^ [10]
+ 24 | )
+ 25 |
+ 26 | [
+ 27 | label](
+    | ^ [11]
+ 28 | <#link>
+    | ^ [12]
+ 29 | "
+    | ^ [13]
+ 30 | title")
+    | ^ [14]
+ 31 |
+ 32 | >[label](#link)
+    |  ^ [15]
+ 33 | ><https://spec.commonmark.org/0.31.2/#autolinks>
+    |  ^ [16]
+ 34 | >https://github.github.com/gfm/#autolinks-extension-
+    |  ^ [17]
+ 35 | >
+ 36 | > [label](#link)
+ 37 | > <https://spec.commonmark.org/0.31.2/#autolinks>
+ 38 | > https://github.github.com/gfm/#autolinks-extension-
+ 39 | >
+ 40 | >  [label](#link)
+    |  ^~ [18]
+ 41 | >  <https://spec.commonmark.org/0.31.2/#autolinks>
+    |  ^~ [19]
+ 42 | >  https://github.github.com/gfm/#autolinks-extension-
+    |  ^~ [20]
+ 43 | >
+ 44 | >[
+    |  ^ [21]
+ 45 | >label
+    |  ^ [22]
+ 46 | >](
+    |  ^ [23]
+ 47 | ><#link>
+    |  ^ [24]
+ 48 | >"
+    |  ^ [25]
+ 49 | >title
+    |  ^ [26]
+ 50 | >"
+    |  ^ [27]
+ 51 | >)
+    |  ^ [28]
+ 52 | >
+ 53 | >[label
+    |  ^ [29]
+ 54 | >](<#link>
+    |  ^ [30]
+ 55 | >"title
+    |  ^ [31]
+ 56 | >"
+    |  ^ [32]
+ 57 | >)
+    |  ^ [33]
+ 58 | >
+ 59 | >[
+    |  ^ [34]
+ 60 | >label](
+    |  ^ [35]
+ 61 | ><#link>
+    |  ^ [36]
+ 62 | >"
+    |  ^ [37]
+ 63 | >title")
+    |  ^ [38]
+ 64 |
+
+Output:
+  1 | # Links
+  2 |
+  3 | [label](#link)
+  4 | <https://spec.commonmark.org/0.31.2/#autolinks>
+  5 | https://github.github.com/gfm/#autolinks-extension-
+  6 |
+  7 | [label](#link)
+  8 | <https://spec.commonmark.org/0.31.2/#autolinks>
+  9 | https://github.github.com/gfm/#autolinks-extension-
+ 10 |
+ 11 | [
+ 12 |   label
+ 13 | ](
+ 14 |   <#link>
+ 15 |   "
+ 16 |     title
+ 17 |   "
+ 18 | )
+ 19 |
+ 20 | [label
+ 21 | ](<#link>
+ 22 |   "title
+ 23 |   "
+ 24 | )
+ 25 |
+ 26 | [
+ 27 |   label](
+ 28 |   <#link>
+ 29 |   "
+ 30 |     title")
+ 31 |
+ 32 | > [label](#link)
+ 33 | > <https://spec.commonmark.org/0.31.2/#autolinks>
+ 34 | > https://github.github.com/gfm/#autolinks-extension-
+ 35 | >
+ 36 | > [label](#link)
+ 37 | > <https://spec.commonmark.org/0.31.2/#autolinks>
+ 38 | > https://github.github.com/gfm/#autolinks-extension-
+ 39 | >
+ 40 | > [label](#link)
+ 41 | > <https://spec.commonmark.org/0.31.2/#autolinks>
+ 42 | > https://github.github.com/gfm/#autolinks-extension-
+ 43 | >
+ 44 | > [
+ 45 | >   label
+ 46 | > ](
+ 47 | >   <#link>
+ 48 | >   "
+ 49 | >     title
+ 50 | >   "
+ 51 | > )
+ 52 | >
+ 53 | > [label
+ 54 | > ](<#link>
+ 55 | >   "title
+ 56 | >   "
+ 57 | > )
+ 58 | >
+ 59 | > [
+ 60 | >   label](
+ 61 | >   <#link>
+ 62 | >   "
+ 63 | >     title")
+ 64 |
+
+[1] Expected indentation of 0 but found 2.
+[2] Expected indentation of 0 but found 2.
+[3] Expected indentation of 0 but found 2.
+[4] Expected indentation of 2 but found 0.
+[5] Expected indentation of 2 but found 0.
+[6] Expected indentation of 2 but found 0.
+[7] Expected indentation of 4 but found 0.
+[8] Expected indentation of 2 but found 0.
+[9] Expected indentation of 2 but found 0.
+[10] Expected indentation of 2 but found 0.
+[11] Expected indentation of 2 but found 0.
+[12] Expected indentation of 2 but found 0.
+[13] Expected indentation of 2 but found 0.
+[14] Expected indentation of 4 but found 0.
+[15] Expected indentation of 1 from the blockquote marker but found 0.
+[16] Expected indentation of 1 from the blockquote marker but found 0.
+[17] Expected indentation of 1 from the blockquote marker but found 0.
+[18] Expected indentation of 1 from the blockquote marker but found 2.
+[19] Expected indentation of 1 from the blockquote marker but found 2.
+[20] Expected indentation of 1 from the blockquote marker but found 2.
+[21] Expected indentation of 1 from the blockquote marker but found 0.
+[22] Expected indentation of 3 from the blockquote marker but found 0.
+[23] Expected indentation of 1 from the blockquote marker but found 0.
+[24] Expected indentation of 3 from the blockquote marker but found 0.
+[25] Expected indentation of 3 from the blockquote marker but found 0.
+[26] Expected indentation of 5 from the blockquote marker but found 0.
+[27] Expected indentation of 3 from the blockquote marker but found 0.
+[28] Expected indentation of 1 from the blockquote marker but found 0.
+[29] Expected indentation of 1 from the blockquote marker but found 0.
+[30] Expected indentation of 1 from the blockquote marker but found 0.
+[31] Expected indentation of 3 from the blockquote marker but found 0.
+[32] Expected indentation of 3 from the blockquote marker but found 0.
+[33] Expected indentation of 1 from the blockquote marker but found 0.
+[34] Expected indentation of 1 from the blockquote marker but found 0.
+[35] Expected indentation of 3 from the blockquote marker but found 0.
+[36] Expected indentation of 3 from the blockquote marker but found 0.
+[37] Expected indentation of 3 from the blockquote marker but found 0.
+[38] Expected indentation of 5 from the blockquote marker but found 0.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/list-item-4-relative-to-marker-end/google-styleguide-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - listItems:
+      first: 4
+      other: 4
+      relativeTo: markerStart
+Plugins: unable to serialize
+
+Code:
+  1 | # Indent list items relative to the end of the marker (Google Style Guide)
+  2 |
+  3 | See <https://google.github.io/styleguide/docguide/style.html#use-lazy-numbering-for-long-lists>
+  4 |
+  5 | 1. Foo.
+    |   ^ [1]
+  6 | 1. Bar.
+    |   ^ [2]
+  7 |    1. Foofoo.
+    | ^~~  ^
+    | [3]  [4]
+  8 |    1. Barbar.
+    |      ^ [5]
+  9 | 1. Baz.
+    |   ^ [6]
+ 10 |
+ 11 | ---
+ 12 |
+ 13 | 1. Use 2 spaces after the item number, so the text itself is indented 4 spaces.
+    |   ^ [7]
+ 14 |    Use a 4-space indent for wrapped text.
+    | ^~~ [8]
+ 15 | 2. Use 2 spaces again for the next item.
+    |   ^ [9]
+ 16 |
+ 17 | - Use 3 spaces after a bullet, so the text itself is indented 4 spaces.
+    |  ^ [10]
+ 18 |   Use a 4-space indent for wrapped text.
+    | ^~ [11]
+ 19 |   1. Use 2 spaces with numbered lists, as before.
+    | ^~ [12]
+    |     ^ [13]
+ 20 |      Wrapped text in a nested list needs an 8-space indent.
+    | ^~~~~ [14]
+ 21 |   2. Looks nice, doesn't it?
+    |     ^ [15]
+ 22 | - Back to the bulleted list, indented 3 spaces.
+    |  ^ [16]
+ 23 |
+
+Output:
+  1 | #    Indent list items relative to the end of the marker (Google Style Guide)
+  2 |
+  3 | See <https://google.github.io/styleguide/docguide/style.html#use-lazy-numbering-for-long-lists>
+  4 |
+  5 | 1.  Foo.
+  6 | 1.  Bar.
+  7 |     1.  Foofoo.
+  8 |    1.  Barbar.
+  9 | 1.  Baz.
+ 10 |
+ 11 | ---
+ 12 |
+ 13 | 1.  Use 2 spaces after the item number, so the text itself is indented 4 spaces.
+ 14 |     Use a 4-space indent for wrapped text.
+ 15 | 2.  Use 2 spaces again for the next item.
+ 16 |
+ 17 | -   Use 3 spaces after a bullet, so the text itself is indented 4 spaces.
+ 18 |     Use a 4-space indent for wrapped text.
+ 19 |     1.  Use 2 spaces with numbered lists, as before.
+ 20 |         Wrapped text in a nested list needs an 8-space indent.
+ 21 | 2.  Looks nice, doesn't it?
+ 22 | -   Back to the bulleted list, indented 3 spaces.
+ 23 |
+
+[1] Expected indentation of 2 from the list marker but found 1.
+[2] Expected indentation of 2 from the list marker but found 1.
+[3] Expected indentation of 4 but found 3.
+[4] Expected indentation of 2 from the list marker but found 1.
+[5] Expected indentation of 2 from the list marker but found 1.
+[6] Expected indentation of 2 from the list marker but found 1.
+[7] Expected indentation of 2 from the list marker but found 1.
+[8] Expected indentation of 4 but found 3.
+[9] Expected indentation of 2 from the list marker but found 1.
+[10] Expected indentation of 3 from the list marker but found 1.
+[11] Expected indentation of 4 but found 2.
+[12] Expected indentation of 4 but found 2.
+[13] Expected indentation of 2 from the list marker but found 1.
+[14] Expected indentation of 6 but found 5.
+[15] Expected indentation of 2 from the list marker but found 1.
+[16] Expected indentation of 3 from the list marker but found 1.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/lists-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 |  - Foo
+    | ^ [1]
+  3 |     -  Foo
+    | ^~~~ ^~
+    | [2]  [3]
+  4 |          - Foo
+    | ^~~~~~~~~ [4]
+  5 |             Foo
+    | ^~~~~~~~~~~~ [5]
+  6 |         - Bar
+  7 |      - Bar
+  8 | - Bar
+  9 |  1. Foo
+    | ^ [6]
+ 10 |       1.  Foo
+    | ^~~~~~  ^~
+    | [7]     [8]
+ 11 |             1. Foo
+    | ^~~~~~~~~~~~ [9]
+ 12 |               Foo
+    | ^~~~~~~~~~~~~~ [10]
+ 13 |             1. Bar
+ 14 |     1. Bar
+ 15 | 1. Bar
+ 16 |
+ 17 | > - Foo
+ 18 | >    -  Foo
+    |  ^~~~ ^~
+    |  [11] [12]
+ 19 | >         - Foo
+    |  ^~~~~~~~~ [13]
+ 20 | >            Foo
+    |  ^~~~~~~~~~~~ [14]
+ 21 | >        - Bar
+ 22 | >     - Bar
+ 23 | >- Bar
+ 24 | > 1. Foo
+ 25 | >      1.  Foo
+    |  ^~~~~~  ^~
+    |  [15]    [16]
+ 26 | >            1. Foo
+    |  ^~~~~~~~~~~~ [17]
+ 27 | >              Foo
+    |  ^~~~~~~~~~~~~~ [18]
+ 28 | >            1. Bar
+ 29 | >    1. Bar
+ 30 | >1. Bar
+ 31 | >  - Foo
+    |  ^~ [19]
+ 32 | >     -  Foo
+    |  ^~~~~ ^~
+    |  [20]  [21]
+ 33 | >          - Foo
+    |  ^~~~~~~~~~ [22]
+ 34 | >             Foo
+    |  ^~~~~~~~~~~~~ [23]
+ 35 | >         - Bar
+ 36 | >      - Bar
+ 37 | > - Bar
+ 38 | >  1. Foo
+    |  ^~ [24]
+ 39 | >       1.  Foo
+    |  ^~~~~~~  ^~
+    |  [25]     [26]
+ 40 | >             1. Foo
+    |  ^~~~~~~~~~~~~ [27]
+ 41 | >               Foo
+    |  ^~~~~~~~~~~~~~~ [28]
+ 42 | >             1. Bar
+ 43 | >     1. Bar
+ 44 | > 1. Bar
+
+Output:
+  1 |
+  2 | - Foo
+  3 |   - Foo
+  4 |     - Foo
+  5 |       Foo
+  6 |     - Bar
+  7 |   - Bar
+  8 | - Bar
+  9 | 1. Foo
+ 10 |    1. Foo
+ 11 |       1. Foo
+ 12 |          Foo
+ 13 |       1. Bar
+ 14 |    1. Bar
+ 15 | 1. Bar
+ 16 |
+ 17 | > - Foo
+ 18 | >   - Foo
+ 19 | >     - Foo
+ 20 | >       Foo
+ 21 | >     - Bar
+ 22 | >   - Bar
+ 23 | >- Bar
+ 24 | > 1. Foo
+ 25 | >    1. Foo
+ 26 | >       1. Foo
+ 27 | >          Foo
+ 28 | >       1. Bar
+ 29 | >    1. Bar
+ 30 | >1. Bar
+ 31 | > - Foo
+ 32 | >   - Foo
+ 33 | >     - Foo
+ 34 | >       Foo
+ 35 | >     - Bar
+ 36 | >   - Bar
+ 37 | > - Bar
+ 38 | > 1. Foo
+ 39 | >    1. Foo
+ 40 | >       1. Foo
+ 41 | >          Foo
+ 42 | >       1. Bar
+ 43 | >    1. Bar
+ 44 | > 1. Bar
+
+[1] Expected indentation of 0 but found 1.
+[2] Expected indentation of 3 but found 4.
+[3] Expected indentation of 1 from the list marker but found 2.
+[4] Expected indentation of 6 but found 9.
+[5] Expected indentation of 11 but found 12.
+[6] Expected indentation of 0 but found 1.
+[7] Expected indentation of 4 but found 6.
+[8] Expected indentation of 1 from the list marker but found 2.
+[9] Expected indentation of 9 but found 12.
+[10] Expected indentation of 15 but found 14.
+[11] Expected indentation of 3 from the blockquote marker but found 4.
+[12] Expected indentation of 1 from the list marker but found 2.
+[13] Expected indentation of 6 from the blockquote marker but found 9.
+[14] Expected indentation of 11 from the blockquote marker but found 12.
+[15] Expected indentation of 4 from the blockquote marker but found 6.
+[16] Expected indentation of 1 from the list marker but found 2.
+[17] Expected indentation of 9 from the blockquote marker but found 12.
+[18] Expected indentation of 15 from the blockquote marker but found 14.
+[19] Expected indentation of 1 from the blockquote marker but found 2.
+[20] Expected indentation of 4 from the blockquote marker but found 5.
+[21] Expected indentation of 1 from the list marker but found 2.
+[22] Expected indentation of 7 from the blockquote marker but found 10.
+[23] Expected indentation of 12 from the blockquote marker but found 13.
+[24] Expected indentation of 1 from the blockquote marker but found 2.
+[25] Expected indentation of 5 from the blockquote marker but found 7.
+[26] Expected indentation of 1 from the list marker but found 2.
+[27] Expected indentation of 10 from the blockquote marker but found 13.
+[28] Expected indentation of 16 from the blockquote marker but found 15.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/setext-headings-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | Setext Heading
+  2 | ==============
+  3 |
+  4 |   Heading
+    | ^~ [1]
+  5 |   --------------
+    | ^~ [2]
+  6 |  Heading
+    | ^ [3]
+  7 |  --------------
+    | ^ [4]
+  8 |    Heading
+    | ^~~ [5]
+  9 |    --------------
+    | ^~~ [6]
+ 10 |   Heading
+    | ^~ [7]
+ 11 |    --------------
+    | ^~~ [8]
+ 12 | Heading
+ 13 |  --------------
+    | ^ [9]
+ 14 |  Heading
+    | ^ [10]
+ 15 | --------------
+ 16 |
+ 17 | > Heading
+ 18 | > --------------
+ 19 | >Heading
+    |  ^ [11]
+ 20 | >--------------
+    |  ^ [12]
+ 21 | >  Heading
+    |  ^~ [13]
+ 22 | >  --------------
+    |  ^~ [14]
+ 23 | > Heading
+ 24 | > --------------
+ 25 | >   Heading
+    |  ^~~ [15]
+ 26 | >   --------------
+    |  ^~~ [16]
+ 27 | >  Heading
+    |  ^~ [17]
+ 28 | >   --------------
+    |  ^~~ [18]
+ 29 | >Heading
+    |  ^ [19]
+ 30 | > --------------
+ 31 | > Heading
+ 32 | >--------------
+    |  ^ [20]
+ 33 |
+
+Output:
+  1 | Setext Heading
+  2 | ==============
+  3 |
+  4 | Heading
+  5 | --------------
+  6 | Heading
+  7 | --------------
+  8 | Heading
+  9 | --------------
+ 10 | Heading
+ 11 | --------------
+ 12 | Heading
+ 13 | --------------
+ 14 | Heading
+ 15 | --------------
+ 16 |
+ 17 | > Heading
+ 18 | > --------------
+ 19 | > Heading
+ 20 | > --------------
+ 21 | > Heading
+ 22 | > --------------
+ 23 | > Heading
+ 24 | > --------------
+ 25 | > Heading
+ 26 | > --------------
+ 27 | > Heading
+ 28 | > --------------
+ 29 | > Heading
+ 30 | > --------------
+ 31 | > Heading
+ 32 | > --------------
+ 33 |
+
+[1] Expected indentation of 0 but found 2.
+[2] Expected indentation of 0 but found 2.
+[3] Expected indentation of 0 but found 1.
+[4] Expected indentation of 0 but found 1.
+[5] Expected indentation of 0 but found 3.
+[6] Expected indentation of 0 but found 3.
+[7] Expected indentation of 0 but found 2.
+[8] Expected indentation of 0 but found 3.
+[9] Expected indentation of 0 but found 1.
+[10] Expected indentation of 0 but found 1.
+[11] Expected indentation of 1 from the blockquote marker but found 0.
+[12] Expected indentation of 1 from the blockquote marker but found 0.
+[13] Expected indentation of 1 from the blockquote marker but found 2.
+[14] Expected indentation of 1 from the blockquote marker but found 2.
+[15] Expected indentation of 1 from the blockquote marker but found 3.
+[16] Expected indentation of 1 from the blockquote marker but found 3.
+[17] Expected indentation of 1 from the blockquote marker but found 2.
+[18] Expected indentation of 1 from the blockquote marker but found 3.
+[19] Expected indentation of 1 from the blockquote marker but found 0.
+[20] Expected indentation of 1 from the blockquote marker but found 0.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | | Header 1 | Header 2 |
+  3 | |----------|----------|
+  4 | | Cell 1   | Cell 2   |
+  5 |
+  6 |    | Header 1 | Header 2 |
+    | ^~~ [1]
+  7 |    |----------|----------|
+    | ^~~ [2]
+  8 |    | Cell 1   | Cell 2   |
+    | ^~~ [3]
+  9 |
+ 10 |  | Header 1 | Header 2 |
+    | ^ [4]
+ 11 |  |----------|----------|
+    | ^ [5]
+ 12 | | Cell 1   | Cell 2   |
+ 13 |
+ 14 | | Header 1 | Header 2 |
+ 15 |  |----------|----------|
+    | ^ [6]
+ 16 |  | Cell 1   | Cell 2   |
+    | ^ [7]
+ 17 |
+ 18 | | Header 1 | Header 2 |
+ 19 | |----------|----------|
+ 20 | | Cell 1   | Cell 2   |
+ 21 |
+ 22 |  | Header 1 | Header 2 |
+    | ^ [8]
+ 23 |  |----------|----------|
+    | ^ [9]
+ 24 | | Cell 1   | Cell 2   |
+ 25 |
+ 26 | | Header 1 | Header 2 |
+ 27 |  |----------|----------|
+    | ^ [10]
+ 28 |  | Cell 1   | Cell 2   |
+    | ^ [11]
+ 29 |
+ 30 | > | Header 1 | Header 2 |
+ 31 | > |----------|----------|
+ 32 | > | Cell 1   | Cell 2   |
+ 33 | >
+ 34 | >| Header 1 | Header 2 |
+    |  ^ [12]
+ 35 | >|----------|----------|
+    |  ^ [13]
+ 36 | >| Cell 1   | Cell 2   |
+    |  ^ [14]
+ 37 | >
+ 38 | >   | Header 1 | Header 2 |
+    |  ^~~ [15]
+ 39 | >   |----------|----------|
+    |  ^~~ [16]
+ 40 | >   | Cell 1   | Cell 2   |
+    |  ^~~ [17]
+ 41 | >
+ 42 | > | Header 1 | Header 2 |
+ 43 | > |----------|----------|
+ 44 | >| Cell 1   | Cell 2   |
+    |  ^ [18]
+ 45 | >
+ 46 | >| Header 1 | Header 2 |
+    |  ^ [19]
+ 47 | > |----------|----------|
+ 48 | > | Cell 1   | Cell 2   |
+ 49 | >
+ 50 | >| Header 1 | Header 2 |
+    |  ^ [20]
+ 51 | >|----------|----------|
+    |  ^ [21]
+ 52 | >| Cell 1   | Cell 2   |
+    |  ^ [22]
+ 53 | >
+ 54 | > | Header 1 | Header 2 |
+ 55 | > |----------|----------|
+ 56 | >| Cell 1   | Cell 2   |
+    |  ^ [23]
+ 57 | >
+ 58 | >| Header 1 | Header 2 |
+    |  ^ [24]
+ 59 | > |----------|----------|
+ 60 | > | Cell 1   | Cell 2   |
+ 61 |
+
+Output:
+  1 |
+  2 | | Header 1 | Header 2 |
+  3 | |----------|----------|
+  4 | | Cell 1   | Cell 2   |
+  5 |
+  6 | | Header 1 | Header 2 |
+  7 | |----------|----------|
+  8 | | Cell 1   | Cell 2   |
+  9 |
+ 10 | | Header 1 | Header 2 |
+ 11 | |----------|----------|
+ 12 | | Cell 1   | Cell 2   |
+ 13 |
+ 14 | | Header 1 | Header 2 |
+ 15 | |----------|----------|
+ 16 | | Cell 1   | Cell 2   |
+ 17 |
+ 18 | | Header 1 | Header 2 |
+ 19 | |----------|----------|
+ 20 | | Cell 1   | Cell 2   |
+ 21 |
+ 22 | | Header 1 | Header 2 |
+ 23 | |----------|----------|
+ 24 | | Cell 1   | Cell 2   |
+ 25 |
+ 26 | | Header 1 | Header 2 |
+ 27 | |----------|----------|
+ 28 | | Cell 1   | Cell 2   |
+ 29 |
+ 30 | > | Header 1 | Header 2 |
+ 31 | > |----------|----------|
+ 32 | > | Cell 1   | Cell 2   |
+ 33 | >
+ 34 | > | Header 1 | Header 2 |
+ 35 | > |----------|----------|
+ 36 | > | Cell 1   | Cell 2   |
+ 37 | >
+ 38 | > | Header 1 | Header 2 |
+ 39 | > |----------|----------|
+ 40 | > | Cell 1   | Cell 2   |
+ 41 | >
+ 42 | > | Header 1 | Header 2 |
+ 43 | > |----------|----------|
+ 44 | > | Cell 1   | Cell 2   |
+ 45 | >
+ 46 | > | Header 1 | Header 2 |
+ 47 | > |----------|----------|
+ 48 | > | Cell 1   | Cell 2   |
+ 49 | >
+ 50 | > | Header 1 | Header 2 |
+ 51 | > |----------|----------|
+ 52 | > | Cell 1   | Cell 2   |
+ 53 | >
+ 54 | > | Header 1 | Header 2 |
+ 55 | > |----------|----------|
+ 56 | > | Cell 1   | Cell 2   |
+ 57 | >
+ 58 | > | Header 1 | Header 2 |
+ 59 | > |----------|----------|
+ 60 | > | Cell 1   | Cell 2   |
+ 61 |
+
+[1] Expected indentation of 0 but found 3.
+[2] Expected indentation of 0 but found 3.
+[3] Expected indentation of 0 but found 3.
+[4] Expected indentation of 0 but found 1.
+[5] Expected indentation of 0 but found 1.
+[6] Expected indentation of 0 but found 1.
+[7] Expected indentation of 0 but found 1.
+[8] Expected indentation of 0 but found 1.
+[9] Expected indentation of 0 but found 1.
+[10] Expected indentation of 0 but found 1.
+[11] Expected indentation of 0 but found 1.
+[12] Expected indentation of 1 from the blockquote marker but found 0.
+[13] Expected indentation of 1 from the blockquote marker but found 0.
+[14] Expected indentation of 1 from the blockquote marker but found 0.
+[15] Expected indentation of 1 from the blockquote marker but found 3.
+[16] Expected indentation of 1 from the blockquote marker but found 3.
+[17] Expected indentation of 1 from the blockquote marker but found 3.
+[18] Expected indentation of 1 from the blockquote marker but found 0.
+[19] Expected indentation of 1 from the blockquote marker but found 0.
+[20] Expected indentation of 1 from the blockquote marker but found 0.
+[21] Expected indentation of 1 from the blockquote marker but found 0.
+[22] Expected indentation of 1 from the blockquote marker but found 0.
+[23] Expected indentation of 1 from the blockquote marker but found 0.
+[24] Expected indentation of 1 from the blockquote marker but found 0.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/thematic-breaks-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Thematic Breaks
+  2 |
+  3 | ---
+  4 |
+  5 |   ---
+    | ^~ [1]
+  6 |  ---
+    | ^ [2]
+  7 |    ---
+    | ^~~ [3]
+  8 |
+  9 | > ---
+ 10 | >  ---
+    |  ^~ [4]
+ 11 | >    ---
+    |  ^~~~ [5]
+ 12 | >---
+    |  ^ [6]
+ 13 |
+
+Output:
+  1 | # Thematic Breaks
+  2 |
+  3 | ---
+  4 |
+  5 | ---
+  6 | ---
+  7 | ---
+  8 |
+  9 | > ---
+ 10 | > ---
+ 11 | > ---
+ 12 | > ---
+ 13 |
+
+[1] Expected indentation of 0 but found 2.
+[2] Expected indentation of 0 but found 1.
+[3] Expected indentation of 0 but found 3.
+[4] Expected indentation of 1 from the blockquote marker but found 2.
+[5] Expected indentation of 1 from the blockquote marker but found 4.
+[6] Expected indentation of 1 from the blockquote marker but found 0.
+---

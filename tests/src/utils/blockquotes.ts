@@ -29,7 +29,17 @@ describe("utils/blockquotes", () => {
     const info = getBlockquoteLevelFromLine(src, 1);
     assert.strictEqual(info.level, 1);
     assert.strictEqual(info.prefix, ">");
-    assert.deepStrictEqual([...info.blockquoteMarkers], [[1, { index: 0 }]]);
+    assert.deepStrictEqual(
+      [...info.blockquoteMarkers],
+      [
+        [
+          1,
+          {
+            loc: { start: { line: 1, column: 1 }, end: { line: 1, column: 2 } },
+          },
+        ],
+      ],
+    );
   });
 
   it("should handle blockquote only with spaces (>'   ')", () => {
@@ -37,7 +47,17 @@ describe("utils/blockquotes", () => {
     const info = getBlockquoteLevelFromLine(src, 1);
     assert.strictEqual(info.level, 1);
     assert.strictEqual(info.prefix, ">   ");
-    assert.deepStrictEqual([...info.blockquoteMarkers], [[1, { index: 0 }]]);
+    assert.deepStrictEqual(
+      [...info.blockquoteMarkers],
+      [
+        [
+          1,
+          {
+            loc: { start: { line: 1, column: 1 }, end: { line: 1, column: 2 } },
+          },
+        ],
+      ],
+    );
   });
 
   it("should handle blockquote with only marker and newline (>'\\n')", () => {
@@ -45,7 +65,17 @@ describe("utils/blockquotes", () => {
     const info = getBlockquoteLevelFromLine(src, 1);
     assert.strictEqual(info.level, 1);
     assert.strictEqual(info.prefix, ">");
-    assert.deepStrictEqual([...info.blockquoteMarkers], [[1, { index: 0 }]]);
+    assert.deepStrictEqual(
+      [...info.blockquoteMarkers],
+      [
+        [
+          1,
+          {
+            loc: { start: { line: 1, column: 1 }, end: { line: 1, column: 2 } },
+          },
+        ],
+      ],
+    );
   });
 
   it("should handle line with tab before blockquote", () => {
@@ -72,8 +102,18 @@ describe("utils/blockquotes", () => {
     assert.deepStrictEqual(
       [...info.blockquoteMarkers],
       [
-        [1, { index: 0 }],
-        [2, { index: 2 }],
+        [
+          1,
+          {
+            loc: { start: { line: 1, column: 1 }, end: { line: 1, column: 2 } },
+          },
+        ],
+        [
+          2,
+          {
+            loc: { start: { line: 1, column: 3 }, end: { line: 1, column: 4 } },
+          },
+        ],
       ],
     );
   });
@@ -91,7 +131,17 @@ describe("utils/blockquotes", () => {
     const info = getBlockquoteLevelFromLine(src, 1);
     assert.strictEqual(info.level, 1);
     assert.strictEqual(info.prefix, "> ");
-    assert.deepStrictEqual([...info.blockquoteMarkers], [[1, { index: 0 }]]);
+    assert.deepStrictEqual(
+      [...info.blockquoteMarkers],
+      [
+        [
+          1,
+          {
+            loc: { start: { line: 1, column: 1 }, end: { line: 1, column: 2 } },
+          },
+        ],
+      ],
+    );
   });
 
   it("should return level 2 for nested blockquote", () => {
@@ -102,8 +152,18 @@ describe("utils/blockquotes", () => {
     assert.deepStrictEqual(
       [...info.blockquoteMarkers],
       [
-        [1, { index: 0 }],
-        [2, { index: 2 }],
+        [
+          1,
+          {
+            loc: { start: { line: 1, column: 1 }, end: { line: 1, column: 2 } },
+          },
+        ],
+        [
+          2,
+          {
+            loc: { start: { line: 1, column: 3 }, end: { line: 1, column: 4 } },
+          },
+        ],
       ],
     );
   });
@@ -113,7 +173,17 @@ describe("utils/blockquotes", () => {
     const info = getBlockquoteLevelFromLine(src, 1);
     assert.strictEqual(info.level, 1);
     assert.strictEqual(info.prefix, ">");
-    assert.deepStrictEqual([...info.blockquoteMarkers], [[1, { index: 0 }]]);
+    assert.deepStrictEqual(
+      [...info.blockquoteMarkers],
+      [
+        [
+          1,
+          {
+            loc: { start: { line: 1, column: 1 }, end: { line: 1, column: 2 } },
+          },
+        ],
+      ],
+    );
   });
 
   it("should handle blockquote with leading spaces", () => {
@@ -121,7 +191,17 @@ describe("utils/blockquotes", () => {
     const info = getBlockquoteLevelFromLine(src, 1);
     assert.strictEqual(info.level, 1);
     assert.strictEqual(info.prefix, "   > ");
-    assert.deepStrictEqual([...info.blockquoteMarkers], [[1, { index: 3 }]]);
+    assert.deepStrictEqual(
+      [...info.blockquoteMarkers],
+      [
+        [
+          1,
+          {
+            loc: { start: { line: 1, column: 4 }, end: { line: 1, column: 5 } },
+          },
+        ],
+      ],
+    );
   });
 
   it("should handle blockquote with leading 4 spaces", () => {
@@ -140,8 +220,18 @@ describe("utils/blockquotes", () => {
     assert.deepStrictEqual(
       [...info.blockquoteMarkers],
       [
-        [1, { index: 0 }],
-        [2, { index: 5 }],
+        [
+          1,
+          {
+            loc: { start: { line: 1, column: 1 }, end: { line: 1, column: 2 } },
+          },
+        ],
+        [
+          2,
+          {
+            loc: { start: { line: 1, column: 6 }, end: { line: 1, column: 7 } },
+          },
+        ],
       ],
     );
   });
@@ -151,7 +241,17 @@ describe("utils/blockquotes", () => {
     const info = getBlockquoteLevelFromLine(src, 1);
     assert.strictEqual(info.level, 1);
     assert.strictEqual(info.prefix, ">     ");
-    assert.deepStrictEqual([...info.blockquoteMarkers], [[1, { index: 0 }]]);
+    assert.deepStrictEqual(
+      [...info.blockquoteMarkers],
+      [
+        [
+          1,
+          {
+            loc: { start: { line: 1, column: 1 }, end: { line: 1, column: 2 } },
+          },
+        ],
+      ],
+    );
   });
 
   it("should handle deeply nested blockquotes", () => {
@@ -162,10 +262,30 @@ describe("utils/blockquotes", () => {
     assert.deepStrictEqual(
       [...info.blockquoteMarkers],
       [
-        [1, { index: 0 }],
-        [2, { index: 2 }],
-        [3, { index: 4 }],
-        [4, { index: 6 }],
+        [
+          1,
+          {
+            loc: { start: { line: 1, column: 1 }, end: { line: 1, column: 2 } },
+          },
+        ],
+        [
+          2,
+          {
+            loc: { start: { line: 1, column: 3 }, end: { line: 1, column: 4 } },
+          },
+        ],
+        [
+          3,
+          {
+            loc: { start: { line: 1, column: 5 }, end: { line: 1, column: 6 } },
+          },
+        ],
+        [
+          4,
+          {
+            loc: { start: { line: 1, column: 7 }, end: { line: 1, column: 8 } },
+          },
+        ],
       ],
     );
   });

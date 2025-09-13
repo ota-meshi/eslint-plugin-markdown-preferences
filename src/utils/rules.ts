@@ -14,6 +14,7 @@ import emojiNotation from "../rules/emoji-notation.ts";
 import emphasisDelimitersStyle from "../rules/emphasis-delimiters-style.ts";
 import hardLinebreakStyle from "../rules/hard-linebreak-style.ts";
 import headingCasing from "../rules/heading-casing.ts";
+import indent from "../rules/indent.ts";
 import level1HeadingStyle from "../rules/level1-heading-style.ts";
 import level2HeadingStyle from "../rules/level2-heading-style.ts";
 import linkBracketNewline from "../rules/link-bracket-newline.ts";
@@ -58,6 +59,7 @@ export const rules = [
   emphasisDelimitersStyle,
   hardLinebreakStyle,
   headingCasing,
+  indent,
   level1HeadingStyle,
   level2HeadingStyle,
   linkBracketNewline,
