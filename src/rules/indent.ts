@@ -28,7 +28,6 @@ import { getParsedLines } from "../utils/lines.ts";
 import {
   getCodeBlockKind,
   getLinkKind,
-  getListItemMarker,
   getSourceLocationFromRange,
 } from "../utils/ast.ts";
 import type {
@@ -44,12 +43,14 @@ import { parseInlineLink } from "../utils/link.ts";
 import { parseLinkReference } from "../utils/link-reference.ts";
 import { parseImage } from "../utils/image.ts";
 import { parseImageReference } from "../utils/image-reference.ts";
+import type { ParsedListItem } from "../utils/list-item.ts";
+import { parseListItem } from "../utils/list-item.ts";
 
 type Options = {
   listItems?: {
     first?: number | "ignore";
     other?: number | "first" | "minimum";
-    relativeTo: "markerStart" | "markerEnd";
+    relativeTo: "markerStart" | "markerEnd" | "taskListMarkerEnd";
   };
 };
 
@@ -62,7 +63,7 @@ function parseOptions(options: Options | undefined) {
     listItems: {
       first: listItems?.first ?? 1,
       other: listItems?.other ?? "first",
-      relativeTo: listItems?.relativeTo ?? "markerEnd",
+      relativeTo: listItems?.relativeTo ?? "taskListMarkerEnd",
     },
   };
 }
@@ -107,7 +108,12 @@ export default createRule<[Options?]>("indent", {
                 ],
               },
               relativeTo: {
-                enum: ["markerStart", "markerEnd"],
+                enum: [
+                  "markerStart",
+                  "markerEnd",
+                  "taskListMarkerStart",
+                  "taskListMarkerEnd",
+                ],
               },
             },
             additionalProperties: false,
@@ -149,6 +155,11 @@ export default createRule<[Options?]>("indent", {
         actual: number;
       };
       fix: (fixer: RuleTextEditor) => Iterable<RuleTextEdit>;
+    };
+
+    type GetExpectedIndentContext = {
+      lineNumber: number;
+      block: boolean;
     };
 
     abstract class AbsBlockStack {
@@ -193,7 +204,9 @@ export default createRule<[Options?]>("indent", {
         return null;
       }
 
-      public abstract getExpectedIndent(lineNumber: number): number | "ignore";
+      public abstract getExpectedIndent(
+        ctx: GetExpectedIndentContext,
+      ): number | "ignore";
     }
 
     class RootStack extends AbsBlockStack {
@@ -260,6 +273,8 @@ export default createRule<[Options?]>("indent", {
 
       private _expectedIndentForOtherLines?: number | "ignore";
 
+      private _parsed?: ParsedListItem;
+
       private readonly nodeLoc: SourceLocation;
 
       public constructor(node: ListItem) {
@@ -270,33 +285,73 @@ export default createRule<[Options?]>("indent", {
         this.nodeLoc = sourceCode.getLoc(this.node);
       }
 
-      public getExpectedIndent(lineNumber: number): number | "ignore" {
+      public getParsedListItem(): ParsedListItem {
+        return (this._parsed ??= parseListItem(sourceCode, this.node));
+      }
+
+      public getExpectedIndent({
+        lineNumber,
+        block,
+      }: {
+        lineNumber: number;
+        block: boolean;
+      }): number | "ignore" {
         const loc = this.nodeLoc;
         if (lineNumber === loc.start.line) {
-          if (options.listItems.first === "ignore") {
-            return "ignore";
-          }
-          if (this._expectedIndentForFirstLine != null)
-            return this._expectedIndentForFirstLine;
-          const markerLength = getListItemMarker(sourceCode, this.node).raw
-            .length;
-          const lineText = sourceCode.lines[loc.start.line - 1];
-          const baseIndent = getWidth(lineText.slice(0, loc.start.column - 1));
-          if (options.listItems.relativeTo === "markerEnd") {
-            return (this._expectedIndentForFirstLine =
-              baseIndent + markerLength + options.listItems.first);
-          }
-          // relative to markerStart
-          return (this._expectedIndentForFirstLine = Math.max(
-            baseIndent + options.listItems.first,
-            baseIndent + markerLength + 1, // At least one space after the marker,
-          ));
+          return this.getExpectedIndentForFirstLine();
         }
         // Other lines
+        const expected = this.getExpectedIndentAfterFirstLine();
+        if (expected === "ignore") return "ignore";
+        if (!block) return expected;
+        const actualFirstLineIndent = this.getActualFirstLineIndent({
+          withoutTaskListMarker: true,
+        });
+        if (actualFirstLineIndent != null)
+          return Math.min(expected, actualFirstLineIndent + 3);
+        return expected;
+      }
+
+      private getExpectedIndentForFirstLine() {
+        if (options.listItems.first === "ignore") {
+          return "ignore";
+        }
+        if (this._expectedIndentForFirstLine != null)
+          return this._expectedIndentForFirstLine;
+        const loc = this.nodeLoc;
+        const parsed = this.getParsedListItem();
+        const lineText = sourceCode.lines[loc.start.line - 1];
+        if (options.listItems.relativeTo === "markerStart") {
+          const baseIndent = getWidth(lineText.slice(0, loc.start.column - 1));
+          return (this._expectedIndentForFirstLine = Math.max(
+            baseIndent + options.listItems.first,
+            baseIndent + parsed.marker.text.length + 1, // At least one space after the marker,
+          ));
+        }
+        if (
+          options.listItems.relativeTo === "taskListMarkerEnd" &&
+          parsed.taskListItemMarker
+        ) {
+          const baseIndent = getWidth(
+            lineText.slice(0, parsed.taskListItemMarker.loc.end.column - 1),
+          );
+          return (this._expectedIndentForFirstLine =
+            baseIndent + options.listItems.first);
+        }
+        // relative to markerEnd, or taskListMarkerEnd without task list marker
+        const baseIndent = getWidth(
+          lineText.slice(0, parsed.marker.loc.end.column - 1),
+        );
+        return (this._expectedIndentForFirstLine =
+          baseIndent + options.listItems.first);
+      }
+
+      private getExpectedIndentAfterFirstLine() {
         if (this._expectedIndentForOtherLines != null)
           return this._expectedIndentForOtherLines;
+        const loc = this.nodeLoc;
         if (options.listItems.other === "first") {
-          const firstLineIndent = this.getExpectedIndent(loc.start.line);
+          const firstLineIndent = this.getExpectedIndentForFirstLine();
           if (firstLineIndent === "ignore") {
             const actualFirstLineIndent = this.getActualFirstLineIndent();
             if (actualFirstLineIndent != null) {
@@ -322,43 +377,54 @@ export default createRule<[Options?]>("indent", {
             this.getMinimumLineIndent());
         }
         const lineText = sourceCode.lines[loc.start.line - 1];
-        const baseIndent = getWidth(lineText.slice(0, loc.start.column - 1));
-        if (options.listItems.relativeTo === "markerEnd") {
-          const markerLength = getListItemMarker(sourceCode, this.node).raw
-            .length;
-          return (this._expectedIndentForOtherLines =
-            baseIndent + markerLength + options.listItems.other);
+        if (options.listItems.relativeTo === "markerStart") {
+          const baseIndent = getWidth(lineText.slice(0, loc.start.column - 1));
+          const minimumLineIndent = this.getMinimumLineIndent();
+          return (this._expectedIndentForOtherLines = Math.max(
+            baseIndent + options.listItems.other,
+            minimumLineIndent,
+          ));
         }
-        // relative to markerStart
-        const minimumLineIndent = this.getMinimumLineIndent();
-        return (this._expectedIndentForOtherLines = Math.max(
-          baseIndent + options.listItems.other,
-          minimumLineIndent,
-        ));
+        const parsed = this.getParsedListItem();
+        if (
+          options.listItems.relativeTo === "taskListMarkerEnd" &&
+          parsed.taskListItemMarker
+        ) {
+          const baseIndent = getWidth(
+            lineText.slice(0, parsed.taskListItemMarker.loc.end.column - 1),
+          );
+          return (this._expectedIndentForOtherLines =
+            baseIndent + options.listItems.other);
+        }
+        // relative to markerEnd, or taskListMarkerEnd without task list marker
+        const baseIndent = getWidth(
+          lineText.slice(0, parsed.marker.loc.end.column - 1),
+        );
+        return (this._expectedIndentForOtherLines =
+          baseIndent + options.listItems.other);
       }
 
       private getMinimumLineIndent() {
-        const actualFirstLineIndent = this.getActualFirstLineIndent();
+        const actualFirstLineIndent = this.getActualFirstLineIndent({
+          withoutTaskListMarker: true,
+        });
         if (actualFirstLineIndent != null) {
           return (this._expectedIndentForOtherLines = actualFirstLineIndent);
         }
-        const loc = this.nodeLoc;
-        const markerLength = getListItemMarker(sourceCode, this.node).raw
-          .length;
-        const lineText = sourceCode.lines[loc.start.line - 1];
-        return getWidth(
-          lineText.slice(0, loc.start.column - 1 + markerLength + 1),
+        const parsed = this.getParsedListItem();
+        const lineText = sourceCode.lines[parsed.marker.loc.end.line - 1];
+        return (
+          getWidth(lineText.slice(0, parsed.marker.loc.end.column - 1)) + 1
         );
       }
 
-      private getActualFirstLineIndent() {
-        const loc = this.nodeLoc;
-        const markerLength = getListItemMarker(sourceCode, this.node).raw
-          .length;
-        const lineText = sourceCode.lines[loc.start.line - 1];
-        const afterMarkerText = lineText.slice(
-          loc.start.column - 1 + markerLength,
-        );
+      private getActualFirstLineIndent({ withoutTaskListMarker = false } = {}) {
+        const parsed = this.getParsedListItem();
+        const markerEndPos = withoutTaskListMarker
+          ? parsed.marker.loc.end
+          : (parsed.taskListItemMarker?.loc.end ?? parsed.marker.loc.end);
+        const lineText = sourceCode.lines[markerEndPos.line - 1];
+        const afterMarkerText = lineText.slice(markerEndPos.column - 1);
         const trimmedAfterMarkerText = afterMarkerText.trimStart();
         if (trimmedAfterMarkerText) {
           const afterMarkerSpacesLength =
@@ -366,7 +432,7 @@ export default createRule<[Options?]>("indent", {
           return getWidth(
             lineText.slice(
               0,
-              loc.start.column - 1 + markerLength + afterMarkerSpacesLength,
+              markerEndPos.column - 1 + afterMarkerSpacesLength,
             ),
           );
         }
@@ -417,15 +483,20 @@ export default createRule<[Options?]>("indent", {
         this.nodeLoc = sourceCode.getLoc(this.node);
       }
 
-      public getExpectedIndent(lineNumber: number): number | "ignore" {
+      public getExpectedIndent(
+        ctx: GetExpectedIndentContext,
+      ): number | "ignore" {
         const loc = this.nodeLoc;
 
-        if (lineNumber === loc.start.line) {
+        if (ctx.lineNumber === loc.start.line) {
           // First line
-          return this.upper.getExpectedIndent(lineNumber);
+          return this.upper.getExpectedIndent(ctx);
         }
         // Other lines (in Text spans)
-        const base = this.upper.getExpectedIndent(loc.start.line);
+        const base = this.upper.getExpectedIndent({
+          lineNumber: loc.start.line,
+          block: ctx.block,
+        });
         if (base === "ignore") {
           return "ignore";
         }
@@ -530,7 +601,8 @@ export default createRule<[Options?]>("indent", {
       const loc = sourceCode.getLoc(node);
       verifyLinesIndent(
         lineNumbersFromRange(loc.start.line, loc.end.line),
-        (lineNumber) => blockStack.getExpectedIndent(lineNumber),
+        (lineNumber) =>
+          blockStack.getExpectedIndent({ lineNumber, block: true }),
       );
     }
 
@@ -541,7 +613,8 @@ export default createRule<[Options?]>("indent", {
       const loc = sourceCode.getLoc(node);
       verifyLinesIndent(
         lineNumbersFromRange(loc.start.line, loc.end.line),
-        (lineNumber) => blockStack.getExpectedIndent(lineNumber),
+        (lineNumber) =>
+          blockStack.getExpectedIndent({ lineNumber, block: true }),
       );
     }
 
@@ -557,7 +630,8 @@ export default createRule<[Options?]>("indent", {
       const loc = sourceCode.getLoc(node);
       verifyLinesIndent(
         [loc.start.line, loc.end.line],
-        (lineNumber) => blockStack.getExpectedIndent(lineNumber),
+        (lineNumber) =>
+          blockStack.getExpectedIndent({ lineNumber, block: true }),
         additionalFixes,
       );
 
@@ -620,7 +694,7 @@ export default createRule<[Options?]>("indent", {
         return;
       }
       verifyLinesIndent([loc.start.line], (lineNumber) =>
-        blockStack.getExpectedIndent(lineNumber),
+        blockStack.getExpectedIndent({ lineNumber, block: true }),
       );
     }
 
@@ -638,7 +712,10 @@ export default createRule<[Options?]>("indent", {
       verifyLinesIndent(
         lineNumbersFromRange(loc.start.line, loc.end.line),
         (lineNumber, column) => {
-          const baseIndent = blockStack.getExpectedIndent(lineNumber);
+          const baseIndent = blockStack.getExpectedIndent({
+            lineNumber,
+            block: true,
+          });
           if (baseIndent === "ignore") {
             return "ignore";
           }
@@ -704,7 +781,8 @@ export default createRule<[Options?]>("indent", {
       const loc = sourceCode.getLoc(node);
       verifyLinesIndent(
         lineNumbersFromRange(loc.start.line, loc.end.line),
-        (lineNumber) => blockStack.getExpectedIndent(lineNumber),
+        (lineNumber) =>
+          blockStack.getExpectedIndent({ lineNumber, block: true }),
       );
     }
 
@@ -715,7 +793,8 @@ export default createRule<[Options?]>("indent", {
       const loc = sourceCode.getLoc(node);
       verifyLinesIndent(
         lineNumbersFromRange(loc.start.line, loc.end.line),
-        (lineNumber) => blockStack.getExpectedIndent(lineNumber),
+        (lineNumber) =>
+          blockStack.getExpectedIndent({ lineNumber, block: true }),
       );
     }
 
@@ -726,7 +805,8 @@ export default createRule<[Options?]>("indent", {
       const loc = sourceCode.getLoc(node);
       verifyLinesIndent(
         [loc.start.line],
-        (lineNumber) => blockStack.getExpectedIndent(lineNumber),
+        (lineNumber) =>
+          blockStack.getExpectedIndent({ lineNumber, block: true }),
         additionalFixes,
       );
 
@@ -741,7 +821,9 @@ export default createRule<[Options?]>("indent", {
           actualIndentWidth: number;
         },
       ) {
-        for (const listItem of node.children.slice(1)) {
+        const [firstItem, ...otherItems] = node.children;
+        yield* fixAfterFirstLine(firstItem, info.actualIndentWidth);
+        for (const listItem of otherItems) {
           const listItemLoc = sourceCode.getLoc(listItem);
           const listItemIndentWidth = getWidth(
             sourceCode.lines[listItemLoc.start.line - 1].slice(
@@ -750,32 +832,53 @@ export default createRule<[Options?]>("indent", {
             ),
           );
           if (listItemIndentWidth === info.expectedIndentWidth) continue;
-          if (info.expectedIndentWidth > listItemIndentWidth) {
+          yield getFixForLine(listItemLoc.start.line, listItemIndentWidth);
+          yield* fixAfterFirstLine(listItem, listItemIndentWidth);
+        }
+
+        /**
+         * Get fixes for lines after the first line of the list item.
+         */
+        function* fixAfterFirstLine(item: ListItem, actualIndentWidth: number) {
+          const itemLoc = sourceCode.getLoc(item);
+          for (
+            let lineNumber = itemLoc.start.line + 1;
+            lineNumber <= itemLoc.end.line;
+            lineNumber++
+          ) {
+            yield getFixForLine(lineNumber, actualIndentWidth);
+          }
+        }
+
+        /**
+         * Get a fix for a line.
+         */
+        function getFixForLine(lineNumber: number, actualIndentWidth: number) {
+          const line = getParsedLines(sourceCode).get(lineNumber);
+          if (info.expectedIndentWidth > actualIndentWidth) {
             // Add indentation
-            const diffWidth = info.expectedIndentWidth - listItemIndentWidth;
-            yield fixer.insertTextBeforeRange(
-              [listItemLoc.start.column - 1, listItemLoc.start.column - 1],
+            const before = sliceWidth(line.text, 0, actualIndentWidth);
+            const diffWidth = info.expectedIndentWidth - actualIndentWidth;
+            return fixer.insertTextAfterRange(
+              [line.range[0], line.range[0] + before.length],
               " ".repeat(diffWidth),
             );
-          } else {
-            // Remove indentation
-            const line = getParsedLines(sourceCode).get(listItemLoc.start.line);
-            if (!line) continue;
-            let before = sliceWidth(line.text, 0, info.expectedIndentWidth);
-            let between = sliceWidth(
-              line.text,
-              info.expectedIndentWidth,
-              listItemIndentWidth,
-            );
-            while (between && !isSpaceOrTab(between)) {
-              before += between[0];
-              between = between.slice(1);
-            }
-            yield fixer.replaceTextRange(
-              [line.range[0], line.range[0] + before.length + between.length],
-              before,
-            );
           }
+          // Remove indentation
+          let before = sliceWidth(line.text, 0, info.expectedIndentWidth);
+          let between = sliceWidth(
+            line.text,
+            info.expectedIndentWidth,
+            actualIndentWidth,
+          );
+          while (between && !isSpaceOrTab(between)) {
+            before += between[0];
+            between = between.slice(1);
+          }
+          return fixer.replaceTextRange(
+            [line.range[0], line.range[0] + before.length + between.length],
+            before,
+          );
         }
       }
     }
@@ -786,7 +889,7 @@ export default createRule<[Options?]>("indent", {
     function verifyFootnoteDefinition(node: FootnoteDefinition) {
       const loc = sourceCode.getLoc(node);
       verifyLinesIndent([loc.start.line], (lineNumber) =>
-        blockStack.getExpectedIndent(lineNumber),
+        blockStack.getExpectedIndent({ lineNumber, block: true }),
       );
     }
 
@@ -799,7 +902,7 @@ export default createRule<[Options?]>("indent", {
         return;
       }
       verifyLinesIndent([loc.start.line], (lineNumber) =>
-        blockStack.getExpectedIndent(lineNumber),
+        blockStack.getExpectedIndent({ lineNumber, block: false }),
       );
     }
 
@@ -812,7 +915,7 @@ export default createRule<[Options?]>("indent", {
         return;
       }
       verifyLinesIndent([loc.start.line], (lineNumber) =>
-        blockStack.getExpectedIndent(lineNumber),
+        blockStack.getExpectedIndent({ lineNumber, block: false }),
       );
     }
 
@@ -829,7 +932,7 @@ export default createRule<[Options?]>("indent", {
       const kind = getLinkKind(sourceCode, node);
       if (kind === "autolink" || kind === "gfm-autolink") {
         verifyLinesIndent(lines, (lineNumber) =>
-          blockStack.getExpectedIndent(lineNumber),
+          blockStack.getExpectedIndent({ lineNumber, block: false }),
         );
       } else if (kind === "inline") {
         const parsed = parseInlineLink(sourceCode, node);
@@ -851,7 +954,10 @@ export default createRule<[Options?]>("indent", {
           );
         }
         verifyLinesIndent(lines, (lineNumber, column) => {
-          const baseIndent = blockStack.getExpectedIndent(lineNumber);
+          const baseIndent = blockStack.getExpectedIndent({
+            lineNumber,
+            block: false,
+          });
           if (baseIndent === "ignore") {
             return "ignore";
           }
@@ -925,7 +1031,10 @@ export default createRule<[Options?]>("indent", {
       }
 
       verifyLinesIndent(lines, (lineNumber, column) => {
-        const baseIndent = blockStack.getExpectedIndent(lineNumber);
+        const baseIndent = blockStack.getExpectedIndent({
+          lineNumber,
+          block: false,
+        });
         if (baseIndent === "ignore") {
           return "ignore";
         }
@@ -977,7 +1086,10 @@ export default createRule<[Options?]>("indent", {
       const parsed = parseImage(sourceCode, node);
       if (!parsed) return;
       verifyLinesIndent(lines, (lineNumber, column) => {
-        const baseIndent = blockStack.getExpectedIndent(lineNumber);
+        const baseIndent = blockStack.getExpectedIndent({
+          lineNumber,
+          block: false,
+        });
         if (baseIndent === "ignore") {
           return "ignore";
         }
@@ -1052,7 +1164,10 @@ export default createRule<[Options?]>("indent", {
         lines = lines.slice(1);
       }
       verifyLinesIndent(lines, (lineNumber, column) => {
-        const baseIndent = blockStack.getExpectedIndent(lineNumber);
+        const baseIndent = blockStack.getExpectedIndent({
+          lineNumber,
+          block: false,
+        });
         if (baseIndent === "ignore") {
           return "ignore";
         }
@@ -1120,7 +1235,7 @@ export default createRule<[Options?]>("indent", {
         lines = lines.slice(0, -1);
       }
       verifyLinesIndent(lines, (lineNumber) =>
-        blockStack.getExpectedIndent(lineNumber),
+        blockStack.getExpectedIndent({ lineNumber, block: false }),
       );
     }
 
@@ -1134,7 +1249,7 @@ export default createRule<[Options?]>("indent", {
         lines = lines.slice(1);
       }
       verifyLinesIndent(lines, (lineNumber) =>
-        blockStack.getExpectedIndent(lineNumber),
+        blockStack.getExpectedIndent({ lineNumber, block: false }),
       );
     }
 
@@ -1146,10 +1261,9 @@ export default createRule<[Options?]>("indent", {
       const listItem = blockStack.getCurrentListItemAtLine(position.line);
       const lineText = sourceCode.lines[position.line - 1];
       if (listItem) {
-        const listItemLoc = sourceCode.getLoc(listItem.node);
-        const marker = getListItemMarker(sourceCode, listItem.node);
+        const parsed = listItem.getParsedListItem();
         const indentText = lineText.slice(
-          listItemLoc.start.column - 1 + marker.raw.length,
+          (parsed.taskListItemMarker?.loc ?? parsed.marker.loc).end.column - 1,
           position.column - 1,
         );
         if (indentText && !isSpaceOrTab(indentText)) {
@@ -1375,8 +1489,7 @@ export default createRule<[Options?]>("indent", {
           );
           if (expectedIndentWidth === "ignore") continue;
           if (actualIndentWidth === expectedIndentWidth) continue;
-          const linePrefix = before;
-          const linePrefixWidth = getWidth(linePrefix);
+          const linePrefixWidth = getWidth(before);
 
           reports.push({
             loc: {
@@ -1459,14 +1572,14 @@ export default createRule<[Options?]>("indent", {
       expectedIndentWidth: number;
       actualIndentWidth: number;
     } | null {
-      const listMarker = getListItemMarker(sourceCode, listItem.node);
-      const listItemLoc = sourceCode.getLoc(listItem.node);
-      const markerAfterColumn =
-        listItemLoc.start.column + listMarker.raw.length;
-      const before = line.text.slice(0, listItemLoc.start.column - 1);
+      const parsed = listItem.getParsedListItem();
+      const markerAfterColumn = (
+        parsed.taskListItemMarker?.loc ?? parsed.marker.loc
+      ).end.column;
+      const before = line.text.slice(0, markerAfterColumn - 1);
       const after = line.text.slice(markerAfterColumn - 1);
       const indentText = /^\s*/u.exec(after)![0];
-      const actualIndentWidth = getWidth(before + listMarker.raw + indentText);
+      const actualIndentWidth = getWidth(before + indentText);
       const expectedIndentWidth = expectedIndentWidthProvider(
         line.line,
         markerAfterColumn,
@@ -1474,11 +1587,10 @@ export default createRule<[Options?]>("indent", {
       if (expectedIndentWidth === "ignore") return null;
       if (actualIndentWidth === expectedIndentWidth) return null;
 
-      const linePrefix = before + listMarker.raw;
-      const linePrefixWidth = getWidth(linePrefix);
+      const linePrefixWidth = getWidth(before);
       const range: [number, number] = [
-        line.range[0] + linePrefix.length,
-        line.range[0] + linePrefix.length + indentText.length,
+        line.range[0] + before.length,
+        line.range[0] + before.length + indentText.length,
       ];
 
       return {
