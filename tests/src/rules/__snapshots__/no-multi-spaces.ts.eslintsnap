@@ -648,6 +648,67 @@ Output:
 ---
 
 
+Test: no-multi-spaces >> invalid
+Filename: tests/fixtures/rules/no-multi-spaces/invalid/task-list-item-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 |
+  2 | -  [x]   X   Foo
+    |  ^~ [1]   ^~~ [2]
+  3 | - [ ] Y    Bar
+    |        ^~~~ [3]
+  4 |
+  5 | +  [x]  X   Foo
+    |  ^~ [4]  ^~~ [5]
+  6 |   1.   [x]    Foo bar
+    |     ^~~ [6]
+  7 |   2.   [ ]    Foo bar
+    |     ^~~ [7]
+  8 |        Foo   bar
+    |           ^~~ [8]
+  9 | +  [x]  Y  Bar
+    |  ^~ [9]  ^~ [10]
+ 10 |   1)   [ ]   Foo bar
+    |     ^~~ [11]
+ 11 |        Foo   bar
+    |           ^~~ [12]
+ 12 |   2)   [x]   Foo bar
+    |     ^~~ [13]
+
+Output:
+  1 |
+  2 | - [x]   X Foo
+  3 | - [ ] Y Bar
+  4 |
+  5 | + [x]  X Foo
+  6 |   1. [x]    Foo bar
+  7 |   2. [ ]    Foo bar
+  8 |        Foo bar
+  9 | + [x]  Y Bar
+ 10 |   1) [ ]   Foo bar
+ 11 |        Foo bar
+ 12 |   2) [x]   Foo bar
+
+[1] Multiple spaces are not allowed.
+[2] Multiple spaces are not allowed.
+[3] Multiple spaces are not allowed.
+[4] Multiple spaces are not allowed.
+[5] Multiple spaces are not allowed.
+[6] Multiple spaces are not allowed.
+[7] Multiple spaces are not allowed.
+[8] Multiple spaces are not allowed.
+[9] Multiple spaces are not allowed.
+[10] Multiple spaces are not allowed.
+[11] Multiple spaces are not allowed.
+[12] Multiple spaces are not allowed.
+[13] Multiple spaces are not allowed.
+---
+
+
 Test: no-multi-spaces >> invalid >>> "\n> Lorem ipsum dolor sit amet, consectetur adipiscing  elit, sed do eiusmod tempor\n>   incididunt ut labore et dolore magna  aliqua.   <!-- comment --> \n> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip \n>  ex ea commodo consequat. Duis  <!-- comment -->  aute irure    dolor in reprehenderit in voluptate velit       \n> esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non \n> proident, sunt in culpa qui\\u0009\\u0009officia \\u0009deserunt mollit anim id est laborum.\n"
 Filename: tests/fixtures/rules/no-multi-spaces/invalid/text-in-blockquote-input.md
 Language: markdown/gfm

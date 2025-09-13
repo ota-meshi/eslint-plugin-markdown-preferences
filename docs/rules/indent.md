@@ -73,7 +73,7 @@ To control the alignment of list item markers and blockquote markers, use [markd
       "listItems": {
         "first": 1,
         "other": "first",
-        "relativeTo": "markerEnd"
+        "relativeTo": "taskListMarkerEnd"
       }
     }
   ]
@@ -89,8 +89,11 @@ To control the alignment of list item markers and blockquote markers, use [markd
     - `"first"`: Sets the indentation to match the value of `first`.
     - `"minimum"`: Uses the minimum indentation required to maintain indentation. The default is `"first"`.
   - `relativeTo`: When using a numeric value for indentation, sets the reference point for the indentation. The following values can be used. The default is `"markerEnd"`:
-    - `"markerStart"`: Calculates indentation relative to the start position of the list marker. If the calculated indentation is less than the minimum required, the minimum indentation is applied.
+    - `"markerStart"`: Calculates indentation relative to the start position of the list marker.
     - `"markerEnd"`: Calculates indentation relative to the end position of the list marker.
+    - `"taskListMarkerEnd"`: Calculates indentation relative to the end position of the task list marker. If the list item is a task list item (e.g., `- [ ]`), the indentation is calculated from the end of the task list marker. If it's a regular list item, it behaves like `"markerEnd"`.
+
+Regardless of the option, if the calculated indentation does not fall within the range allowed by Markdown specifications, the indentation permitted by Markdown specifications will be applied.
 
 ### Examples
 
@@ -147,10 +150,6 @@ To control the alignment of list item markers and blockquote markers, use [markd
 
 ## 🔍 Implementation
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
-
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/indent.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/indent.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/indent)
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->

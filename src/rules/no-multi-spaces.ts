@@ -1,4 +1,5 @@
 import type {
+  Blockquote,
   Definition,
   FootnoteDefinition,
   Heading,
@@ -15,6 +16,7 @@ import { isWhitespace } from "../utils/unicode.ts";
 import { parseLinkDefinition } from "../utils/link-definition.ts";
 import { parseInlineLink } from "../utils/link.ts";
 import { parseImage } from "../utils/image.ts";
+import { parseListItem } from "../utils/list-item.ts";
 
 export default createRule("no-multi-spaces", {
   meta: {
@@ -33,6 +35,7 @@ export default createRule("no-multi-spaces", {
   },
   create(context) {
     const sourceCode = context.sourceCode;
+    let codeText = sourceCode.text;
 
     return {
       definition: verifyLinkDefinition,
@@ -42,6 +45,8 @@ export default createRule("no-multi-spaces", {
       imageReference: verifyImageReference,
       link: verifyLink,
       linkReference: verifyLinkReference,
+      listItem: verifyListItem,
+      blockquote: processBlockquote,
       text: verifyText,
     };
 
@@ -123,6 +128,40 @@ export default createRule("no-multi-spaces", {
     }
 
     /**
+     * Verify a list item node
+     */
+    function verifyListItem(node: ListItem) {
+      const nodeRange = sourceCode.getRange(node);
+      const parsed = parseListItem(sourceCode, node);
+      if (parsed.taskListItemMarker) {
+        verifyTextInRange(node, [
+          nodeRange[0],
+          parsed.taskListItemMarker.range[0],
+        ]);
+      }
+
+      // Strip out the marker texts to avoid indent reports.
+      let newCodeText =
+        codeText.slice(0, parsed.marker.range[0]) +
+        " ".repeat(parsed.marker.range[1] - parsed.marker.range[0]);
+      if (parsed.taskListItemMarker) {
+        newCodeText +=
+          codeText.slice(
+            parsed.marker.range[1],
+            parsed.taskListItemMarker.range[0],
+          ) +
+          " ".repeat(
+            parsed.taskListItemMarker.range[1] -
+              parsed.taskListItemMarker.range[0],
+          ) +
+          codeText.slice(parsed.taskListItemMarker.range[1]);
+      } else {
+        newCodeText += codeText.slice(parsed.marker.range[1]);
+      }
+      codeText = newCodeText;
+    }
+
+    /**
      * Verify spaces in a node
      */
     function verifyTextInNode(node: Text | Image | ImageReference) {
@@ -131,10 +170,35 @@ export default createRule("no-multi-spaces", {
     }
 
     /**
+     * Process a blockquote node
+     */
+    function processBlockquote(node: Blockquote) {
+      const nodeRange = sourceCode.getRange(node);
+
+      // Strip out the marker texts to avoid indent reports.
+      let newCodeText = "";
+      let inIndent = true;
+      for (let index = nodeRange[0]; index < nodeRange[1]; index++) {
+        const c = codeText[index];
+        if (c === "\n") {
+          inIndent = true;
+          continue;
+        }
+        if (isWhitespace(c)) continue;
+        if (c === ">" && inIndent) {
+          newCodeText += `${codeText.slice(newCodeText.length, index)} `;
+        }
+        inIndent = false;
+      }
+      newCodeText += codeText.slice(newCodeText.length);
+      codeText = newCodeText;
+    }
+
+    /**
      * Verify spaces in a node excluding children
      */
     function verifyTextOutsideChildren(
-      node: FootnoteDefinition | Heading | LinkReference | ListItem,
+      node: FootnoteDefinition | Heading | LinkReference,
     ) {
       const nodeRange = sourceCode.getRange(node);
       if (node.children.length > 0) {
@@ -166,7 +230,7 @@ export default createRule("no-multi-spaces", {
       textRange: [number, number],
     ) {
       const nodeRange = sourceCode.getRange(node);
-      const text = sourceCode.text.slice(...textRange);
+      const text = codeText.slice(...textRange);
       const reSpaces = /\s{2,}|\n/gu;
       let match;
 
@@ -175,7 +239,7 @@ export default createRule("no-multi-spaces", {
         if (spaces.includes("\n")) {
           // Skip blockquote marker
           let c = "";
-          while ((c = text[reSpaces.lastIndex]) && (c === ">" || !c.trim())) {
+          while ((c = text[reSpaces.lastIndex]) && isWhitespace(c)) {
             reSpaces.lastIndex++;
           }
           continue;
@@ -188,7 +252,7 @@ export default createRule("no-multi-spaces", {
         if (nodeRange[0] === range[0]) {
           let isIndentation = true;
           for (let index = nodeRange[0] - 1; index >= 0; index--) {
-            const c = sourceCode.text[index];
+            const c = codeText[index];
             if (c === "\n") break;
             if (isWhitespace(c)) continue;
             isIndentation = false;
@@ -201,12 +265,8 @@ export default createRule("no-multi-spaces", {
         }
         if (nodeRange[1] === range[1]) {
           let isTrailingSpaces = true;
-          for (
-            let index = nodeRange[1];
-            index < sourceCode.text.length;
-            index++
-          ) {
-            const c = sourceCode.text[index];
+          for (let index = nodeRange[1]; index < codeText.length; index++) {
+            const c = codeText[index];
             if (c === "\n") break;
             if (isWhitespace(c)) continue;
             isTrailingSpaces = false;
