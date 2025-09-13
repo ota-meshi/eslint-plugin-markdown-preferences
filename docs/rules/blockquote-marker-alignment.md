@@ -69,6 +69,7 @@ This rule has no options.
 
 ## 👫 Related Rules
 
+- [markdown-preferences/indent](./indent.md)
 - [markdown-preferences/no-laziness-blockquotes](./no-laziness-blockquotes.md)
 - [markdown-preferences/list-marker-alignment](./list-marker-alignment.md)
 

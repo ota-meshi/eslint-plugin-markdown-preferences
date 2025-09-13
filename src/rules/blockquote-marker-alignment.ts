@@ -2,6 +2,8 @@ import type { Blockquote, Root } from "mdast";
 import { createRule } from "../utils/index.ts";
 import { getParsedLines } from "../utils/lines.ts";
 import { getBlockquoteLevelFromLine } from "../utils/blockquotes.ts";
+import { getWidth } from "../utils/width.ts";
+import { isWhitespace } from "../utils/unicode.ts";
 
 export default createRule("blockquote-marker-alignment", {
   meta: {
@@ -54,6 +56,12 @@ export default createRule("blockquote-marker-alignment", {
         ).blockquoteMarkers.get(blockquoteLevel);
         if (!base) return;
 
+        const baseBeforeMarker = sourceCode.lines[startLine - 1].slice(
+          0,
+          base.loc.start.column - 1,
+        );
+        const baseIndentWidth = getWidth(baseBeforeMarker);
+
         // Only process lines that are part of this blockquote
         for (
           let lineNumber = startLine + 1;
@@ -67,7 +75,14 @@ export default createRule("blockquote-marker-alignment", {
 
           if (!marker) continue;
 
-          if (base.loc.start.column === marker.loc.start.column) continue;
+          const indentWidth = getWidth(
+            sourceCode.lines[lineNumber - 1].slice(
+              0,
+              marker.loc.start.column - 1,
+            ),
+          );
+
+          if (baseIndentWidth === indentWidth) continue;
 
           blockquoteStack.reported = true;
           context.report({
@@ -77,10 +92,8 @@ export default createRule("blockquote-marker-alignment", {
             fix(fixer) {
               const lines = getParsedLines(sourceCode);
               const line = lines.get(lineNumber);
-              if (marker.loc.start.column < base.loc.start.column) {
-                const addSpaces = " ".repeat(
-                  base.loc.start.column - marker.loc.start.column,
-                );
+              if (indentWidth < baseIndentWidth) {
+                const addSpaces = " ".repeat(baseIndentWidth - indentWidth);
                 return fixer.insertTextBeforeRange(
                   [
                     line.range[0] + marker.loc.start.column - 1,
@@ -89,31 +102,38 @@ export default createRule("blockquote-marker-alignment", {
                   addSpaces,
                 );
               }
-              if (blockquoteLevel === 1) {
-                const expectedSpaces = " ".repeat(base.loc.start.column - 1);
-                return fixer.replaceTextRange(
-                  [line.range[0], line.range[0] + marker.loc.start.column - 1],
-                  expectedSpaces,
+
+              const beforeMarker = line.text.slice(
+                0,
+                marker.loc.start.column - 1,
+              );
+
+              let newBeforeMarker = beforeMarker;
+              while (getWidth(newBeforeMarker) > baseIndentWidth) {
+                const last = newBeforeMarker.at(-1);
+                if (last && isWhitespace(last)) {
+                  newBeforeMarker = newBeforeMarker.slice(0, -1);
+                } else {
+                  return null; // Cannot fix if there's no whitespace to remove
+                }
+              }
+              if (getWidth(newBeforeMarker) < baseIndentWidth) {
+                newBeforeMarker += " ".repeat(
+                  baseIndentWidth - getWidth(newBeforeMarker),
                 );
               }
-              const itemBefore = line.text.slice(
-                0,
-                line.range[0] + marker.loc.start.column - 1,
-              );
-              if (itemBefore.includes("\t")) return null; // Ignore tab
-
-              let removeStartIndex = marker.loc.start.column - 1;
-              for (
-                ;
-                removeStartIndex > base.loc.start.column - 1;
-                removeStartIndex--
+              if (
+                !baseBeforeMarker.includes(">") ||
+                baseBeforeMarker === newBeforeMarker
               ) {
-                if (line.text[removeStartIndex - 1] !== " ") break;
+                return fixer.replaceTextRange(
+                  [line.range[0], line.range[0] + marker.loc.start.column - 1],
+                  newBeforeMarker,
+                );
               }
-              return fixer.removeRange([
-                line.range[0] + removeStartIndex,
-                line.range[0] + marker.loc.start.column - 1,
-              ]);
+
+              // Maybe includes a mismatched blockquote
+              return null;
             },
           });
         }

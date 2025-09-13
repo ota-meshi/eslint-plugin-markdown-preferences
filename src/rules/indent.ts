@@ -1,10 +1,25 @@
 import type {
   Blockquote,
+  Break,
   Code,
+  Definition,
+  Delete,
+  Emphasis,
   FootnoteDefinition,
+  FootnoteReference,
   Heading,
+  Html,
+  Image,
+  ImageReference,
+  InlineCode,
+  Link,
+  LinkReference,
+  List,
   ListItem,
   Root,
+  Strong,
+  Table,
+  Text,
   ThematicBreak,
 } from "mdast";
 import { createRule } from "../utils/index.ts";
@@ -12,15 +27,23 @@ import type { ParsedLine } from "../utils/lines.ts";
 import { getParsedLines } from "../utils/lines.ts";
 import {
   getCodeBlockKind,
+  getLinkKind,
   getListItemMarker,
   getSourceLocationFromRange,
 } from "../utils/ast.ts";
 import type {
+  Position,
   RuleTextEdit,
   RuleTextEditor,
   SourceLocation,
 } from "@eslint/core";
-import { isSpaceOrTab } from "../utils/unicode.ts";
+import { isSpaceOrTab, isWhitespace } from "../utils/unicode.ts";
+import { parseLinkDefinition } from "../utils/link-definition.ts";
+import { atWidth, getWidth, sliceWidth } from "../utils/width.ts";
+import { parseInlineLink } from "../utils/link.ts";
+import { parseLinkReference } from "../utils/link-reference.ts";
+import { parseImage } from "../utils/image.ts";
+import { parseImageReference } from "../utils/image-reference.ts";
 
 export default createRule("indent", {
   meta: {
@@ -58,7 +81,8 @@ export default createRule("indent", {
         | "root"
         | "blockquote"
         | "listItem"
-        | "footnoteDefinition";
+        | "footnoteDefinition"
+        | "link";
 
       public getCurrentBlockquote(): BlockquoteStack | null {
         let block = this as unknown as BlockStack | null;
@@ -71,13 +95,18 @@ export default createRule("indent", {
         return null;
       }
 
-      public getListItemFromLine(lineNumber: number): ListItem | null {
+      public getCurrentListItemAtLine(
+        lineNumber: number,
+      ): ListItemStack | null {
         let block = this as unknown as BlockStack | null;
         while (block) {
+          if (block.type === "blockquote") {
+            return null;
+          }
           if (block.type === "listItem") {
             const loc = sourceCode.getLoc(block.node);
             if (loc.start.line === lineNumber) {
-              return block.node;
+              return block;
             }
           }
           block = block.upper;
@@ -85,7 +114,7 @@ export default createRule("indent", {
         return null;
       }
 
-      public abstract getExpectedIndent(): number;
+      public abstract getExpectedIndent(lineNumber: number): number;
     }
 
     class RootStack extends AbsBlockStack {
@@ -114,6 +143,8 @@ export default createRule("indent", {
 
       private _expectedIndent?: number;
 
+      private _markerIndent?: number;
+
       public constructor(node: Blockquote) {
         super();
         this.node = node;
@@ -123,13 +154,20 @@ export default createRule("indent", {
 
       public getExpectedIndent(): number {
         if (this._expectedIndent == null) {
-          const loc = sourceCode.getLoc(this.node);
-          const baseIndent = getIndentWidth(
-            sourceCode.lines[loc.start.line - 1].slice(0, loc.start.column),
-          );
+          const baseIndent = this.getMarkerIndent() + 1;
           this._expectedIndent = baseIndent + 1;
         }
         return this._expectedIndent;
+      }
+
+      public getMarkerIndent(): number {
+        if (this._markerIndent == null) {
+          const loc = sourceCode.getLoc(this.node);
+          this._markerIndent = getWidth(
+            sourceCode.lines[loc.start.line - 1].slice(0, loc.start.column - 1),
+          );
+        }
+        return this._markerIndent;
       }
     }
     class ListItemStack extends AbsBlockStack {
@@ -139,27 +177,53 @@ export default createRule("indent", {
 
       public readonly upper: BlockStack;
 
+      private _expectedIndentForFirstLine?: number;
+
       private _expectedIndent?: number;
+
+      private readonly nodeLoc: SourceLocation;
 
       public constructor(node: ListItem) {
         super();
         this.node = node;
         // eslint-disable-next-line @typescript-eslint/no-use-before-define -- OK
         this.upper = blockStack;
+        this.nodeLoc = sourceCode.getLoc(this.node);
       }
 
-      public getExpectedIndent(): number {
-        if (this._expectedIndent == null) {
-          const loc = sourceCode.getLoc(this.node);
-          const baseIndent = getIndentWidth(
-            sourceCode.lines[loc.start.line - 1].slice(0, loc.start.column - 1),
-          );
-          this._expectedIndent =
-            baseIndent +
-            getListItemMarker(sourceCode, this.node).raw.length +
-            1;
+      public getExpectedIndent(lineNumber: number): number {
+        const loc = this.nodeLoc;
+        if (lineNumber === loc.start.line) {
+          // First line
+          if (this._expectedIndentForFirstLine != null)
+            return this._expectedIndentForFirstLine;
+          const markerLength = getListItemMarker(sourceCode, this.node).raw
+            .length;
+          const lineText = sourceCode.lines[loc.start.line - 1];
+          const baseIndent = getWidth(lineText.slice(0, loc.start.column - 1));
+          return (this._expectedIndentForFirstLine =
+            baseIndent + markerLength + 1);
         }
-        return this._expectedIndent;
+        // Other lines
+        if (this._expectedIndent != null) return this._expectedIndent;
+        const markerLength = getListItemMarker(sourceCode, this.node).raw
+          .length;
+        const lineText = sourceCode.lines[loc.start.line - 1];
+        const afterMarkerText = lineText.slice(
+          loc.start.column - 1 + markerLength,
+        );
+        const trimmedAfterMarkerText = afterMarkerText.trimStart();
+        if (trimmedAfterMarkerText) {
+          const afterMarkerSpacesLength =
+            afterMarkerText.length - trimmedAfterMarkerText.length;
+          return (this._expectedIndent = getWidth(
+            lineText.slice(
+              0,
+              loc.start.column - 1 + markerLength + afterMarkerSpacesLength,
+            ),
+          ));
+        }
+        return (this._expectedIndent = this.getExpectedIndent(loc.start.line));
       }
     }
     class FootnoteDefinitionStack extends AbsBlockStack {
@@ -181,7 +245,7 @@ export default createRule("indent", {
       public getExpectedIndent(): number {
         if (this._expectedIndent == null) {
           const loc = sourceCode.getLoc(this.node);
-          const baseIndent = getIndentWidth(
+          const baseIndent = getWidth(
             sourceCode.lines[loc.start.line - 1].slice(0, loc.start.column - 1),
           );
           this._expectedIndent = baseIndent + 4;
@@ -189,27 +253,120 @@ export default createRule("indent", {
         return this._expectedIndent;
       }
     }
+    class LinkStack extends AbsBlockStack {
+      public readonly type = "link";
+
+      public readonly node: Link | LinkReference;
+
+      public readonly upper: BlockStack;
+
+      private readonly nodeLoc: SourceLocation;
+
+      public constructor(node: Link | LinkReference) {
+        super();
+        this.node = node;
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define -- OK
+        this.upper = blockStack;
+        this.nodeLoc = sourceCode.getLoc(this.node);
+      }
+
+      public getExpectedIndent(lineNumber: number): number {
+        const loc = this.nodeLoc;
+
+        if (lineNumber === loc.start.line) {
+          // First line
+          return this.upper.getExpectedIndent(lineNumber);
+        }
+        // Other lines (in Text spans)
+        return this.upper.getExpectedIndent(loc.start.line) + 2;
+      }
+    }
     type BlockStack =
       | RootStack
       | BlockquoteStack
       | ListItemStack
-      | FootnoteDefinitionStack;
+      | FootnoteDefinitionStack
+      | LinkStack;
     let blockStack: BlockStack = new RootStack(sourceCode.ast);
+    const reportedLocations: Record<number, Set<number> | undefined> =
+      Object.create(null);
+
+    /**
+     * Reported locations (line and column) to avoid duplicate reports.
+     */
+    function reportIncorrectIndent(violation: {
+      loc: SourceLocation;
+      messageId:
+        | "wrongIndentation"
+        | "wrongIndentationFromBlockquoteMarker"
+        | "wrongIndentationFromListMarker"
+        | "wrongIndentationWithTab"
+        | "wrongIndentationFromBlockquoteMarkerWithTab"
+        | "wrongIndentationFromListMarkerWithTab";
+      data: {
+        expected: number;
+        actual: number;
+      };
+      fix:
+        | ((
+            fixer: RuleTextEditor,
+          ) => RuleTextEdit | Iterable<RuleTextEdit> | null)
+        | null;
+    }) {
+      const reportedColumns = (reportedLocations[violation.loc.start.line] ??=
+        new Set());
+      if (reportedColumns.has(violation.loc.start.column)) {
+        return;
+      }
+      reportedColumns.add(violation.loc.start.column);
+      context.report({
+        loc: violation.loc,
+        messageId: violation.messageId,
+        data: {
+          expected: String(violation.data.expected),
+          actual: String(violation.data.actual),
+        },
+        fix: violation.fix,
+      });
+    }
 
     return {
       thematicBreak: verifyThematicBreak,
       heading: verifyHeading,
       code: verifyCodeBlock,
+      html: verifyHtml,
+      definition: verifyLinkDefinition,
+      table: verifyTable,
+      list: verifyList,
+      inlineCode: verifyInlineCode,
+      emphasis: verifyEmphasisOrStrongOrDelete,
+      strong: verifyEmphasisOrStrongOrDelete,
+      delete: verifyEmphasisOrStrongOrDelete,
+      image: verifyImage,
+      imageReference: verifyImageReference,
+      footnoteReference: verifyInline,
+      break: verifyInline,
+      text: verifyText,
       blockquote(node) {
+        verifyBlockquote(node);
         blockStack = new BlockquoteStack(node);
       },
       listItem(node) {
         blockStack = new ListItemStack(node);
       },
       footnoteDefinition(node) {
+        verifyFootnoteDefinition(node);
         blockStack = new FootnoteDefinitionStack(node);
       },
-      "blockquote, listItem, footnoteDefinition:exit"() {
+      link(node) {
+        verifyLink(node);
+        blockStack = new LinkStack(node);
+      },
+      linkReference(node) {
+        verifyLinkReference(node);
+        blockStack = new LinkStack(node);
+      },
+      "blockquote, listItem, footnoteDefinition, link, linkReference:exit"() {
         blockStack = blockStack.upper!;
       },
     };
@@ -218,19 +375,10 @@ export default createRule("indent", {
      * Verify a thematic break node.
      */
     function verifyThematicBreak(node: ThematicBreak) {
-      const blockquote = blockStack.getCurrentBlockquote();
       const loc = sourceCode.getLoc(node);
-      if (!blockquote) {
-        verifyLinesIndentFromRoot(
-          lineNumbersFromRange(loc.start.line, loc.end.line),
-          blockStack.getExpectedIndent(),
-        );
-        return;
-      }
-      verifyLinesIndentFromBlockquoteMarker(
+      verifyLinesIndent(
         lineNumbersFromRange(loc.start.line, loc.end.line),
-        blockquote.node,
-        blockStack.getExpectedIndent(),
+        (lineNumber) => blockStack.getExpectedIndent(lineNumber),
       );
     }
 
@@ -238,19 +386,10 @@ export default createRule("indent", {
      * Verify a heading node.
      */
     function verifyHeading(node: Heading) {
-      const blockquote = blockStack.getCurrentBlockquote();
       const loc = sourceCode.getLoc(node);
-      if (!blockquote) {
-        verifyLinesIndentFromRoot(
-          lineNumbersFromRange(loc.start.line, loc.end.line),
-          blockStack.getExpectedIndent(),
-        );
-        return;
-      }
-      verifyLinesIndentFromBlockquoteMarker(
+      verifyLinesIndent(
         lineNumbersFromRange(loc.start.line, loc.end.line),
-        blockquote.node,
-        blockStack.getExpectedIndent(),
+        (lineNumber) => blockStack.getExpectedIndent(lineNumber),
       );
     }
 
@@ -263,20 +402,10 @@ export default createRule("indent", {
         // Ignore indented code blocks
         return;
       }
-      const blockquote = blockStack.getCurrentBlockquote();
       const loc = sourceCode.getLoc(node);
-      if (!blockquote) {
-        verifyLinesIndentFromRoot(
-          [loc.start.line, loc.end.line],
-          blockStack.getExpectedIndent(),
-          additionalFixes,
-        );
-        return;
-      }
-      verifyLinesIndentFromBlockquoteMarker(
+      verifyLinesIndent(
         [loc.start.line, loc.end.line],
-        blockquote.node,
-        blockStack.getExpectedIndent(),
+        (lineNumber) => blockStack.getExpectedIndent(lineNumber),
         additionalFixes,
       );
 
@@ -331,6 +460,560 @@ export default createRule("indent", {
     }
 
     /**
+     * Verify an HTML node.
+     */
+    function verifyHtml(node: Html) {
+      const loc = sourceCode.getLoc(node);
+      if (!inlineToBeChecked(loc.start)) {
+        return;
+      }
+      verifyLinesIndent([loc.start.line], (lineNumber) =>
+        blockStack.getExpectedIndent(lineNumber),
+      );
+    }
+
+    /**
+     * Verify a link definition node.
+     */
+    function verifyLinkDefinition(node: Definition) {
+      const parsed = parseLinkDefinition(sourceCode, node);
+      if (!parsed) {
+        // Ignore invalid link definitions
+        return;
+      }
+      const loc = sourceCode.getLoc(node);
+
+      verifyLinesIndent(
+        lineNumbersFromRange(loc.start.line, loc.end.line),
+        (lineNumber, column) => {
+          const baseIndent = blockStack.getExpectedIndent(lineNumber);
+          if (lineNumber <= loc.start.line) {
+            return baseIndent;
+          }
+          if (lineNumber < parsed.label.loc.end.line) {
+            return baseIndent + 2;
+          }
+          if (lineNumber === parsed.label.loc.end.line) {
+            const line = getParsedLines(sourceCode).get(lineNumber);
+            if (!line) return baseIndent; // Unexpected, but just in case
+            const between = line.text.slice(
+              column - 1,
+              parsed.label.loc.end.column - 2,
+            );
+            return !between || isWhitespace(between)
+              ? // e.g. [
+                //   label
+                // ]: ...
+                baseIndent
+              : // e.g. [
+                //   label]: ...
+                baseIndent + 2;
+          }
+          if (lineNumber <= parsed.destination.loc.end.line) {
+            return baseIndent + 4;
+          }
+          if (!parsed.title) return baseIndent; // Unexpected, but just in case
+          if (lineNumber <= parsed.title.loc.start.line) {
+            return baseIndent + 4;
+          }
+          if (lineNumber < parsed.title.loc.end.line) {
+            return baseIndent + 6;
+          }
+          if (lineNumber === parsed.title.loc.end.line) {
+            const line = getParsedLines(sourceCode).get(lineNumber);
+            if (!line) return baseIndent; // Unexpected, but just in case
+            const between = line.text.slice(
+              column - 1,
+              parsed.title.loc.end.column - 2,
+            );
+            return !between || isWhitespace(between)
+              ? // e.g.
+                // [label]: #x "
+                //   title
+                // "
+                baseIndent + 4
+              : // e.g.
+                // [label]: #x "
+                //   title"
+                baseIndent + 6;
+          }
+          return baseIndent; // Unexpected, but just in case
+        },
+      );
+    }
+
+    /**
+     * Verify a blockquote node.
+     */
+    function verifyBlockquote(node: Blockquote) {
+      const loc = sourceCode.getLoc(node);
+      verifyLinesIndent(
+        lineNumbersFromRange(loc.start.line, loc.end.line),
+        (lineNumber) => blockStack.getExpectedIndent(lineNumber),
+      );
+    }
+
+    /**
+     * Verify a table node.
+     */
+    function verifyTable(node: Table) {
+      const loc = sourceCode.getLoc(node);
+      verifyLinesIndent(
+        lineNumbersFromRange(loc.start.line, loc.end.line),
+        (lineNumber) => blockStack.getExpectedIndent(lineNumber),
+      );
+    }
+
+    /**
+     * Verify a list node.
+     */
+    function verifyList(node: List) {
+      const loc = sourceCode.getLoc(node);
+      verifyLinesIndent(
+        [loc.start.line],
+        (lineNumber) => blockStack.getExpectedIndent(lineNumber),
+        additionalFixes,
+      );
+
+      /**
+       * Additional fixes for list item lines.
+       */
+      function* additionalFixes(
+        fixer: RuleTextEditor,
+        info: {
+          loc: SourceLocation;
+          expectedIndentWidth: number;
+          actualIndentWidth: number;
+        },
+      ) {
+        for (const listItem of node.children.slice(1)) {
+          const listItemLoc = sourceCode.getLoc(listItem);
+          const listItemIndentWidth = getWidth(
+            sourceCode.lines[listItemLoc.start.line - 1].slice(
+              0,
+              listItemLoc.start.column - 1,
+            ),
+          );
+          if (listItemIndentWidth === info.expectedIndentWidth) continue;
+          if (info.expectedIndentWidth > listItemIndentWidth) {
+            // Add indentation
+            const diffWidth = info.expectedIndentWidth - listItemIndentWidth;
+            yield fixer.insertTextBeforeRange(
+              [listItemLoc.start.column - 1, listItemLoc.start.column - 1],
+              " ".repeat(diffWidth),
+            );
+          } else {
+            // Remove indentation
+            const line = getParsedLines(sourceCode).get(listItemLoc.start.line);
+            if (!line) continue;
+            let before = sliceWidth(line.text, 0, info.expectedIndentWidth);
+            let between = sliceWidth(
+              line.text,
+              info.expectedIndentWidth,
+              listItemIndentWidth,
+            );
+            while (between && !isSpaceOrTab(between)) {
+              before += between[0];
+              between = between.slice(1);
+            }
+            yield fixer.replaceTextRange(
+              [line.range[0], line.range[0] + before.length + between.length],
+              before,
+            );
+          }
+        }
+      }
+    }
+
+    /**
+     * Verify a footnote definition node.
+     */
+    function verifyFootnoteDefinition(node: FootnoteDefinition) {
+      const loc = sourceCode.getLoc(node);
+      verifyLinesIndent([loc.start.line], (lineNumber) =>
+        blockStack.getExpectedIndent(lineNumber),
+      );
+    }
+
+    /**
+     * Verify an inline code node.
+     */
+    function verifyInlineCode(node: InlineCode) {
+      const loc = sourceCode.getLoc(node);
+      if (!inlineToBeChecked(loc.start)) {
+        return;
+      }
+      verifyLinesIndent([loc.start.line], (lineNumber) =>
+        blockStack.getExpectedIndent(lineNumber),
+      );
+    }
+
+    /**
+     * Verify an emphasis, strong, or delete node.
+     */
+    function verifyEmphasisOrStrongOrDelete(node: Emphasis | Strong | Delete) {
+      const loc = sourceCode.getLoc(node);
+      if (!inlineToBeChecked(loc.start)) {
+        return;
+      }
+      verifyLinesIndent([loc.start.line], (lineNumber) =>
+        blockStack.getExpectedIndent(lineNumber),
+      );
+    }
+
+    /**
+     * Verify a link node.
+     */
+    function verifyLink(node: Link) {
+      const loc = sourceCode.getLoc(node);
+      let lines = lineNumbersFromRange(loc.start.line, loc.end.line);
+      if (!inlineToBeChecked(loc.start)) {
+        lines = lines.slice(1);
+      }
+
+      const kind = getLinkKind(sourceCode, node);
+      if (kind === "autolink" || kind === "gfm-autolink") {
+        verifyLinesIndent(lines, (lineNumber) =>
+          blockStack.getExpectedIndent(lineNumber),
+        );
+      } else if (kind === "inline") {
+        const parsed = parseInlineLink(sourceCode, node);
+        if (!parsed) return;
+        const lastChild = node.children.at(-1);
+        if (
+          lastChild &&
+          parsed.text.loc.start.line < parsed.text.loc.end.line
+        ) {
+          const lastChildLoc = sourceCode.getLoc(lastChild);
+          const lastChildEndLine =
+            lastChild.type === "text" && lastChild.value.endsWith("\n")
+              ? lastChildLoc.end.line - 1
+              : lastChildLoc.end.line;
+          lines = lines.filter(
+            (lineNumber) =>
+              lineNumber <= parsed.text.loc.start.line ||
+              lastChildEndLine < lineNumber,
+          );
+        }
+        verifyLinesIndent(lines, (lineNumber, column) => {
+          const baseIndent = blockStack.getExpectedIndent(lineNumber);
+          if (lineNumber <= loc.start.line) {
+            return baseIndent;
+          }
+          if (lineNumber < parsed.text.loc.end.line) {
+            return baseIndent + 2;
+          }
+          if (lineNumber <= parsed.openingParen.loc.end.line) {
+            return baseIndent;
+          }
+          if (lineNumber <= parsed.destination.loc.end.line) {
+            return baseIndent + 2;
+          }
+          if (!parsed.title) return baseIndent; // Closing parenthesis
+          if (lineNumber <= parsed.title.loc.start.line) {
+            return baseIndent + 2;
+          }
+          if (lineNumber < parsed.title.loc.end.line) {
+            return baseIndent + 4;
+          }
+          if (lineNumber === parsed.title.loc.end.line) {
+            const line = getParsedLines(sourceCode).get(lineNumber);
+            if (!line) return baseIndent; // Unexpected, but just in case
+            const between = line.text.slice(
+              column - 1,
+              parsed.title.loc.end.column - 2,
+            );
+            return !between || isWhitespace(between)
+              ? // e.g.
+                // [label](#x
+                //   "
+                //     title
+                //   ") <-- title ends here
+                baseIndent + 2
+              : // e.g.
+                // [label]:(#x
+                //   "
+                //     title") <-- title ends here
+                baseIndent + 4;
+          }
+          return baseIndent; // Closing parenthesis
+        });
+      }
+    }
+
+    /**
+     * Verify a link reference node.
+     */
+    function verifyLinkReference(node: LinkReference) {
+      const loc = sourceCode.getLoc(node);
+      const parsed = parseLinkReference(sourceCode, node);
+      if (!parsed) return;
+      let lines = lineNumbersFromRange(loc.start.line, loc.end.line);
+      if (!inlineToBeChecked(loc.start)) {
+        lines = lines.slice(1);
+      }
+      const lastChild = node.children.at(-1);
+      if (lastChild && parsed.text.loc.start.line < parsed.text.loc.end.line) {
+        const lastChildLoc = sourceCode.getLoc(lastChild);
+        const lastChildEndLine =
+          lastChild.type === "text" && lastChild.value.endsWith("\n")
+            ? lastChildLoc.end.line - 1
+            : lastChildLoc.end.line;
+        lines = lines.filter(
+          (lineNumber) =>
+            lineNumber <= parsed.text.loc.start.line ||
+            lastChildEndLine < lineNumber,
+        );
+      }
+
+      verifyLinesIndent(lines, (lineNumber, column) => {
+        const baseIndent = blockStack.getExpectedIndent(lineNumber);
+        if (lineNumber <= loc.start.line) {
+          return baseIndent;
+        }
+        if (lineNumber < parsed.text.loc.end.line) {
+          return baseIndent + 2;
+        }
+        if (!parsed.label) return baseIndent; // Closing bracket
+        if (lineNumber <= parsed.label.loc.start.line) {
+          return baseIndent;
+        }
+        if (lineNumber < parsed.label.loc.end.line) {
+          return baseIndent + 2;
+        }
+        if (lineNumber === parsed.label.loc.end.line) {
+          const line = getParsedLines(sourceCode).get(lineNumber);
+          if (!line) return baseIndent; // Unexpected, but just in case
+          const between = line.text.slice(
+            column - 1,
+            parsed.label.loc.end.column - 2,
+          );
+          return !between || isWhitespace(between)
+            ? // e.g.
+              // [text][
+              //   label
+              // ] <-- label ends here
+              baseIndent
+            : // e.g.
+              // [text][
+              //   label] <-- label ends here
+              baseIndent + 2;
+        }
+        return baseIndent; // Closing bracket
+      });
+    }
+
+    /**
+     * Verify an image node.
+     */
+    function verifyImage(node: Image) {
+      const loc = sourceCode.getLoc(node);
+      let lines = lineNumbersFromRange(loc.start.line, loc.end.line);
+      if (!inlineToBeChecked(loc.start)) {
+        lines = lines.slice(1);
+      }
+
+      const parsed = parseImage(sourceCode, node);
+      if (!parsed) return;
+      verifyLinesIndent(lines, (lineNumber, column) => {
+        const baseIndent = blockStack.getExpectedIndent(lineNumber);
+        if (lineNumber <= loc.start.line) {
+          return baseIndent;
+        }
+        if (lineNumber < parsed.text.loc.end.line) {
+          return baseIndent + 2;
+        }
+        if (lineNumber === parsed.text.loc.end.line) {
+          const line = getParsedLines(sourceCode).get(lineNumber);
+          if (!line) return baseIndent; // Unexpected, but just in case
+          const between = line.text.slice(
+            column - 1,
+            parsed.text.loc.end.column - 2,
+          );
+          return !between || isWhitespace(between)
+            ? // e.g. ![
+              //   alt
+              // ]: ...
+              baseIndent
+            : // e.g. ![
+              //   alt]: ...
+              baseIndent + 2;
+        }
+        if (lineNumber <= parsed.openingParen.loc.end.line) {
+          return baseIndent;
+        }
+        if (lineNumber <= parsed.destination.loc.end.line) {
+          return baseIndent + 2;
+        }
+        if (!parsed.title) return baseIndent; // Closing parenthesis
+        if (lineNumber <= parsed.title.loc.start.line) {
+          return baseIndent + 2;
+        }
+        if (lineNumber < parsed.title.loc.end.line) {
+          return baseIndent + 4;
+        }
+        if (lineNumber === parsed.title.loc.end.line) {
+          const line = getParsedLines(sourceCode).get(lineNumber);
+          if (!line) return baseIndent; // Unexpected, but just in case
+          const between = line.text.slice(
+            column - 1,
+            parsed.title.loc.end.column - 2,
+          );
+          return !between || isWhitespace(between)
+            ? // e.g.
+              // ![alt]:(/image.png
+              //   "
+              //     title
+              //   ") <-- title ends here
+              baseIndent + 2
+            : // e.g.
+              // ![alt]:(/image.png
+              //   "
+              //     title") <-- title ends here
+              baseIndent + 4;
+        }
+        return baseIndent; // Closing parenthesis
+      });
+    }
+
+    /**
+     * Verify an image reference node.
+     */
+    function verifyImageReference(node: ImageReference) {
+      const loc = sourceCode.getLoc(node);
+      const parsed = parseImageReference(sourceCode, node);
+      if (!parsed) return;
+      let lines = lineNumbersFromRange(loc.start.line, loc.end.line);
+      if (!inlineToBeChecked(loc.start)) {
+        lines = lines.slice(1);
+      }
+      verifyLinesIndent(lines, (lineNumber, column) => {
+        const baseIndent = blockStack.getExpectedIndent(lineNumber);
+        if (lineNumber <= loc.start.line) {
+          return baseIndent;
+        }
+        if (lineNumber < parsed.text.loc.end.line) {
+          return baseIndent + 2;
+        }
+        if (lineNumber === parsed.text.loc.end.line) {
+          const line = getParsedLines(sourceCode).get(lineNumber);
+          if (!line) return baseIndent; // Unexpected, but just in case
+          const between = line.text.slice(
+            column - 1,
+            parsed.text.loc.end.column - 2,
+          );
+          return !between || isWhitespace(between)
+            ? // e.g. ![
+              //   alt
+              // ][]
+              baseIndent
+            : // e.g. ![
+              //   alt][]
+              baseIndent + 2;
+        }
+        if (!parsed.label) return baseIndent; // Closing bracket
+        if (lineNumber <= parsed.label.loc.start.line) {
+          return baseIndent;
+        }
+        if (lineNumber < parsed.label.loc.end.line) {
+          return baseIndent + 2;
+        }
+        if (lineNumber === parsed.label.loc.end.line) {
+          const line = getParsedLines(sourceCode).get(lineNumber);
+          if (!line) return baseIndent; // Unexpected, but just in case
+          const between = line.text.slice(
+            column - 1,
+            parsed.label.loc.end.column - 2,
+          );
+          return !between || isWhitespace(between)
+            ? // e.g.
+              // ![alt][
+              //   label
+              // ] <-- label ends here
+              baseIndent
+            : // e.g.
+              // ![alt][
+              //   label] <-- label ends here
+              baseIndent + 2;
+        }
+        return baseIndent; // Closing bracket
+      });
+    }
+
+    /**
+     * Verify a text node.
+     */
+    function verifyText(node: Text) {
+      const loc = sourceCode.getLoc(node);
+      let lines = lineNumbersFromRange(loc.start.line, loc.end.line);
+      if (!inlineToBeChecked(loc.start)) {
+        lines = lines.slice(1);
+      }
+      if (node.value.endsWith("\n")) {
+        lines = lines.slice(0, -1);
+      }
+      verifyLinesIndent(lines, (lineNumber) =>
+        blockStack.getExpectedIndent(lineNumber),
+      );
+    }
+
+    /**
+     * Verify an inline node.
+     */
+    function verifyInline(node: Break | FootnoteReference) {
+      const loc = sourceCode.getLoc(node);
+      let lines = lineNumbersFromRange(loc.start.line, loc.end.line);
+      if (!inlineToBeChecked(loc.start)) {
+        lines = lines.slice(1);
+      }
+      verifyLinesIndent(lines, (lineNumber) =>
+        blockStack.getExpectedIndent(lineNumber),
+      );
+    }
+
+    /**
+     * Check whether the inline node should be checked.
+     */
+    function inlineToBeChecked(position: Position): boolean {
+      const blockquote = blockStack.getCurrentBlockquote();
+      const listItem = blockStack.getCurrentListItemAtLine(position.line);
+      const lineText = sourceCode.lines[position.line - 1];
+      if (listItem) {
+        const listItemLoc = sourceCode.getLoc(listItem.node);
+        const marker = getListItemMarker(sourceCode, listItem.node);
+        const indentText = lineText.slice(
+          listItemLoc.start.column - 1 + marker.raw.length,
+          position.column - 1,
+        );
+        if (indentText && !isSpaceOrTab(indentText)) {
+          // Ignore if the node is not indented from the list item marker
+          return false;
+        }
+      } else if (blockquote) {
+        if (atWidth(lineText, blockquote.getMarkerIndent()) !== ">") {
+          // Ignore if the line does not have the blockquote marker that same location
+          return false;
+        }
+        const indentText = sliceWidth(
+          lineText.slice(0, position.column - 1),
+          blockquote.getMarkerIndent() + 1,
+        );
+
+        if (indentText && !isSpaceOrTab(indentText)) {
+          // Ignore if the HTML node is not indented from the blockquote marker
+          return false;
+        }
+      } else {
+        const indentText = lineText.slice(0, position.column - 1);
+        if (indentText && !isSpaceOrTab(indentText)) {
+          // Ignore if the HTML node is not indented from the line start
+          return false;
+        }
+      }
+      return true;
+    }
+
+    /**
      * Get line numbers from the range.
      */
     function lineNumbersFromRange(
@@ -349,11 +1032,49 @@ export default createRule("indent", {
     }
 
     /**
+     * Verify the indentation of the lines.
+     */
+    function verifyLinesIndent(
+      lineNumbers: number[],
+      expectedIndentWidthProvider: (
+        lineNumber: number,
+        column: number,
+      ) => number,
+      additionalFixes?: (
+        fixer: RuleTextEditor,
+        info: {
+          loc: SourceLocation;
+          expectedIndentWidth: number;
+          actualIndentWidth: number;
+        },
+      ) => Iterable<RuleTextEdit> | null,
+    ) {
+      const blockquote = blockStack.getCurrentBlockquote();
+      if (!blockquote) {
+        verifyLinesIndentFromRoot(
+          lineNumbers,
+          expectedIndentWidthProvider,
+          additionalFixes,
+        );
+        return;
+      }
+      verifyLinesIndentFromBlockquoteMarker(
+        lineNumbers,
+        blockquote,
+        expectedIndentWidthProvider,
+        additionalFixes,
+      );
+    }
+
+    /**
      * Verify the indentation of the lines from the root.
      */
     function verifyLinesIndentFromRoot(
       lineNumbers: number[],
-      expectedIndentWidth: number,
+      expectedIndentWidthProvider: (
+        lineNumber: number,
+        column: number,
+      ) => number,
       additionalFixes?: (
         fixer: RuleTextEditor,
         info: {
@@ -378,10 +1099,14 @@ export default createRule("indent", {
       for (const lineNumber of lineNumbers) {
         const line = getParsedLines(sourceCode).get(lineNumber);
         if (!line) return;
-        const listItem = blockStack.getListItemFromLine(lineNumber);
+        const listItem = blockStack.getCurrentListItemAtLine(lineNumber);
         if (!listItem) {
           const indentText = /^\s*/u.exec(line.text)![0];
-          const actualIndentWidth = getIndentWidth(indentText);
+          const actualIndentWidth = getWidth(indentText);
+          const expectedIndentWidth = expectedIndentWidthProvider(
+            lineNumber,
+            1,
+          );
           if (actualIndentWidth === expectedIndentWidth) continue;
           reports.push({
             loc: {
@@ -406,7 +1131,7 @@ export default createRule("indent", {
         const report = verifyLineIndentFromListItemMarker(
           line,
           listItem,
-          expectedIndentWidth,
+          expectedIndentWidthProvider,
         );
         if (!report) continue;
         reports.push(report);
@@ -415,13 +1140,10 @@ export default createRule("indent", {
       if (!reports.length) return;
 
       for (const report of reports) {
-        context.report({
+        reportIncorrectIndent({
           loc: report.loc,
           messageId: report.messageId,
-          data: {
-            expected: String(report.data.expected),
-            actual: String(report.data.actual),
-          },
+          data: report.data,
           *fix(fixer) {
             for (const { fix, ...info } of reports) {
               yield fix(fixer);
@@ -439,8 +1161,11 @@ export default createRule("indent", {
      */
     function verifyLinesIndentFromBlockquoteMarker(
       lineNumbers: number[],
-      blockquote: Blockquote,
-      expectedIndentWidth: number,
+      blockquote: BlockquoteStack,
+      expectedIndentWidthProvider: (
+        lineNumber: number,
+        column: number,
+      ) => number,
       additionalFixes?: (
         fixer: RuleTextEditor,
         info: {
@@ -450,7 +1175,7 @@ export default createRule("indent", {
         },
       ) => Iterable<RuleTextEdit> | null,
     ) {
-      const blockquoteLoc = sourceCode.getLoc(blockquote);
+      const blockquoteLoc = sourceCode.getLoc(blockquote.node);
       const reports: {
         loc: SourceLocation;
         messageId:
@@ -467,20 +1192,24 @@ export default createRule("indent", {
       for (const lineNumber of lineNumbers) {
         const line = getParsedLines(sourceCode).get(lineNumber);
         if (!line) return;
-        if (line.text[blockquoteLoc.start.column - 1] !== ">") {
+        if (atWidth(line.text, blockquote.getMarkerIndent()) !== ">") {
           // Ignore if the line does not have the blockquote marker that same location
           cannotFix = true;
           continue;
         }
-        const listItem = blockStack.getListItemFromLine(lineNumber);
+        const listItem = blockStack.getCurrentListItemAtLine(lineNumber);
         if (!listItem) {
           const before = line.text.slice(0, blockquoteLoc.start.column);
           const after = line.text.slice(blockquoteLoc.start.column);
           const indentText = /^\s*/u.exec(after)![0];
-          const actualIndentWidth = getIndentWidth(before + indentText);
+          const actualIndentWidth = getWidth(before + indentText);
+          const expectedIndentWidth = expectedIndentWidthProvider(
+            lineNumber,
+            blockquoteLoc.start.column + 1,
+          );
           if (actualIndentWidth === expectedIndentWidth) continue;
           const linePrefix = before;
-          const linePrefixWidth = getIndentWidth(linePrefix);
+          const linePrefixWidth = getWidth(linePrefix);
 
           reports.push({
             loc: {
@@ -519,7 +1248,7 @@ export default createRule("indent", {
         const report = verifyLineIndentFromListItemMarker(
           line,
           listItem,
-          expectedIndentWidth,
+          expectedIndentWidthProvider,
         );
         if (!report) continue;
         reports.push(report);
@@ -528,13 +1257,10 @@ export default createRule("indent", {
       if (!reports.length) return;
 
       for (const report of reports) {
-        context.report({
+        reportIncorrectIndent({
           loc: report.loc,
           messageId: report.messageId,
-          data: {
-            expected: String(report.data.expected),
-            actual: String(report.data.actual),
-          },
+          data: report.data,
           fix: cannotFix
             ? null
             : function* (fixer) {
@@ -554,8 +1280,11 @@ export default createRule("indent", {
      */
     function verifyLineIndentFromListItemMarker(
       line: ParsedLine,
-      listItem: ListItem,
-      expectedIndentWidth: number,
+      listItem: ListItemStack,
+      expectedIndentWidthProvider: (
+        lineNumber: number,
+        column: number,
+      ) => number,
     ): {
       loc: SourceLocation;
       messageId:
@@ -566,27 +1295,29 @@ export default createRule("indent", {
       expectedIndentWidth: number;
       actualIndentWidth: number;
     } | null {
-      const listMarker = getListItemMarker(sourceCode, listItem);
-      const listItemLoc = sourceCode.getLoc(listItem);
+      const listMarker = getListItemMarker(sourceCode, listItem.node);
+      const listItemLoc = sourceCode.getLoc(listItem.node);
+      const markerAfterColumn =
+        listItemLoc.start.column + listMarker.raw.length;
       const before = line.text.slice(0, listItemLoc.start.column - 1);
-      const after = line.text.slice(
-        listItemLoc.start.column - 1 + listMarker.raw.length,
-      );
+      const after = line.text.slice(markerAfterColumn - 1);
       const indentText = /^\s*/u.exec(after)![0];
-      const actualIndentWidth = getIndentWidth(
-        before + listMarker.raw + indentText,
+      const actualIndentWidth = getWidth(before + listMarker.raw + indentText);
+      const expectedIndentWidth = expectedIndentWidthProvider(
+        line.line,
+        markerAfterColumn,
       );
       if (actualIndentWidth === expectedIndentWidth) return null;
 
       const linePrefix = before + listMarker.raw;
-      const linePrefixWidth = getIndentWidth(linePrefix);
+      const linePrefixWidth = getWidth(linePrefix);
       const range: [number, number] = [
         line.range[0] + linePrefix.length,
         line.range[0] + linePrefix.length + indentText.length,
       ];
 
       return {
-        loc: getSourceLocationFromRange(sourceCode, listItem, range),
+        loc: getSourceLocationFromRange(sourceCode, listItem.node, range),
         messageId: indentText.includes("\t")
           ? "wrongIndentationFromListMarkerWithTab"
           : "wrongIndentationFromListMarker",
@@ -606,58 +1337,3 @@ export default createRule("indent", {
     }
   },
 });
-
-/**
- * Get the visual width of the indentation.
- */
-function getIndentWidth(str: string): number {
-  let width = 0;
-  for (const c of str) {
-    if (c === "\t") {
-      width += 4 - (width % 4);
-    } else {
-      width++;
-    }
-  }
-  return width;
-}
-
-/**
- * Get a slice of the string by visual width.
- */
-function sliceWidth(str: string, start: number, end?: number): string {
-  const buffer = [...str];
-  let width = 0;
-  let c;
-  while ((c = buffer.shift())) {
-    if (start <= width) {
-      buffer.unshift(c);
-      break;
-    }
-    if (c === "\t") {
-      width += 4 - (width % 4);
-    } else {
-      width++;
-    }
-  }
-  if (end == null) {
-    return buffer.join("");
-  }
-  let result = " ".repeat(width - start);
-  while ((c = buffer.shift())) {
-    let newWidth;
-    if (c === "\t") {
-      newWidth = width + 4 - (width % 4);
-    } else {
-      newWidth = width + 1;
-    }
-    if (end < newWidth) {
-      break;
-    }
-    result += c;
-    width = newWidth;
-  }
-  result += " ".repeat(end - width);
-
-  return result;
-}

@@ -53,9 +53,8 @@ This rule has no options.
 
 ## 👫 Related Rules
 
-- [xxx]
-
-[xxx]: https://xxx
+- [markdown-preferences/blockquote-marker-alignment](./blockquote-marker-alignment.md)
+- [markdown-preferences/list-marker-alignment](./list-marker-alignment.md)
 
 ## 🔍 Implementation
 
