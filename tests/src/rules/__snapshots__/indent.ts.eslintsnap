@@ -72,10 +72,10 @@ Output:
 [6] Expected indentation of 1 from the blockquote marker but found 0.
 [7] Expected indentation of 1 from the list marker but found 3.
 [8] Expected indentation of 1 from the list marker but found 2.
-[9] Expected indentation of 3 but found 4.
+[9] Expected indentation of 2 but found 4.
 [10] Expected indentation of 1 from the list marker but found 3.
 [11] Expected indentation of 1 from the list marker but found 2.
-[12] Expected indentation of 4 from the blockquote marker but found 5.
+[12] Expected indentation of 3 from the blockquote marker but found 5.
 ---
 
 
@@ -111,15 +111,20 @@ Code:
  13 | -   > blockquote
     |  ^~~ [10]
  14 |     >  blockquote
-    |      ^~ [11]
+    | ^~~~ ^~
+    | [11] [12]
  15 |     >   blockquote
-    |      ^~~ [12]
+    | ^~~~ ^~~
+    | [13] [14]
  16 |     >    blockquote
-    |      ^~~~ [13]
+    | ^~~~ ^~~~
+    | [15] [16]
  17 |     >     blockquote
-    |      ^~~~~ [14]
+    | ^~~~ ^~~~~
+    | [17] [18]
  18 |     >      blockquote
-    |      ^~~~~~ [15]
+    | ^~~~ ^~~~~~
+    | [19] [20]
  19 |
 
 Output:
@@ -153,11 +158,16 @@ Output:
 [8] Expected indentation of 1 from the blockquote marker but found 3.
 [9] Expected indentation of 1 from the blockquote marker but found 4.
 [10] Expected indentation of 1 from the list marker but found 3.
-[11] Expected indentation of 1 from the blockquote marker but found 2.
-[12] Expected indentation of 1 from the blockquote marker but found 3.
-[13] Expected indentation of 1 from the blockquote marker but found 4.
-[14] Expected indentation of 1 from the blockquote marker but found 5.
-[15] Expected indentation of 1 from the blockquote marker but found 6.
+[11] Expected indentation of 2 but found 4.
+[12] Expected indentation of 1 from the blockquote marker but found 2.
+[13] Expected indentation of 2 but found 4.
+[14] Expected indentation of 1 from the blockquote marker but found 3.
+[15] Expected indentation of 2 but found 4.
+[16] Expected indentation of 1 from the blockquote marker but found 4.
+[17] Expected indentation of 2 but found 4.
+[18] Expected indentation of 1 from the blockquote marker but found 5.
+[19] Expected indentation of 2 but found 4.
+[20] Expected indentation of 1 from the blockquote marker but found 6.
 ---
 
 
@@ -325,18 +335,19 @@ Code:
  51 |         console.log('code block')
  52 |            console.log('code block')
  53 |     ```
+    | ^~~~ [14]
  54 |
  55 | -  ```js
-    |  ^~ [14]
+    |  ^~ [15]
  56 |       console.log('code block')
  57 |     ```
-    | ^~~~ [15]
+    | ^~~~ [16]
  58 |
  59 |      ```js
-    | ^~~~~ [16]
+    | ^~~~~ [17]
  60 |      console.log('code block')
  61 |      ```
-    | ^~~~~ [17]
+    | ^~~~~ [18]
  62 |
  63 | > - ```js
  64 | >       console.log('code block')
@@ -345,23 +356,24 @@ Code:
  67 | >   ```
  68 | >
  69 | > -   ```js
-    |    ^~~ [18]
+    |    ^~~ [19]
  70 | >       console.log('code block')
  71 | >         console.log('code block')
  72 | >            console.log('code block')
  73 | >     ```
+    |  ^~~~~ [20]
  74 | >
  75 | > -  ```js
-    |    ^~ [19]
+    |    ^~ [21]
  76 | >       console.log('code block')
  77 | >     ```
-    |  ^~~~~ [20]
+    |  ^~~~~ [22]
  78 | >
  79 | >      ```js
-    |  ^~~~~~ [21]
+    |  ^~~~~~ [23]
  80 | >      console.log('code block')
  81 | >      ```
-    |  ^~~~~~ [22]
+    |  ^~~~~~ [24]
  82 |
 
 Output:
@@ -461,15 +473,17 @@ Output:
 [11] Expected indentation of 1 from the blockquote marker but found 4.
 [12] Expected indentation of 1 from the blockquote marker but found 4.
 [13] Expected indentation of 1 from the list marker but found 3.
-[14] Expected indentation of 1 from the list marker but found 2.
-[15] Expected indentation of 3 but found 4.
-[16] Expected indentation of 3 but found 5.
-[17] Expected indentation of 3 but found 5.
-[18] Expected indentation of 1 from the list marker but found 3.
-[19] Expected indentation of 1 from the list marker but found 2.
-[20] Expected indentation of 4 from the blockquote marker but found 5.
-[21] Expected indentation of 4 from the blockquote marker but found 6.
-[22] Expected indentation of 4 from the blockquote marker but found 6.
+[14] Expected indentation of 2 but found 4.
+[15] Expected indentation of 1 from the list marker but found 2.
+[16] Expected indentation of 2 but found 4.
+[17] Expected indentation of 2 but found 5.
+[18] Expected indentation of 2 but found 5.
+[19] Expected indentation of 1 from the list marker but found 3.
+[20] Expected indentation of 3 from the blockquote marker but found 5.
+[21] Expected indentation of 1 from the list marker but found 2.
+[22] Expected indentation of 3 from the blockquote marker but found 5.
+[23] Expected indentation of 3 from the blockquote marker but found 6.
+[24] Expected indentation of 3 from the blockquote marker but found 6.
 ---
 
 
@@ -726,7 +740,7 @@ Output:
 [8] Expected indentation of 1 from the list marker but found 2.
 [9] Expected indentation of 1 from the list marker but found 3.
 [10] Expected indentation of 1 from the list marker but found 2.
-[11] Expected indentation of 4 from the blockquote marker but found 5.
+[11] Expected indentation of 3 from the blockquote marker but found 5.
 [12] Expected indentation of 1 from the list marker but found 2.
 [13] Expected indentation of 0 but found 1.
 [14] Expected indentation of 0 but found 1.
@@ -1812,6 +1826,103 @@ Output:
 
 
 Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/list-item-4-relative-to-marker-end/google-styleguide-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - listItems:
+      first: 4
+      other: 4
+      relativeTo: markerStart
+Plugins: unable to serialize
+
+Code:
+  1 | # Indent list items relative to the end of the marker (Google Style Guide)
+  2 |
+  3 | See <https://google.github.io/styleguide/docguide/style.html#use-lazy-numbering-for-long-lists>
+  4 |
+  5 | 1. Foo.
+    |   ^ [1]
+  6 | 1. Bar.
+    |   ^ [2]
+  7 |    1. Foofoo.
+    | ^~~  ^
+    | [3]  [4]
+  8 |    1. Barbar.
+    |      ^ [5]
+  9 | 1. Baz.
+    |   ^ [6]
+ 10 |
+ 11 | ---
+ 12 |
+ 13 | 1. Use 2 spaces after the item number, so the text itself is indented 4 spaces.
+    |   ^ [7]
+ 14 |    Use a 4-space indent for wrapped text.
+    | ^~~ [8]
+ 15 | 2. Use 2 spaces again for the next item.
+    |   ^ [9]
+ 16 |
+ 17 | - Use 3 spaces after a bullet, so the text itself is indented 4 spaces.
+    |  ^ [10]
+ 18 |   Use a 4-space indent for wrapped text.
+    | ^~ [11]
+ 19 |   1. Use 2 spaces with numbered lists, as before.
+    | ^~ [12]
+    |     ^ [13]
+ 20 |      Wrapped text in a nested list needs an 8-space indent.
+    | ^~~~~ [14]
+ 21 |   2. Looks nice, doesn't it?
+    |     ^ [15]
+ 22 | - Back to the bulleted list, indented 3 spaces.
+    |  ^ [16]
+ 23 |
+
+Output:
+  1 | #    Indent list items relative to the end of the marker (Google Style Guide)
+  2 |
+  3 | See <https://google.github.io/styleguide/docguide/style.html#use-lazy-numbering-for-long-lists>
+  4 |
+  5 | 1.  Foo.
+  6 | 1.  Bar.
+  7 |     1.  Foofoo.
+  8 |    1.  Barbar.
+  9 | 1.  Baz.
+ 10 |
+ 11 | ---
+ 12 |
+ 13 | 1.  Use 2 spaces after the item number, so the text itself is indented 4 spaces.
+ 14 |     Use a 4-space indent for wrapped text.
+ 15 | 2.  Use 2 spaces again for the next item.
+ 16 |
+ 17 | -   Use 3 spaces after a bullet, so the text itself is indented 4 spaces.
+ 18 |     Use a 4-space indent for wrapped text.
+ 19 |     1.  Use 2 spaces with numbered lists, as before.
+ 20 |         Wrapped text in a nested list needs an 8-space indent.
+ 21 | 2.  Looks nice, doesn't it?
+ 22 | -   Back to the bulleted list, indented 3 spaces.
+ 23 |
+
+[1] Expected indentation of 2 from the list marker but found 1.
+[2] Expected indentation of 2 from the list marker but found 1.
+[3] Expected indentation of 4 but found 3.
+[4] Expected indentation of 2 from the list marker but found 1.
+[5] Expected indentation of 2 from the list marker but found 1.
+[6] Expected indentation of 2 from the list marker but found 1.
+[7] Expected indentation of 2 from the list marker but found 1.
+[8] Expected indentation of 4 but found 3.
+[9] Expected indentation of 2 from the list marker but found 1.
+[10] Expected indentation of 3 from the list marker but found 1.
+[11] Expected indentation of 4 but found 2.
+[12] Expected indentation of 4 but found 2.
+[13] Expected indentation of 2 from the list marker but found 1.
+[14] Expected indentation of 6 but found 5.
+[15] Expected indentation of 2 from the list marker but found 1.
+[16] Expected indentation of 3 from the list marker but found 1.
+---
+
+
+Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/lists-input.md
 Language: markdown/gfm
 LanguageOptions:
@@ -1941,30 +2052,30 @@ Output:
 [1] Expected indentation of 0 but found 1.
 [2] Expected indentation of 3 but found 4.
 [3] Expected indentation of 1 from the list marker but found 2.
-[4] Expected indentation of 7 but found 9.
+[4] Expected indentation of 6 but found 9.
 [5] Expected indentation of 11 but found 12.
 [6] Expected indentation of 0 but found 1.
 [7] Expected indentation of 4 but found 6.
 [8] Expected indentation of 1 from the list marker but found 2.
-[9] Expected indentation of 10 but found 12.
+[9] Expected indentation of 9 but found 12.
 [10] Expected indentation of 15 but found 14.
 [11] Expected indentation of 3 from the blockquote marker but found 4.
 [12] Expected indentation of 1 from the list marker but found 2.
-[13] Expected indentation of 7 from the blockquote marker but found 9.
+[13] Expected indentation of 6 from the blockquote marker but found 9.
 [14] Expected indentation of 11 from the blockquote marker but found 12.
 [15] Expected indentation of 4 from the blockquote marker but found 6.
 [16] Expected indentation of 1 from the list marker but found 2.
-[17] Expected indentation of 10 from the blockquote marker but found 12.
+[17] Expected indentation of 9 from the blockquote marker but found 12.
 [18] Expected indentation of 15 from the blockquote marker but found 14.
 [19] Expected indentation of 1 from the blockquote marker but found 2.
 [20] Expected indentation of 4 from the blockquote marker but found 5.
 [21] Expected indentation of 1 from the list marker but found 2.
-[22] Expected indentation of 8 from the blockquote marker but found 10.
+[22] Expected indentation of 7 from the blockquote marker but found 10.
 [23] Expected indentation of 12 from the blockquote marker but found 13.
 [24] Expected indentation of 1 from the blockquote marker but found 2.
 [25] Expected indentation of 5 from the blockquote marker but found 7.
 [26] Expected indentation of 1 from the list marker but found 2.
-[27] Expected indentation of 11 from the blockquote marker but found 13.
+[27] Expected indentation of 10 from the blockquote marker but found 13.
 [28] Expected indentation of 16 from the blockquote marker but found 15.
 ---
 

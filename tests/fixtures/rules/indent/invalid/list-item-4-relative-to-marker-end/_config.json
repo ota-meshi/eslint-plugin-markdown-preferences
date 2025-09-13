@@ -1,0 +1,11 @@
+{
+  "options": [
+    {
+      "listItems": {
+        "first": 4,
+        "other": 4,
+        "relativeTo": "markerStart"
+      }
+    }
+  ]
+}

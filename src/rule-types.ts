@@ -74,6 +74,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/heading-casing'?: Linter.RuleEntry<MarkdownPreferencesHeadingCasing>
   /**
+   * enforce consistent indentation in Markdown files
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/indent.html
+   */
+  'markdown-preferences/indent'?: Linter.RuleEntry<MarkdownPreferencesIndent>
+  /**
    * enforce consistent style for level 1 headings
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/level1-heading-style.html
    */
@@ -306,6 +311,14 @@ type MarkdownPreferencesHeadingCasing = []|[{
   ignorePatterns?: string[]
   
   minorWords?: string[]
+}]
+// ----- markdown-preferences/indent -----
+type MarkdownPreferencesIndent = []|[{
+  listItemsIndent?: {
+    first?: ("ignore" | number)
+    other?: (("first" | "minimum") | number)
+    relativeTo?: ("markerStart" | "markerEnd")
+  }
 }]
 // ----- markdown-preferences/level1-heading-style -----
 type MarkdownPreferencesLevel1HeadingStyle = []|[{

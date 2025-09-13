@@ -45,7 +45,29 @@ import { parseLinkReference } from "../utils/link-reference.ts";
 import { parseImage } from "../utils/image.ts";
 import { parseImageReference } from "../utils/image-reference.ts";
 
-export default createRule("indent", {
+type Options = {
+  listItems?: {
+    first?: number | "ignore";
+    other?: number | "first" | "minimum";
+    relativeTo: "markerStart" | "markerEnd";
+  };
+};
+
+/**
+ * Parse options.
+ */
+function parseOptions(options: Options | undefined) {
+  const listItems = options?.listItems;
+  return {
+    listItems: {
+      first: listItems?.first ?? 1,
+      other: listItems?.other ?? "first",
+      relativeTo: listItems?.relativeTo ?? "markerEnd",
+    },
+  };
+}
+
+export default createRule<[Options?]>("indent", {
   meta: {
     type: "layout",
     docs: {
@@ -55,7 +77,45 @@ export default createRule("indent", {
     },
     fixable: "whitespace",
     hasSuggestions: false,
-    schema: [],
+    schema: [
+      {
+        type: "object",
+        properties: {
+          listItems: {
+            type: "object",
+            properties: {
+              first: {
+                anyOf: [
+                  {
+                    const: "ignore",
+                  },
+                  {
+                    type: "number",
+                    minimum: 1,
+                  },
+                ],
+              },
+              other: {
+                anyOf: [
+                  {
+                    enum: ["first", "minimum"],
+                  },
+                  {
+                    type: "number",
+                    minimum: 1,
+                  },
+                ],
+              },
+              relativeTo: {
+                enum: ["markerStart", "markerEnd"],
+              },
+            },
+            additionalProperties: false,
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
     messages: {
       wrongIndentation:
         "Expected indentation of {{expected}} but found {{actual}}.",
@@ -73,9 +133,28 @@ export default createRule("indent", {
   },
   create(context) {
     const sourceCode = context.sourceCode;
+    const options = parseOptions(context.options[0]);
+
+    type Violation = {
+      loc: SourceLocation;
+      messageId:
+        | "wrongIndentation"
+        | "wrongIndentationFromBlockquoteMarker"
+        | "wrongIndentationFromListMarker"
+        | "wrongIndentationWithTab"
+        | "wrongIndentationFromBlockquoteMarkerWithTab"
+        | "wrongIndentationFromListMarkerWithTab";
+      data: {
+        expected: number;
+        actual: number;
+      };
+      fix: (fixer: RuleTextEditor) => Iterable<RuleTextEdit>;
+    };
 
     abstract class AbsBlockStack {
       public abstract upper: BlockStack | null;
+
+      public readonly violations: Violation[] = [];
 
       public abstract type:
         | "root"
@@ -114,7 +193,7 @@ export default createRule("indent", {
         return null;
       }
 
-      public abstract getExpectedIndent(lineNumber: number): number;
+      public abstract getExpectedIndent(lineNumber: number): number | "ignore";
     }
 
     class RootStack extends AbsBlockStack {
@@ -179,7 +258,7 @@ export default createRule("indent", {
 
       private _expectedIndentForFirstLine?: number;
 
-      private _expectedIndent?: number;
+      private _expectedIndentForOtherLines?: number | "ignore";
 
       private readonly nodeLoc: SourceLocation;
 
@@ -191,21 +270,89 @@ export default createRule("indent", {
         this.nodeLoc = sourceCode.getLoc(this.node);
       }
 
-      public getExpectedIndent(lineNumber: number): number {
+      public getExpectedIndent(lineNumber: number): number | "ignore" {
         const loc = this.nodeLoc;
         if (lineNumber === loc.start.line) {
-          // First line
+          if (options.listItems.first === "ignore") {
+            return "ignore";
+          }
           if (this._expectedIndentForFirstLine != null)
             return this._expectedIndentForFirstLine;
           const markerLength = getListItemMarker(sourceCode, this.node).raw
             .length;
           const lineText = sourceCode.lines[loc.start.line - 1];
           const baseIndent = getWidth(lineText.slice(0, loc.start.column - 1));
-          return (this._expectedIndentForFirstLine =
-            baseIndent + markerLength + 1);
+          if (options.listItems.relativeTo === "markerEnd") {
+            return (this._expectedIndentForFirstLine =
+              baseIndent + markerLength + options.listItems.first);
+          }
+          // relative to markerStart
+          return (this._expectedIndentForFirstLine = Math.max(
+            baseIndent + options.listItems.first,
+            baseIndent + markerLength + 1, // At least one space after the marker,
+          ));
         }
         // Other lines
-        if (this._expectedIndent != null) return this._expectedIndent;
+        if (this._expectedIndentForOtherLines != null)
+          return this._expectedIndentForOtherLines;
+        if (options.listItems.other === "first") {
+          const firstLineIndent = this.getExpectedIndent(loc.start.line);
+          if (firstLineIndent === "ignore") {
+            const actualFirstLineIndent = this.getActualFirstLineIndent();
+            if (actualFirstLineIndent != null) {
+              return (this._expectedIndentForOtherLines =
+                actualFirstLineIndent);
+            }
+            for (const child of this.node.children) {
+              const childLoc = sourceCode.getLoc(child);
+              if (loc.start.line < childLoc.start.line) {
+                return (this._expectedIndentForOtherLines = getWidth(
+                  sourceCode.lines[childLoc.start.line - 1].slice(
+                    0,
+                    childLoc.start.column - 1,
+                  ),
+                ));
+              }
+            }
+          }
+          return (this._expectedIndentForOtherLines = firstLineIndent);
+        }
+        if (options.listItems.other === "minimum") {
+          return (this._expectedIndentForOtherLines =
+            this.getMinimumLineIndent());
+        }
+        const lineText = sourceCode.lines[loc.start.line - 1];
+        const baseIndent = getWidth(lineText.slice(0, loc.start.column - 1));
+        if (options.listItems.relativeTo === "markerEnd") {
+          const markerLength = getListItemMarker(sourceCode, this.node).raw
+            .length;
+          return (this._expectedIndentForOtherLines =
+            baseIndent + markerLength + options.listItems.other);
+        }
+        // relative to markerStart
+        const minimumLineIndent = this.getMinimumLineIndent();
+        return (this._expectedIndentForOtherLines = Math.max(
+          baseIndent + options.listItems.other,
+          minimumLineIndent,
+        ));
+      }
+
+      private getMinimumLineIndent() {
+        const actualFirstLineIndent = this.getActualFirstLineIndent();
+        if (actualFirstLineIndent != null) {
+          return (this._expectedIndentForOtherLines = actualFirstLineIndent);
+        }
+        const loc = this.nodeLoc;
+        const markerLength = getListItemMarker(sourceCode, this.node).raw
+          .length;
+        const lineText = sourceCode.lines[loc.start.line - 1];
+        return getWidth(
+          lineText.slice(0, loc.start.column - 1 + markerLength + 1),
+        );
+      }
+
+      private getActualFirstLineIndent() {
+        const loc = this.nodeLoc;
         const markerLength = getListItemMarker(sourceCode, this.node).raw
           .length;
         const lineText = sourceCode.lines[loc.start.line - 1];
@@ -216,14 +363,14 @@ export default createRule("indent", {
         if (trimmedAfterMarkerText) {
           const afterMarkerSpacesLength =
             afterMarkerText.length - trimmedAfterMarkerText.length;
-          return (this._expectedIndent = getWidth(
+          return getWidth(
             lineText.slice(
               0,
               loc.start.column - 1 + markerLength + afterMarkerSpacesLength,
             ),
-          ));
+          );
         }
-        return (this._expectedIndent = this.getExpectedIndent(loc.start.line));
+        return null;
       }
     }
     class FootnoteDefinitionStack extends AbsBlockStack {
@@ -270,7 +417,7 @@ export default createRule("indent", {
         this.nodeLoc = sourceCode.getLoc(this.node);
       }
 
-      public getExpectedIndent(lineNumber: number): number {
+      public getExpectedIndent(lineNumber: number): number | "ignore" {
         const loc = this.nodeLoc;
 
         if (lineNumber === loc.start.line) {
@@ -278,7 +425,11 @@ export default createRule("indent", {
           return this.upper.getExpectedIndent(lineNumber);
         }
         // Other lines (in Text spans)
-        return this.upper.getExpectedIndent(loc.start.line) + 2;
+        const base = this.upper.getExpectedIndent(loc.start.line);
+        if (base === "ignore") {
+          return "ignore";
+        }
+        return base + 2;
       }
     }
     type BlockStack =
@@ -294,40 +445,37 @@ export default createRule("indent", {
     /**
      * Reported locations (line and column) to avoid duplicate reports.
      */
-    function reportIncorrectIndent(violation: {
-      loc: SourceLocation;
-      messageId:
-        | "wrongIndentation"
-        | "wrongIndentationFromBlockquoteMarker"
-        | "wrongIndentationFromListMarker"
-        | "wrongIndentationWithTab"
-        | "wrongIndentationFromBlockquoteMarkerWithTab"
-        | "wrongIndentationFromListMarkerWithTab";
-      data: {
-        expected: number;
-        actual: number;
-      };
-      fix:
-        | ((
-            fixer: RuleTextEditor,
-          ) => RuleTextEdit | Iterable<RuleTextEdit> | null)
-        | null;
-    }) {
+    function reportIncorrectIndent(violation: Violation) {
       const reportedColumns = (reportedLocations[violation.loc.start.line] ??=
         new Set());
       if (reportedColumns.has(violation.loc.start.column)) {
         return;
       }
       reportedColumns.add(violation.loc.start.column);
-      context.report({
-        loc: violation.loc,
-        messageId: violation.messageId,
-        data: {
-          expected: String(violation.data.expected),
-          actual: String(violation.data.actual),
-        },
-        fix: violation.fix,
-      });
+      blockStack.violations.push(violation);
+    }
+
+    /**
+     * Flush violations to the context.
+     */
+    function flushViolations({ violations }: BlockStack) {
+      for (const violation of violations) {
+        context.report({
+          loc: violation.loc,
+          messageId: violation.messageId,
+          data: {
+            expected: String(violation.data.expected),
+            actual: String(violation.data.actual),
+          },
+          fix(fixer) {
+            const result: RuleTextEdit[] = [];
+            for (const { fix } of violations) {
+              result.push(...fix(fixer));
+            }
+            return result;
+          },
+        });
+      }
     }
 
     return {
@@ -367,7 +515,11 @@ export default createRule("indent", {
         blockStack = new LinkStack(node);
       },
       "blockquote, listItem, footnoteDefinition, link, linkReference:exit"() {
+        flushViolations(blockStack);
         blockStack = blockStack.upper!;
+      },
+      "root:exit"() {
+        flushViolations(blockStack);
       },
     };
 
@@ -487,6 +639,9 @@ export default createRule("indent", {
         lineNumbersFromRange(loc.start.line, loc.end.line),
         (lineNumber, column) => {
           const baseIndent = blockStack.getExpectedIndent(lineNumber);
+          if (baseIndent === "ignore") {
+            return "ignore";
+          }
           if (lineNumber <= loc.start.line) {
             return baseIndent;
           }
@@ -697,6 +852,9 @@ export default createRule("indent", {
         }
         verifyLinesIndent(lines, (lineNumber, column) => {
           const baseIndent = blockStack.getExpectedIndent(lineNumber);
+          if (baseIndent === "ignore") {
+            return "ignore";
+          }
           if (lineNumber <= loc.start.line) {
             return baseIndent;
           }
@@ -768,6 +926,9 @@ export default createRule("indent", {
 
       verifyLinesIndent(lines, (lineNumber, column) => {
         const baseIndent = blockStack.getExpectedIndent(lineNumber);
+        if (baseIndent === "ignore") {
+          return "ignore";
+        }
         if (lineNumber <= loc.start.line) {
           return baseIndent;
         }
@@ -817,6 +978,9 @@ export default createRule("indent", {
       if (!parsed) return;
       verifyLinesIndent(lines, (lineNumber, column) => {
         const baseIndent = blockStack.getExpectedIndent(lineNumber);
+        if (baseIndent === "ignore") {
+          return "ignore";
+        }
         if (lineNumber <= loc.start.line) {
           return baseIndent;
         }
@@ -889,6 +1053,9 @@ export default createRule("indent", {
       }
       verifyLinesIndent(lines, (lineNumber, column) => {
         const baseIndent = blockStack.getExpectedIndent(lineNumber);
+        if (baseIndent === "ignore") {
+          return "ignore";
+        }
         if (lineNumber <= loc.start.line) {
           return baseIndent;
         }
@@ -1039,7 +1206,7 @@ export default createRule("indent", {
       expectedIndentWidthProvider: (
         lineNumber: number,
         column: number,
-      ) => number,
+      ) => number | "ignore",
       additionalFixes?: (
         fixer: RuleTextEditor,
         info: {
@@ -1074,7 +1241,7 @@ export default createRule("indent", {
       expectedIndentWidthProvider: (
         lineNumber: number,
         column: number,
-      ) => number,
+      ) => number | "ignore",
       additionalFixes?: (
         fixer: RuleTextEditor,
         info: {
@@ -1107,6 +1274,7 @@ export default createRule("indent", {
             lineNumber,
             1,
           );
+          if (expectedIndentWidth === "ignore") continue;
           if (actualIndentWidth === expectedIndentWidth) continue;
           reports.push({
             loc: {
@@ -1145,11 +1313,9 @@ export default createRule("indent", {
           messageId: report.messageId,
           data: report.data,
           *fix(fixer) {
-            for (const { fix, ...info } of reports) {
-              yield fix(fixer);
-              if (additionalFixes) {
-                yield* additionalFixes(fixer, info) ?? [];
-              }
+            yield report.fix(fixer);
+            if (additionalFixes) {
+              yield* additionalFixes(fixer, report) ?? [];
             }
           },
         });
@@ -1165,7 +1331,7 @@ export default createRule("indent", {
       expectedIndentWidthProvider: (
         lineNumber: number,
         column: number,
-      ) => number,
+      ) => number | "ignore",
       additionalFixes?: (
         fixer: RuleTextEditor,
         info: {
@@ -1207,6 +1373,7 @@ export default createRule("indent", {
             lineNumber,
             blockquoteLoc.start.column + 1,
           );
+          if (expectedIndentWidth === "ignore") continue;
           if (actualIndentWidth === expectedIndentWidth) continue;
           const linePrefix = before;
           const linePrefixWidth = getWidth(linePrefix);
@@ -1261,16 +1428,13 @@ export default createRule("indent", {
           loc: report.loc,
           messageId: report.messageId,
           data: report.data,
-          fix: cannotFix
-            ? null
-            : function* (fixer) {
-                for (const { fix, ...info } of reports) {
-                  yield fix(fixer);
-                  if (additionalFixes) {
-                    yield* additionalFixes(fixer, info) ?? [];
-                  }
-                }
-              },
+          *fix(fixer) {
+            if (cannotFix) return;
+            yield report.fix(fixer);
+            if (additionalFixes) {
+              yield* additionalFixes(fixer, report) ?? [];
+            }
+          },
         });
       }
     }
@@ -1284,7 +1448,7 @@ export default createRule("indent", {
       expectedIndentWidthProvider: (
         lineNumber: number,
         column: number,
-      ) => number,
+      ) => number | "ignore",
     ): {
       loc: SourceLocation;
       messageId:
@@ -1307,6 +1471,7 @@ export default createRule("indent", {
         line.line,
         markerAfterColumn,
       );
+      if (expectedIndentWidth === "ignore") return null;
       if (actualIndentWidth === expectedIndentWidth) return null;
 
       const linePrefix = before + listMarker.raw;
