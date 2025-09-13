@@ -42,7 +42,6 @@ export default createRule("no-multi-spaces", {
       imageReference: verifyImageReference,
       link: verifyLink,
       linkReference: verifyLinkReference,
-      listItem: verifyListItem,
       text: verifyText,
     };
 
@@ -120,13 +119,6 @@ export default createRule("no-multi-spaces", {
      * Verify a link reference node
      */
     function verifyLinkReference(node: LinkReference) {
-      verifyTextOutsideChildren(node);
-    }
-
-    /**
-     * Verify a list item node
-     */
-    function verifyListItem(node: ListItem) {
       verifyTextOutsideChildren(node);
     }
 
