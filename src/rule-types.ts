@@ -314,10 +314,10 @@ type MarkdownPreferencesHeadingCasing = []|[{
 }]
 // ----- markdown-preferences/indent -----
 type MarkdownPreferencesIndent = []|[{
-  listItemsIndent?: {
+  listItems?: {
     first?: ("ignore" | number)
     other?: (("first" | "minimum") | number)
-    relativeTo?: ("markerStart" | "markerEnd")
+    relativeTo?: ("markerStart" | "markerEnd" | "taskListMarkerStart" | "taskListMarkerEnd")
   }
 }]
 // ----- markdown-preferences/level1-heading-style -----
