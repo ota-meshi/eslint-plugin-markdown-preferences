@@ -8,6 +8,7 @@ import type {
   Link,
   LinkReference,
   ListItem,
+  Table,
   Text,
 } from "mdast";
 import { getSourceLocationFromRange } from "../utils/ast.ts";
@@ -17,6 +18,7 @@ import { parseLinkDefinition } from "../utils/link-definition.ts";
 import { parseInlineLink } from "../utils/link.ts";
 import { parseImage } from "../utils/image.ts";
 import { parseListItem } from "../utils/list-item.ts";
+import { parseTableDelimiterRow } from "../utils/table.ts";
 
 export default createRule("no-multi-spaces", {
   meta: {
@@ -48,6 +50,7 @@ export default createRule("no-multi-spaces", {
       listItem: verifyListItem,
       blockquote: processBlockquote,
       text: verifyText,
+      table: verifyTable,
     };
 
     /**
@@ -55,6 +58,16 @@ export default createRule("no-multi-spaces", {
      */
     function verifyText(node: Text) {
       verifyTextInNode(node);
+    }
+
+    /**
+     * Verify a table node.
+     */
+    function verifyTable(node: Table) {
+      const parsedDelimiterRow = parseTableDelimiterRow(sourceCode, node);
+      if (!parsedDelimiterRow) return;
+      // Verify the delimiter row text.
+      verifyTextInRange(node, parsedDelimiterRow.range);
     }
 
     /**
@@ -226,7 +239,8 @@ export default createRule("no-multi-spaces", {
         | ImageReference
         | Link
         | LinkReference
-        | ListItem,
+        | ListItem
+        | Table,
       textRange: [number, number],
     ) {
       const nodeRange = sourceCode.getRange(node);

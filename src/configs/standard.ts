@@ -52,6 +52,7 @@ export const rules: Linter.RulesRecord = {
   "markdown-preferences/sort-definitions": "error",
   "markdown-preferences/strikethrough-delimiters-style": "error",
   "markdown-preferences/table-leading-trailing-pipes": "error",
+  "markdown-preferences/table-pipe-alignment": "error",
   "markdown-preferences/thematic-break-character-style": "error",
   "markdown-preferences/thematic-break-length": "error",
   "markdown-preferences/thematic-break-sequence-pattern": "error",

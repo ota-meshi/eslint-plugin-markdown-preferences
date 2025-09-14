@@ -1,0 +1,461 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: table-pipe-alignment >> invalid
+Filename: tests/fixtures/rules/table-pipe-alignment/invalid/consistent/no-align-tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - column: consistent
+Plugins: unable to serialize
+
+Code:
+  1 | # Tables
+  2 |
+  3 | | User Name    | Date Of Birth   | Favorite Color   | Age   |
+    |                                                             ^ [1]
+  4 | | ----------------- | :-------------: | :------- | --: |
+    |                     ^ [2]
+  5 | | Alice          | 2000-01-01   | Blue  | 24             |
+    |                  ^ [3]
+  6 | | Bob        | 1995-05-23            | Green                    | 28 |
+    |              ^ [4]
+  7 |
+
+Output:
+  1 | # Tables
+  2 |
+  3 | | User Name    | Date Of Birth   | Favorite Color   | Age              |
+  4 | | ------------ | :-------------: | :--------------- | ---------------: |
+  5 | | Alice        | 2000-01-01      | Blue             | 24               |
+  6 | | Bob          | 1995-05-23      | Green            | 28               |
+  7 |
+
+[1] Table pipe should be aligned at column 69 (add 9 characters).
+[2] Table pipe should be aligned at column 15 (remove 5 characters).
+[3] Table pipe should be aligned at column 15 (remove 2 characters).
+[4] Table pipe should be aligned at column 15 (add 2 characters).
+---
+
+
+Test: table-pipe-alignment >> invalid
+Filename: tests/fixtures/rules/table-pipe-alignment/invalid/consistent/tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - column: consistent
+Plugins: unable to serialize
+
+Code:
+  1 | # Tables with and without leading/trailing pipes
+  2 |
+  3 | | User Name | Date Of Birth | Favorite Color |
+  4 | | --- | --- | --- |
+    |       ^ [1]
+  5 | | Alice | 2000-01-01 | Blue |
+    |         ^ [2]
+  6 | | Bob | 1995-05-23 | Green |
+    |       ^ [3]
+  7 |
+  8 | User Name | Date Of Birth | Favorite Color
+  9 | --- | --- | ---
+    |     ^ [4]
+ 10 | Alice | 2000-01-01 | Blue
+    |       ^ [5]
+ 11 | Bob | 1995-05-23 | Green
+    |     ^ [6]
+ 12 |
+ 13 | | User Name | Date Of Birth | Favorite Color
+ 14 | | --- | --- | ---
+    |       ^ [7]
+ 15 | | Alice | 2000-01-01 | Blue
+    |         ^ [8]
+ 16 | | Bob | 1995-05-23 | Green
+    |       ^ [9]
+ 17 |
+ 18 | User Name | Date Of Birth | Favorite Color |
+ 19 | --- | --- | --- |
+    |     ^ [10]
+ 20 | Alice | 2000-01-01 | Blue |
+    |       ^ [11]
+ 21 | Bob | 1995-05-23 | Green|
+    |     ^ [12]
+ 22 |
+ 23 | | User Name    | Date Of Birth   | Favorite Color   | Age   |
+ 24 | | ------------ | :-------------: | :--------------- | ----: |
+ 25 | | Alice        | 2000-01-01      | Blue             | 24    |
+ 26 | | Bob          | 1995-05-23      | Green            | 28    |
+ 27 |
+ 28 | | User Name    | Date Of Birth   | Favorite Color   | Age   |
+ 29 | |--------------|:---------------:|:----------------:|------:|
+ 30 | | Alice        | 2000-01-01      | Blue             | 24    |
+ 31 | | Bob          | 1995-05-23      | Green            | 28    |
+ 32 |
+ 33 | | User Name    | Date Of Birth   | Favorite Color   | Age   |
+ 34 | | -------      | :---------:     | :-----------     | -:    |
+ 35 | | Alice        | 2000-01-01      | Blue             | 24    |
+ 36 | | Bob          | 1995-05-23      | Green            | 28    |
+ 37 |
+
+Output:
+  1 | # Tables with and without leading/trailing pipes
+  2 |
+  3 | | User Name | Date Of Birth | Favorite Color |
+  4 | | --------- | ------------- | -------------- |
+  5 | | Alice     | 2000-01-01    | Blue           |
+  6 | | Bob       | 1995-05-23    | Green          |
+  7 |
+  8 | User Name | Date Of Birth | Favorite Color
+  9 | --------- | ------------- | ---
+ 10 | Alice     | 2000-01-01    | Blue
+ 11 | Bob       | 1995-05-23    | Green
+ 12 |
+ 13 | | User Name | Date Of Birth | Favorite Color
+ 14 | | --------- | ------------- | ---
+ 15 | | Alice     | 2000-01-01    | Blue
+ 16 | | Bob       | 1995-05-23    | Green
+ 17 |
+ 18 | User Name | Date Of Birth | Favorite Color |
+ 19 | --------- | ------------- | -------------- |
+ 20 | Alice     | 2000-01-01    | Blue           |
+ 21 | Bob       | 1995-05-23    | Green          |
+ 22 |
+ 23 | | User Name    | Date Of Birth   | Favorite Color   | Age   |
+ 24 | | ------------ | :-------------: | :--------------- | ----: |
+ 25 | | Alice        | 2000-01-01      | Blue             | 24    |
+ 26 | | Bob          | 1995-05-23      | Green            | 28    |
+ 27 |
+ 28 | | User Name    | Date Of Birth   | Favorite Color   | Age   |
+ 29 | |--------------|:---------------:|:----------------:|------:|
+ 30 | | Alice        | 2000-01-01      | Blue             | 24    |
+ 31 | | Bob          | 1995-05-23      | Green            | 28    |
+ 32 |
+ 33 | | User Name    | Date Of Birth   | Favorite Color   | Age   |
+ 34 | | -------      | :---------:     | :-----------     | -:    |
+ 35 | | Alice        | 2000-01-01      | Blue             | 24    |
+ 36 | | Bob          | 1995-05-23      | Green            | 28    |
+ 37 |
+
+[1] Table pipe should be aligned at column 12 (add 6 characters).
+[2] Table pipe should be aligned at column 12 (add 4 characters).
+[3] Table pipe should be aligned at column 12 (add 6 characters).
+[4] Table pipe should be aligned at column 10 (add 6 characters).
+[5] Table pipe should be aligned at column 10 (add 4 characters).
+[6] Table pipe should be aligned at column 10 (add 6 characters).
+[7] Table pipe should be aligned at column 12 (add 6 characters).
+[8] Table pipe should be aligned at column 12 (add 4 characters).
+[9] Table pipe should be aligned at column 12 (add 6 characters).
+[10] Table pipe should be aligned at column 10 (add 6 characters).
+[11] Table pipe should be aligned at column 10 (add 4 characters).
+[12] Table pipe should be aligned at column 10 (add 6 characters).
+---
+
+
+Test: table-pipe-alignment >> invalid
+Filename: tests/fixtures/rules/table-pipe-alignment/invalid/japanese-tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # 日本語のテーブル
+  2 |
+  3 | | ユーザー名 | 生年月日 | 好きな色 |
+  4 | | --- | --- | --- |
+    |       ^ [1]
+  5 | | アリス | 2000-01-01 | 青 |
+    |       ^ [2]
+  6 | | ボブ | 1995-05-23 | 緑 |
+    |      ^ [3]
+  7 |
+  8 | ユーザー名 | 生年月日 | 好きな色
+  9 | --- | --- | ---
+    |     ^ [4]
+ 10 | アリス | 2000-01-01 | 青
+    |     ^ [5]
+ 11 | ボブ | 1995-05-23 | 緑
+    |    ^ [6]
+ 12 |
+ 13 | | ユーザー名 | 生年月日 | 好きな色
+ 14 | | --- | --- | ---
+    |       ^ [7]
+ 15 | | アリス | 2000-01-01 | 青
+    |       ^ [8]
+ 16 | | ボブ | 1995-05-23 | 緑
+    |      ^ [9]
+ 17 |
+ 18 | ユーザー名 | 生年月日 | 好きな色 |
+ 19 | --- | --- | --- |
+    |     ^ [10]
+ 20 | アリス | 2000-01-01 | 青 |
+    |     ^ [11]
+ 21 | ボブ | 1995-05-23 | 緑|
+    |    ^ [12]
+ 22 |
+ 23 | | ユーザー名    | 生年月日        | 好きな色         | 年齢   |
+    |            ^ [13]
+ 24 | | ------------ | :-------------: | :--------------- | ----: |
+    |                ^ [14]
+ 25 | | アリス        | 2000-01-01      | 青               | 24    |
+    |              ^ [15]
+ 26 | | ボブ          | 1995-05-23      | 緑               | 28    |
+    |               ^ [16]
+ 27 |
+ 28 | | ユーザー名    | 生年月日        | 好きな色         | 年齢   |
+    |            ^ [17]
+ 29 | |--------------|:---------------:|:----------------:|------:|
+    |                ^ [18]
+ 30 | | アリス        | 2000-01-01      | 青               | 24    |
+    |              ^ [19]
+ 31 | | ボブ          | 1995-05-23      | 緑               | 28    |
+    |               ^ [20]
+ 32 |
+ 33 | | ユーザー名    | 生年月日        | 好きな色         | 年齢   |
+    |            ^ [21]
+ 34 | | -------      | :---------:     | :-----------     | -:    |
+    |                ^ [22]
+ 35 | | アリス        | 2000-01-01      | 青               | 24    |
+    |              ^ [23]
+ 36 | | ボブ          | 1995-05-23      | 緑               | 28    |
+    |               ^ [24]
+ 37 |
+ 38 | | ユーザー名    | 生年月日        | 好きな色         | 年齢   |
+    |            ^ [25]
+ 39 | | -------| :---------:| :-----------| -:|
+    |          ^ [26]
+ 40 | | アリス        | 2000-01-01      | 青               | 24    |
+    |              ^ [27]
+ 41 | | ボブ          | 1995-05-23      | 緑               | 28    |
+    |               ^ [28]
+ 42 |
+
+Output:
+  1 | # 日本語のテーブル
+  2 |
+  3 | | ユーザー名 | 生年月日   | 好きな色 |
+  4 | | ---------- | ---------- | -------- |
+  5 | | アリス     | 2000-01-01 | 青       |
+  6 | | ボブ       | 1995-05-23 | 緑       |
+  7 |
+  8 | ユーザー名 | 生年月日   | 好きな色
+  9 | ---------- | ---------- | ---
+ 10 | アリス     | 2000-01-01 | 青
+ 11 | ボブ       | 1995-05-23 | 緑
+ 12 |
+ 13 | | ユーザー名 | 生年月日   | 好きな色
+ 14 | | ---------- | ---------- | ---
+ 15 | | アリス     | 2000-01-01 | 青
+ 16 | | ボブ       | 1995-05-23 | 緑
+ 17 |
+ 18 | ユーザー名 | 生年月日   | 好きな色 |
+ 19 | ---------- | ---------- | -------- |
+ 20 | アリス     | 2000-01-01 | 青       |
+ 21 | ボブ       | 1995-05-23 | 緑       |
+ 22 |
+ 23 | | ユーザー名 | 生年月日   | 好きな色 | 年齢 |
+ 24 | | ---------- | :--------: | :------- | ---: |
+ 25 | | アリス     | 2000-01-01 | 青       | 24   |
+ 26 | | ボブ       | 1995-05-23 | 緑       | 28   |
+ 27 |
+ 28 | | ユーザー名 | 生年月日   | 好きな色 | 年齢 |
+ 29 | |------------|:----------:|:--------:|-----:|
+ 30 | | アリス     | 2000-01-01 | 青       | 24   |
+ 31 | | ボブ       | 1995-05-23 | 緑       | 28   |
+ 32 |
+ 33 | | ユーザー名 | 生年月日   | 好きな色 | 年齢 |
+ 34 | | -------    | :--------: | :------- | -:   |
+ 35 | | アリス     | 2000-01-01 | 青       | 24   |
+ 36 | | ボブ       | 1995-05-23 | 緑       | 28   |
+ 37 |
+ 38 | | ユーザー名 | 生年月日   | 好きな色 | 年齢 |
+ 39 | | -----------| :---------:| :--------| ----:|
+ 40 | | アリス     | 2000-01-01 | 青       | 24   |
+ 41 | | ボブ       | 1995-05-23 | 緑       | 28   |
+ 42 |
+
+[1] Table pipe should be aligned at column 13 (add 7 characters).
+[2] Table pipe should be aligned at column 13 (add 4 characters).
+[3] Table pipe should be aligned at column 13 (add 6 characters).
+[4] Table pipe should be aligned at column 11 (add 7 characters).
+[5] Table pipe should be aligned at column 11 (add 4 characters).
+[6] Table pipe should be aligned at column 11 (add 6 characters).
+[7] Table pipe should be aligned at column 13 (add 7 characters).
+[8] Table pipe should be aligned at column 13 (add 4 characters).
+[9] Table pipe should be aligned at column 13 (add 6 characters).
+[10] Table pipe should be aligned at column 11 (add 7 characters).
+[11] Table pipe should be aligned at column 11 (add 4 characters).
+[12] Table pipe should be aligned at column 11 (add 6 characters).
+[13] Table pipe should be aligned at column 13 (remove 3 characters).
+[14] Table pipe should be aligned at column 13 (remove 2 characters).
+[15] Table pipe should be aligned at column 13 (remove 3 characters).
+[16] Table pipe should be aligned at column 13 (remove 3 characters).
+[17] Table pipe should be aligned at column 13 (remove 3 characters).
+[18] Table pipe should be aligned at column 13 (remove 2 characters).
+[19] Table pipe should be aligned at column 13 (remove 3 characters).
+[20] Table pipe should be aligned at column 13 (remove 3 characters).
+[21] Table pipe should be aligned at column 13 (remove 3 characters).
+[22] Table pipe should be aligned at column 13 (remove 2 characters).
+[23] Table pipe should be aligned at column 13 (remove 3 characters).
+[24] Table pipe should be aligned at column 13 (remove 3 characters).
+[25] Table pipe should be aligned at column 13 (remove 3 characters).
+[26] Table pipe should be aligned at column 13 (add 4 characters).
+[27] Table pipe should be aligned at column 13 (remove 3 characters).
+[28] Table pipe should be aligned at column 13 (remove 3 characters).
+---
+
+
+Test: table-pipe-alignment >> invalid
+Filename: tests/fixtures/rules/table-pipe-alignment/invalid/tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Tables
+  2 |
+  3 | | User Name | Date Of Birth | Favorite Color |
+  4 | | --- | --- | --- |
+    |       ^ [1]
+  5 | | Alice | 2000-01-01 | Blue |
+    |         ^ [2]
+  6 | | Bob | 1995-05-23 | Green |
+    |       ^ [3]
+  7 |
+  8 | User Name | Date Of Birth | Favorite Color
+  9 | --- | --- | ---
+    |     ^ [4]
+ 10 | Alice | 2000-01-01 | Blue
+    |       ^ [5]
+ 11 | Bob | 1995-05-23 | Green
+    |     ^ [6]
+ 12 |
+ 13 | | User Name | Date Of Birth | Favorite Color
+ 14 | | --- | --- | ---
+    |       ^ [7]
+ 15 | | Alice | 2000-01-01 | Blue
+    |         ^ [8]
+ 16 | | Bob | 1995-05-23 | Green
+    |       ^ [9]
+ 17 |
+ 18 | User Name | Date Of Birth | Favorite Color |
+ 19 | --- | --- | --- |
+    |     ^ [10]
+ 20 | Alice | 2000-01-01 | Blue |
+    |       ^ [11]
+ 21 | Bob | 1995-05-23 | Green|
+    |     ^ [12]
+ 22 |
+ 23 | | User Name    | Date Of Birth   | Favorite Color   | Age   |
+    |                ^ [13]
+ 24 | | ------------ | :-------------: | :--------------- | ----: |
+    |                ^ [14]
+ 25 | | Alice        | 2000-01-01      | Blue             | 24    |
+    |                ^ [15]
+ 26 | | Bob          | 1995-05-23      | Green            | 28    |
+    |                ^ [16]
+ 27 |
+ 28 | | User Name    | Date Of Birth   | Favorite Color   | Age   |
+    |                ^ [17]
+ 29 | |--------------|:---------------:|:----------------:|------:|
+    |                ^ [18]
+ 30 | | Alice        | 2000-01-01      | Blue             | 24    |
+    |                ^ [19]
+ 31 | | Bob          | 1995-05-23      | Green            | 28    |
+    |                ^ [20]
+ 32 |
+ 33 | | User Name    | Date Of Birth   | Favorite Color   | Age   |
+    |                ^ [21]
+ 34 | | -------      | :---------:     | :-----------     | -:    |
+    |                ^ [22]
+ 35 | | Alice        | 2000-01-01      | Blue             | 24    |
+    |                ^ [23]
+ 36 | | Bob          | 1995-05-23      | Green            | 28    |
+    |                ^ [24]
+ 37 |
+ 38 | | User Name    | Date Of Birth   | Favorite Color   | Age   |
+    |                ^ [25]
+ 39 | | -------| :---------:| :-----------| -:|
+    |          ^ [26]
+ 40 | | Alice        | 2000-01-01      | Blue             | 24    |
+    |                ^ [27]
+ 41 | | Bob          | 1995-05-23      | Green            | 28    |
+    |                ^ [28]
+ 42 |
+
+Output:
+  1 | # Tables
+  2 |
+  3 | | User Name | Date Of Birth | Favorite Color |
+  4 | | --------- | ------------- | -------------- |
+  5 | | Alice     | 2000-01-01    | Blue           |
+  6 | | Bob       | 1995-05-23    | Green          |
+  7 |
+  8 | User Name | Date Of Birth | Favorite Color
+  9 | --------- | ------------- | ---
+ 10 | Alice     | 2000-01-01    | Blue
+ 11 | Bob       | 1995-05-23    | Green
+ 12 |
+ 13 | | User Name | Date Of Birth | Favorite Color
+ 14 | | --------- | ------------- | ---
+ 15 | | Alice     | 2000-01-01    | Blue
+ 16 | | Bob       | 1995-05-23    | Green
+ 17 |
+ 18 | User Name | Date Of Birth | Favorite Color |
+ 19 | --------- | ------------- | -------------- |
+ 20 | Alice     | 2000-01-01    | Blue           |
+ 21 | Bob       | 1995-05-23    | Green          |
+ 22 |
+ 23 | | User Name | Date Of Birth | Favorite Color | Age |
+ 24 | | --------- | :-----------: | :------------- | --: |
+ 25 | | Alice     | 2000-01-01    | Blue           | 24  |
+ 26 | | Bob       | 1995-05-23    | Green          | 28  |
+ 27 |
+ 28 | | User Name | Date Of Birth | Favorite Color | Age |
+ 29 | |-----------|:-------------:|:--------------:|----:|
+ 30 | | Alice     | 2000-01-01    | Blue           | 24  |
+ 31 | | Bob       | 1995-05-23    | Green          | 28  |
+ 32 |
+ 33 | | User Name | Date Of Birth | Favorite Color | Age |
+ 34 | | -------   | :---------:   | :-----------   | -:  |
+ 35 | | Alice     | 2000-01-01    | Blue           | 24  |
+ 36 | | Bob       | 1995-05-23    | Green          | 28  |
+ 37 |
+ 38 | | User Name | Date Of Birth | Favorite Color | Age |
+ 39 | | ----------| :------------:| :--------------| ---:|
+ 40 | | Alice     | 2000-01-01    | Blue           | 24  |
+ 41 | | Bob       | 1995-05-23    | Green          | 28  |
+ 42 |
+
+[1] Table pipe should be aligned at column 12 (add 6 characters).
+[2] Table pipe should be aligned at column 12 (add 4 characters).
+[3] Table pipe should be aligned at column 12 (add 6 characters).
+[4] Table pipe should be aligned at column 10 (add 6 characters).
+[5] Table pipe should be aligned at column 10 (add 4 characters).
+[6] Table pipe should be aligned at column 10 (add 6 characters).
+[7] Table pipe should be aligned at column 12 (add 6 characters).
+[8] Table pipe should be aligned at column 12 (add 4 characters).
+[9] Table pipe should be aligned at column 12 (add 6 characters).
+[10] Table pipe should be aligned at column 10 (add 6 characters).
+[11] Table pipe should be aligned at column 10 (add 4 characters).
+[12] Table pipe should be aligned at column 10 (add 6 characters).
+[13] Table pipe should be aligned at column 12 (remove 3 characters).
+[14] Table pipe should be aligned at column 12 (remove 3 characters).
+[15] Table pipe should be aligned at column 12 (remove 3 characters).
+[16] Table pipe should be aligned at column 12 (remove 3 characters).
+[17] Table pipe should be aligned at column 12 (remove 3 characters).
+[18] Table pipe should be aligned at column 12 (remove 3 characters).
+[19] Table pipe should be aligned at column 12 (remove 3 characters).
+[20] Table pipe should be aligned at column 12 (remove 3 characters).
+[21] Table pipe should be aligned at column 12 (remove 3 characters).
+[22] Table pipe should be aligned at column 12 (remove 3 characters).
+[23] Table pipe should be aligned at column 12 (remove 3 characters).
+[24] Table pipe should be aligned at column 12 (remove 3 characters).
+[25] Table pipe should be aligned at column 12 (remove 3 characters).
+[26] Table pipe should be aligned at column 12 (add 3 characters).
+[27] Table pipe should be aligned at column 12 (remove 3 characters).
+[28] Table pipe should be aligned at column 12 (remove 3 characters).
+---

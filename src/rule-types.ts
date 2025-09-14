@@ -214,6 +214,16 @@ export interface RuleOptions {
    */
   'markdown-preferences/table-header-casing'?: Linter.RuleEntry<MarkdownPreferencesTableHeaderCasing>
   /**
+   * enforce consistent use of leading and trailing pipes in tables.
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-leading-trailing-pipes.html
+   */
+  'markdown-preferences/table-leading-trailing-pipes'?: Linter.RuleEntry<MarkdownPreferencesTableLeadingTrailingPipes>
+  /**
+   * enforce consistent alignment of table pipes
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-pipe-alignment.html
+   */
+  'markdown-preferences/table-pipe-alignment'?: Linter.RuleEntry<MarkdownPreferencesTablePipeAlignment>
+  /**
    * enforce consistent character style for thematic breaks (horizontal rules) in Markdown.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-character-style.html
    */
@@ -459,6 +469,15 @@ type MarkdownPreferencesTableHeaderCasing = []|[{
   ignorePatterns?: string[]
   
   minorWords?: string[]
+}]
+// ----- markdown-preferences/table-leading-trailing-pipes -----
+type MarkdownPreferencesTableLeadingTrailingPipes = []|[(("always" | "never") | {
+  leading?: ("always" | "never")
+  trailing?: ("always" | "never")
+})]
+// ----- markdown-preferences/table-pipe-alignment -----
+type MarkdownPreferencesTablePipeAlignment = []|[{
+  column?: ("minimum" | "consistent")
 }]
 // ----- markdown-preferences/thematic-break-character-style -----
 type MarkdownPreferencesThematicBreakCharacterStyle = []|[{

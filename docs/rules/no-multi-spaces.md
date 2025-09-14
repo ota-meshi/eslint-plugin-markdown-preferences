@@ -47,7 +47,7 @@ This rule does not apply to code blocks, inline code, HTML, tables, frontmatter,
 
 - Code blocks and inline code may require multiple spaces for their content.
 - HTML may require multiple spaces in some attribute values and/or content.
-- Tables may use multiple spaces for column alignment.
+- Tables may use multiple spaces for column alignment. But note that this rule does not ignore spaces in table delimiter rows (the second row of a table).
 - Frontmatter may require multiple spaces depending on the format.
 - Spaces immediately after blockquote markers are treated as indentation.
 
