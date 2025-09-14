@@ -1,4 +1,4 @@
-import type { SourceLocation } from "@eslint/core";
+import type { Position, SourceLocation } from "@eslint/core";
 import type { MarkdownSourceCode } from "@eslint/markdown";
 import type { Json, Toml } from "@eslint/markdown/types";
 import type {
@@ -244,14 +244,41 @@ export function getSourceLocationFromRange(
   node: MDNode,
   range: [number, number],
 ): SourceLocation {
-  const [nodeStart] = sourceCode.getRange(node);
+  const nodeRange = sourceCode.getRange(node);
+  const loc = sourceCode.getLoc(node);
+  if (nodeRange[1] <= range[0]) {
+    return getSourceLocationFromRangeAndSourcePosition(
+      sourceCode,
+      nodeRange[1],
+      loc.end,
+      range,
+    );
+  }
+  return getSourceLocationFromRangeAndSourcePosition(
+    sourceCode,
+    nodeRange[0],
+    loc.start,
+    range,
+  );
+}
+
+/**
+ * Get the source location from a range
+ */
+function getSourceLocationFromRangeAndSourcePosition(
+  sourceCode: MarkdownSourceCode,
+  startIndex: number,
+  startLoc: Position,
+  range: [number, number],
+): SourceLocation {
   let startLine: number, startColumn: number;
-  if (nodeStart <= range[0]) {
-    const loc = sourceCode.getLoc(node);
-    const beforeLines = sourceCode.text.slice(nodeStart, range[0]).split(/\n/u);
-    startLine = loc.start.line + beforeLines.length - 1;
+  if (startIndex <= range[0]) {
+    const beforeLines = sourceCode.text
+      .slice(startIndex, range[0])
+      .split(/\n/u);
+    startLine = startLoc.line + beforeLines.length - 1;
     startColumn =
-      (beforeLines.length === 1 ? loc.start.column : 1) +
+      (beforeLines.length === 1 ? startLoc.column : 1) +
       (beforeLines.at(-1) || "").length;
   } else {
     const beforeLines = sourceCode.text.slice(0, range[0]).split(/\n/u);

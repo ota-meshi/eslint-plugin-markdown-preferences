@@ -3,7 +3,7 @@ import type { SourceLocation } from "estree";
 import type { Table } from "mdast";
 import { ForwardCharacterCursor } from "./character-cursor.ts";
 import { isSpaceOrTab } from "./unicode.ts";
-import { getParsedLines } from "./lines.ts";
+import { getSourceLocationFromRange } from "./ast.ts";
 
 type Token = {
   text: string;
@@ -29,73 +29,65 @@ export function parseTableDelimiterRow(
   node: Table,
 ): ParsedTableDelimiterRow | null {
   const headerRow = node.children[0];
-
-  const headerLoc = sourceCode.getLoc(headerRow);
-  const parsedLines = getParsedLines(sourceCode);
-  const delimiterLine = parsedLines.get(headerLoc.end.line + 1);
-  const parsed = parseTableDelimiterRowFromText(delimiterLine.text);
+  const headerRange = sourceCode.getRange(headerRow);
+  const delimiterEndIndex =
+    node.children.length > 1
+      ? sourceCode.getRange(node.children[1])[0]
+      : sourceCode.getRange(node)[1];
+  const delimiterText = sourceCode.text.slice(
+    headerRange[1],
+    delimiterEndIndex,
+  );
+  const parsed = parseTableDelimiterRowFromText(delimiterText);
   if (!parsed) return null;
   const delimiters: ParsedTableDelimiterRow["delimiters"] =
     parsed.delimiters.map((d) => {
+      let leadingPipe: Token | null = null;
+      if (d.leadingPipe) {
+        const leadingPipeRange: [number, number] = [
+          headerRange[1] + d.leadingPipe.range[0],
+          headerRange[1] + d.leadingPipe.range[1],
+        ];
+        leadingPipe = {
+          text: d.leadingPipe.text,
+          range: leadingPipeRange,
+          loc: getSourceLocationFromRange(
+            sourceCode,
+            headerRow,
+            leadingPipeRange,
+          ),
+        };
+      }
+      const delimiterRange: [number, number] = [
+        headerRange[1] + d.delimiter.range[0],
+        headerRange[1] + d.delimiter.range[1],
+      ];
       return {
-        leadingPipe: d.leadingPipe
-          ? {
-              text: d.leadingPipe.text,
-              range: [
-                delimiterLine.range[0] + d.leadingPipe.range[0],
-                delimiterLine.range[0] + d.leadingPipe.range[1],
-              ],
-              loc: {
-                start: {
-                  line: delimiterLine.line,
-                  column: d.leadingPipe.range[0] + 1,
-                },
-                end: {
-                  line: delimiterLine.line,
-                  column: d.leadingPipe.range[1] + 1,
-                },
-              },
-            }
-          : null,
+        leadingPipe,
         delimiter: {
           text: d.delimiter.text,
-          range: [
-            delimiterLine.range[0] + d.delimiter.range[0],
-            delimiterLine.range[0] + d.delimiter.range[1],
-          ],
-          loc: {
-            start: {
-              line: delimiterLine.line,
-              column: d.delimiter.range[0] + 1,
-            },
-            end: {
-              line: delimiterLine.line,
-              column: d.delimiter.range[1] + 1,
-            },
-          },
+          range: delimiterRange,
+          loc: getSourceLocationFromRange(
+            sourceCode,
+            headerRow,
+            delimiterRange,
+          ),
         },
       };
     });
-  const trailingPipe: ParsedTableDelimiterRow["trailingPipe"] =
-    parsed.trailingPipe
-      ? {
-          text: parsed.trailingPipe.text,
-          range: [
-            delimiterLine.range[0] + parsed.trailingPipe.range[0],
-            delimiterLine.range[0] + parsed.trailingPipe.range[1],
-          ],
-          loc: {
-            start: {
-              line: delimiterLine.line,
-              column: parsed.trailingPipe.range[0] + 1,
-            },
-            end: {
-              line: delimiterLine.line,
-              column: parsed.trailingPipe.range[1] + 1,
-            },
-          },
-        }
-      : null;
+
+  let trailingPipe: ParsedTableDelimiterRow["trailingPipe"] = null;
+  if (parsed.trailingPipe) {
+    const trailingPipeRange: [number, number] = [
+      headerRange[1] + parsed.trailingPipe.range[0],
+      headerRange[1] + parsed.trailingPipe.range[1],
+    ];
+    trailingPipe = {
+      text: parsed.trailingPipe.text,
+      range: trailingPipeRange,
+      loc: getSourceLocationFromRange(sourceCode, headerRow, trailingPipeRange),
+    };
+  }
   const firstToken = delimiters[0].leadingPipe ?? delimiters[0].delimiter;
   const lastToken = trailingPipe ?? delimiters[delimiters.length - 1].delimiter;
   return {
