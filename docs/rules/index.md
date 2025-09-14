@@ -16,15 +16,15 @@ The rules with the following 💄 are included in the `plugin.configs.standard` 
 
 <!-- prettier-ignore-start -->
 
-| Rule ID | Description | Fixable | Config      |
-|:--------|:------------|:-------:|:-----------:|
-| [markdown-preferences/canonical-code-block-language](./canonical-code-block-language.md) | enforce canonical language names in code blocks | 🔧 |  |
-| [markdown-preferences/emoji-notation](./emoji-notation.md) | enforce consistent emoji notation style in Markdown files. | 🔧 |  |
-| [markdown-preferences/heading-casing](./heading-casing.md) | enforce consistent casing in headings. | 🔧 |  |
-| [markdown-preferences/ordered-list-marker-start](./ordered-list-marker-start.md) | enforce that ordered list markers start with 1 or 0 | 🔧 | 💄 |
-| [markdown-preferences/prefer-inline-code-words](./prefer-inline-code-words.md) | enforce the use of inline code for specific words. | 🔧 |  |
-| [markdown-preferences/prefer-linked-words](./prefer-linked-words.md) | enforce the specified word to be a link. | 🔧 |  |
-| [markdown-preferences/table-header-casing](./table-header-casing.md) | enforce consistent casing in table header cells. | 🔧 |  |
+| Rule ID                                                                                  | Description                                                | Fixable | Config |
+|:-----------------------------------------------------------------------------------------|:-----------------------------------------------------------|:-------:|:------:|
+| [markdown-preferences/canonical-code-block-language](./canonical-code-block-language.md) | enforce canonical language names in code blocks            | 🔧      |        |
+| [markdown-preferences/emoji-notation](./emoji-notation.md)                               | enforce consistent emoji notation style in Markdown files. | 🔧      |        |
+| [markdown-preferences/heading-casing](./heading-casing.md)                               | enforce consistent casing in headings.                     | 🔧      |        |
+| [markdown-preferences/ordered-list-marker-start](./ordered-list-marker-start.md)         | enforce that ordered list markers start with 1 or 0        | 🔧      | 💄     |
+| [markdown-preferences/prefer-inline-code-words](./prefer-inline-code-words.md)           | enforce the use of inline code for specific words.         | 🔧      |        |
+| [markdown-preferences/prefer-linked-words](./prefer-linked-words.md)                     | enforce the specified word to be a link.                   | 🔧      |        |
+| [markdown-preferences/table-header-casing](./table-header-casing.md)                     | enforce consistent casing in table header cells.           | 🔧      |        |
 
 <!-- prettier-ignore-end -->
 
@@ -34,24 +34,24 @@ The rules with the following 💄 are included in the `plugin.configs.standard` 
 
 <!-- prettier-ignore-start -->
 
-| Rule ID | Description | Fixable | Config      |
-|:--------|:------------|:-------:|:-----------:|
-| [markdown-preferences/bullet-list-marker-style](./bullet-list-marker-style.md) | enforce consistent bullet list (unordered list) marker style | 🔧 | 💄 |
-| [markdown-preferences/code-fence-style](./code-fence-style.md) | enforce a consistent code fence style (backtick or tilde) in Markdown fenced code blocks. | 🔧 | 💄 |
-| [markdown-preferences/definitions-last](./definitions-last.md) | require link definitions and footnote definitions to be placed at the end of the document | 🔧 |  |
-| [markdown-preferences/emphasis-delimiters-style](./emphasis-delimiters-style.md) | enforce a consistent delimiter style for emphasis and strong emphasis | 🔧 | 💄 |
-| [markdown-preferences/hard-linebreak-style](./hard-linebreak-style.md) | enforce consistent hard linebreak style. | 🔧 | ⭐💄 |
-| [markdown-preferences/level1-heading-style](./level1-heading-style.md) | enforce consistent style for level 1 headings | 🔧 | 💄 |
-| [markdown-preferences/level2-heading-style](./level2-heading-style.md) | enforce consistent style for level 2 headings | 🔧 | 💄 |
-| [markdown-preferences/link-destination-style](./link-destination-style.md) | enforce a consistent style for link destinations | 🔧 | 💄 |
-| [markdown-preferences/link-title-style](./link-title-style.md) | enforce a consistent style for link titles | 🔧 | 💄 |
-| [markdown-preferences/no-text-backslash-linebreak](./no-text-backslash-linebreak.md) | disallow text backslash at the end of a line. |  | ⭐💄 |
-| [markdown-preferences/ordered-list-marker-style](./ordered-list-marker-style.md) | enforce consistent ordered list marker style | 🔧 | 💄 |
-| [markdown-preferences/prefer-autolinks](./prefer-autolinks.md) | enforce the use of autolinks for URLs | 🔧 | ⭐💄 |
-| [markdown-preferences/prefer-fenced-code-blocks](./prefer-fenced-code-blocks.md) | enforce the use of fenced code blocks over indented code blocks | 🔧 | ⭐💄 |
-| [markdown-preferences/prefer-link-reference-definitions](./prefer-link-reference-definitions.md) | enforce using link reference definitions instead of inline links | 🔧 |  |
-| [markdown-preferences/strikethrough-delimiters-style](./strikethrough-delimiters-style.md) | enforce a consistent delimiter style for strikethrough | 🔧 | 💄 |
-| [markdown-preferences/thematic-break-character-style](./thematic-break-character-style.md) | enforce consistent character style for thematic breaks (horizontal rules) in Markdown. | 🔧 | 💄 |
+| Rule ID                                                                                          | Description                                                                               | Fixable | Config |
+|:-------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------|:-------:|:------:|
+| [markdown-preferences/bullet-list-marker-style](./bullet-list-marker-style.md)                   | enforce consistent bullet list (unordered list) marker style                              | 🔧      | 💄     |
+| [markdown-preferences/code-fence-style](./code-fence-style.md)                                   | enforce a consistent code fence style (backtick or tilde) in Markdown fenced code blocks. | 🔧      | 💄     |
+| [markdown-preferences/definitions-last](./definitions-last.md)                                   | require link definitions and footnote definitions to be placed at the end of the document | 🔧      |        |
+| [markdown-preferences/emphasis-delimiters-style](./emphasis-delimiters-style.md)                 | enforce a consistent delimiter style for emphasis and strong emphasis                     | 🔧      | 💄     |
+| [markdown-preferences/hard-linebreak-style](./hard-linebreak-style.md)                           | enforce consistent hard linebreak style.                                                  | 🔧      | ⭐💄   |
+| [markdown-preferences/level1-heading-style](./level1-heading-style.md)                           | enforce consistent style for level 1 headings                                             | 🔧      | 💄     |
+| [markdown-preferences/level2-heading-style](./level2-heading-style.md)                           | enforce consistent style for level 2 headings                                             | 🔧      | 💄     |
+| [markdown-preferences/link-destination-style](./link-destination-style.md)                       | enforce a consistent style for link destinations                                          | 🔧      | 💄     |
+| [markdown-preferences/link-title-style](./link-title-style.md)                                   | enforce a consistent style for link titles                                                | 🔧      | 💄     |
+| [markdown-preferences/no-text-backslash-linebreak](./no-text-backslash-linebreak.md)             | disallow text backslash at the end of a line.                                             |         | ⭐💄   |
+| [markdown-preferences/ordered-list-marker-style](./ordered-list-marker-style.md)                 | enforce consistent ordered list marker style                                              | 🔧      | 💄     |
+| [markdown-preferences/prefer-autolinks](./prefer-autolinks.md)                                   | enforce the use of autolinks for URLs                                                     | 🔧      | ⭐💄   |
+| [markdown-preferences/prefer-fenced-code-blocks](./prefer-fenced-code-blocks.md)                 | enforce the use of fenced code blocks over indented code blocks                           | 🔧      | ⭐💄   |
+| [markdown-preferences/prefer-link-reference-definitions](./prefer-link-reference-definitions.md) | enforce using link reference definitions instead of inline links                          | 🔧      |        |
+| [markdown-preferences/strikethrough-delimiters-style](./strikethrough-delimiters-style.md)       | enforce a consistent delimiter style for strikethrough                                    | 🔧      | 💄     |
+| [markdown-preferences/thematic-break-character-style](./thematic-break-character-style.md)       | enforce consistent character style for thematic breaks (horizontal rules) in Markdown.    | 🔧      | 💄     |
 
 <!-- prettier-ignore-end -->
 
@@ -61,19 +61,19 @@ The rules with the following 💄 are included in the `plugin.configs.standard` 
 
 <!-- prettier-ignore-start -->
 
-| Rule ID | Description | Fixable | Config      |
-|:--------|:------------|:-------:|:-----------:|
-| [markdown-preferences/blockquote-marker-alignment](./blockquote-marker-alignment.md) | enforce consistent alignment of blockquote markers | 🔧 | ⭐💄 |
-| [markdown-preferences/indent](./indent.md) | enforce consistent indentation in Markdown files | 🔧 | 💄 |
-| [markdown-preferences/link-bracket-newline](./link-bracket-newline.md) | enforce linebreaks after opening and before closing link brackets | 🔧 | 💄 |
-| [markdown-preferences/link-bracket-spacing](./link-bracket-spacing.md) | enforce consistent spacing inside link brackets | 🔧 | 💄 |
-| [markdown-preferences/link-paren-newline](./link-paren-newline.md) | enforce linebreaks after opening and before closing link parentheses | 🔧 | 💄 |
-| [markdown-preferences/link-paren-spacing](./link-paren-spacing.md) | enforce consistent spacing inside link parentheses | 🔧 | 💄 |
-| [markdown-preferences/list-marker-alignment](./list-marker-alignment.md) | enforce consistent alignment of list markers | 🔧 | ⭐💄 |
-| [markdown-preferences/no-multi-spaces](./no-multi-spaces.md) | disallow multiple spaces | 🔧 | 💄 |
-| [markdown-preferences/no-multiple-empty-lines](./no-multiple-empty-lines.md) | disallow multiple empty lines in Markdown files. | 🔧 | 💄 |
-| [markdown-preferences/no-trailing-spaces](./no-trailing-spaces.md) | disallow trailing whitespace at the end of lines in Markdown files. | 🔧 | 💄 |
-| [markdown-preferences/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | 🔧 | 💄 |
+| Rule ID                                                                              | Description                                                          | Fixable | Config |
+|:-------------------------------------------------------------------------------------|:---------------------------------------------------------------------|:-------:|:------:|
+| [markdown-preferences/blockquote-marker-alignment](./blockquote-marker-alignment.md) | enforce consistent alignment of blockquote markers                   | 🔧      | ⭐💄   |
+| [markdown-preferences/indent](./indent.md)                                           | enforce consistent indentation in Markdown files                     | 🔧      | 💄     |
+| [markdown-preferences/link-bracket-newline](./link-bracket-newline.md)               | enforce linebreaks after opening and before closing link brackets    | 🔧      | 💄     |
+| [markdown-preferences/link-bracket-spacing](./link-bracket-spacing.md)               | enforce consistent spacing inside link brackets                      | 🔧      | 💄     |
+| [markdown-preferences/link-paren-newline](./link-paren-newline.md)                   | enforce linebreaks after opening and before closing link parentheses | 🔧      | 💄     |
+| [markdown-preferences/link-paren-spacing](./link-paren-spacing.md)                   | enforce consistent spacing inside link parentheses                   | 🔧      | 💄     |
+| [markdown-preferences/list-marker-alignment](./list-marker-alignment.md)             | enforce consistent alignment of list markers                         | 🔧      | ⭐💄   |
+| [markdown-preferences/no-multi-spaces](./no-multi-spaces.md)                         | disallow multiple spaces                                             | 🔧      | 💄     |
+| [markdown-preferences/no-multiple-empty-lines](./no-multiple-empty-lines.md)         | disallow multiple empty lines in Markdown files.                     | 🔧      | 💄     |
+| [markdown-preferences/no-trailing-spaces](./no-trailing-spaces.md)                   | disallow trailing whitespace at the end of lines in Markdown files.  | 🔧      | 💄     |
+| [markdown-preferences/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks                     | 🔧      | 💄     |
 
 <!-- prettier-ignore-end -->
 
@@ -83,17 +83,18 @@ The rules with the following 💄 are included in the `plugin.configs.standard` 
 
 <!-- prettier-ignore-start -->
 
-| Rule ID | Description | Fixable | Config      |
-|:--------|:------------|:-------:|:-----------:|
-| [markdown-preferences/atx-heading-closing-sequence-length](./atx-heading-closing-sequence-length.md) | enforce consistent length for the closing sequence (trailing #s) in ATX headings. | 🔧 | 💄 |
-| [markdown-preferences/atx-heading-closing-sequence](./atx-heading-closing-sequence.md) | enforce consistent use of closing sequence in ATX headings. | 🔧 | 💄 |
-| [markdown-preferences/code-fence-length](./code-fence-length.md) | enforce consistent code fence length in fenced code blocks. | 🔧 | 💄 |
-| [markdown-preferences/no-laziness-blockquotes](./no-laziness-blockquotes.md) | disallow laziness in blockquotes |  | ⭐💄 |
-| [markdown-preferences/ordered-list-marker-sequence](./ordered-list-marker-sequence.md) | enforce that ordered list markers use sequential numbers | 🔧 | 💄 |
-| [markdown-preferences/setext-heading-underline-length](./setext-heading-underline-length.md) | enforce setext heading underline length | 🔧 | 💄 |
-| [markdown-preferences/sort-definitions](./sort-definitions.md) | enforce a specific order for link definitions and footnote definitions | 🔧 | 💄 |
-| [markdown-preferences/table-leading-trailing-pipes](./table-leading-trailing-pipes.md) | enforce consistent use of leading and trailing pipes in tables. | 🔧 | 💄 |
-| [markdown-preferences/thematic-break-length](./thematic-break-length.md) | enforce consistent length for thematic breaks (horizontal rules) in Markdown. | 🔧 | 💄 |
-| [markdown-preferences/thematic-break-sequence-pattern](./thematic-break-sequence-pattern.md) | enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown. | 🔧 | 💄 |
+| Rule ID                                                                                              | Description                                                                               | Fixable | Config |
+|:-----------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------|:-------:|:------:|
+| [markdown-preferences/atx-heading-closing-sequence-length](./atx-heading-closing-sequence-length.md) | enforce consistent length for the closing sequence (trailing #s) in ATX headings.         | 🔧      | 💄     |
+| [markdown-preferences/atx-heading-closing-sequence](./atx-heading-closing-sequence.md)               | enforce consistent use of closing sequence in ATX headings.                               | 🔧      | 💄     |
+| [markdown-preferences/code-fence-length](./code-fence-length.md)                                     | enforce consistent code fence length in fenced code blocks.                               | 🔧      | 💄     |
+| [markdown-preferences/no-laziness-blockquotes](./no-laziness-blockquotes.md)                         | disallow laziness in blockquotes                                                          |         | ⭐💄   |
+| [markdown-preferences/ordered-list-marker-sequence](./ordered-list-marker-sequence.md)               | enforce that ordered list markers use sequential numbers                                  | 🔧      | 💄     |
+| [markdown-preferences/setext-heading-underline-length](./setext-heading-underline-length.md)         | enforce setext heading underline length                                                   | 🔧      | 💄     |
+| [markdown-preferences/sort-definitions](./sort-definitions.md)                                       | enforce a specific order for link definitions and footnote definitions                    | 🔧      | 💄     |
+| [markdown-preferences/table-leading-trailing-pipes](./table-leading-trailing-pipes.md)               | enforce consistent use of leading and trailing pipes in tables.                           | 🔧      | 💄     |
+| [markdown-preferences/table-pipe-alignment](./table-pipe-alignment.md)                               | enforce consistent alignment of table pipes                                               | 🔧      | 💄     |
+| [markdown-preferences/thematic-break-length](./thematic-break-length.md)                             | enforce consistent length for thematic breaks (horizontal rules) in Markdown.             | 🔧      | 💄     |
+| [markdown-preferences/thematic-break-sequence-pattern](./thematic-break-sequence-pattern.md)         | enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown. | 🔧      | 💄     |
 
 <!-- prettier-ignore-end -->

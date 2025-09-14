@@ -156,14 +156,11 @@ Bob       | 1995-05-23    | Green
 
 ## 👫 Related Rules
 
+- [markdown-preferences/table-pipe-alignment](./table-pipe-alignment.md)
 - [markdown-preferences/table-header-casing](./table-header-casing.md)
 
 ## 🔍 Implementation
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
-
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/table-leading-trailing-pipes.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/table-leading-trailing-pipes.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/table-leading-trailing-pipes)
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
