@@ -42,6 +42,7 @@ import setextHeadingUnderlineLength from "../rules/setext-heading-underline-leng
 import sortDefinitions from "../rules/sort-definitions.ts";
 import strikethroughDelimitersStyle from "../rules/strikethrough-delimiters-style.ts";
 import tableHeaderCasing from "../rules/table-header-casing.ts";
+import tableLeadingTrailingPipes from "../rules/table-leading-trailing-pipes.ts";
 import thematicBreakCharacterStyle from "../rules/thematic-break-character-style.ts";
 import thematicBreakLength from "../rules/thematic-break-length.ts";
 import thematicBreakSequencePattern from "../rules/thematic-break-sequence-pattern.ts";
@@ -87,6 +88,7 @@ export const rules = [
   sortDefinitions,
   strikethroughDelimitersStyle,
   tableHeaderCasing,
+  tableLeadingTrailingPipes,
   thematicBreakCharacterStyle,
   thematicBreakLength,
   thematicBreakSequencePattern,

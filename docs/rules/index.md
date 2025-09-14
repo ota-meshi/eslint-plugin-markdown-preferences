@@ -92,6 +92,7 @@ The rules with the following 💄 are included in the `plugin.configs.standard` 
 | [markdown-preferences/ordered-list-marker-sequence](./ordered-list-marker-sequence.md) | enforce that ordered list markers use sequential numbers | 🔧 | 💄 |
 | [markdown-preferences/setext-heading-underline-length](./setext-heading-underline-length.md) | enforce setext heading underline length | 🔧 | 💄 |
 | [markdown-preferences/sort-definitions](./sort-definitions.md) | enforce a specific order for link definitions and footnote definitions | 🔧 | 💄 |
+| [markdown-preferences/table-leading-trailing-pipes](./table-leading-trailing-pipes.md) | enforce consistent use of leading and trailing pipes in tables. | 🔧 | 💄 |
 | [markdown-preferences/thematic-break-length](./thematic-break-length.md) | enforce consistent length for thematic breaks (horizontal rules) in Markdown. | 🔧 | 💄 |
 | [markdown-preferences/thematic-break-sequence-pattern](./thematic-break-sequence-pattern.md) | enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown. | 🔧 | 💄 |
 
