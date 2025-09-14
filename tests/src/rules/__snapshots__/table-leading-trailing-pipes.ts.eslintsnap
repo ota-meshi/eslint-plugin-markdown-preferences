@@ -1,0 +1,597 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: table-leading-trailing-pipes >> invalid
+Filename: tests/fixtures/rules/table-leading-trailing-pipes/invalid/leading-only/single-col-tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - leading: always
+    trailing: never
+Plugins: unable to serialize
+
+Code:
+  1 | # Tables with single column, no leading and trailing pipes
+  2 |
+  3 | | User Name |
+    |            ^~ [1]
+  4 | | --------- |
+    |            ^~ [2]
+  5 | | Alice     |
+    |        ^~~~~~ [3]
+  6 | | Bob       |
+    |      ^~~~~~~~ [4]
+  7 |
+  8 | User Name |
+    | ^ [5]
+  9 | --------- |
+    | ^ [6]
+ 10 | Alice     |
+    | ^ [7]
+ 11 | Bob       |
+    | ^ [8]
+ 12 |
+ 13 | | User Name
+ 14 | | ---------
+ 15 | | Alice
+ 16 | | Bob
+ 17 |
+ 18 | | User Name
+ 19 | --------- |
+    | ^ [9]
+ 20 | | Alice
+ 21 | Bob       |
+    | ^ [10]
+ 22 |
+
+Output:
+  1 | # Tables with single column, no leading and trailing pipes
+  2 |
+  3 | | User Name
+  4 | | ---------
+  5 | | Alice
+  6 | | Bob
+  7 |
+  8 | | User Name
+  9 | | ---------
+ 10 | | Alice
+ 11 | | Bob
+ 12 |
+ 13 | | User Name
+ 14 | | ---------
+ 15 | | Alice
+ 16 | | Bob
+ 17 |
+ 18 | | User Name
+ 19 | | ---------
+ 20 | | Alice
+ 21 | | Bob
+ 22 |
+
+[1] Table line should not end with a trailing pipe.
+[2] Table line should not end with a trailing pipe.
+[3] Table line should not end with a trailing pipe.
+[4] Table line should not end with a trailing pipe.
+[5] Table line should start with a leading pipe.
+[6] Table line should start with a leading pipe.
+[7] Table line should start with a leading pipe.
+[8] Table line should start with a leading pipe.
+[9] Table line should start with a leading pipe.
+[10] Table line should start with a leading pipe.
+---
+
+
+Test: table-leading-trailing-pipes >> invalid
+Filename: tests/fixtures/rules/table-leading-trailing-pipes/invalid/leading-only/tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - leading: always
+    trailing: never
+Plugins: unable to serialize
+
+Code:
+  1 | # Tables with and without leading/trailing pipes
+  2 |
+  3 | | User Name | Date Of Birth | Favorite Color |
+    |                                             ^~ [1]
+  4 | | --------- | ------------- | -------------- |
+    |                                             ^~ [2]
+  5 | | Alice     | 2000-01-01    | Blue           |
+    |                                   ^~~~~~~~~~~~ [3]
+  6 | | Bob       | 1995-05-23    | Green          |
+    |                                    ^~~~~~~~~~~ [4]
+  7 |
+  8 | User Name | Date Of Birth | Favorite Color
+    | ^ [5]
+  9 | --------- | ------------- | --------------
+    | ^ [6]
+ 10 | Alice     | 2000-01-01    | Blue
+    | ^ [7]
+ 11 | Bob       | 1995-05-23    | Green
+    | ^ [8]
+ 12 |
+ 13 | | User Name | Date Of Birth | Favorite Color
+ 14 | | --------- | ------------- | --------------
+ 15 | | Alice     | 2000-01-01    | Blue
+ 16 | | Bob       | 1995-05-23    | Green
+ 17 |
+ 18 | User Name | Date Of Birth | Favorite Color |
+    | ^ [9]                                     ^~ [10]
+ 19 | --------- | ------------- | -------------- |
+    | ^ [11]                                    ^~ [12]
+ 20 | Alice     | 2000-01-01    | Blue           |
+    | ^ [13]                          ^~~~~~~~~~~~ [14]
+ 21 | Bob       | 1995-05-23    | Green          |
+    | ^ [15]                           ^~~~~~~~~~~ [16]
+ 22 |
+
+Output:
+  1 | # Tables with and without leading/trailing pipes
+  2 |
+  3 | | User Name | Date Of Birth | Favorite Color
+  4 | | --------- | ------------- | --------------
+  5 | | Alice     | 2000-01-01    | Blue
+  6 | | Bob       | 1995-05-23    | Green
+  7 |
+  8 | | User Name | Date Of Birth | Favorite Color
+  9 | | --------- | ------------- | --------------
+ 10 | | Alice     | 2000-01-01    | Blue
+ 11 | | Bob       | 1995-05-23    | Green
+ 12 |
+ 13 | | User Name | Date Of Birth | Favorite Color
+ 14 | | --------- | ------------- | --------------
+ 15 | | Alice     | 2000-01-01    | Blue
+ 16 | | Bob       | 1995-05-23    | Green
+ 17 |
+ 18 | | User Name | Date Of Birth | Favorite Color
+ 19 | | --------- | ------------- | --------------
+ 20 | | Alice     | 2000-01-01    | Blue
+ 21 | | Bob       | 1995-05-23    | Green
+ 22 |
+
+[1] Table line should not end with a trailing pipe.
+[2] Table line should not end with a trailing pipe.
+[3] Table line should not end with a trailing pipe.
+[4] Table line should not end with a trailing pipe.
+[5] Table line should start with a leading pipe.
+[6] Table line should start with a leading pipe.
+[7] Table line should start with a leading pipe.
+[8] Table line should start with a leading pipe.
+[9] Table line should start with a leading pipe.
+[10] Table line should not end with a trailing pipe.
+[11] Table line should start with a leading pipe.
+[12] Table line should not end with a trailing pipe.
+[13] Table line should start with a leading pipe.
+[14] Table line should not end with a trailing pipe.
+[15] Table line should start with a leading pipe.
+[16] Table line should not end with a trailing pipe.
+---
+
+
+Test: table-leading-trailing-pipes >> invalid >>> "# Tables with and without leading/trailing pipes\n\n| User Name | Date Of Birth | Favorite Color |\n| --------- | ------------- | -------------- |\n| Alice     | 2000-01-01    | Blue           |\n| Bob       | 1995-05-23    | Green          |\n\nUser Name | Date Of Birth | Favorite Color\n--------- | ------------- | --------------\nAlice     | 2000-01-01    | Blue\nBob       | 1995-05-23    | Green\n\n| User Name | Date Of Birth | Favorite Color\n| --------- | ------------- | --------------\n| Alice     | 2000-01-01    | Blue\n| Bob       | 1995-05-23    | Green\n\nUser Name | Date Of Birth | Favorite Color |\n--------- | ------------- | -------------- |\nAlice     | 2000-01-01    | Blue           |\nBob       | 1995-05-23    | Green          |\n 2"
+Filename: tests/fixtures/rules/table-leading-trailing-pipes/invalid/never/tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - never
+Plugins: unable to serialize
+
+Code:
+  1 | # Tables with and without leading/trailing pipes
+  2 |
+  3 | | User Name | Date Of Birth | Favorite Color |
+    | ^~ [1]                                      ^~ [2]
+  4 | | --------- | ------------- | -------------- |
+    | ^~ [3]                                      ^~ [4]
+  5 | | Alice     | 2000-01-01    | Blue           |
+    | ^~ [5]                            ^~~~~~~~~~~~ [6]
+  6 | | Bob       | 1995-05-23    | Green          |
+    | ^~ [7]                             ^~~~~~~~~~~ [8]
+  7 |
+  8 | User Name | Date Of Birth | Favorite Color
+  9 | --------- | ------------- | --------------
+ 10 | Alice     | 2000-01-01    | Blue
+ 11 | Bob       | 1995-05-23    | Green
+ 12 |
+ 13 | | User Name | Date Of Birth | Favorite Color
+    | ^~ [9]
+ 14 | | --------- | ------------- | --------------
+    | ^~ [10]
+ 15 | | Alice     | 2000-01-01    | Blue
+    | ^~ [11]
+ 16 | | Bob       | 1995-05-23    | Green
+    | ^~ [12]
+ 17 |
+ 18 | User Name | Date Of Birth | Favorite Color |
+    |                                           ^~ [13]
+ 19 | --------- | ------------- | -------------- |
+    |                                           ^~ [14]
+ 20 | Alice     | 2000-01-01    | Blue           |
+    |                                 ^~~~~~~~~~~~ [15]
+ 21 | Bob       | 1995-05-23    | Green          |
+    |                                  ^~~~~~~~~~~ [16]
+ 22 |
+
+Output:
+  1 | # Tables with and without leading/trailing pipes
+  2 |
+  3 | User Name | Date Of Birth | Favorite Color
+  4 | --------- | ------------- | --------------
+  5 | Alice     | 2000-01-01    | Blue
+  6 | Bob       | 1995-05-23    | Green
+  7 |
+  8 | User Name | Date Of Birth | Favorite Color
+  9 | --------- | ------------- | --------------
+ 10 | Alice     | 2000-01-01    | Blue
+ 11 | Bob       | 1995-05-23    | Green
+ 12 |
+ 13 | User Name | Date Of Birth | Favorite Color
+ 14 | --------- | ------------- | --------------
+ 15 | Alice     | 2000-01-01    | Blue
+ 16 | Bob       | 1995-05-23    | Green
+ 17 |
+ 18 | User Name | Date Of Birth | Favorite Color
+ 19 | --------- | ------------- | --------------
+ 20 | Alice     | 2000-01-01    | Blue
+ 21 | Bob       | 1995-05-23    | Green
+ 22 |
+
+[1] Table line should not start with a leading pipe.
+[2] Table line should not end with a trailing pipe.
+[3] Table line should not start with a leading pipe.
+[4] Table line should not end with a trailing pipe.
+[5] Table line should not start with a leading pipe.
+[6] Table line should not end with a trailing pipe.
+[7] Table line should not start with a leading pipe.
+[8] Table line should not end with a trailing pipe.
+[9] Table line should not start with a leading pipe.
+[10] Table line should not start with a leading pipe.
+[11] Table line should not start with a leading pipe.
+[12] Table line should not start with a leading pipe.
+[13] Table line should not end with a trailing pipe.
+[14] Table line should not end with a trailing pipe.
+[15] Table line should not end with a trailing pipe.
+[16] Table line should not end with a trailing pipe.
+---
+
+
+Test: table-leading-trailing-pipes >> invalid >>> "# Tables with single column, no leading and trailing pipes\n\n| User Name |\n| --------- |\n| Alice     |\n| Bob       |\n\nUser Name |\n--------- |\nAlice     |\nBob       |\n\n| User Name\n| ---------\n| Alice\n| Bob\n\n| User Name\n--------- |\n| Alice\nBob       |\n 2"
+Filename: tests/fixtures/rules/table-leading-trailing-pipes/invalid/single-col-tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Tables with single column, no leading and trailing pipes
+  2 |
+  3 | | User Name |
+  4 | | --------- |
+  5 | | Alice     |
+  6 | | Bob       |
+  7 |
+  8 | User Name |
+    | ^ [1]
+  9 | --------- |
+    | ^ [2]
+ 10 | Alice     |
+    | ^ [3]
+ 11 | Bob       |
+    | ^ [4]
+ 12 |
+ 13 | | User Name
+    |            ^ [5]
+ 14 | | ---------
+    |            ^ [6]
+ 15 | | Alice
+    |        ^ [7]
+ 16 | | Bob
+    |      ^ [8]
+ 17 |
+ 18 | | User Name
+    |            ^ [9]
+ 19 | --------- |
+    | ^ [10]
+ 20 | | Alice
+    |        ^ [11]
+ 21 | Bob       |
+    | ^ [12]
+ 22 |
+
+Output:
+  1 | # Tables with single column, no leading and trailing pipes
+  2 |
+  3 | | User Name |
+  4 | | --------- |
+  5 | | Alice     |
+  6 | | Bob       |
+  7 |
+  8 | | User Name |
+  9 | | --------- |
+ 10 | | Alice     |
+ 11 | | Bob       |
+ 12 |
+ 13 | | User Name |
+ 14 | | --------- |
+ 15 | | Alice |
+ 16 | | Bob |
+ 17 |
+ 18 | | User Name |
+ 19 | | --------- |
+ 20 | | Alice |
+ 21 | | Bob       |
+ 22 |
+
+[1] Table line should start with a leading pipe.
+[2] Table line should start with a leading pipe.
+[3] Table line should start with a leading pipe.
+[4] Table line should start with a leading pipe.
+[5] Table line should end with a trailing pipe.
+[6] Table line should end with a trailing pipe.
+[7] Table line should end with a trailing pipe.
+[8] Table line should end with a trailing pipe.
+[9] Table line should end with a trailing pipe.
+[10] Table line should start with a leading pipe.
+[11] Table line should end with a trailing pipe.
+[12] Table line should start with a leading pipe.
+---
+
+
+Test: table-leading-trailing-pipes >> invalid >>> "# Tables with and without leading/trailing pipes\n\n| User Name | Date Of Birth | Favorite Color |\n| --------- | ------------- | -------------- |\n| Alice     | 2000-01-01    | Blue           |\n| Bob       | 1995-05-23    | Green          |\n\nUser Name | Date Of Birth | Favorite Color\n--------- | ------------- | --------------\nAlice     | 2000-01-01    | Blue\nBob       | 1995-05-23    | Green\n\n| User Name | Date Of Birth | Favorite Color\n| --------- | ------------- | --------------\n| Alice     | 2000-01-01    | Blue\n| Bob       | 1995-05-23    | Green\n\nUser Name | Date Of Birth | Favorite Color |\n--------- | ------------- | -------------- |\nAlice     | 2000-01-01    | Blue           |\nBob       | 1995-05-23    | Green          |\n 3"
+Filename: tests/fixtures/rules/table-leading-trailing-pipes/invalid/tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Tables with and without leading/trailing pipes
+  2 |
+  3 | | User Name | Date Of Birth | Favorite Color |
+  4 | | --------- | ------------- | -------------- |
+  5 | | Alice     | 2000-01-01    | Blue           |
+  6 | | Bob       | 1995-05-23    | Green          |
+  7 |
+  8 | User Name | Date Of Birth | Favorite Color
+    | ^ [1]                                     ^ [2]
+  9 | --------- | ------------- | --------------
+    | ^ [3]                                     ^ [4]
+ 10 | Alice     | 2000-01-01    | Blue
+    | ^ [5]                           ^ [6]
+ 11 | Bob       | 1995-05-23    | Green
+    | ^ [7]                            ^ [8]
+ 12 |
+ 13 | | User Name | Date Of Birth | Favorite Color
+    |                                             ^ [9]
+ 14 | | --------- | ------------- | --------------
+    |                                             ^ [10]
+ 15 | | Alice     | 2000-01-01    | Blue
+    |                                   ^ [11]
+ 16 | | Bob       | 1995-05-23    | Green
+    |                                    ^ [12]
+ 17 |
+ 18 | User Name | Date Of Birth | Favorite Color |
+    | ^ [13]
+ 19 | --------- | ------------- | -------------- |
+    | ^ [14]
+ 20 | Alice     | 2000-01-01    | Blue           |
+    | ^ [15]
+ 21 | Bob       | 1995-05-23    | Green          |
+    | ^ [16]
+ 22 |
+
+Output:
+  1 | # Tables with and without leading/trailing pipes
+  2 |
+  3 | | User Name | Date Of Birth | Favorite Color |
+  4 | | --------- | ------------- | -------------- |
+  5 | | Alice     | 2000-01-01    | Blue           |
+  6 | | Bob       | 1995-05-23    | Green          |
+  7 |
+  8 | | User Name | Date Of Birth | Favorite Color |
+  9 | | --------- | ------------- | -------------- |
+ 10 | | Alice     | 2000-01-01    | Blue |
+ 11 | | Bob       | 1995-05-23    | Green |
+ 12 |
+ 13 | | User Name | Date Of Birth | Favorite Color |
+ 14 | | --------- | ------------- | -------------- |
+ 15 | | Alice     | 2000-01-01    | Blue |
+ 16 | | Bob       | 1995-05-23    | Green |
+ 17 |
+ 18 | | User Name | Date Of Birth | Favorite Color |
+ 19 | | --------- | ------------- | -------------- |
+ 20 | | Alice     | 2000-01-01    | Blue           |
+ 21 | | Bob       | 1995-05-23    | Green          |
+ 22 |
+
+[1] Table line should start with a leading pipe.
+[2] Table line should end with a trailing pipe.
+[3] Table line should start with a leading pipe.
+[4] Table line should end with a trailing pipe.
+[5] Table line should start with a leading pipe.
+[6] Table line should end with a trailing pipe.
+[7] Table line should start with a leading pipe.
+[8] Table line should end with a trailing pipe.
+[9] Table line should end with a trailing pipe.
+[10] Table line should end with a trailing pipe.
+[11] Table line should end with a trailing pipe.
+[12] Table line should end with a trailing pipe.
+[13] Table line should start with a leading pipe.
+[14] Table line should start with a leading pipe.
+[15] Table line should start with a leading pipe.
+[16] Table line should start with a leading pipe.
+---
+
+
+Test: table-leading-trailing-pipes >> invalid >>> "# Tables with single column, no leading and trailing pipes\n\n| User Name |\n| --------- |\n| Alice     |\n| Bob       |\n\nUser Name |\n--------- |\nAlice     |\nBob       |\n\n| User Name\n| ---------\n| Alice\n| Bob\n\n| User Name\n--------- |\n| Alice\nBob       |\n 3"
+Filename: tests/fixtures/rules/table-leading-trailing-pipes/invalid/trailing-only/single-col-tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - leading: never
+    trailing: always
+Plugins: unable to serialize
+
+Code:
+  1 | # Tables with single column, no leading and trailing pipes
+  2 |
+  3 | | User Name |
+    | ^~ [1]
+  4 | | --------- |
+    | ^~ [2]
+  5 | | Alice     |
+    | ^~ [3]
+  6 | | Bob       |
+    | ^~ [4]
+  7 |
+  8 | User Name |
+  9 | --------- |
+ 10 | Alice     |
+ 11 | Bob       |
+ 12 |
+ 13 | | User Name
+    |            ^ [5]
+ 14 | | ---------
+    |            ^ [6]
+ 15 | | Alice
+    |        ^ [7]
+ 16 | | Bob
+    |      ^ [8]
+ 17 |
+ 18 | | User Name
+    |            ^ [9]
+ 19 | --------- |
+ 20 | | Alice
+    |        ^ [10]
+ 21 | Bob       |
+ 22 |
+
+Output:
+  1 | # Tables with single column, no leading and trailing pipes
+  2 |
+  3 | User Name |
+  4 | --------- |
+  5 | Alice     |
+  6 | Bob       |
+  7 |
+  8 | User Name |
+  9 | --------- |
+ 10 | Alice     |
+ 11 | Bob       |
+ 12 |
+ 13 | User Name |
+ 14 | --------- |
+ 15 | Alice |
+ 16 | Bob |
+ 17 |
+ 18 | User Name |
+ 19 | --------- |
+ 20 | Alice |
+ 21 | Bob       |
+ 22 |
+
+[1] Table line should not start with a leading pipe.
+[2] Table line should not start with a leading pipe.
+[3] Table line should not start with a leading pipe.
+[4] Table line should not start with a leading pipe.
+[5] Table line should end with a trailing pipe.
+[6] Table line should end with a trailing pipe.
+[7] Table line should end with a trailing pipe.
+[8] Table line should end with a trailing pipe.
+[9] Table line should end with a trailing pipe.
+[10] Table line should end with a trailing pipe.
+---
+
+
+Test: table-leading-trailing-pipes >> invalid >>> "# Tables with and without leading/trailing pipes\n\n| User Name | Date Of Birth | Favorite Color |\n| --------- | ------------- | -------------- |\n| Alice     | 2000-01-01    | Blue           |\n| Bob       | 1995-05-23    | Green          |\n\nUser Name | Date Of Birth | Favorite Color\n--------- | ------------- | --------------\nAlice     | 2000-01-01    | Blue\nBob       | 1995-05-23    | Green\n\n| User Name | Date Of Birth | Favorite Color\n| --------- | ------------- | --------------\n| Alice     | 2000-01-01    | Blue\n| Bob       | 1995-05-23    | Green\n\nUser Name | Date Of Birth | Favorite Color |\n--------- | ------------- | -------------- |\nAlice     | 2000-01-01    | Blue           |\nBob       | 1995-05-23    | Green          |\n 4"
+Filename: tests/fixtures/rules/table-leading-trailing-pipes/invalid/trailing-only/tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - leading: never
+    trailing: always
+Plugins: unable to serialize
+
+Code:
+  1 | # Tables with and without leading/trailing pipes
+  2 |
+  3 | | User Name | Date Of Birth | Favorite Color |
+    | ^~ [1]
+  4 | | --------- | ------------- | -------------- |
+    | ^~ [2]
+  5 | | Alice     | 2000-01-01    | Blue           |
+    | ^~ [3]
+  6 | | Bob       | 1995-05-23    | Green          |
+    | ^~ [4]
+  7 |
+  8 | User Name | Date Of Birth | Favorite Color
+    |                                           ^ [5]
+  9 | --------- | ------------- | --------------
+    |                                           ^ [6]
+ 10 | Alice     | 2000-01-01    | Blue
+    |                                 ^ [7]
+ 11 | Bob       | 1995-05-23    | Green
+    |                                  ^ [8]
+ 12 |
+ 13 | | User Name | Date Of Birth | Favorite Color
+    | ^~ [9]                                      ^ [10]
+ 14 | | --------- | ------------- | --------------
+    | ^~ [11]                                     ^ [12]
+ 15 | | Alice     | 2000-01-01    | Blue
+    | ^~ [13]                           ^ [14]
+ 16 | | Bob       | 1995-05-23    | Green
+    | ^~ [15]                            ^ [16]
+ 17 |
+ 18 | User Name | Date Of Birth | Favorite Color |
+ 19 | --------- | ------------- | -------------- |
+ 20 | Alice     | 2000-01-01    | Blue           |
+ 21 | Bob       | 1995-05-23    | Green          |
+ 22 |
+
+Output:
+  1 | # Tables with and without leading/trailing pipes
+  2 |
+  3 | User Name | Date Of Birth | Favorite Color |
+  4 | --------- | ------------- | -------------- |
+  5 | Alice     | 2000-01-01    | Blue           |
+  6 | Bob       | 1995-05-23    | Green          |
+  7 |
+  8 | User Name | Date Of Birth | Favorite Color |
+  9 | --------- | ------------- | -------------- |
+ 10 | Alice     | 2000-01-01    | Blue |
+ 11 | Bob       | 1995-05-23    | Green |
+ 12 |
+ 13 | User Name | Date Of Birth | Favorite Color |
+ 14 | --------- | ------------- | -------------- |
+ 15 | Alice     | 2000-01-01    | Blue |
+ 16 | Bob       | 1995-05-23    | Green |
+ 17 |
+ 18 | User Name | Date Of Birth | Favorite Color |
+ 19 | --------- | ------------- | -------------- |
+ 20 | Alice     | 2000-01-01    | Blue           |
+ 21 | Bob       | 1995-05-23    | Green          |
+ 22 |
+
+[1] Table line should not start with a leading pipe.
+[2] Table line should not start with a leading pipe.
+[3] Table line should not start with a leading pipe.
+[4] Table line should not start with a leading pipe.
+[5] Table line should end with a trailing pipe.
+[6] Table line should end with a trailing pipe.
+[7] Table line should end with a trailing pipe.
+[8] Table line should end with a trailing pipe.
+[9] Table line should not start with a leading pipe.
+[10] Table line should end with a trailing pipe.
+[11] Table line should not start with a leading pipe.
+[12] Table line should end with a trailing pipe.
+[13] Table line should not start with a leading pipe.
+[14] Table line should end with a trailing pipe.
+[15] Table line should not start with a leading pipe.
+[16] Table line should end with a trailing pipe.
+---

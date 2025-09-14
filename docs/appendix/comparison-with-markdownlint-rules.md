@@ -108,12 +108,12 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 
 ## Rules Related to Tables
 
-| Description                       | [markdownlint] Rules                                                         | [@eslint/markdown] Rules                                                                                  | `eslint-plugin-markdown-preferences` Rules                                                                     |
-| --------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| Table pipe style                  | [MD055] _table-pipe-style_<br>Table pipe style                               | --                                                                                                        | --                                                                                                             |
-| Table column count                | [MD056] _table-column-count_<br>Table column count                           | [markdown/table-column-count]<br>Disallow data rows in a table from having more cells than the header row | --                                                                                                             |
-| Require empty lines around tables | [MD058] _blanks-around-tables_<br>Tables should be surrounded by blank lines | --                                                                                                        | [markdown-preferences/padding-line-between-blocks]<br>require or disallow padding lines between block elements |
-| Table header casing               | --                                                                           | --                                                                                                        | [markdown-preferences/table-header-casing]<br>enforce consistent casing in table header cells                  |
+| Description                       | [markdownlint] Rules                                                         | [@eslint/markdown] Rules                                                                                  | `eslint-plugin-markdown-preferences` Rules                                                                            |
+| --------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Table pipe style                  | [MD055] _table-pipe-style_<br>Table pipe style                               | --                                                                                                        | [markdown-preferences/table-leading-trailing-pipes]<br>enforce consistent use of leading and trailing pipes in tables |
+| Table column count                | [MD056] _table-column-count_<br>Table column count                           | [markdown/table-column-count]<br>Disallow data rows in a table from having more cells than the header row | --                                                                                                                    |
+| Require empty lines around tables | [MD058] _blanks-around-tables_<br>Tables should be surrounded by blank lines | --                                                                                                        | [markdown-preferences/padding-line-between-blocks]<br>require or disallow padding lines between block elements        |
+| Table header casing               | --                                                                           | --                                                                                                        | [markdown-preferences/table-header-casing]<br>enforce consistent casing in table header cells                         |
 
 ## Rules Related to Emphasis and Strong Emphasis
 
@@ -265,6 +265,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 [markdown-preferences/sort-definitions]: ../rules/sort-definitions.md
 [markdown-preferences/strikethrough-delimiters-style]: ./../rules/strikethrough-delimiters-style.md
 [markdown-preferences/table-header-casing]: ../rules/table-header-casing.md
+[markdown-preferences/table-leading-trailing-pipes]: ./../rules/table-leading-trailing-pipes.md
 [markdown-preferences/thematic-break-character-style]: ./../rules/thematic-break-character-style.md
 [markdown-preferences/thematic-break-length]: ./../rules/thematic-break-length.md
 [markdown-preferences/thematic-break-sequence-pattern]: ./../rules/thematic-break-sequence-pattern.md

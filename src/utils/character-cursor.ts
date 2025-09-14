@@ -9,7 +9,7 @@ export abstract class CharacterCursor {
     this.text = text;
   }
 
-  public curr(): string {
+  public curr(): string | undefined {
     return this.text[this.index];
   }
 
