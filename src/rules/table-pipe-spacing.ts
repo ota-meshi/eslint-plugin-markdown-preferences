@@ -17,8 +17,85 @@ type Options = {
         leading?: "always" | "never";
         trailing?: "always" | "never";
       };
-  alignToDelimiterAlignment?: boolean;
+  cellAlign?:
+    | "left"
+    | "center"
+    | "right"
+    | {
+        defaultDelimiter?: "left" | "center" | "right" | "ignore";
+        leftAlignmentDelimiter?: "left" | "center" | "right" | "ignore";
+        centerAlignmentDelimiter?: "left" | "center" | "right" | "ignore";
+        rightAlignmentDelimiter?: "left" | "center" | "right" | "ignore";
+      };
 };
+
+/**
+ * Parsed options
+ */
+function parseOptions(options: Options | undefined) {
+  const spaceOption = options?.space;
+  const leadingSpace =
+    (typeof spaceOption === "object" ? spaceOption.leading : spaceOption) ||
+    "always";
+  const trailingSpace =
+    (typeof spaceOption === "object" ? spaceOption.trailing : spaceOption) ||
+    "always";
+  const cellAlignOption = options?.cellAlign;
+  const defaultDelimiterCellAlign =
+    (typeof cellAlignOption === "object"
+      ? cellAlignOption.defaultDelimiter
+      : cellAlignOption) || "left";
+  const leftAlignmentDelimiterCellAlign =
+    (typeof cellAlignOption === "object"
+      ? cellAlignOption.leftAlignmentDelimiter
+      : cellAlignOption) || "left";
+  const centerAlignmentDelimiterCellAlign =
+    (typeof cellAlignOption === "object"
+      ? cellAlignOption.centerAlignmentDelimiter
+      : cellAlignOption) || "center";
+  const rightAlignmentDelimiterCellAlign =
+    (typeof cellAlignOption === "object"
+      ? cellAlignOption.rightAlignmentDelimiter
+      : cellAlignOption) || "right";
+
+  return {
+    leadingSpace,
+    trailingSpace,
+    cellAlignByDelimiter: {
+      none: adjustAlign(defaultDelimiterCellAlign),
+      left: adjustAlign(leftAlignmentDelimiterCellAlign),
+      center: adjustAlign(centerAlignmentDelimiterCellAlign),
+      right: adjustAlign(rightAlignmentDelimiterCellAlign),
+    },
+  };
+
+  /**
+   * Adjust the alignment option based on the spacing options.
+   */
+  function adjustAlign(
+    align: "left" | "center" | "right" | "ignore",
+  ): "left" | "center" | "right" | "ignore" {
+    if (align === "left") {
+      if (trailingSpace === "always") {
+        return "left";
+      }
+      return "ignore";
+    }
+    if (align === "center") {
+      if (leadingSpace === "always" && trailingSpace === "always") {
+        return "center";
+      }
+      return "ignore";
+    }
+    if (align === "right") {
+      if (leadingSpace === "always") {
+        return "right";
+      }
+      return "ignore";
+    }
+    return align;
+  }
+}
 
 export default createRule<[Options?]>("table-pipe-spacing", {
   meta: {
@@ -53,8 +130,30 @@ export default createRule<[Options?]>("table-pipe-spacing", {
               },
             ],
           },
-          alignToDelimiterAlignment: {
-            type: "boolean",
+          cellAlign: {
+            anyOf: [
+              {
+                enum: ["left", "center", "right"],
+              },
+              {
+                type: "object",
+                properties: {
+                  defaultDelimiter: {
+                    enum: ["left", "center", "right", "ignore"],
+                  },
+                  leftAlignmentDelimiter: {
+                    enum: ["left", "center", "right", "ignore"],
+                  },
+                  centerAlignmentDelimiter: {
+                    enum: ["left", "center", "right", "ignore"],
+                  },
+                  rightAlignmentDelimiter: {
+                    enum: ["left", "center", "right", "ignore"],
+                  },
+                },
+                additionalProperties: false,
+              },
+            ],
           },
         },
         additionalProperties: false,
@@ -66,26 +165,19 @@ export default createRule<[Options?]>("table-pipe-spacing", {
       expectedSpaceAfter: 'Expected 1 space after "|".',
       expectedNoSpaceAfter: 'Expected no space after "|".',
       expectedAlignLeft: 'Expected 1 space after "|" for left-aligned column.',
+      expectedNoSpaceAlignLeft:
+        'Expected no space after "|" for left-aligned column.',
       expectedAlignRight:
         'Expected 1 space before "|" for right-aligned column.',
+      expectedNoSpaceAlignRight:
+        'Expected no space before "|" for right-aligned column.',
       expectedAlignCenter:
         "Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.",
     },
   },
   create(context) {
     const sourceCode = context.sourceCode;
-    const options = context.options[0] || {};
-    const spaceOption = options.space;
-    const leadingSpace =
-      (typeof spaceOption === "object" ? spaceOption.leading : spaceOption) ||
-      "always";
-    const trailingSpace =
-      (typeof spaceOption === "object" ? spaceOption.trailing : spaceOption) ||
-      "always";
-    const alignToDelimiterAlignment =
-      leadingSpace === "always" &&
-      trailingSpace === "always" &&
-      (options.alignToDelimiterAlignment ?? true);
+    const options = parseOptions(context.options[0]);
 
     type TokenData = {
       range: [number, number];
@@ -109,7 +201,7 @@ export default createRule<[Options?]>("table-pipe-spacing", {
      * Verify for the leading pipe.
      */
     function verifyLeadingPipe(pipe: TokenData, nextToken: TokenData): boolean {
-      if (leadingSpace === "always") {
+      if (options.leadingSpace === "always") {
         if (pipe.range[1] < nextToken.range[0]) return true;
         context.report({
           loc: pipe.loc,
@@ -119,7 +211,7 @@ export default createRule<[Options?]>("table-pipe-spacing", {
           },
         });
         return false;
-      } else if (leadingSpace === "never") {
+      } else if (options.leadingSpace === "never") {
         if (pipe.range[1] === nextToken.range[0]) return true;
         context.report({
           loc: pipe.loc,
@@ -140,7 +232,7 @@ export default createRule<[Options?]>("table-pipe-spacing", {
       prevToken: TokenData,
       pipe: TokenData,
     ): boolean {
-      if (trailingSpace === "always") {
+      if (options.trailingSpace === "always") {
         if (prevToken.range[1] < pipe.range[0]) return true;
         context.report({
           loc: pipe.loc,
@@ -150,7 +242,7 @@ export default createRule<[Options?]>("table-pipe-spacing", {
           },
         });
         return false;
-      } else if (trailingSpace === "never") {
+      } else if (options.trailingSpace === "never") {
         if (prevToken.range[1] === pipe.range[0]) return true;
         context.report({
           loc: pipe.loc,
@@ -169,55 +261,67 @@ export default createRule<[Options?]>("table-pipe-spacing", {
      */
     function verifyAlignPipe(
       { leadingPipe, content, trailingPipe }: CellData | DelimiterData,
-      delimiter: DelimiterData,
-    ) {
-      if (!leadingPipe || !trailingPipe || !content) return;
+      cellAlign: "left" | "center" | "right" | "ignore",
+    ): boolean {
+      if (!leadingPipe || !trailingPipe || !content) return true;
       const lineText = sourceCode.lines[leadingPipe.loc.start.line - 1];
-      if (delimiter.align === "left" || delimiter.align === "none") {
-        // left-aligned: 1 space after leading pipe
-        if (getLeadingSpacesWidth() === 1) return;
+      if (cellAlign === "left") {
+        // left-aligned: (1 or 0) space after leading pipe
+        const expectedWidth = options.leadingSpace === "always" ? 1 : 0;
+        if (getLeadingSpacesWidth() === expectedWidth) return true;
         context.report({
           loc: {
             start: leadingPipe.loc.end,
             end: content.loc.start,
           },
-          messageId: "expectedAlignLeft",
+          messageId:
+            expectedWidth >= 1
+              ? "expectedAlignLeft"
+              : "expectedNoSpaceAlignLeft",
           *fix(fixer) {
             const cellWidth = getCellWidth();
             const contentTextWidth = getContentTextWidth();
+            const newLeadingSpaces = " ".repeat(expectedWidth);
             const newTrailingSpaces = " ".repeat(
-              cellWidth - contentTextWidth - 1,
+              Math.max(cellWidth - contentTextWidth - expectedWidth, 0),
             );
             const contentText = getNormalizedContentText();
             yield fixer.replaceTextRange(
               [leadingPipe.range[1], trailingPipe.range[0]],
-              ` ${contentText}${newTrailingSpaces}`,
+              `${newLeadingSpaces}${contentText}${newTrailingSpaces}`,
             );
           },
         });
-      } else if (delimiter.align === "right") {
-        // right-aligned: 1 space before trailing pipe
-        if (getTrailingSpacesWidth() === 1) return;
+        return false;
+      } else if (cellAlign === "right") {
+        // right-aligned: (1 or 0) space before trailing pipe
+        const expectedWidth = options.trailingSpace === "always" ? 1 : 0;
+        if (getTrailingSpacesWidth() === expectedWidth) return true;
         context.report({
           loc: {
             start: content.loc.end,
             end: trailingPipe.loc.start,
           },
-          messageId: "expectedAlignRight",
+          messageId:
+            expectedWidth >= 1
+              ? "expectedAlignRight"
+              : "expectedNoSpaceAlignRight",
           *fix(fixer) {
             const cellWidth = getCellWidth();
             const contentTextWidth = getContentTextWidth();
             const newLeadingSpaces = " ".repeat(
-              cellWidth - contentTextWidth - 1,
+              Math.max(cellWidth - contentTextWidth - expectedWidth, 0),
             );
+            const newTrailingSpaces = " ".repeat(expectedWidth);
             const contentText = getNormalizedContentText();
             yield fixer.replaceTextRange(
               [leadingPipe.range[1], trailingPipe.range[0]],
-              `${newLeadingSpaces}${contentText} `,
+              `${newLeadingSpaces}${contentText}${newTrailingSpaces}`,
             );
           },
         });
-      } else if (delimiter.align === "center") {
+        return false;
+      } else if (cellAlign === "center") {
         // center-aligned: the number of spaces before and after the content should be the same or differ by 1 at most
         const leadingSpacesWidth = getLeadingSpacesWidth();
         const trailingSpacesWidth = getTrailingSpacesWidth();
@@ -225,7 +329,7 @@ export default createRule<[Options?]>("table-pipe-spacing", {
           leadingSpacesWidth === trailingSpacesWidth ||
           leadingSpacesWidth + 1 === trailingSpacesWidth
         )
-          return;
+          return true;
         const leadingReportLoc: SourceLocation = {
           start: leadingPipe.loc.end,
           end: content.loc.start,
@@ -254,7 +358,9 @@ export default createRule<[Options?]>("table-pipe-spacing", {
             },
           });
         }
+        return false;
       }
+      return true;
 
       /**
        * Get the width of the leading spaces in the cell.
@@ -378,70 +484,62 @@ export default createRule<[Options?]>("table-pipe-spacing", {
           const parsedRow = parseTableRow(sourceCode, row);
           if (!parsedRow) continue;
           const cells = parsedTableRowToCellDataList(parsedRow);
-          const validColumns = new Set<number>();
           for (let columnIndex = 0; columnIndex < cells.length; columnIndex++) {
-            validColumns.add(columnIndex);
             const cell = cells[columnIndex];
+
+            const delimiter =
+              delimiters && columnIndex < delimiters.length
+                ? delimiters[columnIndex]
+                : null;
+            if (
+              delimiter &&
+              !verifyAlignPipe(
+                cell,
+                options.cellAlignByDelimiter[delimiter.align],
+              )
+            ) {
+              // Already reported by the alignment check.
+              continue;
+            }
             if (cell.leadingPipe) {
-              if (leadingSpace !== "never" || cell.content) {
+              if (options.leadingSpace !== "never" || cell.content) {
                 const nextToken = getNextToken(cells, columnIndex);
                 if (nextToken) {
-                  if (!verifyLeadingPipe(cell.leadingPipe, nextToken)) {
-                    validColumns.delete(columnIndex);
-                  }
+                  verifyLeadingPipe(cell.leadingPipe, nextToken);
                 }
               }
             }
-            if (cell.trailingPipe && trailingSpace !== "never") {
+            if (cell.trailingPipe && options.trailingSpace !== "never") {
               const prevToken = getPrevToken(cells, columnIndex);
               if (prevToken) {
-                if (!verifyTrailingPipe(prevToken, cell.trailingPipe)) {
-                  validColumns.delete(columnIndex - 1);
-                }
-              }
-            }
-          }
-          if (alignToDelimiterAlignment && delimiters) {
-            for (const columnIndex of validColumns) {
-              const cell = cells[columnIndex];
-              const delimiter =
-                columnIndex < delimiters.length
-                  ? delimiters[columnIndex]
-                  : null;
-              if (cell && delimiter) {
-                verifyAlignPipe(cell, delimiter);
+                verifyTrailingPipe(prevToken, cell.trailingPipe);
               }
             }
           }
         }
         if (!delimiters) return;
-        const validColumns = new Set<number>();
         for (
           let columnIndex = 0;
           columnIndex < delimiters.length;
           columnIndex++
         ) {
-          validColumns.add(columnIndex);
           const delimiter = delimiters[columnIndex];
+
+          if (
+            !verifyAlignPipe(
+              delimiter,
+              options.cellAlignByDelimiter[delimiter.align],
+            )
+          ) {
+            // Already reported by the alignment check.
+            continue;
+          }
+
           if (delimiter.leadingPipe) {
-            if (!verifyLeadingPipe(delimiter.leadingPipe, delimiter.content)) {
-              validColumns.delete(columnIndex);
-            }
+            verifyLeadingPipe(delimiter.leadingPipe, delimiter.content);
           }
           if (delimiter.trailingPipe) {
-            if (
-              !verifyTrailingPipe(delimiter.content, delimiter.trailingPipe)
-            ) {
-              validColumns.delete(columnIndex);
-            }
-          }
-        }
-        if (alignToDelimiterAlignment) {
-          for (const columnIndex of validColumns) {
-            const delimiter = delimiters[columnIndex];
-            if (delimiter) {
-              verifyAlignPipe(delimiter, delimiter);
-            }
+            verifyTrailingPipe(delimiter.content, delimiter.trailingPipe);
           }
         }
       },
