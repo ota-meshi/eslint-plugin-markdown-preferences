@@ -115,6 +115,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 | Require empty lines around tables | [MD058] _blanks-around-tables_<br>Tables should be surrounded by blank lines | --                                                                                                        | [markdown-preferences/padding-line-between-blocks]<br>require or disallow padding lines between block elements        |
 | Table header casing               | --                                                                           | --                                                                                                        | [markdown-preferences/table-header-casing]<br>enforce consistent casing in table header cells                         |
 | Table pipe alignment              | --                                                                           | --                                                                                                        | [markdown-preferences/table-pipe-alignment]<br>enforce consistent alignment of table pipes                            |
+| Table pipe spacing                | --                                                                           | --                                                                                                        | [markdown-preferences/table-pipe-spacing]<br>enforce consistent spacing around table pipes                            |
 
 ## Rules Related to Emphasis and Strong Emphasis
 
@@ -268,6 +269,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 [markdown-preferences/table-header-casing]: ../rules/table-header-casing.md
 [markdown-preferences/table-leading-trailing-pipes]: ./../rules/table-leading-trailing-pipes.md
 [markdown-preferences/table-pipe-alignment]: ./../rules/table-pipe-alignment.md
+[markdown-preferences/table-pipe-spacing]: ./../rules/table-pipe-spacing.md
 [markdown-preferences/thematic-break-character-style]: ./../rules/thematic-break-character-style.md
 [markdown-preferences/thematic-break-length]: ./../rules/thematic-break-length.md
 [markdown-preferences/thematic-break-sequence-pattern]: ./../rules/thematic-break-sequence-pattern.md
