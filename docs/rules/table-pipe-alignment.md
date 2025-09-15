@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/table-pipe-alignment"
 description: "enforce consistent alignment of table pipes"
+since: "v0.25.0"
 ---
 
 # markdown-preferences/table-pipe-alignment
 
 > enforce consistent alignment of table pipes
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - ⚙️ This rule is included in `plugin.configs.standard`.
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
@@ -71,6 +71,10 @@ The rule can automatically fix many alignment issues using the `--fix` option.
 - [markdown-preferences/table-leading-trailing-pipes](./table-leading-trailing-pipes.md)
 - [markdown-preferences/table-pipe-spacing](./table-pipe-spacing.md)
 - [markdown-preferences/table-header-casing](./table-header-casing.md)
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.25.0
 
 ## 🔍 Implementation
 
