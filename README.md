@@ -13,18 +13,24 @@ A specialized ESLint plugin that helps enforce consistent writing style and form
 
 ## 📛 Features
 
-- **⚡ Effortless automation** - Transform your Markdown with auto-fixing that handles formatting, casing, and style consistency automatically
-- **📖 Professional documentation** - Enforce consistent headings, table headers, and organize link definitions for enterprise-ready documentation
-- **🎨 Clean formatting** - Remove trailing spaces, control line breaks, standardize code blocks, and ensure consistent list numbering for polished output
-- **⚙️ Flexible customization** - Configure casing styles (Title Case, Sentence case), code block languages, emoji notation, and more with extensive options
-
-**Try it live:** Check out the [Online Demo](https://eslint-online-playground.netlify.app/#eslint-plugin-markdown-preferences) to see the plugin in action!
+- 📝 **Comprehensive style enforcement**\
+  Unifies document expression and description style: heading casing, table header casing, inline code/link usage, emoji notation, and more.
+- 🧩 **Notation and formatting consistency**\
+  Standardizes Markdown notation: list markers, code fences, link/reference style, thematic breaks, and table formatting.
+- 🎨 **Whitespace and decorative rules**\
+  Controls indentation, spacing, line breaks, trailing spaces, and decorative elements for clean, readable Markdown.
+- 🔧 **Auto-fix support**\
+  Most rules support ESLint's `--fix` option for effortless formatting and correction.
+- ⚙️ **Flexible configuration**\
+  Provides both "recommended" and "standard" configs, and allows you to finely customize formatting and rules to suit your preferences and Markdown style.
+- 🌐 **Live demo & documentation**\
+  Try it instantly in the [Online Demo](https://eslint-online-playground.netlify.app/#eslint-plugin-markdown-preferences) and see [full documentation][documentation site].
 
 <!--DOCS_IGNORE_START-->
 
 ## 📖 Documentation
 
-For detailed usage instructions, rule configurations, and examples, visit our comprehensive [documentation site](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/).
+For detailed usage instructions, rule configurations, and examples, visit our comprehensive [documentation site].
 
 ## 💿 Installation
 
@@ -205,5 +211,6 @@ Please use GitHub's Issues/PRs.
 
 See the [LICENSE](./LICENSE) file for license rights and limitations (MIT).
 
+[documentation site]: https://ota-meshi.github.io/eslint-plugin-markdown-preferences/
 [npm-package]: https://www.npmjs.com/package/eslint-plugin-markdown-preferences
 [npmtrends]: http://www.npmtrends.com/eslint-plugin-markdown-preferences
