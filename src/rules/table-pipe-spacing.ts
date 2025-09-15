@@ -264,17 +264,18 @@ export default createRule<[Options?]>("table-pipe-spacing", {
 
     /**
      * Verify for the alignment of the pipe according to the delimiter alignment.
+     * Return "leading" if the leading pipe is reported, "trailing" if the trailing pipe is reported, "both" if both are reported, or null if nothing is reported.
      */
     function verifyAlignPipe(
       { leadingPipe, content, trailingPipe }: CellData | DelimiterData,
       cellAlign: "left" | "center" | "right" | "ignore",
-    ): boolean {
-      if (!leadingPipe || !trailingPipe || !content) return true;
+    ): "leading" | "trailing" | "both" | null {
+      if (!leadingPipe || !trailingPipe || !content) return null;
       const lineText = sourceCode.lines[leadingPipe.loc.start.line - 1];
       if (cellAlign === "left") {
         // left-aligned: (1 or 0) space after leading pipe
         const expectedWidth = options.leadingSpace === "always" ? 1 : 0;
-        if (getLeadingSpacesWidth() === expectedWidth) return true;
+        if (getLeadingSpacesWidth() === expectedWidth) return null;
         context.report({
           loc:
             leadingPipe.range[1] < content.range[0]
@@ -301,11 +302,11 @@ export default createRule<[Options?]>("table-pipe-spacing", {
             );
           },
         });
-        return false;
+        return "leading";
       } else if (cellAlign === "right") {
         // right-aligned: (1 or 0) space before trailing pipe
         const expectedWidth = options.trailingSpace === "always" ? 1 : 0;
-        if (getTrailingSpacesWidth() === expectedWidth) return true;
+        if (getTrailingSpacesWidth() === expectedWidth) return null;
         context.report({
           loc:
             content.range[1] < trailingPipe.range[0]
@@ -332,7 +333,7 @@ export default createRule<[Options?]>("table-pipe-spacing", {
             );
           },
         });
-        return false;
+        return "trailing";
       } else if (cellAlign === "center") {
         // center-aligned: the number of spaces before and after the content should be the same or differ by 1 at most
         const leadingSpacesWidth = getLeadingSpacesWidth();
@@ -341,7 +342,7 @@ export default createRule<[Options?]>("table-pipe-spacing", {
           leadingSpacesWidth === trailingSpacesWidth ||
           leadingSpacesWidth + 1 === trailingSpacesWidth
         )
-          return true;
+          return null;
         const leadingReportLoc: SourceLocation =
           leadingPipe.range[1] < content.range[0]
             ? {
@@ -376,9 +377,9 @@ export default createRule<[Options?]>("table-pipe-spacing", {
             },
           });
         }
-        return false;
+        return "both";
       }
-      return true;
+      return null;
 
       /**
        * Get the width of the leading spaces in the cell.
@@ -509,17 +510,15 @@ export default createRule<[Options?]>("table-pipe-spacing", {
               delimiters && columnIndex < delimiters.length
                 ? delimiters[columnIndex]
                 : null;
-            if (
-              delimiter &&
-              !verifyAlignPipe(
-                cell,
-                options.cellAlignByDelimiter[delimiter.align],
-              )
-            ) {
-              // Already reported by the alignment check.
-              continue;
-            }
-            if (cell.leadingPipe) {
+
+            const alignReportedPoint = delimiter
+              ? verifyAlignPipe(
+                  cell,
+                  options.cellAlignByDelimiter[delimiter.align],
+                )
+              : null;
+            if (alignReportedPoint === "both") continue;
+            if (cell.leadingPipe && alignReportedPoint !== "leading") {
               if (options.leadingSpace !== "never" || cell.content) {
                 const nextToken = getNextToken(cells, columnIndex);
                 if (nextToken) {
@@ -527,7 +526,11 @@ export default createRule<[Options?]>("table-pipe-spacing", {
                 }
               }
             }
-            if (cell.trailingPipe && options.trailingSpace !== "never") {
+            if (
+              cell.trailingPipe &&
+              options.trailingSpace !== "never" &&
+              alignReportedPoint !== "trailing"
+            ) {
               const prevToken = getPrevToken(cells, columnIndex);
               if (prevToken) {
                 verifyTrailingPipe(prevToken, cell.trailingPipe);
@@ -543,20 +546,16 @@ export default createRule<[Options?]>("table-pipe-spacing", {
         ) {
           const delimiter = delimiters[columnIndex];
 
-          if (
-            !verifyAlignPipe(
-              delimiter,
-              options.cellAlignByDelimiter[delimiter.align],
-            )
-          ) {
-            // Already reported by the alignment check.
-            continue;
-          }
+          const alignReportedPoint = verifyAlignPipe(
+            delimiter,
+            options.cellAlignByDelimiter[delimiter.align],
+          );
+          if (alignReportedPoint === "both") continue;
 
-          if (delimiter.leadingPipe) {
+          if (delimiter.leadingPipe && alignReportedPoint !== "leading") {
             verifyLeadingPipe(delimiter.leadingPipe, delimiter.content);
           }
-          if (delimiter.trailingPipe) {
+          if (delimiter.trailingPipe && alignReportedPoint !== "trailing") {
             verifyTrailingPipe(delimiter.content, delimiter.trailingPipe);
           }
         }

@@ -117,22 +117,25 @@ Code:
   6 | | Bob       | 1995-05-23    | Green          |
   7 |
   8 | |User Name|Date Of Birth|Favorite Color|
-    | ^ [1]     ^ [2]         ^ [3]
+    | ^ [1]     ^ [2]         ^ [4]          ^ [6]
+    |           ^ [3]         ^ [5]
   9 | |---------|-------------|--------------|
-    | ^ [4]     ^ [5]         ^ [6]
+    | ^ [7]     ^ [8]         ^ [10]         ^ [12]
+    |           ^ [9]         ^ [11]
  10 | |Alice    |2000-01-01   |Blue          |
-    | ^ [7]     ^ [8]         ^ [9]
+    | ^ [13]    ^ [14]        ^ [15]
  11 | |Bob      |1995-05-23   |Green         |
-    | ^ [10]    ^ [11]        ^ [12]
+    | ^ [16]    ^ [17]        ^ [18]
  12 |
  13 | |User Name |Date Of Birth |Favorite Color |
-    | ^ [13]     ^ [14]         ^ [15]
- 14 | |----------|--------------|---------------|
-    | ^ [16]     ^ [17]         ^ [18]
- 15 | |Alice     |2000-01-01    |Blue           |
     | ^ [19]     ^ [20]         ^ [21]
+ 14 | |----------|--------------|---------------|
+    | ^ [22]     ^ [23]         ^ [25]          ^ [27]
+    |            ^ [24]         ^ [26]
+ 15 | |Alice     |2000-01-01    |Blue           |
+    | ^ [28]     ^ [29]         ^ [30]
  16 | |Bob       |1995-05-23    |Green          |
-    | ^ [22]     ^ [23]         ^ [24]
+    | ^ [31]     ^ [32]         ^ [33]
  17 |
 
 Output:
@@ -155,17 +158,17 @@ Output:
  17 |
 
 [1] Expected 1 space after "|" for left-aligned column.
-[2] Expected 1 space after "|" for left-aligned column.
+[2] Expected 1 space before "|".
 [3] Expected 1 space after "|" for left-aligned column.
-[4] Expected 1 space after "|" for left-aligned column.
+[4] Expected 1 space before "|".
 [5] Expected 1 space after "|" for left-aligned column.
-[6] Expected 1 space after "|" for left-aligned column.
+[6] Expected 1 space before "|".
 [7] Expected 1 space after "|" for left-aligned column.
-[8] Expected 1 space after "|" for left-aligned column.
+[8] Expected 1 space before "|".
 [9] Expected 1 space after "|" for left-aligned column.
-[10] Expected 1 space after "|" for left-aligned column.
+[10] Expected 1 space before "|".
 [11] Expected 1 space after "|" for left-aligned column.
-[12] Expected 1 space after "|" for left-aligned column.
+[12] Expected 1 space before "|".
 [13] Expected 1 space after "|" for left-aligned column.
 [14] Expected 1 space after "|" for left-aligned column.
 [15] Expected 1 space after "|" for left-aligned column.
@@ -176,8 +179,17 @@ Output:
 [20] Expected 1 space after "|" for left-aligned column.
 [21] Expected 1 space after "|" for left-aligned column.
 [22] Expected 1 space after "|" for left-aligned column.
-[23] Expected 1 space after "|" for left-aligned column.
+[23] Expected 1 space before "|".
 [24] Expected 1 space after "|" for left-aligned column.
+[25] Expected 1 space before "|".
+[26] Expected 1 space after "|" for left-aligned column.
+[27] Expected 1 space before "|".
+[28] Expected 1 space after "|" for left-aligned column.
+[29] Expected 1 space after "|" for left-aligned column.
+[30] Expected 1 space after "|" for left-aligned column.
+[31] Expected 1 space after "|" for left-aligned column.
+[32] Expected 1 space after "|" for left-aligned column.
+[33] Expected 1 space after "|" for left-aligned column.
 ---
 
 
@@ -679,8 +691,9 @@ Code:
  10 | |Alice       |  2000-01-01   |Blue            |24    |
     |               ^~ [25]
  11 | |         Bob|  1995-05-23   |           Green|    28|
-    |  ^~~~~~~~~    ^~              ^~~~~~~~~~~      ^~~~  ^
-    |  [26]         [27]            [28]             [29]  [30]
+    |  ^~~~~~~~~ [26]               ^~~~~~~~~~~ [29] ^~~~ [31]
+    |              ^ [27]                           ^ [30] ^ [32]
+    |               ^~ [28]
  12 |
 
 Output:
@@ -723,10 +736,12 @@ Output:
 [24] Expected 1 space before "|".
 [25] Expected no space after "|".
 [26] Expected no space after "|" for left-aligned column.
-[27] Expected no space after "|".
-[28] Expected no space after "|" for left-aligned column.
-[29] Expected no space after "|".
+[27] Expected 1 space before "|".
+[28] Expected no space after "|".
+[29] Expected no space after "|" for left-aligned column.
 [30] Expected 1 space before "|".
+[31] Expected no space after "|".
+[32] Expected 1 space before "|".
 ---
 
 
@@ -909,22 +924,25 @@ Code:
   6 | | Bob       | 1995-05-23    | Green          |
   7 |
   8 | |User Name|Date Of Birth|Favorite Color|
-    | ^ [1]     ^ [2]         ^ [3]
+    | ^ [1]     ^ [2]         ^ [4]          ^ [6]
+    |           ^ [3]         ^ [5]
   9 | |---------|-------------|--------------|
-    | ^ [4]     ^ [5]         ^ [6]
+    | ^ [7]     ^ [8]         ^ [10]         ^ [12]
+    |           ^ [9]         ^ [11]
  10 | |Alice    |2000-01-01   |Blue          |
-    | ^ [7]     ^ [8]         ^ [9]
+    | ^ [13]    ^ [14]        ^ [15]
  11 | |Bob      |1995-05-23   |Green         |
-    | ^ [10]    ^ [11]        ^ [12]
+    | ^ [16]    ^ [17]        ^ [18]
  12 |
  13 | |User Name |Date Of Birth |Favorite Color |
-    | ^ [13]     ^ [14]         ^ [15]
- 14 | |----------|--------------|---------------|
-    | ^ [16]     ^ [17]         ^ [18]
- 15 | |Alice     |2000-01-01    |Blue           |
     | ^ [19]     ^ [20]         ^ [21]
+ 14 | |----------|--------------|---------------|
+    | ^ [22]     ^ [23]         ^ [25]          ^ [27]
+    |            ^ [24]         ^ [26]
+ 15 | |Alice     |2000-01-01    |Blue           |
+    | ^ [28]     ^ [29]         ^ [30]
  16 | |Bob       |1995-05-23    |Green          |
-    | ^ [22]     ^ [23]         ^ [24]
+    | ^ [31]     ^ [32]         ^ [33]
  17 |
 
 Output:
@@ -947,17 +965,17 @@ Output:
  17 |
 
 [1] Expected 1 space after "|" for left-aligned column.
-[2] Expected 1 space after "|" for left-aligned column.
+[2] Expected 1 space before "|".
 [3] Expected 1 space after "|" for left-aligned column.
-[4] Expected 1 space after "|" for left-aligned column.
+[4] Expected 1 space before "|".
 [5] Expected 1 space after "|" for left-aligned column.
-[6] Expected 1 space after "|" for left-aligned column.
+[6] Expected 1 space before "|".
 [7] Expected 1 space after "|" for left-aligned column.
-[8] Expected 1 space after "|" for left-aligned column.
+[8] Expected 1 space before "|".
 [9] Expected 1 space after "|" for left-aligned column.
-[10] Expected 1 space after "|" for left-aligned column.
+[10] Expected 1 space before "|".
 [11] Expected 1 space after "|" for left-aligned column.
-[12] Expected 1 space after "|" for left-aligned column.
+[12] Expected 1 space before "|".
 [13] Expected 1 space after "|" for left-aligned column.
 [14] Expected 1 space after "|" for left-aligned column.
 [15] Expected 1 space after "|" for left-aligned column.
@@ -968,6 +986,15 @@ Output:
 [20] Expected 1 space after "|" for left-aligned column.
 [21] Expected 1 space after "|" for left-aligned column.
 [22] Expected 1 space after "|" for left-aligned column.
-[23] Expected 1 space after "|" for left-aligned column.
+[23] Expected 1 space before "|".
 [24] Expected 1 space after "|" for left-aligned column.
+[25] Expected 1 space before "|".
+[26] Expected 1 space after "|" for left-aligned column.
+[27] Expected 1 space before "|".
+[28] Expected 1 space after "|" for left-aligned column.
+[29] Expected 1 space after "|" for left-aligned column.
+[30] Expected 1 space after "|" for left-aligned column.
+[31] Expected 1 space after "|" for left-aligned column.
+[32] Expected 1 space after "|" for left-aligned column.
+[33] Expected 1 space after "|" for left-aligned column.
 ---
