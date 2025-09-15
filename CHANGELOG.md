@@ -1,5 +1,17 @@
 # eslint-plugin-markdown-preferences
 
+## 0.25.0
+
+### Minor Changes
+
+- [#125](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/125) [`9968ad5`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/9968ad59312185a21d5d9ea6778b74914e9637ca) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat([markdown-preferences/no-multi-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multi-spaces.html)): improve handling of table delimiter rows
+
+- [#123](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/123) [`bbda64e`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/bbda64ee3267b2a00ced04e16865927b0caf6907) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/table-leading-trailing-pipes`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-leading-trailing-pipes.html) rule
+
+- [#125](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/125) [`9968ad5`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/9968ad59312185a21d5d9ea6778b74914e9637ca) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/table-pipe-alignment`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-pipe-alignment.html) rule
+
+- [#126](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/126) [`3ccf0bb`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/3ccf0bb56dac64692c8c9748c0d089ae4b01dba5) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/table-pipe-spacing`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-pipe-spacing.html) rule
+
 ## 0.24.0
 
 ### Minor Changes
