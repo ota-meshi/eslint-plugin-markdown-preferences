@@ -1,0 +1,10 @@
+{
+  "options": [
+    {
+      "space": "always",
+      "cellAlign": {
+        "defaultDelimiter": "center"
+      }
+    }
+  ]
+}

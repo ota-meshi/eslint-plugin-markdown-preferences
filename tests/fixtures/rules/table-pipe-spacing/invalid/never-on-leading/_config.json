@@ -1,0 +1,10 @@
+{
+  "options": [
+    {
+      "space": {
+        "leading": "never",
+        "trailing": "always"
+      }
+    }
+  ]
+}

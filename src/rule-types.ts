@@ -490,7 +490,12 @@ type MarkdownPreferencesTablePipeSpacing = []|[{
     leading?: ("always" | "never")
     trailing?: ("always" | "never")
   })
-  alignToDelimiterAlignment?: boolean
+  cellAlign?: (("left" | "center" | "right") | {
+    defaultDelimiter?: ("left" | "center" | "right" | "ignore")
+    leftAlignmentDelimiter?: ("left" | "center" | "right" | "ignore")
+    centerAlignmentDelimiter?: ("left" | "center" | "right" | "ignore")
+    rightAlignmentDelimiter?: ("left" | "center" | "right" | "ignore")
+  })
 }]
 // ----- markdown-preferences/thematic-break-character-style -----
 type MarkdownPreferencesThematicBreakCharacterStyle = []|[{

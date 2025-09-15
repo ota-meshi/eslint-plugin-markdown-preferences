@@ -117,25 +117,22 @@ Code:
   6 | | Bob       | 1995-05-23    | Green          |
   7 |
   8 | |User Name|Date Of Birth|Favorite Color|
-    | ^ [1]     ^ [2]         ^ [4]          ^ [6]
-    |           ^ [3]         ^ [5]
+    |  ^ [1]     ^ [2]         ^ [3]
   9 | |---------|-------------|--------------|
-    | ^ [7]     ^ [8]         ^ [10]         ^ [12]
-    |           ^ [9]         ^ [11]
+    |  ^ [4]     ^ [5]         ^ [6]
  10 | |Alice    |2000-01-01   |Blue          |
-    | ^ [13]    ^ [14]        ^ [15]
+    |  ^ [7]     ^ [8]         ^ [9]
  11 | |Bob      |1995-05-23   |Green         |
-    | ^ [16]    ^ [17]        ^ [18]
+    |  ^ [10]    ^ [11]        ^ [12]
  12 |
  13 | |User Name |Date Of Birth |Favorite Color |
-    | ^ [19]     ^ [20]         ^ [21]
+    |  ^ [13]     ^ [14]         ^ [15]
  14 | |----------|--------------|---------------|
-    | ^ [22]     ^ [23]         ^ [25]          ^ [27]
-    |            ^ [24]         ^ [26]
+    |  ^ [16]     ^ [17]         ^ [18]
  15 | |Alice     |2000-01-01    |Blue           |
-    | ^ [28]     ^ [29]         ^ [30]
+    |  ^ [19]     ^ [20]         ^ [21]
  16 | |Bob       |1995-05-23    |Green          |
-    | ^ [31]     ^ [32]         ^ [33]
+    |  ^ [22]     ^ [23]         ^ [24]
  17 |
 
 Output:
@@ -148,48 +145,397 @@ Output:
   7 |
   8 | | User Name | Date Of Birth | Favorite Color |
   9 | | --------- | ------------- | -------------- |
- 10 | | Alice    | 2000-01-01   | Blue          |
- 11 | | Bob      | 1995-05-23   | Green         |
+ 10 | | Alice   | 2000-01-01  | Blue         |
+ 11 | | Bob     | 1995-05-23  | Green        |
  12 |
  13 | | User Name | Date Of Birth | Favorite Color |
  14 | | ---------- | -------------- | --------------- |
- 15 | | Alice     | 2000-01-01    | Blue           |
- 16 | | Bob       | 1995-05-23    | Green          |
+ 15 | | Alice    | 2000-01-01   | Blue          |
+ 16 | | Bob      | 1995-05-23   | Green         |
  17 |
 
-[1] Expected 1 space after "|".
-[2] Expected 1 space before "|".
-[3] Expected 1 space after "|".
-[4] Expected 1 space before "|".
-[5] Expected 1 space after "|".
-[6] Expected 1 space before "|".
-[7] Expected 1 space after "|".
-[8] Expected 1 space before "|".
-[9] Expected 1 space after "|".
-[10] Expected 1 space before "|".
-[11] Expected 1 space after "|".
-[12] Expected 1 space before "|".
+[1] Expected 1 space after "|" for left-aligned column.
+[2] Expected 1 space after "|" for left-aligned column.
+[3] Expected 1 space after "|" for left-aligned column.
+[4] Expected 1 space after "|" for left-aligned column.
+[5] Expected 1 space after "|" for left-aligned column.
+[6] Expected 1 space after "|" for left-aligned column.
+[7] Expected 1 space after "|" for left-aligned column.
+[8] Expected 1 space after "|" for left-aligned column.
+[9] Expected 1 space after "|" for left-aligned column.
+[10] Expected 1 space after "|" for left-aligned column.
+[11] Expected 1 space after "|" for left-aligned column.
+[12] Expected 1 space after "|" for left-aligned column.
+[13] Expected 1 space after "|" for left-aligned column.
+[14] Expected 1 space after "|" for left-aligned column.
+[15] Expected 1 space after "|" for left-aligned column.
+[16] Expected 1 space after "|" for left-aligned column.
+[17] Expected 1 space after "|" for left-aligned column.
+[18] Expected 1 space after "|" for left-aligned column.
+[19] Expected 1 space after "|" for left-aligned column.
+[20] Expected 1 space after "|" for left-aligned column.
+[21] Expected 1 space after "|" for left-aligned column.
+[22] Expected 1 space after "|" for left-aligned column.
+[23] Expected 1 space after "|" for left-aligned column.
+[24] Expected 1 space after "|" for left-aligned column.
+---
+
+
+Test: table-pipe-spacing >> invalid >>> "# Tables with aligned pipes\n\n|  User Name     |  Date Of Birth    |  Favorite Color    |  Age    |\n|  ------------  | :-------------:   |  :---------------  |  ----:  |\n|   Alice        |   2000-01-01      |   Blue             |   24    |\n|   Bob          |   1995-05-23      |   Green            |   28    |\n 2"
+Filename: tests/fixtures/rules/table-pipe-spacing/invalid/default-center/align-delimiter-tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+    cellAlign:
+      defaultDelimiter: center
+Plugins: unable to serialize
+
+Code:
+  1 | # Tables with aligned pipes
+  2 |
+  3 | |  User Name     |  Date Of Birth    |  Favorite Color    |  Age    |
+    |  ^~         ^~~~~ ^~             ^~~~ ^~                        ^~~~
+    |  [1]        [2]   [3]            [4]  [5]                       [6]
+  4 | |  ------------  | :-------------:   |  :---------------  |  ----:  |
+    |                   ^               ^~~ ^~                          ^~
+    |                   [7]             [8] [9]                         [10]
+  5 | |   Alice        |   2000-01-01      |   Blue             |   24    |
+    |  ^~~     ^~~~~~~~ ^~~          ^~~~~~ ^~~                       ^~~~
+    |  [11]    [12]     [13]         [14]   [15]                      [16]
+  6 | |   Bob          |   1995-05-23      |   Green            |   28    |
+    |  ^~~   ^~~~~~~~~~ ^~~          ^~~~~~ ^~~                       ^~~~
+    |  [17]  [18]       [19]         [20]   [21]                      [22]
+  7 |
+
+Output:
+  1 | # Tables with aligned pipes
+  2 |
+  3 | |   User Name    |   Date Of Birth   | Favorite Color     |     Age |
+  4 | |  ------------  |  :-------------:  | :---------------   |   ----: |
+  5 | |     Alice      |    2000-01-01     | Blue               |      24 |
+  6 | |      Bob       |    1995-05-23     | Green              |      28 |
+  7 |
+
+[1] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[2] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[3] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[4] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[5] Expected 1 space after "|" for left-aligned column.
+[6] Expected 1 space before "|" for right-aligned column.
+[7] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[8] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[9] Expected 1 space after "|" for left-aligned column.
+[10] Expected 1 space before "|" for right-aligned column.
+[11] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[12] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[13] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[14] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[15] Expected 1 space after "|" for left-aligned column.
+[16] Expected 1 space before "|" for right-aligned column.
+[17] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[18] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[19] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[20] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[21] Expected 1 space after "|" for left-aligned column.
+[22] Expected 1 space before "|" for right-aligned column.
+---
+
+
+Test: table-pipe-spacing >> invalid >>> "# Tables with aligned pipes\n\n| Fixable | Config |\n| :-----: | :----: |\n|   🔧    |        |\n|   🔧     |        |\n|    🔧   |        |\n 2"
+Filename: tests/fixtures/rules/table-pipe-spacing/invalid/default-center/align-delimiter-with-emoji-tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+    cellAlign:
+      defaultDelimiter: center
+Plugins: unable to serialize
+
+Code:
+  1 | # Tables with aligned pipes
+  2 |
+  3 | | Fixable | Config |
+  4 | | :-----: | :----: |
+  5 | |   🔧    |        |
+  6 | |   🔧     |        |
+    |  ^~~  ^~~~~
+    |  [1]  [2]
+  7 | |    🔧   |        |
+    |  ^~~~  ^~~
+    |  [3]   [4]
+  8 |
+
+Output:
+  1 | # Tables with aligned pipes
+  2 |
+  3 | | Fixable | Config |
+  4 | | :-----: | :----: |
+  5 | |   🔧    |        |
+  6 | |    🔧    |        |
+  7 | |   🔧    |        |
+  8 |
+
+[1] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[2] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[3] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[4] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+---
+
+
+Test: table-pipe-spacing >> invalid >>> "# Tables\n\n| User Name | Date Of Birth | Favorite Color |\n| --------- | ------------- | -------------- |\n| Alice     | 2000-01-01    | Blue           |\n| Bob       | 1995-05-23    | Green          |\n\n|User Name|Date Of Birth|Favorite Color|\n|---------|-------------|--------------|\n|Alice    |2000-01-01   |Blue          |\n|Bob      |1995-05-23   |Green         |\n\n|User Name |Date Of Birth |Favorite Color |\n|----------|--------------|---------------|\n|Alice     |2000-01-01    |Blue           |\n|Bob       |1995-05-23    |Green          |\n 2"
+Filename: tests/fixtures/rules/table-pipe-spacing/invalid/default-center/tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+    cellAlign:
+      defaultDelimiter: center
+Plugins: unable to serialize
+
+Code:
+  1 | # Tables
+  2 |
+  3 | | User Name | Date Of Birth | Favorite Color |
+  4 | | --------- | ------------- | -------------- |
+  5 | | Alice     | 2000-01-01    | Blue           |
+    |  ^     ^~~~~ ^          ^~~~ ^    ^~~~~~~~~~~
+    |  [1]   [2]   [3]        [4]  [5]  [6]
+  6 | | Bob       | 1995-05-23    | Green          |
+    |  ^   ^~~~~~~ ^          ^~~~ ^     ^~~~~~~~~~
+    |  [7] [8]     [9]        [10] [11]  [12]
+  7 |
+  8 | |User Name|Date Of Birth|Favorite Color|
+    | ^ [13]    ^ [14]        ^ [16]         ^ [18]
+    |           ^ [15]        ^ [17]
+  9 | |---------|-------------|--------------|
+    | ^ [19]    ^ [20]        ^ [22]         ^ [24]
+    |           ^ [21]        ^ [23]
+ 10 | |Alice    |2000-01-01   |Blue          |
+    |  ^ [25]    ^ [27]    ^~~ [28]
+    |       ^~~~ [26]          ^ [29]
+    |                              ^~~~~~~~~~ [30]
+ 11 | |Bob      |1995-05-23   |Green         |
+    |  ^ [31]    ^ [33]    ^~~ [34] ^~~~~~~~~ [36]
+    |     ^~~~~~ [32]          ^ [35]
+ 12 |
+ 13 | |User Name |Date Of Birth |Favorite Color |
+    | ^ [37]     ^ [38]         ^ [39]
+ 14 | |----------|--------------|---------------|
+    | ^ [40]     ^ [41]         ^ [43]          ^ [45]
+    |            ^ [42]         ^ [44]
+ 15 | |Alice     |2000-01-01    |Blue           |
+    |  ^ [46]     ^ [48]    ^~~~ [49]
+    |       ^~~~~ [47]           ^ [50]
+    |                                ^~~~~~~~~~~ [51]
+ 16 | |Bob       |1995-05-23    |Green          |
+    |  ^ [52]     ^ [54]    ^~~~ [55] ^~~~~~~~~~ [57]
+    |     ^~~~~~~ [53]           ^ [56]
+ 17 |
+
+Output:
+  1 | # Tables
+  2 |
+  3 | | User Name | Date Of Birth | Favorite Color |
+  4 | | --------- | ------------- | -------------- |
+  5 | |   Alice   |  2000-01-01   |      Blue      |
+  6 | |    Bob    |  1995-05-23   |     Green      |
+  7 |
+  8 | | User Name | Date Of Birth | Favorite Color |
+  9 | | --------- | ------------- | -------------- |
+ 10 | |  Alice  | 2000-01-01  |     Blue     |
+ 11 | |   Bob   | 1995-05-23  |    Green     |
+ 12 |
+ 13 | | User Name | Date Of Birth | Favorite Color |
+ 14 | | ---------- | -------------- | --------------- |
+ 15 | |  Alice   |  2000-01-01  |     Blue      |
+ 16 | |   Bob    |  1995-05-23  |     Green     |
+ 17 |
+
+[1] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[2] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[3] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[4] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[5] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[6] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[7] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[8] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[9] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[10] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[11] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[12] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
 [13] Expected 1 space after "|".
-[14] Expected 1 space after "|".
+[14] Expected 1 space before "|".
 [15] Expected 1 space after "|".
-[16] Expected 1 space after "|".
+[16] Expected 1 space before "|".
 [17] Expected 1 space after "|".
-[18] Expected 1 space after "|".
+[18] Expected 1 space before "|".
 [19] Expected 1 space after "|".
-[20] Expected 1 space after "|".
+[20] Expected 1 space before "|".
 [21] Expected 1 space after "|".
-[22] Expected 1 space after "|".
-[23] Expected 1 space before "|".
-[24] Expected 1 space after "|".
-[25] Expected 1 space before "|".
-[26] Expected 1 space after "|".
-[27] Expected 1 space before "|".
-[28] Expected 1 space after "|".
-[29] Expected 1 space after "|".
-[30] Expected 1 space after "|".
-[31] Expected 1 space after "|".
-[32] Expected 1 space after "|".
-[33] Expected 1 space after "|".
+[22] Expected 1 space before "|".
+[23] Expected 1 space after "|".
+[24] Expected 1 space before "|".
+[25] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[26] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[27] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[28] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[29] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[30] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[31] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[32] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[33] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[34] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[35] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[36] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[37] Expected 1 space after "|".
+[38] Expected 1 space after "|".
+[39] Expected 1 space after "|".
+[40] Expected 1 space after "|".
+[41] Expected 1 space before "|".
+[42] Expected 1 space after "|".
+[43] Expected 1 space before "|".
+[44] Expected 1 space after "|".
+[45] Expected 1 space before "|".
+[46] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[47] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[48] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[49] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[50] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[51] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[52] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[53] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[54] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[55] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[56] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+[57] Expected the number of spaces before and after the content to be the same or differ by 1 at most for center-aligned column.
+---
+
+
+Test: table-pipe-spacing >> invalid
+Filename: tests/fixtures/rules/table-pipe-spacing/invalid/never/align-delimiter-tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+Plugins: unable to serialize
+
+Code:
+  1 | # Tables with aligned pipes
+  2 |
+  3 | |  User Name     |  Date Of Birth    |  Favorite Color    |  Age    |
+    | ^ [1]            ^ [2]               ^ [3]                ^ [4]
+  4 | |  ------------  | :-------------:   |  :---------------  |  ----:  |
+    | ^ [5]            ^ [6]               ^ [8]                ^ [10]    ^ [12]
+    |                  ^ [7]               ^ [9]                ^ [11]
+  5 | |   Alice        |   2000-01-01      |   Blue             |   24    |
+    | ^ [13]           ^ [14]              ^ [15]               ^ [16]
+  6 | |   Bob          |   1995-05-23      |   Green            |   28    |
+    | ^ [17]           ^ [18]              ^ [19]               ^ [20]
+  7 |
+  8 | | User Name  | Date Of Birth | Favorite Color | Age  |
+    | ^ [21]       ^ [22]          ^ [23]           ^ [24]
+  9 | |------------|:-------------:|:---------------|-----:|
+ 10 | |Alice       |  2000-01-01   |Blue            |24    |
+    |              ^ [25]
+ 11 | |         Bob|  1995-05-23   |           Green|    28|
+    | ^ [26]       ^ [27]          ^ [28]           ^ [29]
+ 12 |
+
+Output:
+  1 | # Tables with aligned pipes
+  2 |
+  3 | |User Name     |Date Of Birth    |Favorite Color    |Age    |
+  4 | |------------|:-------------:|:---------------|----:|
+  5 | |Alice        |2000-01-01      |Blue             |24    |
+  6 | |Bob          |1995-05-23      |Green            |28    |
+  7 |
+  8 | |User Name  |Date Of Birth |Favorite Color |Age  |
+  9 | |------------|:-------------:|:---------------|-----:|
+ 10 | |Alice       |2000-01-01   |Blue            |24    |
+ 11 | |Bob|1995-05-23   |Green|28|
+ 12 |
+
+[1] Expected no space after "|".
+[2] Expected no space after "|".
+[3] Expected no space after "|".
+[4] Expected no space after "|".
+[5] Expected no space after "|".
+[6] Expected no space before "|".
+[7] Expected no space after "|".
+[8] Expected no space before "|".
+[9] Expected no space after "|".
+[10] Expected no space before "|".
+[11] Expected no space after "|".
+[12] Expected no space before "|".
+[13] Expected no space after "|".
+[14] Expected no space after "|".
+[15] Expected no space after "|".
+[16] Expected no space after "|".
+[17] Expected no space after "|".
+[18] Expected no space after "|".
+[19] Expected no space after "|".
+[20] Expected no space after "|".
+[21] Expected no space after "|".
+[22] Expected no space after "|".
+[23] Expected no space after "|".
+[24] Expected no space after "|".
+[25] Expected no space after "|".
+[26] Expected no space after "|".
+[27] Expected no space after "|".
+[28] Expected no space after "|".
+[29] Expected no space after "|".
+---
+
+
+Test: table-pipe-spacing >> invalid >>> "# Tables with aligned pipes\n\n| Fixable | Config |\n| :-----: | :----: |\n|   🔧    |        |\n|   🔧     |        |\n|    🔧   |        |\n 3"
+Filename: tests/fixtures/rules/table-pipe-spacing/invalid/never/align-delimiter-with-emoji-tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+Plugins: unable to serialize
+
+Code:
+  1 | # Tables with aligned pipes
+  2 |
+  3 | | Fixable | Config |
+    | ^ [1]     ^ [2]
+  4 | | :-----: | :----: |
+    | ^ [3]     ^ [4]    ^ [6]
+    |           ^ [5]
+  5 | |   🔧    |        |
+    | ^ [7]
+  6 | |   🔧     |        |
+    | ^ [8]
+  7 | |    🔧   |        |
+    | ^ [9]
+  8 |
+
+Output:
+  1 | # Tables with aligned pipes
+  2 |
+  3 | |Fixable |Config |
+  4 | |:-----:|:----:|
+  5 | |🔧    |        |
+  6 | |🔧     |        |
+  7 | |🔧   |        |
+  8 |
+
+[1] Expected no space after "|".
+[2] Expected no space after "|".
+[3] Expected no space after "|".
+[4] Expected no space before "|".
+[5] Expected no space after "|".
+[6] Expected no space before "|".
+[7] Expected no space after "|".
+[8] Expected no space after "|".
+[9] Expected no space after "|".
 ---
 
 
@@ -233,7 +579,7 @@ Output:
 ---
 
 
-Test: table-pipe-spacing >> invalid >>> "# Tables\n\n| User Name | Date Of Birth | Favorite Color |\n| --------- | ------------- | -------------- |\n| Alice     | 2000-01-01    | Blue           |\n| Bob       | 1995-05-23    | Green          |\n\n|User Name|Date Of Birth|Favorite Color|\n|---------|-------------|--------------|\n|Alice    |2000-01-01   |Blue          |\n|Bob      |1995-05-23   |Green         |\n\n|User Name |Date Of Birth |Favorite Color |\n|----------|--------------|---------------|\n|Alice     |2000-01-01    |Blue           |\n|Bob       |1995-05-23    |Green          |\n 2"
+Test: table-pipe-spacing >> invalid >>> "# Tables\n\n| User Name | Date Of Birth | Favorite Color |\n| --------- | ------------- | -------------- |\n| Alice     | 2000-01-01    | Blue           |\n| Bob       | 1995-05-23    | Green          |\n\n|User Name|Date Of Birth|Favorite Color|\n|---------|-------------|--------------|\n|Alice    |2000-01-01   |Blue          |\n|Bob      |1995-05-23   |Green         |\n\n|User Name |Date Of Birth |Favorite Color |\n|----------|--------------|---------------|\n|Alice     |2000-01-01    |Blue           |\n|Bob       |1995-05-23    |Green          |\n 3"
 Filename: tests/fixtures/rules/table-pipe-spacing/invalid/never/tables-input.md
 Language: markdown/gfm
 LanguageOptions:
@@ -303,7 +649,251 @@ Output:
 ---
 
 
-Test: table-pipe-spacing >> invalid >>> "# Tables\n\n| User Name | Date Of Birth | Favorite Color |\n| --------- | ------------- | -------------- |\n| Alice     | 2000-01-01    | Blue           |\n| Bob       | 1995-05-23    | Green          |\n\n|User Name|Date Of Birth|Favorite Color|\n|---------|-------------|--------------|\n|Alice    |2000-01-01   |Blue          |\n|Bob      |1995-05-23   |Green         |\n\n|User Name |Date Of Birth |Favorite Color |\n|----------|--------------|---------------|\n|Alice     |2000-01-01    |Blue           |\n|Bob       |1995-05-23    |Green          |\n 3"
+Test: table-pipe-spacing >> invalid >>> "# Tables with aligned pipes\n\n|  User Name     |  Date Of Birth    |  Favorite Color    |  Age    |\n|  ------------  | :-------------:   |  :---------------  |  ----:  |\n|   Alice        |   2000-01-01      |   Blue             |   24    |\n|   Bob          |   1995-05-23      |   Green            |   28    |\n\n| User Name  | Date Of Birth | Favorite Color | Age  |\n|------------|:-------------:|:---------------|-----:|\n|Alice       |  2000-01-01   |Blue            |24    |\n|         Bob|  1995-05-23   |           Green|    28|\n 2"
+Filename: tests/fixtures/rules/table-pipe-spacing/invalid/never-on-leading/align-delimiter-tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space:
+      leading: never
+      trailing: always
+Plugins: unable to serialize
+
+Code:
+  1 | # Tables with aligned pipes
+  2 |
+  3 | |  User Name     |  Date Of Birth    |  Favorite Color    |  Age    |
+    |  ^~ [1]          ^ [2]                ^~ [3]              ^ [4]
+  4 | |  ------------  | :-------------:   |  :---------------  |  ----:  |
+    |  ^~ [5]          ^ [6]                ^~ [7]              ^ [8]
+  5 | |   Alice        |   2000-01-01      |   Blue             |   24    |
+    |  ^~~ [9]         ^ [10]               ^~~ [11]            ^ [12]
+  6 | |   Bob          |   1995-05-23      |   Green            |   28    |
+    |  ^~~ [13]        ^ [14]               ^~~ [15]            ^ [16]
+  7 |
+  8 | | User Name  | Date Of Birth | Favorite Color | Age  |
+    |  ^ [17]      ^ [18]           ^ [19]          ^ [20]
+  9 | |------------|:-------------:|:---------------|-----:|
+    |              ^ [21]          ^ [22]           ^ [23] ^ [24]
+ 10 | |Alice       |  2000-01-01   |Blue            |24    |
+    |              ^ [25]
+ 11 | |         Bob|  1995-05-23   |           Green|    28|
+    |  ^~~~~~~~~   ^                ^~~~~~~~~~~     ^      ^
+    |  [26]        [27]             [28]            [29]   [30]
+ 12 |
+
+Output:
+  1 | # Tables with aligned pipes
+  2 |
+  3 | |User Name       |Date Of Birth    |Favorite Color      |Age    |
+  4 | |------------    |:-------------:   |:---------------    |----:  |
+  5 | |Alice           |2000-01-01      |Blue                |24    |
+  6 | |Bob             |1995-05-23      |Green               |28    |
+  7 |
+  8 | |User Name   |Date Of Birth |Favorite Color  |Age  |
+  9 | |------------ |:-------------: |:--------------- |-----: |
+ 10 | |Alice       |2000-01-01   |Blue            |24    |
+ 11 | |Bob         |1995-05-23   |Green           |28 |
+ 12 |
+
+[1] Expected no space after "|" for left-aligned column.
+[2] Expected no space after "|".
+[3] Expected no space after "|" for left-aligned column.
+[4] Expected no space after "|".
+[5] Expected no space after "|" for left-aligned column.
+[6] Expected no space after "|".
+[7] Expected no space after "|" for left-aligned column.
+[8] Expected no space after "|".
+[9] Expected no space after "|" for left-aligned column.
+[10] Expected no space after "|".
+[11] Expected no space after "|" for left-aligned column.
+[12] Expected no space after "|".
+[13] Expected no space after "|" for left-aligned column.
+[14] Expected no space after "|".
+[15] Expected no space after "|" for left-aligned column.
+[16] Expected no space after "|".
+[17] Expected no space after "|" for left-aligned column.
+[18] Expected no space after "|".
+[19] Expected no space after "|" for left-aligned column.
+[20] Expected no space after "|".
+[21] Expected 1 space before "|".
+[22] Expected 1 space before "|".
+[23] Expected 1 space before "|".
+[24] Expected 1 space before "|".
+[25] Expected no space after "|".
+[26] Expected no space after "|" for left-aligned column.
+[27] Expected no space after "|".
+[28] Expected no space after "|" for left-aligned column.
+[29] Expected no space after "|".
+[30] Expected 1 space before "|".
+---
+
+
+Test: table-pipe-spacing >> invalid >>> "# Tables with aligned pipes\n\n| Fixable | Config |\n| :-----: | :----: |\n|   🔧    |        |\n|   🔧     |        |\n|    🔧   |        |\n 4"
+Filename: tests/fixtures/rules/table-pipe-spacing/invalid/never-on-leading/align-delimiter-with-emoji-tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space:
+      leading: never
+      trailing: always
+Plugins: unable to serialize
+
+Code:
+  1 | # Tables with aligned pipes
+  2 |
+  3 | | Fixable | Config |
+    | ^ [1]     ^ [2]
+  4 | | :-----: | :----: |
+    | ^ [3]     ^ [4]
+  5 | |   🔧    |        |
+    | ^ [5]
+  6 | |   🔧     |        |
+    | ^ [6]
+  7 | |    🔧   |        |
+    | ^ [7]
+  8 |
+
+Output:
+  1 | # Tables with aligned pipes
+  2 |
+  3 | |Fixable |Config |
+  4 | |:-----: |:----: |
+  5 | |🔧    |        |
+  6 | |🔧     |        |
+  7 | |🔧   |        |
+  8 |
+
+[1] Expected no space after "|".
+[2] Expected no space after "|".
+[3] Expected no space after "|".
+[4] Expected no space after "|".
+[5] Expected no space after "|".
+[6] Expected no space after "|".
+[7] Expected no space after "|".
+---
+
+
+Test: table-pipe-spacing >> invalid >>> "# Empty Tables\n\n|   |   |   |\n| - | - | - |\n|   |   |   |\n|   |   |   |\n 2"
+Filename: tests/fixtures/rules/table-pipe-spacing/invalid/never-on-leading/empty-tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space:
+      leading: never
+      trailing: always
+Plugins: unable to serialize
+
+Code:
+  1 | # Empty Tables
+  2 |
+  3 | |   |   |   |
+  4 | | - | - | - |
+    |  ^   ^   ^
+    |  [1] [2] [3]
+  5 | |   |   |   |
+  6 | |   |   |   |
+  7 |
+
+Output:
+  1 | # Empty Tables
+  2 |
+  3 | |   |   |   |
+  4 | |-  |-  |-  |
+  5 | |   |   |   |
+  6 | |   |   |   |
+  7 |
+
+[1] Expected no space after "|" for left-aligned column.
+[2] Expected no space after "|" for left-aligned column.
+[3] Expected no space after "|" for left-aligned column.
+---
+
+
+Test: table-pipe-spacing >> invalid >>> "# Tables\n\n| User Name | Date Of Birth | Favorite Color |\n| --------- | ------------- | -------------- |\n| Alice     | 2000-01-01    | Blue           |\n| Bob       | 1995-05-23    | Green          |\n\n|User Name|Date Of Birth|Favorite Color|\n|---------|-------------|--------------|\n|Alice    |2000-01-01   |Blue          |\n|Bob      |1995-05-23   |Green         |\n\n|User Name |Date Of Birth |Favorite Color |\n|----------|--------------|---------------|\n|Alice     |2000-01-01    |Blue           |\n|Bob       |1995-05-23    |Green          |\n 4"
+Filename: tests/fixtures/rules/table-pipe-spacing/invalid/never-on-leading/tables-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space:
+      leading: never
+      trailing: always
+Plugins: unable to serialize
+
+Code:
+  1 | # Tables
+  2 |
+  3 | | User Name | Date Of Birth | Favorite Color |
+    |  ^ [1]       ^ [2]           ^ [3]
+  4 | | --------- | ------------- | -------------- |
+    |  ^ [4]       ^ [5]           ^ [6]
+  5 | | Alice     | 2000-01-01    | Blue           |
+    |  ^ [7]       ^ [8]           ^ [9]
+  6 | | Bob       | 1995-05-23    | Green          |
+    |  ^ [10]      ^ [11]          ^ [12]
+  7 |
+  8 | |User Name|Date Of Birth|Favorite Color|
+    |           ^ [13]        ^ [14]         ^ [15]
+  9 | |---------|-------------|--------------|
+    |           ^ [16]        ^ [17]         ^ [18]
+ 10 | |Alice    |2000-01-01   |Blue          |
+ 11 | |Bob      |1995-05-23   |Green         |
+ 12 |
+ 13 | |User Name |Date Of Birth |Favorite Color |
+ 14 | |----------|--------------|---------------|
+    |            ^ [19]         ^ [20]          ^ [21]
+ 15 | |Alice     |2000-01-01    |Blue           |
+ 16 | |Bob       |1995-05-23    |Green          |
+ 17 |
+
+Output:
+  1 | # Tables
+  2 |
+  3 | |User Name  |Date Of Birth  |Favorite Color  |
+  4 | |---------  |-------------  |--------------  |
+  5 | |Alice      |2000-01-01     |Blue            |
+  6 | |Bob        |1995-05-23     |Green           |
+  7 |
+  8 | |User Name |Date Of Birth |Favorite Color |
+  9 | |--------- |------------- |-------------- |
+ 10 | |Alice    |2000-01-01   |Blue          |
+ 11 | |Bob      |1995-05-23   |Green         |
+ 12 |
+ 13 | |User Name |Date Of Birth |Favorite Color |
+ 14 | |---------- |-------------- |--------------- |
+ 15 | |Alice     |2000-01-01    |Blue           |
+ 16 | |Bob       |1995-05-23    |Green          |
+ 17 |
+
+[1] Expected no space after "|" for left-aligned column.
+[2] Expected no space after "|" for left-aligned column.
+[3] Expected no space after "|" for left-aligned column.
+[4] Expected no space after "|" for left-aligned column.
+[5] Expected no space after "|" for left-aligned column.
+[6] Expected no space after "|" for left-aligned column.
+[7] Expected no space after "|" for left-aligned column.
+[8] Expected no space after "|" for left-aligned column.
+[9] Expected no space after "|" for left-aligned column.
+[10] Expected no space after "|" for left-aligned column.
+[11] Expected no space after "|" for left-aligned column.
+[12] Expected no space after "|" for left-aligned column.
+[13] Expected 1 space before "|".
+[14] Expected 1 space before "|".
+[15] Expected 1 space before "|".
+[16] Expected 1 space before "|".
+[17] Expected 1 space before "|".
+[18] Expected 1 space before "|".
+[19] Expected 1 space before "|".
+[20] Expected 1 space before "|".
+[21] Expected 1 space before "|".
+---
+
+
+Test: table-pipe-spacing >> invalid >>> "# Tables\n\n| User Name | Date Of Birth | Favorite Color |\n| --------- | ------------- | -------------- |\n| Alice     | 2000-01-01    | Blue           |\n| Bob       | 1995-05-23    | Green          |\n\n|User Name|Date Of Birth|Favorite Color|\n|---------|-------------|--------------|\n|Alice    |2000-01-01   |Blue          |\n|Bob      |1995-05-23   |Green         |\n\n|User Name |Date Of Birth |Favorite Color |\n|----------|--------------|---------------|\n|Alice     |2000-01-01    |Blue           |\n|Bob       |1995-05-23    |Green          |\n 5"
 Filename: tests/fixtures/rules/table-pipe-spacing/invalid/tables-input.md
 Language: markdown/gfm
 LanguageOptions:
@@ -319,25 +909,22 @@ Code:
   6 | | Bob       | 1995-05-23    | Green          |
   7 |
   8 | |User Name|Date Of Birth|Favorite Color|
-    | ^ [1]     ^ [2]         ^ [4]          ^ [6]
-    |           ^ [3]         ^ [5]
+    |  ^ [1]     ^ [2]         ^ [3]
   9 | |---------|-------------|--------------|
-    | ^ [7]     ^ [8]         ^ [10]         ^ [12]
-    |           ^ [9]         ^ [11]
+    |  ^ [4]     ^ [5]         ^ [6]
  10 | |Alice    |2000-01-01   |Blue          |
-    | ^ [13]    ^ [14]        ^ [15]
+    |  ^ [7]     ^ [8]         ^ [9]
  11 | |Bob      |1995-05-23   |Green         |
-    | ^ [16]    ^ [17]        ^ [18]
+    |  ^ [10]    ^ [11]        ^ [12]
  12 |
  13 | |User Name |Date Of Birth |Favorite Color |
-    | ^ [19]     ^ [20]         ^ [21]
+    |  ^ [13]     ^ [14]         ^ [15]
  14 | |----------|--------------|---------------|
-    | ^ [22]     ^ [23]         ^ [25]          ^ [27]
-    |            ^ [24]         ^ [26]
+    |  ^ [16]     ^ [17]         ^ [18]
  15 | |Alice     |2000-01-01    |Blue           |
-    | ^ [28]     ^ [29]         ^ [30]
+    |  ^ [19]     ^ [20]         ^ [21]
  16 | |Bob       |1995-05-23    |Green          |
-    | ^ [31]     ^ [32]         ^ [33]
+    |  ^ [22]     ^ [23]         ^ [24]
  17 |
 
 Output:
@@ -350,46 +937,37 @@ Output:
   7 |
   8 | | User Name | Date Of Birth | Favorite Color |
   9 | | --------- | ------------- | -------------- |
- 10 | | Alice    | 2000-01-01   | Blue          |
- 11 | | Bob      | 1995-05-23   | Green         |
+ 10 | | Alice   | 2000-01-01  | Blue         |
+ 11 | | Bob     | 1995-05-23  | Green        |
  12 |
  13 | | User Name | Date Of Birth | Favorite Color |
  14 | | ---------- | -------------- | --------------- |
- 15 | | Alice     | 2000-01-01    | Blue           |
- 16 | | Bob       | 1995-05-23    | Green          |
+ 15 | | Alice    | 2000-01-01   | Blue          |
+ 16 | | Bob      | 1995-05-23   | Green         |
  17 |
 
-[1] Expected 1 space after "|".
-[2] Expected 1 space before "|".
-[3] Expected 1 space after "|".
-[4] Expected 1 space before "|".
-[5] Expected 1 space after "|".
-[6] Expected 1 space before "|".
-[7] Expected 1 space after "|".
-[8] Expected 1 space before "|".
-[9] Expected 1 space after "|".
-[10] Expected 1 space before "|".
-[11] Expected 1 space after "|".
-[12] Expected 1 space before "|".
-[13] Expected 1 space after "|".
-[14] Expected 1 space after "|".
-[15] Expected 1 space after "|".
-[16] Expected 1 space after "|".
-[17] Expected 1 space after "|".
-[18] Expected 1 space after "|".
-[19] Expected 1 space after "|".
-[20] Expected 1 space after "|".
-[21] Expected 1 space after "|".
-[22] Expected 1 space after "|".
-[23] Expected 1 space before "|".
-[24] Expected 1 space after "|".
-[25] Expected 1 space before "|".
-[26] Expected 1 space after "|".
-[27] Expected 1 space before "|".
-[28] Expected 1 space after "|".
-[29] Expected 1 space after "|".
-[30] Expected 1 space after "|".
-[31] Expected 1 space after "|".
-[32] Expected 1 space after "|".
-[33] Expected 1 space after "|".
+[1] Expected 1 space after "|" for left-aligned column.
+[2] Expected 1 space after "|" for left-aligned column.
+[3] Expected 1 space after "|" for left-aligned column.
+[4] Expected 1 space after "|" for left-aligned column.
+[5] Expected 1 space after "|" for left-aligned column.
+[6] Expected 1 space after "|" for left-aligned column.
+[7] Expected 1 space after "|" for left-aligned column.
+[8] Expected 1 space after "|" for left-aligned column.
+[9] Expected 1 space after "|" for left-aligned column.
+[10] Expected 1 space after "|" for left-aligned column.
+[11] Expected 1 space after "|" for left-aligned column.
+[12] Expected 1 space after "|" for left-aligned column.
+[13] Expected 1 space after "|" for left-aligned column.
+[14] Expected 1 space after "|" for left-aligned column.
+[15] Expected 1 space after "|" for left-aligned column.
+[16] Expected 1 space after "|" for left-aligned column.
+[17] Expected 1 space after "|" for left-aligned column.
+[18] Expected 1 space after "|" for left-aligned column.
+[19] Expected 1 space after "|" for left-aligned column.
+[20] Expected 1 space after "|" for left-aligned column.
+[21] Expected 1 space after "|" for left-aligned column.
+[22] Expected 1 space after "|" for left-aligned column.
+[23] Expected 1 space after "|" for left-aligned column.
+[24] Expected 1 space after "|" for left-aligned column.
 ---

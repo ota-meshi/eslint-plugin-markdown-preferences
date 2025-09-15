@@ -52,13 +52,20 @@ You can configure the rule to require or disallow spaces, or specify different r
 
 ## 🔧 Options
 
+You can also use a shorthand form to specify a single alignment for all columns:
+
 ```json
 {
   "markdown-preferences/table-pipe-spacing": [
     "error",
     {
       "space": "always",
-      "alignToDelimiterAlignment": true
+      "cellAlign": {
+        "defaultDelimiter": "left",
+        "leftAlignmentDelimiter": "left",
+        "centerAlignmentDelimiter": "center",
+        "rightAlignmentDelimiter": "right"
+      }
     }
   ]
 }
@@ -67,11 +74,18 @@ You can configure the rule to require or disallow spaces, or specify different r
 - `space`: Defines the spacing style around table pipes. Possible values are:
   - `"always"`: Requires a single space before and after each pipe. This is the default behavior.
   - `"never"`: Disallows any spaces before or after pipes. However, spaces between cell content and the trailing pipe in headers and bodies are allowed.
-  - object: Allows specifying different spacing rules for leading and trailing pipes.
-    Each property can be set to `"always"` or `"never"`.
+  - object: Allows specifying different spacing rules for leading and trailing pipes. Each property can be set to `"always"` or `"never"`.
     - `leading`: Spacing rule for between the leading pipe and the cell content.
     - `trailing`: Spacing rule for between the trailing pipe and the delimiter.
-- `alignToDelimiterAlignment`: Aligns spaces based on the alignment of the delimiter row. If set to `true`, the rule will ensure that spaces around pipes are consistent with the alignment specified in the delimiter row (e.g., left-aligned, right-aligned, center-aligned). This helps maintain a visually appealing table structure. This option is only applicable when `space` is set to `"always"`. The default value is `true`.
+- `cellAlign`: Controls the alignment of table cell content. Some conflicting options may be ignored when `space` is set to `never`. Possible values are:
+  - `"left"`: All columns will be left-aligned, regardless of the delimiter row.
+  - `"center"`: All columns will be center-aligned, regardless of the delimiter row.
+  - `"right"`: All columns will be right-aligned, regardless of the delimiter row.
+  - object: Allows specifying the alignment for each delimiter type. Each property can be set to `"left"`, `"center"`, `"right"`, or `"ignore"`. If `"ignore"` is specified, alignment will not be enforced for that delimiter type.
+    - `defaultDelimiter`: (optional) Alignment for columns whose delimiter row does not specify alignment (e.g., just `---`). Defaults to `"left"` if not specified.
+    - `leftAlignmentDelimiter`: (optional) Alignment for columns whose delimiter row indicates left alignment (e.g., `:---`). Defaults to `"left"` if not specified.
+    - `centerAlignmentDelimiter`: (optional) Alignment for columns whose delimiter row indicates center alignment (e.g., `:---:`). Defaults to `"center"` if not specified.
+    - `rightAlignmentDelimiter`: (optional) Alignment for columns whose delimiter row indicates right alignment (e.g., `---:`). Defaults to `"right"` if not specified.
 
 ## 📚 Further Reading
 
@@ -85,10 +99,6 @@ You can configure the rule to require or disallow spaces, or specify different r
 
 ## 🔍 Implementation
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
-
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/table-pipe-spacing.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/table-pipe-spacing.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/table-pipe-spacing)
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->

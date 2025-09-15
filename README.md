@@ -139,8 +139,6 @@ The rules with the following 💄 are included in the `standard` config.
 
 - Rules related to whitespace styles in Markdown.
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
-
 <!-- prettier-ignore-start -->
 
 | Rule ID                                                                                                                                                   | Description                                                          | Fixable | Config |
@@ -159,8 +157,6 @@ The rules with the following 💄 are included in the `standard` config.
 | [markdown-preferences/table-pipe-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-pipe-spacing.html)                   | enforce consistent spacing around table pipes                        |   🔧    |   💄   |
 
 <!-- prettier-ignore-end -->
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
 
 ### Decorative Rules
 
