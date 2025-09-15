@@ -214,7 +214,10 @@ export default createRule<[Options?]>("table-pipe-spacing", {
       } else if (options.leadingSpace === "never") {
         if (pipe.range[1] === nextToken.range[0]) return true;
         context.report({
-          loc: pipe.loc,
+          loc: {
+            start: pipe.loc.end,
+            end: nextToken.loc.start,
+          },
           messageId: "expectedNoSpaceAfter",
           fix(fixer) {
             return fixer.removeRange([pipe.range[1], nextToken.range[0]]);
@@ -245,7 +248,10 @@ export default createRule<[Options?]>("table-pipe-spacing", {
       } else if (options.trailingSpace === "never") {
         if (prevToken.range[1] === pipe.range[0]) return true;
         context.report({
-          loc: pipe.loc,
+          loc: {
+            start: prevToken.loc.end,
+            end: pipe.loc.start,
+          },
           messageId: "expectedNoSpaceBefore",
           fix(fixer) {
             return fixer.removeRange([prevToken.range[1], pipe.range[0]]);
@@ -270,10 +276,13 @@ export default createRule<[Options?]>("table-pipe-spacing", {
         const expectedWidth = options.leadingSpace === "always" ? 1 : 0;
         if (getLeadingSpacesWidth() === expectedWidth) return true;
         context.report({
-          loc: {
-            start: leadingPipe.loc.end,
-            end: content.loc.start,
-          },
+          loc:
+            leadingPipe.range[1] < content.range[0]
+              ? {
+                  start: leadingPipe.loc.end,
+                  end: content.loc.start,
+                }
+              : leadingPipe.loc,
           messageId:
             expectedWidth >= 1
               ? "expectedAlignLeft"
@@ -298,10 +307,13 @@ export default createRule<[Options?]>("table-pipe-spacing", {
         const expectedWidth = options.trailingSpace === "always" ? 1 : 0;
         if (getTrailingSpacesWidth() === expectedWidth) return true;
         context.report({
-          loc: {
-            start: content.loc.end,
-            end: trailingPipe.loc.start,
-          },
+          loc:
+            content.range[1] < trailingPipe.range[0]
+              ? {
+                  start: content.loc.end,
+                  end: trailingPipe.loc.start,
+                }
+              : trailingPipe.loc,
           messageId:
             expectedWidth >= 1
               ? "expectedAlignRight"
@@ -330,14 +342,20 @@ export default createRule<[Options?]>("table-pipe-spacing", {
           leadingSpacesWidth + 1 === trailingSpacesWidth
         )
           return true;
-        const leadingReportLoc: SourceLocation = {
-          start: leadingPipe.loc.end,
-          end: content.loc.start,
-        };
-        const trailingReportLoc: SourceLocation = {
-          start: content.loc.end,
-          end: trailingPipe.loc.start,
-        };
+        const leadingReportLoc: SourceLocation =
+          leadingPipe.range[1] < content.range[0]
+            ? {
+                start: leadingPipe.loc.end,
+                end: content.loc.start,
+              }
+            : leadingPipe.loc;
+        const trailingReportLoc: SourceLocation =
+          content.range[1] < trailingPipe.range[0]
+            ? {
+                start: content.loc.end,
+                end: trailingPipe.loc.start,
+              }
+            : trailingPipe.loc;
         for (const reportLoc of [leadingReportLoc, trailingReportLoc]) {
           context.report({
             loc: reportLoc,
