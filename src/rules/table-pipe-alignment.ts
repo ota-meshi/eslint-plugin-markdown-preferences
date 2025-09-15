@@ -6,7 +6,7 @@ import type {
 } from "../utils/table.ts";
 import { parseTable } from "../utils/table.ts";
 import type { SourceLocation } from "estree";
-import { getTextWidth } from "../utils/get-text-width.ts";
+import { getTextWidth } from "../utils/text-width.ts";
 
 type Options = {
   column?: "minimum" | "consistent";
@@ -120,7 +120,10 @@ export default createRule<[Options]>("table-pipe-alignment", {
     function verifyPipe(
       pipe: TokenData,
       expected: number,
-      cxt: { cell: CellData | DelimiterData; pipeIndex: number },
+      ctx: {
+        cell: CellData | DelimiterData;
+        pipeIndex: number;
+      },
     ): boolean {
       const actual = getTextWidth(
         sourceCode.lines[pipe.loc.start.line - 1].slice(
@@ -140,45 +143,45 @@ export default createRule<[Options]>("table-pipe-alignment", {
         },
         fix(fixer) {
           if (diff > 0) {
-            if (cxt.pipeIndex === 0 || cxt.cell.type === "cell") {
+            if (ctx.pipeIndex === 0 || ctx.cell.type === "cell") {
               return fixer.insertTextBeforeRange(pipe.range, " ".repeat(diff));
             }
             // For delimiter cells
             return fixer.insertTextAfterRange(
-              [cxt.cell.delimiter.range[0], cxt.cell.delimiter.range[0] + 1],
+              [ctx.cell.delimiter.range[0], ctx.cell.delimiter.range[0] + 1],
               "-".repeat(diff),
             );
           }
           const baseEdit = fixRemoveSpaces();
           if (baseEdit) return baseEdit;
-          if (cxt.pipeIndex === 0 || cxt.cell.type === "cell") {
+          if (ctx.pipeIndex === 0 || ctx.cell.type === "cell") {
             return null;
           }
           // For delimiter cells
           const beforeDelimiter = sourceCode.lines[
-            cxt.cell.delimiter.loc.start.line - 1
-          ].slice(0, cxt.cell.delimiter.loc.start.column - 1);
+            ctx.cell.delimiter.loc.start.line - 1
+          ].slice(0, ctx.cell.delimiter.loc.start.column - 1);
           const widthBeforeDelimiter = getTextWidth(beforeDelimiter);
           const newLength = expected - widthBeforeDelimiter;
           const minimumDelimiterLength = getMinimumDelimiterLength(
-            cxt.cell.align,
+            ctx.cell.align,
           );
-          const spaceAfter = isNeedSpaceAfterContent(cxt.cell) ? " " : "";
+          const spaceAfter = isNeedSpaceAfterContent(ctx.cell) ? " " : "";
           if (newLength < minimumDelimiterLength + spaceAfter.length) {
             // Can't fix because it requires removing non-space characters
             return null;
           }
           const delimiterPrefix =
-            cxt.cell.align === "left" || cxt.cell.align === "center" ? ":" : "";
+            ctx.cell.align === "left" || ctx.cell.align === "center" ? ":" : "";
           const delimiterSuffix =
-            (cxt.cell.align === "right" || cxt.cell.align === "center"
+            (ctx.cell.align === "right" || ctx.cell.align === "center"
               ? ":"
               : "") + spaceAfter;
           const newDelimiter = "-".repeat(
             newLength - delimiterPrefix.length - delimiterSuffix.length,
           );
           return fixer.replaceTextRange(
-            [cxt.cell.delimiter.range[0], pipe.range[0]],
+            [ctx.cell.delimiter.range[0], pipe.range[0]],
             delimiterPrefix + newDelimiter + delimiterSuffix,
           );
 
@@ -197,7 +200,7 @@ export default createRule<[Options]>("table-pipe-alignment", {
             const newSpacesLength = expected - widthBeforePipe;
             if (
               newSpacesLength <
-              (cxt.pipeIndex > 0 && isNeedSpaceAfterContent(cxt.cell) ? 1 : 0)
+              (ctx.pipeIndex > 0 && isNeedSpaceAfterContent(ctx.cell) ? 1 : 0)
             ) {
               // Can't fix because it requires removing non-space characters
               return null;

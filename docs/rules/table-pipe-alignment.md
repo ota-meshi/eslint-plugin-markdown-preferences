@@ -69,14 +69,11 @@ The rule can automatically fix many alignment issues using the `--fix` option.
 
 - [markdown-preferences/no-multi-spaces](./no-multi-spaces.md)
 - [markdown-preferences/table-leading-trailing-pipes](./table-leading-trailing-pipes.md)
+- [markdown-preferences/table-pipe-spacing](./table-pipe-spacing.md)
 - [markdown-preferences/table-header-casing](./table-header-casing.md)
 
 ## 🔍 Implementation
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
-
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/table-pipe-alignment.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/table-pipe-alignment.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/table-pipe-alignment)
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->

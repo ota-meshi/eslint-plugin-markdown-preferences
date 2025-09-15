@@ -154,7 +154,7 @@ export function parseTableDelimiterRow(
 /**
  * Parse the table row.
  */
-function parseTableRow(
+export function parseTableRow(
   sourceCode: MarkdownSourceCode,
   node: TableRow,
 ): ParsedTableRow | null {

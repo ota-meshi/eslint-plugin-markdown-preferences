@@ -157,6 +157,7 @@ Bob       | 1995-05-23    | Green
 ## 👫 Related Rules
 
 - [markdown-preferences/table-pipe-alignment](./table-pipe-alignment.md)
+- [markdown-preferences/table-pipe-spacing](./table-pipe-spacing.md)
 - [markdown-preferences/table-header-casing](./table-header-casing.md)
 
 ## 🔍 Implementation

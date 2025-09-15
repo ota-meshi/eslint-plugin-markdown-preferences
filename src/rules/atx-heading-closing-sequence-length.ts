@@ -4,7 +4,7 @@ import type { MarkdownSourceCode } from "@eslint/markdown";
 import type { ParsedATXHeadingWithClosingSequence } from "../utils/atx-heading.ts";
 import { parseATXHeading } from "../utils/atx-heading.ts";
 import { getParsedLines } from "../utils/lines.ts";
-import { getTextWidth } from "../utils/get-text-width.ts";
+import { getTextWidth } from "../utils/text-width.ts";
 
 type Options = {
   mode?:
