@@ -4,7 +4,7 @@ import { getHeadingKind } from "../utils/ast.ts";
 import { parseSetextHeading } from "../utils/setext-heading.ts";
 import { getParsedLines } from "../utils/lines.ts";
 import { parseATXHeading } from "../utils/atx-heading.ts";
-import { getTextWidth } from "../utils/get-text-width.ts";
+import { getTextWidth } from "../utils/text-width.ts";
 
 type OptionObject = {
   style?: "atx" | "setext";

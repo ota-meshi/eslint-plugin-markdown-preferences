@@ -224,6 +224,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/table-pipe-alignment'?: Linter.RuleEntry<MarkdownPreferencesTablePipeAlignment>
   /**
+   * enforce consistent spacing around table pipes
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-pipe-spacing.html
+   */
+  'markdown-preferences/table-pipe-spacing'?: Linter.RuleEntry<MarkdownPreferencesTablePipeSpacing>
+  /**
    * enforce consistent character style for thematic breaks (horizontal rules) in Markdown.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-character-style.html
    */
@@ -478,6 +483,14 @@ type MarkdownPreferencesTableLeadingTrailingPipes = []|[(("always" | "never") | 
 // ----- markdown-preferences/table-pipe-alignment -----
 type MarkdownPreferencesTablePipeAlignment = []|[{
   column?: ("minimum" | "consistent")
+}]
+// ----- markdown-preferences/table-pipe-spacing -----
+type MarkdownPreferencesTablePipeSpacing = []|[{
+  space?: (("always" | "never") | {
+    leading?: ("always" | "never")
+    trailing?: ("always" | "never")
+  })
+  alignToDelimiterAlignment?: boolean
 }]
 // ----- markdown-preferences/thematic-break-character-style -----
 type MarkdownPreferencesThematicBreakCharacterStyle = []|[{

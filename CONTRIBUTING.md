@@ -133,7 +133,7 @@ npm test
 
 This project provides various npm scripts to streamline development and release tasks. The main scripts are listed below:
 
-| スクリプト名      | 説明                                                       |
+| Script            | Description                                                |
 | :---------------- | :--------------------------------------------------------- |
 | build             | Build everything (including metadata and type definitions) |
 | build:meta        | Generate rule metadata (for release)                       |

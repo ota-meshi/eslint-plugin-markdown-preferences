@@ -44,6 +44,7 @@ import strikethroughDelimitersStyle from "../rules/strikethrough-delimiters-styl
 import tableHeaderCasing from "../rules/table-header-casing.ts";
 import tableLeadingTrailingPipes from "../rules/table-leading-trailing-pipes.ts";
 import tablePipeAlignment from "../rules/table-pipe-alignment.ts";
+import tablePipeSpacing from "../rules/table-pipe-spacing.ts";
 import thematicBreakCharacterStyle from "../rules/thematic-break-character-style.ts";
 import thematicBreakLength from "../rules/thematic-break-length.ts";
 import thematicBreakSequencePattern from "../rules/thematic-break-sequence-pattern.ts";
@@ -91,6 +92,7 @@ export const rules = [
   tableHeaderCasing,
   tableLeadingTrailingPipes,
   tablePipeAlignment,
+  tablePipeSpacing,
   thematicBreakCharacterStyle,
   thematicBreakLength,
   thematicBreakSequencePattern,
