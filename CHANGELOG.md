@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.26.1
+
+### Patch Changes
+
+- [#132](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/132) [`f0ed7cb`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/f0ed7cb775eadd6f31d136490daef6932edc72a3) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix([markdown-preferences/definitions-last](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/definitions-last.html)): incorrect fixer for footnote definitions in blockquote
+
 ## 0.26.0
 
 ### Minor Changes
