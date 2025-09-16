@@ -392,10 +392,20 @@ export default createRule<[Options?]>("definitions-last", {
         }
       }
       yield fixer.removeRange([rangeStart, range[1]]);
+      // Remove blockquote quoting ">" from the definition or footnote definition
+      const startColumnOffset = loc.start.column - 1;
+      const insertLines = sourceCode.lines
+        .slice(loc.start.line - 1, loc.end.line)
+        .map((lineText, i, arr) => {
+          if (i === arr.length - 1) {
+            return lineText.slice(startColumnOffset, loc.end.column - 1);
+          }
+          return lineText.slice(startColumnOffset);
+        });
       let insertText =
-        // Remove blockquote quoting ">" from the definition or footnote definition
         sourceCode.text.slice(rangeStart, lineStart) +
-        sourceCode.text.slice(...range);
+        insertLines.join(/\r?\n/u.exec(sourceCode.text)?.[0] ?? "\n");
+
       if (
         prev.type === "footnoteDefinition" &&
         node.type !== "footnoteDefinition" &&

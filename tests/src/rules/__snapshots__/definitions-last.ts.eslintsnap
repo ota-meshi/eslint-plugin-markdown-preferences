@@ -2,6 +2,113 @@
 
 
 Test: definitions-last >> invalid
+Filename: tests/fixtures/rules/definitions-last/invalid/blockquote-definition-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Blockquote with Definition
+  2 |
+  3 | > This is a blockquote.
+  4 | >
+  5 | > [ref]: https://example.com
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  6 |
+  7 | Normal text.
+  8 |
+  9 | [ref]
+ 10 |
+
+Output:
+  1 | # Blockquote with Definition
+  2 |
+  3 | > This is a blockquote.
+  4 | >
+  5 |
+  6 | Normal text.
+  7 |
+  8 | [ref]
+  9 | [ref]: https://example.com
+ 10 |
+
+[1] Definition or footnote definition should be placed at the end of the document.
+---
+
+
+Test: definitions-last >> invalid
+Filename: tests/fixtures/rules/definitions-last/invalid/blockquote-footnote-definition-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Blockquote with Footnote Definition
+  2 |
+  3 | > This is a blockquote.
+  4 | > [^note]: This is a footnote inside blockquote.
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  5 |
+  6 | Normal text.
+  7 |
+  8 | [^note]
+  9 |
+
+Output:
+  1 | # Blockquote with Footnote Definition
+  2 |
+  3 | > This is a blockquote.
+  4 |
+  5 | Normal text.
+  6 |
+  7 | [^note]
+  8 | [^note]: This is a footnote inside blockquote.
+  9 |
+
+[1] Definition or footnote definition should be placed at the end of the document.
+---
+
+
+Test: definitions-last >> invalid
+Filename: tests/fixtures/rules/definitions-last/invalid/blockquote-multiline-footnote-definition-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Blockquote Multiline Invalid Footnote Definition
+  2 |
+  3 | > This is a blockquote.
+  4 | > [^foo]: This is a multiline
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~\ [1]
+  5 | >     footnote definition inside blockquote.
+    | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  6 |
+  7 | Normal text.
+  8 |
+  9 | [^foo]
+ 10 |
+
+Output:
+  1 | # Blockquote Multiline Invalid Footnote Definition
+  2 |
+  3 | > This is a blockquote.
+  4 |
+  5 | Normal text.
+  6 |
+  7 | [^foo]
+  8 | [^foo]: This is a multiline
+  9 |     footnote definition inside blockquote.
+ 10 |
+
+[1] Definition or footnote definition should be placed at the end of the document.
+---
+
+
+Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/first-reference-section-last/multi-section-wrong-position-input.md
 Language: markdown/gfm
 LanguageOptions:
@@ -265,6 +372,45 @@ Output:
 [2] Definition or footnote definition should be placed at the end of the section (L7).
 [3] Definition or footnote definition should be placed at the end of the section (L12).
 [4] Definition or footnote definition should be placed at the end of the section (L7).
+---
+
+
+Test: definitions-last >> invalid
+Filename: tests/fixtures/rules/definitions-last/invalid/multiline-footnote-definition-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Multiline Invalid Footnote Definition
+  2 |
+  3 | Some text.
+  4 |
+  5 | [^bar]: This is a multiline
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~\ [1]
+  6 |     footnote definition that is not at the end.
+    | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  7 |
+  8 | More text.
+  9 |
+ 10 | [^bar]
+ 11 |
+
+Output:
+  1 | # Multiline Invalid Footnote Definition
+  2 |
+  3 | Some text.
+  4 |
+  5 | More text.
+  6 |
+  7 | [^bar]
+  8 |
+  9 | [^bar]: This is a multiline
+ 10 |     footnote definition that is not at the end.
+ 11 |
+
+[1] Definition or footnote definition should be placed at the end of the document.
 ---
 
 
