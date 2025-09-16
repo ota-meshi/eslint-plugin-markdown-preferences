@@ -146,14 +146,13 @@ export default createRule<[Options?]>("definitions-last", {
       nextHeading: Heading | null;
     };
 
-    const sections: Section[] = [
-      {
-        heading: null,
-        linkReferenceIds: new Set(),
-        footnoteReferenceIds: new Set(),
-        nextHeading: null,
-      },
-    ];
+    let lastSection: Section = {
+      heading: null,
+      linkReferenceIds: new Set(),
+      footnoteReferenceIds: new Set(),
+      nextHeading: null,
+    };
+    const sections: [Section, ...Section[]] = [lastSection];
     const definitions: (Definition | FootnoteDefinition)[] = [];
 
     /**
@@ -435,19 +434,23 @@ export default createRule<[Options?]>("definitions-last", {
           // Ignore headings in containers
           return;
         }
-        sections.at(-1)!.nextHeading = node;
-        sections.push({
+        lastSection.nextHeading = node;
+        lastSection = {
           heading: node,
           linkReferenceIds: new Set(),
           footnoteReferenceIds: new Set(),
           nextHeading: null,
-        });
+        };
+        sections.push(lastSection);
       },
       linkReference(node) {
-        sections.at(-1)!.linkReferenceIds.add(node.identifier);
+        lastSection.linkReferenceIds.add(node.identifier);
+      },
+      imageReference(node) {
+        lastSection.linkReferenceIds.add(node.identifier);
       },
       footnoteReference(node) {
-        sections.at(-1)!.footnoteReferenceIds.add(node.identifier);
+        lastSection.footnoteReferenceIds.add(node.identifier);
       },
       "definition, footnoteDefinition"(node: Definition | FootnoteDefinition) {
         definitions.push(node);

@@ -122,23 +122,48 @@ This section also references the same footnote for completeness.[^shared-note]
 This rule provides options to control where link and footnote definitions should be placed, depending on the number of references and the type of definition.
 
 - `linkDefinitionPlacement`: Options for link reference definitions (`[label]: URL`).
-  - `referencedFromSingleSection`: Where to place the definition when it is referenced only from a single section.
+  - `referencedFromSingleSection`: Where to place the definition when it is referenced only from a single section. Default is `"document-last"`.
     - `"document-last"`: At the end of the document.
     - `"section-last"`: At the end of the section where the reference appears.
-  - `referencedFromMultipleSections`: Where to place the definition when it is referenced from two or more sections.
+  - `referencedFromMultipleSections`: Where to place the definition when it is referenced from two or more sections. Default is `"document-last"`.
     - `"document-last"`: At the end of the document.
     - `"first-reference-section-last"`: At the end of the section where the reference is first used.
     - `"last-reference-section-last"`: At the end of the section where the reference is last used.
 - `footnoteDefinitionPlacement`: Options for footnote definitions (`[^label]: text`).
-  - `referencedFromSingleSection`: Where to place the definition when it is referenced only from a single section.
+  - `referencedFromSingleSection`: Where to place the definition when it is referenced only from a single section. Default is `"document-last"`.
     - `"document-last"`: At the end of the document.
     - `"section-last"`: At the end of the section where the reference appears.
-  - `referencedFromMultipleSections`: Where to place the definition when it is referenced from two or more sections.
+  - `referencedFromMultipleSections`: Where to place the definition when it is referenced from two or more sections. Default is `"document-last"`.
     - `"document-last"`: At the end of the document.
     - `"first-reference-section-last"`: At the end of the section where the reference is first used.
     - `"last-reference-section-last"`: At the end of the section where the reference is last used.
 
 ### Example With Options
+
+#### Place Link Definitions at the Last of Each Reference Section (but at the Last of the Document If Referenced From Multiple Sections)
+
+The following options place link definitions at the last of the section where the reference appears. However, if there are multiple references, the definition is placed at the last of the document.
+Footnote definitions are always placed at the last of the document.
+
+This is based on the [Google Markdown Style Guide](https://google.github.io/styleguide/docguide/style.html#define-reference-links-after-their-first-use).
+
+```json
+{
+  "markdown-preferences/definitions-last": [
+    "error",
+    {
+      "linkDefinitionPlacement": {
+        "referencedFromSingleSection": "section-last",
+        "referencedFromMultipleSections": "document-last"
+      },
+      "footnoteDefinitionPlacement": {
+        "referencedFromSingleSection": "document-last",
+        "referencedFromMultipleSections": "document-last"
+      }
+    }
+  ]
+}
+```
 
 <!-- eslint-skip -->
 
