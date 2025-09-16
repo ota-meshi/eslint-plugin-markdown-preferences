@@ -31,5 +31,5 @@
     "vue-postcss",
     "stylus"
   ],
-  "chat.mcp.enabled": true
+  "chat.mcp.access": "all"
 }

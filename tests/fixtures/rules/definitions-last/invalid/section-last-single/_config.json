@@ -1,0 +1,14 @@
+{
+  "options": [
+    {
+      "linkDefinitionPlacement": {
+        "referencedFromSingleSection": "section-last",
+        "referencedFromMultipleSections": "document-last"
+      },
+      "footnoteDefinitionPlacement": {
+        "referencedFromSingleSection": "section-last",
+        "referencedFromMultipleSections": "document-last"
+      }
+    }
+  ]
+}

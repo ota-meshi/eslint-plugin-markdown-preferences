@@ -21,41 +21,263 @@ This rule requires link definitions (`[label]: URL`) and footnote definitions (`
 ```md
 <!-- eslint markdown-preferences/definitions-last: 'error' -->
 
-<!-- ✗ BAD -->
-
-# Document Title
-
-[link]: https://example.com
-
-This content comes after a link definition.
-
-[^note]: This footnote definition is too early.
-
-More content here with [link] and footnote[^note].
-
 <!-- ✓ GOOD -->
 
-# Document Title
+# Example Document
 
-This is some content with [link] references and footnotes[^note].
+## Section 1: Introduction
 
-## Section
+Welcome to our documentation. For more details, see [Project Overview].
+You can also refer to [Project Overview] again in this section for emphasis.
 
-More content here.
+Additionally, check out [User Guide] for another resource.
 
-[link]: https://example.com
+## Section 2: Resources
 
-[^note]: This is a footnote definition.
+In this section, we mention [User Guide] as a useful link.
+
+## Section 3: Notes (Single Section Footnote)
+
+Here is a footnote for further explanation.[^about-section]
+You can also refer to the same footnote again in this section.[^about-section]
+
+## Section 4: Additional Notes (Multiple Sections Footnote)
+
+This section references a footnote used in multiple sections.[^shared-note]
+
+## Section 5: More Notes
+
+This section also references the same footnote for completeness.[^shared-note]
+
+[Project Overview]: https://example.com/project-overview
+[User Guide]: https://example.com/user-guide
+
+[^about-section]: This is a footnote definition referenced only from Section 3.
+
+[^shared-note]: This is a footnote definition referenced from multiple sections (Section 4 and Section 5).
+```
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/definitions-last: 'error' -->
+
+<!-- ✗ BAD -->
+
+# Example Document
+
+## Section 1: Introduction
+
+Welcome to our documentation. For more details, see [Project Overview].
+You can also refer to [Project Overview] again in this section for emphasis.
+
+Additionally, check out [User Guide] for another resource.
+
+[Project Overview]: https://example.com/project-overview
+
+## Section 2: Resources
+
+In this section, we mention [User Guide] as a useful link.
+
+[User Guide]: https://example.com/user-guide
+
+## Section 3: Notes (Single Section Footnote)
+
+Here is a footnote for further explanation.[^about-section]
+You can also refer to the same footnote again in this section.[^about-section]
+
+[^about-section]: This is a footnote definition referenced only from Section 3.
+
+## Section 4: Additional Notes (Multiple Sections Footnote)
+
+This section references a footnote used in multiple sections.[^shared-note]
+
+[^shared-note]: This is a footnote definition referenced from multiple sections (Section 4 and Section 5).
+
+## Section 5: More Notes
+
+This section also references the same footnote for completeness.[^shared-note]
 ```
 
 ## 🔧 Options
 
-This rule has no options.
+```json
+{
+  "markdown-preferences/definitions-last": [
+    "error",
+    {
+      "linkDefinitionPlacement": {
+        "referencedFromSingleSection": "document-last", // "document-last", or "section-last",
+        "referencedFromMultipleSections": "document-last" // "document-last", "first-reference-section-last", or "last-reference-section-last"
+      },
+      "footnoteDefinitionPlacement": {
+        "referencedFromSingleSection": "document-last", // "document-last", or "section-last",
+        "referencedFromMultipleSections": "document-last" // "document-last", "first-reference-section-last", or "last-reference-section-last"
+      }
+    }
+  ]
+}
+```
+
+This rule provides options to control where link and footnote definitions should be placed, depending on the number of references and the type of definition.
+
+- `linkDefinitionPlacement`: Options for link reference definitions (`[label]: URL`).
+  - `referencedFromSingleSection`: Where to place the definition when it is referenced only from a single section. Default is `"document-last"`.
+    - `"document-last"`: At the end of the document.
+    - `"section-last"`: At the end of the section where the reference appears.
+  - `referencedFromMultipleSections`: Where to place the definition when it is referenced from two or more sections. Default is `"document-last"`.
+    - `"document-last"`: At the end of the document.
+    - `"first-reference-section-last"`: At the end of the section where the reference is first used.
+    - `"last-reference-section-last"`: At the end of the section where the reference is last used.
+- `footnoteDefinitionPlacement`: Options for footnote definitions (`[^label]: text`).
+  - `referencedFromSingleSection`: Where to place the definition when it is referenced only from a single section. Default is `"document-last"`.
+    - `"document-last"`: At the end of the document.
+    - `"section-last"`: At the end of the section where the reference appears.
+  - `referencedFromMultipleSections`: Where to place the definition when it is referenced from two or more sections. Default is `"document-last"`.
+    - `"document-last"`: At the end of the document.
+    - `"first-reference-section-last"`: At the end of the section where the reference is first used.
+    - `"last-reference-section-last"`: At the end of the section where the reference is last used.
+
+### Example With Options
+
+#### Place Link Definitions at the Last of Each Reference Section (but at the Last of the Document If Referenced From Multiple Sections)
+
+The following options place link definitions at the last of the section where the reference appears. However, if there are multiple references, the definition is placed at the last of the document.
+Footnote definitions are always placed at the last of the document.
+
+This is based on the [Google Markdown Style Guide](https://google.github.io/styleguide/docguide/style.html#define-reference-links-after-their-first-use).
+
+```json
+{
+  "markdown-preferences/definitions-last": [
+    "error",
+    {
+      "linkDefinitionPlacement": {
+        "referencedFromSingleSection": "section-last",
+        "referencedFromMultipleSections": "document-last"
+      },
+      "footnoteDefinitionPlacement": {
+        "referencedFromSingleSection": "document-last",
+        "referencedFromMultipleSections": "document-last"
+      }
+    }
+  ]
+}
+```
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/definitions-last: [
+    "error",
+    {
+      "linkDefinitionPlacement": {
+        "referencedFromSingleSection": "section-last",
+        "referencedFromMultipleSections": "document-last"
+      },
+      "footnoteDefinitionPlacement": {
+        "referencedFromSingleSection": "document-last",
+        "referencedFromMultipleSections": "document-last"
+      }
+    }
+  ] -->
+
+<!-- ✓ GOOD -->
+
+# Example Document
+
+## Section 1: Introduction
+
+Welcome to our documentation. For more details, see [Project Overview].
+You can also refer to [Project Overview] again in this section for emphasis.
+
+Additionally, check out [User Guide] for another resource.
+
+[Project Overview]: https://example.com/project-overview
+
+## Section 2: Resources
+
+In this section, we mention [User Guide] as a useful link.
+
+## Section 3: Notes (Single Section Footnote)
+
+Here is a footnote for further explanation.[^about-section]
+You can also refer to the same footnote again in this section.[^about-section]
+
+## Section 4: Additional Notes (Multiple Sections Footnote)
+
+This section references a footnote used in multiple sections.[^shared-note]
+
+## Section 5: More Notes
+
+This section also references the same footnote for completeness.[^shared-note]
+
+[User Guide]: https://example.com/user-guide
+
+[^about-section]: This is a footnote definition referenced only from Section 3.
+
+[^shared-note]: This is a footnote definition referenced from multiple sections (Section 4 and Section 5).
+```
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/definitions-last: [
+    "error",
+    {
+      "linkDefinitionPlacement": {
+        "referencedFromSingleSection": "section-last",
+        "referencedFromMultipleSections": "document-last"
+      },
+      "footnoteDefinitionPlacement": {
+        "referencedFromSingleSection": "document-last",
+        "referencedFromMultipleSections": "document-last"
+      }
+    }
+  ] -->
+
+<!-- ✗ BAD -->
+
+# Example Document
+
+## Section 1: Introduction
+
+Welcome to our documentation. For more details, see [Project Overview].
+You can also refer to [Project Overview] again in this section for emphasis.
+
+Additionally, check out [User Guide] for another resource.
+
+## Section 2: Resources
+
+In this section, we mention [User Guide] as a useful link.
+
+[User Guide]: https://example.com/user-guide
+
+## Section 3: Notes (Single Section Footnote)
+
+Here is a footnote for further explanation.[^about-section]
+You can also refer to the same footnote again in this section.[^about-section]
+
+[^about-section]: This is a footnote definition referenced only from Section 3.
+
+## Section 4: Additional Notes (Multiple Sections Footnote)
+
+This section references a footnote used in multiple sections.[^shared-note]
+
+[^shared-note]: This is a footnote definition referenced from multiple sections (Section 4 and Section 5).
+
+## Section 5: More Notes
+
+This section also references the same footnote for completeness.[^shared-note]
+
+[Project Overview]: https://example.com/project-overview
+```
 
 ## 📚 Further Reading
 
 - [CommonMark Spec: Link Reference Definitions](https://spec.commonmark.org/0.31.2/#link-reference-definitions)
 - [GitHub Flavored Markdown: Link Reference Definitions](https://github.github.com/gfm/#link-reference-definitions)
+- [Google Markdown Style Guide: Reference](https://google.github.io/styleguide/docguide/style.html#reference)
 
 ## 👫 Related Rules
 
