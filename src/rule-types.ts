@@ -52,7 +52,7 @@ export interface RuleOptions {
    * require link definitions and footnote definitions to be placed at the end of the document
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/definitions-last.html
    */
-  'markdown-preferences/definitions-last'?: Linter.RuleEntry<[]>
+  'markdown-preferences/definitions-last'?: Linter.RuleEntry<MarkdownPreferencesDefinitionsLast>
   /**
    * enforce consistent emoji notation style in Markdown files.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/emoji-notation.html
@@ -285,6 +285,17 @@ type MarkdownPreferencesCodeFenceLength = []|[{
 // ----- markdown-preferences/code-fence-style -----
 type MarkdownPreferencesCodeFenceStyle = []|[{
   style?: ("backtick" | "tilde")
+}]
+// ----- markdown-preferences/definitions-last -----
+type MarkdownPreferencesDefinitionsLast = []|[{
+  linkDefinitionPlacement?: {
+    referencedFromSingleSection?: ("document-last" | "section-last")
+    referencedFromMultipleSections?: ("document-last" | "first-reference-section-last" | "last-reference-section-last")
+  }
+  footnoteDefinitionPlacement?: {
+    referencedFromSingleSection?: ("document-last" | "section-last")
+    referencedFromMultipleSections?: ("document-last" | "first-reference-section-last" | "last-reference-section-last")
+  }
 }]
 // ----- markdown-preferences/emoji-notation -----
 type MarkdownPreferencesEmojiNotation = []|[{

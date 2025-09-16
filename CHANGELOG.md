@@ -1,5 +1,13 @@
 # eslint-plugin-markdown-preferences
 
+## 0.26.0
+
+### Minor Changes
+
+- [#128](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/128) [`16e1ba5`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/16e1ba5c6cddebdcaae0803f0f11c35657189c84) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat([markdown-preferences/table-pipe-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-pipe-alignment.html)): improve handling of spaces around pipes in tables
+
+- [#130](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/130) [`2cd7f14`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/2cd7f140342e35957cebe28b5be2ede09eeb0c17) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat([markdown-preferences/definitions-last](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/definitions-last.html)): Add option to place definitions at the end of the document or section
+
 ## 0.25.0
 
 ### Minor Changes
