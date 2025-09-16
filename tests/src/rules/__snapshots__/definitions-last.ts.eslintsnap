@@ -2,6 +2,368 @@
 
 
 Test: definitions-last >> invalid
+Filename: tests/fixtures/rules/definitions-last/invalid/first-reference-section-last/multi-section-wrong-position-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - linkDefinitionPlacement:
+      referencedFromSingleSection: document-last
+      referencedFromMultipleSections: first-reference-section-last
+    footnoteDefinitionPlacement:
+      referencedFromSingleSection: document-last
+      referencedFromMultipleSections: first-reference-section-last
+Plugins: unable to serialize
+
+Code:
+  1 | # First Reference Section Last - Wrong Position
+  2 |
+  3 | ## Section 1: Introduction
+  4 |
+  5 | This section mentions [Shared Link] for the first time.
+  6 |
+  7 | ## Section 2: Resources
+  8 |
+  9 | This section mentions [Single Link] only once.
+ 10 |
+ 11 | ## Section 3: More Usage
+ 12 |
+ 13 | This section also uses [Shared Link] again.
+ 14 | Here's also a footnote used across sections.[^multi-footnote]
+ 15 |
+ 16 | ## Section 4: Final Usage  
+ 17 |
+ 18 | This section uses [Shared Link] for the third time.
+ 19 | The shared footnote is also referenced here.[^multi-footnote]
+ 20 |
+ 21 | ## Section 5: Notes
+ 22 |
+ 23 | This section has [Another Single Link] reference.
+ 24 | Here's a single-section footnote.[^single-footnote]
+ 25 |
+ 26 | [Single Link]: https://example.com/single
+ 27 | [Another Single Link]: https://example.com/another-single
+ 28 | [Shared Link]: https://example.com/shared
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+ 29 |
+ 30 | [^single-footnote]: Single section footnote.
+ 31 | [^multi-footnote]: Multi-section footnote.
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 32 |
+
+Output:
+  1 | # First Reference Section Last - Wrong Position
+  2 |
+  3 | ## Section 1: Introduction
+  4 |
+  5 | This section mentions [Shared Link] for the first time.
+  6 | [Shared Link]: https://example.com/shared
+  7 |
+  8 | ## Section 2: Resources
+  9 |
+ 10 | This section mentions [Single Link] only once.
+ 11 |
+ 12 | ## Section 3: More Usage
+ 13 |
+ 14 | This section also uses [Shared Link] again.
+ 15 | Here's also a footnote used across sections.[^multi-footnote]
+ 16 | [^multi-footnote]: Multi-section footnote.
+ 17 |
+ 18 | ## Section 4: Final Usage  
+ 19 |
+ 20 | This section uses [Shared Link] for the third time.
+ 21 | The shared footnote is also referenced here.[^multi-footnote]
+ 22 |
+ 23 | ## Section 5: Notes
+ 24 |
+ 25 | This section has [Another Single Link] reference.
+ 26 | Here's a single-section footnote.[^single-footnote]
+ 27 |
+ 28 | [Single Link]: https://example.com/single
+ 29 | [Another Single Link]: https://example.com/another-single
+ 30 |
+ 31 | [^single-footnote]: Single section footnote.
+ 32 |
+
+[1] Definition or footnote definition should be placed at the end of the section (L6).
+[2] Definition or footnote definition should be placed at the end of the section (L15).
+---
+
+
+Test: definitions-last >> invalid
+Filename: tests/fixtures/rules/definitions-last/invalid/last-reference-section-last/multi-section-wrong-position-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - linkDefinitionPlacement:
+      referencedFromSingleSection: document-last
+      referencedFromMultipleSections: last-reference-section-last
+    footnoteDefinitionPlacement:
+      referencedFromSingleSection: document-last
+      referencedFromMultipleSections: last-reference-section-last
+Plugins: unable to serialize
+
+Code:
+  1 | # Last Reference Section Last - Wrong Position
+  2 |
+  3 | ## Section 1: Introduction
+  4 |
+  5 | This section mentions [Shared Link] for the first time.
+  6 | Here's also a footnote used across sections.[^multi-footnote]
+  7 |
+  8 | [Shared Link]: https://example.com/shared
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  9 | [^multi-footnote]: Multi-section footnote.
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 10 |
+ 11 | ## Section 2: Resources
+ 12 |
+ 13 | This section mentions [Single Link] only once.
+ 14 |
+ 15 | ## Section 3: More Usage
+ 16 |
+ 17 | This section also uses [Shared Link] again.
+ 18 |
+ 19 | ## Section 4: Final Usage  
+ 20 |
+ 21 | This section uses [Shared Link] for the last time.
+ 22 | The shared footnote is also referenced here for the last time.[^multi-footnote]
+ 23 |
+ 24 | ## Section 5: Notes
+ 25 |
+ 26 | This section has [Single Link] reference.
+ 27 | Here's a single-section footnote.[^single-footnote]
+ 28 |
+ 29 | [Single Link]: https://example.com/single
+ 30 |
+ 31 | [^single-footnote]: Single section footnote.
+ 32 |
+
+Output:
+  1 | # Last Reference Section Last - Wrong Position
+  2 |
+  3 | ## Section 1: Introduction
+  4 |
+  5 | This section mentions [Shared Link] for the first time.
+  6 | Here's also a footnote used across sections.[^multi-footnote]
+  7 |
+  8 | ## Section 2: Resources
+  9 |
+ 10 | This section mentions [Single Link] only once.
+ 11 |
+ 12 | ## Section 3: More Usage
+ 13 |
+ 14 | This section also uses [Shared Link] again.
+ 15 |
+ 16 | ## Section 4: Final Usage  
+ 17 |
+ 18 | This section uses [Shared Link] for the last time.
+ 19 | The shared footnote is also referenced here for the last time.[^multi-footnote]
+ 20 | [^multi-footnote]: Multi-section footnote.
+ 21 |
+ 22 | [Shared Link]: https://example.com/shared
+ 23 |
+ 24 | ## Section 5: Notes
+ 25 |
+ 26 | This section has [Single Link] reference.
+ 27 | Here's a single-section footnote.[^single-footnote]
+ 28 |
+ 29 | [Single Link]: https://example.com/single
+ 30 |
+ 31 | [^single-footnote]: Single section footnote.
+ 32 |
+
+[1] Definition or footnote definition should be placed at the end of the section (L23).
+[2] Definition or footnote definition should be placed at the end of the section (L23).
+---
+
+
+Test: definitions-last >> invalid
+Filename: tests/fixtures/rules/definitions-last/invalid/mixed-options/mixed-placement-wrong-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - linkDefinitionPlacement:
+      referencedFromSingleSection: section-last
+      referencedFromMultipleSections: first-reference-section-last
+    footnoteDefinitionPlacement:
+      referencedFromSingleSection: document-last
+      referencedFromMultipleSections: last-reference-section-last
+Plugins: unable to serialize
+
+Code:
+  1 | # Mixed Options - Wrong Placement
+  2 |
+  3 | ## Section 1: Introduction
+  4 |
+  5 | This section mentions [Single Link 1] for single usage.
+  6 | This section also mentions [Multi Link] for the first time.
+  7 |
+  8 | ## Section 2: Resources
+  9 |
+ 10 | This section mentions [Single Link 2] only once in this section.
+ 11 | This section also uses [Multi Link] again.
+ 12 |
+ 13 | ## Section 3: Notes
+ 14 |
+ 15 | Here's a single-section footnote.[^single-footnote]
+ 16 | Here's also a multi-section footnote used for the first time.[^multi-footnote]
+ 17 |
+ 18 | [^single-footnote]: Single section footnote placed at wrong position (should be at document end).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+ 19 |
+ 20 | ## Section 4: Final Usage  
+ 21 |
+ 22 | This section uses [Multi Link] for the last time.
+ 23 | The multi-section footnote is also referenced here for the last time.[^multi-footnote]
+ 24 |
+ 25 | [^multi-footnote]: Multi-section footnote placed at wrong position (should be at last reference section).
+ 26 |
+ 27 | [Single Link 1]: https://example.com/single1
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 28 | [Single Link 2]: https://example.com/single2
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+ 29 | [Multi Link]: https://example.com/multi
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+ 30 |
+
+Output:
+  1 | # Mixed Options - Wrong Placement
+  2 |
+  3 | ## Section 1: Introduction
+  4 |
+  5 | This section mentions [Single Link 1] for single usage.
+  6 | This section also mentions [Multi Link] for the first time.
+  7 |
+  8 | [Single Link 1]: https://example.com/single1
+  9 |
+ 10 | ## Section 2: Resources
+ 11 |
+ 12 | This section mentions [Single Link 2] only once in this section.
+ 13 | This section also uses [Multi Link] again.
+ 14 |
+ 15 | ## Section 3: Notes
+ 16 |
+ 17 | Here's a single-section footnote.[^single-footnote]
+ 18 | Here's also a multi-section footnote used for the first time.[^multi-footnote]
+ 19 |
+ 20 | ## Section 4: Final Usage  
+ 21 |
+ 22 | This section uses [Multi Link] for the last time.
+ 23 | The multi-section footnote is also referenced here for the last time.[^multi-footnote]
+ 24 |
+ 25 | [^single-footnote]: Single section footnote placed at wrong position (should be at document end).
+ 26 |
+ 27 | [^multi-footnote]: Multi-section footnote placed at wrong position (should be at last reference section).
+ 28 | [Single Link 2]: https://example.com/single2
+ 29 | [Multi Link]: https://example.com/multi
+ 30 |
+
+[1] Definition or footnote definition should be placed at the end of the document.
+[2] Definition or footnote definition should be placed at the end of the section (L7).
+[3] Definition or footnote definition should be placed at the end of the section (L12).
+[4] Definition or footnote definition should be placed at the end of the section (L7).
+---
+
+
+Test: definitions-last >> invalid
+Filename: tests/fixtures/rules/definitions-last/invalid/section-last-single/single-section-wrong-position-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - linkDefinitionPlacement:
+      referencedFromSingleSection: section-last
+      referencedFromMultipleSections: document-last
+    footnoteDefinitionPlacement:
+      referencedFromSingleSection: section-last
+      referencedFromMultipleSections: document-last
+Plugins: unable to serialize
+
+Code:
+  1 | # Single Section Reference - Link Definition Wrong Position
+  2 |
+  3 | ## Section 1: Introduction
+  4 |
+  5 | [Project Overview]: https://example.com/project-overview
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  6 |
+  7 | Welcome to our documentation. For more details, see [Project Overview].
+  8 | This section only references Project Overview.
+  9 |
+ 10 | ## Section 2: Resources
+ 11 |
+ 12 | This section mentions [User Guide] only once in this section.
+ 13 |
+ 14 | ## Section 3: Notes
+ 15 |
+ 16 | Here is a footnote for further explanation.[^section-note]
+ 17 | This footnote is only used in this section.[^section-note]
+ 18 |
+ 19 | [^section-note]: This footnote is only referenced from Section 3.
+ 20 |
+ 21 | ## Section 4: Cross-section reference
+ 22 |
+ 23 | This section uses [Shared Link] which is also used below.
+ 24 | Additionally, here's a cross-section footnote reference.[^shared-footnote]
+ 25 |
+ 26 | ## Section 5: More Cross-section reference
+ 27 |
+ 28 | This section also uses [Shared Link] for multiple section usage.
+ 29 | This section also references the shared footnote.[^shared-footnote]
+ 30 |
+ 31 | [User Guide]: https://example.com/user-guide
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 32 | [Shared Link]: https://example.com/shared
+ 33 |
+ 34 | [^shared-footnote]: This footnote is used in multiple sections.
+ 35 |
+
+Output:
+  1 | # Single Section Reference - Link Definition Wrong Position
+  2 |
+  3 | ## Section 1: Introduction
+  4 |
+  5 | Welcome to our documentation. For more details, see [Project Overview].
+  6 | This section only references Project Overview.
+  7 |
+  8 | [Project Overview]: https://example.com/project-overview
+  9 |
+ 10 | ## Section 2: Resources
+ 11 |
+ 12 | This section mentions [User Guide] only once in this section.
+ 13 |
+ 14 | [User Guide]: https://example.com/user-guide
+ 15 |
+ 16 | ## Section 3: Notes
+ 17 |
+ 18 | Here is a footnote for further explanation.[^section-note]
+ 19 | This footnote is only used in this section.[^section-note]
+ 20 |
+ 21 | [^section-note]: This footnote is only referenced from Section 3.
+ 22 |
+ 23 | ## Section 4: Cross-section reference
+ 24 |
+ 25 | This section uses [Shared Link] which is also used below.
+ 26 | Additionally, here's a cross-section footnote reference.[^shared-footnote]
+ 27 |
+ 28 | ## Section 5: More Cross-section reference
+ 29 |
+ 30 | This section also uses [Shared Link] for multiple section usage.
+ 31 | This section also references the shared footnote.[^shared-footnote]
+ 32 | [Shared Link]: https://example.com/shared
+ 33 |
+ 34 | [^shared-footnote]: This footnote is used in multiple sections.
+ 35 |
+
+[1] Definition or footnote definition should be placed at the end of the section (L9).
+[2] Definition or footnote definition should be placed at the end of the section (L13).
+---
+
+
+Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/test01-input.md
 Language: markdown/gfm
 LanguageOptions:
