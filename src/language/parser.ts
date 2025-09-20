@@ -5,6 +5,8 @@ import { frontmatterFromMarkdown } from "mdast-util-frontmatter";
 import { gfmFromMarkdown } from "mdast-util-gfm";
 import { frontmatter } from "micromark-extension-frontmatter";
 import { gfm } from "micromark-extension-gfm";
+import { math } from "micromark-extension-math";
+import { mathFromMarkdown } from "mdast-util-math";
 import { customContainer } from "./extensions/micromark-custom-container.ts";
 import { customContainerFromMarkdown } from "./extensions/mdast-custom-container.ts";
 
@@ -13,10 +15,16 @@ import { customContainerFromMarkdown } from "./extensions/mdast-custom-container
  */
 export function parseExtendedMarkdown(code: string): Root {
   const options: Options = {
-    extensions: [gfm(), frontmatter(["yaml", "toml"]), customContainer()],
+    extensions: [
+      gfm(),
+      frontmatter(["yaml", "toml"]),
+      math(),
+      customContainer(),
+    ],
     mdastExtensions: [
       gfmFromMarkdown(),
       frontmatterFromMarkdown(["yaml", "toml"]),
+      mathFromMarkdown(),
       customContainerFromMarkdown(),
     ],
   };

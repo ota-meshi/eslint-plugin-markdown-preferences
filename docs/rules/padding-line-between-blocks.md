@@ -250,7 +250,20 @@ You can specify block types in two ways:
   ```
 
   This syntax is non-standard, but supported by some Markdown parsers like [markdown-it-container](https://github.com/markdown-it/markdown-it-container).\
-  To check this, specify [`markdown-preferences/extended-syntax` as the `language`](../user-guide/index.md#using-extended-syntax).
+  To check this, specify [`markdown-preferences/extended-syntax`] as the `language`.
+
+- `"math"` - Math blocks
+
+  e.g.
+
+  ```md
+  $$
+  E = mc^2
+  $$
+  ```
+
+  This syntax is non-standard, but supported by some Markdown parsers like [GitHub](https://docs.github.com/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions).\
+  To check this, specify [`markdown-preferences/extended-syntax`] as the `language`.
 
 - `"*"` - Wildcard matching any block type
 
@@ -260,6 +273,8 @@ You can specify block types in two ways:
 - `{ "type": "list", "in": "list" }` - List elements inside another list
 - `{ "type": "paragraph", "in": "blockquote" }` - Paragraphs inside blockquotes
 - `{ "type": "*", "in": "footnote-definition" }` - Any block inside footnote definitions
+
+[`markdown-preferences/extended-syntax`]: ../user-guide/index.md#using-extended-syntax
 
 #### Spacing Values
 
