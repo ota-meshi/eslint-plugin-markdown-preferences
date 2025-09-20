@@ -97,7 +97,7 @@ export default defineConfig([
 
 The following syntaxes are supported:
 
-- Custom Containers\
+- [Custom Containers](https://vitepress.dev/guide/markdown#custom-containers)\
   Example:
 
   ```md
@@ -106,7 +106,7 @@ The following syntaxes are supported:
   :::
   ```
 
-- Math (LaTeX-style)\
+- [Mathematical Expressions](https://docs.github.com/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions)\
   Example:
 
   ```md
