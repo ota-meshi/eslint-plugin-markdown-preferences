@@ -181,7 +181,6 @@ export function customContainer(): Extension {
     nok: State,
   ): State {
     let size = 0;
-    let startAt: Token["start"] | undefined;
 
     return start;
 
@@ -192,7 +191,6 @@ export function customContainer(): Extension {
       if (code !== COLON) return nok(code);
 
       size = 0;
-      startAt = self.now();
       effects.enter("customContainerFence");
       effects.enter("customContainerFenceSequence");
       return sequence;
@@ -236,11 +234,6 @@ export function customContainer(): Extension {
 
         const openToken = self.containerState._customContainer?.open;
         if (openToken?._customContainer?.size === size) {
-          if (hasNextSameLengthOpeningMarker(openToken)) {
-            // There is a next unclosed custom container with the same length of opening marker.
-            // So, do not close this custom container.
-            return nok(code);
-          }
           openToken._customContainer.closed = true;
           self.containerState._closeFlow = true;
           effects.exit("customContainerFence");
@@ -248,31 +241,6 @@ export function customContainer(): Extension {
         }
       }
       return nok(code);
-    }
-
-    /**
-     * Check if there is a next unclosed custom container with the same length of opening marker.
-     */
-    function hasNextSameLengthOpeningMarker(currToken: Token) {
-      const currState = currToken._customContainer!;
-      const currTokenIndex = self.events.findLastIndex(([, token]) => {
-        return token === currToken;
-      });
-      if (currTokenIndex === -1) return false;
-      for (let i = currTokenIndex + 1; i < self.events.length; i++) {
-        const [type, token] = self.events[i];
-        if (type !== "enter" || token.type !== "customContainer") continue;
-        const targetState = token._customContainer;
-        if (!targetState || targetState.closed) continue;
-        if (
-          targetState.size === currState.size &&
-          token.start.column === currToken.start.column &&
-          token.start.column === startAt!.column
-        ) {
-          return true;
-        }
-      }
-      return false;
     }
   }
 
