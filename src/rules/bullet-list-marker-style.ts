@@ -1,6 +1,12 @@
-import type { Blockquote, FootnoteDefinition, ListItem, Root } from "mdast";
+import type {
+  Blockquote,
+  CustomContainer,
+  FootnoteDefinition,
+  ListItem,
+  Root,
+} from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
-import type { List } from "mdast";
+import type { List } from "../language/ast-types.ts";
 import { getListItemMarker } from "../utils/ast.ts";
 
 type Marker = "-" | "*" | "+";
@@ -24,7 +30,12 @@ type ParsedOptions = {
     secondary: Marker | "any";
   };
 };
-type MDBlockContainer = Root | Blockquote | ListItem | FootnoteDefinition;
+type MDBlockContainer =
+  | Root
+  | Blockquote
+  | ListItem
+  | FootnoteDefinition
+  | CustomContainer;
 
 const MARKERS: Marker[] = ["-", "*", "+"];
 
@@ -249,14 +260,16 @@ export default createRule<[Options?]>("bullet-list-marker-style", {
         if (node.ordered) return;
         checkBulletList(node);
       },
-      "root, blockquote, listItem, footnoteDefinition"(node: MDBlockContainer) {
+      "root, blockquote, listItem, footnoteDefinition, customContainer"(
+        node: MDBlockContainer,
+      ) {
         containerStack = {
           node,
           level: node.type === "listItem" ? containerStack.level + 1 : 1,
           upper: containerStack,
         };
       },
-      "root, blockquote, listItem, footnoteDefinition:exit"() {
+      "root, blockquote, listItem, footnoteDefinition, customContainer:exit"() {
         containerStack = containerStack.upper!;
       },
     };

@@ -1,5 +1,4 @@
 import type { Position, SourceLocation } from "@eslint/core";
-import type { MarkdownSourceCode } from "@eslint/markdown";
 import type { Json, Toml } from "@eslint/markdown/types";
 import type {
   Blockquote,
@@ -27,8 +26,10 @@ import type {
   TableRow,
   Text,
   ThematicBreak,
+  CustomContainer,
   Yaml,
-} from "mdast";
+} from "../language/ast-types.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
 
 export type MDFrontmatter = Yaml | Toml | Json;
 export type MDBlock =
@@ -38,7 +39,8 @@ export type MDBlock =
   | List
   | Paragraph
   | ThematicBreak
-  | Table;
+  | Table
+  | CustomContainer;
 export type MDDefinition = Definition | FootnoteDefinition;
 export type MDSpecialNode = ListItem | TableCell | TableRow;
 export type MDInline = Exclude<
@@ -71,6 +73,7 @@ export type MDNode =
   | Table
   | TableCell
   | TableRow
+  | CustomContainer
   | Yaml
   | Toml
   | Json;
@@ -89,7 +92,7 @@ export type MDParent<N extends MDNode> = N extends Root
  * Get the parent of a node.
  */
 export function getParent<N extends MDNode>(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   node: N,
 ): MDParent<N> {
   return sourceCode.getParent(node) as MDParent<N>;
@@ -103,7 +106,7 @@ export type MDSibling<N extends MDNode> = NonNullable<
  * Get the previous sibling of a node.
  */
 export function getPrevSibling<N extends MDNode>(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   node: N,
 ): MDSibling<N> | null {
   const parent = getParent(sourceCode, node);
@@ -117,7 +120,7 @@ export function getPrevSibling<N extends MDNode>(
  * Get the next sibling of a node.
  */
 export function getNextSibling<N extends MDNode>(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   node: N,
 ): MDSibling<N> | null {
   const parent = getParent(sourceCode, node);
@@ -131,7 +134,7 @@ export function getNextSibling<N extends MDNode>(
  * Get the kind of heading.
  */
 export function getHeadingKind(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   node: Heading,
 ): "atx" | "setext" {
   const loc = sourceCode.getLoc(node);
@@ -144,7 +147,7 @@ export function getHeadingKind(
  * Get the kind of code block.
  */
 export function getCodeBlockKind(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   node: Code,
 ): "backtick-fenced" | "tilde-fenced" | "indented" {
   const text = sourceCode.getText(node);
@@ -159,7 +162,7 @@ export function getCodeBlockKind(
  * Get the kind of link.
  */
 export function getLinkKind(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   node: Link,
 ): "inline" | "autolink" | "gfm-autolink" {
   const text = sourceCode.getText(node);
@@ -186,7 +189,7 @@ export type OrderedListMarker = {
  * Get the marker of a list item.
  */
 export function getListItemMarker(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   node: ListItem | List,
 ): BulletListMarker | OrderedListMarker {
   const item = node.type === "list" ? node.children[0] || node : node;
@@ -225,7 +228,7 @@ export type ThematicBreakMarker = {
  * Get the marker for a thematic break.
  */
 export function getThematicBreakMarker(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   node: ThematicBreak,
 ): ThematicBreakMarker {
   const text = sourceCode.getText(node).trimEnd();
@@ -240,7 +243,7 @@ export function getThematicBreakMarker(
  * Get the source location from a range in a node.
  */
 export function getSourceLocationFromRange(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   node: MDNode,
   range: [number, number],
 ): SourceLocation {
@@ -266,7 +269,7 @@ export function getSourceLocationFromRange(
  * Get the source location from a range
  */
 function getSourceLocationFromRangeAndSourcePosition(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   startIndex: number,
   startLoc: Position,
   range: [number, number],

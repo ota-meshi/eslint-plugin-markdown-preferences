@@ -3,7 +3,7 @@
 
 Test: table-pipe-alignment >> invalid
 Filename: tests/fixtures/rules/table-pipe-alignment/invalid/consistent/no-align-tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -41,7 +41,7 @@ Output:
 
 Test: table-pipe-alignment >> invalid
 Filename: tests/fixtures/rules/table-pipe-alignment/invalid/consistent/tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -155,7 +155,7 @@ Output:
 
 Test: table-pipe-alignment >> invalid
 Filename: tests/fixtures/rules/table-pipe-alignment/invalid/japanese-tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -311,7 +311,7 @@ Output:
 
 Test: table-pipe-alignment >> invalid
 Filename: tests/fixtures/rules/table-pipe-alignment/invalid/tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize

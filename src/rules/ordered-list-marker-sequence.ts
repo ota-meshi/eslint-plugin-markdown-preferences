@@ -4,11 +4,12 @@ import { getListItemMarker } from "../utils/ast.ts";
 import { createRule } from "../utils/index.ts";
 import type {
   Blockquote,
+  CustomContainer,
   FootnoteDefinition,
   List,
   ListItem,
   Root,
-} from "mdast";
+} from "../language/ast-types.ts";
 
 export default createRule("ordered-list-marker-sequence", {
   meta: {
@@ -33,7 +34,7 @@ export default createRule("ordered-list-marker-sequence", {
     const sourceCode = context.sourceCode;
 
     type Scope = {
-      node: Root | Blockquote | ListItem | FootnoteDefinition;
+      node: Root | Blockquote | ListItem | FootnoteDefinition | CustomContainer;
       upper: Scope | null;
       last: { kind: OrderedListMarkerKind; sequence: number } | null;
     };
@@ -138,8 +139,8 @@ export default createRule("ordered-list-marker-sequence", {
     }
 
     return {
-      "blockquote, listItem, footnoteDefinition"(
-        node: Blockquote | ListItem | FootnoteDefinition,
+      "blockquote, listItem, footnoteDefinition, customContainer"(
+        node: Blockquote | ListItem | FootnoteDefinition | CustomContainer,
       ) {
         scope = {
           node,
@@ -147,8 +148,8 @@ export default createRule("ordered-list-marker-sequence", {
           last: null,
         };
       },
-      "blockquote, listItem, footnoteDefinition:exit"(
-        node: Blockquote | ListItem | FootnoteDefinition,
+      "blockquote, listItem, footnoteDefinition, customContainer:exit"(
+        node: Blockquote | ListItem | FootnoteDefinition | CustomContainer,
       ) {
         if (scope.node === node) scope = scope.upper!;
       },

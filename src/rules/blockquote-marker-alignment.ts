@@ -1,4 +1,4 @@
-import type { Blockquote, Root } from "mdast";
+import type { Blockquote, Root } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import { getParsedLines } from "../utils/lines.ts";
 import { getBlockquoteLevelFromLine } from "../utils/blockquotes.ts";

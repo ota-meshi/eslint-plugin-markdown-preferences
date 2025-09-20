@@ -1,5 +1,5 @@
 import { createRule } from "../utils/index.ts";
-import type { Link, LinkReference } from "mdast";
+import type { Link, LinkReference } from "../language/ast-types.ts";
 import path from "node:path";
 import type { Ignores } from "../utils/search-words.ts";
 import {

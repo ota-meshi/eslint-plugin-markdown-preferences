@@ -3,7 +3,7 @@
 
 Test: level2-heading-style >> invalid
 Filename: tests/fixtures/rules/level2-heading-style/invalid/atx-style/blockquote-multiline-setext-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -35,7 +35,7 @@ No errors
 
 Test: level2-heading-style >> invalid
 Filename: tests/fixtures/rules/level2-heading-style/invalid/atx-style/blockquote-setext-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -69,7 +69,7 @@ No errors
 
 Test: level2-heading-style >> invalid
 Filename: tests/fixtures/rules/level2-heading-style/invalid/atx-style/multiline-setext-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -101,7 +101,7 @@ Output: unchanged
 
 Test: level2-heading-style >> invalid
 Filename: tests/fixtures/rules/level2-heading-style/invalid/atx-style/setext-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -141,7 +141,7 @@ Output:
 
 Test: level2-heading-style >> invalid
 Filename: tests/fixtures/rules/level2-heading-style/invalid/atx-style/setext-to-atx-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -189,7 +189,7 @@ Output:
 
 Test: level2-heading-style >> invalid
 Filename: tests/fixtures/rules/level2-heading-style/invalid/atx-style/with-level2-setext-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -241,7 +241,7 @@ Output:
 
 Test: level2-heading-style >> invalid
 Filename: tests/fixtures/rules/level2-heading-style/invalid/default-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -279,7 +279,7 @@ Output:
 
 Test: level2-heading-style >> invalid
 Filename: tests/fixtures/rules/level2-heading-style/invalid/setext-style/atx-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -318,7 +318,7 @@ Output:
 
 Test: level2-heading-style >> invalid
 Filename: tests/fixtures/rules/level2-heading-style/invalid/setext-style/atx-with-closing-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -353,7 +353,7 @@ No errors
 
 Test: level2-heading-style >> invalid
 Filename: tests/fixtures/rules/level2-heading-style/invalid/setext-style/blockquote-atx-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -389,7 +389,7 @@ No errors
 
 Test: level2-heading-style >> invalid
 Filename: tests/fixtures/rules/level2-heading-style/invalid/setext-style/blockquote-atx-with-closing-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -429,7 +429,7 @@ No errors
 
 Test: level2-heading-style >> invalid
 Filename: tests/fixtures/rules/level2-heading-style/invalid/setext-style/with-level2-atx-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:

@@ -1,9 +1,9 @@
-import type { MarkdownSourceCode } from "@eslint/markdown";
 import type { SourceLocation } from "estree";
-import type { Link } from "mdast";
+import type { Link } from "../language/ast-types.ts";
 import { isAsciiControlCharacter } from "./unicode.ts";
 import { getLinkKind, getSourceLocationFromRange } from "./ast.ts";
 import { ForwardCharacterCursor } from "./character-cursor.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
 
 export type ParsedInlineLink = {
   text: {
@@ -35,7 +35,7 @@ export type ParsedInlineLink = {
  * Parse the inline link.
  */
 export function parseInlineLink(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   node: Link,
 ): ParsedInlineLink | null {
   const kind = getLinkKind(sourceCode, node);

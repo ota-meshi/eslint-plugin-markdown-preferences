@@ -1,5 +1,5 @@
 import { createRule } from "../utils/index.ts";
-import type { Code, Html, Yaml } from "mdast";
+import type { Code, Html, Yaml } from "../language/ast-types.ts";
 import type { Toml, Json } from "@eslint/markdown/types";
 import type { ParsedLine } from "../utils/lines.ts";
 import { getParsedLines } from "../utils/lines.ts";

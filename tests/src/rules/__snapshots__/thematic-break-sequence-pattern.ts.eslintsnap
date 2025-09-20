@@ -3,7 +3,7 @@
 
 Test: thematic-break-sequence-pattern >> invalid
 Filename: tests/fixtures/rules/thematic-break-sequence-pattern/invalid/asterisk/spaced-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -41,7 +41,7 @@ Output:
 
 Test: thematic-break-sequence-pattern >> invalid
 Filename: tests/fixtures/rules/thematic-break-sequence-pattern/invalid/asterisk-spaced/solid-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -97,7 +97,7 @@ Output:
 
 Test: thematic-break-sequence-pattern >> invalid
 Filename: tests/fixtures/rules/thematic-break-sequence-pattern/invalid/complex/complex-pattern-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -137,7 +137,7 @@ Output:
 
 Test: thematic-break-sequence-pattern >> invalid
 Filename: tests/fixtures/rules/thematic-break-sequence-pattern/invalid/multiline/multiline-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -185,7 +185,7 @@ Output:
 
 Test: thematic-break-sequence-pattern >> invalid
 Filename: tests/fixtures/rules/thematic-break-sequence-pattern/invalid/solid/spaced-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -229,7 +229,7 @@ Output:
 
 Test: thematic-break-sequence-pattern >> invalid >>> "# solid pattern\n\n---\n\n***\n\n___\n\n-------\n\n*****\n\n_________\n 2"
 Filename: tests/fixtures/rules/thematic-break-sequence-pattern/invalid/spaced/solid-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -285,7 +285,7 @@ Output:
 
 Test: thematic-break-sequence-pattern >> invalid >>> "# spaced pattern\n\n- - -\n\n* * *\n\n_ _ _\n 2"
 Filename: tests/fixtures/rules/thematic-break-sequence-pattern/invalid/underscore/spaced-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -323,7 +323,7 @@ Output:
 
 Test: thematic-break-sequence-pattern >> invalid >>> "# solid pattern\n\n---\n\n***\n\n___\n\n-------\n\n*****\n\n_________\n 3"
 Filename: tests/fixtures/rules/thematic-break-sequence-pattern/invalid/underscore-spaced/solid-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:

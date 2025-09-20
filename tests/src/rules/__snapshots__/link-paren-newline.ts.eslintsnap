@@ -3,7 +3,7 @@
 
 Test: link-paren-newline >> invalid
 Filename: tests/fixtures/rules/link-paren-newline/invalid/always/image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -140,7 +140,7 @@ Output:
 
 Test: link-paren-newline >> invalid
 Filename: tests/fixtures/rules/link-paren-newline/invalid/always/link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -277,7 +277,7 @@ Output:
 
 Test: link-paren-newline >> invalid >>> "\n- ![foo](/url)\n- ![foo]( /url )\n- ![foo](\n    /url\n  )\n- ![foo](/url\n  )\n- ![foo](\n    /url)\n- Multi lines\n  - ![foo](/url\n    \"title\")\n  - ![foo]( /url\n    \"title\" )\n  - ![foo](\n      /url\n      \"title\"\n    )\n- Empty\n  - ![foo]()\n  - ![foo](<>)\n  - ![foo]( )\n  - ![foo]( <> )\n  - ![foo](\n    )\n  - ![foo](\n      <>\n    )\n  - ![foo](<>\n    )\n  - ![foo](\n      <>)\n 2"
 Filename: tests/fixtures/rules/link-paren-newline/invalid/consistent/image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -371,7 +371,7 @@ Output:
 
 Test: link-paren-newline >> invalid >>> "\n- [foo](/url)\n- [foo]( /url )\n- [foo](\n    /url\n  )\n- [foo](/url\n  )\n- [foo](\n    /url)\n- Multi lines\n  - [foo](/url\n    \"title\")\n  - [foo]( /url\n    \"title\" )\n  - [foo](\n      /url\n      \"title\"\n    )\n- Empty\n  - [foo]()\n  - [foo](<>)\n  - [foo]( )\n  - [foo]( <> )\n  - [foo](\n    )\n  - [foo](\n      <>\n    )\n  - [foo](<>\n    )\n  - [foo](\n      <>)\n 2"
 Filename: tests/fixtures/rules/link-paren-newline/invalid/consistent/link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -465,7 +465,7 @@ Output:
 
 Test: link-paren-newline >> invalid >>> "\n- ![foo](/url)\n- ![foo]( /url )\n- ![foo](\n    /url\n  )\n- ![foo](/url\n  )\n- ![foo](\n    /url)\n- Multi lines\n  - ![foo](/url\n    \"title\")\n  - ![foo]( /url\n    \"title\" )\n  - ![foo](\n      /url\n      \"title\"\n    )\n- Empty\n  - ![foo]()\n  - ![foo](<>)\n  - ![foo]( )\n  - ![foo]( <> )\n  - ![foo](\n    )\n  - ![foo](\n      <>\n    )\n  - ![foo](<>\n    )\n  - ![foo](\n      <>)\n 3"
 Filename: tests/fixtures/rules/link-paren-newline/invalid/image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -569,7 +569,7 @@ Output:
 
 Test: link-paren-newline >> invalid >>> "\n- [foo](/url)\n- [foo]( /url )\n- [foo](\n    /url\n  )\n- [foo](/url\n  )\n- [foo](\n    /url)\n- Multi lines\n  - [foo](/url\n    \"title\")\n  - [foo]( /url\n    \"title\" )\n  - [foo](\n      /url\n      \"title\"\n    )\n- Empty\n  - [foo]()\n  - [foo](<>)\n  - [foo]( )\n  - [foo]( <> )\n  - [foo](\n    )\n  - [foo](\n      <>\n    )\n  - [foo](<>\n    )\n  - [foo](\n      <>)\n 3"
 Filename: tests/fixtures/rules/link-paren-newline/invalid/link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -673,7 +673,7 @@ Output:
 
 Test: link-paren-newline >> invalid >>> "\n- ![foo](/url)\n- ![foo]( /url )\n- ![foo](\n    /url\n  )\n- ![foo](/url\n  )\n- ![foo](\n    /url)\n- Multi lines\n  - ![foo](/url\n    \"title\")\n  - ![foo]( /url\n    \"title\" )\n  - ![foo](\n      /url\n      \"title\"\n    )\n- Empty\n  - ![foo]()\n  - ![foo](<>)\n  - ![foo]( )\n  - ![foo]( <> )\n  - ![foo](\n    )\n  - ![foo](\n      <>\n    )\n  - ![foo](<>\n    )\n  - ![foo](\n      <>)\n 4"
 Filename: tests/fixtures/rules/link-paren-newline/invalid/never/image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -779,7 +779,7 @@ Output:
 
 Test: link-paren-newline >> invalid >>> "\n- [foo](/url)\n- [foo]( /url )\n- [foo](\n    /url\n  )\n- [foo](/url\n  )\n- [foo](\n    /url)\n- Multi lines\n  - [foo](/url\n    \"title\")\n  - [foo]( /url\n    \"title\" )\n  - [foo](\n      /url\n      \"title\"\n    )\n- Empty\n  - [foo]()\n  - [foo](<>)\n  - [foo]( )\n  - [foo]( <> )\n  - [foo](\n    )\n  - [foo](\n      <>\n    )\n  - [foo](<>\n    )\n  - [foo](\n      <>)\n 4"
 Filename: tests/fixtures/rules/link-paren-newline/invalid/never/link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -885,7 +885,7 @@ Output:
 
 Test: link-paren-newline >> invalid >>> "\n- ![foo](/url)\n- ![foo]( /url )\n- ![foo](\n    /url\n  )\n- ![foo](/url\n  )\n- ![foo](\n    /url)\n- Multi lines\n  - ![foo](/url\n    \"title\")\n  - ![foo]( /url\n    \"title\" )\n  - ![foo](\n      /url\n      \"title\"\n    )\n- Empty\n  - ![foo]()\n  - ![foo](<>)\n  - ![foo]( )\n  - ![foo]( <> )\n  - ![foo](\n    )\n  - ![foo](\n      <>\n    )\n  - ![foo](<>\n    )\n  - ![foo](\n      <>)\n 5"
 Filename: tests/fixtures/rules/link-paren-newline/invalid/never-with-multiline-true/image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1000,7 +1000,7 @@ Output:
 
 Test: link-paren-newline >> invalid >>> "\n- [foo](/url)\n- [foo]( /url )\n- [foo](\n    /url\n  )\n- [foo](/url\n  )\n- [foo](\n    /url)\n- Multi lines\n  - [foo](/url\n    \"title\")\n  - [foo]( /url\n    \"title\" )\n  - [foo](\n      /url\n      \"title\"\n    )\n- Empty\n  - [foo]()\n  - [foo](<>)\n  - [foo]( )\n  - [foo]( <> )\n  - [foo](\n    )\n  - [foo](\n      <>\n    )\n  - [foo](<>\n    )\n  - [foo](\n      <>)\n 5"
 Filename: tests/fixtures/rules/link-paren-newline/invalid/never-with-multiline-true/link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:

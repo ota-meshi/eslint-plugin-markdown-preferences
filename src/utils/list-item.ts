@@ -1,6 +1,6 @@
-import type { MarkdownSourceCode } from "@eslint/markdown";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
 import type { SourceLocation } from "estree";
-import type { ListItem } from "mdast";
+import type { ListItem } from "../language/ast-types.ts";
 import { isAsciiControlCharacter, isSpaceOrTab } from "./unicode.ts";
 import type { BulletListMarkerKind, OrderedListMarkerKind } from "./ast.ts";
 import { getListItemMarker, getSourceLocationFromRange } from "./ast.ts";
@@ -31,7 +31,7 @@ export type ParsedListItem = {
  * Parse the list item.
  */
 export function parseListItem(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   node: ListItem,
 ): ParsedListItem {
   const marker = getListItemMarker(sourceCode, node);

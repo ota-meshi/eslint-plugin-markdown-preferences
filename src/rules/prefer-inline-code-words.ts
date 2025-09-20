@@ -1,4 +1,4 @@
-import type { LinkReference } from "mdast";
+import type { LinkReference } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import type { Ignores } from "../utils/search-words.ts";
 import {

@@ -3,7 +3,7 @@
 
 Test: atx-heading-closing-sequence >> invalid
 Filename: tests/fixtures/rules/atx-heading-closing-sequence/invalid/always-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -51,7 +51,7 @@ Output:
 
 Test: atx-heading-closing-sequence >> invalid
 Filename: tests/fixtures/rules/atx-heading-closing-sequence/invalid/default-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -87,7 +87,7 @@ Output:
 
 Test: atx-heading-closing-sequence >> invalid
 Filename: tests/fixtures/rules/atx-heading-closing-sequence/invalid/never-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:

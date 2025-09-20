@@ -3,7 +3,7 @@
 
 Test: no-multi-spaces >> invalid
 Filename: tests/fixtures/rules/no-multi-spaces/invalid/atx-heading-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -38,7 +38,7 @@ Output:
 
 Test: no-multi-spaces >> invalid
 Filename: tests/fixtures/rules/no-multi-spaces/invalid/emphasis-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -74,7 +74,7 @@ Output:
 
 Test: no-multi-spaces >> invalid
 Filename: tests/fixtures/rules/no-multi-spaces/invalid/footnote-definition-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -114,7 +114,7 @@ Output:
 
 Test: no-multi-spaces >> invalid
 Filename: tests/fixtures/rules/no-multi-spaces/invalid/hard-linebreak-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -140,7 +140,7 @@ Output:
 
 Test: no-multi-spaces >> invalid
 Filename: tests/fixtures/rules/no-multi-spaces/invalid/image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -247,7 +247,7 @@ Output:
 
 Test: no-multi-spaces >> invalid
 Filename: tests/fixtures/rules/no-multi-spaces/invalid/link-definition-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -315,7 +315,7 @@ Output:
 
 Test: no-multi-spaces >> invalid
 Filename: tests/fixtures/rules/no-multi-spaces/invalid/link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -422,7 +422,7 @@ Output:
 
 Test: no-multi-spaces >> invalid
 Filename: tests/fixtures/rules/no-multi-spaces/invalid/list-item-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -472,7 +472,7 @@ Output:
 
 Test: no-multi-spaces >> invalid
 Filename: tests/fixtures/rules/no-multi-spaces/invalid/one-link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -498,7 +498,7 @@ Output:
 
 Test: no-multi-spaces >> invalid
 Filename: tests/fixtures/rules/no-multi-spaces/invalid/setext-heading-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -544,7 +544,7 @@ Output:
 
 Test: no-multi-spaces >> invalid
 Filename: tests/fixtures/rules/no-multi-spaces/invalid/strikethrough-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -586,7 +586,7 @@ Output:
 
 Test: no-multi-spaces >> invalid
 Filename: tests/fixtures/rules/no-multi-spaces/invalid/strong-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -622,7 +622,7 @@ Output:
 
 Test: no-multi-spaces >> invalid
 Filename: tests/fixtures/rules/no-multi-spaces/invalid/table-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -656,7 +656,7 @@ Output:
 
 Test: no-multi-spaces >> invalid
 Filename: tests/fixtures/rules/no-multi-spaces/invalid/task-list-item-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -717,7 +717,7 @@ Output:
 
 Test: no-multi-spaces >> invalid >>> "\n> Lorem ipsum dolor sit amet, consectetur adipiscing  elit, sed do eiusmod tempor\n>   incididunt ut labore et dolore magna  aliqua.   <!-- comment --> \n> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip \n>  ex ea commodo consequat. Duis  <!-- comment -->  aute irure    dolor in reprehenderit in voluptate velit       \n> esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non \n> proident, sunt in culpa qui\\u0009\\u0009officia \\u0009deserunt mollit anim id est laborum.\n"
 Filename: tests/fixtures/rules/no-multi-spaces/invalid/text-in-blockquote-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -759,7 +759,7 @@ Output:
 
 Test: no-multi-spaces >> invalid >>> "\nLorem ipsum dolor sit amet, consectetur adipiscing  elit, sed do eiusmod tempor\n  incididunt ut labore et dolore magna  aliqua.   <!-- comment --> \nUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip \n ex ea commodo consequat. Duis  <!-- comment -->  aute irure    dolor in reprehenderit in voluptate velit       \nesse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non \nproident, sunt in culpa qui\\u0009\\u0009officia \\u0009deserunt mollit anim id est laborum.\n"
 Filename: tests/fixtures/rules/no-multi-spaces/invalid/text-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize

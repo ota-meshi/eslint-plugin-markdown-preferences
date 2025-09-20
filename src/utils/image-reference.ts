@@ -1,8 +1,8 @@
-import type { MarkdownSourceCode } from "@eslint/markdown";
 import type { SourceLocation } from "estree";
-import type { ImageReference } from "mdast";
+import type { ImageReference } from "../language/ast-types.ts";
 import { getSourceLocationFromRange } from "./ast.ts";
 import { BackwardCharacterCursor } from "./character-cursor.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
 
 export type ParsedImageReference = {
   text: {
@@ -28,7 +28,7 @@ export type ParsedImageReference = {
  * Parse the image reference.
  */
 export function parseImageReference(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   node: ImageReference,
 ): ParsedImageReference | null {
   const nodeRange = sourceCode.getRange(node);

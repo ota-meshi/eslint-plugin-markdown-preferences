@@ -1,7 +1,7 @@
-import type { MarkdownSourceCode } from "@eslint/markdown";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
 import type { SourceLocation } from "estree";
 import type { JSONSchema4 } from "json-schema";
-import type { Text } from "mdast";
+import type { Text } from "../language/ast-types.ts";
 import { getSourceLocationFromRange } from "./ast.ts";
 
 export const RE_BOUNDARY =
@@ -16,7 +16,7 @@ export function* iterateSearchWords({
   words,
   ignores,
 }: {
-  sourceCode: MarkdownSourceCode;
+  sourceCode: ExtendedMarkdownSourceCode;
   node: Text;
   words: string[];
   ignores: SearchWordsIgnoreContext;

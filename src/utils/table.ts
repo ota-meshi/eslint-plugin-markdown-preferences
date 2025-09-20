@@ -1,9 +1,9 @@
-import type { MarkdownSourceCode } from "@eslint/markdown";
 import type { SourceLocation } from "estree";
-import type { Table, TableRow } from "mdast";
+import type { Table, TableRow } from "../language/ast-types.ts";
 import { ForwardCharacterCursor } from "./character-cursor.ts";
 import { isSpaceOrTab } from "./unicode.ts";
 import { getSourceLocationFromRange } from "./ast.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
 
 type Token = {
   text: string;
@@ -44,7 +44,7 @@ export type ParsedTable = {
  * Parse the table.
  */
 export function parseTable(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   node: Table,
 ): ParsedTable | null {
   const headerRow = parseTableRow(sourceCode, node.children[0]);
@@ -68,7 +68,7 @@ export function parseTable(
  * Parse the table delimiter row.
  */
 export function parseTableDelimiterRow(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   node: Table,
 ): ParsedTableDelimiterRow | null {
   const headerRow = node.children[0];
@@ -155,7 +155,7 @@ export function parseTableDelimiterRow(
  * Parse the table row.
  */
 export function parseTableRow(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   node: TableRow,
 ): ParsedTableRow | null {
   const cells: ParsedTableCell[] = [];

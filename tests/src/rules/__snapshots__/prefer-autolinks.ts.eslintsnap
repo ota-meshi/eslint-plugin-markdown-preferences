@@ -3,7 +3,7 @@
 
 Test: prefer-autolinks >> invalid
 Filename: tests/fixtures/rules/prefer-autolinks/invalid/bare-url-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -27,7 +27,7 @@ Output:
 
 Test: prefer-autolinks >> invalid
 Filename: tests/fixtures/rules/prefer-autolinks/invalid/inline-link-same-label-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize

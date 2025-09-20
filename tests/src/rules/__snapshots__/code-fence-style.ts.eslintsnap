@@ -3,7 +3,7 @@
 
 Test: code-fence-style >> invalid
 Filename: tests/fixtures/rules/code-fence-style/invalid/backtick-in-tilde-config-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -43,7 +43,7 @@ Output:
 
 Test: code-fence-style >> invalid
 Filename: tests/fixtures/rules/code-fence-style/invalid/mixed-fence-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -79,7 +79,7 @@ Output:
 
 Test: code-fence-style >> invalid
 Filename: tests/fixtures/rules/code-fence-style/invalid/tilde-in-backtick-config-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:

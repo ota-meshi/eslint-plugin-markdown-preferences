@@ -1,5 +1,5 @@
 import { createRule } from "../utils/index.ts";
-import type { Delete } from "mdast";
+import type { Delete } from "../language/ast-types.ts";
 
 type StrikethroughDelimiter = "~" | "~~";
 

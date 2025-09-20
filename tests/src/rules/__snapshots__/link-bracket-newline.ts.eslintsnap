@@ -3,7 +3,7 @@
 
 Test: link-bracket-newline >> invalid
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -104,7 +104,7 @@ Output:
 
 Test: link-bracket-newline >> invalid
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/image-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -531,7 +531,7 @@ Output:
 
 Test: link-bracket-newline >> invalid
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/link-definition-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -623,7 +623,7 @@ Output:
 
 Test: link-bracket-newline >> invalid
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -729,7 +729,7 @@ Output:
 
 Test: link-bracket-newline >> invalid
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/link-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1156,7 +1156,7 @@ Output:
 
 Test: link-bracket-newline >> invalid
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/no-newline-image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1241,7 +1241,7 @@ Output:
 
 Test: link-bracket-newline >> invalid
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/no-newline-image-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1583,7 +1583,7 @@ Output:
 
 Test: link-bracket-newline >> invalid
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/no-newline-link-definition-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1645,7 +1645,7 @@ Output:
 
 Test: link-bracket-newline >> invalid
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/no-newline-link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1735,7 +1735,7 @@ Output:
 
 Test: link-bracket-newline >> invalid
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/always/no-newline-link-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -2077,7 +2077,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n- ![foo](/url)\n- ![ foo ](/url)\n- ![\n    foo\n  ](/url)\n- ![foo\n    ](/url)\n- ![\n    foo](/url)\n- Multi lines\n  - ![foo\n      bar](/url)\n  - ![ foo\n      bar ](/url)\n  - ![\n      foo\n      bar\n    ](/url)\n- Empty\n  - ![](/url)\n  - ![ ](/url)\n  - ![\n      ](/url)\n 2"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/consistent/image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -2148,7 +2148,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n- ![foo]\n- ![ foo ]\n- ![\n    foo\n    ]\n- ![foo\n    ]\n- ![\n    foo]\n- ![foo][]\n- ![ foo ][]\n- ![\n    foo\n    ][]\n- ![foo\n    ][]\n- ![\n    foo][]\n- ![foo][x]\n- ![ foo ][x]\n- ![\n    foo\n    ][x]\n- ![foo\n    ][x]\n- ![\n    foo][x]\n- ![x][foo]\n- ![x][ foo ]\n- ![x][\n    foo\n    ]\n- ![x][foo\n    ]\n- ![x][\n    foo]\n- Multi lines\n  - ![foo\n      bar]\n  - ![ foo\n      bar ]\n  - ![\n      foo\n      bar\n    ]\n  - ![foo\n      bar][]\n  - ![ foo\n      bar ][]\n  - ![\n      foo\n      bar\n    ][]\n  - ![foo\n      bar][x]\n  - ![ foo\n      bar ][x]\n  - ![\n      foo\n      bar\n    ][x]\n  - ![x][foo\n      bar]\n  - ![x][ foo\n      bar ]\n  - ![x][\n      foo\n      bar\n    ]\n- Empty\n  - ![][x]\n  - ![ ][x]\n  - ![\n      ][x]\n\n[x]: /url\n[foo]: /url\n[foo bar]: /url\n 2"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/consistent/image-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -2344,7 +2344,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n[a]: /url\n[ b ]: /url\n[\n  c\n  ]: /url\n[d\n  ]: /url\n[\n  e]: /url\n[ f\n  g ]: /url\n[ h\n  i\n]: /url\n[\n  j\n  k ]: /url\n[\n  l\n  m\n  ]: /url\n 2"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/consistent/link-definition-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -2416,7 +2416,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n- [foo](/url)\n- [ foo ](/url)\n- [\n    foo\n  ](/url)\n- [foo\n    ](/url)\n- [\n    foo](/url)\n- Multi lines\n  - [foo\n      bar](/url)\n  - [ foo\n      bar ](/url)\n  - [\n      foo\n      bar\n    ](/url)\n- Empty\n  - [](/url)\n  - [ ](/url)\n  - [      ](/url)\n  - [\n      ](/url)\n 2"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/consistent/link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -2489,7 +2489,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n- [foo]\n- [ foo ]\n- [\n    foo\n    ]\n- [foo\n    ]\n- [\n    foo]\n- [foo][]\n- [ foo ][]\n- [\n    foo\n    ][]\n- [foo\n    ][]\n- [\n    foo][]\n- [foo][x]\n- [ foo ][x]\n- [\n    foo\n    ][x]\n- [foo\n    ][x]\n- [\n    foo][x]\n- [x][foo]\n- [x][ foo ]\n- [x][\n    foo\n    ]\n- [x][foo\n    ]\n- [x][\n    foo]\n- Multi lines\n  - [foo\n      bar]\n  - [ foo\n      bar ]\n  - [\n      foo\n      bar\n    ]\n  - [foo\n      bar][]\n  - [ foo\n      bar ][]\n  - [\n      foo\n      bar\n    ][]\n  - [foo\n      bar][x]\n  - [ foo\n      bar ][x]\n  - [\n      foo\n      bar\n    ][x]\n  - [x][foo\n      bar]\n  - [x][ foo\n      bar ]\n  - [x][\n      foo\n      bar\n    ]\n- Empty\n  - [][x]\n  - [ ][x]\n  - [\n      ][x]\n\n[x]: /url\n[foo]: /url\n[foo bar]: /url\n 2"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/consistent/link-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -2685,7 +2685,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n- ![foo](/url)\n- ![ foo ](/url)\n- ![\n    foo\n  ](/url)\n- ![foo\n    ](/url)\n- ![\n    foo](/url)\n- Multi lines\n  - ![foo\n      bar](/url)\n  - ![ foo\n      bar ](/url)\n  - ![\n      foo\n      bar\n    ](/url)\n- Empty\n  - ![](/url)\n  - ![ ](/url)\n  - ![\n      ](/url)\n 3"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -2763,7 +2763,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n- ![foo]\n- ![ foo ]\n- ![\n    foo\n    ]\n- ![foo\n    ]\n- ![\n    foo]\n- ![foo][]\n- ![ foo ][]\n- ![\n    foo\n    ][]\n- ![foo\n    ][]\n- ![\n    foo][]\n- ![foo][x]\n- ![ foo ][x]\n- ![\n    foo\n    ][x]\n- ![foo\n    ][x]\n- ![\n    foo][x]\n- ![x][foo]\n- ![x][ foo ]\n- ![x][\n    foo\n    ]\n- ![x][foo\n    ]\n- ![x][\n    foo]\n- Multi lines\n  - ![foo\n      bar]\n  - ![ foo\n      bar ]\n  - ![\n      foo\n      bar\n    ]\n  - ![foo\n      bar][]\n  - ![ foo\n      bar ][]\n  - ![\n      foo\n      bar\n    ][]\n  - ![foo\n      bar][x]\n  - ![ foo\n      bar ][x]\n  - ![\n      foo\n      bar\n    ][x]\n  - ![x][foo\n      bar]\n  - ![x][ foo\n      bar ]\n  - ![x][\n      foo\n      bar\n    ]\n- Empty\n  - ![][x]\n  - ![ ][x]\n  - ![\n      ][x]\n\n[x]: /url\n[foo]: /url\n[foo bar]: /url\n 3"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/image-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -2987,7 +2987,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n[a]: /url\n[ b ]: /url\n[\n  c\n  ]: /url\n[d\n  ]: /url\n[\n  e]: /url\n[ f\n  g ]: /url\n[ h\n  i\n]: /url\n[\n  j\n  k ]: /url\n[\n  l\n  m\n  ]: /url\n 3"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/link-definition-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -3063,7 +3063,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n- [foo](/url)\n- [ foo ](/url)\n- [\n    foo\n  ](/url)\n- [foo\n    ](/url)\n- [\n    foo](/url)\n- Multi lines\n  - [foo\n      bar](/url)\n  - [ foo\n      bar ](/url)\n  - [\n      foo\n      bar\n    ](/url)\n- Empty\n  - [](/url)\n  - [ ](/url)\n  - [      ](/url)\n  - [\n      ](/url)\n 3"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -3143,7 +3143,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n- [foo]\n- [ foo ]\n- [\n    foo\n    ]\n- [foo\n    ]\n- [\n    foo]\n- [foo][]\n- [ foo ][]\n- [\n    foo\n    ][]\n- [foo\n    ][]\n- [\n    foo][]\n- [foo][x]\n- [ foo ][x]\n- [\n    foo\n    ][x]\n- [foo\n    ][x]\n- [\n    foo][x]\n- [x][foo]\n- [x][ foo ]\n- [x][\n    foo\n    ]\n- [x][foo\n    ]\n- [x][\n    foo]\n- Multi lines\n  - [foo\n      bar]\n  - [ foo\n      bar ]\n  - [\n      foo\n      bar\n    ]\n  - [foo\n      bar][]\n  - [ foo\n      bar ][]\n  - [\n      foo\n      bar\n    ][]\n  - [foo\n      bar][x]\n  - [ foo\n      bar ][x]\n  - [\n      foo\n      bar\n    ][x]\n  - [x][foo\n      bar]\n  - [x][ foo\n      bar ]\n  - [x][\n      foo\n      bar\n    ]\n- Empty\n  - [][x]\n  - [ ][x]\n  - [\n      ][x]\n\n[x]: /url\n[foo]: /url\n[foo bar]: /url\n 3"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/link-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -3367,7 +3367,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n- ![foo](/url)\n- ![ foo ](/url)\n- ![\n    foo\n  ](/url)\n- ![foo\n    ](/url)\n- ![\n    foo](/url)\n- Multi lines\n  - ![foo\n      bar](/url)\n  - ![ foo\n      bar ](/url)\n  - ![\n      foo\n      bar\n    ](/url)\n- Empty\n  - ![](/url)\n  - ![ ](/url)\n  - ![\n      ](/url)\n 4"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -3447,7 +3447,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n- ![foo]\n- ![ foo ]\n- ![\n    foo\n    ]\n- ![foo\n    ]\n- ![\n    foo]\n- ![foo][]\n- ![ foo ][]\n- ![\n    foo\n    ][]\n- ![foo\n    ][]\n- ![\n    foo][]\n- ![foo][x]\n- ![ foo ][x]\n- ![\n    foo\n    ][x]\n- ![foo\n    ][x]\n- ![\n    foo][x]\n- ![x][foo]\n- ![x][ foo ]\n- ![x][\n    foo\n    ]\n- ![x][foo\n    ]\n- ![x][\n    foo]\n- Multi lines\n  - ![foo\n      bar]\n  - ![ foo\n      bar ]\n  - ![\n      foo\n      bar\n    ]\n  - ![foo\n      bar][]\n  - ![ foo\n      bar ][]\n  - ![\n      foo\n      bar\n    ][]\n  - ![foo\n      bar][x]\n  - ![ foo\n      bar ][x]\n  - ![\n      foo\n      bar\n    ][x]\n  - ![x][foo\n      bar]\n  - ![x][ foo\n      bar ]\n  - ![x][\n      foo\n      bar\n    ]\n- Empty\n  - ![][x]\n  - ![ ][x]\n  - ![\n      ][x]\n\n[x]: /url\n[foo]: /url\n[foo bar]: /url\n 4"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/image-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -3673,7 +3673,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n[a]: /url\n[ b ]: /url\n[\n  c\n  ]: /url\n[d\n  ]: /url\n[\n  e]: /url\n[ f\n  g ]: /url\n[ h\n  i\n]: /url\n[\n  j\n  k ]: /url\n[\n  l\n  m\n  ]: /url\n 4"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/link-definition-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -3751,7 +3751,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n- [foo](/url)\n- [ foo ](/url)\n- [\n    foo\n  ](/url)\n- [foo\n    ](/url)\n- [\n    foo](/url)\n- Multi lines\n  - [foo\n      bar](/url)\n  - [ foo\n      bar ](/url)\n  - [\n      foo\n      bar\n    ](/url)\n- Empty\n  - [](/url)\n  - [ ](/url)\n  - [      ](/url)\n  - [\n      ](/url)\n 4"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -3833,7 +3833,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n- [foo]\n- [ foo ]\n- [\n    foo\n    ]\n- [foo\n    ]\n- [\n    foo]\n- [foo][]\n- [ foo ][]\n- [\n    foo\n    ][]\n- [foo\n    ][]\n- [\n    foo][]\n- [foo][x]\n- [ foo ][x]\n- [\n    foo\n    ][x]\n- [foo\n    ][x]\n- [\n    foo][x]\n- [x][foo]\n- [x][ foo ]\n- [x][\n    foo\n    ]\n- [x][foo\n    ]\n- [x][\n    foo]\n- Multi lines\n  - [foo\n      bar]\n  - [ foo\n      bar ]\n  - [\n      foo\n      bar\n    ]\n  - [foo\n      bar][]\n  - [ foo\n      bar ][]\n  - [\n      foo\n      bar\n    ][]\n  - [foo\n      bar][x]\n  - [ foo\n      bar ][x]\n  - [\n      foo\n      bar\n    ][x]\n  - [x][foo\n      bar]\n  - [x][ foo\n      bar ]\n  - [x][\n      foo\n      bar\n    ]\n- Empty\n  - [][x]\n  - [ ][x]\n  - [\n      ][x]\n\n[x]: /url\n[foo]: /url\n[foo bar]: /url\n 4"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/link-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -4059,7 +4059,7 @@ Output:
 
 Test: link-bracket-newline >> invalid
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/newline-image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -4187,7 +4187,7 @@ Output:
 
 Test: link-bracket-newline >> invalid
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/newline-image-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -4756,7 +4756,7 @@ Output:
 
 Test: link-bracket-newline >> invalid
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/newline-link-definition-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -4874,7 +4874,7 @@ Output:
 
 Test: link-bracket-newline >> invalid
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/newline-link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -5008,7 +5008,7 @@ Output:
 
 Test: link-bracket-newline >> invalid
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/never/newline-link-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -5577,7 +5577,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n- ![foo](/url)\n- ![ foo ](/url)\n- ![\n    foo\n  ](/url)\n- ![foo\n    ](/url)\n- ![\n    foo](/url)\n- Multi lines\n  - ![foo\n      bar](/url)\n  - ![ foo\n      bar ](/url)\n  - ![\n      foo\n      bar\n    ](/url)\n- Empty\n  - ![](/url)\n  - ![ ](/url)\n  - ![\n      ](/url)\n 5"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/never-with-multiline-true/image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -5666,7 +5666,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n- ![foo]\n- ![ foo ]\n- ![\n    foo\n    ]\n- ![foo\n    ]\n- ![\n    foo]\n- ![foo][]\n- ![ foo ][]\n- ![\n    foo\n    ][]\n- ![foo\n    ][]\n- ![\n    foo][]\n- ![foo][x]\n- ![ foo ][x]\n- ![\n    foo\n    ][x]\n- ![foo\n    ][x]\n- ![\n    foo][x]\n- ![x][foo]\n- ![x][ foo ]\n- ![x][\n    foo\n    ]\n- ![x][foo\n    ]\n- ![x][\n    foo]\n- Multi lines\n  - ![foo\n      bar]\n  - ![ foo\n      bar ]\n  - ![\n      foo\n      bar\n    ]\n  - ![foo\n      bar][]\n  - ![ foo\n      bar ][]\n  - ![\n      foo\n      bar\n    ][]\n  - ![foo\n      bar][x]\n  - ![ foo\n      bar ][x]\n  - ![\n      foo\n      bar\n    ][x]\n  - ![x][foo\n      bar]\n  - ![x][ foo\n      bar ]\n  - ![x][\n      foo\n      bar\n    ]\n- Empty\n  - ![][x]\n  - ![ ][x]\n  - ![\n      ][x]\n\n[x]: /url\n[foo]: /url\n[foo bar]: /url\n 5"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/never-with-multiline-true/image-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -5925,7 +5925,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n[a]: /url\n[ b ]: /url\n[\n  c\n  ]: /url\n[d\n  ]: /url\n[\n  e]: /url\n[ f\n  g ]: /url\n[ h\n  i\n]: /url\n[\n  j\n  k ]: /url\n[\n  l\n  m\n  ]: /url\n 5"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/never-with-multiline-true/link-definition-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -6008,7 +6008,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n- [foo](/url)\n- [ foo ](/url)\n- [\n    foo\n  ](/url)\n- [foo\n    ](/url)\n- [\n    foo](/url)\n- Multi lines\n  - [foo\n      bar](/url)\n  - [ foo\n      bar ](/url)\n  - [\n      foo\n      bar\n    ](/url)\n- Empty\n  - [](/url)\n  - [ ](/url)\n  - [      ](/url)\n  - [\n      ](/url)\n 5"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/never-with-multiline-true/link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -6099,7 +6099,7 @@ Output:
 
 Test: link-bracket-newline >> invalid >>> "\n- [foo]\n- [ foo ]\n- [\n    foo\n    ]\n- [foo\n    ]\n- [\n    foo]\n- [foo][]\n- [ foo ][]\n- [\n    foo\n    ][]\n- [foo\n    ][]\n- [\n    foo][]\n- [foo][x]\n- [ foo ][x]\n- [\n    foo\n    ][x]\n- [foo\n    ][x]\n- [\n    foo][x]\n- [x][foo]\n- [x][ foo ]\n- [x][\n    foo\n    ]\n- [x][foo\n    ]\n- [x][\n    foo]\n- Multi lines\n  - [foo\n      bar]\n  - [ foo\n      bar ]\n  - [\n      foo\n      bar\n    ]\n  - [foo\n      bar][]\n  - [ foo\n      bar ][]\n  - [\n      foo\n      bar\n    ][]\n  - [foo\n      bar][x]\n  - [ foo\n      bar ][x]\n  - [\n      foo\n      bar\n    ][x]\n  - [x][foo\n      bar]\n  - [x][ foo\n      bar ]\n  - [x][\n      foo\n      bar\n    ]\n- Empty\n  - [][x]\n  - [ ][x]\n  - [\n      ][x]\n\n[x]: /url\n[foo]: /url\n[foo bar]: /url\n 5"
 Filename: tests/fixtures/rules/link-bracket-newline/invalid/never-with-multiline-true/link-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:

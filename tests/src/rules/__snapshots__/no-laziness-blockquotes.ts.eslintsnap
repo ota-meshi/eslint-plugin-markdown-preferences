@@ -3,7 +3,7 @@
 
 Test: no-laziness-blockquotes >> invalid
 Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/complex-nested-lazy-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -231,7 +231,7 @@ Code:
 
 Test: no-laziness-blockquotes >> invalid
 Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/consecutive-nested-lazy-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -514,7 +514,7 @@ Code:
 
 Test: no-laziness-blockquotes >> invalid
 Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/deep-nested-lazy-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -634,7 +634,7 @@ Code:
 
 Test: no-laziness-blockquotes >> invalid
 Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/example-complex-nested-lazy-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -775,7 +775,7 @@ Code:
 
 Test: no-laziness-blockquotes >> invalid
 Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/lazy-continuation-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -810,7 +810,7 @@ Code:
 
 Test: no-laziness-blockquotes >> invalid
 Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/mixed-content-nested-lazy-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -918,7 +918,7 @@ Code:
 
 Test: no-laziness-blockquotes >> invalid
 Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/mixed-lazy-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -981,7 +981,7 @@ Code:
 
 Test: no-laziness-blockquotes >> invalid
 Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/multi-level-transition-lazy-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -1122,7 +1122,7 @@ Code:
 
 Test: no-laziness-blockquotes >> invalid
 Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/multiple-lazy-lines-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -1161,7 +1161,7 @@ Code:
 
 Test: no-laziness-blockquotes >> invalid
 Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/nested-lazy-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -1199,7 +1199,7 @@ Code:
 
 Test: no-laziness-blockquotes >> invalid
 Filename: tests/fixtures/rules/no-laziness-blockquotes/invalid/nested-to-outer-lazy-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize

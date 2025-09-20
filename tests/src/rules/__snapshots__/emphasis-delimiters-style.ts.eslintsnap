@@ -3,7 +3,7 @@
 
 Test: emphasis-delimiters-style >> invalid
 Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -121,7 +121,7 @@ Output:
 
 Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 2"
 Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/emphasis-asterisk-and-strong-asterisk/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -242,7 +242,7 @@ Output:
 
 Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 3"
 Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/emphasis-asterisk-and-strong-underline/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -365,7 +365,7 @@ Output:
 
 Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 4"
 Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/emphasis-underline-and-strong-asterisk/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -486,7 +486,7 @@ Output:
 
 Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 5"
 Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/emphasis-underline-and-strong-underline/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -605,7 +605,7 @@ Output:
 
 Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 6"
 Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/strong-emphasis-asterisk/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -727,7 +727,7 @@ Output:
 
 Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 7"
 Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/strong-emphasis-outer-double-asterisk/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -851,7 +851,7 @@ Output:
 
 Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 8"
 Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/strong-emphasis-outer-double-underline/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -973,7 +973,7 @@ Output:
 
 Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 9"
 Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/strong-emphasis-outer-single-asterisk/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1099,7 +1099,7 @@ Output:
 
 Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 10"
 Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/strong-emphasis-outer-single-underline/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1221,7 +1221,7 @@ Output:
 
 Test: emphasis-delimiters-style >> invalid >>> "<!-- Basic -->\n\n***StrongEmph***\n___StrongEmph___\n_**StrongEmph**_\n**_StrongEmph_**\n__*StrongEmph*__\n*__StrongEmph__*\n\n**Strong**\n__Strong__\n\n*Emph*\n_Emph_\n\n*_NestingEmph_*\n_*NestingEmph*_\n\n_*_NestingEmph_*_\n*_*NestingEmph*_*\n\n****NestingStrong****\n____NestingStrong____\n**__NestingStrong__**\n__**NestingStrong**__\n\n<!-- Tests for delimiters -->\n\nS___text___E\nS__text__E\nS_text_E\n\nS***StrongEmph***E\nS**Strong**E\nS*Emph*E\n\nS_**Strong**_E\nS**_StrongEmph_**E\n\nS*_NestingEmph_*E\nS_*Emph*_E\n 11"
 Filename: tests/fixtures/rules/emphasis-delimiters-style/invalid/strong-emphasis-underline/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:

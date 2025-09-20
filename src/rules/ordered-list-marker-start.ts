@@ -3,11 +3,12 @@ import type { OrderedListMarker, OrderedListMarkerKind } from "../utils/ast.ts";
 import { getListItemMarker } from "../utils/ast.ts";
 import type {
   Blockquote,
+  CustomContainer,
   FootnoteDefinition,
   List,
   ListItem,
   Root,
-} from "mdast";
+} from "../language/ast-types.ts";
 import type { SuggestedEdit } from "@eslint/core";
 
 type Option = {
@@ -45,7 +46,7 @@ export default createRule<[Option?]>("ordered-list-marker-start", {
     const expectedStart = option.start ?? 1;
 
     type Scope = {
-      node: Root | Blockquote | ListItem | FootnoteDefinition;
+      node: Root | Blockquote | ListItem | FootnoteDefinition | CustomContainer;
       upper: Scope | null;
       last: { kind: OrderedListMarkerKind; sequence: number } | null;
     };
@@ -105,8 +106,8 @@ export default createRule<[Option?]>("ordered-list-marker-start", {
     }
 
     return {
-      "blockquote, listItem, footnoteDefinition"(
-        node: Blockquote | ListItem | FootnoteDefinition,
+      "blockquote, listItem, footnoteDefinition, customContainer"(
+        node: Blockquote | ListItem | FootnoteDefinition | CustomContainer,
       ) {
         scope = {
           node,
@@ -114,7 +115,7 @@ export default createRule<[Option?]>("ordered-list-marker-start", {
           last: null,
         };
       },
-      "blockquote, listItem, footnoteDefinition:exit"(
+      "blockquote, listItem, footnoteDefinition, customContainer:exit"(
         node: Blockquote | ListItem | FootnoteDefinition,
       ) {
         if (scope.node === node) scope = scope.upper!;

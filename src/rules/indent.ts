@@ -2,6 +2,7 @@ import type {
   Blockquote,
   Break,
   Code,
+  CustomContainer,
   Definition,
   Delete,
   Emphasis,
@@ -21,7 +22,7 @@ import type {
   Table,
   Text,
   ThematicBreak,
-} from "mdast";
+} from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import type { ParsedLine } from "../utils/lines.ts";
 import { getParsedLines } from "../utils/lines.ts";
@@ -557,6 +558,7 @@ export default createRule<[Options?]>("indent", {
       definition: verifyLinkDefinition,
       table: verifyTable,
       list: verifyList,
+      customContainer: verifyCustomContainer,
       inlineCode: verifyInlineCode,
       emphasis: verifyEmphasisOrStrongOrDelete,
       strong: verifyEmphasisOrStrongOrDelete,
@@ -881,6 +883,16 @@ export default createRule<[Options?]>("indent", {
           );
         }
       }
+    }
+
+    /**
+     * Verify a custom container node.
+     */
+    function verifyCustomContainer(node: CustomContainer) {
+      const loc = sourceCode.getLoc(node);
+      verifyLinesIndent([loc.start.line, loc.end.line], (lineNumber) =>
+        blockStack.getExpectedIndent({ lineNumber, block: true }),
+      );
     }
 
     /**

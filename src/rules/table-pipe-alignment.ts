@@ -1,4 +1,4 @@
-import type { Table } from "mdast";
+import type { Table } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import type {
   ParsedTable,

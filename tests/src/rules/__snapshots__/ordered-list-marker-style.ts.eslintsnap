@@ -3,7 +3,7 @@
 
 Test: ordered-list-marker-style >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-style/invalid/custom-prefer-parenthesis/wrong-markers-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -53,7 +53,7 @@ Output:
 
 Test: ordered-list-marker-style >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-style/invalid/deep-nesting-wrong-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -109,7 +109,7 @@ Output:
 
 Test: ordered-list-marker-style >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-style/invalid/default-wrong-primary-marker-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -157,7 +157,7 @@ Output:
 
 Test: ordered-list-marker-style >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-style/invalid/mixed-list-types-wrong-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -221,7 +221,7 @@ Output:
 
 Test: ordered-list-marker-style >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-style/invalid/multiple-overrides/wrong-multiple-levels-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -278,7 +278,7 @@ Output:
 
 Test: ordered-list-marker-style >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-style/invalid/overrides-bullet-parent/wrong-bullet-parent-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -334,7 +334,7 @@ Output:
 
 Test: ordered-list-marker-style >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-style/invalid/overrides-level/level-2-wrong-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -387,7 +387,7 @@ Output:
 
 Test: ordered-list-marker-style >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-style/invalid/overrides-parent-marker/wrong-alternating-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -448,7 +448,7 @@ Output:
 
 Test: ordered-list-marker-style >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-style/invalid/single-item-lists-wrong-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize

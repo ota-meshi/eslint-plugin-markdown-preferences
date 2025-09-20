@@ -8,6 +8,7 @@ import type { Linter } from "eslint";
 import type { RuleDefinition } from "@eslint/core";
 import { defaultPreserveWords } from "./resources/preserve-words.ts";
 import { defaultMinorWords } from "./resources/minor-words.ts";
+import { ExtendedMarkdownLanguage } from "./language/extended-markdown-ianguage.ts";
 
 const configs = {
   recommended: recommended satisfies Linter.Config,
@@ -26,6 +27,9 @@ const resources = {
   defaultPreserveWords,
   defaultMinorWords,
 };
+const languages = {
+  "extended-syntax": new ExtendedMarkdownLanguage(),
+};
 
-export { meta, configs, rules, resources };
-export default { meta, configs, rules, resources };
+export { meta, languages, configs, rules, resources };
+export default { meta, languages, configs, rules, resources };

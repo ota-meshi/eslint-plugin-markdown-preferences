@@ -1,4 +1,4 @@
-import type { Emphasis, Strong } from "mdast";
+import type { Emphasis, Strong } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import { isPunctuation, isWhitespace } from "../utils/unicode.ts";
 

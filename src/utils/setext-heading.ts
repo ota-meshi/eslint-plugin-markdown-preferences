@@ -1,6 +1,6 @@
 import type { SourceLocation } from "@eslint/core";
-import type { MarkdownSourceCode } from "@eslint/markdown";
-import type { Heading } from "mdast";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
+import type { Heading } from "../language/ast-types.ts";
 import { getHeadingKind } from "./ast.ts";
 import type { ParsedLine } from "./lines.ts";
 import { getParsedLines } from "./lines.ts";
@@ -33,7 +33,7 @@ export type ParsedSetextHeading = {
  * Parse the setext heading.
  */
 export function parseSetextHeading(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   node: Heading,
 ): ParsedSetextHeading | null {
   if (getHeadingKind(sourceCode, node) !== "setext") return null;

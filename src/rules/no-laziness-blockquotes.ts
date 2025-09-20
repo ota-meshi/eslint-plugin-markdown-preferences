@@ -1,5 +1,5 @@
 import { createRule } from "../utils/index.ts";
-import type { Blockquote } from "mdast";
+import type { Blockquote } from "../language/ast-types.ts";
 import type { BlockquoteLevelInfo } from "../utils/blockquotes.ts";
 import { getBlockquoteLevelFromLine } from "../utils/blockquotes.ts";
 import { getParsedLines } from "../utils/lines.ts";

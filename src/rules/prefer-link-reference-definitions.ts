@@ -6,7 +6,7 @@ import type {
   Link,
   LinkReference,
   Resource,
-} from "mdast";
+} from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 
 export default createRule<[{ minLinks?: number }?]>(

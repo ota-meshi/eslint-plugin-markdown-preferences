@@ -3,7 +3,7 @@
 
 Test: thematic-break-character-style >> invalid
 Filename: tests/fixtures/rules/thematic-break-character-style/invalid/asterisk/with-dash-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -31,7 +31,7 @@ Output:
 
 Test: thematic-break-character-style >> invalid
 Filename: tests/fixtures/rules/thematic-break-character-style/invalid/asterisk/with-spaced-dash-underscore-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -59,7 +59,7 @@ Output:
 
 Test: thematic-break-character-style >> invalid
 Filename: tests/fixtures/rules/thematic-break-character-style/invalid/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -89,7 +89,7 @@ Output:
 
 Test: thematic-break-character-style >> invalid
 Filename: tests/fixtures/rules/thematic-break-character-style/invalid/dash/with-asterisk-underscore-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -117,7 +117,7 @@ Output:
 
 Test: thematic-break-character-style >> invalid
 Filename: tests/fixtures/rules/thematic-break-character-style/invalid/dash/with-spaced-asterisk-underscore-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -145,7 +145,7 @@ Output:
 
 Test: thematic-break-character-style >> invalid
 Filename: tests/fixtures/rules/thematic-break-character-style/invalid/underscore/with-dash-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -173,7 +173,7 @@ Output:
 
 Test: thematic-break-character-style >> invalid
 Filename: tests/fixtures/rules/thematic-break-character-style/invalid/underscore/with-spaced-dash-asterisk-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:

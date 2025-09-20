@@ -1,6 +1,6 @@
 import type { SourceLocation } from "@eslint/core";
-import type { MarkdownSourceCode } from "@eslint/markdown";
-import type { Code } from "mdast";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
+import type { Code } from "../language/ast-types.ts";
 import { getParsedLines } from "./lines.ts";
 import { isSpaceOrTab } from "./unicode.ts";
 
@@ -32,7 +32,7 @@ const RE_LANGUAGE = /^(\w*)/u;
  * Parse the fenced code block.
  */
 export function parseFencedCodeBlock(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   node: Code,
 ): ParsedFencedCodeBlock | null {
   const loc = sourceCode.getLoc(node);

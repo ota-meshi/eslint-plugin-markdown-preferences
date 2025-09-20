@@ -1,4 +1,4 @@
-import type { Table, TableRow } from "mdast";
+import type { Table, TableRow } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import type { SourceLocation } from "estree";
 import { parseTableDelimiterRow } from "../utils/table.ts";

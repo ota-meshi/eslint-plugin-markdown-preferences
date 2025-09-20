@@ -3,7 +3,7 @@
 
 Test: code-fence-length >> invalid
 Filename: tests/fixtures/rules/code-fence-length/invalid/fallback-as-is/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -56,7 +56,7 @@ Output:
 
 Test: code-fence-length >> invalid
 Filename: tests/fixtures/rules/code-fence-length/invalid/fallback-minimum/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -103,7 +103,7 @@ Output:
 
 Test: code-fence-length >> invalid
 Filename: tests/fixtures/rules/code-fence-length/invalid/fallback-number/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -182,7 +182,7 @@ Output:
 
 Test: code-fence-length >> invalid
 Filename: tests/fixtures/rules/code-fence-length/invalid/length-3/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -222,7 +222,7 @@ Output:
 
 Test: code-fence-length >> invalid
 Filename: tests/fixtures/rules/code-fence-length/invalid/length-4/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -272,7 +272,7 @@ Output:
 
 Test: code-fence-length >> invalid
 Filename: tests/fixtures/rules/code-fence-length/invalid/overrides-md4/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -321,7 +321,7 @@ Output:
 
 Test: code-fence-length >> invalid
 Filename: tests/fixtures/rules/code-fence-length/invalid/overrides-md4-fallback-minimum/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:

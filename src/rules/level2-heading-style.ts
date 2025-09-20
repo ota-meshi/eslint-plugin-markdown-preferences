@@ -1,4 +1,4 @@
-import type { Heading } from "mdast";
+import type { Heading } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import { getHeadingKind } from "../utils/ast.ts";
 import { parseSetextHeading } from "../utils/setext-heading.ts";

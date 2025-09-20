@@ -3,7 +3,7 @@
 
 Test: ordered-list-marker-start >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-start/invalid/start-not-0-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -33,7 +33,7 @@ Output:
 
 Test: ordered-list-marker-start >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-start/invalid/start-not-1-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize

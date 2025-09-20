@@ -1,4 +1,4 @@
-import type { List, ListItem } from "mdast";
+import type { List, ListItem } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import { getParsedLines } from "../utils/lines.ts";
 import { getListItemMarker } from "../utils/ast.ts";

@@ -3,7 +3,7 @@
 
 Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/blockquote-definition-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -39,7 +39,7 @@ Output:
 
 Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/blockquote-footnote-definition-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -73,7 +73,7 @@ Output:
 
 Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/blockquote-multiline-footnote-definition-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -110,7 +110,7 @@ Output:
 
 Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/first-reference-section-last/multi-section-wrong-position-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -199,7 +199,7 @@ Output:
 
 Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/last-reference-section-last/multi-section-wrong-position-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -288,7 +288,7 @@ Output:
 
 Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/mixed-options/mixed-placement-wrong-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -377,7 +377,7 @@ Output:
 
 Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/multiline-footnote-definition-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -416,7 +416,7 @@ Output:
 
 Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/section-last-single/single-section-wrong-position-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -511,7 +511,7 @@ Output:
 
 Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/test01-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -557,7 +557,7 @@ Output:
 
 Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/test02-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -597,7 +597,7 @@ Output:
 
 Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/test03-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -655,7 +655,7 @@ Output:
 
 Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/test04-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -721,7 +721,7 @@ Output:
 
 Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/test05-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize

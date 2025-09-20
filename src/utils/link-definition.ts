@@ -1,9 +1,9 @@
-import type { MarkdownSourceCode } from "@eslint/markdown";
 import type { SourceLocation } from "estree";
-import type { Definition } from "mdast";
+import type { Definition } from "../language/ast-types.ts";
 import { isAsciiControlCharacter } from "./unicode.ts";
 import { getSourceLocationFromRange } from "./ast.ts";
 import { ForwardCharacterCursor } from "./character-cursor.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
 
 export type ParsedLinkDefinition = {
   label: {
@@ -28,7 +28,7 @@ export type ParsedLinkDefinition = {
  * Parse the link definition.
  */
 export function parseLinkDefinition(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   node: Definition,
 ): ParsedLinkDefinition | null {
   const text = sourceCode.getText(node);

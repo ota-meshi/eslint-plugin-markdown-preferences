@@ -1,10 +1,11 @@
 import type {
   Blockquote,
+  CustomContainer,
   FootnoteDefinition,
   Html,
   ListItem,
   Root,
-} from "mdast";
+} from "../language/ast-types.ts";
 import {
   getHeadingKind,
   getThematicBreakMarker,
@@ -17,7 +18,7 @@ import { createRule } from "../utils/index.ts";
 import type { ParsedLine } from "../utils/lines.ts";
 import { getParsedLines } from "../utils/lines.ts";
 import { getBlockquoteLevelFromLine } from "../utils/blockquotes.ts";
-import type { MarkdownSourceCode } from "@eslint/markdown";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
 import type { JSONSchema4 } from "json-schema";
 
 type BlockType =
@@ -31,7 +32,8 @@ type BlockType =
   | "table"
   | "link-definition"
   | "footnote-definition"
-  | "frontmatter";
+  | "frontmatter"
+  | "custom-container";
 type BlockTypeOption = BlockType | "*";
 
 type ObjectSelector = {
@@ -48,7 +50,12 @@ interface PaddingRule {
 
 type Options = PaddingRule[];
 
-type MDBlockContainer = Root | Blockquote | ListItem | FootnoteDefinition;
+type MDBlockContainer =
+  | Root
+  | Blockquote
+  | ListItem
+  | FootnoteDefinition
+  | CustomContainer;
 
 export type MarkdownBlockNode = MDBlock | MDDefinition | MDFrontmatter | Html;
 
@@ -59,7 +66,7 @@ export type MarkdownBlockNode = MDBlock | MDDefinition | MDFrontmatter | Html;
 export function requiresBlankLineBetween(
   prev: MDNode,
   next: MDNode,
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
 ): boolean {
   if (prev.type === "paragraph") {
     if (next.type === "paragraph" || next.type === "definition") {
@@ -130,6 +137,7 @@ const BLOCK_TYPES: BlockTypeOption[] = [
   "link-definition",
   "footnote-definition",
   "frontmatter",
+  "custom-container",
   "*",
 ];
 
@@ -184,6 +192,7 @@ const BLOCK_TYPE_MAP0: {
   json: "frontmatter",
   toml: "frontmatter",
   yaml: "frontmatter",
+  customContainer: "custom-container",
 };
 const BLOCK_TYPE_MAP: {
   [K in MDNode["type"]]?: BlockType;
@@ -431,10 +440,12 @@ export default createRule<Options>("padding-line-between-blocks", {
     }
 
     return {
-      "root, blockquote, listItem, footnoteDefinition"(node: MDBlockContainer) {
+      "root, blockquote, listItem, footnoteDefinition, customContainer"(
+        node: MDBlockContainer,
+      ) {
         containerStack.unshift(node);
       },
-      "root, blockquote, listItem, footnoteDefinition:exit"(
+      "root, blockquote, listItem, footnoteDefinition, customContainer:exit"(
         node: MDBlockContainer,
       ) {
         checkBlockPadding(node);

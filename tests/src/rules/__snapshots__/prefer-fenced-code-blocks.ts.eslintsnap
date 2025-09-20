@@ -3,7 +3,7 @@
 
 Test: prefer-fenced-code-blocks >> invalid
 Filename: tests/fixtures/rules/prefer-fenced-code-blocks/invalid/blockquote-indented-codeblock-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -32,7 +32,7 @@ Output:
 
 Test: prefer-fenced-code-blocks >> invalid >>> "# Invalid indented code block (tab)\n\n>\\u0009\\u0009a\n\n---\n\n>\\u0009 \\u0009\\u0009a\n"
 Filename: tests/fixtures/rules/prefer-fenced-code-blocks/invalid/complex-tab-indented-codeblock-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -58,7 +58,7 @@ Output: unchanged
 
 Test: prefer-fenced-code-blocks >> invalid
 Filename: tests/fixtures/rules/prefer-fenced-code-blocks/invalid/indented-codeblock-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -90,7 +90,7 @@ Output:
 
 Test: prefer-fenced-code-blocks >> invalid >>> "# Mixed tab and space indentation\n\n\\u0009code with tab and spaces\n\\u0009  code with tab and spaces\n\n---\n\n\\u0009code with tab and spaces\n\\u0009  code with tab and spaces\n"
 Filename: tests/fixtures/rules/prefer-fenced-code-blocks/invalid/mixed-tab-space-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -134,7 +134,7 @@ Output:
 
 Test: prefer-fenced-code-blocks >> invalid >>> "# Inconsistent indentation prefix\n\n>     code\n>\\u0009  code\n"
 Filename: tests/fixtures/rules/prefer-fenced-code-blocks/invalid/prefix-inconsistent-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -156,7 +156,7 @@ Output: unchanged
 
 Test: prefer-fenced-code-blocks >> invalid >>> "# Invalid indented code block (tab)\n\n\\u0009function bar() {\n\\u0009  return 99;\n\\u0009}\n\n---\n\n    code\n   \\u0009code with 3 spaces\n  \\u0009code with 2 spaces\n \\u0009code with 1 spaces\n\\u0009code with tab\n"
 Filename: tests/fixtures/rules/prefer-fenced-code-blocks/invalid/tab-indented-codeblock-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
