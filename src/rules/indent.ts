@@ -12,6 +12,7 @@ import type {
   Html,
   Image,
   ImageReference,
+  ImportCodeSnippet,
   InlineCode,
   InlineMath,
   Link,
@@ -563,6 +564,7 @@ export default createRule<[Options?]>("indent", {
       list: verifyList,
       customContainer: verifyCustomContainer,
       math: verifyMathBlock,
+      importCodeSnippet: verifyImportCodeSnippet,
       inlineCode: verifyInlineCodeOrInlineMath,
       emphasis: verifyEmphasisOrStrongOrDelete,
       strong: verifyEmphasisOrStrongOrDelete,
@@ -882,6 +884,18 @@ export default createRule<[Options?]>("indent", {
             endLineToBeChecked ? loc.end.line - 1 : loc.end.line,
           );
         },
+      );
+    }
+
+    /**
+     * Verify an import code snippet node.
+     */
+    function verifyImportCodeSnippet(node: ImportCodeSnippet) {
+      const loc = sourceCode.getLoc(node);
+      verifyLinesIndent(
+        lineNumbersFromRange(loc.start.line, loc.end.line),
+        (lineNumber) =>
+          blockStack.getExpectedIndent({ lineNumber, block: true }),
       );
     }
 

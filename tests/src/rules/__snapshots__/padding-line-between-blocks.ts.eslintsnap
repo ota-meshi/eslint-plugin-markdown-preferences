@@ -1973,6 +1973,26 @@ Options:
     blankLine: always
 
 Code:
+  1 | # heading
+  2 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | # heading
+  2 |
+  3 | <<< ./example.js
+
+[1] Expected a blank line between heading and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
   1 | heading
   2 | ---
   3 | # heading
@@ -2501,6 +2521,28 @@ Options:
     blankLine: always
 
 Code:
+  1 | heading
+  2 | ---
+  3 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | heading
+  2 | ---
+  3 |
+  4 | <<< ./example.js
+
+[1] Expected a blank line between heading and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
   1 | paragraph
   2 | # heading
     | ^~~~~~~~~ [1]
@@ -2881,6 +2923,26 @@ Options:
     blankLine: always
 
 Code:
+  1 | paragraph
+  2 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | paragraph
+  2 |
+  3 | <<< ./example.js
+
+[1] Expected a blank line between paragraph and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
   1 | - list
   2 | # heading
     | ^~~~~~~~~ [1]
@@ -3247,6 +3309,26 @@ Output:
   5 | $$
 
 [1] Expected a blank line between list and math.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | - list
+  2 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | - list
+  2 |
+  3 | <<< ./example.js
+
+[1] Expected a blank line between list and import-code-snippet.
 ---
 
 
@@ -3633,6 +3715,26 @@ Options:
     blankLine: always
 
 Code:
+  1 | * list
+  2 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | * list
+  2 |
+  3 | <<< ./example.js
+
+[1] Expected a blank line between list and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
   1 | + list
   2 | # heading
     | ^~~~~~~~~ [1]
@@ -3999,6 +4101,26 @@ Output:
   5 | $$
 
 [1] Expected a blank line between list and math.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | + list
+  2 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | + list
+  2 |
+  3 | <<< ./example.js
+
+[1] Expected a blank line between list and import-code-snippet.
 ---
 
 
@@ -4385,6 +4507,26 @@ Options:
     blankLine: always
 
 Code:
+  1 | 1. list
+  2 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | 1. list
+  2 |
+  3 | <<< ./example.js
+
+[1] Expected a blank line between list and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
   1 | 1) list
   2 | # heading
     | ^~~~~~~~~ [1]
@@ -4751,6 +4893,26 @@ Output:
   5 | $$
 
 [1] Expected a blank line between list and math.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | 1) list
+  2 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | 1) list
+  2 |
+  3 | <<< ./example.js
+
+[1] Expected a blank line between list and import-code-snippet.
 ---
 
 
@@ -5137,6 +5299,26 @@ Options:
     blankLine: always
 
 Code:
+  1 | > blockquote
+  2 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | > blockquote
+  2 |
+  3 | <<< ./example.js
+
+[1] Expected a blank line between blockquote and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
   1 | ```
   2 | code
   3 | ```
@@ -5711,6 +5893,30 @@ Options:
     blankLine: always
 
 Code:
+  1 | ```
+  2 | code
+  3 | ```
+  4 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | ```
+  2 | code
+  3 | ```
+  4 |
+  5 | <<< ./example.js
+
+[1] Expected a blank line between code and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
   1 | ````
   2 | code
   3 | ````
@@ -6275,6 +6481,30 @@ Output:
   7 | $$
 
 [1] Expected a blank line between code and math.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | ````
+  2 | code
+  3 | ````
+  4 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | ````
+  2 | code
+  3 | ````
+  4 |
+  5 | <<< ./example.js
+
+[1] Expected a blank line between code and import-code-snippet.
 ---
 
 
@@ -6757,6 +6987,30 @@ Options:
     blankLine: always
 
 Code:
+  1 | |table|
+  2 | |-|
+  3 | |data|
+  4 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | |table|
+  2 | |-|
+  3 | |data|
+  4 |
+  5 | <<< ./example.js
+
+[1] Expected a blank line between table and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
   1 |
   2 |
   3 | ---
@@ -7333,6 +7587,30 @@ Options:
 Code:
   1 |
   2 |
+  3 | ---
+  4 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 |
+  2 |
+  3 | ---
+  4 |
+  5 | <<< ./example.js
+
+[1] Expected a blank line between thematic-break and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 |
+  2 |
   3 | ***
   4 | # heading
     | ^~~~~~~~~ [1]
@@ -7907,6 +8185,30 @@ Options:
 Code:
   1 |
   2 |
+  3 | ***
+  4 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 |
+  2 |
+  3 | ***
+  4 |
+  5 | <<< ./example.js
+
+[1] Expected a blank line between thematic-break and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 |
+  2 |
   3 | - - -
   4 | # heading
     | ^~~~~~~~~ [1]
@@ -8481,6 +8783,30 @@ Options:
 Code:
   1 |
   2 |
+  3 | - - -
+  4 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 |
+  2 |
+  3 | - - -
+  4 |
+  5 | <<< ./example.js
+
+[1] Expected a blank line between thematic-break and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 |
+  2 |
   3 | * * *
   4 | # heading
     | ^~~~~~~~~ [1]
@@ -9055,6 +9381,30 @@ Options:
 Code:
   1 |
   2 |
+  3 | * * *
+  4 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 |
+  2 |
+  3 | * * *
+  4 |
+  5 | <<< ./example.js
+
+[1] Expected a blank line between thematic-break and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 |
+  2 |
   3 | -----
   4 | # heading
     | ^~~~~~~~~ [1]
@@ -9629,6 +9979,30 @@ Options:
 Code:
   1 |
   2 |
+  3 | -----
+  4 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 |
+  2 |
+  3 | -----
+  4 |
+  5 | <<< ./example.js
+
+[1] Expected a blank line between thematic-break and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 |
+  2 |
   3 | *****
   4 | # heading
     | ^~~~~~~~~ [1]
@@ -10191,6 +10565,30 @@ Output:
   7 | $$
 
 [1] Expected a blank line between thematic-break and math.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 |
+  2 |
+  3 | *****
+  4 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 |
+  2 |
+  3 | *****
+  4 |
+  5 | <<< ./example.js
+
+[1] Expected a blank line between thematic-break and import-code-snippet.
 ---
 
 
@@ -10692,6 +11090,26 @@ Options:
     blankLine: always
 
 Code:
+  1 | [link]: #link-definition
+  2 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | [link]: #link-definition
+  2 |
+  3 | <<< ./example.js
+
+[1] Expected a blank line between link-definition and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
   1 | [^footnote]: footnote-definition
   2 | # heading
     | ^~~~~~~~~ [1]
@@ -11078,6 +11496,26 @@ Output:
   5 | $$
 
 [1] Expected a blank line between footnote-definition and math.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | [^footnote]: footnote-definition
+  2 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | [^footnote]: footnote-definition
+  2 |
+  3 | <<< ./example.js
+
+[1] Expected a blank line between footnote-definition and import-code-snippet.
 ---
 
 
@@ -11662,6 +12100,30 @@ Options:
     blankLine: always
 
 Code:
+  1 | ---
+  2 | title: Frontmatter
+  3 | ---
+  4 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | ---
+  2 | title: Frontmatter
+  3 | ---
+  4 |
+  5 | <<< ./example.js
+
+[1] Expected a blank line between frontmatter and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
   1 | ::: warning
   2 | custom container
   3 | :::
@@ -12226,6 +12688,30 @@ Output:
   7 | $$
 
 [1] Expected a blank line between custom-container and math.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | ::: warning
+  2 | custom container
+  3 | :::
+  4 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | ::: warning
+  2 | custom container
+  3 | :::
+  4 |
+  5 | <<< ./example.js
+
+[1] Expected a blank line between custom-container and import-code-snippet.
 ---
 
 
@@ -12807,6 +13293,532 @@ Test: padding-line-between-blocks >> invalid
 Options:
   - prev: "*"
     next: "*"
+    blankLine: always
+
+Code:
+  1 | $$
+  2 | E=mc^2
+  3 | $$
+  4 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | $$
+  2 | E=mc^2
+  3 | $$
+  4 |
+  5 | <<< ./example.js
+
+[1] Expected a blank line between math and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | # heading
+    | ^~~~~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | # heading
+
+[1] Expected a blank line between import-code-snippet and heading.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | heading
+    | ^~~~~~~ [1]
+  3 | ---
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | heading
+  4 | ---
+
+[1] Expected a blank line between import-code-snippet and heading.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | paragraph
+    | ^~~~~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | paragraph
+
+[1] Expected a blank line between import-code-snippet and paragraph.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | - list
+    | ^~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | - list
+
+[1] Expected a blank line between import-code-snippet and list.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | * list
+    | ^~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | * list
+
+[1] Expected a blank line between import-code-snippet and list.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | + list
+    | ^~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | + list
+
+[1] Expected a blank line between import-code-snippet and list.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | 1. list
+    | ^~~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | 1. list
+
+[1] Expected a blank line between import-code-snippet and list.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | 1) list
+    | ^~~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | 1) list
+
+[1] Expected a blank line between import-code-snippet and list.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | > blockquote
+    | ^~~~~~~~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | > blockquote
+
+[1] Expected a blank line between import-code-snippet and blockquote.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | ```
+    | ^~~ [1]
+  3 | code
+  4 | ```
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | ```
+  4 | code
+  5 | ```
+
+[1] Expected a blank line between import-code-snippet and code.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | ````
+    | ^~~~ [1]
+  3 | code
+  4 | ````
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | ````
+  4 | code
+  5 | ````
+
+[1] Expected a blank line between import-code-snippet and code.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | <div>html</div>
+    | ^~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | <div>html</div>
+
+[1] Expected a blank line between import-code-snippet and html.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | |table|
+    | ^~~~~~~ [1]
+  3 | |-|
+  4 | |data|
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | |table|
+  4 | |-|
+  5 | |data|
+
+[1] Expected a blank line between import-code-snippet and table.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | ---
+    | ^~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | ---
+
+[1] Expected a blank line between import-code-snippet and thematic-break.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | ***
+    | ^~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | ***
+
+[1] Expected a blank line between import-code-snippet and thematic-break.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | - - -
+    | ^~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | - - -
+
+[1] Expected a blank line between import-code-snippet and thematic-break.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | * * *
+    | ^~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | * * *
+
+[1] Expected a blank line between import-code-snippet and thematic-break.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | -----
+    | ^~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | -----
+
+[1] Expected a blank line between import-code-snippet and thematic-break.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | *****
+    | ^~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | *****
+
+[1] Expected a blank line between import-code-snippet and thematic-break.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | [link]: #link-definition
+    | ^~~~~~~~~~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | [link]: #link-definition
+
+[1] Expected a blank line between import-code-snippet and link-definition.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | [^footnote]: footnote-definition
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | [^footnote]: footnote-definition
+
+[1] Expected a blank line between import-code-snippet and footnote-definition.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | ::: warning
+    | ^~~~~~~~~~~ [1]
+  3 | custom container
+  4 | :::
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | ::: warning
+  4 | custom container
+  5 | :::
+
+[1] Expected a blank line between import-code-snippet and custom-container.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | $$
+    | ^~ [1]
+  3 | E=mc^2
+  4 | $$
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | $$
+  4 | E=mc^2
+  5 | $$
+
+[1] Expected a blank line between import-code-snippet and math.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: always
+
+Code:
+  1 | <<< ./example.js
+  2 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 |
+  3 | <<< ./example.js
+
+[1] Expected a blank line between import-code-snippet and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
     blankLine: never
 
 Code:
@@ -13292,6 +14304,26 @@ Options:
     blankLine: never
 
 Code:
+  1 | # heading
+  2 |
+  3 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | # heading
+  2 | <<< ./example.js
+
+[1] Unexpected blank line between heading and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
   1 | heading
   2 | ---
   3 |
@@ -13820,6 +14852,28 @@ Options:
     blankLine: never
 
 Code:
+  1 | heading
+  2 | ---
+  3 |
+  4 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | heading
+  2 | ---
+  3 | <<< ./example.js
+
+[1] Unexpected blank line between heading and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
   1 | paragraph
   2 |
   3 | # heading
@@ -14200,6 +15254,26 @@ Options:
     blankLine: never
 
 Code:
+  1 | paragraph
+  2 |
+  3 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | paragraph
+  2 | <<< ./example.js
+
+[1] Unexpected blank line between paragraph and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
   1 | - list
   2 |
   3 | # heading
@@ -14566,6 +15640,26 @@ Output:
   4 | $$
 
 [1] Unexpected blank line between list and math.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | - list
+  2 |
+  3 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | - list
+  2 | <<< ./example.js
+
+[1] Unexpected blank line between list and import-code-snippet.
 ---
 
 
@@ -14952,6 +16046,26 @@ Options:
     blankLine: never
 
 Code:
+  1 | * list
+  2 |
+  3 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | * list
+  2 | <<< ./example.js
+
+[1] Unexpected blank line between list and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
   1 | + list
   2 |
   3 | # heading
@@ -15318,6 +16432,26 @@ Output:
   4 | $$
 
 [1] Unexpected blank line between list and math.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | + list
+  2 |
+  3 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | + list
+  2 | <<< ./example.js
+
+[1] Unexpected blank line between list and import-code-snippet.
 ---
 
 
@@ -15704,6 +16838,26 @@ Options:
     blankLine: never
 
 Code:
+  1 | 1. list
+  2 |
+  3 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | 1. list
+  2 | <<< ./example.js
+
+[1] Unexpected blank line between list and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
   1 | 1) list
   2 |
   3 | # heading
@@ -16070,6 +17224,26 @@ Output:
   4 | $$
 
 [1] Unexpected blank line between list and math.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | 1) list
+  2 |
+  3 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | 1) list
+  2 | <<< ./example.js
+
+[1] Unexpected blank line between list and import-code-snippet.
 ---
 
 
@@ -16456,6 +17630,26 @@ Options:
     blankLine: never
 
 Code:
+  1 | > blockquote
+  2 |
+  3 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | > blockquote
+  2 | <<< ./example.js
+
+[1] Unexpected blank line between blockquote and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
   1 | ```
   2 | code
   3 | ```
@@ -17030,6 +18224,30 @@ Options:
     blankLine: never
 
 Code:
+  1 | ```
+  2 | code
+  3 | ```
+  4 |
+  5 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | ```
+  2 | code
+  3 | ```
+  4 | <<< ./example.js
+
+[1] Unexpected blank line between code and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
   1 | ````
   2 | code
   3 | ````
@@ -17594,6 +18812,30 @@ Output:
   6 | $$
 
 [1] Unexpected blank line between code and math.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | ````
+  2 | code
+  3 | ````
+  4 |
+  5 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | ````
+  2 | code
+  3 | ````
+  4 | <<< ./example.js
+
+[1] Unexpected blank line between code and import-code-snippet.
 ---
 
 
@@ -18076,6 +19318,30 @@ Options:
     blankLine: never
 
 Code:
+  1 | |table|
+  2 | |-|
+  3 | |data|
+  4 |
+  5 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | |table|
+  2 | |-|
+  3 | |data|
+  4 | <<< ./example.js
+
+[1] Unexpected blank line between table and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
   1 |
   2 |
   3 | ---
@@ -18652,6 +19918,30 @@ Options:
 Code:
   1 |
   2 |
+  3 | ---
+  4 |
+  5 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 |
+  2 |
+  3 | ---
+  4 | <<< ./example.js
+
+[1] Unexpected blank line between thematic-break and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 |
+  2 |
   3 | ***
   4 |
   5 | # heading
@@ -19226,6 +20516,30 @@ Options:
 Code:
   1 |
   2 |
+  3 | ***
+  4 |
+  5 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 |
+  2 |
+  3 | ***
+  4 | <<< ./example.js
+
+[1] Unexpected blank line between thematic-break and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 |
+  2 |
   3 | - - -
   4 |
   5 | # heading
@@ -19800,6 +21114,30 @@ Options:
 Code:
   1 |
   2 |
+  3 | - - -
+  4 |
+  5 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 |
+  2 |
+  3 | - - -
+  4 | <<< ./example.js
+
+[1] Unexpected blank line between thematic-break and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 |
+  2 |
   3 | * * *
   4 |
   5 | # heading
@@ -20374,6 +21712,30 @@ Options:
 Code:
   1 |
   2 |
+  3 | * * *
+  4 |
+  5 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 |
+  2 |
+  3 | * * *
+  4 | <<< ./example.js
+
+[1] Unexpected blank line between thematic-break and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 |
+  2 |
   3 | -----
   4 |
   5 | # heading
@@ -20948,6 +22310,30 @@ Options:
 Code:
   1 |
   2 |
+  3 | -----
+  4 |
+  5 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 |
+  2 |
+  3 | -----
+  4 | <<< ./example.js
+
+[1] Unexpected blank line between thematic-break and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 |
+  2 |
   3 | *****
   4 |
   5 | # heading
@@ -21510,6 +22896,30 @@ Output:
   6 | $$
 
 [1] Unexpected blank line between thematic-break and math.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 |
+  2 |
+  3 | *****
+  4 |
+  5 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 |
+  2 |
+  3 | *****
+  4 | <<< ./example.js
+
+[1] Unexpected blank line between thematic-break and import-code-snippet.
 ---
 
 
@@ -22002,6 +23412,26 @@ Options:
     blankLine: never
 
 Code:
+  1 | [link]: #link-definition
+  2 |
+  3 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | [link]: #link-definition
+  2 | <<< ./example.js
+
+[1] Unexpected blank line between link-definition and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
   1 | [^footnote]: footnote-definition
   2 |
   3 | # heading
@@ -22388,6 +23818,26 @@ Output:
   4 | $$
 
 [1] Unexpected blank line between footnote-definition and math.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | [^footnote]: footnote-definition
+  2 |
+  3 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | [^footnote]: footnote-definition
+  2 | <<< ./example.js
+
+[1] Unexpected blank line between footnote-definition and import-code-snippet.
 ---
 
 
@@ -22972,6 +24422,30 @@ Options:
     blankLine: never
 
 Code:
+  1 | ---
+  2 | title: Frontmatter
+  3 | ---
+  4 |
+  5 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | ---
+  2 | title: Frontmatter
+  3 | ---
+  4 | <<< ./example.js
+
+[1] Unexpected blank line between frontmatter and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
   1 | ::: warning
   2 | custom container
   3 | :::
@@ -23546,6 +25020,30 @@ Options:
     blankLine: never
 
 Code:
+  1 | ::: warning
+  2 | custom container
+  3 | :::
+  4 |
+  5 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | ::: warning
+  2 | custom container
+  3 | :::
+  4 | <<< ./example.js
+
+[1] Unexpected blank line between custom-container and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
   1 | $$
   2 | E=mc^2
   3 | $$
@@ -24110,4 +25608,530 @@ Output:
   6 | $$
 
 [1] Unexpected blank line between math and math.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | $$
+  2 | E=mc^2
+  3 | $$
+  4 |
+  5 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | $$
+  2 | E=mc^2
+  3 | $$
+  4 | <<< ./example.js
+
+[1] Unexpected blank line between math and import-code-snippet.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | # heading
+    | ^~~~~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 | # heading
+
+[1] Unexpected blank line between import-code-snippet and heading.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | heading
+    | ^~~~~~~ [1]
+  4 | ---
+
+Output:
+  1 | <<< ./example.js
+  2 | heading
+  3 | ---
+
+[1] Unexpected blank line between import-code-snippet and heading.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | paragraph
+    | ^~~~~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 | paragraph
+
+[1] Unexpected blank line between import-code-snippet and paragraph.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | - list
+    | ^~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 | - list
+
+[1] Unexpected blank line between import-code-snippet and list.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | * list
+    | ^~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 | * list
+
+[1] Unexpected blank line between import-code-snippet and list.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | + list
+    | ^~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 | + list
+
+[1] Unexpected blank line between import-code-snippet and list.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | 1. list
+    | ^~~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 | 1. list
+
+[1] Unexpected blank line between import-code-snippet and list.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | 1) list
+    | ^~~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 | 1) list
+
+[1] Unexpected blank line between import-code-snippet and list.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | > blockquote
+    | ^~~~~~~~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 | > blockquote
+
+[1] Unexpected blank line between import-code-snippet and blockquote.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | ```
+    | ^~~ [1]
+  4 | code
+  5 | ```
+
+Output:
+  1 | <<< ./example.js
+  2 | ```
+  3 | code
+  4 | ```
+
+[1] Unexpected blank line between import-code-snippet and code.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | ````
+    | ^~~~ [1]
+  4 | code
+  5 | ````
+
+Output:
+  1 | <<< ./example.js
+  2 | ````
+  3 | code
+  4 | ````
+
+[1] Unexpected blank line between import-code-snippet and code.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | <div>html</div>
+    | ^~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 | <div>html</div>
+
+[1] Unexpected blank line between import-code-snippet and html.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | |table|
+    | ^~~~~~~ [1]
+  4 | |-|
+  5 | |data|
+
+Output:
+  1 | <<< ./example.js
+  2 | |table|
+  3 | |-|
+  4 | |data|
+
+[1] Unexpected blank line between import-code-snippet and table.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | ---
+    | ^~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 | ---
+
+[1] Unexpected blank line between import-code-snippet and thematic-break.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | ***
+    | ^~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 | ***
+
+[1] Unexpected blank line between import-code-snippet and thematic-break.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | - - -
+    | ^~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 | - - -
+
+[1] Unexpected blank line between import-code-snippet and thematic-break.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | * * *
+    | ^~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 | * * *
+
+[1] Unexpected blank line between import-code-snippet and thematic-break.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | -----
+    | ^~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 | -----
+
+[1] Unexpected blank line between import-code-snippet and thematic-break.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | *****
+    | ^~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 | *****
+
+[1] Unexpected blank line between import-code-snippet and thematic-break.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | [link]: #link-definition
+    | ^~~~~~~~~~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 | [link]: #link-definition
+
+[1] Unexpected blank line between import-code-snippet and link-definition.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | [^footnote]: footnote-definition
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 | [^footnote]: footnote-definition
+
+[1] Unexpected blank line between import-code-snippet and footnote-definition.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | ::: warning
+    | ^~~~~~~~~~~ [1]
+  4 | custom container
+  5 | :::
+
+Output:
+  1 | <<< ./example.js
+  2 | ::: warning
+  3 | custom container
+  4 | :::
+
+[1] Unexpected blank line between import-code-snippet and custom-container.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | $$
+    | ^~ [1]
+  4 | E=mc^2
+  5 | $$
+
+Output:
+  1 | <<< ./example.js
+  2 | $$
+  3 | E=mc^2
+  4 | $$
+
+[1] Unexpected blank line between import-code-snippet and math.
+---
+
+
+Test: padding-line-between-blocks >> invalid
+Options:
+  - prev: "*"
+    next: "*"
+    blankLine: never
+
+Code:
+  1 | <<< ./example.js
+  2 |
+  3 | <<< ./example.js
+    | ^~~~~~~~~~~~~~~~ [1]
+
+Output:
+  1 | <<< ./example.js
+  2 | <<< ./example.js
+
+[1] Unexpected blank line between import-code-snippet and import-code-snippet.
 ---

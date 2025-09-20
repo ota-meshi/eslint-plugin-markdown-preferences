@@ -34,7 +34,8 @@ type BlockType =
   | "footnote-definition"
   | "frontmatter"
   | "custom-container"
-  | "math";
+  | "math"
+  | "import-code-snippet";
 type BlockTypeOption = BlockType | "*";
 
 type ObjectSelector = {
@@ -140,6 +141,7 @@ const BLOCK_TYPES: BlockTypeOption[] = [
   "frontmatter",
   "custom-container",
   "math",
+  "import-code-snippet",
   "*",
 ];
 
@@ -196,6 +198,7 @@ const BLOCK_TYPE_MAP0: {
   yaml: "frontmatter",
   customContainer: "custom-container",
   math: "math",
+  importCodeSnippet: "import-code-snippet",
 };
 const BLOCK_TYPE_MAP: {
   [K in MDNode["type"]]?: BlockType;

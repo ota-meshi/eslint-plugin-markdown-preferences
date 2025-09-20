@@ -115,6 +115,13 @@ The following syntaxes are supported:
   $$
   ```
 
+- [VitePress-style Import Code Snippets](https://vitepress.dev/guide/markdown#import-code-snippets) syntax using triple left angle brackets\
+  Example:
+
+  ```md
+  <<< @/filepath
+  ```
+
 #### Legacy Config (`.eslintrc`)
 
 Is not supported.

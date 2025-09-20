@@ -15,7 +15,13 @@ import type {
   MarkdownLanguageOptions,
   MarkdownRuleVisitor,
 } from "@eslint/markdown/types";
-import type { Root, Node, InlineMath, Math } from "./ast-types.ts";
+import type {
+  Root,
+  Node,
+  InlineMath,
+  Math,
+  ImportCodeSnippet,
+} from "./ast-types.ts";
 import type { CustomContainer } from "./ast-types.ts";
 import type { TextSourceCodeBase } from "@eslint/plugin-kit";
 import { parseExtendedMarkdown } from "./parser.ts";
@@ -127,4 +133,5 @@ export interface ExtendedMarkdownRuleVisitor
       customContainer?(node: CustomContainer): void;
       math?(node: Math): void;
       inlineMath?(node: InlineMath): void;
+      importCodeSnippet?(node: ImportCodeSnippet): void;
     }> {}
