@@ -28,6 +28,8 @@ import type {
   ThematicBreak,
   CustomContainer,
   Yaml,
+  Math,
+  InlineMath,
 } from "../language/ast-types.ts";
 import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
 
@@ -40,7 +42,8 @@ export type MDBlock =
   | Paragraph
   | ThematicBreak
   | Table
-  | CustomContainer;
+  | CustomContainer
+  | Math;
 export type MDDefinition = Definition | FootnoteDefinition;
 export type MDSpecialNode = ListItem | TableCell | TableRow;
 export type MDInline = Exclude<
@@ -74,6 +77,8 @@ export type MDNode =
   | TableCell
   | TableRow
   | CustomContainer
+  | Math
+  | InlineMath
   | Yaml
   | Toml
   | Json;

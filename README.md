@@ -106,6 +106,15 @@ The following syntaxes are supported:
   :::
   ```
 
+- Math (LaTeX-style)\
+  Example:
+
+  ```md
+  $$
+  E = mc^2
+  $$
+  ```
+
 #### Legacy Config (`.eslintrc`)
 
 Is not supported.
