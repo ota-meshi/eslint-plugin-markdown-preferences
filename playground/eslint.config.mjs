@@ -5,9 +5,10 @@ const ruleEntries = Object.entries(markdownPreferences.rules).filter(
   ([, rule]) => !rule.meta.deprecated,
 );
 export default defineConfig([
+  // add more generic rule sets here, such as:
+  // markdown.configs.recommended,
+  markdownPreferences.configs.recommended,
   {
-    extends: [markdownPreferences.configs.recommended],
-    language: "markdown-preferences/extended-syntax",
     rules: {
       // Add all "eslint-plugin-markdown-preferences" rules
       ...Object.fromEntries(

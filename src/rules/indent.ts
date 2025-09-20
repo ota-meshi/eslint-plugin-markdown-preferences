@@ -13,12 +13,10 @@ import type {
   Image,
   ImageReference,
   InlineCode,
-  InlineMath,
   Link,
   LinkReference,
   List,
   ListItem,
-  Math,
   Root,
   Strong,
   Table,
@@ -48,7 +46,6 @@ import { parseImage } from "../utils/image.ts";
 import { parseImageReference } from "../utils/image-reference.ts";
 import type { ParsedListItem } from "../utils/list-item.ts";
 import { parseListItem } from "../utils/list-item.ts";
-import { parseMathBlock } from "../utils/math-block.ts";
 
 type Options = {
   listItems?: {
@@ -562,8 +559,7 @@ export default createRule<[Options?]>("indent", {
       table: verifyTable,
       list: verifyList,
       customContainer: verifyCustomContainer,
-      math: verifyMathBlock,
-      inlineCode: verifyInlineCodeOrInlineMath,
+      inlineCode: verifyInlineCode,
       emphasis: verifyEmphasisOrStrongOrDelete,
       strong: verifyEmphasisOrStrongOrDelete,
       delete: verifyEmphasisOrStrongOrDelete,
@@ -572,7 +568,6 @@ export default createRule<[Options?]>("indent", {
       footnoteReference: verifyInline,
       break: verifyInline,
       text: verifyText,
-      inlineMath: verifyInlineCodeOrInlineMath,
       blockquote(node) {
         verifyBlockquote(node);
         blockStack = new BlockquoteStack(node);
@@ -639,16 +634,57 @@ export default createRule<[Options?]>("indent", {
         [loc.start.line, loc.end.line],
         (lineNumber) =>
           blockStack.getExpectedIndent({ lineNumber, block: true }),
-        (fixer, info) => {
-          return additionalFixesForCodeBlock(
-            node,
-            fixer,
-            info,
-            loc.start.line + 1,
-            loc.end.line - 1,
-          );
-        },
+        additionalFixes,
       );
+
+      /**
+       * Additional fixes for code block content lines.
+       */
+      function* additionalFixes(
+        fixer: RuleTextEditor,
+        info: {
+          loc: SourceLocation;
+          expectedIndentWidth: number;
+          actualIndentWidth: number;
+        },
+      ) {
+        if (info.loc.start.line !== loc.start.line) return;
+        for (
+          let lineNumber = loc.start.line + 1;
+          lineNumber < loc.end.line;
+          lineNumber++
+        ) {
+          const line = getParsedLines(sourceCode).get(lineNumber);
+          if (!line) continue;
+          if (info.expectedIndentWidth > info.actualIndentWidth) {
+            // Add indentation
+            const before = sliceWidth(line.text, 0, info.actualIndentWidth);
+            const after = sliceWidth(line.text, info.actualIndentWidth);
+            const diffWidth = info.expectedIndentWidth - info.actualIndentWidth;
+            yield fixer.replaceTextRange(
+              [line.range[0], line.range[0] + line.text.length],
+              before + " ".repeat(diffWidth) + after,
+            );
+          } else {
+            // Remove indentation
+            let before = sliceWidth(line.text, 0, info.expectedIndentWidth);
+            let between = sliceWidth(
+              line.text,
+              info.expectedIndentWidth,
+              info.actualIndentWidth,
+            );
+            const after = sliceWidth(line.text, info.actualIndentWidth);
+            while (between && !isSpaceOrTab(between)) {
+              before += between[0];
+              between = between.slice(1);
+            }
+            yield fixer.replaceTextRange(
+              [line.range[0], line.range[0] + line.text.length],
+              before + after,
+            );
+          }
+        }
+      }
     }
 
     /**
@@ -860,32 +896,6 @@ export default createRule<[Options?]>("indent", {
     }
 
     /**
-     * Verify a math node.
-     */
-    function verifyMathBlock(node: Math) {
-      const parsed = parseMathBlock(sourceCode, node);
-      if (!parsed) return;
-      const loc = sourceCode.getLoc(node);
-      const endLineToBeChecked = inlineToBeChecked(
-        parsed.closingSequence.loc.start,
-      );
-      verifyLinesIndent(
-        endLineToBeChecked ? [loc.start.line, loc.end.line] : [loc.start.line],
-        (lineNumber) =>
-          blockStack.getExpectedIndent({ lineNumber, block: true }),
-        (fixer, info) => {
-          return additionalFixesForCodeBlock(
-            node,
-            fixer,
-            info,
-            loc.start.line + 1,
-            endLineToBeChecked ? loc.end.line - 1 : loc.end.line,
-          );
-        },
-      );
-    }
-
-    /**
      * Verify a footnote definition node.
      */
     function verifyFootnoteDefinition(node: FootnoteDefinition) {
@@ -896,9 +906,9 @@ export default createRule<[Options?]>("indent", {
     }
 
     /**
-     * Verify an inline code/math node.
+     * Verify an inline code node.
      */
-    function verifyInlineCodeOrInlineMath(node: InlineCode | InlineMath) {
+    function verifyInlineCode(node: InlineCode) {
       const loc = sourceCode.getLoc(node);
       if (!inlineToBeChecked(loc.start)) {
         return;
@@ -1613,59 +1623,6 @@ export default createRule<[Options?]>("indent", {
         expectedIndentWidth,
         actualIndentWidth,
       };
-    }
-
-    /**
-     * Additional fixes for code/math block content lines.
-     */
-    function* additionalFixesForCodeBlock(
-      node: Code | Math,
-      fixer: RuleTextEditor,
-      info: {
-        loc: SourceLocation;
-        expectedIndentWidth: number;
-        actualIndentWidth: number;
-      },
-      fixStartLine: number,
-      fixEndLine: number,
-    ) {
-      const loc = sourceCode.getLoc(node);
-      if (info.loc.start.line !== loc.start.line) return;
-      for (
-        let lineNumber = fixStartLine;
-        lineNumber <= fixEndLine;
-        lineNumber++
-      ) {
-        const line = getParsedLines(sourceCode).get(lineNumber);
-        if (!line) continue;
-        if (info.expectedIndentWidth > info.actualIndentWidth) {
-          // Add indentation
-          const before = sliceWidth(line.text, 0, info.actualIndentWidth);
-          const after = sliceWidth(line.text, info.actualIndentWidth);
-          const diffWidth = info.expectedIndentWidth - info.actualIndentWidth;
-          yield fixer.replaceTextRange(
-            [line.range[0], line.range[0] + line.text.length],
-            before + " ".repeat(diffWidth) + after,
-          );
-        } else {
-          // Remove indentation
-          let before = sliceWidth(line.text, 0, info.expectedIndentWidth);
-          let between = sliceWidth(
-            line.text,
-            info.expectedIndentWidth,
-            info.actualIndentWidth,
-          );
-          const after = sliceWidth(line.text, info.actualIndentWidth);
-          while (between && !isSpaceOrTab(between)) {
-            before += between[0];
-            between = between.slice(1);
-          }
-          yield fixer.replaceTextRange(
-            [line.range[0], line.range[0] + line.text.length],
-            before + after,
-          );
-        }
-      }
     }
   },
 });
