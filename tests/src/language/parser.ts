@@ -248,7 +248,7 @@ Some information content.
     assert.strictEqual(container.info, 'info "Custom Title"');
   });
 
-  it("should parse nested custom containers", () => {
+  it("should parse nested custom containers with same fence lengths", () => {
     const code = `::: outer
 Outer content.
 
@@ -256,19 +256,41 @@ Outer content.
 Inner content.
 :::
 
-More outer content.
+Outside content.
 :::`;
     const ast = parseExtendedMarkdown(code);
 
     assert.strictEqual(ast.type, "root");
 
-    assert.strictEqual(ast.children.length, 1);
+    assert.strictEqual(ast.children.length, 2);
     const outerContainer = ast.children[0] as CustomContainer;
     assert.strictEqual(outerContainer.type, "customContainer");
-    const innerContainer = outerContainer.children.find(
-      (child) => child.type === "customContainer",
+    assert.strictEqual(outerContainer.children.length, 2);
+    assert.strictEqual(outerContainer.children[0].type, "paragraph");
+    assert.deepStrictEqual(
+      outerContainer.children[0].children
+        .map((c) => (c.type === "text" ? c.value : "?"))
+        .join(""),
+      "Outer content.",
     );
-    assert(innerContainer);
+    assert.strictEqual(outerContainer.children[1].type, "customContainer");
+    const innerContainer = outerContainer.children[1];
+    assert.strictEqual(innerContainer.children.length, 1);
+    assert.strictEqual(innerContainer.children[0].type, "paragraph");
+    assert.deepStrictEqual(
+      innerContainer.children[0].children
+        .map((c) => (c.type === "text" ? c.value : "?"))
+        .join(""),
+      "Inner content.",
+    );
+    const paragraph = ast.children[1] as Paragraph;
+    assert.strictEqual(paragraph.type, "paragraph");
+    assert.deepStrictEqual(
+      paragraph.children
+        .map((c) => (c.type === "text" ? c.value : "?"))
+        .join(""),
+      "Outside content.\n:::",
+    );
   });
 
   it("should parse nested custom containers with different fence lengths", () => {
