@@ -1,4 +1,4 @@
-# Indented Code Blocks
+# Fenced Code Blocks
 
 ```js
     console.log('code block')

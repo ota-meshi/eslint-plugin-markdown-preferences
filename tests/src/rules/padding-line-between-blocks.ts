@@ -28,6 +28,7 @@ const syntaxMap: Record<
   footnoteDefinition: { code: ["[^footnote]: footnote-definition"] },
   yaml: { code: ["---\ntitle: Frontmatter\n---"] },
   customContainer: { code: ["::: warning\ncustom container\n:::"] },
+  math: { code: ["$$\nE=mc^2\n$$"] },
 };
 
 const syntaxEntries = Object.entries(syntaxMap).flatMap(([type, def]) =>
