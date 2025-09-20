@@ -249,7 +249,8 @@ You can specify block types in two ways:
   :::
   ```
 
-  (This syntax is non-standard, but supported by some Markdown parsers like [markdown-it-container](https://github.com/markdown-it/markdown-it-container))
+  This syntax is non-standard, but supported by some Markdown parsers like [markdown-it-container](https://github.com/markdown-it/markdown-it-container).\
+  To check this, specify [`markdown-preferences/extended-syntax` as the `language`](../user-guide/index.md#using-extended-syntax).
 
 - `"*"` - Wildcard matching any block type
 
