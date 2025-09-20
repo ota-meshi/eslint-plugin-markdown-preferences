@@ -809,39 +809,6 @@ Output:
 
 
 Test: padding-line-between-blocks >> invalid
-Filename: tests/fixtures/rules/padding-line-between-blocks/invalid/math-input.md
-Language: markdown-preferences/extended-syntax
-LanguageOptions:
-  frontmatter: yaml
-Plugins: unable to serialize
-
-Code:
-  1 |
-  2 | $$
-  3 | L = \frac{1}{2} \rho v^2 S C_L
-  4 | $$
-  5 | $$
-    | ^~ [1]
-  6 | L = \frac{1}{2} \rho v^2 S C_L
-  7 | $$
-  8 |
-
-Output:
-  1 |
-  2 | $$
-  3 | L = \frac{1}{2} \rho v^2 S C_L
-  4 | $$
-  5 |
-  6 | $$
-  7 | L = \frac{1}{2} \rho v^2 S C_L
-  8 | $$
-  9 |
-
-[1] Expected a blank line between math and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
 Filename: tests/fixtures/rules/padding-line-between-blocks/invalid/multiple-rules-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
@@ -1949,30 +1916,6 @@ Options:
     blankLine: always
 
 Code:
-  1 | # heading
-  2 | $$
-    | ^~ [1]
-  3 | E=mc^2
-  4 | $$
-
-Output:
-  1 | # heading
-  2 |
-  3 | $$
-  4 | E=mc^2
-  5 | $$
-
-[1] Expected a blank line between heading and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
   1 | heading
   2 | ---
   3 | # heading
@@ -2475,32 +2418,6 @@ Options:
     blankLine: always
 
 Code:
-  1 | heading
-  2 | ---
-  3 | $$
-    | ^~ [1]
-  4 | E=mc^2
-  5 | $$
-
-Output:
-  1 | heading
-  2 | ---
-  3 |
-  4 | $$
-  5 | E=mc^2
-  6 | $$
-
-[1] Expected a blank line between heading and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
   1 | paragraph
   2 | # heading
     | ^~~~~~~~~ [1]
@@ -2857,30 +2774,6 @@ Options:
     blankLine: always
 
 Code:
-  1 | paragraph
-  2 | $$
-    | ^~ [1]
-  3 | E=mc^2
-  4 | $$
-
-Output:
-  1 | paragraph
-  2 |
-  3 | $$
-  4 | E=mc^2
-  5 | $$
-
-[1] Expected a blank line between paragraph and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
   1 | - list
   2 | # heading
     | ^~~~~~~~~ [1]
@@ -3223,30 +3116,6 @@ Output:
   5 | :::
 
 [1] Expected a blank line between list and custom-container.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | - list
-  2 | $$
-    | ^~ [1]
-  3 | E=mc^2
-  4 | $$
-
-Output:
-  1 | - list
-  2 |
-  3 | $$
-  4 | E=mc^2
-  5 | $$
-
-[1] Expected a blank line between list and math.
 ---
 
 
@@ -3609,30 +3478,6 @@ Options:
     blankLine: always
 
 Code:
-  1 | * list
-  2 | $$
-    | ^~ [1]
-  3 | E=mc^2
-  4 | $$
-
-Output:
-  1 | * list
-  2 |
-  3 | $$
-  4 | E=mc^2
-  5 | $$
-
-[1] Expected a blank line between list and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
   1 | + list
   2 | # heading
     | ^~~~~~~~~ [1]
@@ -3975,30 +3820,6 @@ Output:
   5 | :::
 
 [1] Expected a blank line between list and custom-container.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | + list
-  2 | $$
-    | ^~ [1]
-  3 | E=mc^2
-  4 | $$
-
-Output:
-  1 | + list
-  2 |
-  3 | $$
-  4 | E=mc^2
-  5 | $$
-
-[1] Expected a blank line between list and math.
 ---
 
 
@@ -4361,30 +4182,6 @@ Options:
     blankLine: always
 
 Code:
-  1 | 1. list
-  2 | $$
-    | ^~ [1]
-  3 | E=mc^2
-  4 | $$
-
-Output:
-  1 | 1. list
-  2 |
-  3 | $$
-  4 | E=mc^2
-  5 | $$
-
-[1] Expected a blank line between list and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
   1 | 1) list
   2 | # heading
     | ^~~~~~~~~ [1]
@@ -4727,30 +4524,6 @@ Output:
   5 | :::
 
 [1] Expected a blank line between list and custom-container.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | 1) list
-  2 | $$
-    | ^~ [1]
-  3 | E=mc^2
-  4 | $$
-
-Output:
-  1 | 1) list
-  2 |
-  3 | $$
-  4 | E=mc^2
-  5 | $$
-
-[1] Expected a blank line between list and math.
 ---
 
 
@@ -5113,30 +4886,6 @@ Options:
     blankLine: always
 
 Code:
-  1 | > blockquote
-  2 | $$
-    | ^~ [1]
-  3 | E=mc^2
-  4 | $$
-
-Output:
-  1 | > blockquote
-  2 |
-  3 | $$
-  4 | E=mc^2
-  5 | $$
-
-[1] Expected a blank line between blockquote and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
   1 | ```
   2 | code
   3 | ```
@@ -5683,34 +5432,6 @@ Options:
     blankLine: always
 
 Code:
-  1 | ```
-  2 | code
-  3 | ```
-  4 | $$
-    | ^~ [1]
-  5 | E=mc^2
-  6 | $$
-
-Output:
-  1 | ```
-  2 | code
-  3 | ```
-  4 |
-  5 | $$
-  6 | E=mc^2
-  7 | $$
-
-[1] Expected a blank line between code and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
   1 | ````
   2 | code
   3 | ````
@@ -6247,34 +5968,6 @@ Output:
   7 | :::
 
 [1] Expected a blank line between code and custom-container.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | ````
-  2 | code
-  3 | ````
-  4 | $$
-    | ^~ [1]
-  5 | E=mc^2
-  6 | $$
-
-Output:
-  1 | ````
-  2 | code
-  3 | ````
-  4 |
-  5 | $$
-  6 | E=mc^2
-  7 | $$
-
-[1] Expected a blank line between code and math.
 ---
 
 
@@ -6729,34 +6422,6 @@ Options:
     blankLine: always
 
 Code:
-  1 | |table|
-  2 | |-|
-  3 | |data|
-  4 | $$
-    | ^~ [1]
-  5 | E=mc^2
-  6 | $$
-
-Output:
-  1 | |table|
-  2 | |-|
-  3 | |data|
-  4 |
-  5 | $$
-  6 | E=mc^2
-  7 | $$
-
-[1] Expected a blank line between table and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
   1 |
   2 |
   3 | ---
@@ -7293,34 +6958,6 @@ Output:
   7 | :::
 
 [1] Expected a blank line between thematic-break and custom-container.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 |
-  2 |
-  3 | ---
-  4 | $$
-    | ^~ [1]
-  5 | E=mc^2
-  6 | $$
-
-Output:
-  1 |
-  2 |
-  3 | ---
-  4 |
-  5 | $$
-  6 | E=mc^2
-  7 | $$
-
-[1] Expected a blank line between thematic-break and math.
 ---
 
 
@@ -7879,34 +7516,6 @@ Options:
 Code:
   1 |
   2 |
-  3 | ***
-  4 | $$
-    | ^~ [1]
-  5 | E=mc^2
-  6 | $$
-
-Output:
-  1 |
-  2 |
-  3 | ***
-  4 |
-  5 | $$
-  6 | E=mc^2
-  7 | $$
-
-[1] Expected a blank line between thematic-break and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 |
-  2 |
   3 | - - -
   4 | # heading
     | ^~~~~~~~~ [1]
@@ -8441,34 +8050,6 @@ Output:
   7 | :::
 
 [1] Expected a blank line between thematic-break and custom-container.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 |
-  2 |
-  3 | - - -
-  4 | $$
-    | ^~ [1]
-  5 | E=mc^2
-  6 | $$
-
-Output:
-  1 |
-  2 |
-  3 | - - -
-  4 |
-  5 | $$
-  6 | E=mc^2
-  7 | $$
-
-[1] Expected a blank line between thematic-break and math.
 ---
 
 
@@ -9027,34 +8608,6 @@ Options:
 Code:
   1 |
   2 |
-  3 | * * *
-  4 | $$
-    | ^~ [1]
-  5 | E=mc^2
-  6 | $$
-
-Output:
-  1 |
-  2 |
-  3 | * * *
-  4 |
-  5 | $$
-  6 | E=mc^2
-  7 | $$
-
-[1] Expected a blank line between thematic-break and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 |
-  2 |
   3 | -----
   4 | # heading
     | ^~~~~~~~~ [1]
@@ -9601,34 +9154,6 @@ Options:
 Code:
   1 |
   2 |
-  3 | -----
-  4 | $$
-    | ^~ [1]
-  5 | E=mc^2
-  6 | $$
-
-Output:
-  1 |
-  2 |
-  3 | -----
-  4 |
-  5 | $$
-  6 | E=mc^2
-  7 | $$
-
-[1] Expected a blank line between thematic-break and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 |
-  2 |
   3 | *****
   4 | # heading
     | ^~~~~~~~~ [1]
@@ -10163,34 +9688,6 @@ Output:
   7 | :::
 
 [1] Expected a blank line between thematic-break and custom-container.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 |
-  2 |
-  3 | *****
-  4 | $$
-    | ^~ [1]
-  5 | E=mc^2
-  6 | $$
-
-Output:
-  1 |
-  2 |
-  3 | *****
-  4 |
-  5 | $$
-  6 | E=mc^2
-  7 | $$
-
-[1] Expected a blank line between thematic-break and math.
 ---
 
 
@@ -10668,30 +10165,6 @@ Options:
     blankLine: always
 
 Code:
-  1 | [link]: #link-definition
-  2 | $$
-    | ^~ [1]
-  3 | E=mc^2
-  4 | $$
-
-Output:
-  1 | [link]: #link-definition
-  2 |
-  3 | $$
-  4 | E=mc^2
-  5 | $$
-
-[1] Expected a blank line between link-definition and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
   1 | [^footnote]: footnote-definition
   2 | # heading
     | ^~~~~~~~~ [1]
@@ -11054,30 +10527,6 @@ Output:
   5 | :::
 
 [1] Expected a blank line between footnote-definition and custom-container.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | [^footnote]: footnote-definition
-  2 | $$
-    | ^~ [1]
-  3 | E=mc^2
-  4 | $$
-
-Output:
-  1 | [^footnote]: footnote-definition
-  2 |
-  3 | $$
-  4 | E=mc^2
-  5 | $$
-
-[1] Expected a blank line between footnote-definition and math.
 ---
 
 
@@ -11634,34 +11083,6 @@ Options:
     blankLine: always
 
 Code:
-  1 | ---
-  2 | title: Frontmatter
-  3 | ---
-  4 | $$
-    | ^~ [1]
-  5 | E=mc^2
-  6 | $$
-
-Output:
-  1 | ---
-  2 | title: Frontmatter
-  3 | ---
-  4 |
-  5 | $$
-  6 | E=mc^2
-  7 | $$
-
-[1] Expected a blank line between frontmatter and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
   1 | ::: warning
   2 | custom container
   3 | :::
@@ -12205,608 +11626,6 @@ Test: padding-line-between-blocks >> invalid
 Options:
   - prev: "*"
     next: "*"
-    blankLine: always
-
-Code:
-  1 | ::: warning
-  2 | custom container
-  3 | :::
-  4 | $$
-    | ^~ [1]
-  5 | E=mc^2
-  6 | $$
-
-Output:
-  1 | ::: warning
-  2 | custom container
-  3 | :::
-  4 |
-  5 | $$
-  6 | E=mc^2
-  7 | $$
-
-[1] Expected a blank line between custom-container and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | # heading
-    | ^~~~~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | # heading
-
-[1] Expected a blank line between math and heading.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | heading
-    | ^~~~~~~ [1]
-  5 | ---
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | heading
-  6 | ---
-
-[1] Expected a blank line between math and heading.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | paragraph
-    | ^~~~~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | paragraph
-
-[1] Expected a blank line between math and paragraph.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | - list
-    | ^~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | - list
-
-[1] Expected a blank line between math and list.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | * list
-    | ^~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | * list
-
-[1] Expected a blank line between math and list.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | + list
-    | ^~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | + list
-
-[1] Expected a blank line between math and list.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | 1. list
-    | ^~~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | 1. list
-
-[1] Expected a blank line between math and list.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | 1) list
-    | ^~~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | 1) list
-
-[1] Expected a blank line between math and list.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | > blockquote
-    | ^~~~~~~~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | > blockquote
-
-[1] Expected a blank line between math and blockquote.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | ```
-    | ^~~ [1]
-  5 | code
-  6 | ```
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | ```
-  6 | code
-  7 | ```
-
-[1] Expected a blank line between math and code.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | ````
-    | ^~~~ [1]
-  5 | code
-  6 | ````
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | ````
-  6 | code
-  7 | ````
-
-[1] Expected a blank line between math and code.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | <div>html</div>
-    | ^~~~~~~~~~~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | <div>html</div>
-
-[1] Expected a blank line between math and html.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | |table|
-    | ^~~~~~~ [1]
-  5 | |-|
-  6 | |data|
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | |table|
-  6 | |-|
-  7 | |data|
-
-[1] Expected a blank line between math and table.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | ---
-    | ^~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | ---
-
-[1] Expected a blank line between math and thematic-break.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | ***
-    | ^~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | ***
-
-[1] Expected a blank line between math and thematic-break.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | - - -
-    | ^~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | - - -
-
-[1] Expected a blank line between math and thematic-break.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | * * *
-    | ^~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | * * *
-
-[1] Expected a blank line between math and thematic-break.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | -----
-    | ^~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | -----
-
-[1] Expected a blank line between math and thematic-break.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | *****
-    | ^~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | *****
-
-[1] Expected a blank line between math and thematic-break.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | [link]: #link-definition
-    | ^~~~~~~~~~~~~~~~~~~~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | [link]: #link-definition
-
-[1] Expected a blank line between math and link-definition.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | [^footnote]: footnote-definition
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | [^footnote]: footnote-definition
-
-[1] Expected a blank line between math and footnote-definition.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | ::: warning
-    | ^~~~~~~~~~~ [1]
-  5 | custom container
-  6 | :::
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | ::: warning
-  6 | custom container
-  7 | :::
-
-[1] Expected a blank line between math and custom-container.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: always
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | $$
-    | ^~ [1]
-  5 | E=mc^2
-  6 | $$
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | $$
-  6 | E=mc^2
-  7 | $$
-
-[1] Expected a blank line between math and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
     blankLine: never
 
 Code:
@@ -13268,30 +12087,6 @@ Options:
     blankLine: never
 
 Code:
-  1 | # heading
-  2 |
-  3 | $$
-    | ^~ [1]
-  4 | E=mc^2
-  5 | $$
-
-Output:
-  1 | # heading
-  2 | $$
-  3 | E=mc^2
-  4 | $$
-
-[1] Unexpected blank line between heading and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
   1 | heading
   2 | ---
   3 |
@@ -13794,32 +12589,6 @@ Options:
     blankLine: never
 
 Code:
-  1 | heading
-  2 | ---
-  3 |
-  4 | $$
-    | ^~ [1]
-  5 | E=mc^2
-  6 | $$
-
-Output:
-  1 | heading
-  2 | ---
-  3 | $$
-  4 | E=mc^2
-  5 | $$
-
-[1] Unexpected blank line between heading and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
   1 | paragraph
   2 |
   3 | # heading
@@ -14176,30 +12945,6 @@ Options:
     blankLine: never
 
 Code:
-  1 | paragraph
-  2 |
-  3 | $$
-    | ^~ [1]
-  4 | E=mc^2
-  5 | $$
-
-Output:
-  1 | paragraph
-  2 | $$
-  3 | E=mc^2
-  4 | $$
-
-[1] Unexpected blank line between paragraph and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
   1 | - list
   2 |
   3 | # heading
@@ -14542,30 +13287,6 @@ Output:
   4 | :::
 
 [1] Unexpected blank line between list and custom-container.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | - list
-  2 |
-  3 | $$
-    | ^~ [1]
-  4 | E=mc^2
-  5 | $$
-
-Output:
-  1 | - list
-  2 | $$
-  3 | E=mc^2
-  4 | $$
-
-[1] Unexpected blank line between list and math.
 ---
 
 
@@ -14928,30 +13649,6 @@ Options:
     blankLine: never
 
 Code:
-  1 | * list
-  2 |
-  3 | $$
-    | ^~ [1]
-  4 | E=mc^2
-  5 | $$
-
-Output:
-  1 | * list
-  2 | $$
-  3 | E=mc^2
-  4 | $$
-
-[1] Unexpected blank line between list and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
   1 | + list
   2 |
   3 | # heading
@@ -15294,30 +13991,6 @@ Output:
   4 | :::
 
 [1] Unexpected blank line between list and custom-container.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | + list
-  2 |
-  3 | $$
-    | ^~ [1]
-  4 | E=mc^2
-  5 | $$
-
-Output:
-  1 | + list
-  2 | $$
-  3 | E=mc^2
-  4 | $$
-
-[1] Unexpected blank line between list and math.
 ---
 
 
@@ -15680,30 +14353,6 @@ Options:
     blankLine: never
 
 Code:
-  1 | 1. list
-  2 |
-  3 | $$
-    | ^~ [1]
-  4 | E=mc^2
-  5 | $$
-
-Output:
-  1 | 1. list
-  2 | $$
-  3 | E=mc^2
-  4 | $$
-
-[1] Unexpected blank line between list and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
   1 | 1) list
   2 |
   3 | # heading
@@ -16046,30 +14695,6 @@ Output:
   4 | :::
 
 [1] Unexpected blank line between list and custom-container.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | 1) list
-  2 |
-  3 | $$
-    | ^~ [1]
-  4 | E=mc^2
-  5 | $$
-
-Output:
-  1 | 1) list
-  2 | $$
-  3 | E=mc^2
-  4 | $$
-
-[1] Unexpected blank line between list and math.
 ---
 
 
@@ -16432,30 +15057,6 @@ Options:
     blankLine: never
 
 Code:
-  1 | > blockquote
-  2 |
-  3 | $$
-    | ^~ [1]
-  4 | E=mc^2
-  5 | $$
-
-Output:
-  1 | > blockquote
-  2 | $$
-  3 | E=mc^2
-  4 | $$
-
-[1] Unexpected blank line between blockquote and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
   1 | ```
   2 | code
   3 | ```
@@ -17002,34 +15603,6 @@ Options:
     blankLine: never
 
 Code:
-  1 | ```
-  2 | code
-  3 | ```
-  4 |
-  5 | $$
-    | ^~ [1]
-  6 | E=mc^2
-  7 | $$
-
-Output:
-  1 | ```
-  2 | code
-  3 | ```
-  4 | $$
-  5 | E=mc^2
-  6 | $$
-
-[1] Unexpected blank line between code and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
   1 | ````
   2 | code
   3 | ````
@@ -17566,34 +16139,6 @@ Output:
   6 | :::
 
 [1] Unexpected blank line between code and custom-container.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | ````
-  2 | code
-  3 | ````
-  4 |
-  5 | $$
-    | ^~ [1]
-  6 | E=mc^2
-  7 | $$
-
-Output:
-  1 | ````
-  2 | code
-  3 | ````
-  4 | $$
-  5 | E=mc^2
-  6 | $$
-
-[1] Unexpected blank line between code and math.
 ---
 
 
@@ -18048,34 +16593,6 @@ Options:
     blankLine: never
 
 Code:
-  1 | |table|
-  2 | |-|
-  3 | |data|
-  4 |
-  5 | $$
-    | ^~ [1]
-  6 | E=mc^2
-  7 | $$
-
-Output:
-  1 | |table|
-  2 | |-|
-  3 | |data|
-  4 | $$
-  5 | E=mc^2
-  6 | $$
-
-[1] Unexpected blank line between table and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
   1 |
   2 |
   3 | ---
@@ -18612,34 +17129,6 @@ Output:
   6 | :::
 
 [1] Unexpected blank line between thematic-break and custom-container.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 |
-  2 |
-  3 | ---
-  4 |
-  5 | $$
-    | ^~ [1]
-  6 | E=mc^2
-  7 | $$
-
-Output:
-  1 |
-  2 |
-  3 | ---
-  4 | $$
-  5 | E=mc^2
-  6 | $$
-
-[1] Unexpected blank line between thematic-break and math.
 ---
 
 
@@ -19198,34 +17687,6 @@ Options:
 Code:
   1 |
   2 |
-  3 | ***
-  4 |
-  5 | $$
-    | ^~ [1]
-  6 | E=mc^2
-  7 | $$
-
-Output:
-  1 |
-  2 |
-  3 | ***
-  4 | $$
-  5 | E=mc^2
-  6 | $$
-
-[1] Unexpected blank line between thematic-break and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 |
-  2 |
   3 | - - -
   4 |
   5 | # heading
@@ -19760,34 +18221,6 @@ Output:
   6 | :::
 
 [1] Unexpected blank line between thematic-break and custom-container.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 |
-  2 |
-  3 | - - -
-  4 |
-  5 | $$
-    | ^~ [1]
-  6 | E=mc^2
-  7 | $$
-
-Output:
-  1 |
-  2 |
-  3 | - - -
-  4 | $$
-  5 | E=mc^2
-  6 | $$
-
-[1] Unexpected blank line between thematic-break and math.
 ---
 
 
@@ -20346,34 +18779,6 @@ Options:
 Code:
   1 |
   2 |
-  3 | * * *
-  4 |
-  5 | $$
-    | ^~ [1]
-  6 | E=mc^2
-  7 | $$
-
-Output:
-  1 |
-  2 |
-  3 | * * *
-  4 | $$
-  5 | E=mc^2
-  6 | $$
-
-[1] Unexpected blank line between thematic-break and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 |
-  2 |
   3 | -----
   4 |
   5 | # heading
@@ -20920,34 +19325,6 @@ Options:
 Code:
   1 |
   2 |
-  3 | -----
-  4 |
-  5 | $$
-    | ^~ [1]
-  6 | E=mc^2
-  7 | $$
-
-Output:
-  1 |
-  2 |
-  3 | -----
-  4 | $$
-  5 | E=mc^2
-  6 | $$
-
-[1] Unexpected blank line between thematic-break and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 |
-  2 |
   3 | *****
   4 |
   5 | # heading
@@ -21482,34 +19859,6 @@ Output:
   6 | :::
 
 [1] Unexpected blank line between thematic-break and custom-container.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 |
-  2 |
-  3 | *****
-  4 |
-  5 | $$
-    | ^~ [1]
-  6 | E=mc^2
-  7 | $$
-
-Output:
-  1 |
-  2 |
-  3 | *****
-  4 | $$
-  5 | E=mc^2
-  6 | $$
-
-[1] Unexpected blank line between thematic-break and math.
 ---
 
 
@@ -21978,30 +20327,6 @@ Options:
     blankLine: never
 
 Code:
-  1 | [link]: #link-definition
-  2 |
-  3 | $$
-    | ^~ [1]
-  4 | E=mc^2
-  5 | $$
-
-Output:
-  1 | [link]: #link-definition
-  2 | $$
-  3 | E=mc^2
-  4 | $$
-
-[1] Unexpected blank line between link-definition and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
   1 | [^footnote]: footnote-definition
   2 |
   3 | # heading
@@ -22364,30 +20689,6 @@ Output:
   4 | :::
 
 [1] Unexpected blank line between footnote-definition and custom-container.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | [^footnote]: footnote-definition
-  2 |
-  3 | $$
-    | ^~ [1]
-  4 | E=mc^2
-  5 | $$
-
-Output:
-  1 | [^footnote]: footnote-definition
-  2 | $$
-  3 | E=mc^2
-  4 | $$
-
-[1] Unexpected blank line between footnote-definition and math.
 ---
 
 
@@ -22944,34 +21245,6 @@ Options:
     blankLine: never
 
 Code:
-  1 | ---
-  2 | title: Frontmatter
-  3 | ---
-  4 |
-  5 | $$
-    | ^~ [1]
-  6 | E=mc^2
-  7 | $$
-
-Output:
-  1 | ---
-  2 | title: Frontmatter
-  3 | ---
-  4 | $$
-  5 | E=mc^2
-  6 | $$
-
-[1] Unexpected blank line between frontmatter and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
   1 | ::: warning
   2 | custom container
   3 | :::
@@ -23508,606 +21781,4 @@ Output:
   6 | :::
 
 [1] Unexpected blank line between custom-container and custom-container.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | ::: warning
-  2 | custom container
-  3 | :::
-  4 |
-  5 | $$
-    | ^~ [1]
-  6 | E=mc^2
-  7 | $$
-
-Output:
-  1 | ::: warning
-  2 | custom container
-  3 | :::
-  4 | $$
-  5 | E=mc^2
-  6 | $$
-
-[1] Unexpected blank line between custom-container and math.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | # heading
-    | ^~~~~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | # heading
-
-[1] Unexpected blank line between math and heading.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | heading
-    | ^~~~~~~ [1]
-  6 | ---
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | heading
-  5 | ---
-
-[1] Unexpected blank line between math and heading.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | paragraph
-    | ^~~~~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | paragraph
-
-[1] Unexpected blank line between math and paragraph.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | - list
-    | ^~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | - list
-
-[1] Unexpected blank line between math and list.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | * list
-    | ^~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | * list
-
-[1] Unexpected blank line between math and list.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | + list
-    | ^~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | + list
-
-[1] Unexpected blank line between math and list.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | 1. list
-    | ^~~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | 1. list
-
-[1] Unexpected blank line between math and list.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | 1) list
-    | ^~~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | 1) list
-
-[1] Unexpected blank line between math and list.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | > blockquote
-    | ^~~~~~~~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | > blockquote
-
-[1] Unexpected blank line between math and blockquote.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | ```
-    | ^~~ [1]
-  6 | code
-  7 | ```
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | ```
-  5 | code
-  6 | ```
-
-[1] Unexpected blank line between math and code.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | ````
-    | ^~~~ [1]
-  6 | code
-  7 | ````
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | ````
-  5 | code
-  6 | ````
-
-[1] Unexpected blank line between math and code.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | <div>html</div>
-    | ^~~~~~~~~~~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | <div>html</div>
-
-[1] Unexpected blank line between math and html.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | |table|
-    | ^~~~~~~ [1]
-  6 | |-|
-  7 | |data|
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | |table|
-  5 | |-|
-  6 | |data|
-
-[1] Unexpected blank line between math and table.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | ---
-    | ^~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | ---
-
-[1] Unexpected blank line between math and thematic-break.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | ***
-    | ^~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | ***
-
-[1] Unexpected blank line between math and thematic-break.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | - - -
-    | ^~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | - - -
-
-[1] Unexpected blank line between math and thematic-break.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | * * *
-    | ^~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | * * *
-
-[1] Unexpected blank line between math and thematic-break.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | -----
-    | ^~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | -----
-
-[1] Unexpected blank line between math and thematic-break.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | *****
-    | ^~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | *****
-
-[1] Unexpected blank line between math and thematic-break.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | [link]: #link-definition
-    | ^~~~~~~~~~~~~~~~~~~~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | [link]: #link-definition
-
-[1] Unexpected blank line between math and link-definition.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | [^footnote]: footnote-definition
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | [^footnote]: footnote-definition
-
-[1] Unexpected blank line between math and footnote-definition.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | ::: warning
-    | ^~~~~~~~~~~ [1]
-  6 | custom container
-  7 | :::
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | ::: warning
-  5 | custom container
-  6 | :::
-
-[1] Unexpected blank line between math and custom-container.
----
-
-
-Test: padding-line-between-blocks >> invalid
-Options:
-  - prev: "*"
-    next: "*"
-    blankLine: never
-
-Code:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 |
-  5 | $$
-    | ^~ [1]
-  6 | E=mc^2
-  7 | $$
-
-Output:
-  1 | $$
-  2 | E=mc^2
-  3 | $$
-  4 | $$
-  5 | E=mc^2
-  6 | $$
-
-[1] Unexpected blank line between math and math.
 ---

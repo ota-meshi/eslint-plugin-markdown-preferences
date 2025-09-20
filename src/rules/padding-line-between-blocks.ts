@@ -33,8 +33,7 @@ type BlockType =
   | "link-definition"
   | "footnote-definition"
   | "frontmatter"
-  | "custom-container"
-  | "math";
+  | "custom-container";
 type BlockTypeOption = BlockType | "*";
 
 type ObjectSelector = {
@@ -139,7 +138,6 @@ const BLOCK_TYPES: BlockTypeOption[] = [
   "footnote-definition",
   "frontmatter",
   "custom-container",
-  "math",
   "*",
 ];
 
@@ -195,7 +193,6 @@ const BLOCK_TYPE_MAP0: {
   toml: "frontmatter",
   yaml: "frontmatter",
   customContainer: "custom-container",
-  math: "math",
 };
 const BLOCK_TYPE_MAP: {
   [K in MDNode["type"]]?: BlockType;
@@ -425,7 +422,7 @@ export default createRule<Options>("padding-line-between-blocks", {
               const startNext = nextRange[0] - nextLoc.start.column;
               return fixer.insertTextBeforeRange([startNext, startNext], text);
             }
-            // if (expected.blankLine === "never")
+            // if (expectedblankLine === "never")
 
             const lines = getParsedLines(sourceCode);
             const linesToRemove: ParsedLine[] = [];

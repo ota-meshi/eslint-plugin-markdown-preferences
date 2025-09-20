@@ -97,22 +97,13 @@ export default defineConfig([
 
 The following syntaxes are supported:
 
-- [Custom Containers](https://vitepress.dev/guide/markdown#custom-containers)\
+- Custom Containers\
   Example:
 
   ```md
   ::: warning
   This is a warning box.
   :::
-  ```
-
-- [Mathematical Expressions](https://docs.github.com/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions)\
-  Example:
-
-  ```md
-  $$
-  E = mc^2
-  $$
   ```
 
 #### Legacy Config (`.eslintrc`)
