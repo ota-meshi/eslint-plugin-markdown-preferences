@@ -52,10 +52,13 @@ export interface CustomContainer
   /**
    * Children of custom container.
    */
-  children: (CustomContainer | mdast.BlockContent | mdast.DefinitionContent)[];
+  children: (CustomContainer | BlockContent | DefinitionContent)[];
 }
 
 export type RootContent = RootContentMap[keyof RootContentMap];
+export type BlockContent = RootContentMap[keyof mdast.BlockContentMap];
+export type DefinitionContent =
+  RootContentMap[keyof mdast.DefinitionContentMap];
 export type Resource = mdast.Resource;
 export type PhrasingContent = mdast.PhrasingContent;
 

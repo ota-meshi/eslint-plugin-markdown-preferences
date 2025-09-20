@@ -79,7 +79,7 @@ for (const entry1 of syntaxEntries) {
     assert.deepStrictEqual(
       sourceCodeForCodeWithPadding.ast.children.map((n) => n.type),
       [entry1.type, entry2.type],
-      `Unexpected AST:\n${codeWithPadding}`,
+      `Unexpected AST:\n${codeWithoutPadding}`,
     );
     testCases.push({
       prevBlockType: entry1.type,
