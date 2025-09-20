@@ -29,6 +29,7 @@ const syntaxMap: Record<
   yaml: { code: ["---\ntitle: Frontmatter\n---"] },
   customContainer: { code: ["::: warning\ncustom container\n:::"] },
   math: { code: ["$$\nE=mc^2\n$$"] },
+  importCodeSnippet: { code: ["<<< ./example.js"] },
 };
 
 const syntaxEntries = Object.entries(syntaxMap).flatMap(([type, def]) =>

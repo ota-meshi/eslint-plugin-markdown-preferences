@@ -40,9 +40,9 @@ export type Toml = eslint.Toml;
 export type Json = eslint.Json;
 
 export interface CustomContainer
-  extends ExtendChildren<mdast.Parent, CustomContainer> {
+  extends ExtendChildren<mdast.Parent, CustomContainer | ImportCodeSnippet> {
   /**
-   * Node type of mdast block quote.
+   * Node type of mdast custom container.
    */
   type: "customContainer";
   /**
@@ -55,8 +55,17 @@ export interface CustomContainer
   children: (CustomContainer | BlockContent | DefinitionContent)[];
 }
 
+export interface ImportCodeSnippet extends mdast.Literal {
+  /**
+   * Node type of mdast import code snippet.
+   */
+  type: "importCodeSnippet";
+}
+
 export type RootContent = RootContentMap[keyof RootContentMap];
-export type BlockContent = RootContentMap[keyof mdast.BlockContentMap];
+export type BlockContent =
+  | RootContentMap[keyof mdast.BlockContentMap]
+  | ImportCodeSnippet;
 export type DefinitionContent =
   RootContentMap[keyof mdast.DefinitionContentMap];
 export type Resource = mdast.Resource;
@@ -102,4 +111,5 @@ interface RootContentMap {
   customContainer: CustomContainer;
   inlineMath: InlineMath;
   math: Math;
+  importCodeSnippet: ImportCodeSnippet;
 }

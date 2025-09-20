@@ -265,6 +265,17 @@ You can specify block types in two ways:
   This syntax is non-standard, but supported by some Markdown parsers like [GitHub](https://docs.github.com/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions).\
   To check this, specify [`markdown-preferences/extended-syntax`] as the `language`.
 
+- `"import-code-snippet"` - Import code snippet blocks
+
+  e.g.
+
+  ```md
+  <<< ./example.js
+  ```
+
+  This syntax is non-standard, but supported by some Markdown parsers like [VitePress](https://vitepress.dev/guide/markdown#import-code-snippets).\
+  To check this, specify [`markdown-preferences/extended-syntax`] as the `language`.
+
 - `"*"` - Wildcard matching any block type
 
 **Object notation** (advanced matching):

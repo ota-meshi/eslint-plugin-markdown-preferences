@@ -35,8 +35,6 @@ declare module "micromark-util-types" {
   }
 }
 
-const COLON = 58; /* `:` */
-
 /**
  * Micromark extension to support custom containers (e.g., ::: warning ... :::).
  */
@@ -66,7 +64,7 @@ export function customContainer(): Extension {
 
   return {
     document: {
-      [COLON]: customContainerOpenConstruct,
+      [codes.colon]: customContainerOpenConstruct,
     },
   };
 
@@ -90,7 +88,7 @@ export function customContainer(): Extension {
      * Process start for the opening marker of the custom container.
      */
     function start(code: Code): State | undefined {
-      if (code !== COLON) return nok(code);
+      if (code !== codes.colon) return nok(code);
 
       size = 0;
       openToken = effects.enter("customContainer", { _container: true });
@@ -108,7 +106,7 @@ export function customContainer(): Extension {
      * ```
      */
     function sequence(code: Code): State | undefined {
-      if (code === COLON) {
+      if (code === codes.colon) {
         size++;
         effects.consume(code);
         return sequence;
@@ -188,7 +186,7 @@ export function customContainer(): Extension {
      * Process start for the closing marker of the custom container.
      */
     function start(code: Code): State | undefined {
-      if (code !== COLON) return nok(code);
+      if (code !== codes.colon) return nok(code);
 
       size = 0;
       effects.enter("customContainerFence");
@@ -204,7 +202,7 @@ export function customContainer(): Extension {
      * ```
      */
     function sequence(code: Code): State | undefined {
-      if (code === COLON) {
+      if (code === codes.colon) {
         size++;
         effects.consume(code);
         return sequence;
@@ -263,7 +261,7 @@ export function customContainer(): Extension {
      * Process start for the custom container.
      */
     function start(code: Code): State | undefined {
-      if (code !== COLON) return ok(code);
+      if (code !== codes.colon) return ok(code);
       return effects.attempt(
         customContainerCloseConstruct,
         () => {
