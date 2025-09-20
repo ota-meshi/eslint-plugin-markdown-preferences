@@ -105,6 +105,11 @@ export default defineConfig([
               name: "mdast",
               message: "Please use `src/language/ast-types.ts` instead.",
             },
+            {
+              name: "mdast-util-math",
+              importNames: ["Math", "InlineMath"],
+              message: "Please use `src/language/ast-types.ts` instead.",
+            },
           ],
         },
       ],
