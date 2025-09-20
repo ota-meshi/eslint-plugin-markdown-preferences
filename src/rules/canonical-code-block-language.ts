@@ -1,4 +1,4 @@
-import type { Code } from "mdast";
+import type { Code } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import { parseFencedCodeBlock } from "../utils/fenced-code-block.ts";
 

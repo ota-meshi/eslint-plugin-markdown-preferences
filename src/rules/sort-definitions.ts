@@ -1,4 +1,4 @@
-import type { Definition, FootnoteDefinition } from "mdast";
+import type { Definition, FootnoteDefinition } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import { toRegExp, isRegExp } from "../utils/regexp.ts";
 import { getParent, type MDNode } from "../utils/ast.ts";

@@ -3,7 +3,7 @@
 
 Test: prefer-linked-words >> invalid
 Filename: tests/fixtures/rules/prefer-linked-words/invalid/array/test-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -32,7 +32,7 @@ Output: unchanged
 
 Test: prefer-linked-words >> invalid
 Filename: tests/fixtures/rules/prefer-linked-words/invalid/array-example/example-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -61,7 +61,7 @@ Output: unchanged
 
 Test: prefer-linked-words >> invalid
 Filename: tests/fixtures/rules/prefer-linked-words/invalid/cjk-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -94,7 +94,7 @@ Output:
 
 Test: prefer-linked-words >> invalid >>> "# Title\n\n- `foo`\n- foo\n  foo\n 2"
 Filename: tests/fixtures/rules/prefer-linked-words/invalid/file/test-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -129,7 +129,7 @@ Output:
 
 Test: prefer-linked-words >> invalid
 Filename: tests/fixtures/rules/prefer-linked-words/invalid/ignore-example-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -179,7 +179,7 @@ Output:
 
 Test: prefer-linked-words >> invalid >>> "# Ignore Test\n\nESLint is a popular linting tool for JavaScript and TypeScript.\n\n- ESLint[^a]\n- TypeScript[^b]\n- JavaScript[^c]\n\n[^a]: ESLint is a static code analysis tool for identifying problematic patterns in JavaScript code.\n[^b]: TypeScript is a superset of JavaScript that adds static types.\n[^c]: JavaScript is a programming language that conforms to the ECMAScript specification.\n 2"
 Filename: tests/fixtures/rules/prefer-linked-words/invalid/ignores/example-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -236,7 +236,7 @@ Output:
 
 Test: prefer-linked-words >> invalid
 Filename: tests/fixtures/rules/prefer-linked-words/invalid/test01-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -281,7 +281,7 @@ Output:
 
 Test: prefer-linked-words >> invalid
 Filename: tests/fixtures/rules/prefer-linked-words/invalid/test02-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:

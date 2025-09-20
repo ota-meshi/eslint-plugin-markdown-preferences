@@ -3,7 +3,7 @@
 
 Test: table-pipe-spacing >> invalid
 Filename: tests/fixtures/rules/table-pipe-spacing/invalid/always/align-delimiter-tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -61,7 +61,7 @@ Output:
 
 Test: table-pipe-spacing >> invalid
 Filename: tests/fixtures/rules/table-pipe-spacing/invalid/always/align-delimiter-with-emoji-tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -101,7 +101,7 @@ Output:
 
 Test: table-pipe-spacing >> invalid
 Filename: tests/fixtures/rules/table-pipe-spacing/invalid/always/tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -195,7 +195,7 @@ Output:
 
 Test: table-pipe-spacing >> invalid >>> "# Tables with aligned pipes\n\n|  User Name     |  Date Of Birth    |  Favorite Color    |  Age    |\n|  ------------  | :-------------:   |  :---------------  |  ----:  |\n|   Alice        |   2000-01-01      |   Blue             |   24    |\n|   Bob          |   1995-05-23      |   Green            |   28    |\n 2"
 Filename: tests/fixtures/rules/table-pipe-spacing/invalid/default-center/align-delimiter-tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -257,7 +257,7 @@ Output:
 
 Test: table-pipe-spacing >> invalid >>> "# Tables with aligned pipes\n\n| Fixable | Config |\n| :-----: | :----: |\n|   🔧    |        |\n|   🔧     |        |\n|    🔧   |        |\n 2"
 Filename: tests/fixtures/rules/table-pipe-spacing/invalid/default-center/align-delimiter-with-emoji-tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -299,7 +299,7 @@ Output:
 
 Test: table-pipe-spacing >> invalid >>> "# Tables\n\n| User Name | Date Of Birth | Favorite Color |\n| --------- | ------------- | -------------- |\n| Alice     | 2000-01-01    | Blue           |\n| Bob       | 1995-05-23    | Green          |\n\n|User Name|Date Of Birth|Favorite Color|\n|---------|-------------|--------------|\n|Alice    |2000-01-01   |Blue          |\n|Bob      |1995-05-23   |Green         |\n\n|User Name |Date Of Birth |Favorite Color |\n|----------|--------------|---------------|\n|Alice     |2000-01-01    |Blue           |\n|Bob       |1995-05-23    |Green          |\n 2"
 Filename: tests/fixtures/rules/table-pipe-spacing/invalid/default-center/tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -429,7 +429,7 @@ Output:
 
 Test: table-pipe-spacing >> invalid
 Filename: tests/fixtures/rules/table-pipe-spacing/invalid/never/align-delimiter-tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -507,7 +507,7 @@ Output:
 
 Test: table-pipe-spacing >> invalid >>> "# Tables with aligned pipes\n\n| Fixable | Config |\n| :-----: | :----: |\n|   🔧    |        |\n|   🔧     |        |\n|    🔧   |        |\n 3"
 Filename: tests/fixtures/rules/table-pipe-spacing/invalid/never/align-delimiter-with-emoji-tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -554,7 +554,7 @@ Output:
 
 Test: table-pipe-spacing >> invalid
 Filename: tests/fixtures/rules/table-pipe-spacing/invalid/never/empty-tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -593,7 +593,7 @@ Output:
 
 Test: table-pipe-spacing >> invalid >>> "# Tables\n\n| User Name | Date Of Birth | Favorite Color |\n| --------- | ------------- | -------------- |\n| Alice     | 2000-01-01    | Blue           |\n| Bob       | 1995-05-23    | Green          |\n\n|User Name|Date Of Birth|Favorite Color|\n|---------|-------------|--------------|\n|Alice    |2000-01-01   |Blue          |\n|Bob      |1995-05-23   |Green         |\n\n|User Name |Date Of Birth |Favorite Color |\n|----------|--------------|---------------|\n|Alice     |2000-01-01    |Blue           |\n|Bob       |1995-05-23    |Green          |\n 3"
 Filename: tests/fixtures/rules/table-pipe-spacing/invalid/never/tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -663,7 +663,7 @@ Output:
 
 Test: table-pipe-spacing >> invalid >>> "# Tables with aligned pipes\n\n|  User Name     |  Date Of Birth    |  Favorite Color    |  Age    |\n|  ------------  | :-------------:   |  :---------------  |  ----:  |\n|   Alice        |   2000-01-01      |   Blue             |   24    |\n|   Bob          |   1995-05-23      |   Green            |   28    |\n\n| User Name  | Date Of Birth | Favorite Color | Age  |\n|------------|:-------------:|:---------------|-----:|\n|Alice       |  2000-01-01   |Blue            |24    |\n|         Bob|  1995-05-23   |           Green|    28|\n 2"
 Filename: tests/fixtures/rules/table-pipe-spacing/invalid/never-on-leading/align-delimiter-tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -747,7 +747,7 @@ Output:
 
 Test: table-pipe-spacing >> invalid >>> "# Tables with aligned pipes\n\n| Fixable | Config |\n| :-----: | :----: |\n|   🔧    |        |\n|   🔧     |        |\n|    🔧   |        |\n 4"
 Filename: tests/fixtures/rules/table-pipe-spacing/invalid/never-on-leading/align-delimiter-with-emoji-tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -793,7 +793,7 @@ Output:
 
 Test: table-pipe-spacing >> invalid >>> "# Empty Tables\n\n|   |   |   |\n| - | - | - |\n|   |   |   |\n|   |   |   |\n 2"
 Filename: tests/fixtures/rules/table-pipe-spacing/invalid/never-on-leading/empty-tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -830,7 +830,7 @@ Output:
 
 Test: table-pipe-spacing >> invalid >>> "# Tables\n\n| User Name | Date Of Birth | Favorite Color |\n| --------- | ------------- | -------------- |\n| Alice     | 2000-01-01    | Blue           |\n| Bob       | 1995-05-23    | Green          |\n\n|User Name|Date Of Birth|Favorite Color|\n|---------|-------------|--------------|\n|Alice    |2000-01-01   |Blue          |\n|Bob      |1995-05-23   |Green         |\n\n|User Name |Date Of Birth |Favorite Color |\n|----------|--------------|---------------|\n|Alice     |2000-01-01    |Blue           |\n|Bob       |1995-05-23    |Green          |\n 4"
 Filename: tests/fixtures/rules/table-pipe-spacing/invalid/never-on-leading/tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -910,7 +910,7 @@ Output:
 
 Test: table-pipe-spacing >> invalid >>> "# Tables\n\n| User Name | Date Of Birth | Favorite Color |\n| --------- | ------------- | -------------- |\n| Alice     | 2000-01-01    | Blue           |\n| Bob       | 1995-05-23    | Green          |\n\n|User Name|Date Of Birth|Favorite Color|\n|---------|-------------|--------------|\n|Alice    |2000-01-01   |Blue          |\n|Bob      |1995-05-23   |Green         |\n\n|User Name |Date Of Birth |Favorite Color |\n|----------|--------------|---------------|\n|Alice     |2000-01-01    |Blue           |\n|Bob       |1995-05-23    |Green          |\n 5"
 Filename: tests/fixtures/rules/table-pipe-spacing/invalid/tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize

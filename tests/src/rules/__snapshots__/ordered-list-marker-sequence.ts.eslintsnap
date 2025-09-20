@@ -3,7 +3,7 @@
 
 Test: ordered-list-marker-sequence >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/all-one-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -33,7 +33,7 @@ Output:
 
 Test: ordered-list-marker-sequence >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/deep-nested-jump-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -71,7 +71,7 @@ Output:
 
 Test: ordered-list-marker-sequence >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/jump-number-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -101,7 +101,7 @@ Output:
 
 Test: ordered-list-marker-sequence >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/last-sequence-jump-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -145,7 +145,7 @@ Output:
 
 Test: ordered-list-marker-sequence >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/last-sequence-jump2-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -220,7 +220,7 @@ Output: unchanged
 
 Test: ordered-list-marker-sequence >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/nested-jump-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -252,7 +252,7 @@ Output:
 
 Test: ordered-list-marker-sequence >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/parent-continues-after-nest-jump-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -288,7 +288,7 @@ Output:
 
 Test: ordered-list-marker-sequence >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/reverse-number-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize

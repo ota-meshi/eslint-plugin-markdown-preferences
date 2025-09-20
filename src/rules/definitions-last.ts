@@ -5,7 +5,7 @@ import type {
   Heading,
   ListItem,
   RootContent,
-} from "mdast";
+} from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import { getNextSibling, getPrevSibling } from "../utils/ast.ts";
 import type { RuleTextEditor } from "@eslint/core";

@@ -6,7 +6,7 @@ import rule, {
 import { loadTestCases } from "../../utils/utils.ts";
 import { parseMarkdown } from "../../utils/markdown-parser/parser.ts";
 import assert from "node:assert";
-import eslintMarkdown from "@eslint/markdown";
+import plugin from "../../../src/index.ts";
 
 const syntaxMap: Record<
   Exclude<MarkdownBlockNode["type"], "json" | "toml">,
@@ -27,6 +27,7 @@ const syntaxMap: Record<
   definition: { code: ["[link]: #link-definition"] },
   footnoteDefinition: { code: ["[^footnote]: footnote-definition"] },
   yaml: { code: ["---\ntitle: Frontmatter\n---"] },
+  customContainer: { code: ["::: warning\ncustom container\n:::"] },
 };
 
 const syntaxEntries = Object.entries(syntaxMap).flatMap(([type, def]) =>
@@ -123,9 +124,9 @@ describe("requiresBlankLineBetween", () => {
 
 const tester = new SnapshotRuleTester({
   plugins: {
-    markdown: eslintMarkdown,
+    "markdown-preferences": plugin,
   },
-  language: "markdown/gfm",
+  language: "markdown-preferences/extended-syntax",
   languageOptions: {
     frontmatter: "yaml",
   },

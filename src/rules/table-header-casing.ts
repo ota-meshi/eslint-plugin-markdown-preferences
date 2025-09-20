@@ -2,7 +2,7 @@ import { createRule } from "../utils/index.ts";
 import { isRegExp, toRegExp } from "../utils/regexp.ts";
 import { defaultPreserveWords } from "../resources/preserve-words.ts";
 import { defaultMinorWords } from "../resources/minor-words.ts";
-import type { Text } from "mdast";
+import type { Text } from "../language/ast-types.ts";
 import { parsePreserveWordsOption } from "../utils/preserve-words.ts";
 import type { WordAndOffset } from "../utils/words.ts";
 import { parseWordsFromText } from "../utils/words.ts";

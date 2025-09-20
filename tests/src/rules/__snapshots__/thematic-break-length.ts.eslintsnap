@@ -3,7 +3,7 @@
 
 Test: thematic-break-length >> invalid
 Filename: tests/fixtures/rules/thematic-break-length/invalid/default/basic-invalid-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options: []
@@ -32,7 +32,7 @@ Output:
 
 Test: thematic-break-length >> invalid
 Filename: tests/fixtures/rules/thematic-break-length/invalid/default/mixed-style-invalid-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options: []
@@ -65,7 +65,7 @@ Output:
 
 Test: thematic-break-length >> invalid
 Filename: tests/fixtures/rules/thematic-break-length/invalid/default/space-separated-invalid-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options: []
@@ -92,7 +92,7 @@ Output: unchanged
 
 Test: thematic-break-length >> invalid
 Filename: tests/fixtures/rules/thematic-break-length/invalid/length-5/complex-space-separated-invalid-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -136,7 +136,7 @@ Output:
 
 Test: thematic-break-length >> invalid
 Filename: tests/fixtures/rules/thematic-break-length/invalid/length-5/length-5-invalid-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -172,7 +172,7 @@ Output:
 
 Test: thematic-break-length >> invalid
 Filename: tests/fixtures/rules/thematic-break-length/invalid/length-5/mixed-style-invalid-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -206,7 +206,7 @@ Output:
 
 Test: thematic-break-length >> invalid
 Filename: tests/fixtures/rules/thematic-break-length/invalid/length-5/space-separated-invalid-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -262,7 +262,7 @@ Output:
 
 Test: thematic-break-length >> invalid
 Filename: tests/fixtures/rules/thematic-break-length/invalid/length-6/complex-space-separated-invalid-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:

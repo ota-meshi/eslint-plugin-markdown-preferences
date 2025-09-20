@@ -3,7 +3,7 @@
 
 Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -99,7 +99,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/image-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -466,7 +466,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/link-definition-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -516,7 +516,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -643,7 +643,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/link-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1020,7 +1020,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/no-spaced-image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1094,7 +1094,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/no-spaced-image-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1322,7 +1322,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/no-spaced-link-definition-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1369,7 +1369,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/no-spaced-link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1466,7 +1466,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/always/no-spaced-link-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1709,7 +1709,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/exceptions/always-images-in-links-false/image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1738,7 +1738,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/exceptions/always-images-in-links-false/image-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1792,7 +1792,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/exceptions/always-images-in-links-false/link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1862,7 +1862,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/exceptions/always-images-in-links-false/link-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1959,7 +1959,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid >>> "\n- ![ foo ](/url)\n- ![foo](/url)\n 2"
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/exceptions/never-images-in-links-true/image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1988,7 +1988,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid >>> "\n- ![ foo ]\n- ![foo]\n- ![ foo ][ x ]\n- ![foo][x]\n\n[x]: /url\n[foo]: /url\n 2"
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/exceptions/never-images-in-links-true/image-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -2034,7 +2034,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid >>> "\n- [ foo ](/url)\n- [foo](/url)\n- Image link\n  - [ ![x](x.png) ](/url)\n  - [![x](x.png)](/url)\n  - [ ![x] ](/url)\n  - [![x]](/url)\n\n[x]: /url\n 2"
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/exceptions/never-images-in-links-true/link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -2084,7 +2084,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid >>> "\n- [ foo ]\n- [foo]\n- [ foo ][ x ]\n- [foo][x]\n- Image link\n  - [ ![x](x.png) ][x]\n  - [![x](x.png)][x]\n  - [ ![x] ][x]\n  - [![x]][x]\n\n[x]: /url\n[foo]: /url\n 2"
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/exceptions/never-images-in-links-true/link-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -2147,7 +2147,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid >>> "\n- ![ foo ](/url)\n- ![foo](/url)\n- ![ foo](/url)\n- ![foo ](/url)\n- ![      foo     ](/url)\n- Starts with `^`\n    - ![ ^foo ](/url)\n    - ![^foo](/url)\n- Multi lines\n  - ![ foo\n      bar ](/url)\n  - ![foo\n      bar](/url)\n  - ![\n      foo\n      bar\n    ](/url)\n  - ![  \n      foo\n      bar  \n    ](/url)\n- Empty\n  - ![](/url)\n  - ![ ](/url)\n  - ![      ](/url)\n\n[x]: /url\n 2"
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -2243,7 +2243,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid >>> "\n- ![ foo ]\n- ![foo]\n- ![ foo]\n- ![foo ]\n- ![      foo     ]\n- ![ foo ][]\n- ![foo][]\n- ![ foo][]\n- ![foo ][]\n- ![      foo     ][]\n- ![ foo ][x]\n- ![foo][x]\n- ![ foo][x]\n- ![foo ][x]\n- ![      foo     ][x]\n- ![foo][ x ]\n- ![foo][x]\n- ![foo][ x]\n- ![foo][x ]\n- ![foo][      x     ]\n- Starts with `^`\n    - ![ ^foo ][x]\n    - ![^foo][x]\n    - ![ ^foo ]\n    - ![^foo]\n    - ![ ^foo ][]\n    - ![^foo][]\n    - ![x][ ^foo ]\n    - ![x][^foo]\n- Multi lines\n  - ![ foo\n      bar ][x]\n  - ![foo\n      bar][x]\n  - ![\n      foo\n      bar\n    ][x]\n  - ![  \n      foo\n      bar  \n    ][x]\n  - ![ foo\n      bar ]\n  - ![foo\n      bar]\n  - ![\n      foo\n      bar\n    ]\n  - ![  \n      foo\n      bar  \n    ]\n  - ![ foo\n      bar ][]\n  - ![foo\n      bar][]\n  - ![\n      foo\n      bar\n    ][]\n  - ![  \n      foo\n      bar  \n    ][]\n  - ![x][ foo\n      bar ]\n  - ![x][foo\n      bar]\n  - ![x][\n      foo\n      bar\n    ]\n  - ![x][  \n      foo\n      bar  \n    ]\n- Empty\n  - ![][x]\n  - ![ ][x]\n  - ![      ][x]\n\n[x]: /url\n[foo]: /url\n[ ^foo ]: /url\n[foo bar]: /url\n[^foo]: footnote\n 2"
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/image-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -2521,7 +2521,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid >>> "\n[a]: /url\n[ b ]: /url\n[ c]: /url\n[d ]: /url\n[  e   f  ]: /url\n[  g\n  h  ]: /url\n[  \n  i\n  j\n  ]: /url\n 2"
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/link-definition-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -2576,7 +2576,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid >>> "\n- [ foo ](/url)\n- [foo](/url)\n- [ foo](/url)\n- [foo ](/url)\n- [      foo     ](/url)\n- Starts with `^`\n    - [ ^foo ](/url)\n    - [^foo](/url)\n- Image link\n  - [ ![x](x.png) ](/url)\n  - [![x](x.png)](/url)\n  - [ ![x] ](/url)\n  - [![x]](/url)\n- Multi lines\n  - [ foo\n      bar ](/url)\n  - [foo\n      bar](/url)\n  - [\n      foo\n      bar\n    ](/url)\n  - [  \n      foo\n      bar  \n    ](/url)\n- Empty\n  - [](/url)\n  - [ ](/url)\n  - [      ](/url)\n\n[x]: /url\n 2"
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -2685,7 +2685,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid >>> "\n- [ foo ]\n- [foo]\n- [ foo]\n- [foo ]\n- [      foo     ]\n- [ foo ][]\n- [foo][]\n- [ foo][]\n- [foo ][]\n- [      foo     ][]\n- [ foo ][x]\n- [foo][x]\n- [ foo][x]\n- [foo ][x]\n- [      foo     ][x]\n- [foo][ x ]\n- [foo][x]\n- [foo][ x]\n- [foo][x ]\n- [foo][      x     ]\n- Starts with `^`\n    - [ ^foo ][x]\n    - [^foo][x]\n    - [ ^foo ]\n    - [^foo]\n    - [ ^foo ][]\n    - [^foo][]\n    - [x][ ^foo ]\n    - [x][^foo]\n- Image link\n  - [ ![x](x.png) ][x]\n  - [![x](x.png)][x]\n  - [ ![x] ][x]\n  - [![x]][x]\n- Multi lines\n  - [ foo\n      bar ][x]\n  - [foo\n      bar][x]\n  - [\n      foo\n      bar\n    ][x]\n  - [  \n      foo\n      bar  \n    ][x]\n  - [ foo\n      bar ]\n  - [foo\n      bar]\n  - [\n      foo\n      bar\n    ]\n  - [  \n      foo\n      bar  \n    ]\n  - [ foo\n      bar ][]\n  - [foo\n      bar][]\n  - [\n      foo\n      bar\n    ][]\n  - [  \n      foo\n      bar  \n    ][]\n  - [x][ foo\n      bar ]\n  - [x][foo\n      bar]\n  - [x][\n      foo\n      bar\n    ]\n  - [x][  \n      foo\n      bar  \n    ]\n\n[x]: /url\n[foo]: /url\n[ ^foo ]: /url\n[foo bar]: /url\n[^foo]: footnote\n 2"
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/link-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -2956,7 +2956,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid >>> "\n- ![ foo ](/url)\n- ![foo](/url)\n- ![ foo](/url)\n- ![foo ](/url)\n- ![      foo     ](/url)\n- Starts with `^`\n    - ![ ^foo ](/url)\n    - ![^foo](/url)\n- Multi lines\n  - ![ foo\n      bar ](/url)\n  - ![foo\n      bar](/url)\n  - ![\n      foo\n      bar\n    ](/url)\n  - ![  \n      foo\n      bar  \n    ](/url)\n- Empty\n  - ![](/url)\n  - ![ ](/url)\n  - ![      ](/url)\n\n[x]: /url\n 3"
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -3054,7 +3054,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid >>> "\n- ![ foo ]\n- ![foo]\n- ![ foo]\n- ![foo ]\n- ![      foo     ]\n- ![ foo ][]\n- ![foo][]\n- ![ foo][]\n- ![foo ][]\n- ![      foo     ][]\n- ![ foo ][x]\n- ![foo][x]\n- ![ foo][x]\n- ![foo ][x]\n- ![      foo     ][x]\n- ![foo][ x ]\n- ![foo][x]\n- ![foo][ x]\n- ![foo][x ]\n- ![foo][      x     ]\n- Starts with `^`\n    - ![ ^foo ][x]\n    - ![^foo][x]\n    - ![ ^foo ]\n    - ![^foo]\n    - ![ ^foo ][]\n    - ![^foo][]\n    - ![x][ ^foo ]\n    - ![x][^foo]\n- Multi lines\n  - ![ foo\n      bar ][x]\n  - ![foo\n      bar][x]\n  - ![\n      foo\n      bar\n    ][x]\n  - ![  \n      foo\n      bar  \n    ][x]\n  - ![ foo\n      bar ]\n  - ![foo\n      bar]\n  - ![\n      foo\n      bar\n    ]\n  - ![  \n      foo\n      bar  \n    ]\n  - ![ foo\n      bar ][]\n  - ![foo\n      bar][]\n  - ![\n      foo\n      bar\n    ][]\n  - ![  \n      foo\n      bar  \n    ][]\n  - ![x][ foo\n      bar ]\n  - ![x][foo\n      bar]\n  - ![x][\n      foo\n      bar\n    ]\n  - ![x][  \n      foo\n      bar  \n    ]\n- Empty\n  - ![][x]\n  - ![ ][x]\n  - ![      ][x]\n\n[x]: /url\n[foo]: /url\n[ ^foo ]: /url\n[foo bar]: /url\n[^foo]: footnote\n 3"
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/image-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -3334,7 +3334,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid >>> "\n[a]: /url\n[ b ]: /url\n[ c]: /url\n[d ]: /url\n[  e   f  ]: /url\n[  g\n  h  ]: /url\n[  \n  i\n  j\n  ]: /url\n 3"
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/link-definition-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -3391,7 +3391,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid >>> "\n- [ foo ](/url)\n- [foo](/url)\n- [ foo](/url)\n- [foo ](/url)\n- [      foo     ](/url)\n- Starts with `^`\n    - [ ^foo ](/url)\n    - [^foo](/url)\n- Image link\n  - [ ![x](x.png) ](/url)\n  - [![x](x.png)](/url)\n  - [ ![x] ](/url)\n  - [![x]](/url)\n- Multi lines\n  - [ foo\n      bar ](/url)\n  - [foo\n      bar](/url)\n  - [\n      foo\n      bar\n    ](/url)\n  - [  \n      foo\n      bar  \n    ](/url)\n- Empty\n  - [](/url)\n  - [ ](/url)\n  - [      ](/url)\n\n[x]: /url\n 3"
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -3502,7 +3502,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid >>> "\n- [ foo ]\n- [foo]\n- [ foo]\n- [foo ]\n- [      foo     ]\n- [ foo ][]\n- [foo][]\n- [ foo][]\n- [foo ][]\n- [      foo     ][]\n- [ foo ][x]\n- [foo][x]\n- [ foo][x]\n- [foo ][x]\n- [      foo     ][x]\n- [foo][ x ]\n- [foo][x]\n- [foo][ x]\n- [foo][x ]\n- [foo][      x     ]\n- Starts with `^`\n    - [ ^foo ][x]\n    - [^foo][x]\n    - [ ^foo ]\n    - [^foo]\n    - [ ^foo ][]\n    - [^foo][]\n    - [x][ ^foo ]\n    - [x][^foo]\n- Image link\n  - [ ![x](x.png) ][x]\n  - [![x](x.png)][x]\n  - [ ![x] ][x]\n  - [![x]][x]\n- Multi lines\n  - [ foo\n      bar ][x]\n  - [foo\n      bar][x]\n  - [\n      foo\n      bar\n    ][x]\n  - [  \n      foo\n      bar  \n    ][x]\n  - [ foo\n      bar ]\n  - [foo\n      bar]\n  - [\n      foo\n      bar\n    ]\n  - [  \n      foo\n      bar  \n    ]\n  - [ foo\n      bar ][]\n  - [foo\n      bar][]\n  - [\n      foo\n      bar\n    ][]\n  - [  \n      foo\n      bar  \n    ][]\n  - [x][ foo\n      bar ]\n  - [x][foo\n      bar]\n  - [x][\n      foo\n      bar\n    ]\n  - [x][  \n      foo\n      bar  \n    ]\n\n[x]: /url\n[foo]: /url\n[ ^foo ]: /url\n[foo bar]: /url\n[^foo]: footnote\n 3"
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/link-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -3775,7 +3775,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/spaced-image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -3859,7 +3859,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/spaced-image-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -4124,7 +4124,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/spaced-link-definition-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -4171,7 +4171,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/spaced-link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -4273,7 +4273,7 @@ Output:
 
 Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/never/spaced-link-reference-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:

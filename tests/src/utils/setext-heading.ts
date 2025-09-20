@@ -1,7 +1,7 @@
 import assert from "node:assert";
 import { parseMarkdown } from "../../utils/markdown-parser/parser.ts";
 import { parseSetextHeading } from "../../../src/utils/setext-heading.ts";
-import type { Heading } from "mdast";
+import type { Heading } from "../../../src/language/ast-types.ts";
 
 function parseSetextHeadingFromTest(code: string) {
   const sourceCode = parseMarkdown(code, { frontmatter: "yaml" })!;

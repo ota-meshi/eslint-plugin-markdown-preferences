@@ -1,10 +1,11 @@
 import type {
   Blockquote,
+  CustomContainer,
   FootnoteDefinition,
   List,
   ListItem,
   Root,
-} from "mdast";
+} from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import type { BulletListMarker, OrderedListMarker } from "../utils/ast.ts";
 import { getListItemMarker } from "../utils/ast.ts";
@@ -28,7 +29,12 @@ type ParsedOptions = {
     prefer: MarkerKind;
   };
 };
-type MDBlockContainer = Root | Blockquote | ListItem | FootnoteDefinition;
+type MDBlockContainer =
+  | Root
+  | Blockquote
+  | ListItem
+  | FootnoteDefinition
+  | CustomContainer;
 
 const MARKER_KINDS: MarkerKind[] = [".", ")"];
 const MARKERS: Marker[] = MARKER_KINDS.map((kind): Marker => `n${kind}`);
@@ -254,14 +260,16 @@ export default createRule("ordered-list-marker-style", {
         if (!node.ordered) return;
         checkOrderedList(node);
       },
-      "root, blockquote, listItem, footnoteDefinition"(node: MDBlockContainer) {
+      "root, blockquote, listItem, footnoteDefinition, customContainer"(
+        node: MDBlockContainer,
+      ) {
         containerStack = {
           node,
           level: node.type === "listItem" ? containerStack.level + 1 : 1,
           upper: containerStack,
         };
       },
-      "root, blockquote, listItem, footnoteDefinition:exit"() {
+      "root, blockquote, listItem, footnoteDefinition, customContainer:exit"() {
         containerStack = containerStack.upper!;
       },
     };

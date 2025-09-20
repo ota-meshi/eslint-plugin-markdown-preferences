@@ -1,10 +1,10 @@
 import assert from "node:assert";
 import { parseMarkdown } from "../../utils/markdown-parser/parser.ts";
 import { getBlockquoteLevelFromLine } from "../../../src/utils/blockquotes.ts";
-import type { MarkdownSourceCode } from "@eslint/markdown";
+import type { ExtendedMarkdownSourceCode } from "../../../src/language/extended-markdown-ianguage.ts";
 
 describe("utils/blockquotes", () => {
-  function getSrc(md: string): MarkdownSourceCode {
+  function getSrc(md: string): ExtendedMarkdownSourceCode {
     return parseMarkdown(md, { frontmatter: "yaml" })!;
   }
 

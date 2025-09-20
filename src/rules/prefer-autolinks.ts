@@ -1,4 +1,4 @@
-import type { Text } from "mdast";
+import type { Text } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import { getLinkKind } from "../utils/ast.ts";
 

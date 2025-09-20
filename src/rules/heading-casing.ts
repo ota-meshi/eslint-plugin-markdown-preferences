@@ -1,4 +1,4 @@
-import type { Heading, Text } from "mdast";
+import type { Heading, Text } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import { isRegExp, toRegExp } from "../utils/regexp.ts";
 import { defaultPreserveWords } from "../resources/preserve-words.ts";

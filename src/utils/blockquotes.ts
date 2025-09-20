@@ -1,4 +1,4 @@
-import type { MarkdownSourceCode } from "@eslint/markdown";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
 import { isSpaceOrTab } from "./unicode.ts";
 import type { SourceLocation } from "estree";
 
@@ -13,7 +13,7 @@ export type BlockquoteLevelInfo = {
 };
 
 const cache = new WeakMap<
-  MarkdownSourceCode,
+  ExtendedMarkdownSourceCode,
   Map<number, BlockquoteLevelInfo>
 >();
 
@@ -21,7 +21,7 @@ const cache = new WeakMap<
  * Helper function to get blockquote level information.
  */
 export function getBlockquoteLevelFromLine(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   lineNumber: number,
 ): BlockquoteLevelInfo {
   let map = cache.get(sourceCode);

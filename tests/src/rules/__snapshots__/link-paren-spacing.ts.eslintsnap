@@ -3,7 +3,7 @@
 
 Test: link-paren-spacing >> invalid
 Filename: tests/fixtures/rules/link-paren-spacing/invalid/always/image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -181,7 +181,7 @@ Output:
 
 Test: link-paren-spacing >> invalid
 Filename: tests/fixtures/rules/link-paren-spacing/invalid/always/link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -359,7 +359,7 @@ Output:
 
 Test: link-paren-spacing >> invalid >>> "\n- ![foo]( /url )\n- ![foo](/url)\n- ![foo]( /url)\n- ![foo](/url )\n- ![foo](     /url     )\n- ![foo]( </url> )\n- ![foo](</url>)\n- ![foo]( </url>)\n- ![foo](</url> )\n- ![foo](     </url>     )\n- ![foo]( /url \"title\" )\n- ![foo](/url \"title\")\n- ![foo]( /url \"title\")\n- ![foo](/url \"title\" )\n- ![foo](     /url \"title\"     )\n- ![foo]( </url> \"title\" )\n- ![foo](</url> \"title\")\n- ![foo]( </url> \"title\")\n- ![foo](</url> \"title\" )\n- ![foo](     </url> \"title\"     )\n- Multi lines\n  - ![foo](\n      /url\n    )\n  - ![foo](\n      /url\n      \"title\"\n    )\n  - ![foo](/url\n    )\n  - ![foo]( /url\n    )\n  - ![foo](/url\n      \"title\"\n    )\n  - ![foo]( /url\n      \"title\"\n    )\n  - ![foo](\n      /url)\n  - ![foo](\n      /url )\n  - ![foo](\n      /url\n      \"title\")\n  - ![foo](\n      /url\n      \"title\" )\n- Empty\n  - ![foo]()\n  - ![foo](<>)\n  - ![foo]( <> )\n  - ![foo](   )\n  - ![foo](<#foo>)\n  - ![foo]( <#foo> )\n 2"
 Filename: tests/fixtures/rules/link-paren-spacing/invalid/image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -548,7 +548,7 @@ Output:
 
 Test: link-paren-spacing >> invalid >>> "\n- [foo]( /url )\n- [foo](/url)\n- [foo]( /url)\n- [foo](/url )\n- [foo](     /url     )\n- [foo]( </url> )\n- [foo](</url>)\n- [foo]( </url>)\n- [foo](</url> )\n- [foo](     </url>     )\n- [foo]( /url \"title\" )\n- [foo](/url \"title\")\n- [foo]( /url \"title\")\n- [foo](/url \"title\" )\n- [foo](     /url \"title\"     )\n- [foo]( </url> \"title\" )\n- [foo](</url> \"title\")\n- [foo]( </url> \"title\")\n- [foo](</url> \"title\" )\n- [foo](     </url> \"title\"     )\n- Multi lines\n  - [foo](\n      /url\n    )\n  - [foo](\n      /url\n      \"title\"\n    )\n  - [foo](/url\n    )\n  - [foo]( /url\n    )\n  - [foo](/url\n      \"title\"\n    )\n  - [foo]( /url\n      \"title\"\n    )\n  - [foo](\n      /url)\n  - [foo](\n      /url )\n  - [foo](\n      /url\n      \"title\")\n  - [foo](\n      /url\n      \"title\" )\n- Empty\n  - [foo]()\n  - [foo](<>)\n  - [foo]( <> )\n  - [foo](   )\n  - [foo](<#foo>)\n  - [foo]( <#foo> )\n 2"
 Filename: tests/fixtures/rules/link-paren-spacing/invalid/link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -737,7 +737,7 @@ Output:
 
 Test: link-paren-spacing >> invalid >>> "\n- ![foo]( /url )\n- ![foo](/url)\n- ![foo]( /url)\n- ![foo](/url )\n- ![foo](     /url     )\n- ![foo]( </url> )\n- ![foo](</url>)\n- ![foo]( </url>)\n- ![foo](</url> )\n- ![foo](     </url>     )\n- ![foo]( /url \"title\" )\n- ![foo](/url \"title\")\n- ![foo]( /url \"title\")\n- ![foo](/url \"title\" )\n- ![foo](     /url \"title\"     )\n- ![foo]( </url> \"title\" )\n- ![foo](</url> \"title\")\n- ![foo]( </url> \"title\")\n- ![foo](</url> \"title\" )\n- ![foo](     </url> \"title\"     )\n- Multi lines\n  - ![foo](\n      /url\n    )\n  - ![foo](\n      /url\n      \"title\"\n    )\n  - ![foo](/url\n    )\n  - ![foo]( /url\n    )\n  - ![foo](/url\n      \"title\"\n    )\n  - ![foo]( /url\n      \"title\"\n    )\n  - ![foo](\n      /url)\n  - ![foo](\n      /url )\n  - ![foo](\n      /url\n      \"title\")\n  - ![foo](\n      /url\n      \"title\" )\n- Empty\n  - ![foo]()\n  - ![foo](<>)\n  - ![foo]( <> )\n  - ![foo](   )\n  - ![foo](<#foo>)\n  - ![foo]( <#foo> )\n 3"
 Filename: tests/fixtures/rules/link-paren-spacing/invalid/never/image-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -928,7 +928,7 @@ Output:
 
 Test: link-paren-spacing >> invalid >>> "\n- [foo]( /url )\n- [foo](/url)\n- [foo]( /url)\n- [foo](/url )\n- [foo](     /url     )\n- [foo]( </url> )\n- [foo](</url>)\n- [foo]( </url>)\n- [foo](</url> )\n- [foo](     </url>     )\n- [foo]( /url \"title\" )\n- [foo](/url \"title\")\n- [foo]( /url \"title\")\n- [foo](/url \"title\" )\n- [foo](     /url \"title\"     )\n- [foo]( </url> \"title\" )\n- [foo](</url> \"title\")\n- [foo]( </url> \"title\")\n- [foo](</url> \"title\" )\n- [foo](     </url> \"title\"     )\n- Multi lines\n  - [foo](\n      /url\n    )\n  - [foo](\n      /url\n      \"title\"\n    )\n  - [foo](/url\n    )\n  - [foo]( /url\n    )\n  - [foo](/url\n      \"title\"\n    )\n  - [foo]( /url\n      \"title\"\n    )\n  - [foo](\n      /url)\n  - [foo](\n      /url )\n  - [foo](\n      /url\n      \"title\")\n  - [foo](\n      /url\n      \"title\" )\n- Empty\n  - [foo]()\n  - [foo](<>)\n  - [foo]( <> )\n  - [foo](   )\n  - [foo](<#foo>)\n  - [foo]( <#foo> )\n 3"
 Filename: tests/fixtures/rules/link-paren-spacing/invalid/never/link-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:

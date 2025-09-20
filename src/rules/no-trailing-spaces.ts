@@ -1,6 +1,13 @@
 import type { SourceLocation } from "@eslint/core";
 import { createRule } from "../utils/index.ts";
-import type { Break, Code, Html, InlineCode, Text, Yaml } from "mdast";
+import type {
+  Break,
+  Code,
+  Html,
+  InlineCode,
+  Text,
+  Yaml,
+} from "../language/ast-types.ts";
 import type { Json, Toml } from "@eslint/markdown/types";
 import { getParsedLines } from "../utils/lines.ts";
 import { getSourceLocationFromRange } from "../utils/ast.ts";

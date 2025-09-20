@@ -1,4 +1,4 @@
-import type { Code } from "mdast";
+import type { Code } from "../language/ast-types.ts";
 import { getCodeBlockKind } from "../utils/ast.ts";
 import { createRule } from "../utils/index.ts";
 import { getParsedLines } from "../utils/lines.ts";

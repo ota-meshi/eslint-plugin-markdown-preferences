@@ -3,7 +3,7 @@
 
 Test: strikethrough-delimiters-style >> invalid
 Filename: tests/fixtures/rules/strikethrough-delimiters-style/invalid/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -39,7 +39,7 @@ Output:
 
 Test: strikethrough-delimiters-style >> invalid
 Filename: tests/fixtures/rules/strikethrough-delimiters-style/invalid/double-tilde/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -77,7 +77,7 @@ Output:
 
 Test: strikethrough-delimiters-style >> invalid
 Filename: tests/fixtures/rules/strikethrough-delimiters-style/invalid/single-tilde/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:

@@ -1,6 +1,6 @@
-import type { MarkdownSourceCode } from "@eslint/markdown";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
 
-const cache = new WeakMap<MarkdownSourceCode, ParsedLines>();
+const cache = new WeakMap<ExtendedMarkdownSourceCode, ParsedLines>();
 
 export type ParsedLine = {
   text: string;
@@ -55,7 +55,9 @@ export class ParsedLines {
  * @param sourceCode source code to parse
  * @returns parsed lines
  */
-export function getParsedLines(sourceCode: MarkdownSourceCode): ParsedLines {
+export function getParsedLines(
+  sourceCode: ExtendedMarkdownSourceCode,
+): ParsedLines {
   const cached = cache.get(sourceCode);
   if (cached) {
     return cached;

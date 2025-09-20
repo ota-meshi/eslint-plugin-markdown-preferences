@@ -3,7 +3,7 @@
 
 Test: no-trailing-spaces >> invalid
 Filename: tests/fixtures/rules/no-trailing-spaces/invalid/example-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -43,7 +43,7 @@ Output:
 
 Test: no-trailing-spaces >> invalid
 Filename: tests/fixtures/rules/no-trailing-spaces/invalid/hard-linebreak-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -69,7 +69,7 @@ Output:
 
 Test: no-trailing-spaces >> invalid
 Filename: tests/fixtures/rules/no-trailing-spaces/invalid/ignore-comments/example-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:

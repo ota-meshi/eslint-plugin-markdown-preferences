@@ -1,4 +1,4 @@
-import type { Definition, Image, Link } from "mdast";
+import type { Definition, Image, Link } from "../language/ast-types.ts";
 import { getLinkKind } from "../utils/ast.ts";
 import { parseImage } from "../utils/image.ts";
 import { createRule } from "../utils/index.ts";

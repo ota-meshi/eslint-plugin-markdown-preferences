@@ -16,7 +16,7 @@ import type {
   ThematicBreak,
   Paragraph,
   Text,
-} from "mdast";
+} from "../../../src/language/ast-types.ts";
 
 describe("utils/ast", () => {
   describe("getHeadingKind", () => {

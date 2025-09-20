@@ -3,7 +3,7 @@
 
 Test: no-multiple-empty-lines >> invalid
 Filename: tests/fixtures/rules/no-multiple-empty-lines/invalid/html-block-multiple-empty-lines-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -40,7 +40,7 @@ Output:
 
 Test: no-multiple-empty-lines >> invalid
 Filename: tests/fixtures/rules/no-multiple-empty-lines/invalid/leading-multiple-empty-lines-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -65,7 +65,7 @@ Output:
 
 Test: no-multiple-empty-lines >> invalid
 Filename: tests/fixtures/rules/no-multiple-empty-lines/invalid/max-plus-one-empty-lines-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -92,7 +92,7 @@ Output:
 
 Test: no-multiple-empty-lines >> invalid
 Filename: tests/fixtures/rules/no-multiple-empty-lines/invalid/maxbof1-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -121,7 +121,7 @@ Output:
 
 Test: no-multiple-empty-lines >> invalid
 Filename: tests/fixtures/rules/no-multiple-empty-lines/invalid/maxbof1-maxeof1-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -156,7 +156,7 @@ Output:
 
 Test: no-multiple-empty-lines >> invalid
 Filename: tests/fixtures/rules/no-multiple-empty-lines/invalid/maxeof1-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -185,7 +185,7 @@ Output:
 
 Test: no-multiple-empty-lines >> invalid
 Filename: tests/fixtures/rules/no-multiple-empty-lines/invalid/middle-multiple-empty-lines-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -214,7 +214,7 @@ Output:
 
 Test: no-multiple-empty-lines >> invalid >>> "# Heading\n\n\n\nParagraph\n 2"
 Filename: tests/fixtures/rules/no-multiple-empty-lines/invalid/multiple-empty-lines-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -241,7 +241,7 @@ Output:
 
 Test: no-multiple-empty-lines >> invalid >>> "# Heading\n\nParagraph\n\n\n 2"
 Filename: tests/fixtures/rules/no-multiple-empty-lines/invalid/trailing-multiple-empty-lines-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize

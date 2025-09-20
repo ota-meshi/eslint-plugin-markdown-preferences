@@ -3,7 +3,7 @@
 
 Test: table-header-casing >> invalid
 Filename: tests/fixtures/rules/table-header-casing/invalid/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -33,7 +33,7 @@ Output:
 
 Test: table-header-casing >> invalid
 Filename: tests/fixtures/rules/table-header-casing/invalid/ignore-patterns/test01-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -67,7 +67,7 @@ Output:
 
 Test: table-header-casing >> invalid
 Filename: tests/fixtures/rules/table-header-casing/invalid/minor-words/test01-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -108,7 +108,7 @@ Output:
 
 Test: table-header-casing >> invalid
 Filename: tests/fixtures/rules/table-header-casing/invalid/multiline/test01-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -142,7 +142,7 @@ Output:
 
 Test: table-header-casing >> invalid
 Filename: tests/fixtures/rules/table-header-casing/invalid/preserve-words/test01-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -182,7 +182,7 @@ Output:
 
 Test: table-header-casing >> invalid
 Filename: tests/fixtures/rules/table-header-casing/invalid/punctuation/test01-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -214,7 +214,7 @@ Output:
 
 Test: table-header-casing >> invalid
 Filename: tests/fixtures/rules/table-header-casing/invalid/sentence-case/test01-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -248,7 +248,7 @@ Output:
 
 Test: table-header-casing >> invalid
 Filename: tests/fixtures/rules/table-header-casing/invalid/title-case/test01-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -284,7 +284,7 @@ Output:
 
 Test: table-header-casing >> invalid
 Filename: tests/fixtures/rules/table-header-casing/invalid/words/test01-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize

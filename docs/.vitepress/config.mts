@@ -73,7 +73,7 @@ export default async (): Promise<UserConfig<DefaultTheme.Config>> => {
                   markdown: eslintMarkdown,
                   "markdown-preferences": plugin,
                 },
-                language: "markdown/gfm",
+                language: "markdown-preferences/extended-syntax",
                 languageOptions: {
                   frontmatter: "yaml", // Or pass `"toml"` or `"json"` to enable TOML or JSON front matter parsing.
                 },

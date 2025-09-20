@@ -239,6 +239,18 @@ You can specify block types in two ways:
   ---
   ```
 
+- `"custom-container"` - Custom container blocks
+
+  e.g.
+
+  ```md
+  ::: custom
+  Custom container content.
+  :::
+  ```
+
+  (This syntax is non-standard, but supported by some Markdown parsers like [markdown-it-container](https://github.com/markdown-it/markdown-it-container))
+
 - `"*"` - Wildcard matching any block type
 
 **Object notation** (advanced matching):

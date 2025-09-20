@@ -1,7 +1,7 @@
 import type { ThematicBreakMarker } from "../utils/ast.ts";
 import { getThematicBreakMarker } from "../utils/ast.ts";
 import { createRule } from "../utils/index.ts";
-import type { ThematicBreak } from "mdast";
+import type { ThematicBreak } from "../language/ast-types.ts";
 import {
   createThematicBreakFromPattern,
   isValidThematicBreakPattern,

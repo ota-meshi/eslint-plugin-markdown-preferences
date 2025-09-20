@@ -97,6 +97,17 @@ export default defineConfig([
         },
       ],
       "default-case": "off",
+      "no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            {
+              name: "mdast",
+              message: "Please use `src/language/ast-types.ts` instead.",
+            },
+          ],
+        },
+      ],
     },
   },
   {
@@ -131,6 +142,7 @@ export default defineConfig([
       markdownPreferences.configs.standard,
       markdownLinks.configs.recommended,
     ],
+    language: "markdown-preferences/extended-syntax",
     rules: {
       "prettier/prettier": "error",
       "markdown/no-missing-link-fragments": "off",

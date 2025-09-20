@@ -3,7 +3,7 @@
 
 Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/atx-headings-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -81,7 +81,7 @@ Output:
 
 Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/blockquotes-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -172,8 +172,108 @@ Output:
 
 
 Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/custom-container-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | ::: outer
+  2 |  Outer content.
+    | ^ [1]
+  3 |
+  4 |  ::: inner
+    | ^ [2]
+  5 |   Inner content.
+    | ^~ [3]
+  6 |  :::
+    | ^ [4]
+  7 |
+  8 |  More outer content.
+    | ^ [5]
+  9 | :::
+ 10 |
+ 11 | >::: outer
+    |  ^ [6]
+ 12 | > Outer content.
+ 13 | >
+ 14 | > ::: inner
+ 15 | >  Inner content.
+    |  ^~ [7]
+ 16 | > :::
+ 17 | >
+ 18 | > More outer content.
+ 19 | >:::
+    |  ^ [8]
+ 20 | >
+ 21 | > ::: outer
+ 22 | >  Outer content.
+    |  ^~ [9]
+ 23 | >
+ 24 | >  ::: inner
+    |  ^~ [10]
+ 25 | >   Inner content.
+    |  ^~~ [11]
+ 26 | >  :::
+    |  ^~ [12]
+ 27 | >
+ 28 | >  More outer content.
+    |  ^~ [13]
+ 29 | > :::
+ 30 |
+
+Output:
+  1 | ::: outer
+  2 | Outer content.
+  3 |
+  4 | ::: inner
+  5 | Inner content.
+  6 | :::
+  7 |
+  8 | More outer content.
+  9 | :::
+ 10 |
+ 11 | > ::: outer
+ 12 | > Outer content.
+ 13 | >
+ 14 | > ::: inner
+ 15 | > Inner content.
+ 16 | > :::
+ 17 | >
+ 18 | > More outer content.
+ 19 | > :::
+ 20 | >
+ 21 | > ::: outer
+ 22 | > Outer content.
+ 23 | >
+ 24 | > ::: inner
+ 25 | > Inner content.
+ 26 | > :::
+ 27 | >
+ 28 | > More outer content.
+ 29 | > :::
+ 30 |
+
+[1] Expected indentation of 0 but found 1.
+[2] Expected indentation of 0 but found 1.
+[3] Expected indentation of 0 but found 2.
+[4] Expected indentation of 0 but found 1.
+[5] Expected indentation of 0 but found 1.
+[6] Expected indentation of 1 from the blockquote marker but found 0.
+[7] Expected indentation of 1 from the blockquote marker but found 2.
+[8] Expected indentation of 1 from the blockquote marker but found 0.
+[9] Expected indentation of 1 from the blockquote marker but found 2.
+[10] Expected indentation of 1 from the blockquote marker but found 2.
+[11] Expected indentation of 1 from the blockquote marker but found 3.
+[12] Expected indentation of 1 from the blockquote marker but found 2.
+[13] Expected indentation of 1 from the blockquote marker but found 2.
+---
+
+
+Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/emphasis-strong-delete-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -263,7 +363,7 @@ Output:
 
 Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/fenced-code-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -489,7 +589,7 @@ Output:
 
 Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/footnotes-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -637,7 +737,7 @@ Output:
 
 Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/html-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -749,7 +849,7 @@ Output:
 
 Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/image-references-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -995,7 +1095,7 @@ Output:
 
 Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/images-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -1181,7 +1281,7 @@ Output:
 
 Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/link-definitions-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -1363,7 +1463,7 @@ Output:
 
 Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/link-references-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -1609,7 +1709,7 @@ Output:
 
 Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/links-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -1827,7 +1927,7 @@ Output:
 
 Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/list-item-4-relative-to-marker-end/google-styleguide-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -1924,7 +2024,7 @@ Output:
 
 Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/lists-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -2084,7 +2184,7 @@ Output:
 
 Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/setext-headings-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -2204,7 +2304,7 @@ Output:
 
 Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -2388,7 +2488,7 @@ Output:
 
 Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/task-list-items-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -2535,7 +2635,7 @@ Output:
 
 Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/task-list-items2-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -2569,7 +2669,7 @@ Output:
 
 Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/task-list-items3-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -2603,7 +2703,7 @@ Output:
 
 Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/thematic-breaks-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize

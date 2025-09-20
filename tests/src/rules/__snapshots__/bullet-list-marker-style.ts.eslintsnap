@@ -3,7 +3,7 @@
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/custom-primary-secondary/consecutive-same-secondary-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -44,7 +44,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/custom-primary-secondary/wrong-alternating-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -87,7 +87,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/custom-primary-secondary/wrong-markers-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -144,7 +144,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/deep-nested-structure-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -184,7 +184,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/deep-nesting-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -234,7 +234,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/default-nested-wrong-marker-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -264,7 +264,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/default-wrong-primary-marker-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -298,7 +298,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/edge-cases-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -362,7 +362,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/mixed-list-types-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -416,7 +416,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/mixed-with-paragraphs-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -462,7 +462,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/multiple-overrides-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -521,7 +521,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/nested-wrong-secondary-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -561,7 +561,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/overrides-level/wrong-level1-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -618,7 +618,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/overrides-level/wrong-level2-marker-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -659,7 +659,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/overrides-ordered-parent/wrong-nested-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -718,7 +718,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/overrides-ordered-parent/wrong-nested-under-ordered-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -765,7 +765,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/overrides-parent-marker/wrong-nested-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -824,7 +824,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/overrides-parent-marker/wrong-nested-marker-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -865,7 +865,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/secondary-any/wrong-primary-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -923,7 +923,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/separated-lists-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -981,7 +981,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/simple-invalid-consecutive-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -1013,7 +1013,7 @@ Output:
 
 Test: bullet-list-marker-style >> invalid
 Filename: tests/fixtures/rules/bullet-list-marker-style/invalid/single-item-lists-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize

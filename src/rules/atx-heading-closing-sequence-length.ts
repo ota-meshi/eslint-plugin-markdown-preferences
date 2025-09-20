@@ -1,6 +1,5 @@
 import { createRule } from "../utils/index.ts";
-import type { Heading } from "mdast";
-import type { MarkdownSourceCode } from "@eslint/markdown";
+import type { Heading } from "../language/ast-types.ts";
 import type { ParsedATXHeadingWithClosingSequence } from "../utils/atx-heading.ts";
 import { parseATXHeading } from "../utils/atx-heading.ts";
 import { getParsedLines } from "../utils/lines.ts";
@@ -51,7 +50,7 @@ export default createRule<[Options?]>("atx-heading-closing-sequence-length", {
     },
   },
   create(context) {
-    const sourceCode: MarkdownSourceCode = context.sourceCode;
+    const sourceCode = context.sourceCode;
     const option = context.options[0] || {};
     const mode = option.mode || "match-opening";
 

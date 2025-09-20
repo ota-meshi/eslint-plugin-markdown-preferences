@@ -3,7 +3,7 @@
 
 Test: emoji-notation >> invalid
 Filename: tests/fixtures/rules/emoji-notation/invalid/colon-ignore-unknown-false-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -32,7 +32,7 @@ Output:
 
 Test: emoji-notation >> invalid
 Filename: tests/fixtures/rules/emoji-notation/invalid/colon-in-unicode-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -58,7 +58,7 @@ Output:
 
 Test: emoji-notation >> invalid
 Filename: tests/fixtures/rules/emoji-notation/invalid/ignore-unknown-false-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -89,7 +89,7 @@ Output:
 
 Test: emoji-notation >> invalid
 Filename: tests/fixtures/rules/emoji-notation/invalid/multiline/multiline-colon-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -121,7 +121,7 @@ Output:
 
 Test: emoji-notation >> invalid
 Filename: tests/fixtures/rules/emoji-notation/invalid/multiline/multiline-unicode-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -153,7 +153,7 @@ Output:
 
 Test: emoji-notation >> invalid
 Filename: tests/fixtures/rules/emoji-notation/invalid/unicode-in-colon-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:

@@ -10,7 +10,7 @@ import type {
   ListItem,
   Table,
   Text,
-} from "mdast";
+} from "../language/ast-types.ts";
 import { getSourceLocationFromRange } from "../utils/ast.ts";
 import { createRule } from "../utils/index.ts";
 import { isWhitespace } from "../utils/unicode.ts";

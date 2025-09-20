@@ -1,4 +1,4 @@
-import type { Heading } from "mdast";
+import type { Heading } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import {
   parseATXHeading,

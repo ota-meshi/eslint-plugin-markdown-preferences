@@ -5,7 +5,7 @@ import type {
   Link,
   LinkReference,
   PhrasingContent,
-} from "mdast";
+} from "../language/ast-types.ts";
 import { getLinkKind, getSourceLocationFromRange } from "../utils/ast.ts";
 import { createRule } from "../utils/index.ts";
 import { parseInlineLink } from "../utils/link.ts";

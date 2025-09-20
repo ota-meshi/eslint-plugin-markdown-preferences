@@ -3,7 +3,7 @@
 
 Test: blockquote-marker-alignment >> invalid
 Filename: tests/fixtures/rules/blockquote-marker-alignment/invalid/inconsistent-nested-levels-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -39,7 +39,7 @@ Output:
 
 Test: blockquote-marker-alignment >> invalid
 Filename: tests/fixtures/rules/blockquote-marker-alignment/invalid/inconsistent-nested-levels2-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -111,7 +111,7 @@ Output:
 
 Test: blockquote-marker-alignment >> invalid
 Filename: tests/fixtures/rules/blockquote-marker-alignment/invalid/inconsistent-single-level-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -139,7 +139,7 @@ Output:
 
 Test: blockquote-marker-alignment >> invalid
 Filename: tests/fixtures/rules/blockquote-marker-alignment/invalid/mixed-indentation-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize

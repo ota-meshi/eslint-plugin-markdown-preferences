@@ -1,8 +1,9 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import eslintMarkdown from "@eslint/markdown";
 import type { TestCase } from "eslint-snapshot-rule-tester";
+import eslintMarkdown from "@eslint/markdown";
+import plugin from "../../src/index.ts";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 /**
@@ -182,10 +183,11 @@ async function adjustConfig(
   if (inputFile.endsWith(".md")) {
     result.plugins = {
       markdown: eslintMarkdown,
+      "markdown-preferences": plugin,
       ...result.plugins,
     };
     if (!result.language) {
-      result.language = "markdown/gfm";
+      result.language = "markdown-preferences/extended-syntax";
     }
 
     if (!result.languageOptions) {

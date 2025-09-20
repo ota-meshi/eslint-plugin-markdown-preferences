@@ -3,7 +3,7 @@
 
 Test: list-marker-alignment >> invalid
 Filename: tests/fixtures/rules/list-marker-alignment/invalid/align-right/ordered-misaligned-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -37,7 +37,7 @@ Output:
 
 Test: list-marker-alignment >> invalid
 Filename: tests/fixtures/rules/list-marker-alignment/invalid/blockquote-misaligned-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -65,7 +65,7 @@ Output:
 
 Test: list-marker-alignment >> invalid
 Filename: tests/fixtures/rules/list-marker-alignment/invalid/blockquote-ordered-misaligned-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -93,7 +93,7 @@ Output:
 
 Test: list-marker-alignment >> invalid
 Filename: tests/fixtures/rules/list-marker-alignment/invalid/extra-spaces-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -123,7 +123,7 @@ Output:
 
 Test: list-marker-alignment >> invalid
 Filename: tests/fixtures/rules/list-marker-alignment/invalid/mixed-blockquote-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -161,7 +161,7 @@ Output:
 
 Test: list-marker-alignment >> invalid
 Filename: tests/fixtures/rules/list-marker-alignment/invalid/mixed-indentation-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -189,7 +189,7 @@ Output:
 
 Test: list-marker-alignment >> invalid
 Filename: tests/fixtures/rules/list-marker-alignment/invalid/nested-list-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -219,7 +219,7 @@ Output:
 
 Test: list-marker-alignment >> invalid
 Filename: tests/fixtures/rules/list-marker-alignment/invalid/ordered-misaligned-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -247,7 +247,7 @@ Output:
 
 Test: list-marker-alignment >> invalid
 Filename: tests/fixtures/rules/list-marker-alignment/invalid/scattered-blockquote-misaligned-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -295,7 +295,7 @@ Output:
 
 Test: list-marker-alignment >> invalid
 Filename: tests/fixtures/rules/list-marker-alignment/invalid/unordered-misaligned-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize

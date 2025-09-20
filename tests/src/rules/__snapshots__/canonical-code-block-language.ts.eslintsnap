@@ -3,7 +3,7 @@
 
 Test: canonical-code-block-language >> invalid
 Filename: tests/fixtures/rules/canonical-code-block-language/invalid/basic-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -99,7 +99,7 @@ Output:
 
 Test: canonical-code-block-language >> invalid
 Filename: tests/fixtures/rules/canonical-code-block-language/invalid/extended-fences-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -295,7 +295,7 @@ Output:
 
 Test: canonical-code-block-language >> invalid
 Filename: tests/fixtures/rules/canonical-code-block-language/invalid/meta-info-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize

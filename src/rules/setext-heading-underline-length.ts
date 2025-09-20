@@ -1,6 +1,6 @@
 import { createRule } from "../utils/index.ts";
 import { parseSetextHeading } from "../utils/setext-heading.ts";
-import type { Heading } from "mdast";
+import type { Heading } from "../language/ast-types.ts";
 import type { ParsedSetextHeading } from "../utils/setext-heading.ts";
 import { getTextWidth } from "../utils/text-width.ts";
 import { getHeadingKind } from "../utils/ast.ts";

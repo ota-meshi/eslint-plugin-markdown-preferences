@@ -1,8 +1,8 @@
 import type { SourceLocation } from "@eslint/core";
-import type { MarkdownSourceCode } from "@eslint/markdown";
-import type { Heading } from "mdast";
+import type { Heading } from "../language/ast-types.ts";
 import { getHeadingKind } from "./ast.ts";
 import { isSpaceOrTab } from "./unicode.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
 
 export type BaseParsedATXHeading = {
   openingSequence: {
@@ -39,7 +39,7 @@ export type ParsedATXHeading =
  * Parse the ATX heading.
  */
 export function parseATXHeading(
-  sourceCode: MarkdownSourceCode,
+  sourceCode: ExtendedMarkdownSourceCode,
   node: Heading,
 ): ParsedATXHeading | null {
   if (getHeadingKind(sourceCode, node) !== "atx") return null;

@@ -4,7 +4,7 @@ import type {
   ImageReference,
   Link,
   LinkReference,
-} from "mdast";
+} from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import { getLinkKind, getSourceLocationFromRange } from "../utils/ast.ts";
 import { parseInlineLink } from "../utils/link.ts";

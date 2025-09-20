@@ -3,7 +3,7 @@
 
 Test: table-leading-trailing-pipes >> invalid
 Filename: tests/fixtures/rules/table-leading-trailing-pipes/invalid/leading-only/single-col-tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -84,7 +84,7 @@ Output:
 
 Test: table-leading-trailing-pipes >> invalid
 Filename: tests/fixtures/rules/table-leading-trailing-pipes/invalid/leading-only/tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -173,7 +173,7 @@ Output:
 
 Test: table-leading-trailing-pipes >> invalid >>> "# Tables with and without leading/trailing pipes\n\n| User Name | Date Of Birth | Favorite Color |\n| --------- | ------------- | -------------- |\n| Alice     | 2000-01-01    | Blue           |\n| Bob       | 1995-05-23    | Green          |\n\nUser Name | Date Of Birth | Favorite Color\n--------- | ------------- | --------------\nAlice     | 2000-01-01    | Blue\nBob       | 1995-05-23    | Green\n\n| User Name | Date Of Birth | Favorite Color\n| --------- | ------------- | --------------\n| Alice     | 2000-01-01    | Blue\n| Bob       | 1995-05-23    | Green\n\nUser Name | Date Of Birth | Favorite Color |\n--------- | ------------- | -------------- |\nAlice     | 2000-01-01    | Blue           |\nBob       | 1995-05-23    | Green          |\n 2"
 Filename: tests/fixtures/rules/table-leading-trailing-pipes/invalid/never/tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -261,7 +261,7 @@ Output:
 
 Test: table-leading-trailing-pipes >> invalid >>> "# Tables with single column, no leading and trailing pipes\n\n| User Name |\n| --------- |\n| Alice     |\n| Bob       |\n\nUser Name |\n--------- |\nAlice     |\nBob       |\n\n| User Name\n| ---------\n| Alice\n| Bob\n\n| User Name\n--------- |\n| Alice\nBob       |\n 2"
 Filename: tests/fixtures/rules/table-leading-trailing-pipes/invalid/single-col-tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -343,7 +343,7 @@ Output:
 
 Test: table-leading-trailing-pipes >> invalid >>> "# Tables with and without leading/trailing pipes\n\n| User Name | Date Of Birth | Favorite Color |\n| --------- | ------------- | -------------- |\n| Alice     | 2000-01-01    | Blue           |\n| Bob       | 1995-05-23    | Green          |\n\nUser Name | Date Of Birth | Favorite Color\n--------- | ------------- | --------------\nAlice     | 2000-01-01    | Blue\nBob       | 1995-05-23    | Green\n\n| User Name | Date Of Birth | Favorite Color\n| --------- | ------------- | --------------\n| Alice     | 2000-01-01    | Blue\n| Bob       | 1995-05-23    | Green\n\nUser Name | Date Of Birth | Favorite Color |\n--------- | ------------- | -------------- |\nAlice     | 2000-01-01    | Blue           |\nBob       | 1995-05-23    | Green          |\n 3"
 Filename: tests/fixtures/rules/table-leading-trailing-pipes/invalid/tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -429,7 +429,7 @@ Output:
 
 Test: table-leading-trailing-pipes >> invalid >>> "# Tables with single column, no leading and trailing pipes\n\n| User Name |\n| --------- |\n| Alice     |\n| Bob       |\n\nUser Name |\n--------- |\nAlice     |\nBob       |\n\n| User Name\n| ---------\n| Alice\n| Bob\n\n| User Name\n--------- |\n| Alice\nBob       |\n 3"
 Filename: tests/fixtures/rules/table-leading-trailing-pipes/invalid/trailing-only/single-col-tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -510,7 +510,7 @@ Output:
 
 Test: table-leading-trailing-pipes >> invalid >>> "# Tables with and without leading/trailing pipes\n\n| User Name | Date Of Birth | Favorite Color |\n| --------- | ------------- | -------------- |\n| Alice     | 2000-01-01    | Blue           |\n| Bob       | 1995-05-23    | Green          |\n\nUser Name | Date Of Birth | Favorite Color\n--------- | ------------- | --------------\nAlice     | 2000-01-01    | Blue\nBob       | 1995-05-23    | Green\n\n| User Name | Date Of Birth | Favorite Color\n| --------- | ------------- | --------------\n| Alice     | 2000-01-01    | Blue\n| Bob       | 1995-05-23    | Green\n\nUser Name | Date Of Birth | Favorite Color |\n--------- | ------------- | -------------- |\nAlice     | 2000-01-01    | Blue           |\nBob       | 1995-05-23    | Green          |\n 4"
 Filename: tests/fixtures/rules/table-leading-trailing-pipes/invalid/trailing-only/tables-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:

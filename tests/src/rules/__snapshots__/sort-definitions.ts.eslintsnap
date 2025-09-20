@@ -3,7 +3,7 @@
 
 Test: sort-definitions >> invalid
 Filename: tests/fixtures/rules/sort-definitions/invalid/nesting-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -37,7 +37,7 @@ Output:
 
 Test: sort-definitions >> invalid
 Filename: tests/fixtures/rules/sort-definitions/invalid/options/exclude-pattern-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -81,7 +81,7 @@ Output:
 
 Test: sort-definitions >> invalid
 Filename: tests/fixtures/rules/sort-definitions/invalid/options/footnotes-first-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -131,7 +131,7 @@ Output:
 
 Test: sort-definitions >> invalid
 Filename: tests/fixtures/rules/sort-definitions/invalid/options/multiple-patterns-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -175,7 +175,7 @@ Output:
 
 Test: sort-definitions >> invalid
 Filename: tests/fixtures/rules/sort-definitions/invalid/options/specific-first-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -216,7 +216,7 @@ Output:
 
 Test: sort-definitions >> invalid
 Filename: tests/fixtures/rules/sort-definitions/invalid/options/url-pattern-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -260,7 +260,7 @@ Output:
 
 Test: sort-definitions >> invalid
 Filename: tests/fixtures/rules/sort-definitions/invalid/test01-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -307,7 +307,7 @@ Output:
 
 Test: sort-definitions >> invalid
 Filename: tests/fixtures/rules/sort-definitions/invalid/test02-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -341,7 +341,7 @@ Output:
 
 Test: sort-definitions >> invalid
 Filename: tests/fixtures/rules/sort-definitions/invalid/test03-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -386,7 +386,7 @@ Output:
 
 Test: sort-definitions >> invalid
 Filename: tests/fixtures/rules/sort-definitions/invalid/test04-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
@@ -443,7 +443,7 @@ Output:
 
 Test: sort-definitions >> invalid
 Filename: tests/fixtures/rules/sort-definitions/invalid/test05-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize

@@ -1,19 +1,21 @@
 import type { RuleContext as CoreRuleContext } from "@eslint/core";
-import type { MarkdownSourceCode } from "@eslint/markdown";
 import type {
   MarkdownLanguageOptions,
   MarkdownRuleDefinition,
-  MarkdownRuleVisitor,
 } from "@eslint/markdown/types";
 import type { JSONSchema4 } from "json-schema";
-import type { Node } from "mdast";
+import type { Node } from "./language/ast-types.ts";
+import type {
+  ExtendedMarkdownRuleVisitor,
+  ExtendedMarkdownSourceCode,
+} from "./language/extended-markdown-ianguage.ts";
 
 export type RuleContext<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- ignore
   O extends any[],
 > = CoreRuleContext<{
   LangOptions: MarkdownLanguageOptions;
-  Code: MarkdownSourceCode;
+  Code: ExtendedMarkdownSourceCode;
   RuleOptions: O;
   Node: Node;
   MessageIds: string;
@@ -21,7 +23,7 @@ export type RuleContext<
 
 export interface RuleModule extends MarkdownRuleDefinition {
   meta: RuleMetaData;
-  create(context: RuleContext<unknown[]>): MarkdownRuleVisitor;
+  create(context: RuleContext<unknown[]>): ExtendedMarkdownRuleVisitor;
 }
 
 export type ListCategory =
@@ -54,7 +56,7 @@ export interface PartialRuleModule<
   O extends any[],
 > {
   meta: PartialRuleMetaData;
-  create(context: RuleContext<O>): MarkdownRuleVisitor;
+  create(context: RuleContext<O>): ExtendedMarkdownRuleVisitor;
 }
 
 export interface PartialRuleMetaData {

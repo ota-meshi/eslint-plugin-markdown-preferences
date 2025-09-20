@@ -3,7 +3,7 @@
 
 Test: link-title-style >> invalid
 Filename: tests/fixtures/rules/link-title-style/invalid/double/fource/titles-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -102,7 +102,7 @@ Output:
 
 Test: link-title-style >> invalid
 Filename: tests/fixtures/rules/link-title-style/invalid/double/parentheses-titles-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -168,7 +168,7 @@ Output:
 
 Test: link-title-style >> invalid
 Filename: tests/fixtures/rules/link-title-style/invalid/double/single-quoted-titles-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -234,7 +234,7 @@ Output:
 
 Test: link-title-style >> invalid >>> "# Title styles\n\n## Links\n\n- [foo](/url \"double\")\n- [foo](/url 'single')\n- [foo](/url (parentheses))\n- [foo](/url \"double \\\" in double\")\n- [foo](/url \"single ' in double\")\n- [foo](/url \"parentheses () in double\")\n- [foo](/url 'double \" in single')\n- [foo](/url 'single \\'  in single')\n- [foo](/url 'parentheses () in single')\n- [foo](/url (double \" in parentheses))\n- [foo](/url (single ' in parentheses))\n- [foo](/url (parentheses \\(\\) in parentheses))\n\n## Images\n\n- ![foo](/url \"double\")\n- ![foo](/url 'single')\n- ![foo](/url (parentheses))\n\n## Definitions\n\n[x]: /url \"double\"\n[y]: /url 'single'\n[z]: /url (parentheses)\n 2"
 Filename: tests/fixtures/rules/link-title-style/invalid/double/titles-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -328,7 +328,7 @@ Output:
 
 Test: link-title-style >> invalid
 Filename: tests/fixtures/rules/link-title-style/invalid/parentheses/double-quoted-titles-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -394,7 +394,7 @@ Output:
 
 Test: link-title-style >> invalid >>> "# Title styles\n\n## Links\n\n- [foo](/url \"double\")\n- [foo](/url 'single')\n- [foo](/url (parentheses))\n- [foo](/url \"double \\\" in double\")\n- [foo](/url \"single ' in double\")\n- [foo](/url \"parentheses () in double\")\n- [foo](/url 'double \" in single')\n- [foo](/url 'single \\'  in single')\n- [foo](/url 'parentheses () in single')\n- [foo](/url (double \" in parentheses))\n- [foo](/url (single ' in parentheses))\n- [foo](/url (parentheses \\(\\) in parentheses))\n\n## Images\n\n- ![foo](/url \"double\")\n- ![foo](/url 'single')\n- ![foo](/url (parentheses))\n\n## Definitions\n\n[x]: /url \"double\"\n[y]: /url 'single'\n[z]: /url (parentheses)\n 3"
 Filename: tests/fixtures/rules/link-title-style/invalid/parentheses/fource/titles-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -493,7 +493,7 @@ Output:
 
 Test: link-title-style >> invalid >>> "# Title styles\n\n## Links\n\n- [foo](/url 'single')\n- [foo](/url \"single ' in double\")\n- [foo](/url 'double \" in single')\n- [foo](/url 'single \\'  in single')\n- [foo](/url 'parentheses () in single')\n- [foo](/url (single ' in parentheses))\n\n## Images\n\n- ![foo](/url 'single')\n\n## Definitions\n\n[y]: /url 'single'\n 2"
 Filename: tests/fixtures/rules/link-title-style/invalid/parentheses/single-quoted-titles-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -559,7 +559,7 @@ Output:
 
 Test: link-title-style >> invalid >>> "# Title styles\n\n## Links\n\n- [foo](/url \"double\")\n- [foo](/url 'single')\n- [foo](/url (parentheses))\n- [foo](/url \"double \\\" in double\")\n- [foo](/url \"single ' in double\")\n- [foo](/url \"parentheses () in double\")\n- [foo](/url 'double \" in single')\n- [foo](/url 'single \\'  in single')\n- [foo](/url 'parentheses () in single')\n- [foo](/url (double \" in parentheses))\n- [foo](/url (single ' in parentheses))\n- [foo](/url (parentheses \\(\\) in parentheses))\n\n## Images\n\n- ![foo](/url \"double\")\n- ![foo](/url 'single')\n- ![foo](/url (parentheses))\n\n## Definitions\n\n[x]: /url \"double\"\n[y]: /url 'single'\n[z]: /url (parentheses)\n 4"
 Filename: tests/fixtures/rules/link-title-style/invalid/parentheses/titles-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -653,7 +653,7 @@ Output:
 
 Test: link-title-style >> invalid >>> "# Title styles\n\n## Links\n\n- [foo](/url \"double\")\n- [foo](/url \"double \\\" in double\")\n- [foo](/url \"single ' in double\")\n- [foo](/url \"parentheses () in double\")\n- [foo](/url 'double \" in single')\n- [foo](/url (double \" in parentheses))\n\n## Images\n\n- ![foo](/url \"double\")\n\n## Definitions\n\n[x]: /url \"double\"\n 2"
 Filename: tests/fixtures/rules/link-title-style/invalid/single/double-quoted-titles-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -719,7 +719,7 @@ Output:
 
 Test: link-title-style >> invalid >>> "# Title styles\n\n## Links\n\n- [foo](/url \"double\")\n- [foo](/url 'single')\n- [foo](/url (parentheses))\n- [foo](/url \"double \\\" in double\")\n- [foo](/url \"single ' in double\")\n- [foo](/url \"parentheses () in double\")\n- [foo](/url 'double \" in single')\n- [foo](/url 'single \\'  in single')\n- [foo](/url 'parentheses () in single')\n- [foo](/url (double \" in parentheses))\n- [foo](/url (single ' in parentheses))\n- [foo](/url (parentheses \\(\\) in parentheses))\n\n## Images\n\n- ![foo](/url \"double\")\n- ![foo](/url 'single')\n- ![foo](/url (parentheses))\n\n## Definitions\n\n[x]: /url \"double\"\n[y]: /url 'single'\n[z]: /url (parentheses)\n 5"
 Filename: tests/fixtures/rules/link-title-style/invalid/single/fource/titles-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -818,7 +818,7 @@ Output:
 
 Test: link-title-style >> invalid >>> "# Title styles\n\n## Links\n\n- [foo](/url (parentheses))\n- [foo](/url \"parentheses () in double\")\n- [foo](/url 'parentheses () in single')\n- [foo](/url (double \" in parentheses))\n- [foo](/url (single ' in parentheses))\n- [foo](/url (parentheses \\(\\) in parentheses))\n\n## Images\n\n- ![foo](/url (parentheses))\n\n## Definitions\n\n[z]: /url (parentheses)\n 2"
 Filename: tests/fixtures/rules/link-title-style/invalid/single/parentheses-titles-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -884,7 +884,7 @@ Output:
 
 Test: link-title-style >> invalid >>> "# Title styles\n\n## Links\n\n- [foo](/url \"double\")\n- [foo](/url 'single')\n- [foo](/url (parentheses))\n- [foo](/url \"double \\\" in double\")\n- [foo](/url \"single ' in double\")\n- [foo](/url \"parentheses () in double\")\n- [foo](/url 'double \" in single')\n- [foo](/url 'single \\'  in single')\n- [foo](/url 'parentheses () in single')\n- [foo](/url (double \" in parentheses))\n- [foo](/url (single ' in parentheses))\n- [foo](/url (parentheses \\(\\) in parentheses))\n\n## Images\n\n- ![foo](/url \"double\")\n- ![foo](/url 'single')\n- ![foo](/url (parentheses))\n\n## Definitions\n\n[x]: /url \"double\"\n[y]: /url 'single'\n[z]: /url (parentheses)\n 6"
 Filename: tests/fixtures/rules/link-title-style/invalid/single/titles-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
@@ -978,7 +978,7 @@ Output:
 
 Test: link-title-style >> invalid >>> "# Title styles\n\n## Links\n\n- [foo](/url \"double\")\n- [foo](/url 'single')\n- [foo](/url (parentheses))\n- [foo](/url \"double \\\" in double\")\n- [foo](/url \"single ' in double\")\n- [foo](/url \"parentheses () in double\")\n- [foo](/url 'double \" in single')\n- [foo](/url 'single \\'  in single')\n- [foo](/url 'parentheses () in single')\n- [foo](/url (double \" in parentheses))\n- [foo](/url (single ' in parentheses))\n- [foo](/url (parentheses \\(\\) in parentheses))\n\n## Images\n\n- ![foo](/url \"double\")\n- ![foo](/url 'single')\n- ![foo](/url (parentheses))\n\n## Definitions\n\n[x]: /url \"double\"\n[y]: /url 'single'\n[z]: /url (parentheses)\n 7"
 Filename: tests/fixtures/rules/link-title-style/invalid/titles-input.md
-Language: markdown/gfm
+Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Plugins: unable to serialize
