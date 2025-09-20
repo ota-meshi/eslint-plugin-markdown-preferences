@@ -1,5 +1,15 @@
 # eslint-plugin-markdown-preferences
 
+## 0.27.0
+
+### Minor Changes
+
+- [#140](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/140) [`977f59a`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/977f59afcc01ebe54b6a1c9aaf491d0692019e30) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add support for math syntax
+
+- [#135](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/135) [`2a3411d`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/2a3411dd4ab4dc0d8fd6d319ba443a93183b99f1) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add support for custom container syntax
+
+- [#141](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/141) [`56b68a7`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/56b68a75e6dc0a819c001d4cfe2cf09c317a1eb3) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add support for import code snippet syntax
+
 ## 0.26.1
 
 ### Patch Changes
