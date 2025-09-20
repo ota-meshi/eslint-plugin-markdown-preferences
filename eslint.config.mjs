@@ -185,6 +185,9 @@ export default defineConfig([
       "markdown-links/no-dead-urls": [
         "error",
         {
+          ignoreUrls: [
+            "https://www.npmjs.com/package/eslint-plugin-markdown-preferences",
+          ],
           allowedAnchors: {
             "/^https:\\/\\/eslint-online-playground\\.netlify\\.app\\//u":
               "/.*/u",
