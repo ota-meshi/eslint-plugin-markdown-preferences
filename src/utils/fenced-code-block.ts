@@ -2,7 +2,7 @@ import type { SourceLocation } from "@eslint/core";
 import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 import type { Code } from "../language/ast-types.ts";
 import { isSpaceOrTab } from "./unicode.ts";
-import { getSourceLocationFromRange } from "./ast.ts";
+import { getCodeBlockKind, getSourceLocationFromRange } from "./ast.ts";
 
 export type ParsedFencedCodeBlock = {
   openingFence: {
@@ -35,6 +35,9 @@ export function parseFencedCodeBlock(
   sourceCode: ExtendedMarkdownSourceCode,
   node: Code,
 ): ParsedFencedCodeBlock | null {
+  if (getCodeBlockKind(sourceCode, node) === "indented") {
+    return null;
+  }
   const loc = sourceCode.getLoc(node);
   const range = sourceCode.getRange(node);
   const text = sourceCode.text.slice(...range);
