@@ -124,7 +124,7 @@ export interface RuleOptions {
    */
   'markdown-preferences/list-marker-alignment'?: Linter.RuleEntry<MarkdownPreferencesListMarkerAlignment>
   /**
-   * disallow implicit block closing for fenced code blocks, math blocks, and custom blocks
+   * disallow implicit block closing for fenced code blocks, math blocks, and custom containers
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-implicit-block-closing.html
    */
   'markdown-preferences/no-implicit-block-closing'?: Linter.RuleEntry<[]>
@@ -168,6 +168,11 @@ export interface RuleOptions {
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-style.html
    */
   'markdown-preferences/ordered-list-marker-style'?: Linter.RuleEntry<MarkdownPreferencesOrderedListMarkerStyle>
+  /**
+   * disallow or require padding inside custom containers
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/padded-custom-containers.html
+   */
+  'markdown-preferences/padded-custom-containers'?: Linter.RuleEntry<MarkdownPreferencesPaddedCustomContainers>
   /**
    * require or disallow padding lines between blocks
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/padding-line-between-blocks.html
@@ -419,6 +424,10 @@ type MarkdownPreferencesOrderedListMarkerStyle = []|[{
     parentMarker?: ("n." | "n)" | "any" | "bullet")
     prefer?: ("n." | "n)")
   }[]
+}]
+// ----- markdown-preferences/padded-custom-containers -----
+type MarkdownPreferencesPaddedCustomContainers = []|[{
+  padding?: ("always" | "never")
 }]
 // ----- markdown-preferences/padding-line-between-blocks -----
 type MarkdownPreferencesPaddingLineBetweenBlocks = {

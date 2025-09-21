@@ -1,0 +1,155 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: padded-custom-containers >> invalid
+Filename: tests/fixtures/rules/padded-custom-containers/invalid/always/missing-padding-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - padding: always
+Plugins: unable to serialize
+
+Code:
+  1 | # Missing Padding (padding: "always")
+  2 |
+  3 | ::: info
+    | ^~~~~~~~ [1]
+  4 | This container is missing padding.
+  5 | :::
+    | ^~~ [2]
+  6 |
+  7 | ::: warning
+    | ^~~~~~~~~~~ [3]
+  8 | Another container without padding.
+  9 | :::
+    | ^~~ [4]
+ 10 |
+
+Output:
+  1 | # Missing Padding (padding: "always")
+  2 |
+  3 | ::: info
+  4 |
+  5 | This container is missing padding.
+  6 |
+  7 | :::
+  8 |
+  9 | ::: warning
+ 10 |
+ 11 | Another container without padding.
+ 12 |
+ 13 | :::
+ 14 |
+
+[1] Expected padding after opening marker.
+[2] Expected padding before closing marker.
+[3] Expected padding after opening marker.
+[4] Expected padding before closing marker.
+---
+
+
+Test: padded-custom-containers >> invalid
+Filename: tests/fixtures/rules/padded-custom-containers/invalid/never/unexpected-padding-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - padding: never
+Plugins: unable to serialize
+
+Code:
+  1 | # With Unexpected Padding (padding: "never")
+  2 |
+  3 | ::: info
+    |    ^~~~~\ [1]
+  4 |
+    | ~\ [1]
+  5 | This container has unexpected padding.
+    | ~ [1]                                 ^\ [2]
+  6 |
+    | ~\ [2]
+  7 | :::
+    | ~ [2]
+  8 |
+  9 | ::: warning
+    |    ^~~~~~~~\ [3]
+ 10 |
+    | ~\ [3]
+ 11 | Another container with padding.
+    | ~ [3]                          ^\ [4]
+ 12 |
+    | ~\ [4]
+ 13 | :::
+    | ~ [4]
+ 14 |
+
+Output:
+  1 | # With Unexpected Padding (padding: "never")
+  2 |
+  3 | ::: info
+  4 | This container has unexpected padding.
+  5 | :::
+  6 |
+  7 | ::: warning
+  8 | Another container with padding.
+  9 | :::
+ 10 |
+
+[1] Unexpected padding after opening marker.
+[2] Unexpected padding before closing marker.
+[3] Unexpected padding after opening marker.
+[4] Unexpected padding before closing marker.
+---
+
+
+Test: padded-custom-containers >> invalid >>> "# With Unexpected Padding (padding: \"never\")\n\n::: info\n\nThis container has unexpected padding.\n\n:::\n\n::: warning\n\nAnother container with padding.\n\n:::\n 2"
+Filename: tests/fixtures/rules/padded-custom-containers/invalid/unexpected-padding-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # With Unexpected Padding (padding: "never")
+  2 |
+  3 | ::: info
+    |    ^~~~~\ [1]
+  4 |
+    | ~\ [1]
+  5 | This container has unexpected padding.
+    | ~ [1]                                 ^\ [2]
+  6 |
+    | ~\ [2]
+  7 | :::
+    | ~ [2]
+  8 |
+  9 | ::: warning
+    |    ^~~~~~~~\ [3]
+ 10 |
+    | ~\ [3]
+ 11 | Another container with padding.
+    | ~ [3]                          ^\ [4]
+ 12 |
+    | ~\ [4]
+ 13 | :::
+    | ~ [4]
+ 14 |
+
+Output:
+  1 | # With Unexpected Padding (padding: "never")
+  2 |
+  3 | ::: info
+  4 | This container has unexpected padding.
+  5 | :::
+  6 |
+  7 | ::: warning
+  8 | Another container with padding.
+  9 | :::
+ 10 |
+
+[1] Unexpected padding after opening marker.
+[2] Unexpected padding before closing marker.
+[3] Unexpected padding after opening marker.
+[4] Unexpected padding before closing marker.
+---

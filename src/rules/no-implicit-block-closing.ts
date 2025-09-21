@@ -12,7 +12,7 @@ export default createRule("no-implicit-block-closing", {
     type: "suggestion",
     docs: {
       description:
-        "disallow implicit block closing for fenced code blocks, math blocks, and custom blocks",
+        "disallow implicit block closing for fenced code blocks, math blocks, and custom containers",
       categories: ["recommended", "standard"],
       listCategory: "Notation",
     },
