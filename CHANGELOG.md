@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.28.1
+
+### Patch Changes
+
+- [#147](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/147) [`aee9eaa`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/aee9eaab70c0360bc4f36822b830f3978624c3c2) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix([markdown-preferences/no-implicit-block-closing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-implicit-block-closing.html)): wrong autofix for nested same length opening custom containers
+
 ## 0.28.0
 
 ### Minor Changes
