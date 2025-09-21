@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/padded-custom-containers"
 description: "disallow or require padding inside custom containers"
+since: "v0.29.0"
 ---
 
 # markdown-preferences/padded-custom-containers
 
 > disallow or require padding inside custom containers
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - ⚙️ This rule is included in `plugin.configs.standard`.
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
@@ -105,12 +105,12 @@ export default defineConfig([
 - [markdown-preferences/padding-line-between-blocks](./padding-line-between-blocks.md)
 - [markdown-preferences/no-implicit-block-closing](./no-implicit-block-closing.md)
 
-## 🔍 Implementation
+## 🚀 Version
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+This rule was introduced in eslint-plugin-markdown-preferences v0.29.0
+
+## 🔍 Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/padded-custom-containers.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/padded-custom-containers.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/padded-custom-containers)
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
