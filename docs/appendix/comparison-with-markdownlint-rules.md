@@ -85,17 +85,18 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 
 ## Rules Related to Code & Fences
 
-| Description                                   | [markdownlint] Rules                                                                       | [@eslint/markdown] Rules                                                    | `eslint-plugin-markdown-preferences` Rules                                                                                           |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Disallow `$` signs in shell code              | [MD014] _commands-show-output_<br>Dollar signs used before commands without showing output | --                                                                          | --                                                                                                                                   |
-| Require empty lines around fenced code blocks | [MD031] _blanks-around-fences_<br>Fenced code blocks should be surrounded by blank lines   | --                                                                          | [markdown-preferences/padding-line-between-blocks]<br>require or disallow padding lines between block elements                       |
-| Spaces around the text in inline codes        | [MD038] _no-space-in-code_<br>Spaces inside code span elements                             | --                                                                          | --                                                                                                                                   |
-| Fenced code blocks should have a language     | [MD040] _fenced-code-language_<br>Fenced code blocks should have a language specified      | [markdown/fenced-code-language]<br>Require languages for fenced code blocks | --                                                                                                                                   |
-| Fenced code block style                       | [MD046] _code-block-style_<br>Code block style                                             | --                                                                          | [markdown-preferences/prefer-fenced-code-blocks]<br>enforce the use of fenced code blocks over indented code blocks                  |
-| Code fence style                              | [MD048] _code-fence-style_<br>Code fence style                                             | --                                                                          | [markdown-preferences/code-fence-style]<br>enforce a consistent code fence style (backtick or tilde) in Markdown fenced code blocks. |
-| Canonical code block language names           | --                                                                                         | --                                                                          | [markdown-preferences/canonical-code-block-language]<br>enforce canonical language names in code blocks                              |
-| Code fence length                             | --                                                                                         | --                                                                          | [markdown-preferences/code-fence-length]<br>enforce consistent length for code fences in Markdown fenced code blocks                 |
-| Enforce specific words to be inline codes     | --                                                                                         | --                                                                          | [markdown-preferences/prefer-inline-code-words]<br>enforce the use of inline code for specific words                                 |
+| Description                                   | [markdownlint] Rules                                                                       | [@eslint/markdown] Rules                                                    | `eslint-plugin-markdown-preferences` Rules                                                                                                     |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Disallow `$` signs in shell code              | [MD014] _commands-show-output_<br>Dollar signs used before commands without showing output | --                                                                          | --                                                                                                                                             |
+| Require empty lines around fenced code blocks | [MD031] _blanks-around-fences_<br>Fenced code blocks should be surrounded by blank lines   | --                                                                          | [markdown-preferences/padding-line-between-blocks]<br>require or disallow padding lines between block elements                                 |
+| Spaces around the text in inline codes        | [MD038] _no-space-in-code_<br>Spaces inside code span elements                             | --                                                                          | --                                                                                                                                             |
+| Fenced code blocks should have a language     | [MD040] _fenced-code-language_<br>Fenced code blocks should have a language specified      | [markdown/fenced-code-language]<br>Require languages for fenced code blocks | --                                                                                                                                             |
+| Fenced code block style                       | [MD046] _code-block-style_<br>Code block style                                             | --                                                                          | [markdown-preferences/prefer-fenced-code-blocks]<br>enforce the use of fenced code blocks over indented code blocks                            |
+| Code fence style                              | [MD048] _code-fence-style_<br>Code fence style                                             | --                                                                          | [markdown-preferences/code-fence-style]<br>enforce a consistent code fence style (backtick or tilde) in Markdown fenced code blocks.           |
+| Canonical code block language names           | --                                                                                         | --                                                                          | [markdown-preferences/canonical-code-block-language]<br>enforce canonical language names in code blocks                                        |
+| Code fence length                             | --                                                                                         | --                                                                          | [markdown-preferences/code-fence-length]<br>enforce consistent length for code fences in Markdown fenced code blocks                           |
+| Enforce specific words to be inline codes     | --                                                                                         | --                                                                          | [markdown-preferences/prefer-inline-code-words]<br>enforce the use of inline code for specific words                                           |
+| Disallow implicit block closing               | --                                                                                         | --                                                                          | [markdown-preferences/no-implicit-block-closing]<br>disallow implicit block closing for fenced code blocks, math blocks, and custom containers |
 
 ## Rules Related to Blockquotes
 
@@ -174,6 +175,12 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 | Disallow reversed link/image syntax    | [MD011] _no-reversed-links_<br>Reversed link syntax | [markdown/no-reversed-media-syntax]<br>Disallow reversed link and image syntax | --                                         |
 | Disallow invalid link label references | --                                                  | [markdown/no-invalid-label-refs]<br>Disallow invalid label references          | --                                         |
 
+## Rules Related to Extended Syntax
+
+| Description                                   | [markdownlint] Rules | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules                                                              |
+| --------------------------------------------- | -------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------- |
+| Disallow or require padding inside containers | --                   | --                       | [markdown-preferences/padded-custom-containers]<br>disallow or require padding inside custom containers |
+
 [@eslint/markdown]: https://github.com/eslint/markdown
 [MD001]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md001.md
 [MD003]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md003.md
@@ -249,6 +256,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 [markdown-preferences/link-paren-spacing]: ./../rules/link-paren-spacing.md
 [markdown-preferences/link-title-style]: ./../rules/link-title-style.md
 [markdown-preferences/list-marker-alignment]: ../rules/list-marker-alignment.md
+[markdown-preferences/no-implicit-block-closing]: ../rules/no-implicit-block-closing.md
 [markdown-preferences/no-laziness-blockquotes]: ../rules/no-laziness-blockquotes.md
 [markdown-preferences/no-multi-spaces]: ./../rules/no-multi-spaces.md
 [markdown-preferences/no-multiple-empty-lines]: ../rules/no-multiple-empty-lines.md
@@ -257,6 +265,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 [markdown-preferences/ordered-list-marker-sequence]: ../rules/ordered-list-marker-sequence.md
 [markdown-preferences/ordered-list-marker-start]: ../rules/ordered-list-marker-start.md
 [markdown-preferences/ordered-list-marker-style]: ../rules/ordered-list-marker-style.md
+[markdown-preferences/padded-custom-containers]: ../rules/padded-custom-containers.md
 [markdown-preferences/padding-line-between-blocks]: ../rules/padding-line-between-blocks.md
 [markdown-preferences/prefer-autolinks]: ../rules/prefer-autolinks.md
 [markdown-preferences/prefer-fenced-code-blocks]: ../rules/prefer-fenced-code-blocks.md
