@@ -868,9 +868,9 @@ export default createRule<[Options?]>("indent", {
       const parsed = parseMathBlock(sourceCode, node);
       if (!parsed) return;
       const loc = sourceCode.getLoc(node);
-      const endLineToBeChecked = inlineToBeChecked(
-        parsed.closingSequence.loc.start,
-      );
+      const endLineToBeChecked =
+        parsed.closingSequence &&
+        inlineToBeChecked(parsed.closingSequence.loc.start);
       verifyLinesIndent(
         endLineToBeChecked ? [loc.start.line, loc.end.line] : [loc.start.line],
         (lineNumber) =>

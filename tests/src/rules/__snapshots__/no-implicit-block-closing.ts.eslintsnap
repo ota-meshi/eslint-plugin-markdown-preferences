@@ -1,0 +1,315 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: no-implicit-block-closing >> invalid
+Filename: tests/fixtures/rules/no-implicit-block-closing/invalid/missing-code-fence-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Missing closing fence for code block
+  2 |
+  3 | ```javascript
+    | ^~~ [1]
+  4 | console.log("Hello, world!");
+  5 | // Missing closing fence
+  6 |
+
+Output:
+  1 | # Missing closing fence for code block
+  2 |
+  3 | ```javascript
+  4 | console.log("Hello, world!");
+  5 | // Missing closing fence
+  6 |
+  7 | ```
+
+[1] Missing closing fence for fenced code block.
+---
+
+
+Test: no-implicit-block-closing >> invalid
+Filename: tests/fixtures/rules/no-implicit-block-closing/invalid/missing-container-in-blockquote-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Missing closing fence in blockquote
+  2 |
+  3 | > This is a blockquote with a code block:
+  4 | >
+  5 | > ::: warning
+    |   ^~~ [1]
+  6 | > This is a warning in list item
+  7 | > Missing closing sequence
+  8 |
+
+Output:
+  1 | # Missing closing fence in blockquote
+  2 |
+  3 | > This is a blockquote with a code block:
+  4 | >
+  5 | > ::: warning
+  6 | > This is a warning in list item
+  7 | > Missing closing sequence
+  8 | > :::
+  9 |
+
+[1] Missing closing sequence for custom container.
+---
+
+
+Test: no-implicit-block-closing >> invalid
+Filename: tests/fixtures/rules/no-implicit-block-closing/invalid/missing-container-in-list-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Missing custom container in list item
+  2 |
+  3 | 1. This is a list item with a custom container:
+  4 |
+  5 |    ::: warning
+    |    ^~~ [1]
+  6 |    This is a warning in list item
+  7 |    Missing closing sequence
+  8 |
+
+Output:
+  1 | # Missing custom container in list item
+  2 |
+  3 | 1. This is a list item with a custom container:
+  4 |
+  5 |    ::: warning
+  6 |    This is a warning in list item
+  7 |    Missing closing sequence
+  8 |    :::
+  9 |
+
+[1] Missing closing sequence for custom container.
+---
+
+
+Test: no-implicit-block-closing >> invalid
+Filename: tests/fixtures/rules/no-implicit-block-closing/invalid/missing-custom-container-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Missing closing sequence for custom container
+  2 |
+  3 | ::: warning
+    | ^~~ [1]
+  4 | This is a warning message.
+  5 | # Missing closing sequence
+  6 |
+
+Output:
+  1 | # Missing closing sequence for custom container
+  2 |
+  3 | ::: warning
+  4 | This is a warning message.
+  5 | # Missing closing sequence
+  6 | :::
+  7 |
+
+[1] Missing closing sequence for custom container.
+---
+
+
+Test: no-implicit-block-closing >> invalid
+Filename: tests/fixtures/rules/no-implicit-block-closing/invalid/missing-fence-in-blockquote-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Missing closing fence in blockquote
+  2 |
+  3 | > This is a blockquote with a code block:
+  4 | >
+  5 | > ```javascript
+    |   ^~~ [1]
+  6 | > console.log("Hello from blockquote");
+  7 | > // Missing closing fence in blockquote
+  8 |
+
+Output:
+  1 | # Missing closing fence in blockquote
+  2 |
+  3 | > This is a blockquote with a code block:
+  4 | >
+  5 | > ```javascript
+  6 | > console.log("Hello from blockquote");
+  7 | > // Missing closing fence in blockquote
+  8 | > ```
+  9 |
+
+[1] Missing closing fence for fenced code block.
+---
+
+
+Test: no-implicit-block-closing >> invalid
+Filename: tests/fixtures/rules/no-implicit-block-closing/invalid/missing-fence-in-list-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Missing closing fence in list item
+  2 |
+  3 | 1. This is a list item with a code block:
+  4 |
+  5 |    ```python
+    |    ^~~ [1]
+  6 |    print("Hello from list item")
+  7 |    # Missing closing fence in list item
+  8 |
+
+Output:
+  1 | # Missing closing fence in list item
+  2 |
+  3 | 1. This is a list item with a code block:
+  4 |
+  5 |    ```python
+  6 |    print("Hello from list item")
+  7 |    # Missing closing fence in list item
+  8 |
+  9 |    ```
+
+[1] Missing closing fence for fenced code block.
+---
+
+
+Test: no-implicit-block-closing >> invalid
+Filename: tests/fixtures/rules/no-implicit-block-closing/invalid/missing-math-block-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Missing closing sequence for math block
+  2 |
+  3 | $$
+    | ^~ [1]
+  4 | E = mc^2
+  5 | # Missing closing sequence
+  6 |
+
+Output:
+  1 | # Missing closing sequence for math block
+  2 |
+  3 | $$
+  4 | E = mc^2
+  5 | # Missing closing sequence
+  6 |
+  7 | $$
+
+[1] Missing closing sequence for math block.
+---
+
+
+Test: no-implicit-block-closing >> invalid
+Filename: tests/fixtures/rules/no-implicit-block-closing/invalid/missing-math-in-blockquote-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Missing math block in blockquote
+  2 |
+  3 | > This is a blockquote with a math block:
+  4 | >
+  5 | > $$
+    |   ^~ [1]
+  6 | > E = mc^2
+  7 | > Missing closing sequence
+  8 |
+
+Output:
+  1 | # Missing math block in blockquote
+  2 |
+  3 | > This is a blockquote with a math block:
+  4 | >
+  5 | > $$
+  6 | > E = mc^2
+  7 | > Missing closing sequence
+  8 | > $$
+  9 |
+
+[1] Missing closing sequence for math block.
+---
+
+
+Test: no-implicit-block-closing >> invalid
+Filename: tests/fixtures/rules/no-implicit-block-closing/invalid/missing-math-in-list-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Missing math block in list item
+  2 |
+  3 | 1. This is a list item with a math block:
+  4 |
+  5 |    $$
+    |    ^~ [1]
+  6 |    E = mc^2
+  7 |    Missing closing sequence
+  8 |
+
+Output:
+  1 | # Missing math block in list item
+  2 |
+  3 | 1. This is a list item with a math block:
+  4 |
+  5 |    $$
+  6 |    E = mc^2
+  7 |    Missing closing sequence
+  8 |
+  9 |    $$
+
+[1] Missing closing sequence for math block.
+---
+
+
+Test: no-implicit-block-closing >> invalid
+Filename: tests/fixtures/rules/no-implicit-block-closing/invalid/missing-tilde-fence-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Missing closing fence for tilde code block
+  2 |
+  3 | ~~~python
+    | ^~~ [1]
+  4 | print("Hello, world!")
+  5 | # Missing closing fence
+  6 |
+
+Output:
+  1 | # Missing closing fence for tilde code block
+  2 |
+  3 | ~~~python
+  4 | print("Hello, world!")
+  5 | # Missing closing fence
+  6 |
+  7 | ~~~
+
+[1] Missing closing fence for fenced code block.
+---

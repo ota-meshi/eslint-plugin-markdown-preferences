@@ -37,6 +37,7 @@ export const rules: Linter.RulesRecord = {
   "markdown-preferences/link-paren-spacing": "error",
   "markdown-preferences/link-title-style": "error",
   "markdown-preferences/list-marker-alignment": "error",
+  "markdown-preferences/no-implicit-block-closing": "error",
   "markdown-preferences/no-laziness-blockquotes": "error",
   "markdown-preferences/no-multi-spaces": "error",
   "markdown-preferences/no-multiple-empty-lines": "error",

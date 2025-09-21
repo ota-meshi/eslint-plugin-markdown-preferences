@@ -1,4 +1,4 @@
-import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 import type { SourceLocation } from "estree";
 import type { ListItem } from "../language/ast-types.ts";
 import { isAsciiControlCharacter, isSpaceOrTab } from "./unicode.ts";

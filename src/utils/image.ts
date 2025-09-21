@@ -3,7 +3,7 @@ import type { Image } from "../language/ast-types.ts";
 import { isAsciiControlCharacter } from "./unicode.ts";
 import { getSourceLocationFromRange } from "./ast.ts";
 import { BackwardCharacterCursor } from "./character-cursor.ts";
-import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 
 export type ParsedImage = {
   text: {

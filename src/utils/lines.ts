@@ -1,4 +1,4 @@
-import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 
 const cache = new WeakMap<ExtendedMarkdownSourceCode, ParsedLines>();
 

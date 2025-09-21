@@ -2,7 +2,7 @@ import type { SourceLocation } from "estree";
 import type { ImageReference } from "../language/ast-types.ts";
 import { getSourceLocationFromRange } from "./ast.ts";
 import { BackwardCharacterCursor } from "./character-cursor.ts";
-import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 
 export type ParsedImageReference = {
   text: {

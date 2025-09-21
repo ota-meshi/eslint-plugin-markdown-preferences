@@ -6,7 +6,7 @@ import type {
 import {
   ExtendedMarkdownLanguage,
   type ExtendedMarkdownSourceCode,
-} from "../../../src/language/extended-markdown-ianguage.ts";
+} from "../../../src/language/extended-markdown-language.ts";
 const extendedMd = new ExtendedMarkdownLanguage();
 
 /**

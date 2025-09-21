@@ -1,7 +1,7 @@
 import type { SourceLocation } from "estree";
 import type { LinkReference } from "../language/ast-types.ts";
 import { getSourceLocationFromRange } from "./ast.ts";
-import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 
 export type ParsedLinkReference = {
   text: {

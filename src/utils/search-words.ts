@@ -1,4 +1,4 @@
-import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 import type { SourceLocation } from "estree";
 import type { JSONSchema4 } from "json-schema";
 import type { Text } from "../language/ast-types.ts";

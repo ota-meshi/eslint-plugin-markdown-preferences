@@ -22,6 +22,7 @@ export const rules: Linter.RulesRecord = {
   "markdown-preferences/blockquote-marker-alignment": "error",
   "markdown-preferences/hard-linebreak-style": "error",
   "markdown-preferences/list-marker-alignment": "error",
+  "markdown-preferences/no-implicit-block-closing": "error",
   "markdown-preferences/no-laziness-blockquotes": "error",
   "markdown-preferences/no-text-backslash-linebreak": "error",
   "markdown-preferences/prefer-autolinks": "error",

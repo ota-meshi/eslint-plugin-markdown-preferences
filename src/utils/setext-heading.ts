@@ -1,5 +1,5 @@
 import type { SourceLocation } from "@eslint/core";
-import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 import type { Heading } from "../language/ast-types.ts";
 import { getHeadingKind } from "./ast.ts";
 import type { ParsedLine } from "./lines.ts";

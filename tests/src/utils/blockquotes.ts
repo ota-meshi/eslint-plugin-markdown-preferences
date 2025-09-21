@@ -1,7 +1,7 @@
 import assert from "node:assert";
 import { parseMarkdown } from "../../utils/markdown-parser/parser.ts";
 import { getBlockquoteLevelFromLine } from "../../../src/utils/blockquotes.ts";
-import type { ExtendedMarkdownSourceCode } from "../../../src/language/extended-markdown-ianguage.ts";
+import type { ExtendedMarkdownSourceCode } from "../../../src/language/extended-markdown-language.ts";
 
 describe("utils/blockquotes", () => {
   function getSrc(md: string): ExtendedMarkdownSourceCode {
