@@ -8,31 +8,55 @@ import { parseTableDelimiterRow, parseTableRow } from "../utils/table.ts";
 import type { SourceLocation } from "@eslint/core";
 import { getTextWidth } from "../utils/text-width.ts";
 import { getWidth } from "../utils/width.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
+
+type SpaceStyle = "always" | "never";
+type AlignStyle = "left" | "center" | "right";
 
 type Options = {
   space?:
-    | "always"
-    | "never"
+    | SpaceStyle
     | {
-        leading?: "always" | "never";
-        trailing?: "always" | "never";
+        leading?: SpaceStyle;
+        trailing?: SpaceStyle;
       };
   cellAlign?:
-    | "left"
-    | "center"
-    | "right"
+    | AlignStyle
     | {
-        defaultDelimiter?: "left" | "center" | "right" | "ignore";
-        leftAlignmentDelimiter?: "left" | "center" | "right" | "ignore";
-        centerAlignmentDelimiter?: "left" | "center" | "right" | "ignore";
-        rightAlignmentDelimiter?: "left" | "center" | "right" | "ignore";
+        defaultDelimiter?: AlignStyle | "ignore";
+        leftAlignmentDelimiter?: AlignStyle | "ignore";
+        centerAlignmentDelimiter?: AlignStyle | "ignore";
+        rightAlignmentDelimiter?: AlignStyle | "ignore";
       };
 };
+
+type ParsedOptions = {
+  leadingSpace: SpaceStyle;
+  trailingSpace: SpaceStyle;
+  cellAlignByDelimiter: {
+    none: AlignStyle | "ignore";
+    left: AlignStyle | "ignore";
+    center: AlignStyle | "ignore";
+    right: AlignStyle | "ignore";
+  };
+};
+
+const currentOption = new WeakMap<ExtendedMarkdownSourceCode, ParsedOptions>();
+
+/**
+ * Get the current options for the given source code.
+ * This is a method that allows you to access the configuration of this rule from another rule.
+ */
+export function getCurrentTablePipeSpacingOption(
+  sourceCode: ExtendedMarkdownSourceCode,
+): ParsedOptions | null {
+  return currentOption.get(sourceCode) ?? null;
+}
 
 /**
  * Parsed options
  */
-function parseOptions(options: Options | undefined) {
+function parseOptions(options: Options | undefined): ParsedOptions {
   const spaceOption = options?.space;
   const leadingSpace =
     (typeof spaceOption === "object" ? spaceOption.leading : spaceOption) ||
@@ -72,9 +96,7 @@ function parseOptions(options: Options | undefined) {
   /**
    * Adjust the alignment option based on the spacing options.
    */
-  function adjustAlign(
-    align: "left" | "center" | "right" | "ignore",
-  ): "left" | "center" | "right" | "ignore" {
+  function adjustAlign(align: AlignStyle | "ignore"): AlignStyle | "ignore" {
     if (align === "left") {
       if (trailingSpace === "always") {
         return "left";
@@ -178,6 +200,7 @@ export default createRule<[Options?]>("table-pipe-spacing", {
   create(context) {
     const sourceCode = context.sourceCode;
     const options = parseOptions(context.options[0]);
+    currentOption.set(sourceCode, options);
 
     type TokenData = {
       range: [number, number];
@@ -268,7 +291,7 @@ export default createRule<[Options?]>("table-pipe-spacing", {
      */
     function verifyAlignPipe(
       { leadingPipe, content, trailingPipe }: CellData | DelimiterData,
-      cellAlign: "left" | "center" | "right" | "ignore",
+      cellAlign: AlignStyle | "ignore",
     ): "leading" | "trailing" | "both" | null {
       if (!leadingPipe || !trailingPipe || !content) return null;
       const lineText = sourceCode.lines[leadingPipe.loc.start.line - 1];
