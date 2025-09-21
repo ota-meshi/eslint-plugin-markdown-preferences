@@ -1,5 +1,13 @@
 # eslint-plugin-markdown-preferences
 
+## 0.28.0
+
+### Minor Changes
+
+- [#145](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/145) [`58b34b3`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/58b34b317f4b120042f80883ff861fb4b7053fae) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat([markdown-preferences/no-multi-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multi-spaces.html)): improve to verify opening fenced code block, opening custom container, math blocks, and inline math
+
+- [#143](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/143) [`158961f`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/158961f2b9492a1f65da10fe7908692293e79812) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/no-implicit-block-closing`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-implicit-block-closing.html) rule
+
 ## 0.27.0
 
 ### Minor Changes

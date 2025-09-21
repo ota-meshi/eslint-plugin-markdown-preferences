@@ -162,8 +162,6 @@ The rules with the following 💄 are included in the `standard` config.
 
 - Rules related to notation styles in Markdown.
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
-
 <!-- prettier-ignore-start -->
 
 | Rule ID                                                                                                                                                               | Description                                                                               | Fixable | Config |
@@ -187,8 +185,6 @@ The rules with the following 💄 are included in the `standard` config.
 | [markdown-preferences/thematic-break-character-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-character-style.html)       | enforce consistent character style for thematic breaks (horizontal rules) in Markdown.    |   🔧    |   💄   |
 
 <!-- prettier-ignore-end -->
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
 
 ### Whitespace Rules
 

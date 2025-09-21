@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/no-implicit-block-closing"
 description: "disallow implicit block closing for fenced code blocks, math blocks, and custom blocks"
+since: "v0.28.0"
 ---
 
 # markdown-preferences/no-implicit-block-closing
 
 > disallow implicit block closing for fenced code blocks, math blocks, and custom blocks
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - ⚙️ This rule is included in `plugin.configs.recommended` and `plugin.configs.standard`.
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
@@ -138,12 +138,12 @@ export default defineConfig([
 
 This rule was introduced in eslint-plugin-markdown-preferences v0.22.0
 
-## 🔍 Implementation
+## 🚀 Version
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+This rule was introduced in eslint-plugin-markdown-preferences v0.28.0
+
+## 🔍 Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/no-implicit-block-closing.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/no-implicit-block-closing.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/no-implicit-block-closing)
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
