@@ -34,25 +34,25 @@ The rules with the following 💄 are included in the `plugin.configs.standard` 
 
 <!-- prettier-ignore-start -->
 
-| Rule ID                                                                                          | Description                                                                               | Fixable | Config |
-| :----------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------- | :-----: | :----: |
-| [markdown-preferences/bullet-list-marker-style](./bullet-list-marker-style.md)                   | enforce consistent bullet list (unordered list) marker style                              |   🔧    |   💄   |
-| [markdown-preferences/code-fence-style](./code-fence-style.md)                                   | enforce a consistent code fence style (backtick or tilde) in Markdown fenced code blocks. |   🔧    |   💄   |
-| [markdown-preferences/definitions-last](./definitions-last.md)                                   | require link definitions and footnote definitions to be placed at the end of the document |   🔧    |        |
-| [markdown-preferences/emphasis-delimiters-style](./emphasis-delimiters-style.md)                 | enforce a consistent delimiter style for emphasis and strong emphasis                     |   🔧    |   💄   |
-| [markdown-preferences/hard-linebreak-style](./hard-linebreak-style.md)                           | enforce consistent hard linebreak style.                                                  |   🔧    |  ⭐💄  |
-| [markdown-preferences/level1-heading-style](./level1-heading-style.md)                           | enforce consistent style for level 1 headings                                             |   🔧    |   💄   |
-| [markdown-preferences/level2-heading-style](./level2-heading-style.md)                           | enforce consistent style for level 2 headings                                             |   🔧    |   💄   |
-| [markdown-preferences/link-destination-style](./link-destination-style.md)                       | enforce a consistent style for link destinations                                          |   🔧    |   💄   |
-| [markdown-preferences/link-title-style](./link-title-style.md)                                   | enforce a consistent style for link titles                                                |   🔧    |   💄   |
-| [markdown-preferences/no-implicit-block-closing](./no-implicit-block-closing.md)                 | disallow implicit block closing for fenced code blocks, math blocks, and custom blocks    |   🔧    |  ⭐💄  |
-| [markdown-preferences/no-text-backslash-linebreak](./no-text-backslash-linebreak.md)             | disallow text backslash at the end of a line.                                             |         |  ⭐💄  |
-| [markdown-preferences/ordered-list-marker-style](./ordered-list-marker-style.md)                 | enforce consistent ordered list marker style                                              |   🔧    |   💄   |
-| [markdown-preferences/prefer-autolinks](./prefer-autolinks.md)                                   | enforce the use of autolinks for URLs                                                     |   🔧    |  ⭐💄  |
-| [markdown-preferences/prefer-fenced-code-blocks](./prefer-fenced-code-blocks.md)                 | enforce the use of fenced code blocks over indented code blocks                           |   🔧    |  ⭐💄  |
-| [markdown-preferences/prefer-link-reference-definitions](./prefer-link-reference-definitions.md) | enforce using link reference definitions instead of inline links                          |   🔧    |        |
-| [markdown-preferences/strikethrough-delimiters-style](./strikethrough-delimiters-style.md)       | enforce a consistent delimiter style for strikethrough                                    |   🔧    |   💄   |
-| [markdown-preferences/thematic-break-character-style](./thematic-break-character-style.md)       | enforce consistent character style for thematic breaks (horizontal rules) in Markdown.    |   🔧    |   💄   |
+| Rule ID                                                                                          | Description                                                                                | Fixable | Config |
+| :----------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------- | :-----: | :----: |
+| [markdown-preferences/bullet-list-marker-style](./bullet-list-marker-style.md)                   | enforce consistent bullet list (unordered list) marker style                               |   🔧    |   💄   |
+| [markdown-preferences/code-fence-style](./code-fence-style.md)                                   | enforce a consistent code fence style (backtick or tilde) in Markdown fenced code blocks.  |   🔧    |   💄   |
+| [markdown-preferences/definitions-last](./definitions-last.md)                                   | require link definitions and footnote definitions to be placed at the end of the document  |   🔧    |        |
+| [markdown-preferences/emphasis-delimiters-style](./emphasis-delimiters-style.md)                 | enforce a consistent delimiter style for emphasis and strong emphasis                      |   🔧    |   💄   |
+| [markdown-preferences/hard-linebreak-style](./hard-linebreak-style.md)                           | enforce consistent hard linebreak style.                                                   |   🔧    |  ⭐💄  |
+| [markdown-preferences/level1-heading-style](./level1-heading-style.md)                           | enforce consistent style for level 1 headings                                              |   🔧    |   💄   |
+| [markdown-preferences/level2-heading-style](./level2-heading-style.md)                           | enforce consistent style for level 2 headings                                              |   🔧    |   💄   |
+| [markdown-preferences/link-destination-style](./link-destination-style.md)                       | enforce a consistent style for link destinations                                           |   🔧    |   💄   |
+| [markdown-preferences/link-title-style](./link-title-style.md)                                   | enforce a consistent style for link titles                                                 |   🔧    |   💄   |
+| [markdown-preferences/no-implicit-block-closing](./no-implicit-block-closing.md)                 | disallow implicit block closing for fenced code blocks, math blocks, and custom containers |   🔧    |  ⭐💄  |
+| [markdown-preferences/no-text-backslash-linebreak](./no-text-backslash-linebreak.md)             | disallow text backslash at the end of a line.                                              |         |  ⭐💄  |
+| [markdown-preferences/ordered-list-marker-style](./ordered-list-marker-style.md)                 | enforce consistent ordered list marker style                                               |   🔧    |   💄   |
+| [markdown-preferences/prefer-autolinks](./prefer-autolinks.md)                                   | enforce the use of autolinks for URLs                                                      |   🔧    |  ⭐💄  |
+| [markdown-preferences/prefer-fenced-code-blocks](./prefer-fenced-code-blocks.md)                 | enforce the use of fenced code blocks over indented code blocks                            |   🔧    |  ⭐💄  |
+| [markdown-preferences/prefer-link-reference-definitions](./prefer-link-reference-definitions.md) | enforce using link reference definitions instead of inline links                           |   🔧    |        |
+| [markdown-preferences/strikethrough-delimiters-style](./strikethrough-delimiters-style.md)       | enforce a consistent delimiter style for strikethrough                                     |   🔧    |   💄   |
+| [markdown-preferences/thematic-break-character-style](./thematic-break-character-style.md)       | enforce consistent character style for thematic breaks (horizontal rules) in Markdown.     |   🔧    |   💄   |
 
 <!-- prettier-ignore-end -->
 

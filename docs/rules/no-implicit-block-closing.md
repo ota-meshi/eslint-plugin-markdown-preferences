@@ -2,23 +2,23 @@
 pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/no-implicit-block-closing"
-description: "disallow implicit block closing for fenced code blocks, math blocks, and custom blocks"
+description: "disallow implicit block closing for fenced code blocks, math blocks, and custom containers"
 since: "v0.28.0"
 ---
 
 # markdown-preferences/no-implicit-block-closing
 
-> disallow implicit block closing for fenced code blocks, math blocks, and custom blocks
+> disallow implicit block closing for fenced code blocks, math blocks, and custom containers
 
 - ⚙️ This rule is included in `plugin.configs.recommended` and `plugin.configs.standard`.
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
 
-This rule disallows implicit block closing for fenced code blocks, math blocks, and custom blocks in Markdown.\
+This rule disallows implicit block closing for fenced code blocks, math blocks, and custom containers in Markdown.\
 While Markdown allows blocks to be implicitly closed at the end of the document or when encountering certain other elements, explicit closing markers improve readability and prevent unintended content inclusion.
 
-**Note:** Math blocks and custom blocks are non-standard Markdown syntax. To use this rule with these extended syntaxes, you need to configure the `"markdown-preferences/extended-syntax"` language option in your ESLint configuration.
+**Note:** Math blocks and custom containers are non-standard Markdown syntax. To use this rule with these extended syntaxes, you need to configure the `"markdown-preferences/extended-syntax"` language option in your ESLint configuration.
 
 **Why require explicit closing markers?**
 
@@ -105,7 +105,7 @@ This rule has no options.
 
 ### Configuration for Extended Syntax
 
-To check math blocks and custom blocks (which are non-standard Markdown syntax), you need to configure the `"markdown-preferences/extended-syntax"` language option:
+To check math blocks and custom containers (which are non-standard Markdown syntax), you need to configure the `"markdown-preferences/extended-syntax"` language option:
 
 ```js
 // eslint.config.js

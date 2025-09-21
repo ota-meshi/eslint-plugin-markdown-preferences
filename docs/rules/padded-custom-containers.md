@@ -15,7 +15,10 @@ description: "disallow or require padding inside custom containers"
 
 ## 📖 Rule Details
 
-This rule reports ???.
+This rule checks whether there are blank lines (padding) immediately after the opening `:::` and before the next content, and immediately before the closing `:::` and after the previous content in custom containers.
+By default, blank lines (padding) at these positions are not allowed (padding is disallowed).
+
+**Note:** Custom containers are non-standard Markdown syntax. To use this rule with these extended syntaxes, you need to configure the `"markdown-preferences/extended-syntax"` language option in your ESLint configuration.
 
 <!-- prettier-ignore-start -->
 
@@ -25,37 +28,82 @@ This rule reports ???.
 <!-- eslint markdown-preferences/padded-custom-containers: 'error' -->
 
 <!-- ✓ GOOD -->
+:::
+content
+:::
 
+:::
+# Heading
+
+- list
+:::
 
 <!-- ✗ BAD -->
+:::
 
+content
+
+:::
+
+:::
+
+# Heading
+
+- list
+
+:::
 ```
 
 <!-- prettier-ignore-end -->
 
 ## 🔧 Options
 
-This rule has no options.
-
-<!-- or -->
+By default, blank lines (padding) are disallowed (`{ padding: "never" }`).
+You can require blank lines by setting `{ padding: "always" }`.
 
 ```json
 {
-  "markdown-preferences/padded-custom-containers": ["error", {}]
+  "markdown-preferences/padded-custom-containers": [
+    "error",
+    {
+      "padding": "never"
+    }
+  ]
 }
 ```
 
--
+- `padding`: Specify whether blank lines (padding) are required or disallowed before and after the content inside custom containers.
+  - `"never"` (default): Disallow blank lines before and after the content inside custom containers.
+  - `"always"`: Require blank lines before and after the content inside custom containers.
+
+### Configuration for Extended Syntax
+
+To check custom containers (which are non-standard Markdown syntax), you need to configure the `"markdown-preferences/extended-syntax"` language option:
+
+```js
+// eslint.config.js
+import { defineConfig } from "eslint/config";
+import markdownPreferences from "eslint-plugin-markdown-preferences";
+
+export default defineConfig([
+  {
+    extends: [markdownPreferences.configs.recommended],
+    language: "markdown-preferences/extended-syntax",
+    rules: {
+      "markdown-preferences/no-implicit-block-closing": "error",
+    },
+  },
+]);
+```
 
 ## 📚 Further Reading
 
--
+- [VitePress: Markdown Extensions > Custom Containers](https://vitepress.dev/guide/markdown#custom-containers)
 
 ## 👫 Related Rules
 
-- [xxx]
-
-[xxx]: https://xxx
+- [markdown-preferences/padding-line-between-blocks](./padding-line-between-blocks.md)
+- [markdown-preferences/no-implicit-block-closing](./no-implicit-block-closing.md)
 
 ## 🔍 Implementation
 
