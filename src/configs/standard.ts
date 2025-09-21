@@ -46,6 +46,7 @@ export const rules: Linter.RulesRecord = {
   "markdown-preferences/ordered-list-marker-sequence": "error",
   "markdown-preferences/ordered-list-marker-start": "error",
   "markdown-preferences/ordered-list-marker-style": "error",
+  "markdown-preferences/padded-custom-containers": "error",
   "markdown-preferences/padding-line-between-blocks": "error",
   "markdown-preferences/prefer-autolinks": "error",
   "markdown-preferences/prefer-fenced-code-blocks": "error",
