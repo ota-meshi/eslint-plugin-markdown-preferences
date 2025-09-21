@@ -25,7 +25,7 @@
     "markdownlint": "npx -y markdownlint-cli2 .",
     "test": "npm run mocha -- \"tests/src/**/*.ts\" --reporter=dot --timeout=60000",
     "test:debug": "node --experimental-strip-types --experimental-transform-types ./node_modules/mocha/bin/mocha.js \"tests/src/**/*.ts\" --reporter=dot --timeout=60000",
-    "cover": "c8 --reporter=lcov npm run test",
+    "cover": "c8 --reporter=lcov --reporter=text npm run test:debug",
     "test:update": "npm run mocha -- \"tests/src/**/*.ts\" --reporter=dot --update",
     "update": "npm run ts -- ./tools/update.ts && npm run eslint-fix",
     "update:resources": "npm run ts -- ./tools/update-resources.ts && npm run eslint-fix",
