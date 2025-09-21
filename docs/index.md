@@ -13,17 +13,15 @@ A specialized ESLint plugin that helps enforce consistent writing style and form
 
 ## 📛 Features
 
-- 📝 **Comprehensive style enforcement**\
-  Unifies document expression and description style: heading casing, table header casing, inline code/link usage, emoji notation, and more.
-- 🧩 **Notation and formatting consistency**\
-  Standardizes Markdown notation: list markers, code fences, link/reference style, thematic breaks, and table formatting.
-- 🎨 **Whitespace and decorative rules**\
-  Controls indentation, spacing, line breaks, trailing spaces, and decorative elements for clean, readable Markdown.
-- 🔧 **Auto-fix support**\
-  Most rules support ESLint's `--fix` option for effortless formatting and correction.
-- ⚙️ **Flexible configuration**\
-  Provides both "recommended" and "standard" configs, and allows you to finely customize formatting and rules to suit your preferences and Markdown style.
-- 🌐 **Live demo & documentation**\
+- 📝 **Comprehensive style enforcement**
+  Enforces consistent heading casing, table header casing, inline code/link usage, emoji notation, and more for unified document style.
+- 🧩 **Powerful formatting consistency**
+  Strongly standardizes Markdown formatting: whitespace, indentation, spacing, line breaks, list markers, code fences, links, references, thematic breaks, tables, and decorative elements—ensuring documents are clean and uniform.
+- 🚀 **Extended Markdown syntax support**
+  Supports custom containers, mathematical expressions, and other extended syntax for high compatibility with VitePress.
+- 🔧 **Auto-fix support**
+  Most rules support ESLint's `--fix` option for automatic correction.
+- 🌐 **Online Demo & Documentation**
   Try it instantly in the [Online Demo](https://eslint-online-playground.netlify.app/#eslint-plugin-markdown-preferences) and see [full documentation][documentation site].
 
 ## 📖 Usage
