@@ -14,7 +14,7 @@ export type ParsedCustomContainer = {
     text: string;
     range: [number, number];
     loc: SourceLocation;
-  } | null;
+  };
   closingSequence: {
     text: string;
     range: [number, number];
@@ -43,6 +43,7 @@ export function parseCustomContainer(
   const spaceAfterOpeningSequenceLength =
     afterOpeningSequence.length - trimmedAfterOpeningSequence.length;
   const infoText = trimmedAfterOpeningSequence.trimEnd();
+  if (!infoText) return null;
   const openingSequenceRange: [number, number] = [
     range[0],
     range[0] + sequenceText.length,
@@ -56,26 +57,21 @@ export function parseCustomContainer(
     range: openingSequenceRange,
     loc: getSourceLocationFromRange(sourceCode, node, openingSequenceRange),
   };
-  const infoRange: [number, number] | null = infoText
-    ? [
-        openingSequence.range[1] + spaceAfterOpeningSequenceLength,
-        openingSequence.range[1] +
-          spaceAfterOpeningSequenceLength +
-          infoText.length,
-      ]
-    : null;
+  const infoRange: [number, number] = [
+    openingSequence.range[1] + spaceAfterOpeningSequenceLength,
+    openingSequence.range[1] +
+      spaceAfterOpeningSequenceLength +
+      infoText.length,
+  ];
   const info: {
     text: string;
     range: [number, number];
     loc: SourceLocation;
-  } | null =
-    infoText && infoRange
-      ? {
-          text: infoText,
-          range: infoRange,
-          loc: getSourceLocationFromRange(sourceCode, node, infoRange),
-        }
-      : null;
+  } = {
+    text: infoText,
+    range: infoRange,
+    loc: getSourceLocationFromRange(sourceCode, node, infoRange),
+  };
 
   // parse closing sequence
   const sequenceChar = sequenceText[0];

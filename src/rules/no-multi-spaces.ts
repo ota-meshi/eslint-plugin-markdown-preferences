@@ -1,5 +1,7 @@
 import type {
   Blockquote,
+  Code,
+  CustomContainer,
   Definition,
   FootnoteDefinition,
   Heading,
@@ -8,6 +10,7 @@ import type {
   Link,
   LinkReference,
   ListItem,
+  Math,
   Table,
   Text,
 } from "../language/ast-types.ts";
@@ -19,6 +22,8 @@ import { parseInlineLink } from "../utils/link.ts";
 import { parseImage } from "../utils/image.ts";
 import { parseListItem } from "../utils/list-item.ts";
 import { parseTableDelimiterRow } from "../utils/table.ts";
+import { parseCustomContainer } from "../utils/custom-container.ts";
+import { parseFencedCodeBlock } from "../utils/fenced-code-block.ts";
 
 export default createRule("no-multi-spaces", {
   meta: {
@@ -40,6 +45,8 @@ export default createRule("no-multi-spaces", {
     let codeText = sourceCode.text;
 
     return {
+      customContainer: verifyCustomContainer,
+      code: verifyCodeBlock,
       definition: verifyLinkDefinition,
       footnoteDefinition: verifyFootnoteDefinition,
       heading: verifyHeading,
@@ -48,26 +55,34 @@ export default createRule("no-multi-spaces", {
       link: verifyLink,
       linkReference: verifyLinkReference,
       listItem: verifyListItem,
-      blockquote: processBlockquote,
-      text: verifyText,
       table: verifyTable,
+      text: verifyText,
+      math: verifyMathBlock,
+      blockquote: processBlockquote,
     };
 
     /**
-     * Verify a text node.
+     * Verify a code block node.
      */
-    function verifyText(node: Text) {
-      verifyTextInNode(node);
+    function verifyCustomContainer(node: CustomContainer) {
+      const parsed = parseCustomContainer(sourceCode, node);
+      if (!parsed) return;
+      verifyTextInRange(node, [
+        parsed.openingSequence.range[0],
+        parsed.info.range[1],
+      ]);
     }
 
     /**
-     * Verify a table node.
+     * Verify a code block node.
      */
-    function verifyTable(node: Table) {
-      const parsedDelimiterRow = parseTableDelimiterRow(sourceCode, node);
-      if (!parsedDelimiterRow) return;
-      // Verify the delimiter row text.
-      verifyTextInRange(node, parsedDelimiterRow.range);
+    function verifyCodeBlock(node: Code) {
+      const parsed = parseFencedCodeBlock(sourceCode, node);
+      if (!parsed) return;
+      verifyTextInRange(node, [
+        parsed.openingFence.range[0],
+        (parsed.meta ?? parsed.language ?? parsed.openingFence).range[1],
+      ]);
     }
 
     /**
@@ -175,9 +190,33 @@ export default createRule("no-multi-spaces", {
     }
 
     /**
+     * Verify a table node.
+     */
+    function verifyTable(node: Table) {
+      const parsedDelimiterRow = parseTableDelimiterRow(sourceCode, node);
+      if (!parsedDelimiterRow) return;
+      // Verify the delimiter row text.
+      verifyTextInRange(node, parsedDelimiterRow.range);
+    }
+
+    /**
+     * Verify a text node.
+     */
+    function verifyText(node: Text) {
+      verifyTextInNode(node);
+    }
+
+    /**
+     * Verify a math block node
+     */
+    function verifyMathBlock(node: Math) {
+      verifyTextInNode(node);
+    }
+
+    /**
      * Verify spaces in a node
      */
-    function verifyTextInNode(node: Text | Image | ImageReference) {
+    function verifyTextInNode(node: Text | Image | ImageReference | Math) {
       const nodeRange = sourceCode.getRange(node);
       verifyTextInRange(node, nodeRange);
     }
@@ -240,7 +279,10 @@ export default createRule("no-multi-spaces", {
         | Link
         | LinkReference
         | ListItem
-        | Table,
+        | Table
+        | Code
+        | CustomContainer
+        | Math,
       textRange: [number, number],
     ) {
       const nodeRange = sourceCode.getRange(node);
