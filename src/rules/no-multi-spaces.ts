@@ -7,6 +7,7 @@ import type {
   Heading,
   Image,
   ImageReference,
+  InlineMath,
   Link,
   LinkReference,
   ListItem,
@@ -52,6 +53,7 @@ export default createRule("no-multi-spaces", {
       heading: verifyHeading,
       image: verifyImage,
       imageReference: verifyImageReference,
+      inlineMath: verifyInlineMath,
       link: verifyLink,
       linkReference: verifyLinkReference,
       listItem: verifyListItem,
@@ -125,6 +127,13 @@ export default createRule("no-multi-spaces", {
      * Verify an image reference node
      */
     function verifyImageReference(node: ImageReference) {
+      verifyTextInNode(node);
+    }
+
+    /**
+     * Verify an inline math node
+     */
+    function verifyInlineMath(node: InlineMath) {
       verifyTextInNode(node);
     }
 
@@ -216,7 +225,9 @@ export default createRule("no-multi-spaces", {
     /**
      * Verify spaces in a node
      */
-    function verifyTextInNode(node: Text | Image | ImageReference | Math) {
+    function verifyTextInNode(
+      node: Text | Image | ImageReference | Math | InlineMath,
+    ) {
       const nodeRange = sourceCode.getRange(node);
       verifyTextInRange(node, nodeRange);
     }
@@ -282,7 +293,8 @@ export default createRule("no-multi-spaces", {
         | Table
         | Code
         | CustomContainer
-        | Math,
+        | Math
+        | InlineMath,
       textRange: [number, number],
     ) {
       const nodeRange = sourceCode.getRange(node);
