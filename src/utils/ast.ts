@@ -32,7 +32,7 @@ import type {
   InlineMath,
   ImportCodeSnippet,
 } from "../language/ast-types.ts";
-import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 
 export type MDFrontmatter = Yaml | Toml | Json;
 export type MDBlock =

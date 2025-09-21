@@ -8,7 +8,7 @@ import type { Node } from "./language/ast-types.ts";
 import type {
   ExtendedMarkdownRuleVisitor,
   ExtendedMarkdownSourceCode,
-} from "./language/extended-markdown-ianguage.ts";
+} from "./language/extended-markdown-language.ts";
 
 export type RuleContext<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- ignore

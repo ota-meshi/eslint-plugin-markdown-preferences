@@ -162,6 +162,8 @@ The rules with the following 💄 are included in the `standard` config.
 
 - Rules related to notation styles in Markdown.
 
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+
 <!-- prettier-ignore-start -->
 
 | Rule ID                                                                                                                                                               | Description                                                                               | Fixable | Config |
@@ -175,6 +177,7 @@ The rules with the following 💄 are included in the `standard` config.
 | [markdown-preferences/level2-heading-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/level2-heading-style.html)                           | enforce consistent style for level 2 headings                                             |   🔧    |   💄   |
 | [markdown-preferences/link-destination-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-destination-style.html)                       | enforce a consistent style for link destinations                                          |   🔧    |   💄   |
 | [markdown-preferences/link-title-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-title-style.html)                                   | enforce a consistent style for link titles                                                |   🔧    |   💄   |
+| [markdown-preferences/no-implicit-block-closing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-implicit-block-closing.html)                 | disallow implicit block closing for fenced code blocks, math blocks, and custom blocks    |   🔧    |  ⭐💄  |
 | [markdown-preferences/no-text-backslash-linebreak](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-text-backslash-linebreak.html)             | disallow text backslash at the end of a line.                                             |         |  ⭐💄  |
 | [markdown-preferences/ordered-list-marker-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-style.html)                 | enforce consistent ordered list marker style                                              |   🔧    |   💄   |
 | [markdown-preferences/prefer-autolinks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-autolinks.html)                                   | enforce the use of autolinks for URLs                                                     |   🔧    |  ⭐💄  |
@@ -184,6 +187,8 @@ The rules with the following 💄 are included in the `standard` config.
 | [markdown-preferences/thematic-break-character-style](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-character-style.html)       | enforce consistent character style for thematic breaks (horizontal rules) in Markdown.    |   🔧    |   💄   |
 
 <!-- prettier-ignore-end -->
+
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
 
 ### Whitespace Rules
 

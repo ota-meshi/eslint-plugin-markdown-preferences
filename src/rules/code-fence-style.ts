@@ -61,19 +61,19 @@ export default createRule("code-fence-style", {
             actual: parsed.openingFence.text,
           },
           messageId: "useCodeFenceStyle",
-          fix(fixer) {
-            return [
-              fixer.replaceTextRange(
-                parsed.openingFence.range,
-                expectedOpeningFence,
-              ),
-              fixer.replaceTextRange(
+          *fix(fixer) {
+            yield fixer.replaceTextRange(
+              parsed.openingFence.range,
+              expectedOpeningFence,
+            );
+            if (parsed.closingFence) {
+              yield fixer.replaceTextRange(
                 parsed.closingFence.range,
                 expectedChar.repeat(
                   Math.max(3, parsed.closingFence.text.length),
                 ),
-              ),
-            ];
+              );
+            }
           },
         });
       },

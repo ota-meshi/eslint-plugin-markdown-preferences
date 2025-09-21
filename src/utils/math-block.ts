@@ -1,7 +1,7 @@
 import type { SourceLocation } from "@eslint/core";
 import type { Math } from "../language/ast-types.ts";
 import { isSpaceOrTab, isWhitespace } from "./unicode.ts";
-import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 import { getSourceLocationFromRange } from "./ast.ts";
 
 export type ParsedMathBlock = {
@@ -19,7 +19,7 @@ export type ParsedMathBlock = {
     text: string;
     range: [number, number];
     loc: SourceLocation;
-  };
+  } | null;
   after: {
     text: string;
     range: [number, number];
@@ -52,7 +52,25 @@ export function parseMathBlock(
     loc: getSourceLocationFromRange(sourceCode, node, openingSequenceRange),
   };
   const parsedClosing = parseMathClosingSequenceFromText(text);
-  if (parsedClosing == null) return null;
+  if (
+    parsedClosing == null ||
+    parsedClosing.closingSequence !== parsedOpening.openingSequence
+  ) {
+    const contentRange: [number, number] = [
+      openingSequence.range[1] + parsedOpening.after.length,
+      range[1],
+    ];
+    return {
+      openingSequence,
+      content: {
+        text: text.slice(parsedOpening.after.length),
+        range: contentRange,
+        loc: getSourceLocationFromRange(sourceCode, node, contentRange),
+      },
+      closingSequence: null,
+      after: null,
+    };
+  }
   const spaceAfterClosingRange: [number, number] = [
     range[1] - parsedClosing.after.length,
     range[1],

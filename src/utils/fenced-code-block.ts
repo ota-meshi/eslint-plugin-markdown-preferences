@@ -1,8 +1,8 @@
 import type { SourceLocation } from "@eslint/core";
-import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 import type { Code } from "../language/ast-types.ts";
-import { getParsedLines } from "./lines.ts";
 import { isSpaceOrTab } from "./unicode.ts";
+import { getSourceLocationFromRange } from "./ast.ts";
 
 export type ParsedFencedCodeBlock = {
   openingFence: {
@@ -24,7 +24,7 @@ export type ParsedFencedCodeBlock = {
     text: string;
     range: [number, number];
     loc: SourceLocation;
-  };
+  } | null;
 };
 const RE_OPENING_FENCE = /^(`{3,}|~{3,})/u;
 const RE_LANGUAGE = /^(\w*)/u;
@@ -42,28 +42,9 @@ export function parseFencedCodeBlock(
   if (!match) return null;
   const [, fenceText] = match;
 
-  const fenceChar = fenceText[0];
-
-  // parse closing fence
-  let closingFenceText = "";
-  const trimmed = text.trimEnd();
-  const trailingSpacesLength = text.length - trimmed.length;
-  for (let index = trimmed.length - 1; index >= 0; index--) {
-    const c = trimmed[index];
-    if (c === fenceChar || isSpaceOrTab(c)) {
-      closingFenceText = c + closingFenceText;
-      continue;
-    }
-    if (c === "\n") break;
-    return null; // invalid closing fence
-  }
-  closingFenceText = closingFenceText.trimStart();
-  if (!closingFenceText || !closingFenceText.startsWith(fenceText)) return null;
-
-  const lines = getParsedLines(sourceCode);
-  const afterOpeningFence = lines
-    .get(loc.start.line)
-    .text.slice(fenceText.length);
+  const afterOpeningFence = sourceCode.lines[loc.start.line - 1].slice(
+    loc.start.column - 1 + fenceText.length,
+  );
   const trimmedAfterOpeningFence = afterOpeningFence.trimStart();
   const spaceAfterOpeningFenceLength =
     afterOpeningFence.length - trimmedAfterOpeningFence.length;
@@ -77,77 +58,89 @@ export function parseFencedCodeBlock(
   const spaceAfterLanguageLength =
     afterLanguage.length - trimmedAfterLanguage.length;
   const metaText = trimmedAfterLanguage.trimEnd();
-
+  const openingFenceRange: [number, number] = [
+    range[0],
+    range[0] + fenceText.length,
+  ];
   const openingFence: {
     text: string;
     range: [number, number];
     loc: SourceLocation;
   } = {
     text: fenceText,
-    range: [range[0], range[0] + fenceText.length],
-    loc: {
-      start: loc.start,
-      end: {
-        line: loc.start.line,
-        column: loc.start.column + fenceText.length,
-      },
-    },
+    range: openingFenceRange,
+    loc: getSourceLocationFromRange(sourceCode, node, openingFenceRange),
   };
+  const languageRange: [number, number] | null = languageText
+    ? [
+        openingFence.range[1] + spaceAfterOpeningFenceLength,
+        openingFence.range[1] +
+          spaceAfterOpeningFenceLength +
+          languageText.length,
+      ]
+    : null;
   const language: {
     text: string;
     range: [number, number];
     loc: SourceLocation;
-  } | null = languageText
-    ? {
-        text: languageText,
-        range: [
-          openingFence.range[1] + spaceAfterOpeningFenceLength,
-          openingFence.range[1] +
-            spaceAfterOpeningFenceLength +
-            languageText.length,
-        ],
-        loc: {
-          start: {
-            line: openingFence.loc.end.line,
-            column: openingFence.loc.end.column + spaceAfterOpeningFenceLength,
-          },
-          end: {
-            line: openingFence.loc.end.line,
-            column:
-              openingFence.loc.end.column +
-              spaceAfterOpeningFenceLength +
-              languageText.length,
-          },
-        },
-      }
-    : null;
+  } | null =
+    languageText && languageRange
+      ? {
+          text: languageText,
+          range: languageRange,
+          loc: getSourceLocationFromRange(sourceCode, node, languageRange),
+        }
+      : null;
+  const metaRange: [number, number] | null =
+    language && metaText
+      ? [
+          language.range[1] + spaceAfterLanguageLength,
+          language.range[1] + spaceAfterLanguageLength + metaText.length,
+        ]
+      : null;
   const meta: {
     text: string;
     range: [number, number];
     loc: SourceLocation;
   } | null =
-    language && metaText
+    language && metaText && metaRange
       ? {
           text: metaText,
-          range: [
-            language.range[1] + spaceAfterLanguageLength,
-            language.range[1] + spaceAfterLanguageLength + metaText.length,
-          ],
-          loc: {
-            start: {
-              line: language.loc.end.line,
-              column: language.loc.end.column + spaceAfterLanguageLength,
-            },
-            end: {
-              line: language.loc.end.line,
-              column:
-                language.loc.end.column +
-                spaceAfterLanguageLength +
-                metaText.length,
-            },
-          },
+          range: metaRange,
+          loc: getSourceLocationFromRange(sourceCode, node, metaRange),
         }
       : null;
+
+  // parse closing fence
+  const fenceChar = fenceText[0];
+  let closingFenceText = "";
+  const trimmed = text.trimEnd();
+  const trailingSpacesLength = text.length - trimmed.length;
+  for (let index = trimmed.length - 1; index >= 0; index--) {
+    const c = trimmed[index];
+    if (c === fenceChar || isSpaceOrTab(c)) {
+      closingFenceText = c + closingFenceText;
+      continue;
+    }
+    if (c === ">") {
+      closingFenceText = ` ${closingFenceText}`;
+      continue;
+    }
+    if (c === "\n") break;
+    // invalid closing fence
+    closingFenceText = "";
+    break;
+  }
+  closingFenceText = closingFenceText.trimStart();
+  if (!closingFenceText || !closingFenceText.startsWith(fenceText)) {
+    return {
+      openingFence,
+      language,
+      meta,
+      closingFence: null,
+    };
+  }
+
   return {
     openingFence,
     language,

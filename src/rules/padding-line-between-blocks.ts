@@ -18,7 +18,7 @@ import { createRule } from "../utils/index.ts";
 import type { ParsedLine } from "../utils/lines.ts";
 import { getParsedLines } from "../utils/lines.ts";
 import { getBlockquoteLevelFromLine } from "../utils/blockquotes.ts";
-import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 import type { JSONSchema4 } from "json-schema";
 
 type BlockType =

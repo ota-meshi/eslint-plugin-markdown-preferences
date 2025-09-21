@@ -3,7 +3,7 @@ import type { Table, TableRow } from "../language/ast-types.ts";
 import { ForwardCharacterCursor } from "./character-cursor.ts";
 import { isSpaceOrTab } from "./unicode.ts";
 import { getSourceLocationFromRange } from "./ast.ts";
-import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 
 type Token = {
   text: string;

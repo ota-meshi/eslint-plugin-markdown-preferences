@@ -100,11 +100,17 @@ export default createRule<[Options?]>("code-fence-length", {
           actual: parsed.openingFence.text,
         },
         messageId: "notPreferred",
-        fix(fixer) {
-          return [
-            fixer.replaceTextRange(parsed.openingFence.range, expectedFence),
-            fixer.replaceTextRange(parsed.closingFence.range, expectedFence),
-          ];
+        *fix(fixer) {
+          yield fixer.replaceTextRange(
+            parsed.openingFence.range,
+            expectedFence,
+          );
+          if (parsed.closingFence) {
+            yield fixer.replaceTextRange(
+              parsed.closingFence.range,
+              expectedFence,
+            );
+          }
         },
       });
     }
@@ -161,21 +167,21 @@ export default createRule<[Options?]>("code-fence-length", {
      */
     function verifyClosingFenceLength(
       node: Code,
-      parsed: ParsedFencedCodeBlock,
+      { openingFence, closingFence }: ParsedFencedCodeBlock,
     ): boolean {
-      if (parsed.openingFence.text.length === parsed.closingFence.text.length)
+      if (
+        !closingFence ||
+        openingFence.text.length === closingFence.text.length
+      )
         return true;
 
       context.report({
         node,
-        loc: parsed.closingFence.loc,
+        loc: closingFence.loc,
         messageId: "notMatch",
         fix(fixer) {
           return [
-            fixer.replaceTextRange(
-              parsed.closingFence.range,
-              parsed.openingFence.text,
-            ),
+            fixer.replaceTextRange(closingFence.range, openingFence.text),
           ];
         },
       });

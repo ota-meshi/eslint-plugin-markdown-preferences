@@ -124,6 +124,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/list-marker-alignment'?: Linter.RuleEntry<MarkdownPreferencesListMarkerAlignment>
   /**
+   * disallow implicit block closing for fenced code blocks, math blocks, and custom blocks
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-implicit-block-closing.html
+   */
+  'markdown-preferences/no-implicit-block-closing'?: Linter.RuleEntry<[]>
+  /**
    * disallow laziness in blockquotes
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-laziness-blockquotes.html
    */

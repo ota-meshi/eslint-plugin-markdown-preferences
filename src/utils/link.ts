@@ -3,7 +3,7 @@ import type { Link } from "../language/ast-types.ts";
 import { isAsciiControlCharacter } from "./unicode.ts";
 import { getLinkKind, getSourceLocationFromRange } from "./ast.ts";
 import { ForwardCharacterCursor } from "./character-cursor.ts";
-import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-ianguage.ts";
+import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 
 export type ParsedInlineLink = {
   text: {
