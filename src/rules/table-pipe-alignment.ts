@@ -8,6 +8,7 @@ import type {
 import { parseTable } from "../utils/table.ts";
 import type { SourceLocation } from "estree";
 import { getTextWidth } from "../utils/text-width.ts";
+import { getCurrentTablePipeSpacingOption } from "./table-pipe-spacing.ts";
 
 type TokenData = {
   range: [number, number];
@@ -163,8 +164,10 @@ export default createRule<[Options]>("table-pipe-alignment", {
        * Get the minimum pipe position for the index
        */
       private getMinimumPipePosition(pipeIndex: number): number | null {
-        const needSpaceBeforePipe =
-          this.hasSpaceBetweenContentAndTrailingPipe(pipeIndex);
+        const spacingRuleOptions = getCurrentTablePipeSpacingOption(sourceCode);
+        const needSpaceBeforePipe = spacingRuleOptions
+          ? spacingRuleOptions.trailingSpace === "always"
+          : this.hasSpaceBetweenContentAndTrailingPipe(pipeIndex);
         let maxWidth = 0;
         const columnIndex = pipeIndex - 1;
         for (const row of this.rows) {
