@@ -126,6 +126,32 @@ Output:
 
 
 Test: no-implicit-block-closing >> invalid
+Filename: tests/fixtures/rules/no-implicit-block-closing/invalid/missing-custom-container-with-outer-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Missing closing sequence for custom container with the same length of the opening sequence
+  2 |
+  3 | ::: warning
+  4 |
+  5 | ::: warning
+    | ^~~ [1]
+  6 | This is a warning message.
+  7 | :::
+  8 |
+  9 | :::
+ 10 |
+
+Output: unchanged
+
+[1] Missing closing sequence for custom container.
+---
+
+
+Test: no-implicit-block-closing >> invalid
 Filename: tests/fixtures/rules/no-implicit-block-closing/invalid/missing-fence-in-blockquote-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
