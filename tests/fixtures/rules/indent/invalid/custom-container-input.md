@@ -1,4 +1,4 @@
-::: outer
+:::: outer
  Outer content.
 
  ::: inner
@@ -6,9 +6,9 @@
  :::
 
  More outer content.
-:::
+::::
 
->::: outer
+>:::: outer
 > Outer content.
 >
 > ::: inner
@@ -16,9 +16,9 @@
 > :::
 >
 > More outer content.
->:::
+>::::
 >
-> ::: outer
+> :::: outer
 >  Outer content.
 >
 >  ::: inner
@@ -26,4 +26,4 @@
 >  :::
 >
 >  More outer content.
-> :::
+> ::::
