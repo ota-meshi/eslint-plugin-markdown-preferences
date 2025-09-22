@@ -95,7 +95,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 | Code fence style                              | [MD048] _code-fence-style_<br>Code fence style                                             | --                                                                          | [markdown-preferences/code-fence-style]<br>enforce a consistent code fence style (backtick or tilde) in Markdown fenced code blocks.           |
 | Canonical code block language names           | --                                                                                         | --                                                                          | [markdown-preferences/canonical-code-block-language]<br>enforce canonical language names in code blocks                                        |
 | Code fence length                             | --                                                                                         | --                                                                          | [markdown-preferences/code-fence-length]<br>enforce consistent length for code fences in Markdown fenced code blocks                           |
-| Code fence spacing                            | --                                                                                         | --                                                                          | [markdown-preferences/code-fence-spacing]<br>enforce consistent spacing around code fences in Markdown fenced code blocks                      |
+| Code fence spacing                            | --                                                                                         | --                                                                          | [markdown-preferences/code-fence-spacing]<br>require or disallow spacing between opening code fence and language identifier                    |
 | Enforce specific words to be inline codes     | --                                                                                         | --                                                                          | [markdown-preferences/prefer-inline-code-words]<br>enforce the use of inline code for specific words                                           |
 | Disallow implicit block closing               | --                                                                                         | --                                                                          | [markdown-preferences/no-implicit-block-closing]<br>disallow implicit block closing for fenced code blocks, math blocks, and custom containers |
 
@@ -142,12 +142,6 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 | -------------------- | --------------------------------------- | ---------------------------------------- | ------------------------------------------ |
 | Disallow inline HTML | [MD033] _no-inline-html_<br>Inline HTML | [markdown/no-html]<br>Disallow HTML tags | --                                         |
 
-## Rules Related to Emoji
-
-| Description          | [markdownlint] Rules | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules                                                         |
-| -------------------- | -------------------- | ------------------------ | -------------------------------------------------------------------------------------------------- |
-| Emoji notation style | --                   | --                       | [markdown-preferences/emoji-notation]<br>enforce consistent emoji notation style in Markdown files |
-
 ## Rules Related to Whitespaces
 
 | Description                                      | [markdownlint] Rules                                                                  | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules                                                                      |
@@ -178,9 +172,11 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 
 ## Rules Related to Extended Syntax
 
-| Description                                   | [markdownlint] Rules | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules                                                              |
-| --------------------------------------------- | -------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------- |
-| Disallow or require padding inside containers | --                   | --                       | [markdown-preferences/padded-custom-containers]<br>disallow or require padding inside custom containers |
+| Description                                   | [markdownlint] Rules | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules                                                                                             |
+| --------------------------------------------- | -------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Emoji notation style                          | --                   | --                       | [markdown-preferences/emoji-notation]<br>enforce consistent emoji notation style in Markdown files                                     |
+| Custom container marker spacing               | --                   | --                       | [markdown-preferences/custom-container-marker-spacing]<br>require or disallow spacing between opening custom container marker and info |
+| Disallow or require padding inside containers | --                   | --                       | [markdown-preferences/padded-custom-containers]<br>disallow or require padding inside custom containers                                |
 
 [@eslint/markdown]: https://github.com/eslint/markdown
 [MD001]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md001.md
@@ -243,6 +239,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 [markdown-preferences/code-fence-length]: ../../docs/rules/code-fence-length.md
 [markdown-preferences/code-fence-spacing]: ./../rules/code-fence-spacing.md
 [markdown-preferences/code-fence-style]: ./../rules/code-fence-style.md
+[markdown-preferences/custom-container-marker-spacing]: ./../rules/custom-container-marker-spacing.md
 [markdown-preferences/definitions-last]: ../rules/definitions-last.md
 [markdown-preferences/emoji-notation]: ../rules/emoji-notation.md
 [markdown-preferences/emphasis-delimiters-style]: ./../rules/emphasis-delimiters-style.md

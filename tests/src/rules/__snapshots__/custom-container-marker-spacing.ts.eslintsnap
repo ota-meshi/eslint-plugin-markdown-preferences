@@ -1,0 +1,89 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: custom-container-marker-spacing >> invalid
+Filename: tests/fixtures/rules/custom-container-marker-spacing/invalid/always/missing-space-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+Plugins: unable to serialize
+
+Code:
+  1 | # Missing Space
+  2 |
+  3 | :::warning
+    |    ^~~~~~~ [1]
+  4 | This is a warning.
+  5 | :::
+  6 |
+
+Output:
+  1 | # Missing Space
+  2 |
+  3 | ::: warning
+  4 | This is a warning.
+  5 | :::
+  6 |
+
+[1] Expected a space between opening custom container marker and info.
+---
+
+
+Test: custom-container-marker-spacing >> invalid >>> "# Missing Space\n\n:::warning\nThis is a warning.\n:::\n 2"
+Filename: tests/fixtures/rules/custom-container-marker-spacing/invalid/missing-space-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Missing Space
+  2 |
+  3 | :::warning
+    |    ^~~~~~~ [1]
+  4 | This is a warning.
+  5 | :::
+  6 |
+
+Output:
+  1 | # Missing Space
+  2 |
+  3 | ::: warning
+  4 | This is a warning.
+  5 | :::
+  6 |
+
+[1] Expected a space between opening custom container marker and info.
+---
+
+
+Test: custom-container-marker-spacing >> invalid
+Filename: tests/fixtures/rules/custom-container-marker-spacing/invalid/never/unexpected-space-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+Plugins: unable to serialize
+
+Code:
+  1 | # With Unexpected Space
+  2 |
+  3 | ::: warning
+    |    ^ [1]
+  4 | This is a warning.
+  5 | :::
+  6 |
+
+Output:
+  1 | # With Unexpected Space
+  2 |
+  3 | :::warning
+  4 | This is a warning.
+  5 | :::
+  6 |
+
+[1] Unexpected space between opening custom container marker and info.
+---

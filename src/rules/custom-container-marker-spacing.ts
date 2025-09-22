@@ -1,16 +1,16 @@
 import { getSourceLocationFromRange } from "../utils/ast.ts";
-import { parseFencedCodeBlock } from "../utils/fenced-code-block.ts";
+import { parseCustomContainer } from "../utils/custom-container.ts";
 import { createRule } from "../utils/index.ts";
 
 type Options = {
   space?: "always" | "never";
 };
-export default createRule<[Options?]>("code-fence-spacing", {
+export default createRule<[Options?]>("custom-container-marker-spacing", {
   meta: {
     type: "layout",
     docs: {
       description:
-        "require or disallow spacing between opening code fence and language identifier",
+        "require or disallow spacing between opening custom container marker and info",
       categories: [],
       listCategory: "Whitespace",
     },
@@ -29,32 +29,31 @@ export default createRule<[Options?]>("code-fence-spacing", {
     ],
     messages: {
       expectedSpace:
-        "Expected a space between code fence and language identifier.",
+        "Expected a space between opening custom container marker and info.",
       unexpectedSpace:
-        "Unexpected space between code fence and language identifier.",
+        "Unexpected space between opening custom container marker and info.",
     },
   },
   create(context) {
     const sourceCode = context.sourceCode;
     const option = context.options[0] || {};
-    const space = option.space || "never";
+    const space = option.space || "always";
 
     return {
-      code(node) {
-        const parsed = parseFencedCodeBlock(sourceCode, node);
+      customContainer(node) {
+        const parsed = parseCustomContainer(sourceCode, node);
         if (!parsed) return;
-        const { openingFence, language } = parsed;
-        if (!language) return;
+        const { openingSequence, info } = parsed;
 
-        const hasSpace = openingFence.range[1] < language.range[0];
+        const hasSpace = openingSequence.range[1] < info.range[0];
         if (space === "always") {
           if (hasSpace) return;
           context.report({
             node,
-            loc: getSourceLocationFromRange(sourceCode, node, language.range),
+            loc: getSourceLocationFromRange(sourceCode, node, info.range),
             messageId: "expectedSpace",
             fix(fixer) {
-              return fixer.insertTextAfterRange(openingFence.range, " ");
+              return fixer.insertTextAfterRange(openingSequence.range, " ");
             },
           });
         } else if (space === "never") {
@@ -62,14 +61,14 @@ export default createRule<[Options?]>("code-fence-spacing", {
           context.report({
             node,
             loc: getSourceLocationFromRange(sourceCode, node, [
-              openingFence.range[1],
-              language.range[0],
+              openingSequence.range[1],
+              info.range[0],
             ]),
             messageId: "unexpectedSpace",
             fix(fixer) {
               return fixer.removeRange([
-                openingFence.range[1],
-                language.range[0],
+                openingSequence.range[1],
+                info.range[0],
               ]);
             },
           });
