@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.31.0
+
+### Minor Changes
+
+- [#154](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/154) [`7a5f937`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/7a5f937d5f9a5fd4a7382b2a6723c29ebe2b77b3) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat(standard-config): add code-fence-spacing rule and custom-container-marker-spacing rule
+
 ## 0.30.0
 
 ### Minor Changes
