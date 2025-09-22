@@ -95,6 +95,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 | Code fence style                              | [MD048] _code-fence-style_<br>Code fence style                                             | --                                                                          | [markdown-preferences/code-fence-style]<br>enforce a consistent code fence style (backtick or tilde) in Markdown fenced code blocks.           |
 | Canonical code block language names           | --                                                                                         | --                                                                          | [markdown-preferences/canonical-code-block-language]<br>enforce canonical language names in code blocks                                        |
 | Code fence length                             | --                                                                                         | --                                                                          | [markdown-preferences/code-fence-length]<br>enforce consistent length for code fences in Markdown fenced code blocks                           |
+| Code fence spacing                            | --                                                                                         | --                                                                          | [markdown-preferences/code-fence-spacing]<br>enforce consistent spacing around code fences in Markdown fenced code blocks                      |
 | Enforce specific words to be inline codes     | --                                                                                         | --                                                                          | [markdown-preferences/prefer-inline-code-words]<br>enforce the use of inline code for specific words                                           |
 | Disallow implicit block closing               | --                                                                                         | --                                                                          | [markdown-preferences/no-implicit-block-closing]<br>disallow implicit block closing for fenced code blocks, math blocks, and custom containers |
 
@@ -240,6 +241,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 [markdown-preferences/bullet-list-marker-style]: ../rules/bullet-list-marker-style.md
 [markdown-preferences/canonical-code-block-language]: ../rules/canonical-code-block-language.md
 [markdown-preferences/code-fence-length]: ../../docs/rules/code-fence-length.md
+[markdown-preferences/code-fence-spacing]: ./../rules/code-fence-spacing.md
 [markdown-preferences/code-fence-style]: ./../rules/code-fence-style.md
 [markdown-preferences/definitions-last]: ../rules/definitions-last.md
 [markdown-preferences/emoji-notation]: ../rules/emoji-notation.md
