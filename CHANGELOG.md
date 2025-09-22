@@ -1,5 +1,13 @@
 # eslint-plugin-markdown-preferences
 
+## 0.30.0
+
+### Minor Changes
+
+- [#152](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/152) [`67757bd`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/67757bd707c658a8a3732a7300b27f76799e63fa) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/code-fence-spacing`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/code-fence-spacing.html) rule
+
+- [#152](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/152) [`67757bd`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/67757bd707c658a8a3732a7300b27f76799e63fa) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/custom-container-marker-spacing`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/custom-container-marker-spacing.html) rule
+
 ## 0.29.1
 
 ### Patch Changes

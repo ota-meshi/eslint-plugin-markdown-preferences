@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/custom-container-marker-spacing"
 description: "require or disallow spacing between opening custom container marker and info"
+since: "v0.30.0"
 ---
 
 # markdown-preferences/custom-container-marker-spacing
 
 > require or disallow spacing between opening custom container marker and info
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
@@ -89,12 +89,12 @@ export default defineConfig([
 - [markdown-preferences/padded-custom-containers](./padded-custom-containers.md)
 - [markdown-preferences/no-implicit-block-closing](./no-implicit-block-closing.md)
 
-## 🔍 Implementation
+## 🚀 Version
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+This rule was introduced in eslint-plugin-markdown-preferences v0.30.0
+
+## 🔍 Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/custom-container-marker-spacing.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/custom-container-marker-spacing.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/custom-container-marker-spacing)
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
