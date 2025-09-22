@@ -54,6 +54,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/code-fence-style'?: Linter.RuleEntry<MarkdownPreferencesCodeFenceStyle>
   /**
+   * require or disallow spacing between opening custom container marker and info
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/custom-container-marker-spacing.html
+   */
+  'markdown-preferences/custom-container-marker-spacing'?: Linter.RuleEntry<MarkdownPreferencesCustomContainerMarkerSpacing>
+  /**
    * require link definitions and footnote definitions to be placed at the end of the document
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/definitions-last.html
    */
@@ -304,6 +309,10 @@ type MarkdownPreferencesCodeFenceSpacing = []|[{
 // ----- markdown-preferences/code-fence-style -----
 type MarkdownPreferencesCodeFenceStyle = []|[{
   style?: ("backtick" | "tilde")
+}]
+// ----- markdown-preferences/custom-container-marker-spacing -----
+type MarkdownPreferencesCustomContainerMarkerSpacing = []|[{
+  space?: ("always" | "never")
 }]
 // ----- markdown-preferences/definitions-last -----
 type MarkdownPreferencesDefinitionsLast = []|[{
