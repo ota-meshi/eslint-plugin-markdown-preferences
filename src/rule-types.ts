@@ -526,6 +526,12 @@ type MarkdownPreferencesTableLeadingTrailingPipes = []|[(("always" | "never") | 
 // ----- markdown-preferences/table-pipe-alignment -----
 type MarkdownPreferencesTablePipeAlignment = []|[{
   column?: ("minimum" | "consistent")
+  delimiterMinLength?: ("minimum" | number | {
+    defaultDelimiter?: number
+    leftAlignmentDelimiter?: number
+    centerAlignmentDelimiter?: number
+    rightAlignmentDelimiter?: number
+  })
 }]
 // ----- markdown-preferences/table-pipe-spacing -----
 type MarkdownPreferencesTablePipeSpacing = []|[{
