@@ -2,10 +2,17 @@ import assert from "assert";
 import * as plugin from "../../src/index.ts";
 import { Linter } from "eslint";
 
-const testCases: { name: string; code: string; rules: Linter.RulesRecord }[] = [
+const testCases: {
+  name: string;
+  code: string;
+  rules: Linter.RulesRecord;
+  output?: string;
+  only?: boolean;
+}[] = [
   {
     name: "table-pipe-alignment with table-pipe-spacing",
-    code: `| Name   | Age | Role      |
+    code: `
+| Name   | Age | Role      |
 | ------- | ---| --------- |
 | Alice  | 30  | Developer |
 | Bob    | 25  | Designer  |
@@ -15,10 +22,29 @@ const testCases: { name: string; code: string; rules: Linter.RulesRecord }[] = [
       "markdown-preferences/table-pipe-spacing": "error",
     },
   },
+  {
+    name: "table-pipe-alignment with table-pipe-spacing",
+    code: `
+| Name      | age | role      |
+|-----------|----:|:---------:|
+| Alice     |  30 | Developer |
+| Bob       |  25 | Designer  |
+| Charlie   |  35 | Manager   |`,
+    rules: {
+      "markdown-preferences/table-pipe-alignment": "error",
+      "markdown-preferences/table-pipe-spacing": "error",
+    },
+    output: `
+| Name    | age |   role    |
+| ------- | --: | :-------: |
+| Alice   |  30 | Developer |
+| Bob     |  25 | Designer  |
+| Charlie |  35 |  Manager  |`,
+  },
 ];
 describe("No conflicts between multiple rules", () => {
   for (const testCase of testCases) {
-    it(testCase.name, () => {
+    (testCase.only ? it.only : it)(testCase.name, () => {
       const linter = new Linter();
       const result = linter.verifyAndFix(testCase.code, {
         plugins: {
@@ -37,6 +63,9 @@ describe("No conflicts between multiple rules", () => {
         })),
         [],
       );
+      if (testCase.output) {
+        assert.strictEqual(result.output, testCase.output);
+      }
     });
   }
 });

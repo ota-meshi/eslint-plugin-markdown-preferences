@@ -30,6 +30,9 @@ type DelimiterData = {
 type RowData = {
   cells: (CellData | DelimiterData)[];
 };
+type DelimiterRowData = {
+  cells: DelimiterData[];
+};
 
 type DelimiterMinLengthValue = "minimum" | number;
 type DelimiterMinLengthOption =
@@ -151,9 +154,16 @@ export default createRule<[Options]>("table-pipe-alignment", {
     class TableContext {
       public readonly rows: RowData[];
 
+      public readonly delimiterRow: DelimiterRowData;
+
       public readonly columnCount: number;
 
-      private readonly _cacheHasSpaceBetweenContentAndTrailingPipe = new Map<
+      private readonly _cacheNeedSpaceBetweenLeadingPipeAndContent = new Map<
+        number,
+        boolean
+      >();
+
+      private readonly _cacheNeedSpaceBetweenContentAndTrailingPipe = new Map<
         number,
         boolean
       >();
@@ -164,9 +174,12 @@ export default createRule<[Options]>("table-pipe-alignment", {
       >();
 
       public constructor(parsed: ParsedTable) {
+        this.delimiterRow = parsedTableDelimiterRowToRowData(
+          parsed.delimiterRow,
+        );
         const rows: RowData[] = [
           parsedTableRowToRowData(parsed.headerRow),
-          parsedTableDelimiterRowToRowData(parsed.delimiterRow),
+          this.delimiterRow,
         ];
         for (const bodyRow of parsed.bodyRows) {
           rows.push(parsedTableRowToRowData(bodyRow));
@@ -192,17 +205,48 @@ export default createRule<[Options]>("table-pipe-alignment", {
       }
 
       /**
+       * Check if there is at least one space between leading pipe and content
+       */
+      public isNeedSpaceBetweenLeadingPipeAndContent(
+        pipeIndex: number,
+      ): boolean {
+        let v = this._cacheNeedSpaceBetweenLeadingPipeAndContent.get(pipeIndex);
+        if (v != null) return v;
+        if (
+          getCurrentTablePipeSpacingOption(sourceCode)?.leadingSpace ===
+          "always"
+        ) {
+          v = true;
+        } else {
+          v = this._hasSpaceBetweenLeadingPipeAndContentWithoutCache(pipeIndex);
+        }
+        this._cacheNeedSpaceBetweenLeadingPipeAndContent.set(pipeIndex, v);
+        return v;
+      }
+
+      /**
        * Check if there is at least one space between content and trailing pipe
        * for the index
        *
        * This is used to determine if the pipe should be aligned with a space before it.
        */
-      public hasSpaceBetweenContentAndTrailingPipe(pipeIndex: number): boolean {
+      public isNeedSpaceBetweenContentAndTrailingPipe(
+        pipeIndex: number,
+      ): boolean {
         if (pipeIndex === 0) return false;
-        let v = this._cacheHasSpaceBetweenContentAndTrailingPipe.get(pipeIndex);
+        let v =
+          this._cacheNeedSpaceBetweenContentAndTrailingPipe.get(pipeIndex);
         if (v != null) return v;
-        v = this._hasSpaceBetweenContentAndTrailingPipeWithoutCache(pipeIndex);
-        this._cacheHasSpaceBetweenContentAndTrailingPipe.set(pipeIndex, v);
+        if (
+          getCurrentTablePipeSpacingOption(sourceCode)?.trailingSpace ===
+          "always"
+        ) {
+          v = true;
+        } else {
+          v =
+            this._hasSpaceBetweenContentAndTrailingPipeWithoutCache(pipeIndex);
+        }
+        this._cacheNeedSpaceBetweenContentAndTrailingPipe.set(pipeIndex, v);
         return v;
       }
 
@@ -217,10 +261,9 @@ export default createRule<[Options]>("table-pipe-alignment", {
           const firstToken = firstCell.leadingPipe ?? firstCell.content;
           if (!firstToken) return null;
           return getTextWidth(
-            sourceCode.lines[firstToken.loc.start.line - 1].slice(
-              0,
-              firstToken.loc.start.column - 1,
-            ),
+            sourceCode.lines[firstToken.loc.start.line - 1],
+            0,
+            firstToken.loc.start.column - 1,
           );
         }
         if (options.columnOption === "minimum") {
@@ -232,10 +275,9 @@ export default createRule<[Options]>("table-pipe-alignment", {
             const cell = row.cells[columnIndex];
             if (cell.type === "delimiter" || !cell.trailingPipe) continue;
             const width = getTextWidth(
-              sourceCode.lines[cell.trailingPipe.loc.start.line - 1].slice(
-                0,
-                cell.trailingPipe.loc.start.column - 1,
-              ),
+              sourceCode.lines[cell.trailingPipe.loc.start.line - 1],
+              0,
+              cell.trailingPipe.loc.start.column - 1,
             );
             return Math.max(width, this.getMinimumPipePosition(pipeIndex) || 0);
           }
@@ -247,34 +289,54 @@ export default createRule<[Options]>("table-pipe-alignment", {
        * Get the minimum pipe position for the index
        */
       private getMinimumPipePosition(pipeIndex: number): number | null {
-        const spacingRuleOptions = getCurrentTablePipeSpacingOption(sourceCode);
-        const needSpaceBeforePipe = spacingRuleOptions
-          ? spacingRuleOptions.trailingSpace === "always"
-          : this.hasSpaceBetweenContentAndTrailingPipe(pipeIndex);
+        const needSpaceAfterPipe = this.isNeedSpaceBetweenLeadingPipeAndContent(
+          pipeIndex - 1,
+        );
+        const needSpaceBeforePipe =
+          this.isNeedSpaceBetweenContentAndTrailingPipe(pipeIndex);
         let maxWidth = 0;
         const columnIndex = pipeIndex - 1;
         for (const row of this.rows) {
           if (row.cells.length <= columnIndex) continue;
           const cell = row.cells[columnIndex];
           let width: number;
-          if (cell.type === "delimiter") {
+          if (cell.leadingPipe) {
+            const leadingPipeEndOffset = getTextWidth(
+              sourceCode.lines[cell.leadingPipe.loc.end.line - 1],
+              0,
+              cell.leadingPipe.loc.end.column - 1,
+            );
+            let contentLength: number;
+            if (cell.type === "delimiter") {
+              contentLength = getMinimumDelimiterLength(cell.align);
+            } else {
+              if (!cell.content) continue;
+              contentLength = getTextWidth(
+                sourceCode.lines[cell.content.loc.start.line - 1],
+                cell.content.loc.start.column - 1,
+                cell.content.loc.end.column - 1,
+              );
+            }
+            width =
+              leadingPipeEndOffset +
+              (needSpaceAfterPipe ? 1 : 0) +
+              contentLength;
+          } else if (cell.type === "delimiter") {
             const minimumDelimiterLength = getMinimumDelimiterLength(
               cell.align,
             );
             width =
               getTextWidth(
-                sourceCode.lines[cell.delimiter.loc.start.line - 1].slice(
-                  0,
-                  cell.delimiter.loc.start.column - 1,
-                ),
+                sourceCode.lines[cell.delimiter.loc.start.line - 1],
+                0,
+                cell.delimiter.loc.start.column - 1,
               ) + minimumDelimiterLength;
           } else {
             if (!cell.content) continue;
             width = getTextWidth(
-              sourceCode.lines[cell.content.loc.end.line - 1].slice(
-                0,
-                cell.content.loc.end.column - 1,
-              ),
+              sourceCode.lines[cell.content.loc.end.line - 1],
+              0,
+              cell.content.loc.end.column - 1,
             );
           }
           if (needSpaceBeforePipe) {
@@ -284,6 +346,30 @@ export default createRule<[Options]>("table-pipe-alignment", {
           maxWidth = Math.max(maxWidth, width);
         }
         return maxWidth;
+      }
+
+      /**
+       * Check if there is at least one space between leading pipe and content
+       */
+      private _hasSpaceBetweenLeadingPipeAndContentWithoutCache(
+        pipeIndex: number,
+      ) {
+        const columnIndex = pipeIndex;
+        for (const row of this.rows) {
+          if (row.cells.length <= columnIndex) continue;
+          const cell = row.cells[columnIndex];
+          if (!cell.leadingPipe) continue;
+          let content: TokenData;
+          if (cell.type === "delimiter") {
+            content = cell.delimiter;
+          } else {
+            if (!cell.content) continue;
+            content = cell.content;
+          }
+          if (cell.leadingPipe.range[1] < content.range[0]) continue;
+          return false;
+        }
+        return true;
       }
 
       /**
@@ -361,10 +447,9 @@ export default createRule<[Options]>("table-pipe-alignment", {
       const expected = table.getExpectedPipePosition(pipeIndex);
       if (expected == null) return true;
       const actual = getTextWidth(
-        sourceCode.lines[pipe.loc.start.line - 1].slice(
-          0,
-          pipe.loc.start.column - 1,
-        ),
+        sourceCode.lines[pipe.loc.start.line - 1],
+        0,
+        pipe.loc.start.column - 1,
       );
       const diff = expected - actual;
       if (diff === 0) return true;
@@ -399,26 +484,50 @@ export default createRule<[Options]>("table-pipe-alignment", {
           const widthBeforeDelimiter = getTextWidth(beforeDelimiter);
           const newLength = expected - widthBeforeDelimiter;
           const minimumDelimiterLength = getMinimumDelimiterLength(cell.align);
-          const spaceAfter = table.hasSpaceBetweenContentAndTrailingPipe(
+          const spaceAfter = table.isNeedSpaceBetweenContentAndTrailingPipe(
             pipeIndex,
           )
             ? " "
             : "";
           if (newLength < minimumDelimiterLength + spaceAfter.length) {
             // Can't fix because it requires removing non-space characters
-            return null;
+            const edit = fixRemoveSpacesFromLeadingSpaces(
+              Math.abs(newLength - minimumDelimiterLength) + spaceAfter.length,
+            );
+            if (!edit) {
+              // Can't fix because it requires removing non-space characters
+              return null;
+            }
+            const delimiterPrefix =
+              cell.align === "left" || cell.align === "center" ? ":" : "";
+            const delimiterSuffix =
+              cell.align === "right" || cell.align === "center" ? ":" : "";
+            const newDelimiter = "-".repeat(
+              minimumDelimiterLength -
+                delimiterPrefix.length -
+                delimiterSuffix.length,
+            );
+            return [
+              edit,
+              fixer.replaceTextRange(
+                [cell.delimiter.range[0], pipe.range[0]],
+                delimiterPrefix + newDelimiter + delimiterSuffix + spaceAfter,
+              ),
+            ];
           }
           const delimiterPrefix =
             cell.align === "left" || cell.align === "center" ? ":" : "";
           const delimiterSuffix =
-            (cell.align === "right" || cell.align === "center" ? ":" : "") +
-            spaceAfter;
+            cell.align === "right" || cell.align === "center" ? ":" : "";
           const newDelimiter = "-".repeat(
-            newLength - delimiterPrefix.length - delimiterSuffix.length,
+            newLength -
+              delimiterPrefix.length -
+              delimiterSuffix.length -
+              spaceAfter.length,
           );
           return fixer.replaceTextRange(
             [cell.delimiter.range[0], pipe.range[0]],
-            delimiterPrefix + newDelimiter + delimiterSuffix,
+            delimiterPrefix + newDelimiter + delimiterSuffix + spaceAfter,
           );
 
           /**
@@ -434,15 +543,56 @@ export default createRule<[Options]>("table-pipe-alignment", {
               beforePipe.length - trimmedBeforePipe.length;
             const widthBeforePipe = getTextWidth(trimmedBeforePipe);
             const newSpacesLength = expected! - widthBeforePipe;
+            const minTrailingSpaceWidth =
+              table.isNeedSpaceBetweenContentAndTrailingPipe(pipeIndex) ? 1 : 0;
+            if (newSpacesLength < minTrailingSpaceWidth) {
+              const edit = fixRemoveSpacesFromLeadingSpaces(
+                Math.abs(newSpacesLength) + minTrailingSpaceWidth,
+              );
+              if (!edit) {
+                // Can't fix because it requires removing non-space characters
+                return null;
+              }
+
+              return [
+                edit,
+                fixer.replaceTextRange(
+                  [pipe.range[0] - spacesBeforePipeLength, pipe.range[0]],
+                  " ".repeat(minTrailingSpaceWidth),
+                ),
+              ];
+            }
+            return fixer.replaceTextRange(
+              [pipe.range[0] - spacesBeforePipeLength, pipe.range[0]],
+              " ".repeat(newSpacesLength),
+            );
+          }
+
+          /**
+           * Fixer to remove spaces from the leading spaces
+           */
+          function fixRemoveSpacesFromLeadingSpaces(removeSpaceLength: number) {
+            if (!cell.leadingPipe || pipeIndex === 0) return null;
+            const content =
+              cell.type === "delimiter" ? cell.delimiter : cell.content;
+            if (!content) return null;
+            const leadingSpaceWidth = getTextWidth(
+              sourceCode.lines[cell.leadingPipe.loc.end.line - 1],
+              cell.leadingPipe.loc.end.column - 1,
+              content.loc.start.column - 1,
+            );
+            const newSpacesLength = leadingSpaceWidth - removeSpaceLength;
             if (
               newSpacesLength <
-              (table.hasSpaceBetweenContentAndTrailingPipe(pipeIndex) ? 1 : 0)
+              (table.isNeedSpaceBetweenLeadingPipeAndContent(pipeIndex - 1)
+                ? 1
+                : 0)
             ) {
               // Can't fix because it requires removing non-space characters
               return null;
             }
             return fixer.replaceTextRange(
-              [pipe.range[0] - spacesBeforePipeLength, pipe.range[0]],
+              [cell.leadingPipe.range[1], content.range[0]],
               " ".repeat(newSpacesLength),
             );
           }
@@ -505,7 +655,7 @@ function parsedTableRowToRowData(parsedRow: ParsedTableRow): RowData {
  */
 function parsedTableDelimiterRowToRowData(
   parsedDelimiterRow: ParsedTableDelimiterRow,
-): RowData {
+): DelimiterRowData {
   return {
     cells: parsedDelimiterRow.delimiters.map((cell, index) => {
       const nextCell =

@@ -611,10 +611,10 @@ Output:
  25 | | アリス     | 2000-01-01 | 青       | 24   |
  26 | | ボブ       | 1995-05-23 | 緑       | 28   |
  27 |
- 28 | | ユーザー名| 生年月日  | 好きな色| 年齢|
- 29 | |-----------|:---------:|:-------:|----:|
- 30 | | アリス    | 2000-01-01| 青      | 24  |
- 31 | | ボブ      | 1995-05-23| 緑      | 28  |
+ 28 | |ユーザー名| 生年月日 |好きな色|年齢|
+ 29 | |----------|:--------:|:------:|---:|
+ 30 | | アリス   |2000-01-01| 青     | 24 |
+ 31 | | ボブ     |1995-05-23| 緑     | 28 |
  32 |
  33 | | ユーザー名 | 生年月日   | 好きな色 | 年齢 |
  34 | | -------    | :--------: | :------- | -:   |
@@ -644,10 +644,10 @@ Output:
 [15] Table pipe should be aligned at column 13 (remove 2 characters).
 [16] Table pipe should be aligned at column 13 (remove 3 characters).
 [17] Table pipe should be aligned at column 13 (remove 3 characters).
-[18] Table pipe should be aligned at column 12 (remove 4 characters).
-[19] Table pipe should be aligned at column 12 (remove 3 characters).
-[20] Table pipe should be aligned at column 12 (remove 4 characters).
-[21] Table pipe should be aligned at column 12 (remove 4 characters).
+[18] Table pipe should be aligned at column 11 (remove 5 characters).
+[19] Table pipe should be aligned at column 11 (remove 4 characters).
+[20] Table pipe should be aligned at column 11 (remove 5 characters).
+[21] Table pipe should be aligned at column 11 (remove 5 characters).
 [22] Table pipe should be aligned at column 13 (remove 3 characters).
 [23] Table pipe should be aligned at column 13 (remove 2 characters).
 [24] Table pipe should be aligned at column 13 (remove 3 characters).
@@ -767,10 +767,10 @@ Output:
  25 | | Alice     | 2000-01-01    | Blue           | 24  |
  26 | | Bob       | 1995-05-23    | Green          | 28  |
  27 |
- 28 | | User Name| Date Of Birth| Favorite Color| Age|
- 29 | |----------|:------------:|:-------------:|---:|
- 30 | | Alice    | 2000-01-01   | Blue          | 24 |
- 31 | | Bob      | 1995-05-23   | Green         | 28 |
+ 28 | |User Name|Date Of Birth|Favorite Color|Age|
+ 29 | |---------|:-----------:|:------------:|--:|
+ 30 | | Alice   | 2000-01-01  | Blue         | 24|
+ 31 | | Bob     | 1995-05-23  | Green        | 28|
  32 |
  33 | | User Name | Date Of Birth | Favorite Color | Age |
  34 | | -------   | :---------:   | :-----------   | -:  |
@@ -800,10 +800,10 @@ Output:
 [15] Table pipe should be aligned at column 12 (remove 3 characters).
 [16] Table pipe should be aligned at column 12 (remove 3 characters).
 [17] Table pipe should be aligned at column 12 (remove 3 characters).
-[18] Table pipe should be aligned at column 11 (remove 4 characters).
-[19] Table pipe should be aligned at column 11 (remove 4 characters).
-[20] Table pipe should be aligned at column 11 (remove 4 characters).
-[21] Table pipe should be aligned at column 11 (remove 4 characters).
+[18] Table pipe should be aligned at column 10 (remove 5 characters).
+[19] Table pipe should be aligned at column 10 (remove 5 characters).
+[20] Table pipe should be aligned at column 10 (remove 5 characters).
+[21] Table pipe should be aligned at column 10 (remove 5 characters).
 [22] Table pipe should be aligned at column 12 (remove 3 characters).
 [23] Table pipe should be aligned at column 12 (remove 3 characters).
 [24] Table pipe should be aligned at column 12 (remove 3 characters).
