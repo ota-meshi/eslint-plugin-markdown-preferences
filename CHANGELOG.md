@@ -1,5 +1,13 @@
 # eslint-plugin-markdown-preferences
 
+## 0.32.0
+
+### Minor Changes
+
+- [#157](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/157) [`0148afd`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/0148afd9368c93d77d714c731904dc33808b690b) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat([markdown-preferences/table-pipe-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-pipe-alignment.html)): change default `delimiterMinLength` option to `3`
+
+- [#157](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/157) [`0148afd`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/0148afd9368c93d77d714c731904dc33808b690b) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat([markdown-preferences/table-pipe-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-pipe-alignment.html)): add `delimiterMinLength` option
+
 ## 0.31.0
 
 ### Minor Changes
