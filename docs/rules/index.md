@@ -62,21 +62,22 @@ The rules with the following 💄 are included in the `plugin.configs.standard` 
 
 <!-- prettier-ignore-start -->
 
-| Rule ID                                                                              | Description                                                          | Fixable | Config |
-| :----------------------------------------------------------------------------------- | :------------------------------------------------------------------- | :-----: | :----: |
-| [markdown-preferences/blockquote-marker-alignment](./blockquote-marker-alignment.md) | enforce consistent alignment of blockquote markers                   |   🔧    |  ⭐💄  |
-| [markdown-preferences/indent](./indent.md)                                           | enforce consistent indentation in Markdown files                     |   🔧    |   💄   |
-| [markdown-preferences/link-bracket-newline](./link-bracket-newline.md)               | enforce linebreaks after opening and before closing link brackets    |   🔧    |   💄   |
-| [markdown-preferences/link-bracket-spacing](./link-bracket-spacing.md)               | enforce consistent spacing inside link brackets                      |   🔧    |   💄   |
-| [markdown-preferences/link-paren-newline](./link-paren-newline.md)                   | enforce linebreaks after opening and before closing link parentheses |   🔧    |   💄   |
-| [markdown-preferences/link-paren-spacing](./link-paren-spacing.md)                   | enforce consistent spacing inside link parentheses                   |   🔧    |   💄   |
-| [markdown-preferences/list-marker-alignment](./list-marker-alignment.md)             | enforce consistent alignment of list markers                         |   🔧    |  ⭐💄  |
-| [markdown-preferences/no-multi-spaces](./no-multi-spaces.md)                         | disallow multiple spaces                                             |   🔧    |   💄   |
-| [markdown-preferences/no-multiple-empty-lines](./no-multiple-empty-lines.md)         | disallow multiple empty lines in Markdown files.                     |   🔧    |   💄   |
-| [markdown-preferences/no-trailing-spaces](./no-trailing-spaces.md)                   | disallow trailing whitespace at the end of lines in Markdown files.  |   🔧    |   💄   |
-| [markdown-preferences/padded-custom-containers](./padded-custom-containers.md)       | disallow or require padding inside custom containers                 |   🔧    |   💄   |
-| [markdown-preferences/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks                     |   🔧    |   💄   |
-| [markdown-preferences/table-pipe-spacing](./table-pipe-spacing.md)                   | enforce consistent spacing around table pipes                        |   🔧    |   💄   |
+| Rule ID                                                                              | Description                                                                    | Fixable | Config |
+| :----------------------------------------------------------------------------------- | :----------------------------------------------------------------------------- | :-----: | :----: |
+| [markdown-preferences/blockquote-marker-alignment](./blockquote-marker-alignment.md) | enforce consistent alignment of blockquote markers                             |   🔧    |  ⭐💄  |
+| [markdown-preferences/code-fence-spacing](./code-fence-spacing.md)                   | require or disallow spacing between opening code fence and language identifier |   🔧    |        |
+| [markdown-preferences/indent](./indent.md)                                           | enforce consistent indentation in Markdown files                               |   🔧    |   💄   |
+| [markdown-preferences/link-bracket-newline](./link-bracket-newline.md)               | enforce linebreaks after opening and before closing link brackets              |   🔧    |   💄   |
+| [markdown-preferences/link-bracket-spacing](./link-bracket-spacing.md)               | enforce consistent spacing inside link brackets                                |   🔧    |   💄   |
+| [markdown-preferences/link-paren-newline](./link-paren-newline.md)                   | enforce linebreaks after opening and before closing link parentheses           |   🔧    |   💄   |
+| [markdown-preferences/link-paren-spacing](./link-paren-spacing.md)                   | enforce consistent spacing inside link parentheses                             |   🔧    |   💄   |
+| [markdown-preferences/list-marker-alignment](./list-marker-alignment.md)             | enforce consistent alignment of list markers                                   |   🔧    |  ⭐💄  |
+| [markdown-preferences/no-multi-spaces](./no-multi-spaces.md)                         | disallow multiple spaces                                                       |   🔧    |   💄   |
+| [markdown-preferences/no-multiple-empty-lines](./no-multiple-empty-lines.md)         | disallow multiple empty lines in Markdown files.                               |   🔧    |   💄   |
+| [markdown-preferences/no-trailing-spaces](./no-trailing-spaces.md)                   | disallow trailing whitespace at the end of lines in Markdown files.            |   🔧    |   💄   |
+| [markdown-preferences/padded-custom-containers](./padded-custom-containers.md)       | disallow or require padding inside custom containers                           |   🔧    |   💄   |
+| [markdown-preferences/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks                               |   🔧    |   💄   |
+| [markdown-preferences/table-pipe-spacing](./table-pipe-spacing.md)                   | enforce consistent spacing around table pipes                                  |   🔧    |   💄   |
 
 <!-- prettier-ignore-end -->
 
