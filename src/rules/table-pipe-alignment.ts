@@ -31,9 +31,74 @@ type RowData = {
   cells: (CellData | DelimiterData)[];
 };
 
+type DelimiterMinLengthValue = "minimum" | number;
+type DelimiterMinLengthOption =
+  | DelimiterMinLengthValue
+  | {
+      defaultDelimiter?: DelimiterMinLengthValue;
+      leftAlignmentDelimiter?: DelimiterMinLengthValue;
+      centerAlignmentDelimiter?: DelimiterMinLengthValue;
+      rightAlignmentDelimiter?: DelimiterMinLengthValue;
+    };
+
 type Options = {
   column?: "minimum" | "consistent";
+  delimiterMinLength?: DelimiterMinLengthOption;
 };
+
+/**
+ * Parse and normalize options
+ */
+function parseOptions(options: Options | undefined) {
+  const columnOption = options?.column || "minimum";
+  const delimiterMinLengthOption = options?.delimiterMinLength || 3;
+  let delimiterMinLength: {
+    defaultDelimiter: number;
+    leftAlignmentDelimiter: number;
+    centerAlignmentDelimiter: number;
+    rightAlignmentDelimiter: number;
+  };
+  if (
+    delimiterMinLengthOption === "minimum" ||
+    delimiterMinLengthOption == null
+  ) {
+    delimiterMinLength = {
+      defaultDelimiter: 1,
+      leftAlignmentDelimiter: 2,
+      centerAlignmentDelimiter: 3,
+      rightAlignmentDelimiter: 2,
+    };
+  } else if (typeof delimiterMinLengthOption === "number") {
+    const v = Math.max(3, delimiterMinLengthOption);
+    delimiterMinLength = {
+      defaultDelimiter: v,
+      leftAlignmentDelimiter: v,
+      centerAlignmentDelimiter: v,
+      rightAlignmentDelimiter: v,
+    };
+  } else {
+    delimiterMinLength = {
+      defaultDelimiter:
+        typeof delimiterMinLengthOption.defaultDelimiter === "number"
+          ? Math.max(1, delimiterMinLengthOption.defaultDelimiter)
+          : 3,
+      leftAlignmentDelimiter:
+        typeof delimiterMinLengthOption.leftAlignmentDelimiter === "number"
+          ? Math.max(2, delimiterMinLengthOption.leftAlignmentDelimiter)
+          : 3,
+      centerAlignmentDelimiter:
+        typeof delimiterMinLengthOption.centerAlignmentDelimiter === "number"
+          ? Math.max(3, delimiterMinLengthOption.centerAlignmentDelimiter)
+          : 3,
+      rightAlignmentDelimiter:
+        typeof delimiterMinLengthOption.rightAlignmentDelimiter === "number"
+          ? Math.max(2, delimiterMinLengthOption.rightAlignmentDelimiter)
+          : 3,
+    };
+  }
+  return { columnOption, delimiterMinLength };
+}
+
 export default createRule<[Options]>("table-pipe-alignment", {
   meta: {
     type: "layout",
@@ -49,6 +114,25 @@ export default createRule<[Options]>("table-pipe-alignment", {
         type: "object",
         properties: {
           column: { enum: ["minimum", "consistent"] },
+          delimiterMinLength: {
+            anyOf: [
+              { const: "minimum" },
+              {
+                type: "number",
+                minimum: 3,
+              },
+              {
+                type: "object",
+                properties: {
+                  defaultDelimiter: { type: "number", minimum: 1 },
+                  leftAlignmentDelimiter: { type: "number", minimum: 2 },
+                  centerAlignmentDelimiter: { type: "number", minimum: 3 },
+                  rightAlignmentDelimiter: { type: "number", minimum: 2 },
+                },
+                additionalProperties: false,
+              },
+            ],
+          },
         },
         additionalProperties: false,
       },
@@ -62,8 +146,7 @@ export default createRule<[Options]>("table-pipe-alignment", {
   },
   create(context) {
     const sourceCode = context.sourceCode;
-    const options = context.options[0] || {};
-    const columnOption = options.column || "minimum";
+    const options = parseOptions(context.options[0]);
 
     class TableContext {
       public readonly rows: RowData[];
@@ -140,9 +223,9 @@ export default createRule<[Options]>("table-pipe-alignment", {
             ),
           );
         }
-        if (columnOption === "minimum") {
+        if (options.columnOption === "minimum") {
           return this.getMinimumPipePosition(pipeIndex);
-        } else if (columnOption === "consistent") {
+        } else if (options.columnOption === "consistent") {
           const columnIndex = pipeIndex - 1;
           for (const row of this.rows) {
             if (row.cells.length <= columnIndex) continue;
@@ -369,12 +452,24 @@ export default createRule<[Options]>("table-pipe-alignment", {
     }
 
     /**
-     * Get the minimum delimiter length based on alignment
+     * Get the minimum delimiter length based on alignment and options
      */
     function getMinimumDelimiterLength(
       align: "left" | "right" | "center" | "none",
     ): number {
-      return align === "none" ? 1 : align === "center" ? 3 : 2;
+      if (align === "none") {
+        return options.delimiterMinLength.defaultDelimiter;
+      }
+      if (align === "left") {
+        return options.delimiterMinLength.leftAlignmentDelimiter;
+      }
+      if (align === "center") {
+        return options.delimiterMinLength.centerAlignmentDelimiter;
+      }
+      if (align === "right") {
+        return options.delimiterMinLength.rightAlignmentDelimiter;
+      }
+      return options.delimiterMinLength.defaultDelimiter;
     }
 
     return {

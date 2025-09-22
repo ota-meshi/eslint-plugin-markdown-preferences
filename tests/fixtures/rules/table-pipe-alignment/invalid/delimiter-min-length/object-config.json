@@ -1,0 +1,10 @@
+{
+  "options": [
+    {
+      "delimiterMinLength": {
+        "defaultDelimiter": 5,
+        "centerAlignmentDelimiter": 7
+      }
+    }
+  ]
+}
