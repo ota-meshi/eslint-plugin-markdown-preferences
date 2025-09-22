@@ -11,7 +11,7 @@ export default createRule<[Options?]>("code-fence-spacing", {
     docs: {
       description:
         "require or disallow spacing between opening code fence and language identifier",
-      categories: [],
+      categories: ["standard"],
       listCategory: "Whitespace",
     },
     fixable: "whitespace",

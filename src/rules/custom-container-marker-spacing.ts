@@ -11,7 +11,7 @@ export default createRule<[Options?]>("custom-container-marker-spacing", {
     docs: {
       description:
         "require or disallow spacing between opening custom container marker and info",
-      categories: [],
+      categories: ["standard"],
       listCategory: "Whitespace",
     },
     fixable: "whitespace",
