@@ -65,8 +65,8 @@ The rules with the following 💄 are included in the `plugin.configs.standard` 
 | Rule ID                                                                                      | Description                                                                    | Fixable | Config |
 | :------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------- | :-----: | :----: |
 | [markdown-preferences/blockquote-marker-alignment](./blockquote-marker-alignment.md)         | enforce consistent alignment of blockquote markers                             |   🔧    |  ⭐💄  |
-| [markdown-preferences/code-fence-spacing](./code-fence-spacing.md)                           | require or disallow spacing between opening code fence and language identifier |   🔧    |        |
-| [markdown-preferences/custom-container-marker-spacing](./custom-container-marker-spacing.md) | require or disallow spacing between opening custom container marker and info   |   🔧    |        |
+| [markdown-preferences/code-fence-spacing](./code-fence-spacing.md)                           | require or disallow spacing between opening code fence and language identifier |   🔧    |   💄   |
+| [markdown-preferences/custom-container-marker-spacing](./custom-container-marker-spacing.md) | require or disallow spacing between opening custom container marker and info   |   🔧    |   💄   |
 | [markdown-preferences/indent](./indent.md)                                                   | enforce consistent indentation in Markdown files                               |   🔧    |   💄   |
 | [markdown-preferences/link-bracket-newline](./link-bracket-newline.md)                       | enforce linebreaks after opening and before closing link brackets              |   🔧    |   💄   |
 | [markdown-preferences/link-bracket-spacing](./link-bracket-spacing.md)                       | enforce consistent spacing inside link brackets                                |   🔧    |   💄   |
