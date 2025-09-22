@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.33.0
+
+### Minor Changes
+
+- [#159](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/159) [`6ff057d`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/6ff057dcdc00f9595dfd0deb9499a378725197d9) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat([markdown-preferences/table-pipe-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-pipe-alignment.html)): improve alignment calculation for `column: "minimum"`
+
 ## 0.32.0
 
 ### Minor Changes
