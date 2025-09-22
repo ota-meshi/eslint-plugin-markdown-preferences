@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.29.1
+
+### Patch Changes
+
+- [#150](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/150) [`bb9cb0e`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/bb9cb0e89eb63c490ede7b00d6510dd35ba2f424) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix([markdown-preferences/table-pipe-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-pipe-alignment.html)): conflict autofix with [markdown-preferences/table-pipe-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-pipe-spacing.html) rule
+
 ## 0.29.0
 
 ### Minor Changes
