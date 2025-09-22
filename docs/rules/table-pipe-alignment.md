@@ -51,7 +51,8 @@ The rule can automatically fix many alignment issues using the `--fix` option.
   "markdown-preferences/table-pipe-alignment": [
     "error",
     {
-      "column": "minimum"
+      "column": "minimum",
+      "delimiterMinLength": "minimum"
     }
   ]
 }
@@ -60,6 +61,66 @@ The rule can automatically fix many alignment issues using the `--fix` option.
 - `column`: Specifies the alignment style for table pipes. Possible values are:
   - `"minimum"` (default): Aligns pipes to the minimum necessary positions based on the content.
   - `"consistent"`: Ensures that all pipes in a column are aligned consistently, based on the first row's alignment. However, if there are cells longer than the first row, they will be adjusted accordingly.
+- `delimiterMinLength`: Specifies the minimum length for table delimiter markers. Possible values are:
+  - `"minimum"` (default): Uses the minimum required length for each delimiter type (`----`: 1, `:---`: 2, `---:`: 2, `:--:`: 3).
+  - `number`: Forces all delimiters to be at least this length. If you want to use a value less than 3, please use the object format.
+  - `object`: Allows fine-grained control per delimiter type:
+    - `defaultDelimiter`: Length for default delimiters (`----`).
+    - `leftAlignmentDelimiter`: Length for left-aligned delimiters (`:---`).
+    - `centerAlignmentDelimiter`: Length for center-aligned delimiters (`:--:`).
+    - `rightAlignmentDelimiter`: Length for right-aligned delimiters (`---:`).
+
+### Examples for `delimiterMinLength` Option
+
+#### Number Value
+
+<!-- prettier-ignore-start -->
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/table-pipe-alignment: ['error', { delimiterMinLength: 3 }] -->
+
+<!-- ✓ GOOD -->
+
+| No  | Header 1 | Header 2 |
+| --- | -------- | -------- |
+| 1   | Value 1  | Value 2  |
+| 2   | Value 3  | Value 4  |
+
+<!-- ✗ BAD -->
+
+| No | Header 1 | Header 2 |
+| -- | -------- | -------- |
+| 1  | Value 1  | Value 2  |
+| 2  | Value 3  | Value 4  |
+```
+
+<!-- prettier-ignore-end -->
+
+#### Object Value
+
+<!-- prettier-ignore-start -->
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/table-pipe-alignment: ['error', { delimiterMinLength: { defaultDelimiter: 5, centerAlignmentDelimiter: 7, rightAlignmentDelimiter: 2 } }] -->
+
+<!-- ✓ GOOD -->
+
+| L     | C       | R  |
+| ----- | :-----: | -: |
+| A     | B       | C  |
+
+<!-- ✗ BAD -->
+
+| L    | C      | R   |
+| ---- | :----: | --: |
+| A    | B      | C   |
+```
+
+<!-- prettier-ignore-end -->
 
 ## 📚 Further Reading
 

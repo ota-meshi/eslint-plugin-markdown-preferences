@@ -154,6 +154,80 @@ Output:
 
 
 Test: table-pipe-alignment >> invalid
+Filename: tests/fixtures/rules/table-pipe-alignment/invalid/delimiter-min-length/number-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - delimiterMinLength: 3
+Plugins: unable to serialize
+
+Code:
+  1 | # Test for delimiterMinLength number option
+  2 |
+  3 | | No | Header 1 | Header 2 |
+    |      ^ [1]
+  4 | | -- | -------- | -------- |
+    |      ^ [2]
+  5 | | 1  | Value 1  | Value 2  |
+    |      ^ [3]
+  6 | | 2  | Value 3  | Value 4  |
+    |      ^ [4]
+  7 |
+
+Output:
+  1 | # Test for delimiterMinLength number option
+  2 |
+  3 | | No  | Header 1 | Header 2 |
+  4 | | --- | -------- | -------- |
+  5 | | 1   | Value 1  | Value 2  |
+  6 | | 2   | Value 3  | Value 4  |
+  7 |
+
+[1] Table pipe should be aligned at column 6 (add 1 character).
+[2] Table pipe should be aligned at column 6 (add 1 character).
+[3] Table pipe should be aligned at column 6 (add 1 character).
+[4] Table pipe should be aligned at column 6 (add 1 character).
+---
+
+
+Test: table-pipe-alignment >> invalid
+Filename: tests/fixtures/rules/table-pipe-alignment/invalid/delimiter-min-length/object-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - delimiterMinLength:
+      defaultDelimiter: 5
+      centerAlignmentDelimiter: 7
+Plugins: unable to serialize
+
+Code:
+  1 | # Test for delimiterMinLength object option
+  2 |
+  3 | | Left | Center    | Right |
+    |        ^ [1]
+  4 | | ---- | :------:  | ----: |
+    |        ^ [2]
+  5 | | A    | B         | C     |
+    |        ^ [3]
+  6 |
+
+Output:
+  1 | # Test for delimiterMinLength object option
+  2 |
+  3 | | Left  | Center  | Right |
+  4 | | ----- | :-----: | ----: |
+  5 | | A     | B       | C     |
+  6 |
+
+[1] Table pipe should be aligned at column 8 (add 1 character).
+[2] Table pipe should be aligned at column 8 (add 1 character).
+[3] Table pipe should be aligned at column 8 (add 1 character).
+---
+
+
+Test: table-pipe-alignment >> invalid
 Filename: tests/fixtures/rules/table-pipe-alignment/invalid/japanese-tables-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
