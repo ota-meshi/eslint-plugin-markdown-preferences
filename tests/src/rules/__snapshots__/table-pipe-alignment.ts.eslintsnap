@@ -154,6 +154,246 @@ Output:
 
 
 Test: table-pipe-alignment >> invalid
+Filename: tests/fixtures/rules/table-pipe-alignment/invalid/delimiter-min-length/default-delimiter-min-length/default-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Test for default delimiterMinLength (should be 3)
+  2 |
+  3 | | No | Header 1 | Header 2 |
+    |      ^ [1]
+  4 | | -- | -------- | -------- |
+    |      ^ [2]
+  5 | | 1  | Value 1  | Value 2  |
+    |      ^ [3]
+  6 | | 2  | Value 3  | Value 4  |
+    |      ^ [4]
+  7 |
+
+Output:
+  1 | # Test for default delimiterMinLength (should be 3)
+  2 |
+  3 | | No  | Header 1 | Header 2 |
+  4 | | --- | -------- | -------- |
+  5 | | 1   | Value 1  | Value 2  |
+  6 | | 2   | Value 3  | Value 4  |
+  7 |
+
+[1] Table pipe should be aligned at column 6 (add 1 character).
+[2] Table pipe should be aligned at column 6 (add 1 character).
+[3] Table pipe should be aligned at column 6 (add 1 character).
+[4] Table pipe should be aligned at column 6 (add 1 character).
+---
+
+
+Test: table-pipe-alignment >> invalid
+Filename: tests/fixtures/rules/table-pipe-alignment/invalid/delimiter-min-length/length-4-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - delimiterMinLength: 4
+Plugins: unable to serialize
+
+Code:
+  1 | # Test for delimiterMinLength: 4 (invalid case)
+  2 |
+  3 | | No | Header 1 | Header 2 |
+    |      ^ [1]
+  4 | | --- | -------- | :-----: |
+    |       ^ [2]
+  5 | | 1  | Value 1  | Value 2 |
+    |      ^ [3]
+  6 | | 2  | Value 3  | Value 4 |
+    |      ^ [4]
+  7 |
+
+Output:
+  1 | # Test for delimiterMinLength: 4 (invalid case)
+  2 |
+  3 | | No   | Header 1 | Header 2 |
+  4 | | ---- | -------- | :------: |
+  5 | | 1    | Value 1  | Value 2  |
+  6 | | 2    | Value 3  | Value 4  |
+  7 |
+
+[1] Table pipe should be aligned at column 7 (add 2 characters).
+[2] Table pipe should be aligned at column 7 (add 1 character).
+[3] Table pipe should be aligned at column 7 (add 2 characters).
+[4] Table pipe should be aligned at column 7 (add 2 characters).
+---
+
+
+Test: table-pipe-alignment >> invalid
+Filename: tests/fixtures/rules/table-pipe-alignment/invalid/delimiter-min-length/length-5-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - delimiterMinLength: 5
+Plugins: unable to serialize
+
+Code:
+  1 | # Test for delimiterMinLength: 5 (invalid case)
+  2 |
+  3 | | No | Header 1  | Header 2  |
+    |      ^ [1]
+  4 | | ---- | -------- | :------: |
+    |        ^ [2]
+  5 | | 1    | Value 1  | Value 2  |
+    |        ^ [3]
+  6 | | 2    | Value 3  | Value 4  |
+    |        ^ [4]
+  7 |
+
+Output:
+  1 | # Test for delimiterMinLength: 5 (invalid case)
+  2 |
+  3 | | No    | Header 1 | Header 2 |
+  4 | | ----- | -------- | :------: |
+  5 | | 1     | Value 1  | Value 2  |
+  6 | | 2     | Value 3  | Value 4  |
+  7 |
+
+[1] Table pipe should be aligned at column 8 (add 3 characters).
+[2] Table pipe should be aligned at column 8 (add 1 character).
+[3] Table pipe should be aligned at column 8 (add 1 character).
+[4] Table pipe should be aligned at column 8 (add 1 character).
+---
+
+
+Test: table-pipe-alignment >> invalid
+Filename: tests/fixtures/rules/table-pipe-alignment/invalid/delimiter-min-length/minimum-option/center-too-long-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - delimiterMinLength: minimum
+Plugins: unable to serialize
+
+Code:
+  1 | # Test for "minimum" option - center alignment delimiter too long (invalid)
+  2 |
+  3 | | A | B | C |
+    |     ^ [1]
+  4 | | :---: | :-------: | :-------: |
+    |         ^ [2]
+  5 | | X | Y | Z |
+    |     ^ [3]
+
+Output:
+  1 | # Test for "minimum" option - center alignment delimiter too long (invalid)
+  2 |
+  3 | | A   | B   | C   |
+  4 | | :-: | :-: | :-: |
+  5 | | X   | Y   | Z   |
+
+[1] Table pipe should be aligned at column 6 (add 2 characters).
+[2] Table pipe should be aligned at column 6 (remove 2 characters).
+[3] Table pipe should be aligned at column 6 (add 2 characters).
+---
+
+
+Test: table-pipe-alignment >> invalid
+Filename: tests/fixtures/rules/table-pipe-alignment/invalid/delimiter-min-length/minimum-option/default-too-long-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - delimiterMinLength: minimum
+Plugins: unable to serialize
+
+Code:
+  1 | # Test for "minimum" option - default delimiter too long (invalid)
+  2 |
+  3 | | A | B | C |
+    |         ^ [1]
+  4 | | ----- | ----- | ----- |
+    |         ^ [2]
+  5 | | 1 | 2 | 3 |
+    |         ^ [3]
+
+Output:
+  1 | # Test for "minimum" option - default delimiter too long (invalid)
+  2 |
+  3 | | A | B | C |
+  4 | | - | - | - |
+  5 | | 1 | 2 | 3 |
+
+[1] Table pipe should be aligned at column 12 (add 4 characters).
+[2] Table pipe should be aligned at column 4 (remove 4 characters).
+[3] Table pipe should be aligned at column 12 (add 4 characters).
+---
+
+
+Test: table-pipe-alignment >> invalid
+Filename: tests/fixtures/rules/table-pipe-alignment/invalid/delimiter-min-length/minimum-option/left-too-long-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - delimiterMinLength: minimum
+Plugins: unable to serialize
+
+Code:
+  1 | # Test for "minimum" option - left alignment delimiter too long (invalid)
+  2 |
+  3 | | A | B | C |
+    |     ^ [1]
+  4 | | :------ | :------: | ------: |
+    |           ^ [2]
+  5 | | X | Y | Z |
+    |     ^ [3]
+
+Output:
+  1 | # Test for "minimum" option - left alignment delimiter too long (invalid)
+  2 |
+  3 | | A  | B   | C  |
+  4 | | :- | :-: | -: |
+  5 | | X  | Y   | Z  |
+
+[1] Table pipe should be aligned at column 5 (add 1 character).
+[2] Table pipe should be aligned at column 5 (remove 5 characters).
+[3] Table pipe should be aligned at column 5 (add 1 character).
+---
+
+
+Test: table-pipe-alignment >> invalid
+Filename: tests/fixtures/rules/table-pipe-alignment/invalid/delimiter-min-length/minimum-option/right-too-long-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - delimiterMinLength: minimum
+Plugins: unable to serialize
+
+Code:
+  1 | # Test for "minimum" option - right alignment delimiter too long (invalid)
+  2 |
+  3 | | A | B | C |
+    |     ^ [1]
+  4 | | :---: | :-------: | -------: |
+    |         ^ [2]
+  5 | | X | Y | Z |
+    |     ^ [3]
+
+Output:
+  1 | # Test for "minimum" option - right alignment delimiter too long (invalid)
+  2 |
+  3 | | A   | B   | C  |
+  4 | | :-: | :-: | -: |
+  5 | | X   | Y   | Z  |
+
+[1] Table pipe should be aligned at column 6 (add 2 characters).
+[2] Table pipe should be aligned at column 6 (remove 2 characters).
+[3] Table pipe should be aligned at column 6 (add 2 characters).
+---
+
+
+Test: table-pipe-alignment >> invalid
 Filename: tests/fixtures/rules/table-pipe-alignment/invalid/delimiter-min-length/number-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
@@ -188,6 +428,42 @@ Output:
 [2] Table pipe should be aligned at column 6 (add 1 character).
 [3] Table pipe should be aligned at column 6 (add 1 character).
 [4] Table pipe should be aligned at column 6 (add 1 character).
+---
+
+
+Test: table-pipe-alignment >> invalid
+Filename: tests/fixtures/rules/table-pipe-alignment/invalid/delimiter-min-length/object-detailed/mixed-delimiters-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - delimiterMinLength:
+      defaultDelimiter: 2
+      leftAlignmentDelimiter: 4
+      centerAlignmentDelimiter: 5
+      rightAlignmentDelimiter: 3
+Plugins: unable to serialize
+
+Code:
+  1 | # Test for detailed object config (invalid)
+  2 |
+  3 | | A | B | C | D |
+    |     ^ [1]
+  4 | | - | :- | :-: | -: |
+    |     ^ [2]
+  5 | | X | Y | Z | W |
+    |     ^ [3]
+
+Output:
+  1 | # Test for detailed object config (invalid)
+  2 |
+  3 | | A  | B    | C     | D   |
+  4 | | -- | :--- | :---: | --: |
+  5 | | X  | Y    | Z     | W   |
+
+[1] Table pipe should be aligned at column 5 (add 1 character).
+[2] Table pipe should be aligned at column 5 (add 1 character).
+[3] Table pipe should be aligned at column 5 (add 1 character).
 ---
 
 

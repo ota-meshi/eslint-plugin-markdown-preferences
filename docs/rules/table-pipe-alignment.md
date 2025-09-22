@@ -52,7 +52,7 @@ The rule can automatically fix many alignment issues using the `--fix` option.
     "error",
     {
       "column": "minimum",
-      "delimiterMinLength": "minimum"
+      "delimiterMinLength": 3
     }
   ]
 }
@@ -62,8 +62,8 @@ The rule can automatically fix many alignment issues using the `--fix` option.
   - `"minimum"` (default): Aligns pipes to the minimum necessary positions based on the content.
   - `"consistent"`: Ensures that all pipes in a column are aligned consistently, based on the first row's alignment. However, if there are cells longer than the first row, they will be adjusted accordingly.
 - `delimiterMinLength`: Specifies the minimum length for table delimiter markers. Possible values are:
-  - `"minimum"` (default): Uses the minimum required length for each delimiter type (`----`: 1, `:---`: 2, `---:`: 2, `:--:`: 3).
-  - `number`: Forces all delimiters to be at least this length. If you want to use a value less than 3, please use the object format.
+  - `number` (default: `3`): Forces all delimiters to be at least this length. If you want to use a value less than 3, please use the object format.
+  - `"minimum"`: Uses the minimum required length for each delimiter type (`----`: 1, `:---`: 2, `---:`: 2, `:--:`: 3).
   - `object`: Allows fine-grained control per delimiter type:
     - `defaultDelimiter`: Length for default delimiters (`----`).
     - `leftAlignmentDelimiter`: Length for left-aligned delimiters (`:---`).

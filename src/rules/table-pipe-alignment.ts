@@ -51,7 +51,7 @@ type Options = {
  */
 function parseOptions(options: Options | undefined) {
   const columnOption = options?.column || "minimum";
-  const delimiterMinLengthOption = options?.delimiterMinLength || "minimum";
+  const delimiterMinLengthOption = options?.delimiterMinLength || 3;
   let delimiterMinLength: {
     defaultDelimiter: number;
     leftAlignmentDelimiter: number;
