@@ -145,6 +145,7 @@ console.log("js")
 
 ## 👫 Related Rules
 
+- [markdown-preferences/code-fence-spacing](./code-fence-spacing.md)
 - [markdown-preferences/code-fence-style](./code-fence-style.md)
 - [markdown-preferences/prefer-fenced-code-blocks](./prefer-fenced-code-blocks.md)
 

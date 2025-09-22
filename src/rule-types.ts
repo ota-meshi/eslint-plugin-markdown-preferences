@@ -44,6 +44,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/code-fence-length'?: Linter.RuleEntry<MarkdownPreferencesCodeFenceLength>
   /**
+   * require or disallow spacing between opening code fence and language identifier
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/code-fence-spacing.html
+   */
+  'markdown-preferences/code-fence-spacing'?: Linter.RuleEntry<MarkdownPreferencesCodeFenceSpacing>
+  /**
    * enforce a consistent code fence style (backtick or tilde) in Markdown fenced code blocks.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/code-fence-style.html
    */
@@ -291,6 +296,10 @@ type MarkdownPreferencesCodeFenceLength = []|[{
     length?: number
     fallbackLength?: (number | ("minimum" | "as-is"))
   }[]
+}]
+// ----- markdown-preferences/code-fence-spacing -----
+type MarkdownPreferencesCodeFenceSpacing = []|[{
+  space?: ("always" | "never")
 }]
 // ----- markdown-preferences/code-fence-style -----
 type MarkdownPreferencesCodeFenceStyle = []|[{

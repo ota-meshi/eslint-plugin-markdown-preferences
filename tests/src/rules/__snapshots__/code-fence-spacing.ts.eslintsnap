@@ -1,0 +1,113 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: code-fence-spacing >> invalid
+Filename: tests/fixtures/rules/code-fence-spacing/invalid/always/missing-space-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: always
+Plugins: unable to serialize
+
+Code:
+  1 | # Missing Space
+  2 |
+  3 | ```js
+    |    ^~ [1]
+  4 | console.log("hello")
+  5 | ```
+  6 |
+  7 | ```
+  8 | no language specified
+  9 | ```
+ 10 |
+
+Output:
+  1 | # Missing Space
+  2 |
+  3 | ``` js
+  4 | console.log("hello")
+  5 | ```
+  6 |
+  7 | ```
+  8 | no language specified
+  9 | ```
+ 10 |
+
+[1] Expected a space between code fence and language identifier.
+---
+
+
+Test: code-fence-spacing >> invalid
+Filename: tests/fixtures/rules/code-fence-spacing/invalid/never/unexpected-space-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - space: never
+Plugins: unable to serialize
+
+Code:
+  1 | # With Unexpected Space
+  2 |
+  3 | ``` js
+    |    ^ [1]
+  4 | console.log("hello")
+  5 | ```
+  6 |
+  7 | ```
+  8 | no language specified
+  9 | ```
+ 10 |
+
+Output:
+  1 | # With Unexpected Space
+  2 |
+  3 | ```js
+  4 | console.log("hello")
+  5 | ```
+  6 |
+  7 | ```
+  8 | no language specified
+  9 | ```
+ 10 |
+
+[1] Unexpected space between code fence and language identifier.
+---
+
+
+Test: code-fence-spacing >> invalid >>> "# With Unexpected Space\n\n``` js\nconsole.log(\"hello\")\n```\n\n```\nno language specified\n```\n 2"
+Filename: tests/fixtures/rules/code-fence-spacing/invalid/unexpected-space-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # With Unexpected Space
+  2 |
+  3 | ``` js
+    |    ^ [1]
+  4 | console.log("hello")
+  5 | ```
+  6 |
+  7 | ```
+  8 | no language specified
+  9 | ```
+ 10 |
+
+Output:
+  1 | # With Unexpected Space
+  2 |
+  3 | ```js
+  4 | console.log("hello")
+  5 | ```
+  6 |
+  7 | ```
+  8 | no language specified
+  9 | ```
+ 10 |
+
+[1] Unexpected space between code fence and language identifier.
+---

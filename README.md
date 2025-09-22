@@ -188,25 +188,31 @@ The rules with the following 💄 are included in the `standard` config.
 
 - Rules related to whitespace styles in Markdown.
 
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+
 <!-- prettier-ignore-start -->
 
-| Rule ID                                                                                                                                                   | Description                                                          | Fixable | Config |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------- | :-----: | :----: |
-| [markdown-preferences/blockquote-marker-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/blockquote-marker-alignment.html) | enforce consistent alignment of blockquote markers                   |   🔧    |  ⭐💄  |
-| [markdown-preferences/indent](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/indent.html)                                           | enforce consistent indentation in Markdown files                     |   🔧    |   💄   |
-| [markdown-preferences/link-bracket-newline](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-bracket-newline.html)               | enforce linebreaks after opening and before closing link brackets    |   🔧    |   💄   |
-| [markdown-preferences/link-bracket-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-bracket-spacing.html)               | enforce consistent spacing inside link brackets                      |   🔧    |   💄   |
-| [markdown-preferences/link-paren-newline](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-paren-newline.html)                   | enforce linebreaks after opening and before closing link parentheses |   🔧    |   💄   |
-| [markdown-preferences/link-paren-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-paren-spacing.html)                   | enforce consistent spacing inside link parentheses                   |   🔧    |   💄   |
-| [markdown-preferences/list-marker-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/list-marker-alignment.html)             | enforce consistent alignment of list markers                         |   🔧    |  ⭐💄  |
-| [markdown-preferences/no-multi-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multi-spaces.html)                         | disallow multiple spaces                                             |   🔧    |   💄   |
-| [markdown-preferences/no-multiple-empty-lines](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multiple-empty-lines.html)         | disallow multiple empty lines in Markdown files.                     |   🔧    |   💄   |
-| [markdown-preferences/no-trailing-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-trailing-spaces.html)                   | disallow trailing whitespace at the end of lines in Markdown files.  |   🔧    |   💄   |
-| [markdown-preferences/padded-custom-containers](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/padded-custom-containers.html)       | disallow or require padding inside custom containers                 |   🔧    |   💄   |
-| [markdown-preferences/padding-line-between-blocks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/padding-line-between-blocks.html) | require or disallow padding lines between blocks                     |   🔧    |   💄   |
-| [markdown-preferences/table-pipe-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-pipe-spacing.html)                   | enforce consistent spacing around table pipes                        |   🔧    |   💄   |
+| Rule ID                                                                                                                                                           | Description                                                                    | Fixable | Config |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------- | :-----: | :----: |
+| [markdown-preferences/blockquote-marker-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/blockquote-marker-alignment.html)         | enforce consistent alignment of blockquote markers                             |   🔧    |  ⭐💄  |
+| [markdown-preferences/code-fence-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/code-fence-spacing.html)                           | require or disallow spacing between opening code fence and language identifier |   🔧    |        |
+| [markdown-preferences/custom-container-marker-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/custom-container-marker-spacing.html) | require or disallow spacing between opening custom container marker and info   |   🔧    |        |
+| [markdown-preferences/indent](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/indent.html)                                                   | enforce consistent indentation in Markdown files                               |   🔧    |   💄   |
+| [markdown-preferences/link-bracket-newline](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-bracket-newline.html)                       | enforce linebreaks after opening and before closing link brackets              |   🔧    |   💄   |
+| [markdown-preferences/link-bracket-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-bracket-spacing.html)                       | enforce consistent spacing inside link brackets                                |   🔧    |   💄   |
+| [markdown-preferences/link-paren-newline](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-paren-newline.html)                           | enforce linebreaks after opening and before closing link parentheses           |   🔧    |   💄   |
+| [markdown-preferences/link-paren-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/link-paren-spacing.html)                           | enforce consistent spacing inside link parentheses                             |   🔧    |   💄   |
+| [markdown-preferences/list-marker-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/list-marker-alignment.html)                     | enforce consistent alignment of list markers                                   |   🔧    |  ⭐💄  |
+| [markdown-preferences/no-multi-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multi-spaces.html)                                 | disallow multiple spaces                                                       |   🔧    |   💄   |
+| [markdown-preferences/no-multiple-empty-lines](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multiple-empty-lines.html)                 | disallow multiple empty lines in Markdown files.                               |   🔧    |   💄   |
+| [markdown-preferences/no-trailing-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-trailing-spaces.html)                           | disallow trailing whitespace at the end of lines in Markdown files.            |   🔧    |   💄   |
+| [markdown-preferences/padded-custom-containers](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/padded-custom-containers.html)               | disallow or require padding inside custom containers                           |   🔧    |   💄   |
+| [markdown-preferences/padding-line-between-blocks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/padding-line-between-blocks.html)         | require or disallow padding lines between blocks                               |   🔧    |   💄   |
+| [markdown-preferences/table-pipe-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-pipe-spacing.html)                           | enforce consistent spacing around table pipes                                  |   🔧    |   💄   |
 
 <!-- prettier-ignore-end -->
+
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
 
 ### Decorative Rules
 

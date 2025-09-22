@@ -79,6 +79,7 @@ console.log("hello");
 ## 👫 Related Rules
 
 - [markdown-preferences/code-fence-length](./code-fence-length.md)
+- [markdown-preferences/code-fence-spacing](./code-fence-spacing.md)
 - [markdown-preferences/prefer-fenced-code-blocks](./prefer-fenced-code-blocks.md)
 
 ## 🚀 Version

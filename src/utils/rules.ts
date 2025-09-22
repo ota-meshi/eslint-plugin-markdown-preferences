@@ -8,7 +8,9 @@ import blockquoteMarkerAlignment from "../rules/blockquote-marker-alignment.ts";
 import bulletListMarkerStyle from "../rules/bullet-list-marker-style.ts";
 import canonicalCodeBlockLanguage from "../rules/canonical-code-block-language.ts";
 import codeFenceLength from "../rules/code-fence-length.ts";
+import codeFenceSpacing from "../rules/code-fence-spacing.ts";
 import codeFenceStyle from "../rules/code-fence-style.ts";
+import customContainerMarkerSpacing from "../rules/custom-container-marker-spacing.ts";
 import definitionsLast from "../rules/definitions-last.ts";
 import emojiNotation from "../rules/emoji-notation.ts";
 import emphasisDelimitersStyle from "../rules/emphasis-delimiters-style.ts";
@@ -58,7 +60,9 @@ export const rules = [
   bulletListMarkerStyle,
   canonicalCodeBlockLanguage,
   codeFenceLength,
+  codeFenceSpacing,
   codeFenceStyle,
+  customContainerMarkerSpacing,
   definitionsLast,
   emojiNotation,
   emphasisDelimitersStyle,
