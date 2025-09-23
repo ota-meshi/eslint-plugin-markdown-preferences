@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.34.0
+
+### Minor Changes
+
+- [#162](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/162) [`2ca2d91`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/2ca2d911468055ab252edb4f3c50199f9494890e) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat([markdown-preferences/padded-custom-containers](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/padded-custom-containers.html)): add `overrides` option
+
 ## 0.33.0
 
 ### Minor Changes

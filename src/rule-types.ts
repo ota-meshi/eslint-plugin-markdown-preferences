@@ -446,6 +446,14 @@ type MarkdownPreferencesOrderedListMarkerStyle = []|[{
 // ----- markdown-preferences/padded-custom-containers -----
 type MarkdownPreferencesPaddedCustomContainers = []|[{
   padding?: ("always" | "never")
+  
+  overrides?: [{
+    info?: (string | [string, ...(string)[]])
+    padding?: ("always" | "never")
+  }, ...({
+    info?: (string | [string, ...(string)[]])
+    padding?: ("always" | "never")
+  })[]]
 }]
 // ----- markdown-preferences/padding-line-between-blocks -----
 type MarkdownPreferencesPaddingLineBetweenBlocks = {
