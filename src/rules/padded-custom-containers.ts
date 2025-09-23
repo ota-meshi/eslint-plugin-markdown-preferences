@@ -2,11 +2,65 @@ import type { CustomContainer } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import { getSourceLocationFromRange } from "../utils/ast.ts";
 import { parseCustomContainer } from "../utils/custom-container.ts";
+import type { ParsedLine } from "../utils/lines.ts";
 import { getParsedLines } from "../utils/lines.ts";
+import { toRegExp } from "../utils/regexp.ts";
 
 type Options = {
   padding?: "always" | "never";
+  overrides?: {
+    info?: string | string[];
+    padding?: "always" | "never";
+  }[];
 };
+
+/**
+ * Parse the given options.
+ */
+function parseOptions(options: Options | undefined) {
+  const padding = options?.padding || "never";
+  const overrides = (options?.overrides || [])
+    .map((override) => {
+      return {
+        test: normalizeTest(override.info),
+        padding: override.padding || padding,
+      };
+    })
+    .reverse();
+
+  /**
+   * Get the padding setting for the given container.
+   */
+  function getPaddingForContainer(node: CustomContainer): "always" | "never" {
+    for (const override of overrides) {
+      if (override.test(node)) {
+        return override.padding;
+      }
+    }
+    return padding;
+  }
+
+  return {
+    getPaddingForContainer,
+  };
+
+  /**
+   * Normalize the given info option.
+   */
+  function normalizeTest(
+    infoOption: string | string[] | undefined,
+  ): (n: CustomContainer) => boolean {
+    if (infoOption == null) {
+      return () => false;
+    }
+    if (Array.isArray(infoOption)) {
+      const tests = infoOption.map(normalizeTest);
+      return (n) => tests.some((t) => t(n));
+    }
+    const test = toRegExp(infoOption);
+    return (n) => test.test(n.info);
+  }
+}
 
 export default createRule<[Options?]>("padded-custom-containers", {
   meta: {
@@ -27,6 +81,32 @@ export default createRule<[Options?]>("padded-custom-containers", {
             enum: ["always", "never"],
             default: "never",
           },
+          overrides: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                info: {
+                  anyOf: [
+                    { type: "string" },
+                    {
+                      type: "array",
+                      items: { type: "string" },
+                      minItems: 1,
+                      uniqueItems: true,
+                    },
+                  ],
+                },
+                padding: {
+                  type: "string",
+                  enum: ["always", "never"],
+                },
+              },
+              additionalProperties: false,
+            },
+            uniqueItems: true,
+            minItems: 1,
+          },
         },
         additionalProperties: false,
       },
@@ -44,8 +124,7 @@ export default createRule<[Options?]>("padded-custom-containers", {
   },
   create(context) {
     const sourceCode = context.sourceCode;
-    const options = context.options[0] || {};
-    const padding = options.padding || "never";
+    const options = parseOptions(context.options[0]);
 
     return {
       customContainer(node: CustomContainer) {
@@ -53,6 +132,8 @@ export default createRule<[Options?]>("padded-custom-containers", {
           // Empty containers don't need padding
           return;
         }
+
+        const padding = options.getPaddingForContainer(node);
 
         const parsed = parseCustomContainer(sourceCode, node);
         if (!parsed) return;
@@ -113,23 +194,25 @@ export default createRule<[Options?]>("padded-custom-containers", {
           }
         } else if (padding === "never") {
           if (paddingAfterOpeningLines > 0) {
-            const firstChildRange = sourceCode.getRange(firstChild);
+            const lines = getParsedLines(sourceCode);
+            const reportLines: ParsedLine[] = [];
+            for (
+              let lineNumber = openingSequence.loc.end.line + 1;
+              lineNumber < firstChildLoc.start.line;
+              lineNumber++
+            ) {
+              reportLines.push(lines.get(lineNumber));
+            }
+
+            const removeRange: [number, number] = [
+              reportLines[0].range[0],
+              reportLines[reportLines.length - 1].range[1],
+            ];
             context.report({
               messageId: "unexpectedPaddingAfterOpeningMarker",
-              loc: getSourceLocationFromRange(sourceCode, node, [
-                openingSequence.range[1],
-                firstChildRange[0],
-              ]),
-              *fix(fixer) {
-                const lines = getParsedLines(sourceCode);
-                for (
-                  let lineNumber = openingSequence.loc.end.line + 1;
-                  lineNumber < firstChildLoc.start.line;
-                  lineNumber++
-                ) {
-                  const line = lines.get(lineNumber);
-                  yield fixer.removeRange(line.range);
-                }
+              loc: getSourceLocationFromRange(sourceCode, node, removeRange),
+              fix(fixer) {
+                return fixer.removeRange(removeRange);
               },
             });
           }
@@ -138,23 +221,24 @@ export default createRule<[Options?]>("padded-custom-containers", {
             paddingBeforeClosingLines !== null &&
             paddingBeforeClosingLines > 0
           ) {
-            const lastChildRange = sourceCode.getRange(lastChild);
+            const lines = getParsedLines(sourceCode);
+            const reportLines: ParsedLine[] = [];
+            for (
+              let lineNumber = lastChildLoc.end.line + 1;
+              lineNumber < closingSequence.loc.start.line;
+              lineNumber++
+            ) {
+              reportLines.push(lines.get(lineNumber));
+            }
+            const removeRange: [number, number] = [
+              reportLines[0].range[0],
+              reportLines[reportLines.length - 1].range[1],
+            ];
             context.report({
               messageId: "unexpectedPaddingBeforeClosingMarker",
-              loc: getSourceLocationFromRange(sourceCode, node, [
-                lastChildRange[1],
-                closingSequence.range[0],
-              ]),
-              *fix(fixer) {
-                const lines = getParsedLines(sourceCode);
-                for (
-                  let lineNumber = lastChildLoc.end.line + 1;
-                  lineNumber < closingSequence.loc.start.line;
-                  lineNumber++
-                ) {
-                  const line = lines.get(lineNumber);
-                  yield fixer.removeRange(line.range);
-                }
+              loc: getSourceLocationFromRange(sourceCode, node, removeRange),
+              fix(fixer) {
+                return fixer.removeRange(removeRange);
               },
             });
           }

@@ -28,24 +28,24 @@ By default, blank lines (padding) at these positions are not allowed (padding is
 <!-- eslint markdown-preferences/padded-custom-containers: 'error' -->
 
 <!-- ✓ GOOD -->
-:::
+::: info
 content
 :::
 
-:::
+::: info
 # Heading
 
 - list
 :::
 
 <!-- ✗ BAD -->
-:::
+::: info
 
 content
 
 :::
 
-:::
+::: info
 
 # Heading
 
@@ -66,7 +66,13 @@ You can require blank lines by setting `{ padding: "always" }`.
   "markdown-preferences/padded-custom-containers": [
     "error",
     {
-      "padding": "never"
+      "padding": "never",
+      "overrides": [
+        {
+          "info": "/^code-group\\b/u",
+          "padding": "always"
+        }
+      ]
     }
   ]
 }
@@ -75,6 +81,65 @@ You can require blank lines by setting `{ padding: "always" }`.
 - `padding`: Specify whether blank lines (padding) are required or disallowed before and after the content inside custom containers.
   - `"never"` (default): Disallow blank lines before and after the content inside custom containers.
   - `"always"`: Require blank lines before and after the content inside custom containers.
+- `overrides`: Specify different padding rules for specific custom container types. Each override object can contain:
+  - `info`: A string or array of strings matching the container info text (supports regular expressions).
+  - `padding`: The padding setting for containers matching the info pattern (`"always"` or `"never"`).
+
+### Override Examples
+
+You can specify different padding rules for different container types:
+
+<!-- prettier-ignore-start -->
+
+<!-- eslint-skip -->
+
+````md
+<!-- eslint markdown-preferences/padded-custom-containers: ["error", { "padding": "never", "overrides": [{ "info": "/^code-group\\b/u", "padding": "always" }] }] -->
+
+<!-- ✓ GOOD -->
+
+::: info
+This is an info box.
+:::
+
+::: code-group
+
+```js [config.js]
+export default {/* ... */}
+```
+
+```ts [config.ts]
+const config: UserConfig = {
+  // ...
+}
+export default config
+```
+
+:::
+
+<!-- ✗ BAD -->
+
+::: info
+
+This is an info box.
+
+:::
+
+::: code-group
+```js [config.js]
+export default {/* ... */}
+```
+
+```ts [config.ts]
+const config: UserConfig = {
+  // ...
+}
+export default config
+```
+:::
+````
+
+<!-- prettier-ignore-end -->
 
 ### Configuration for Extended Syntax
 
