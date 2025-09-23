@@ -48,7 +48,7 @@ export interface CustomContainer
   /**
    * Info string (e.g., "warning" in ::: warning ... :::).
    */
-  info: string | null;
+  info: string;
   /**
    * Children of custom container.
    */

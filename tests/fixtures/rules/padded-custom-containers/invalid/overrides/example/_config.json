@@ -1,0 +1,13 @@
+{
+  "options": [
+    {
+      "padding": "never",
+      "overrides": [
+        {
+          "info": "/^code-group\\b/u",
+          "padding": "always"
+        }
+      ]
+    }
+  ]
+}

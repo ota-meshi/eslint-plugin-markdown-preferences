@@ -1,0 +1,17 @@
+{
+  "options": [
+    {
+      "padding": "never",
+      "overrides": [
+        {
+          "info": "warning",
+          "padding": "always"
+        },
+        {
+          "info": "^code-",
+          "padding": "never"
+        }
+      ]
+    }
+  ]
+}
