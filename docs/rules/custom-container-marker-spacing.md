@@ -74,7 +74,7 @@ export default defineConfig([
     extends: [markdownPreferences.configs.recommended],
     language: "markdown-preferences/extended-syntax",
     rules: {
-      "markdown-preferences/no-implicit-block-closing": "error",
+      "markdown-preferences/custom-container-marker-spacing": "error",
     },
   },
 ]);
