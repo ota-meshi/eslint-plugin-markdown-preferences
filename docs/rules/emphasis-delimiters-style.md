@@ -19,7 +19,7 @@ This rule enforces a consistent delimiter style for emphasis (`*text*`/`_text_`)
 
 You can configure which delimiter to use for each type:
 
-- `emphasis`: `*` or `_` (default: `*`)
+- `emphasis`: `*` or `_` (default: `_`)
 - `strong`: `**` or `__` (default: `**`)
 - `strongEmphasis`: You can specify allowed styles as a string (for `***text***` or `___text___`) or as an object `{ outer, inner }` for mixed delimiters. See Options below for details.
 
