@@ -5,10 +5,10 @@ describe("ExtendedMarkdownLanguage", () => {
   it("should handle parse errors gracefully", () => {
     const language = new ExtendedMarkdownLanguage();
 
-    // Test with extremely malformed content that might cause parsing issues
-    // Since the parser is robust, we'll focus on testing the error handling structure
-    const file = {
-      body: "", // Empty content that should still parse successfully
+    // Test with extremely malformed input that might cause parser issues
+    // We'll try to trigger an error by passing an object instead of string
+    const mockFile = {
+      body: null as any, // This might cause parsing to fail
       ok: true,
       errors: [],
       messages: [],
@@ -17,12 +17,34 @@ describe("ExtendedMarkdownLanguage", () => {
       bom: false,
     };
 
-    const result = language.parse(file, {} as any);
+    const result = language.parse(mockFile, {} as any);
 
-    // The parser should successfully handle even empty content
-    // This tests that the try-catch structure works correctly
-    assert.strictEqual(result.ok, true);
-    assert.notStrictEqual(result.ast, null);
+    // If parsing failed, verify error handling
+    assert.strictEqual(result.ok, false);
+    assert.strictEqual(Array.isArray(result.errors), true);
+    assert.strictEqual(result.errors.length, 1);
+  });
+
+  it("should handle parse errors when body is not a string", () => {
+    const language = new ExtendedMarkdownLanguage();
+
+    // Create a mock file with invalid body type
+    const mockFile = {
+      body: 123 as any, // Number instead of string
+      ok: true,
+      errors: [],
+      messages: [],
+      path: "test.md",
+      physicalPath: "test.md",
+      bom: false,
+    };
+
+    const result = language.parse(mockFile, {} as any);
+
+    // This should fail and return an error result
+    assert.strictEqual(result.ok, false);
+    assert.strictEqual(Array.isArray(result.errors), true);
+    assert.strictEqual(result.errors.length, 1);
   });
 
   it("should parse successfully under normal conditions", () => {

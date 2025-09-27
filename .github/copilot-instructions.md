@@ -63,6 +63,26 @@ tests/fixtures/rules/<rule-name>/
 
 - Name input files descriptively, e.g., `multiple-heading-input.md`, `setext-heading-input.md`, etc.
 - Place configuration files as `_config.json` in the same directory. You may also use `xxx-config.json` for input-specific (`xxx-input.md`) configs.
+- **Configuration File Format:** All rule configuration files must follow the ESLint format with an `options` array:
+  ```json
+  {
+    "options": [{ "mode": "fixed-line-length", "length": 30 }]
+  }
+  ```
+  For complex configurations:
+  ```json
+  {
+    "options": [
+      {
+        "listItems": {
+          "first": 4,
+          "rest": 2
+        }
+      }
+    ]
+  }
+  ```
+  **Important:** Do not use the direct format like `{ "mode": "fixed-line-length" }` as it will result in "Unexpected key" configuration errors during testing.
 - You may create subdirectories such as `multiline/` or `spaces/` for different test cases.
 
   **Example:**

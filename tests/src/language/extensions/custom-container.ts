@@ -351,4 +351,84 @@ C
       "C\n:::",
     );
   });
+
+  it("should not parse containers with insufficient colons", () => {
+    // Test with less than 3 colons - this should be treated as regular text
+    const code = `:: warning
+This should not be a container.
+::`;
+    const ast = parseExtendedMarkdown(code);
+
+    assert.strictEqual(ast.type, "root");
+    assert.strictEqual(ast.children.length, 1);
+
+    // Should be parsed as a paragraph, not a custom container
+    const paragraph = ast.children[0] as Paragraph;
+    assert.strictEqual(paragraph.type, "paragraph");
+    assert.strictEqual(paragraph.children.length, 1);
+    assert.strictEqual(paragraph.children[0].type, "text");
+  });
+
+  it("should handle single colon as regular text", () => {
+    // Test with single colon
+    const code = `: note
+This is just text.`;
+    const ast = parseExtendedMarkdown(code);
+
+    assert.strictEqual(ast.type, "root");
+    assert.strictEqual(ast.children.length, 1);
+
+    // Should be parsed as a paragraph
+    const paragraph = ast.children[0] as Paragraph;
+    assert.strictEqual(paragraph.type, "paragraph");
+  });
+
+  it("should handle incomplete container closing with insufficient colons", () => {
+    // Test case where container is opened but attempted to close with < 3 colons
+    const code = `::: warning
+This is a warning.
+::
+More content after incomplete close.`;
+    const ast = parseExtendedMarkdown(code);
+
+    assert.strictEqual(ast.type, "root");
+    assert.strictEqual(ast.children.length, 1);
+
+    // Should be parsed as a single custom container because :: is insufficient to close
+    const container = ast.children[0] as CustomContainer;
+    assert.strictEqual(container.type, "customContainer");
+
+    // The container should contain the warning text and the attempted close sequence as content
+    assert.ok(container.children.length >= 1);
+
+    // Verify that :: was not recognized as a closing marker by checking the content
+    const contentText = container.children
+      .map((child) => {
+        if (child.type === "paragraph") {
+          return child.children.map((c) => (c as any).value || "").join("");
+        }
+        return "";
+      })
+      .join("\n");
+
+    assert.ok(
+      contentText.includes("::") || contentText.includes("More content"),
+    );
+  });
+
+  it("should handle attempted container closing with single colon", () => {
+    // Test case where container closing is attempted with only one colon
+    const code = `::: info
+Content here.
+:
+Still inside container.`;
+    const ast = parseExtendedMarkdown(code);
+
+    assert.strictEqual(ast.type, "root");
+    assert.strictEqual(ast.children.length, 1);
+
+    // Should remain as a custom container since : is insufficient to close
+    const container = ast.children[0] as CustomContainer;
+    assert.strictEqual(container.type, "customContainer");
+  });
 });

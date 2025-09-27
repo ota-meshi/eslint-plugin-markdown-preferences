@@ -1,0 +1,3 @@
+{
+  "options": [{ "mode": "fixed-line-length", "length": 50 }]
+}

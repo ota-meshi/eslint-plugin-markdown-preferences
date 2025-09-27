@@ -259,6 +259,42 @@ Output:
 
 
 Test: sort-definitions >> invalid
+Filename: tests/fixtures/rules/sort-definitions/invalid/quote-handling-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Quote Handling Test
+  2 |
+  3 | Content with [complex quotes][quote-test].
+  4 |
+  5 | [quote-test]: https://example.com "Title with 'single' and \"double\" quotes"
+  6 | [simple]: https://simple.com 'Simple title'
+  7 | [parentheses]: https://example.com (Title with parens and "quotes")
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  8 | [mixed]: https://mixed.com "Title with both ' and \" quotes"
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  9 |
+
+Output:
+  1 | # Quote Handling Test
+  2 |
+  3 | Content with [complex quotes][quote-test].
+  4 |
+  5 | [mixed]: https://mixed.com "Title with both ' and \" quotes"
+  6 | [parentheses]: https://example.com (Title with parens and "quotes")
+  7 | [quote-test]: https://example.com "Title with 'single' and \"double\" quotes"
+  8 | [simple]: https://simple.com 'Simple title'
+  9 |
+
+[1] The definition '[parentheses]: https://example.com 'Title with parens and "quotes"'' should be before '[quote-test]: https://example.com (Title with 'single' and "double" quotes)'.
+[2] The definition '[mixed]: https://mixed.com (Title with both ' and " quotes)' should be before '[quote-test]: https://example.com (Title with 'single' and "double" quotes)'.
+---
+
+
+Test: sort-definitions >> invalid
 Filename: tests/fixtures/rules/sort-definitions/invalid/test01-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:

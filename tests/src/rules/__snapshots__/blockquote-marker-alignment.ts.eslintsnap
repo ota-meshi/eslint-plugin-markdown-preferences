@@ -2,6 +2,88 @@
 
 
 Test: blockquote-marker-alignment >> invalid
+Filename: tests/fixtures/rules/blockquote-marker-alignment/invalid/complex-alignment-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Complex Blockquote Alignment Test
+  2 |
+  3 | > First level quote
+  4 | >> Second level quote
+  5 | >  Misaligned continuation
+  6 | >    > Another nested quote
+    |      ^ [1]
+  7 | >   >> Deeply nested
+    |     ^ [2]
+  8 | > Back to first level
+  9 |
+
+Output:
+  1 | # Complex Blockquote Alignment Test
+  2 |
+  3 | > First level quote
+  4 | >> Second level quote
+  5 | >  Misaligned continuation
+  6 | >> Another nested quote
+  7 | >>> Deeply nested
+  8 | > Back to first level
+  9 |
+
+[1] Blockquote markers should be consistently aligned at the same nesting level.
+[2] Blockquote markers should be consistently aligned at the same nesting level.
+---
+
+
+Test: blockquote-marker-alignment >> invalid
+Filename: tests/fixtures/rules/blockquote-marker-alignment/invalid/edge-cases-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Edge Case Tests for Blockquote Alignment
+  2 |
+  3 | ## Test case for space addition (121-124 lines)
+  4 |
+  5 | > First level quote
+  6 |   > Second level needs space addition
+    |   ^ [1]
+  7 | > Back to first level
+  8 |
+  9 | ## Test case with mismatched blockquote markers (134-137 lines)
+ 10 |
+ 11 | >>>> Multiple marker alignment
+ 12 | > Single marker
+ 13 | >>>> Back to multiple
+ 14 | >> Double marker
+ 15 |
+
+Output:
+  1 | # Edge Case Tests for Blockquote Alignment
+  2 |
+  3 | ## Test case for space addition (121-124 lines)
+  4 |
+  5 | > First level quote
+  6 | > Second level needs space addition
+  7 | > Back to first level
+  8 |
+  9 | ## Test case with mismatched blockquote markers (134-137 lines)
+ 10 |
+ 11 | >>>> Multiple marker alignment
+ 12 | > Single marker
+ 13 | >>>> Back to multiple
+ 14 | >> Double marker
+ 15 |
+
+[1] Blockquote markers should be consistently aligned at the same nesting level.
+---
+
+
+Test: blockquote-marker-alignment >> invalid
 Filename: tests/fixtures/rules/blockquote-marker-alignment/invalid/inconsistent-nested-levels-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
@@ -200,6 +282,42 @@ Output:
 
 [1] Blockquote markers should be consistently aligned at the same nesting level.
 [2] Blockquote markers should be consistently aligned at the same nesting level.
+---
+
+
+Test: blockquote-marker-alignment >> invalid >>> "# Specific Coverage Test for Blockquote Alignment\n\n> First level blockquote\n > This has insufficient indentation and should trigger space addition\n> Back to first level\n\n> Another first level\n\\u0009> This has different whitespace that needs adjustment\n> Back to normal\n"
+Filename: tests/fixtures/rules/blockquote-marker-alignment/invalid/space-addition-test-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Specific Coverage Test for Blockquote Alignment
+  2 |
+  3 | > First level blockquote
+  4 |  > This has insufficient indentation and should trigger space addition
+    |  ^ [1]
+  5 | > Back to first level
+  6 |
+  7 | > Another first level
+  8 | 	> This has different whitespace that needs adjustment
+  9 | > Back to normal
+ 10 |
+
+Output:
+  1 | # Specific Coverage Test for Blockquote Alignment
+  2 |
+  3 | > First level blockquote
+  4 | > This has insufficient indentation and should trigger space addition
+  5 | > Back to first level
+  6 |
+  7 | > Another first level
+  8 | 	> This has different whitespace that needs adjustment
+  9 | > Back to normal
+ 10 |
+
+[1] Blockquote markers should be consistently aligned at the same nesting level.
 ---
 
 

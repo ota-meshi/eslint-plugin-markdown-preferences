@@ -206,5 +206,19 @@ describe("utils/ast", () => {
         end: { line: 2, column: 4 },
       });
     });
+
+    it("should handle range calculation correctly", () => {
+      // Test the range calculation without relying on startLoc
+      const src = parseMarkdown("abc\ndef\nghi", { frontmatter: "yaml" });
+      const para = src!.ast.children[0] as Paragraph;
+      const node = para.children[0] as Text;
+
+      // Test a specific range that exercises the code path
+      const loc = getSourceLocationFromRange(src!, node, [0, 3]);
+      assert.deepStrictEqual(loc, {
+        start: { line: 1, column: 1 },
+        end: { line: 1, column: 4 },
+      });
+    });
   });
 });

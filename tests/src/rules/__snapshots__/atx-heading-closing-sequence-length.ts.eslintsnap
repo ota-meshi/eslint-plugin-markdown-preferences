@@ -80,6 +80,54 @@ Output:
 
 
 Test: atx-heading-closing-sequence-length >> invalid
+Filename: tests/fixtures/rules/atx-heading-closing-sequence-length/invalid/consistent-line-length/coverage-test-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: consistent-line-length
+Plugins: unable to serialize
+
+Code:
+  1 | # Coverage Test For getContentLength and getLineLength
+  2 |
+  3 | ## Short heading #
+    |                  ^ [1]
+  4 |
+  5 | ## This is a much longer heading text ###
+    |                                       ^~~ [2]
+  6 |
+  7 | ## Medium length text ##
+    |                       ^~ [3]
+  8 |
+  9 | ### Third level short #
+    |                       ^ [4]
+ 10 |
+ 11 | ### Another third level with longer text ##
+ 12 |
+
+Output:
+  1 | # Coverage Test For getContentLength and getLineLength
+  2 |
+  3 | ## Short heading ##########################
+  4 |
+  5 | ## This is a much longer heading text #####
+  6 |
+  7 | ## Medium length text #####################
+  8 |
+  9 | ### Third level short #####################
+ 10 |
+ 11 | ### Another third level with longer text ##
+ 12 |
+
+[1] The closing sequence length should be 26 (was 1).
+[2] The closing sequence length should be 5 (was 3).
+[3] The closing sequence length should be 21 (was 2).
+[4] The closing sequence length should be 21 (was 1).
+---
+
+
+Test: atx-heading-closing-sequence-length >> invalid
 Filename: tests/fixtures/rules/atx-heading-closing-sequence-length/invalid/consistent-line-length/long-header-late-invalid-1-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
@@ -219,6 +267,45 @@ Output:
   2 |
 
 [1] The closing sequence length should be 20 (was 2).
+---
+
+
+Test: atx-heading-closing-sequence-length >> invalid
+Filename: tests/fixtures/rules/atx-heading-closing-sequence-length/invalid/fixed-line-length/min-line-length-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - mode: fixed-line-length
+    length: 50
+Plugins: unable to serialize
+
+Code:
+  1 | # Min Line Length Test
+  2 |
+  3 | ## Short #
+    |          ^ [1]
+  4 |
+  5 | ### Medium length ##
+    |                   ^~ [2]
+  6 |
+  7 | #### Longer heading ###
+    |                     ^~~ [3]
+  8 |
+
+Output:
+  1 | # Min Line Length Test
+  2 |
+  3 | ## Short #########################################
+  4 |
+  5 | ### Medium length ################################
+  6 |
+  7 | #### Longer heading ##############################
+  8 |
+
+[1] The closing sequence length should be 41 (was 1).
+[2] The closing sequence length should be 32 (was 2).
+[3] The closing sequence length should be 30 (was 3).
 ---
 
 

@@ -1,0 +1,8 @@
+{
+  "options": [
+    {
+      "style": "Title Case",
+      "preserveWords": ["API endpoint", "REST API"]
+    }
+  ]
+}

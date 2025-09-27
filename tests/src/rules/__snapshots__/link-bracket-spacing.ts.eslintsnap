@@ -1708,6 +1708,103 @@ Output:
 
 
 Test: link-bracket-spacing >> invalid
+Filename: tests/fixtures/rules/link-bracket-spacing/invalid/complex-image-reference-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Complex Image Reference Cases for Coverage
+  2 |
+  3 | ## Cases that should trigger link-bracket-spacing violations
+  4 |
+  5 | ![alt text with spaces][]
+  6 |
+  7 | ![ alt text with leading space][]
+    |   ^ [1]
+  8 |
+  9 | ![alt text with trailing space ][]
+    |                               ^ [2]
+ 10 |
+ 11 | ![ alt text with both spaces ][]
+    |   ^ [3]                     ^ [4]
+ 12 |
+ 13 | ![  multiple   spaces  ][]
+    |   ^~ [5]             ^~ [6]
+ 14 |
+ 15 | ![valid alt text][ reference with spaces ]
+    |                   ^ [7]                 ^ [8]
+ 16 |
+ 17 | ![valid alt text][reference with spaces ]
+    |                                        ^ [9]
+ 18 |
+ 19 | ![ valid alt text ][reference]
+    |   ^ [10]         ^ [11]
+ 20 |
+ 21 | ![complex alt text][ complex reference ]
+    |                     ^ [12]            ^ [13]
+ 22 |
+ 23 | [alt text with spaces]: http://example.com
+ 24 | [alt text with leading space]: http://example.com
+ 25 | [alt text with trailing space]: http://example.com
+ 26 | [alt text with both spaces]: http://example.com
+ 27 | [multiple spaces]: http://example.com
+ 28 | [reference with spaces]: http://example.com
+ 29 | [complex reference]: http://example.com
+ 30 | [reference]: http://example.com
+ 31 |
+
+Output:
+  1 | # Complex Image Reference Cases for Coverage
+  2 |
+  3 | ## Cases that should trigger link-bracket-spacing violations
+  4 |
+  5 | ![alt text with spaces][]
+  6 |
+  7 | ![alt text with leading space][]
+  8 |
+  9 | ![alt text with trailing space][]
+ 10 |
+ 11 | ![alt text with both spaces][]
+ 12 |
+ 13 | ![multiple   spaces][]
+ 14 |
+ 15 | ![valid alt text][reference with spaces]
+ 16 |
+ 17 | ![valid alt text][reference with spaces]
+ 18 |
+ 19 | ![valid alt text][reference]
+ 20 |
+ 21 | ![complex alt text][complex reference]
+ 22 |
+ 23 | [alt text with spaces]: http://example.com
+ 24 | [alt text with leading space]: http://example.com
+ 25 | [alt text with trailing space]: http://example.com
+ 26 | [alt text with both spaces]: http://example.com
+ 27 | [multiple spaces]: http://example.com
+ 28 | [reference with spaces]: http://example.com
+ 29 | [complex reference]: http://example.com
+ 30 | [reference]: http://example.com
+ 31 |
+
+[1] Unexpected space after opening bracket.
+[2] Unexpected space before closing bracket.
+[3] Unexpected space after opening bracket.
+[4] Unexpected space before closing bracket.
+[5] Unexpected space after opening bracket.
+[6] Unexpected space before closing bracket.
+[7] Unexpected space after opening bracket.
+[8] Unexpected space before closing bracket.
+[9] Unexpected space before closing bracket.
+[10] Unexpected space after opening bracket.
+[11] Unexpected space before closing bracket.
+[12] Unexpected space after opening bracket.
+[13] Unexpected space before closing bracket.
+---
+
+
+Test: link-bracket-spacing >> invalid
 Filename: tests/fixtures/rules/link-bracket-spacing/invalid/exceptions/always-images-in-links-false/image-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:

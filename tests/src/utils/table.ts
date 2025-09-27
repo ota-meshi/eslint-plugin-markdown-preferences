@@ -133,4 +133,24 @@ describe("parseTableDelimiterRowFromText", () => {
       trailingPipe: { text: "|", range: [29, 30] },
     });
   });
+
+  it("handles edge cases in table parsing", () => {
+    // Test edge case that might not parse correctly
+    const result = parseTableDelimiterRowFromText("not-a-delimiter");
+    // This should return null as it's not a valid table delimiter
+    assert.strictEqual(result, null);
+  });
+
+  it("handles blockquote markers in table", () => {
+    // Test case with blockquote marker and pipes - line 256-258
+    const result = parseTableDelimiterRowFromText("> | --- | --- |");
+    assert.notStrictEqual(result, null);
+    assert.strictEqual(result?.delimiters.length, 2);
+  });
+
+  it("returns null for invalid delimiter format", () => {
+    // Test various invalid formats that should return null
+    const result = parseTableDelimiterRowFromText("not a table");
+    assert.strictEqual(result, null);
+  });
 });

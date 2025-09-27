@@ -472,6 +472,56 @@ Output:
 
 
 Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/edge-cases-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Edge Case Indentation Test
+  2 |
+  3 | 1. First item
+  4 |    - Nested item
+  5 |    - Another nested
+  6 |       - Deep nested item
+    | ^~~~~~ [1]
+  7 |         - Very deep
+  8 |      
+  9 | 2. Second item
+ 10 |    > Blockquote in list
+ 11 |    
+ 12 |    ```
+ 13 |    code block in list
+ 14 |    ```
+ 15 |    
+ 16 |    Continued content
+ 17 |
+
+Output:
+  1 | # Edge Case Indentation Test
+  2 |
+  3 | 1. First item
+  4 |    - Nested item
+  5 |    - Another nested
+  6 |      - Deep nested item
+  7 |        - Very deep
+  8 |      
+  9 | 2. Second item
+ 10 |    > Blockquote in list
+ 11 |    
+ 12 |    ```
+ 13 |    code block in list
+ 14 |    ```
+ 15 |    
+ 16 |    Continued content
+ 17 |
+
+[1] Expected indentation of 5 but found 6.
+---
+
+
+Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/emphasis-strong-delete-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:

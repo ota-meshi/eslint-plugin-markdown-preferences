@@ -25,4 +25,18 @@ describe("parseInlineLinkDestAndTitleFromText", () => {
     );
     assert.strictEqual(result, null);
   });
+
+  it("returns null when cursor finishes early", () => {
+    // Test line 190-191: cursor.finished() case
+    const result = parseInlineLinkDestAndTitleFromText("https://example.com");
+    assert.strictEqual(result, null);
+  });
+
+  it("returns null when closing paren is missing", () => {
+    // Test case where closing parenthesis is missing
+    const result = parseInlineLinkDestAndTitleFromText(
+      'https://example.com "title"',
+    );
+    assert.strictEqual(result, null);
+  });
 });
