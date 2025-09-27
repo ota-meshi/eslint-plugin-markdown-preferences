@@ -57,25 +57,15 @@ Consistent parentheses linebreaks:
 
 [foo](/url)
 ![foo](/url)
-[foo][ref]
-
-[ref]: /url
 
 <!-- ✗ BAD -->
 
-[
-  foo
-](/url)
-![
-  foo
-](/url)
-[foo][
-   ref
-  ]
-
-[
- ref
- ]: /url
+[foo](
+  /url
+)
+![foo](
+  /url
+)
 ```
 
 <!-- prettier-ignore-end -->

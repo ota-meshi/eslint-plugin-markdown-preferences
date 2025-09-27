@@ -84,10 +84,10 @@ To control the alignment of list item markers and blockquote markers, use [markd
   - `first`: Sets the indentation for the first line. The following values can be used:
     - Integer value (`>= 1`): Sets the indentation to the specified number of spaces.
     - `"ignore"`: Skips enforcing indentation for the first line.
-  - `other`: Sets the indentation for lines other than the first. The following values can be used:
+  - `other`: Sets the indentation for lines other than the first. The following values can be used. The default is `"first"`:
     - Integer value (`>= 2`): Sets the indentation to the specified number of spaces.
     - `"first"`: Sets the indentation to match the value of `first`.
-    - `"minimum"`: Uses the minimum indentation required to maintain indentation. The default is `"first"`.
+    - `"minimum"`: Uses the minimum indentation required to maintain indentation.
   - `relativeTo`: When using a numeric value for indentation, sets the reference point for the indentation. The following values can be used. The default is `"markerEnd"`:
     - `"markerStart"`: Calculates indentation relative to the start position of the list marker.
     - `"markerEnd"`: Calculates indentation relative to the end position of the list marker.
