@@ -134,10 +134,6 @@ export default defineConfig([
 - [markdown-preferences/code-fence-style](./code-fence-style.md)
 - [markdown-preferences/code-fence-length](./code-fence-length.md)
 
-## � Version
-
-This rule was introduced in eslint-plugin-markdown-preferences v0.22.0
-
 ## 🚀 Version
 
 This rule was introduced in eslint-plugin-markdown-preferences v0.28.0
