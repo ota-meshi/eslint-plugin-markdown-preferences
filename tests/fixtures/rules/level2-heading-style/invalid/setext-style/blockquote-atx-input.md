@@ -3,9 +3,9 @@ Main Setext Level 1 Heading
 
 This is valid.
 
-> # Blockquote ATX Level 1 Heading
+> ## Blockquote ATX Level 2 Heading
 >
-> This level 1 heading inside a blockquote should be invalid when Setext style is enforced.
+> This level 2 heading inside a blockquote should be invalid when Setext style is enforced.
 >
 > Level 2 in blockquote
 > ---------------------

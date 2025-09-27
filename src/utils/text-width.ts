@@ -12,9 +12,6 @@ export function getTextWidth(
   if (!text.includes("\t")) {
     return stringWidth(text.slice(start, end));
   }
-  if (!segmenter) {
-    segmenter = new Intl.Segmenter("en");
-  }
   const prefixWidth = getTextWidthBySegment(text.slice(0, start), 0);
   return getTextWidthBySegment(text.slice(start, end), prefixWidth);
 }

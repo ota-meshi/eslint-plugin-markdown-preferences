@@ -79,6 +79,38 @@ describe("parseTableDelimiterRowFromText", () => {
     assert.strictEqual(result, null);
   });
 
+  it("returns null for delimiter row with missing pipe between delimiters", () => {
+    const result = parseTableDelimiterRowFromText("| --- :---: |");
+    assert.strictEqual(result, null);
+  });
+
+  it("returns null for delimiter row with invalid delimiter character", () => {
+    const result = parseTableDelimiterRowFromText("| --- | :abc: |");
+    assert.strictEqual(result, null);
+  });
+
+  it("returns null for delimiter row with consecutive pipes", () => {
+    const result = parseTableDelimiterRowFromText("| --- || :---: |");
+    assert.strictEqual(result, null);
+  });
+
+  it("handles delimiter row with blockquote markers", () => {
+    const result = parseTableDelimiterRowFromText("> | --- | --- |");
+    assert.deepStrictEqual(result, {
+      delimiters: [
+        {
+          leadingPipe: { text: "|", range: [2, 3] },
+          delimiter: { text: "---", range: [4, 7] },
+        },
+        {
+          leadingPipe: { text: "|", range: [8, 9] },
+          delimiter: { text: "---", range: [10, 13] },
+        },
+      ],
+      trailingPipe: { text: "|", range: [14, 15] },
+    });
+  });
+
   it("parses delimiter row with spaces", () => {
     const result = parseTableDelimiterRowFromText(
       "  |  ---  |  :---:  |  ---:  |  ",

@@ -327,6 +327,40 @@ Output:
 
 
 Test: link-title-style >> invalid
+Filename: tests/fixtures/rules/link-title-style/invalid/malformed-links-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Test inconsistent link title styles
+  2 |
+  3 | This tests links with different title quote styles that should be consistent:
+  4 |
+  5 | [Link with double quotes](https://example.com "Double quoted title")
+  6 | [Link with single quotes](https://example.com 'Single quoted title')
+    |                                               ^~~~~~~~~~~~~~~~~~~~~ [1]
+  7 | [Link with parentheses](https://example.com (Parenthesized title))
+    |                                             ^~~~~~~~~~~~~~~~~~~~~ [2]
+  8 |
+
+Output:
+  1 | # Test inconsistent link title styles
+  2 |
+  3 | This tests links with different title quote styles that should be consistent:
+  4 |
+  5 | [Link with double quotes](https://example.com "Double quoted title")
+  6 | [Link with single quotes](https://example.com "Single quoted title")
+  7 | [Link with parentheses](https://example.com "Parenthesized title")
+  8 |
+
+[1] Expected link title to be double quoted.
+[2] Expected link title to be double quoted.
+---
+
+
+Test: link-title-style >> invalid
 Filename: tests/fixtures/rules/link-title-style/invalid/parentheses/double-quoted-titles-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:

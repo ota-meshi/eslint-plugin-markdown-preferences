@@ -2,10 +2,10 @@
 
 This is valid.
 
-> Blockquote Setext Level 1 Heading
-> ==================================
+> Blockquote Setext Level 2 Heading
+> ----------------------------------
 >
-> This level 1 heading inside a blockquote should be invalid when ATX style is enforced.
+> This level 2 heading inside a blockquote should be invalid when ATX style is enforced.
 >
 > ## Level 2 in blockquote
 >

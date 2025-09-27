@@ -138,6 +138,38 @@ Output:
 
 
 Test: blockquote-marker-alignment >> invalid
+Filename: tests/fixtures/rules/blockquote-marker-alignment/invalid/mismatched-markers-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Test mismatched blockquote markers
+  2 |
+  3 | This tests the case where there are mismatched blockquote markers that cannot be properly fixed.
+  4 |
+  5 | > First level
+  6 | >> Second level with mismatch
+  7 | >  > This line has inconsistent alignment with internal blockquote marker
+    |    ^ [1]
+  8 |
+
+Output:
+  1 | # Test mismatched blockquote markers
+  2 |
+  3 | This tests the case where there are mismatched blockquote markers that cannot be properly fixed.
+  4 |
+  5 | > First level
+  6 | >> Second level with mismatch
+  7 | >> This line has inconsistent alignment with internal blockquote marker
+  8 |
+
+[1] Blockquote markers should be consistently aligned at the same nesting level.
+---
+
+
+Test: blockquote-marker-alignment >> invalid
 Filename: tests/fixtures/rules/blockquote-marker-alignment/invalid/mixed-indentation-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
@@ -168,4 +200,36 @@ Output:
 
 [1] Blockquote markers should be consistently aligned at the same nesting level.
 [2] Blockquote markers should be consistently aligned at the same nesting level.
+---
+
+
+Test: blockquote-marker-alignment >> invalid
+Filename: tests/fixtures/rules/blockquote-marker-alignment/invalid/unfixable-non-whitespace-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Test edge cases for blockquote alignment
+  2 |
+  3 | This tests blockquotes with inconsistent alignment that are difficult to fix.
+  4 |
+  5 | > First blockquote line
+  6 |   > This line has extra indentation
+    |   ^ [1]
+  7 | > Back to normal blockquote
+  8 |
+
+Output:
+  1 | # Test edge cases for blockquote alignment
+  2 |
+  3 | This tests blockquotes with inconsistent alignment that are difficult to fix.
+  4 |
+  5 | > First blockquote line
+  6 | > This line has extra indentation
+  7 | > Back to normal blockquote
+  8 |
+
+[1] Blockquote markers should be consistently aligned at the same nesting level.
 ---
