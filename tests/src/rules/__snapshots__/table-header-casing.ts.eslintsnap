@@ -66,6 +66,38 @@ Output:
 
 
 Test: table-header-casing >> invalid
+Filename: tests/fixtures/rules/table-header-casing/invalid/invalid-regex-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: Sentence case
+    ignorePatterns:
+      - Header
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid Regex Pattern Test
+  2 |
+  3 | | test header |
+    |   ^~~~ [1]
+  4 | |--------|
+  5 | | content |
+  6 |
+
+Output:
+  1 | # Invalid Regex Pattern Test
+  2 |
+  3 | | Test header |
+  4 | |--------|
+  5 | | content |
+  6 |
+
+[1] Expected "test" to be "Test" (Sentence case).
+---
+
+
+Test: table-header-casing >> invalid
 Filename: tests/fixtures/rules/table-header-casing/invalid/minor-words/test01-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
@@ -137,6 +169,39 @@ Output:
 [2] Expected "name" to be "Name" (Title Case).
 [3] Expected "date" to be "Date" (Title Case).
 [4] Expected "birth" to be "Birth" (Title Case).
+---
+
+
+Test: table-header-casing >> invalid
+Filename: tests/fixtures/rules/table-header-casing/invalid/phrase-preserve-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: Title Case
+    preserveWords:
+      - API endpoint
+      - REST API
+Plugins: unable to serialize
+
+Code:
+  1 | # Phrase Preservation Test
+  2 |
+  3 | | API endpoint management |
+    |                ^~~~~~~~~~ [1]
+  4 | |------------------------|
+  5 | | REST API calls |
+  6 |
+
+Output:
+  1 | # Phrase Preservation Test
+  2 |
+  3 | | API endpoint Management |
+  4 | |------------------------|
+  5 | | REST API calls |
+  6 |
+
+[1] Expected "management" to be "Management" (Title Case).
 ---
 
 

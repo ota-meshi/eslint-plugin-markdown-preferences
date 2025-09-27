@@ -171,6 +171,40 @@ Output:
 ---
 
 
+Test: indent >> invalid >>> "# Test complex indentation with tabs\n\nThis tests list items with mixed tab and space indentation for complex fixing scenarios.\n\n- First item\n\\u0009- Nested item with tab indentation\n    - Item with space indentation that doesn't align\n  - Another nested item with different indentation\n"
+Filename: tests/fixtures/rules/indent/invalid/complex-tab-indentation-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Test complex indentation with tabs
+  2 |
+  3 | This tests list items with mixed tab and space indentation for complex fixing scenarios.
+  4 |
+  5 | - First item
+  6 | 	- Nested item with tab indentation
+    | ^ [1]
+  7 |     - Item with space indentation that doesn't align
+  8 |   - Another nested item with different indentation
+  9 |
+
+Output:
+  1 | # Test complex indentation with tabs
+  2 |
+  3 | This tests list items with mixed tab and space indentation for complex fixing scenarios.
+  4 |
+  5 | - First item
+  6 |   - Nested item with tab indentation
+  7 |   - Item with space indentation that doesn't align
+  8 |   - Another nested item with different indentation
+  9 |
+
+[1] Expected indentation of 2 but found 4 (tab width is 4).
+---
+
+
 Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/custom-container-input.md
 Language: markdown-preferences/extended-syntax
@@ -434,6 +468,56 @@ Output:
 [23] Expected indentation of 1 from the blockquote marker but found 2.
 [24] Expected indentation of 1 from the blockquote marker but found 2.
 [25] Expected indentation of 1 from the blockquote marker but found 0.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/edge-cases-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Edge Case Indentation Test
+  2 |
+  3 | 1. First item
+  4 |    - Nested item
+  5 |    - Another nested
+  6 |       - Deep nested item
+    | ^~~~~~ [1]
+  7 |         - Very deep
+  8 |      
+  9 | 2. Second item
+ 10 |    > Blockquote in list
+ 11 |    
+ 12 |    ```
+ 13 |    code block in list
+ 14 |    ```
+ 15 |    
+ 16 |    Continued content
+ 17 |
+
+Output:
+  1 | # Edge Case Indentation Test
+  2 |
+  3 | 1. First item
+  4 |    - Nested item
+  5 |    - Another nested
+  6 |      - Deep nested item
+  7 |        - Very deep
+  8 |      
+  9 | 2. Second item
+ 10 |    > Blockquote in list
+ 11 |    
+ 12 |    ```
+ 13 |    code block in list
+ 14 |    ```
+ 15 |    
+ 16 |    Continued content
+ 17 |
+
+[1] Expected indentation of 5 but found 6.
 ---
 
 
@@ -2657,6 +2741,48 @@ Output:
 [23] Expected indentation of 3 from the blockquote marker but found 6.
 [24] Expected indentation of 3 from the blockquote marker but found 6.
 [25] Expected indentation of 0 but found 1.
+---
+
+
+Test: indent >> invalid >>> "# Test edge cases for indent rule\n\nThis tests special cases that are difficult to fix automatically.\n\n- Item with mixed tab and space indentation:\n\\u0009 - Nested item with mixed indentation\n    \\u0009- Another nested item with different mixed indentation\n\n* First item\n  * Nested item with space-only indentation\n    * Deeply nested item\n"
+Filename: tests/fixtures/rules/indent/invalid/mixed-tab-space-edge-cases-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Test edge cases for indent rule
+  2 |
+  3 | This tests special cases that are difficult to fix automatically.
+  4 |
+  5 | - Item with mixed tab and space indentation:
+  6 | 	 - Nested item with mixed indentation
+    | ^~ [1]
+  7 |     	- Another nested item with different mixed indentation
+    | ^~~~~ [2]
+  8 |
+  9 | * First item
+ 10 |   * Nested item with space-only indentation
+ 11 |     * Deeply nested item
+ 12 |
+
+Output:
+  1 | # Test edge cases for indent rule
+  2 |
+  3 | This tests special cases that are difficult to fix automatically.
+  4 |
+  5 | - Item with mixed tab and space indentation:
+  6 |   - Nested item with mixed indentation
+  7 |   - Another nested item with different mixed indentation
+  8 |
+  9 | * First item
+ 10 |   * Nested item with space-only indentation
+ 11 |     * Deeply nested item
+ 12 |
+
+[1] Expected indentation of 2 but found 5 (tab width is 4).
+[2] Expected indentation of 7 but found 8 (tab width is 4).
 ---
 
 

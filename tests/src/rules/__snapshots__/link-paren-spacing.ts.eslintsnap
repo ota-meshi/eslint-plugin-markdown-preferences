@@ -357,6 +357,44 @@ Output:
 ---
 
 
+Test: link-paren-spacing >> invalid
+Filename: tests/fixtures/rules/link-paren-spacing/invalid/edge-cases-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Test inconsistent paren spacing in links
+  2 |
+  3 | This tests links with inconsistent spacing around parentheses:
+  4 |
+  5 | [Link with no spaces](https://example.com)
+  6 | [Link with spaces]( https://example.com )
+    |                    ^ [1]               ^ [2]
+  7 | [Link with title and no spaces](https://example.com"Title")
+  8 | [Link with title and spaces]( https://example.com "Title" )
+    |                              ^ [3]                       ^ [4]
+  9 |
+
+Output:
+  1 | # Test inconsistent paren spacing in links
+  2 |
+  3 | This tests links with inconsistent spacing around parentheses:
+  4 |
+  5 | [Link with no spaces](https://example.com)
+  6 | [Link with spaces](https://example.com)
+  7 | [Link with title and no spaces](https://example.com"Title")
+  8 | [Link with title and spaces](https://example.com "Title")
+  9 |
+
+[1] Unexpected space after opening parenthesis.
+[2] Unexpected space before closing parenthesis.
+[3] Unexpected space after opening parenthesis.
+[4] Unexpected space before closing parenthesis.
+---
+
+
 Test: link-paren-spacing >> invalid >>> "\n- ![foo]( /url )\n- ![foo](/url)\n- ![foo]( /url)\n- ![foo](/url )\n- ![foo](     /url     )\n- ![foo]( </url> )\n- ![foo](</url>)\n- ![foo]( </url>)\n- ![foo](</url> )\n- ![foo](     </url>     )\n- ![foo]( /url \"title\" )\n- ![foo](/url \"title\")\n- ![foo]( /url \"title\")\n- ![foo](/url \"title\" )\n- ![foo](     /url \"title\"     )\n- ![foo]( </url> \"title\" )\n- ![foo](</url> \"title\")\n- ![foo]( </url> \"title\")\n- ![foo](</url> \"title\" )\n- ![foo](     </url> \"title\"     )\n- Multi lines\n  - ![foo](\n      /url\n    )\n  - ![foo](\n      /url\n      \"title\"\n    )\n  - ![foo](/url\n    )\n  - ![foo]( /url\n    )\n  - ![foo](/url\n      \"title\"\n    )\n  - ![foo]( /url\n      \"title\"\n    )\n  - ![foo](\n      /url)\n  - ![foo](\n      /url )\n  - ![foo](\n      /url\n      \"title\")\n  - ![foo](\n      /url\n      \"title\" )\n- Empty\n  - ![foo]()\n  - ![foo](<>)\n  - ![foo]( <> )\n  - ![foo](   )\n  - ![foo](<#foo>)\n  - ![foo]( <#foo> )\n 2"
 Filename: tests/fixtures/rules/link-paren-spacing/invalid/image-input.md
 Language: markdown-preferences/extended-syntax

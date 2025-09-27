@@ -287,6 +287,48 @@ Output:
 
 
 Test: definitions-last >> invalid
+Filename: tests/fixtures/rules/definitions-last/invalid/mixed-content-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Definitions Last Edge Cases
+  2 |
+  3 | Content with [link1][ref1] and [link2][ref2].
+  4 |
+  5 | [ref1]: https://example1.com
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  6 |
+  7 | Some content between definitions.
+  8 |
+  9 | [ref2]: https://example2.com
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 10 |
+ 11 | More content after definitions.
+ 12 |
+
+Output:
+  1 | # Definitions Last Edge Cases
+  2 |
+  3 | Content with [link1][ref1] and [link2][ref2].
+  4 |
+  5 | Some content between definitions.
+  6 |
+  7 | More content after definitions.
+  8 |
+  9 | [ref2]: https://example2.com
+ 10 |
+ 11 | [ref1]: https://example1.com
+ 12 |
+
+[1] Definition or footnote definition should be placed at the end of the document.
+[2] Definition or footnote definition should be placed at the end of the document.
+---
+
+
+Test: definitions-last >> invalid
 Filename: tests/fixtures/rules/definitions-last/invalid/mixed-options/mixed-placement-wrong-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:

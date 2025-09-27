@@ -63,6 +63,26 @@ tests/fixtures/rules/<rule-name>/
 
 - Name input files descriptively, e.g., `multiple-heading-input.md`, `setext-heading-input.md`, etc.
 - Place configuration files as `_config.json` in the same directory. You may also use `xxx-config.json` for input-specific (`xxx-input.md`) configs.
+- **Configuration File Format:** All rule configuration files must follow the ESLint format with an `options` array:
+  ```json
+  {
+    "options": [{ "mode": "fixed-line-length", "length": 30 }]
+  }
+  ```
+  For complex configurations:
+  ```json
+  {
+    "options": [
+      {
+        "listItems": {
+          "first": 4,
+          "rest": 2
+        }
+      }
+    ]
+  }
+  ```
+  **Important:** Do not use the direct format like `{ "mode": "fixed-line-length" }` as it will result in "Unexpected key" configuration errors during testing.
 - You may create subdirectories such as `multiline/` or `spaces/` for different test cases.
 
   **Example:**
@@ -103,6 +123,22 @@ npm run test:update
 
 Ensure that snapshot files reflect the correct results.
 
+#### Important: Snapshot Test Validation
+
+**Critical:** When creating or modifying test fixtures in the `invalid/` directories, ensure that they actually produce ESLint errors. Test fixtures that result in "No errors" in snapshot files indicate incorrect test cases that don't properly exercise the rule.
+
+- **Invalid fixtures must produce errors:** All files in `tests/fixtures/rules/<rule-name>/invalid/` should trigger the rule and produce lint errors.
+- **Check snapshots after updates:** After running `npm run test:update`, review the generated snapshot files (`.eslintsnap`) to ensure:
+  - No "No errors" entries exist for invalid test cases
+  - Error messages are meaningful and match expected violations
+  - Fixes (when applicable) are correctly applied
+- **Common causes of "No errors":**
+  - Markdown syntax that isn't recognized by the parser (e.g., `text>` instead of `> text`)
+  - Test fixtures that don't actually violate the rule being tested
+  - Configuration issues in test setup
+
+If you encounter "No errors" in snapshots for invalid test cases, review and fix the test fixtures to ensure they contain valid Markdown that violates the specific rule being tested.
+
 #### Updating Rule Lists and Metadata
 
 The rule list, metadata, and type definition files can be automatically generated. After adding or modifying rules, always run:
@@ -127,6 +163,7 @@ Below are the main npm scripts useful for development:
 | :-------------------- | :----------------------------- |
 | `npm run new`         | Generate a new rule template   |
 | `npm run test`        | Run tests                      |
+| `npm run cover`       | Generate test coverage report  |
 | `npm run test:update` | Update snapshot tests          |
 | `npm run update`      | Update metadata and rule lists |
 

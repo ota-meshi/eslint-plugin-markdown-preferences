@@ -3,11 +3,11 @@ Main Setext Level 1 Heading
 
 This is valid.
 
-# ATX Style with Closing Sequence #
+## ATX Level 2 Style with Closing Sequence ##
 
 This should be invalid when Setext style is enforced.
 
-# Another ATX Style Heading ###
+## Another ATX Level 2 Style Heading ###
 
 This should also be invalid.
 

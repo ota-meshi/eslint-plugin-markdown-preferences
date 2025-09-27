@@ -31,6 +31,56 @@ Output:
 ---
 
 
+Test: custom-container-marker-spacing >> invalid
+Filename: tests/fixtures/rules/custom-container-marker-spacing/invalid/malformed-containers-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Test inconsistent custom container marker spacing
+  2 |
+  3 | This tests custom containers with inconsistent spacing after the marker:
+  4 |
+  5 | :::info
+    |    ^~~~ [1]
+  6 | Content with no space after marker
+  7 | :::
+  8 |
+  9 | ::: warning
+ 10 | Content with space after marker
+ 11 | :::
+ 12 |
+ 13 | :::note   
+    |    ^~~~ [2]
+ 14 | Content with multiple spaces after marker
+ 15 | :::
+ 16 |
+
+Output:
+  1 | # Test inconsistent custom container marker spacing
+  2 |
+  3 | This tests custom containers with inconsistent spacing after the marker:
+  4 |
+  5 | ::: info
+  6 | Content with no space after marker
+  7 | :::
+  8 |
+  9 | ::: warning
+ 10 | Content with space after marker
+ 11 | :::
+ 12 |
+ 13 | ::: note   
+ 14 | Content with multiple spaces after marker
+ 15 | :::
+ 16 |
+
+[1] Expected a space between opening custom container marker and info.
+[2] Expected a space between opening custom container marker and info.
+---
+
+
 Test: custom-container-marker-spacing >> invalid >>> "# Missing Space\n\n:::warning\nThis is a warning.\n:::\n 2"
 Filename: tests/fixtures/rules/custom-container-marker-spacing/invalid/missing-space-input.md
 Language: markdown-preferences/extended-syntax

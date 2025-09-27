@@ -79,6 +79,38 @@ describe("parseTableDelimiterRowFromText", () => {
     assert.strictEqual(result, null);
   });
 
+  it("returns null for delimiter row with missing pipe between delimiters", () => {
+    const result = parseTableDelimiterRowFromText("| --- :---: |");
+    assert.strictEqual(result, null);
+  });
+
+  it("returns null for delimiter row with invalid delimiter character", () => {
+    const result = parseTableDelimiterRowFromText("| --- | :abc: |");
+    assert.strictEqual(result, null);
+  });
+
+  it("returns null for delimiter row with consecutive pipes", () => {
+    const result = parseTableDelimiterRowFromText("| --- || :---: |");
+    assert.strictEqual(result, null);
+  });
+
+  it("handles delimiter row with blockquote markers", () => {
+    const result = parseTableDelimiterRowFromText("> | --- | --- |");
+    assert.deepStrictEqual(result, {
+      delimiters: [
+        {
+          leadingPipe: { text: "|", range: [2, 3] },
+          delimiter: { text: "---", range: [4, 7] },
+        },
+        {
+          leadingPipe: { text: "|", range: [8, 9] },
+          delimiter: { text: "---", range: [10, 13] },
+        },
+      ],
+      trailingPipe: { text: "|", range: [14, 15] },
+    });
+  });
+
   it("parses delimiter row with spaces", () => {
     const result = parseTableDelimiterRowFromText(
       "  |  ---  |  :---:  |  ---:  |  ",
@@ -100,5 +132,25 @@ describe("parseTableDelimiterRowFromText", () => {
       ],
       trailingPipe: { text: "|", range: [29, 30] },
     });
+  });
+
+  it("handles edge cases in table parsing", () => {
+    // Test edge case that might not parse correctly
+    const result = parseTableDelimiterRowFromText("not-a-delimiter");
+    // This should return null as it's not a valid table delimiter
+    assert.strictEqual(result, null);
+  });
+
+  it("handles blockquote markers in table", () => {
+    // Test case with blockquote marker and pipes - line 256-258
+    const result = parseTableDelimiterRowFromText("> | --- | --- |");
+    assert.notStrictEqual(result, null);
+    assert.strictEqual(result?.delimiters.length, 2);
+  });
+
+  it("returns null for invalid delimiter format", () => {
+    // Test various invalid formats that should return null
+    const result = parseTableDelimiterRowFromText("not a table");
+    assert.strictEqual(result, null);
   });
 });

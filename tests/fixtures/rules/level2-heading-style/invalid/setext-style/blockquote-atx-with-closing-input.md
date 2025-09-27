@@ -3,11 +3,11 @@ Main Setext Level 1 Heading
 
 This is valid.
 
-> # Blockquote ATX Level 1 Heading #
+> ## Blockquote ATX Level 2 Heading ##
 >
 > This should be invalid when Setext style is enforced.
 >
-> # Another Blockquote Heading ###
+> ## Another Blockquote Level 2 Heading ###
 >
 > This should also be invalid.
 >

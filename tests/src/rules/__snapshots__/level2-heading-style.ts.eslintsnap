@@ -16,9 +16,13 @@ Code:
   3 | This is valid.
   4 |
   5 | > Multi-line
-  6 | > Setext Heading
+    |   ^~~~~~~~~~\ [1]
+  6 | > Setext Level 2 Heading
+    | ~~~~~~~~~~~~~~~~~~~~~~~~\ [1]
   7 | > in Blockquote
-  8 | > ==============
+    | ~~~~~~~~~~~~~~~\ [1]
+  8 | > ----------------------
+    | ~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   9 | >
  10 | > This should be invalid when allowMultilineSetext is false (default).
  11 |
@@ -29,7 +33,7 @@ Code:
 
 Output: unchanged
 
-No errors
+[1] Multiline Setext headings are not allowed.
 ---
 
 
@@ -47,10 +51,12 @@ Code:
   2 |
   3 | This is valid.
   4 |
-  5 | > Blockquote Setext Level 1 Heading
-  6 | > ==================================
+  5 | > Blockquote Setext Level 2 Heading
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\ [1]
+  6 | > ----------------------------------
+    | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   7 | >
-  8 | > This level 1 heading inside a blockquote should be invalid when ATX style is enforced.
+  8 | > This level 2 heading inside a blockquote should be invalid when ATX style is enforced.
   9 | >
  10 | > ## Level 2 in blockquote
  11 | >
@@ -61,9 +67,25 @@ Code:
  16 | This should not be affected.
  17 |
 
-Output: unchanged
+Output:
+  1 | # Main ATX Level 1 Heading
+  2 |
+  3 | This is valid.
+  4 |
+  5 | > ## Blockquote Setext Level 2 Heading
+  6 | >
+  7 | > This level 2 heading inside a blockquote should be invalid when ATX style is enforced.
+  8 | >
+  9 | > ## Level 2 in blockquote
+ 10 | >
+ 11 | > This should not be affected.
+ 12 |
+ 13 | ## Normal Level 2 Heading
+ 14 |
+ 15 | This should not be affected.
+ 16 |
 
-No errors
+[1] Expected ATX style heading (## Heading).
 ---
 
 
@@ -331,11 +353,13 @@ Code:
   3 |
   4 | This is valid.
   5 |
-  6 | # ATX Style with Closing Sequence #
+  6 | ## ATX Level 2 Style with Closing Sequence ##
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   7 |
   8 | This should be invalid when Setext style is enforced.
   9 |
- 10 | # Another ATX Style Heading ###
+ 10 | ## Another ATX Level 2 Style Heading ###
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
  11 |
  12 | This should also be invalid.
  13 |
@@ -345,9 +369,30 @@ Code:
  17 | This should not be affected.
  18 |
 
-Output: unchanged
+Output:
+  1 | Main Setext Level 1 Heading
+  2 | ============================
+  3 |
+  4 | This is valid.
+  5 |
+  6 | ATX Level 2 Style with Closing Sequence
+  7 | ---------------------------------------
+  8 |
+  9 | This should be invalid when Setext style is enforced.
+ 10 |
+ 11 | Another ATX Level 2 Style Heading
+ 12 | ---------------------------------
+ 13 |
+ 14 | This should also be invalid.
+ 15 |
+ 16 | Level 2 Setext Heading
+ 17 | ----------------------
+ 18 |
+ 19 | This should not be affected.
+ 20 |
 
-No errors
+[1] Expected Setext style heading (Heading\n------).
+[2] Expected Setext style heading (Heading\n------).
 ---
 
 
@@ -366,9 +411,10 @@ Code:
   3 |
   4 | This is valid.
   5 |
-  6 | > # Blockquote ATX Level 1 Heading
+  6 | > ## Blockquote ATX Level 2 Heading
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   7 | >
-  8 | > This level 1 heading inside a blockquote should be invalid when Setext style is enforced.
+  8 | > This level 2 heading inside a blockquote should be invalid when Setext style is enforced.
   9 | >
  10 | > Level 2 in blockquote
  11 | > ---------------------
@@ -381,9 +427,29 @@ Code:
  18 | This should not be affected.
  19 |
 
-Output: unchanged
+Output:
+  1 | Main Setext Level 1 Heading
+  2 | ============================
+  3 |
+  4 | This is valid.
+  5 |
+  6 | > Blockquote ATX Level 2 Heading
+  7 | > ------------------------------
+  8 | >
+  9 | > This level 2 heading inside a blockquote should be invalid when Setext style is enforced.
+ 10 | >
+ 11 | > Level 2 in blockquote
+ 12 | > ---------------------
+ 13 | >
+ 14 | > This should not be affected.
+ 15 |
+ 16 | Level 2 Normal Heading
+ 17 | ----------------------
+ 18 |
+ 19 | This should not be affected.
+ 20 |
 
-No errors
+[1] Expected Setext style heading (Heading\n------).
 ---
 
 
@@ -402,11 +468,13 @@ Code:
   3 |
   4 | This is valid.
   5 |
-  6 | > # Blockquote ATX Level 1 Heading #
+  6 | > ## Blockquote ATX Level 2 Heading ##
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   7 | >
   8 | > This should be invalid when Setext style is enforced.
   9 | >
- 10 | > # Another Blockquote Heading ###
+ 10 | > ## Another Blockquote Level 2 Heading ###
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
  11 | >
  12 | > This should also be invalid.
  13 | >
@@ -421,9 +489,35 @@ Code:
  22 | This should not be affected.
  23 |
 
-Output: unchanged
+Output:
+  1 | Main Setext Level 1 Heading
+  2 | ============================
+  3 |
+  4 | This is valid.
+  5 |
+  6 | > Blockquote ATX Level 2 Heading
+  7 | > ------------------------------
+  8 | >
+  9 | > This should be invalid when Setext style is enforced.
+ 10 | >
+ 11 | > Another Blockquote Level 2 Heading
+ 12 | > ----------------------------------
+ 13 | >
+ 14 | > This should also be invalid.
+ 15 | >
+ 16 | > Level 2 in blockquote
+ 17 | > ---------------------
+ 18 | >
+ 19 | > This should not be affected.
+ 20 |
+ 21 | Level 2 Normal Heading
+ 22 | ----------------------
+ 23 |
+ 24 | This should not be affected.
+ 25 |
 
-No errors
+[1] Expected Setext style heading (Heading\n------).
+[2] Expected Setext style heading (Heading\n------).
 ---
 
 
