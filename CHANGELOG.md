@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.34.2
+
+### Patch Changes
+
+- [#167](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/167) [`6c30087`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/6c30087a145b12a712f17cfbc674578ad2ac5197) Thanks [@ota-meshi](https://github.com/ota-meshi)! - chore: use trusted publisher (take2)
+
 ## 0.34.1
 
 ### Patch Changes
