@@ -12,12 +12,12 @@ Code:
   1 | # Test Document
   2 |
   3 | > [b]: #b
-  4 | > [a]: #a
     |   ^~~~~~~ [1]
+  4 | > [a]: #a
   5 |
   6 | [d]: #d
-  7 | [c]: #c
     | ^~~~~~~ [2]
+  7 | [c]: #c
   8 |
 
 Output:
@@ -30,8 +30,8 @@ Output:
   7 | [d]: #d
   8 |
 
-[1] The definition '[a]: #a' should be before '[b]: #b'.
-[2] The definition '[c]: #c' should be before '[d]: #d'.
+[1] The definition '[b]: #b' should be after '[a]: #a'.
+[2] The definition '[d]: #d' should be after '[c]: #c'.
 ---
 
 
@@ -55,10 +55,9 @@ Code:
   5 | See [normal] and [special] and note[^note].
   6 |
   7 | [normal]: https://example.com/normal
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   8 | [special]: https://example.com/special
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   9 | [^note]: A footnote
-    | ^~~~~~~~~~~~~~~~~~~ [2]
  10 |
 
 Output:
@@ -74,8 +73,7 @@ Output:
  10 | [normal]: https://example.com/normal
  11 |
 
-[1] The definition '[special]: https://example.com/special' should be before '[normal]: https://example.com/normal'.
-[2] The definition '[^note]: A footnote' should be before '[normal]: https://example.com/normal'.
+[1] The definition '[normal]: https://example.com/normal' should be after '[^note]: A footnote'.
 ---
 
 
@@ -100,12 +98,11 @@ Code:
   5 | See [ESLint] and [TypeScript] and note[^first] and [^second].
   6 |
   7 | [TypeScript]: https://www.typescriptlang.org
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   8 | [ESLint]: https://eslint.org
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
   9 | [^first]: First footnote
-    | ^~~~~~~~~~~~~~~~~~~~~~~~ [2]
  10 | [^second]: Second footnote
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
  11 |
 
 Output:
@@ -116,16 +113,145 @@ Output:
   5 | See [ESLint] and [TypeScript] and note[^first] and [^second].
   6 |
   7 | [^first]: First footnote
-  8 |
-  9 | [^second]: Second footnote
- 10 |
- 11 | [ESLint]: https://eslint.org
- 12 | [TypeScript]: https://www.typescriptlang.org
- 13 |
+  8 | [^second]: Second footnote
+  9 |
+ 10 | [ESLint]: https://eslint.org
+ 11 | [TypeScript]: https://www.typescriptlang.org
+ 12 |
 
-[1] The definition '[ESLint]: https://eslint.org' should be before '[TypeScript]: https://www.typescriptlang.org'.
-[2] The definition '[^first]: First footnote' should be before '[TypeScript]: https://www.typescriptlang.org'.
-[3] The definition '[^second]: Second footnote' should be before '[TypeScript]: https://www.typescriptlang.org'.
+[1] The definition '[TypeScript]: https://www.typescriptlang.org' should be after '[^second]: Second footnote'.
+[2] The definition '[ESLint]: https://eslint.org' should be after '[^second]: Second footnote'.
+---
+
+
+Test: sort-definitions >> invalid
+Filename: tests/fixtures/rules/sort-definitions/invalid/options/many-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options: []
+Plugins: unable to serialize
+
+Code:
+  1 | # Many definitions
+  2 |
+  3 | [markdown-preferences/atx-heading-closing-sequence-length]: ../rules/atx-heading-closing-sequence-length.md
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  4 | [@eslint/markdown]: https://github.com/eslint/markdown
+  5 | [MD001]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md001.md
+  6 | [MD003]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md003.md
+  7 | [MD004]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md004.md
+  8 | [MD005]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md005.md
+  9 | [MD007]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md007.md
+ 10 | [MD009]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md009.md
+ 11 | [MD010]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md010.md
+ 12 | [MD011]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md011.md
+ 13 | [MD012]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md012.md
+ 14 | [MD013]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md013.md
+ 15 | [MD014]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md014.md
+ 16 | [MD018]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md018.md
+ 17 | [MD019]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md019.md
+ 18 | [MD020]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md020.md
+ 19 | [MD021]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md021.md
+ 20 | [MD022]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md022.md
+ 21 | [MD023]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md023.md
+ 22 | [MD024]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md024.md
+ 23 | [MD025]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md025.md
+ 24 | [MD026]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md026.md
+ 25 | [MD027]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md027.md
+ 26 | [MD028]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md028.md
+ 27 | [MD029]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md029.md
+ 28 | [MD030]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md030.md
+ 29 | [MD031]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md031.md
+ 30 | [MD032]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md032.md
+ 31 | [MD033]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md033.md
+ 32 | [MD034]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md034.md
+ 33 | [MD035]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md035.md
+ 34 | [MD036]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md036.md
+ 35 | [MD037]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md037.md
+ 36 | [MD038]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md038.md
+ 37 | [MD039]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md039.md
+ 38 | [MD040]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md040.md
+ 39 | [MD041]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md041.md
+ 40 | [MD042]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md042.md
+ 41 | [MD043]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md043.md
+ 42 | [MD044]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md044.md
+ 43 | [MD045]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md045.md
+ 44 | [MD046]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md046.md
+ 45 | [MD047]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md047.md
+ 46 | [MD048]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md048.md
+ 47 | [MD049]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md049.md
+ 48 | [MD050]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md050.md
+ 49 | [MD051]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md051.md
+ 50 | [MD052]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md052.md
+ 51 | [MD053]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md053.md
+ 52 | [MD054]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md054.md
+ 53 | [MD055]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md055.md
+ 54 | [MD056]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md056.md
+ 55 | [MD058]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md058.md
+ 56 | [MD059]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md059.md
+ 57 |
+
+Output:
+  1 | # Many definitions
+  2 |
+  3 | [@eslint/markdown]: https://github.com/eslint/markdown
+  4 | [MD001]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md001.md
+  5 | [MD003]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md003.md
+  6 | [MD004]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md004.md
+  7 | [MD005]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md005.md
+  8 | [MD007]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md007.md
+  9 | [MD009]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md009.md
+ 10 | [MD010]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md010.md
+ 11 | [MD011]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md011.md
+ 12 | [MD012]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md012.md
+ 13 | [MD013]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md013.md
+ 14 | [MD014]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md014.md
+ 15 | [MD018]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md018.md
+ 16 | [MD019]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md019.md
+ 17 | [MD020]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md020.md
+ 18 | [MD021]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md021.md
+ 19 | [MD022]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md022.md
+ 20 | [MD023]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md023.md
+ 21 | [MD024]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md024.md
+ 22 | [MD025]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md025.md
+ 23 | [MD026]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md026.md
+ 24 | [MD027]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md027.md
+ 25 | [MD028]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md028.md
+ 26 | [MD029]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md029.md
+ 27 | [MD030]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md030.md
+ 28 | [MD031]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md031.md
+ 29 | [MD032]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md032.md
+ 30 | [MD033]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md033.md
+ 31 | [MD034]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md034.md
+ 32 | [MD035]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md035.md
+ 33 | [MD036]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md036.md
+ 34 | [MD037]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md037.md
+ 35 | [MD038]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md038.md
+ 36 | [MD039]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md039.md
+ 37 | [MD040]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md040.md
+ 38 | [MD041]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md041.md
+ 39 | [MD042]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md042.md
+ 40 | [MD043]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md043.md
+ 41 | [MD044]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md044.md
+ 42 | [MD045]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md045.md
+ 43 | [MD046]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md046.md
+ 44 | [MD047]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md047.md
+ 45 | [MD048]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md048.md
+ 46 | [MD049]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md049.md
+ 47 | [MD050]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md050.md
+ 48 | [MD051]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md051.md
+ 49 | [MD052]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md052.md
+ 50 | [MD053]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md053.md
+ 51 | [MD054]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md054.md
+ 52 | [MD055]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md055.md
+ 53 | [MD056]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md056.md
+ 54 | [MD058]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md058.md
+ 55 | [MD059]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md059.md
+ 56 | [markdown-preferences/atx-heading-closing-sequence-length]: ../rules/atx-heading-closing-sequence-length.md
+ 57 |
+
+[1] The definition '[markdown-preferences/atx-heading-closing-sequence-length]: ../rules/atx-heading-closing-sequence-length.md' should be after '[MD059]: https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md059.md'.
 ---
 
 
@@ -152,8 +278,8 @@ Code:
   7 | [user-guide]: https://example.com/user-guide
   8 | [api-docs]: https://example.com/api-docs
   9 | [beta-link]: https://example.com/beta
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
  10 | [alpha-link]: https://example.com/alpha
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
  11 |
 
 Output:
@@ -169,7 +295,7 @@ Output:
  10 | [beta-link]: https://example.com/beta
  11 |
 
-[1] The definition '[alpha-link]: https://example.com/alpha' should be before '[beta-link]: https://example.com/beta'.
+[1] The definition '[beta-link]: https://example.com/beta' should be after '[alpha-link]: https://example.com/alpha'.
 ---
 
 
@@ -193,8 +319,8 @@ Code:
   5 | See [beta-link] and [alpha-link] and [gamma-link].
   6 |
   7 | [beta-link]: https://example.com/beta
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   8 | [alpha-link]: https://example.com/alpha
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   9 | [gamma-link]: https://example.com/gamma
  10 |
 
@@ -210,7 +336,7 @@ Output:
   9 | [gamma-link]: https://example.com/gamma
  10 |
 
-[1] The definition '[alpha-link]: https://example.com/alpha' should be before '[beta-link]: https://example.com/beta'.
+[1] The definition '[beta-link]: https://example.com/beta' should be after '[alpha-link]: https://example.com/alpha'.
 ---
 
 
@@ -235,10 +361,9 @@ Code:
   5 | See [example] and [github] and [docs].
   6 |
   7 | [example]: https://example.com/page
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   8 | [github]: https://github.com/project
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   9 | [docs]: https://docs.example.com/guide
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
  10 |
 
 Output:
@@ -253,8 +378,7 @@ Output:
   9 | [example]: https://example.com/page
  10 |
 
-[1] The definition '[github]: https://github.com/project' should be before '[example]: https://example.com/page'.
-[2] The definition '[docs]: https://docs.example.com/guide' should be before '[example]: https://example.com/page'.
+[1] The definition '[example]: https://example.com/page' should be after '[docs]: https://docs.example.com/guide'.
 ---
 
 
@@ -310,13 +434,13 @@ Code:
   6 | Also check the footnote[^second] and [^first].
   7 |
   8 | [^second]: This is the second footnote
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   9 | [^first]: This is the first footnote
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
  10 |
  11 | [TypeScript]: https://www.typescriptlang.org
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
  12 | [ESLint]: https://eslint.org
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
  13 |
 
 Output:
@@ -328,16 +452,15 @@ Output:
   6 | Also check the footnote[^second] and [^first].
   7 |
   8 | [ESLint]: https://eslint.org
-  9 | [TypeScript]: https://www.typescriptlang.org
- 10 |
+  9 |
+ 10 | [TypeScript]: https://www.typescriptlang.org
  11 | [^first]: This is the first footnote
- 12 |
- 13 | [^second]: This is the second footnote
- 14 |
+ 12 | [^second]: This is the second footnote
+ 13 |
 
-[1] The definition '[^first]: This is the first footnote' should be before '[^second]: This is the second footnote'.
-[2] The definition '[TypeScript]: https://www.typescriptlang.org' should be before '[^second]: This is the second footnote'.
-[3] The definition '[ESLint]: https://eslint.org' should be before '[^second]: This is the second footnote'.
+[1] The definition '[^second]: This is the second footnote' should be after '[ESLint]: https://eslint.org'.
+[2] The definition '[^first]: This is the first footnote' should be after '[ESLint]: https://eslint.org'.
+[3] The definition '[TypeScript]: https://www.typescriptlang.org' should be after '[ESLint]: https://eslint.org'.
 ---
 
 
@@ -356,8 +479,8 @@ Code:
   5 | Check out [Zulu] and [Alpha] projects.
   6 |
   7 | [Zulu]: https://example.com/zulu
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   8 | [Alpha]: https://example.com/alpha
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   9 |
 
 Output:
@@ -371,7 +494,7 @@ Output:
   8 | [Zulu]: https://example.com/zulu
   9 |
 
-[1] The definition '[Alpha]: https://example.com/alpha' should be before '[Zulu]: https://example.com/zulu'.
+[1] The definition '[Zulu]: https://example.com/zulu' should be after '[Alpha]: https://example.com/alpha'.
 ---
 
 
@@ -390,13 +513,13 @@ Code:
   5 | See [Beta] and note[^zebra] and [Alpha] and note[^alpha].
   6 |
   7 | [^zebra]: This is a zebra note
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   8 | [^alpha]: This is an alpha note
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
   9 |
  10 | [Beta]: https://example.com/beta
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
  11 | [Alpha]: https://example.com/alpha
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
  12 |
 
 Output:
@@ -407,16 +530,15 @@ Output:
   5 | See [Beta] and note[^zebra] and [Alpha] and note[^alpha].
   6 |
   7 | [Alpha]: https://example.com/alpha
-  8 | [Beta]: https://example.com/beta
-  9 |
+  8 |
+  9 | [Beta]: https://example.com/beta
  10 | [^alpha]: This is an alpha note
- 11 |
- 12 | [^zebra]: This is a zebra note
- 13 |
+ 11 | [^zebra]: This is a zebra note
+ 12 |
 
-[1] The definition '[^alpha]: This is an alpha note' should be before '[^zebra]: This is a zebra note'.
-[2] The definition '[Beta]: https://example.com/beta' should be before '[^zebra]: This is a zebra note'.
-[3] The definition '[Alpha]: https://example.com/alpha' should be before '[^zebra]: This is a zebra note'.
+[1] The definition '[^zebra]: This is a zebra note' should be after '[Alpha]: https://example.com/alpha'.
+[2] The definition '[^alpha]: This is an alpha note' should be after '[Alpha]: https://example.com/alpha'.
+[3] The definition '[Beta]: https://example.com/beta' should be after '[Alpha]: https://example.com/alpha'.
 ---
 
 
@@ -441,13 +563,13 @@ Code:
  11 | See footnotes[^zoo] and [^apple].
  12 |
  13 | [^zoo]: Zoo footnote
+    | ^~~~~~~~~~~~~~~~~~~~ [1]
  14 | [^apple]: Apple footnote
-    | ^~~~~~~~~~~~~~~~~~~~~~~~ [1]
+    | ^~~~~~~~~~~~~~~~~~~~~~~~ [2]
  15 |
  16 | [Yankee]: https://example.com/yankee
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
  17 | [X-ray]: https://example.com/xray
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
  18 |
 
 Output:
@@ -464,16 +586,15 @@ Output:
  11 | See footnotes[^zoo] and [^apple].
  12 |
  13 | [X-ray]: https://example.com/xray
- 14 | [Yankee]: https://example.com/yankee
- 15 |
+ 14 |
+ 15 | [Yankee]: https://example.com/yankee
  16 | [^apple]: Apple footnote
- 17 |
- 18 | [^zoo]: Zoo footnote
- 19 |
+ 17 | [^zoo]: Zoo footnote
+ 18 |
 
-[1] The definition '[^apple]: Apple footnote' should be before '[^zoo]: Zoo footnote'.
-[2] The definition '[Yankee]: https://example.com/yankee' should be before '[^zoo]: Zoo footnote'.
-[3] The definition '[X-ray]: https://example.com/xray' should be before '[^zoo]: Zoo footnote'.
+[1] The definition '[^zoo]: Zoo footnote' should be after '[X-ray]: https://example.com/xray'.
+[2] The definition '[^apple]: Apple footnote' should be after '[X-ray]: https://example.com/xray'.
+[3] The definition '[Yankee]: https://example.com/yankee' should be after '[X-ray]: https://example.com/xray'.
 ---
 
 
@@ -492,10 +613,9 @@ Code:
   5 | Check [Zebra] and [Alpha] and [Beta].
   6 |
   7 | [Zebra]: https://example.com/zebra
-  8 | [Alpha]: https://example.com/alpha
     | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  8 | [Alpha]: https://example.com/alpha
   9 | [Beta]: https://example.com/beta
-    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
  10 |
 
 Output:
@@ -510,6 +630,5 @@ Output:
   9 | [Zebra]: https://example.com/zebra
  10 |
 
-[1] The definition '[Alpha]: https://example.com/alpha' should be before '[Zebra]: https://example.com/zebra'.
-[2] The definition '[Beta]: https://example.com/beta' should be before '[Zebra]: https://example.com/zebra'.
+[1] The definition '[Zebra]: https://example.com/zebra' should be after '[Beta]: https://example.com/beta'.
 ---
