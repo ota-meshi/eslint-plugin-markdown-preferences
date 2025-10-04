@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.35.0
+
+### Minor Changes
+
+- [#170](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/170) [`20ecb71`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/20ecb71dcd8ad4c52c5ff845de00bdd5edf99683) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat([markdown-preferences/sort-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/sort-definitions.html)): improve to calculate the minimum edit distance for sorting and report the optimal sorting direction
+
 ## 0.34.2
 
 ### Patch Changes
