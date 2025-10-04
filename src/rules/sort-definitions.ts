@@ -2,6 +2,9 @@ import type { Definition, FootnoteDefinition } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import { toRegExp, isRegExp } from "../utils/regexp.ts";
 import { getParent, type MDNode } from "../utils/ast.ts";
+import { calcShortestEditScript } from "../utils/calc-shortest-edit-script.ts";
+import type { RuleTextEdit, RuleTextEditor } from "@eslint/core";
+import { getParsedLines } from "../utils/lines.ts";
 
 type MatchOption = string | string[];
 type OrderOption =
@@ -72,8 +75,10 @@ export default createRule<[{ order?: OrderOption[] }?]>("sort-definitions", {
       },
     ],
     messages: {
-      shouldBefore:
+      shouldBeBefore:
         "The definition '{{currentKey}}' should be before '{{prevKey}}'.",
+      shouldBeAfter:
+        "The definition '{{currentKey}}' should be after '{{nextKey}}'.",
     },
   },
   create(context) {
@@ -116,7 +121,7 @@ export default createRule<[{ order?: OrderOption[] }?]>("sort-definitions", {
     }
 
     /** Report */
-    function report(
+    function reportFixToMoveUp(
       node: DefinitionNode,
       previousNode: DefinitionNode,
       definitions: DefinitionNode[],
@@ -125,7 +130,7 @@ export default createRule<[{ order?: OrderOption[] }?]>("sort-definitions", {
       const prevKey = getDefinitionText(previousNode);
       context.report({
         node,
-        messageId: "shouldBefore",
+        messageId: "shouldBeBefore",
         data: {
           currentKey,
           prevKey,
@@ -141,23 +146,112 @@ export default createRule<[{ order?: OrderOption[] }?]>("sort-definitions", {
           const before = definitions.slice(0, previousNodeIndex);
           const after = definitions.slice(targetNodeIndex + 1);
           const movedNodes = [...before, node, ...previousNodes, ...after];
-          return movedNodes.map((moveNode, index) => {
-            let text = sourceCode.getText(moveNode);
-            if (moveNode.type === "definition" && index > 0) {
-              if (movedNodes[index - 1].type === "footnoteDefinition") {
-                const footnoteLoc = sourceCode.getLoc(definitions[index - 1]);
-                const linkLoc = sourceCode.getLoc(definitions[index]);
-                if (linkLoc.start.line - footnoteLoc.end.line <= 1) {
-                  // If there is no blank line between the footnote definition and the link definition, add a line break.
-                  text = `\n${text}`;
-                }
-              }
-            }
-
-            return fixer.replaceText(definitions[index], text);
-          });
+          return fixReplaceDefinitions(fixer, definitions, movedNodes);
         },
       });
+    }
+
+    /** Report */
+    function reportFixToMoveDown(
+      node: DefinitionNode,
+      nextNode: DefinitionNode,
+      definitions: DefinitionNode[],
+    ) {
+      const currentKey = getDefinitionText(node);
+      const nextKey = getDefinitionText(nextNode);
+      context.report({
+        node,
+        messageId: "shouldBeAfter",
+        data: {
+          currentKey,
+          nextKey,
+        },
+
+        fix(fixer) {
+          const nextNodeIndex = definitions.indexOf(nextNode);
+          const targetNodeIndex = definitions.indexOf(node);
+          const nextNodes = definitions.slice(
+            targetNodeIndex + 1,
+            nextNodeIndex + 1,
+          );
+          const before = definitions.slice(0, targetNodeIndex);
+          const after = definitions.slice(nextNodeIndex + 1);
+          const movedNodes = [...before, ...nextNodes, node, ...after];
+          return fixReplaceDefinitions(fixer, definitions, movedNodes);
+        },
+      });
+    }
+
+    /**
+     * Fix by replacing the definition array.
+     */
+    function fixReplaceDefinitions(
+      fixer: RuleTextEditor,
+      definitions: DefinitionNode[],
+      newDefinitions: DefinitionNode[],
+    ) {
+      const fixes: RuleTextEdit[] = [];
+      let removeLine: [number, number] | null = null;
+      for (let index = 0; index < newDefinitions.length; index++) {
+        const newNode = newDefinitions[index];
+        const oldNode = definitions[index];
+        let newText = sourceCode.getText(newNode);
+        if (needLineBreakBetweenKind(index)) {
+          const oldLoc = sourceCode.getLoc(oldNode);
+          const indent = sourceCode.lines[oldLoc.start.line - 1]
+            .slice(0, oldLoc.start.column - 1)
+            .replaceAll(/[^\s>]/g, " ");
+          newText = `\n${indent}${newText}`;
+        } else if (newNode === oldNode) {
+          continue;
+        }
+
+        fixes.push(fixer.replaceText(oldNode, newText));
+
+        if (removeLine) {
+          fixes.push(fixer.removeRange(removeLine));
+          removeLine = null;
+        }
+      }
+      return fixes;
+
+      /**
+       * Determine if a line break is needed between different kinds of definitions.
+       */
+      function needLineBreakBetweenKind(index: number) {
+        if (index === 0) return false;
+        const newNode = newDefinitions[index];
+        if (newNode.type !== "definition") return false;
+        const newPrevNode = newDefinitions[index - 1];
+        if (newPrevNode.type !== "footnoteDefinition") return false;
+        const oldPrevNode = definitions[index - 1];
+        const oldNode = definitions[index];
+        const footnoteLoc = sourceCode.getLoc(oldPrevNode);
+        const linkLoc = sourceCode.getLoc(oldNode);
+        if (linkLoc.start.line - footnoteLoc.end.line > 1) return false;
+
+        // If there is no blank line between the footnote definition and the link definition, add a line break.
+
+        if (index + 1 < newDefinitions.length) {
+          const newNextNode = newDefinitions[index + 1];
+          if (newNextNode.type === "definition") {
+            const oldNextNode = definitions[index + 1];
+            const oldNextLoc = sourceCode.getLoc(oldNextNode);
+            if (oldNextLoc.start.line - linkLoc.end.line > 1) {
+              const parsedLine = getParsedLines(sourceCode).get(
+                oldNextLoc.start.line - 1,
+              );
+              if (!parsedLine.text.replaceAll(">", "").trim()) {
+                // Remove the blank line after the current link definition
+                // if there is a blank line between the link definition and the next definition.
+                removeLine = parsedLine.range;
+              }
+            }
+          }
+        }
+
+        return true;
+      }
     }
 
     /**
@@ -166,21 +260,92 @@ export default createRule<[{ order?: OrderOption[] }?]>("sort-definitions", {
     function verify(definitions: DefinitionNode[]) {
       if (definitions.length === 0) return;
 
-      const validPreviousNodes: DefinitionNode[] = [];
-
-      for (const definition of definitions) {
-        if (option.ignore(definition)) {
-          continue;
-        }
-        const invalidPreviousNode = validPreviousNodes.find(
-          (previousNode) => option.compare(previousNode, definition) > 0,
+      const sorted = [...definitions].sort(option.compare);
+      const editScript = calcShortestEditScript(definitions, sorted);
+      for (let index = 0; index < editScript.length; index++) {
+        const edit = editScript[index];
+        if (edit.type !== "delete") continue;
+        const insertEditIndex = editScript.findIndex(
+          (e) => e.type === "insert" && e.b === edit.a,
         );
-        if (invalidPreviousNode) {
-          report(definition, invalidPreviousNode, definitions);
+        if (insertEditIndex === -1) {
+          // should not happen
           continue;
         }
+        if (index < insertEditIndex) {
+          const target = findInsertAfterTarget(edit.a, insertEditIndex);
+          if (!target) {
+            // should not happen
+            continue;
+          }
+          reportFixToMoveDown(edit.a, target, definitions);
+        } else {
+          const target = findInsertBeforeTarget(edit.a, insertEditIndex);
+          if (!target) {
+            // should not happen
+            continue;
+          }
+          reportFixToMoveUp(edit.a, target, definitions);
+        }
+      }
 
-        validPreviousNodes.push(definition);
+      /**
+       * Find insert after target
+       */
+      function findInsertAfterTarget(
+        def: DefinitionNode,
+        insertEditIndex: number,
+      ) {
+        for (let index = insertEditIndex - 1; index >= 0; index--) {
+          const edit = editScript[index];
+          if (edit.type === "delete" && edit.a === def) break;
+          if (edit.type !== "common") continue;
+          return edit.a;
+        }
+        let lastTarget: DefinitionNode | null = null;
+        for (
+          let index = definitions.indexOf(def) + 1;
+          index < definitions.length;
+          index++
+        ) {
+          const element = definitions[index];
+          if (option.compare(element, def) <= 0) {
+            lastTarget = element;
+            continue;
+          }
+          return lastTarget;
+        }
+        return lastTarget;
+      }
+
+      /**
+       * Find insert before target
+       */
+      function findInsertBeforeTarget(
+        def: DefinitionNode,
+        insertEditIndex: number,
+      ) {
+        for (
+          let index = insertEditIndex + 1;
+          index < editScript.length;
+          index++
+        ) {
+          const edit = editScript[index];
+          if (edit.type === "delete" && edit.a === def) break;
+          if (edit.type !== "common") continue;
+          return edit.a;
+        }
+
+        let lastTarget: DefinitionNode | null = null;
+        for (let index = definitions.indexOf(def) - 1; index >= 0; index--) {
+          const element = definitions[index];
+          if (option.compare(def, element) <= 0) {
+            lastTarget = element;
+            continue;
+          }
+          return lastTarget;
+        }
+        return lastTarget;
       }
     }
 
@@ -204,7 +369,7 @@ export default createRule<[{ order?: OrderOption[] }?]>("sort-definitions", {
         }
       },
       "root:exit"() {
-        verify(group);
+        verify(group.filter((definition) => !option.ignore(definition)));
       },
     };
 

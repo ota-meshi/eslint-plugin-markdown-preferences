@@ -62,6 +62,7 @@
     "eslint": ">=9.0.0"
   },
   "dependencies": {
+    "diff-sequences": "^29.6.3",
     "emoji-regex-xs": "^2.0.1",
     "mdast-util-from-markdown": "^2.0.2",
     "mdast-util-frontmatter": "^2.0.1",
