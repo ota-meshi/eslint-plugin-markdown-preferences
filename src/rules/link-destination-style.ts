@@ -44,6 +44,7 @@ export default createRule<[Options?]>("link-destination-style", {
             type: "boolean",
           },
         },
+        additionalProperties: false,
       },
     ],
     messages: {

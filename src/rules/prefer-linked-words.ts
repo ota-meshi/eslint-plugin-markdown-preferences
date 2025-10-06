@@ -48,7 +48,7 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
             ignores: IGNORES_SCHEMA,
           },
           required: ["words"],
-          additionalProperties: true,
+          additionalProperties: false,
         },
       ],
       messages: {
