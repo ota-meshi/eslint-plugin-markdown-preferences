@@ -6,7 +6,6 @@ import {
   getLinkKind,
   getListItemMarker,
   getThematicBreakMarker,
-  getSourceLocationFromRange,
 } from "../../../src/utils/ast.ts";
 import type {
   Heading,
@@ -15,7 +14,6 @@ import type {
   ListItem,
   ThematicBreak,
   Paragraph,
-  Text,
 } from "../../../src/language/ast-types.ts";
 
 describe("utils/ast", () => {
@@ -181,43 +179,6 @@ describe("utils/ast", () => {
         kind: "_",
         hasSpaces: true,
         text: "_ _ _",
-      });
-    });
-  });
-
-  describe("getSourceLocationFromRange", () => {
-    it("should return correct location for text node", () => {
-      const src = parseMarkdown("abc\ndef", { frontmatter: "yaml" });
-      const para = src!.ast.children[0] as Paragraph;
-      const node = para.children[0] as Text;
-      const loc = getSourceLocationFromRange(src!, node, [0, 3]);
-      assert.deepStrictEqual(loc, {
-        start: { line: 1, column: 1 },
-        end: { line: 1, column: 4 },
-      });
-    });
-    it("should return correct location for multiline range", () => {
-      const src = parseMarkdown("abc\ndef", { frontmatter: "yaml" });
-      const para = src!.ast.children[0] as Paragraph;
-      const node = para.children[0] as Text;
-      const loc = getSourceLocationFromRange(src!, node, [0, 7]);
-      assert.deepStrictEqual(loc, {
-        start: { line: 1, column: 1 },
-        end: { line: 2, column: 4 },
-      });
-    });
-
-    it("should handle range calculation correctly", () => {
-      // Test the range calculation without relying on startLoc
-      const src = parseMarkdown("abc\ndef\nghi", { frontmatter: "yaml" });
-      const para = src!.ast.children[0] as Paragraph;
-      const node = para.children[0] as Text;
-
-      // Test a specific range that exercises the code path
-      const loc = getSourceLocationFromRange(src!, node, [0, 3]);
-      assert.deepStrictEqual(loc, {
-        start: { line: 1, column: 1 },
-        end: { line: 1, column: 4 },
       });
     });
   });

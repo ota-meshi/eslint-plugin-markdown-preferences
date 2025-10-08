@@ -87,7 +87,10 @@ export default createRule<[{ languages?: LanguageMapping }?]>(
 
           context.report({
             node,
-            loc: parsed.language.loc,
+            loc: {
+              start: sourceCode.getLocFromIndex(parsed.language.range[0]),
+              end: sourceCode.getLocFromIndex(parsed.language.range[1]),
+            },
             messageId: "useCanonical",
             data: {
               canonical,

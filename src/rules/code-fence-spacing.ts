@@ -1,4 +1,3 @@
-import { getSourceLocationFromRange } from "../utils/ast.ts";
 import { parseFencedCodeBlock } from "../utils/fenced-code-block.ts";
 import { createRule } from "../utils/index.ts";
 
@@ -51,7 +50,10 @@ export default createRule<[Options?]>("code-fence-spacing", {
           if (hasSpace) return;
           context.report({
             node,
-            loc: getSourceLocationFromRange(sourceCode, node, language.range),
+            loc: {
+              start: sourceCode.getLocFromIndex(language.range[0]),
+              end: sourceCode.getLocFromIndex(language.range[1]),
+            },
             messageId: "expectedSpace",
             fix(fixer) {
               return fixer.insertTextAfterRange(openingFence.range, " ");
@@ -61,10 +63,10 @@ export default createRule<[Options?]>("code-fence-spacing", {
           if (!hasSpace) return;
           context.report({
             node,
-            loc: getSourceLocationFromRange(sourceCode, node, [
-              openingFence.range[1],
-              language.range[0],
-            ]),
+            loc: {
+              start: sourceCode.getLocFromIndex(openingFence.range[1]),
+              end: sourceCode.getLocFromIndex(language.range[0]),
+            },
             messageId: "unexpectedSpace",
             fix(fixer) {
               return fixer.removeRange([

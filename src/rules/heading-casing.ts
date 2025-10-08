@@ -3,7 +3,6 @@ import { createRule } from "../utils/index.ts";
 import { isRegExp, toRegExp } from "../utils/regexp.ts";
 import { defaultPreserveWords } from "../resources/preserve-words.ts";
 import { defaultMinorWords } from "../resources/minor-words.ts";
-import { getSourceLocationFromRange } from "../utils/ast.ts";
 import type { CaseStyle } from "../utils/word-casing.ts";
 import { convertWordCasing } from "../utils/word-casing.ts";
 import { parsePreserveWordsOption } from "../utils/preserve-words.ts";
@@ -222,7 +221,10 @@ export default createRule<
             actual: word,
             expected: expectedWord,
           },
-          loc: getSourceLocationFromRange(sourceCode, node, range),
+          loc: {
+            start: sourceCode.getLocFromIndex(range[0]),
+            end: sourceCode.getLocFromIndex(range[1]),
+          },
           fix(fixer) {
             // Replace only the specific word
             return fixer.replaceTextRange(range, expectedWord);

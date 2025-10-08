@@ -204,7 +204,6 @@ export default createRule<[Options?]>("table-pipe-spacing", {
 
     type TokenData = {
       range: [number, number];
-      loc: SourceLocation;
     };
     type CellData = {
       type: "cell";
@@ -227,7 +226,10 @@ export default createRule<[Options?]>("table-pipe-spacing", {
       if (options.leadingSpace === "always") {
         if (pipe.range[1] < nextToken.range[0]) return true;
         context.report({
-          loc: pipe.loc,
+          loc: {
+            start: sourceCode.getLocFromIndex(pipe.range[0]),
+            end: sourceCode.getLocFromIndex(pipe.range[1]),
+          },
           messageId: "expectedSpaceAfter",
           fix(fixer) {
             return fixer.insertTextAfterRange(pipe.range, " ");
@@ -238,8 +240,8 @@ export default createRule<[Options?]>("table-pipe-spacing", {
         if (pipe.range[1] === nextToken.range[0]) return true;
         context.report({
           loc: {
-            start: pipe.loc.end,
-            end: nextToken.loc.start,
+            start: sourceCode.getLocFromIndex(pipe.range[1]),
+            end: sourceCode.getLocFromIndex(nextToken.range[0]),
           },
           messageId: "expectedNoSpaceAfter",
           fix(fixer) {
@@ -261,7 +263,10 @@ export default createRule<[Options?]>("table-pipe-spacing", {
       if (options.trailingSpace === "always") {
         if (prevToken.range[1] < pipe.range[0]) return true;
         context.report({
-          loc: pipe.loc,
+          loc: {
+            start: sourceCode.getLocFromIndex(pipe.range[0]),
+            end: sourceCode.getLocFromIndex(pipe.range[1]),
+          },
           messageId: "expectedSpaceBefore",
           fix(fixer) {
             return fixer.insertTextBeforeRange(pipe.range, " ");
@@ -272,8 +277,8 @@ export default createRule<[Options?]>("table-pipe-spacing", {
         if (prevToken.range[1] === pipe.range[0]) return true;
         context.report({
           loc: {
-            start: prevToken.loc.end,
-            end: pipe.loc.start,
+            start: sourceCode.getLocFromIndex(prevToken.range[1]),
+            end: sourceCode.getLocFromIndex(pipe.range[0]),
           },
           messageId: "expectedNoSpaceBefore",
           fix(fixer) {
@@ -294,7 +299,11 @@ export default createRule<[Options?]>("table-pipe-spacing", {
       cellAlign: AlignStyle | "ignore",
     ): "leading" | "trailing" | "both" | null {
       if (!leadingPipe || !trailingPipe || !content) return null;
-      const lineText = sourceCode.lines[leadingPipe.loc.start.line - 1];
+
+      const lineText =
+        sourceCode.lines[
+          sourceCode.getLocFromIndex(leadingPipe.range[0]).line - 1
+        ];
       if (cellAlign === "left") {
         // left-aligned: (1 or 0) space after leading pipe
         const expectedWidth = options.leadingSpace === "always" ? 1 : 0;
@@ -303,10 +312,13 @@ export default createRule<[Options?]>("table-pipe-spacing", {
           loc:
             leadingPipe.range[1] < content.range[0]
               ? {
-                  start: leadingPipe.loc.end,
-                  end: content.loc.start,
+                  start: sourceCode.getLocFromIndex(leadingPipe.range[1]),
+                  end: sourceCode.getLocFromIndex(content.range[0]),
                 }
-              : leadingPipe.loc,
+              : {
+                  start: sourceCode.getLocFromIndex(leadingPipe.range[0]),
+                  end: sourceCode.getLocFromIndex(leadingPipe.range[1]),
+                },
           messageId:
             expectedWidth >= 1
               ? "expectedAlignLeft"
@@ -334,10 +346,13 @@ export default createRule<[Options?]>("table-pipe-spacing", {
           loc:
             content.range[1] < trailingPipe.range[0]
               ? {
-                  start: content.loc.end,
-                  end: trailingPipe.loc.start,
+                  start: sourceCode.getLocFromIndex(content.range[1]),
+                  end: sourceCode.getLocFromIndex(trailingPipe.range[0]),
                 }
-              : trailingPipe.loc,
+              : {
+                  start: sourceCode.getLocFromIndex(trailingPipe.range[0]),
+                  end: sourceCode.getLocFromIndex(trailingPipe.range[1]),
+                },
           messageId:
             expectedWidth >= 1
               ? "expectedAlignRight"
@@ -369,17 +384,23 @@ export default createRule<[Options?]>("table-pipe-spacing", {
         const leadingReportLoc: SourceLocation =
           leadingPipe.range[1] < content.range[0]
             ? {
-                start: leadingPipe.loc.end,
-                end: content.loc.start,
+                start: sourceCode.getLocFromIndex(leadingPipe.range[1]),
+                end: sourceCode.getLocFromIndex(content.range[0]),
               }
-            : leadingPipe.loc;
+            : {
+                start: sourceCode.getLocFromIndex(leadingPipe.range[0]),
+                end: sourceCode.getLocFromIndex(leadingPipe.range[1]),
+              };
         const trailingReportLoc: SourceLocation =
           content.range[1] < trailingPipe.range[0]
             ? {
-                start: content.loc.end,
-                end: trailingPipe.loc.start,
+                start: sourceCode.getLocFromIndex(content.range[1]),
+                end: sourceCode.getLocFromIndex(trailingPipe.range[0]),
               }
-            : trailingPipe.loc;
+            : {
+                start: sourceCode.getLocFromIndex(trailingPipe.range[0]),
+                end: sourceCode.getLocFromIndex(trailingPipe.range[1]),
+              };
         for (const reportLoc of [leadingReportLoc, trailingReportLoc]) {
           context.report({
             loc: reportLoc,
@@ -410,8 +431,8 @@ export default createRule<[Options?]>("table-pipe-spacing", {
       function getLeadingSpacesWidth() {
         return getTextWidth(
           lineText,
-          leadingPipe!.loc.end.column - 1,
-          content!.loc.start.column - 1,
+          sourceCode.getLocFromIndex(leadingPipe!.range[1]).column - 1,
+          sourceCode.getLocFromIndex(content!.range[0]).column - 1,
         );
       }
 
@@ -421,8 +442,8 @@ export default createRule<[Options?]>("table-pipe-spacing", {
       function getTrailingSpacesWidth() {
         return getTextWidth(
           lineText,
-          content!.loc.end.column - 1,
-          trailingPipe!.loc.start.column - 1,
+          sourceCode.getLocFromIndex(content!.range[1]).column - 1,
+          sourceCode.getLocFromIndex(trailingPipe!.range[0]).column - 1,
         );
       }
 
@@ -432,8 +453,8 @@ export default createRule<[Options?]>("table-pipe-spacing", {
       function getCellWidth() {
         return getTextWidth(
           lineText,
-          leadingPipe!.loc.end.column - 1,
-          trailingPipe!.loc.start.column - 1,
+          sourceCode.getLocFromIndex(leadingPipe!.range[1]).column - 1,
+          sourceCode.getLocFromIndex(trailingPipe!.range[0]).column - 1,
         );
       }
 
@@ -443,8 +464,8 @@ export default createRule<[Options?]>("table-pipe-spacing", {
       function getContentTextWidth() {
         return getTextWidth(
           lineText,
-          content!.loc.start.column - 1,
-          content!.loc.end.column - 1,
+          sourceCode.getLocFromIndex(content!.range[0]).column - 1,
+          sourceCode.getLocFromIndex(content!.range[1]).column - 1,
         );
       }
 
@@ -452,13 +473,14 @@ export default createRule<[Options?]>("table-pipe-spacing", {
        * Get the normalized content text (with normalized spaces)
        */
       function getNormalizedContentText() {
+        const contentStartLoc = sourceCode.getLocFromIndex(content!.range[0]);
         const prefixWidth = getWidth(
-          lineText.slice(0, content!.loc.start.column - 1),
+          lineText.slice(0, contentStartLoc.column - 1),
         );
         let result = "";
         for (const c of lineText.slice(
-          content!.loc.start.column - 1,
-          content!.loc.end.column - 1,
+          contentStartLoc.column - 1,
+          sourceCode.getLocFromIndex(content!.range[1]).column - 1,
         )) {
           if (c === "\t") {
             result += " ".repeat(4 - ((prefixWidth + result.length) % 4));

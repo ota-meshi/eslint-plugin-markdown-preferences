@@ -1,10 +1,9 @@
 import type { Image, Link } from "../language/ast-types.ts";
-import { getLinkKind, getSourceLocationFromRange } from "../utils/ast.ts";
+import { getLinkKind } from "../utils/ast.ts";
 import { parseImage } from "../utils/image.ts";
 import { createRule } from "../utils/index.ts";
 import { parseInlineLink } from "../utils/link.ts";
 import { isWhitespace } from "../utils/unicode.ts";
-import type { SourceLocation } from "estree";
 
 type Options = {
   space?: "always" | "never";
@@ -45,7 +44,6 @@ export default createRule<[Options?]>("link-paren-spacing", {
   create(context) {
     type RangeAndLoc = {
       range: [number, number];
-      loc: SourceLocation;
     };
 
     const sourceCode = context.sourceCode;
@@ -64,7 +62,10 @@ export default createRule<[Options?]>("link-paren-spacing", {
         if (space.length > 0) return;
         context.report({
           node,
-          loc: openingParen.loc,
+          loc: {
+            start: sourceCode.getLocFromIndex(openingParen.range[0]),
+            end: sourceCode.getLocFromIndex(openingParen.range[1]),
+          },
           messageId: "expectedSpaceAfterOpeningParen",
           fix: (fixer) => fixer.insertTextAfterRange(openingParen.range, " "),
         });
@@ -72,10 +73,12 @@ export default createRule<[Options?]>("link-paren-spacing", {
         if (space.length === 0) return;
         context.report({
           node,
-          loc: getSourceLocationFromRange(sourceCode, node, [
-            openingParen.range[1],
-            openingParen.range[1] + space.length,
-          ]),
+          loc: {
+            start: sourceCode.getLocFromIndex(openingParen.range[1]),
+            end: sourceCode.getLocFromIndex(
+              openingParen.range[1] + space.length,
+            ),
+          },
           messageId: "unexpectedSpaceAfterOpeningParen",
           fix: (fixer) =>
             fixer.removeRange([
@@ -99,7 +102,10 @@ export default createRule<[Options?]>("link-paren-spacing", {
         if (space.length > 0) return;
         context.report({
           node,
-          loc: closingParen.loc,
+          loc: {
+            start: sourceCode.getLocFromIndex(closingParen.range[0]),
+            end: sourceCode.getLocFromIndex(closingParen.range[1]),
+          },
           messageId: "expectedSpaceBeforeClosingParen",
           fix: (fixer) => fixer.insertTextBeforeRange(closingParen.range, " "),
         });
@@ -107,10 +113,12 @@ export default createRule<[Options?]>("link-paren-spacing", {
         if (space.length === 0) return;
         context.report({
           node,
-          loc: getSourceLocationFromRange(sourceCode, node, [
-            closingParen.range[0] - space.length,
-            closingParen.range[0],
-          ]),
+          loc: {
+            start: sourceCode.getLocFromIndex(
+              closingParen.range[0] - space.length,
+            ),
+            end: sourceCode.getLocFromIndex(closingParen.range[0]),
+          },
           messageId: "unexpectedSpaceBeforeClosingParen",
           fix: (fixer) =>
             fixer.removeRange([

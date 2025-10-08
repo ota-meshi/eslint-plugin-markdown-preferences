@@ -18,10 +18,6 @@ describe("utils/setext-heading", () => {
           {
             text: "Heading",
             range: [0, 7],
-            loc: {
-              start: { line: 1, column: 1 },
-              end: { line: 1, column: 8 },
-            },
             raws: {
               prefix: "",
               spaceBefore: "",
@@ -32,10 +28,6 @@ describe("utils/setext-heading", () => {
         underline: {
           text: "=====",
           range: [8, 13],
-          loc: {
-            start: { line: 2, column: 1 },
-            end: { line: 2, column: 6 },
-          },
           marker: "=",
           raws: {
             prefix: "",
@@ -54,10 +46,6 @@ describe("utils/setext-heading", () => {
           {
             text: "Title",
             range: [0, 5],
-            loc: {
-              start: { line: 1, column: 1 },
-              end: { line: 1, column: 6 },
-            },
             raws: {
               prefix: "",
               spaceBefore: "",
@@ -68,10 +56,6 @@ describe("utils/setext-heading", () => {
         underline: {
           text: "---",
           range: [6, 9],
-          loc: {
-            start: { line: 2, column: 1 },
-            end: { line: 2, column: 4 },
-          },
           marker: "-",
           raws: {
             prefix: "",
@@ -90,10 +74,6 @@ describe("utils/setext-heading", () => {
           {
             text: "Heading",
             range: [4, 11],
-            loc: {
-              start: { line: 1, column: 5 },
-              end: { line: 1, column: 12 },
-            },
             raws: {
               prefix: ">",
               spaceBefore: "   ",
@@ -104,10 +84,6 @@ describe("utils/setext-heading", () => {
         underline: {
           text: "---",
           range: [16, 19],
-          loc: {
-            start: { line: 2, column: 5 },
-            end: { line: 2, column: 8 },
-          },
           marker: "-",
           raws: {
             prefix: ">",

@@ -1,4 +1,3 @@
-import { getSourceLocationFromRange } from "../utils/ast.ts";
 import { createRule } from "../utils/index.ts";
 
 export default createRule("no-text-backslash-linebreak", {
@@ -38,7 +37,10 @@ export default createRule("no-text-backslash-linebreak", {
 
         context.report({
           node,
-          loc: getSourceLocationFromRange(sourceCode, node, backslashRange),
+          loc: {
+            start: sourceCode.getLocFromIndex(backslashRange[0]),
+            end: sourceCode.getLocFromIndex(backslashRange[1]),
+          },
           messageId: "textBackslashWithLinebreak",
           suggest: [
             {

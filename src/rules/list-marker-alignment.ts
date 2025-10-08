@@ -1,6 +1,5 @@
 import type { List, ListItem } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
-import { getParsedLines } from "../utils/lines.ts";
 import { getListItemMarker } from "../utils/ast.ts";
 import { getWidth } from "../utils/width.ts";
 import { isWhitespace } from "../utils/unicode.ts";
@@ -124,21 +123,24 @@ export default createRule<[{ align?: "left" | "right" }?]>(
             messageId: "incorrectAlignment",
             data: messageData,
             fix(fixer) {
-              const lines = getParsedLines(sourceCode);
-              const line = lines.get(markerLocation.line);
-
               if (diff < 0) {
                 const addSpaces = " ".repeat(-diff);
+                const lineStartIndex = sourceCode.getIndexFromLoc({
+                  line: markerLocation.line,
+                  column: 1,
+                });
                 return fixer.insertTextBeforeRange(
                   [
-                    line.range[0] + markerLocation.start,
-                    line.range[0] + markerLocation.start,
+                    lineStartIndex + markerLocation.start,
+                    lineStartIndex + markerLocation.start,
                   ],
                   addSpaces,
                 );
               }
 
-              const beforeItemMarker = line.text.slice(0, markerLocation.start);
+              const beforeItemMarker = sourceCode.lines[
+                markerLocation.line - 1
+              ].slice(0, markerLocation.start);
               const currentWidth = getWidth(beforeItemMarker);
               const newWidth = currentWidth - diff;
 
@@ -156,15 +158,19 @@ export default createRule<[{ align?: "left" | "right" }?]>(
                   newWidth - getWidth(newBeforeItemMarker),
                 );
               }
-              const referenceBeforeItemMarker = lines
-                .get(referenceMarkerLocation.line)
-                .text.slice(0, referenceMarkerLocation.start);
+              const referenceBeforeItemMarker = sourceCode.lines[
+                referenceMarkerLocation.line - 1
+              ].slice(0, referenceMarkerLocation.start);
               if (
                 !referenceBeforeItemMarker.includes(">") ||
                 referenceBeforeItemMarker === newBeforeItemMarker
               ) {
+                const lineStartIndex = sourceCode.getIndexFromLoc({
+                  line: markerLocation.line,
+                  column: 1,
+                });
                 return fixer.replaceTextRange(
-                  [line.range[0], line.range[0] + markerLocation.start],
+                  [lineStartIndex, lineStartIndex + markerLocation.start],
                   newBeforeItemMarker,
                 );
               }

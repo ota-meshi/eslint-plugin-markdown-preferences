@@ -1,7 +1,5 @@
-import type { SourceLocation } from "estree";
 import type { Definition } from "../language/ast-types.ts";
 import { isAsciiControlCharacter } from "./unicode.ts";
-import { getSourceLocationFromRange } from "./ast.ts";
 import { ForwardCharacterCursor } from "./character-cursor.ts";
 import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 
@@ -9,19 +7,16 @@ export type ParsedLinkDefinition = {
   label: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   };
   destination: {
     type: "pointy-bracketed" | "bare";
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   };
   title: {
     type: "double-quoted" | "single-quoted" | "parenthesized";
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } | null;
 };
 /**
@@ -47,13 +42,11 @@ export function parseLinkDefinition(
     label: {
       text: parsed.label.text,
       range: labelRange,
-      loc: getSourceLocationFromRange(sourceCode, node, labelRange),
     },
     destination: {
       type: parsed.destination.type,
       text: parsed.destination.text,
       range: destinationRange,
-      loc: getSourceLocationFromRange(sourceCode, node, destinationRange),
     },
     title: parsed.title
       ? {
@@ -63,10 +56,6 @@ export function parseLinkDefinition(
             nodeRange[0] + parsed.title.range[0],
             nodeRange[0] + parsed.title.range[1],
           ],
-          loc: getSourceLocationFromRange(sourceCode, node, [
-            nodeRange[0] + parsed.title.range[0],
-            nodeRange[0] + parsed.title.range[1],
-          ]),
         }
       : null,
   };

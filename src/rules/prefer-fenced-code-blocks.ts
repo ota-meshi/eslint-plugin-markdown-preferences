@@ -1,7 +1,6 @@
 import type { Code } from "../language/ast-types.ts";
 import { getCodeBlockKind } from "../utils/ast.ts";
 import { createRule } from "../utils/index.ts";
-import { getParsedLines } from "../utils/lines.ts";
 
 export default createRule("prefer-fenced-code-blocks", {
   meta: {
@@ -37,23 +36,26 @@ export default createRule("prefer-fenced-code-blocks", {
               // Do not fix if the code block is not fixable
               return null;
             }
-            const lines = getParsedLines(sourceCode);
             const startColumnOffset = loc.start.column - 1;
             const removeRanges: [number, number][] = [];
             let prefixText: string | null = null;
             for (let line = loc.start.line; line <= loc.end.line; line++) {
-              const parsedLine = lines.get(line);
+              const lineText = sourceCode.lines[line - 1];
               const currentPrefix = normalizePrefix(
-                parsedLine.text.slice(0, startColumnOffset),
+                lineText.slice(0, startColumnOffset),
               );
               if (!prefixText) {
                 prefixText = currentPrefix;
               } else if (currentPrefix !== prefixText) {
                 return null; // Do not fix if the indentation is inconsistent
               }
+              const lineStartIndex = sourceCode.getIndexFromLoc({
+                line,
+                column: 1,
+              });
               let removeRange: [number, number] = [
-                parsedLine.range[0] + startColumnOffset,
-                parsedLine.range[0] + startColumnOffset + 4,
+                lineStartIndex + startColumnOffset,
+                lineStartIndex + startColumnOffset + 4,
               ];
               for (
                 let index = removeRange[0];
@@ -70,8 +72,19 @@ export default createRule("prefer-fenced-code-blocks", {
               }
               removeRanges.push(removeRange);
             }
-            const beginFenceInsertOffset = lines.get(loc.start.line).range[0];
-            const endFenceInsertOffset = lines.get(loc.end.line).range[1];
+            const beginFenceInsertOffset = sourceCode.getIndexFromLoc({
+              line: loc.start.line,
+              column: 1,
+            });
+
+            const endFenceInsertOffset =
+              sourceCode.lines.length > loc.end.line
+                ? sourceCode.getIndexFromLoc({
+                    line: loc.end.line + 1,
+                    column: 1,
+                  })
+                : sourceCode.text.length;
+
             return [
               fixer.insertTextBeforeRange(
                 [beginFenceInsertOffset, beginFenceInsertOffset],
@@ -95,15 +108,14 @@ export default createRule("prefer-fenced-code-blocks", {
      */
     function isFixableIndentedCodeBlock(node: Code): boolean {
       if (!node.value.startsWith(" ")) return true;
-      const lines = getParsedLines(sourceCode);
       const loc = sourceCode.getLoc(node);
-      const firstLine = lines.get(loc.start.line);
+      const firstLineText = sourceCode.lines[loc.start.line - 1];
 
       const codeBlockFirstLine = normalizePrefix(node.value.split(/\r?\n/u)[0]);
 
       const startColumnOffset = loc.start.column - 1;
       const normalizedFirstLine = normalizePrefix(
-        firstLine.text.slice(startColumnOffset),
+        firstLineText.slice(startColumnOffset),
       );
 
       // Maybe it is included in tab and the indent is ambiguous.

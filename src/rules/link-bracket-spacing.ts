@@ -6,7 +6,7 @@ import type {
   LinkReference,
   PhrasingContent,
 } from "../language/ast-types.ts";
-import { getLinkKind, getSourceLocationFromRange } from "../utils/ast.ts";
+import { getLinkKind } from "../utils/ast.ts";
 import { createRule } from "../utils/index.ts";
 import { parseInlineLink } from "../utils/link.ts";
 import { isWhitespace } from "../utils/unicode.ts";
@@ -127,10 +127,10 @@ export default createRule<[Options?]>("link-bracket-spacing", {
         if (space.length > 0) return;
         context.report({
           node,
-          loc: getSourceLocationFromRange(sourceCode, node, [
-            openingBracketIndex,
-            openingBracketIndex + 1,
-          ]),
+          loc: {
+            start: sourceCode.getLocFromIndex(openingBracketIndex),
+            end: sourceCode.getLocFromIndex(openingBracketIndex + 1),
+          },
           messageId: "expectedSpaceAfterOpeningBracket",
           fix: (fixer) =>
             fixer.insertTextAfterRange(
@@ -142,10 +142,12 @@ export default createRule<[Options?]>("link-bracket-spacing", {
         if (space.length === 0) return;
         context.report({
           node,
-          loc: getSourceLocationFromRange(sourceCode, node, [
-            openingBracketIndex + 1,
-            openingBracketIndex + 1 + space.length,
-          ]),
+          loc: {
+            start: sourceCode.getLocFromIndex(openingBracketIndex + 1),
+            end: sourceCode.getLocFromIndex(
+              openingBracketIndex + 1 + space.length,
+            ),
+          },
           messageId: "unexpectedSpaceAfterOpeningBracket",
           fix: (fixer) =>
             fixer.removeRange([
@@ -175,10 +177,10 @@ export default createRule<[Options?]>("link-bracket-spacing", {
         if (space.length > 0) return;
         context.report({
           node,
-          loc: getSourceLocationFromRange(sourceCode, node, [
-            closingBracketIndex,
-            closingBracketIndex + 1,
-          ]),
+          loc: {
+            start: sourceCode.getLocFromIndex(closingBracketIndex),
+            end: sourceCode.getLocFromIndex(closingBracketIndex + 1),
+          },
           messageId: "expectedSpaceBeforeClosingBracket",
           fix: (fixer) =>
             fixer.insertTextBeforeRange(
@@ -190,10 +192,12 @@ export default createRule<[Options?]>("link-bracket-spacing", {
         if (space.length === 0) return;
         context.report({
           node,
-          loc: getSourceLocationFromRange(sourceCode, node, [
-            closingBracketIndex - space.length,
-            closingBracketIndex,
-          ]),
+          loc: {
+            start: sourceCode.getLocFromIndex(
+              closingBracketIndex - space.length,
+            ),
+            end: sourceCode.getLocFromIndex(closingBracketIndex),
+          },
           messageId: "unexpectedSpaceBeforeClosingBracket",
           fix: (fixer) =>
             fixer.removeRange([

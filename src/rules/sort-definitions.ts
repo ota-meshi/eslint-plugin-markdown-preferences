@@ -4,7 +4,6 @@ import { toRegExp, isRegExp } from "../utils/regexp.ts";
 import { getParent, type MDNode } from "../utils/ast.ts";
 import { calcShortestEditScript } from "../utils/calc-shortest-edit-script.ts";
 import type { RuleTextEdit, RuleTextEditor } from "@eslint/core";
-import { getParsedLines } from "../utils/lines.ts";
 
 type MatchOption = string | string[];
 type OrderOption =
@@ -238,13 +237,21 @@ export default createRule<[{ order?: OrderOption[] }?]>("sort-definitions", {
             const oldNextNode = definitions[index + 1];
             const oldNextLoc = sourceCode.getLoc(oldNextNode);
             if (oldNextLoc.start.line - linkLoc.end.line > 1) {
-              const parsedLine = getParsedLines(sourceCode).get(
-                oldNextLoc.start.line - 1,
-              );
-              if (!parsedLine.text.replaceAll(">", "").trim()) {
+              const betweenLineText =
+                sourceCode.lines[oldNextLoc.start.line - 2];
+              if (!betweenLineText.replaceAll(">", "").trim()) {
                 // Remove the blank line after the current link definition
                 // if there is a blank line between the link definition and the next definition.
-                removeLine = parsedLine.range;
+                removeLine = [
+                  sourceCode.getIndexFromLoc({
+                    line: oldNextLoc.start.line - 1,
+                    column: 1,
+                  }),
+                  sourceCode.getIndexFromLoc({
+                    line: oldNextLoc.start.line,
+                    column: 1,
+                  }),
+                ];
               }
             }
           }

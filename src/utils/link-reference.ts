@@ -1,24 +1,19 @@
-import type { SourceLocation } from "estree";
 import type { LinkReference } from "../language/ast-types.ts";
-import { getSourceLocationFromRange } from "./ast.ts";
 import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 
 export type ParsedLinkReference = {
   text: {
     range: [number, number];
-    loc: SourceLocation;
   };
   label:
     | {
         type: "full";
         text: string;
         range: [number, number];
-        loc: SourceLocation;
       }
     | {
         type: "collapsed";
         range: [number, number];
-        loc: SourceLocation;
       }
     | null;
 };
@@ -46,7 +41,6 @@ export function parseLinkReference(
     return {
       text: {
         range: textRange,
-        loc: getSourceLocationFromRange(sourceCode, node, textRange),
       },
       label: null,
     };
@@ -56,12 +50,10 @@ export function parseLinkReference(
     return {
       text: {
         range: textRange,
-        loc: getSourceLocationFromRange(sourceCode, node, textRange),
       },
       label: {
         type: "collapsed",
         range: labelRange,
-        loc: getSourceLocationFromRange(sourceCode, node, labelRange),
       },
     };
   }
@@ -86,13 +78,11 @@ export function parseLinkReference(
   return {
     text: {
       range: textRange,
-      loc: getSourceLocationFromRange(sourceCode, node, textRange),
     },
     label: {
       type: "full",
       text: sourceCode.text.slice(...labelRange),
       range: labelRange,
-      loc: getSourceLocationFromRange(sourceCode, node, labelRange),
     },
   };
 }

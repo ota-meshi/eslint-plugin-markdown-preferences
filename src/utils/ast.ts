@@ -1,4 +1,3 @@
-import type { Position, SourceLocation } from "@eslint/core";
 import type { Json, Toml } from "@eslint/markdown/types";
 import type {
   Blockquote,
@@ -244,65 +243,5 @@ export function getThematicBreakMarker(
     kind: text.startsWith("-") ? "-" : text.startsWith("*") ? "*" : "_",
     hasSpaces: /\s/u.test(text),
     text,
-  };
-}
-
-/**
- * Get the source location from a range in a node.
- */
-export function getSourceLocationFromRange(
-  sourceCode: ExtendedMarkdownSourceCode,
-  node: MDNode,
-  range: [number, number],
-): SourceLocation {
-  const nodeRange = sourceCode.getRange(node);
-  const loc = sourceCode.getLoc(node);
-  if (nodeRange[1] <= range[0]) {
-    return getSourceLocationFromRangeAndSourcePosition(
-      sourceCode,
-      nodeRange[1],
-      loc.end,
-      range,
-    );
-  }
-  return getSourceLocationFromRangeAndSourcePosition(
-    sourceCode,
-    nodeRange[0],
-    loc.start,
-    range,
-  );
-}
-
-/**
- * Get the source location from a range
- */
-function getSourceLocationFromRangeAndSourcePosition(
-  sourceCode: ExtendedMarkdownSourceCode,
-  startIndex: number,
-  startLoc: Position,
-  range: [number, number],
-): SourceLocation {
-  let startLine: number, startColumn: number;
-  if (startIndex <= range[0]) {
-    const beforeLines = sourceCode.text
-      .slice(startIndex, range[0])
-      .split(/\n/u);
-    startLine = startLoc.line + beforeLines.length - 1;
-    startColumn =
-      (beforeLines.length === 1 ? startLoc.column : 1) +
-      (beforeLines.at(-1) || "").length;
-  } else {
-    const beforeLines = sourceCode.text.slice(0, range[0]).split(/\n/u);
-    startLine = beforeLines.length;
-    startColumn = 1 + (beforeLines.at(-1) || "").length;
-  }
-  const contentLines = sourceCode.text.slice(range[0], range[1]).split(/\n/u);
-  const endLine = startLine + contentLines.length - 1;
-  const endColumn =
-    (contentLines.length === 1 ? startColumn : 1) +
-    (contentLines.at(-1) || "").length;
-  return {
-    start: { line: startLine, column: startColumn },
-    end: { line: endLine, column: endColumn },
   };
 }

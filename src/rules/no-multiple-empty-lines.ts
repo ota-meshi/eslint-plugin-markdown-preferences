@@ -1,8 +1,6 @@
 import { createRule } from "../utils/index.ts";
 import type { Code, Html, Yaml } from "../language/ast-types.ts";
 import type { Toml, Json } from "@eslint/markdown/types";
-import type { ParsedLine } from "../utils/lines.ts";
-import { getParsedLines } from "../utils/lines.ts";
 
 export default createRule("no-multiple-empty-lines", {
   meta: {
@@ -74,9 +72,20 @@ export default createRule("no-multiple-empty-lines", {
       json: addIgnoreLoc,
 
       "root:exit"() {
-        const lines = [...getParsedLines(sourceCode)];
+        const lines = sourceCode.lines.map((text, index) => ({
+          line: index + 1,
+          text,
+        }));
 
-        const bofEmptyLines: ParsedLine[] = [];
+        if (lines.at(-1)?.text === "") {
+          // Remove the last empty line to avoid reporting it as EOF empty line
+          lines.pop();
+        }
+
+        const bofEmptyLines: {
+          line: number;
+          text: string;
+        }[] = [];
         while (lines.length) {
           if (lines[0].text.trim()) break;
           bofEmptyLines.push(lines.shift()!);
@@ -93,11 +102,16 @@ export default createRule("no-multiple-empty-lines", {
             messageId: "blankBeginningOfFile",
             data: { max: maxBOF },
             fix(fixer) {
-              return fixer.removeRange([first.range[0], last.range[1]]);
+              return fixer.removeRange(
+                getRangeFromLines(first.line, last.line),
+              );
             },
           });
         }
-        const eofEmptyLines: ParsedLine[] = [];
+        const eofEmptyLines: {
+          line: number;
+          text: string;
+        }[] = [];
         while (lines.length) {
           if (lines[lines.length - 1].text.trim()) break;
           eofEmptyLines.unshift(lines.pop()!);
@@ -114,12 +128,17 @@ export default createRule("no-multiple-empty-lines", {
             messageId: "blankEndOfFile",
             data: { max: maxEOF },
             fix(fixer) {
-              return fixer.removeRange([first.range[0], last.range[1]]);
+              return fixer.removeRange(
+                getRangeFromLines(first.line, last.line),
+              );
             },
           });
         }
 
-        const emptyLines: ParsedLine[] = [];
+        const emptyLines: {
+          line: number;
+          text: string;
+        }[] = [];
 
         for (const lineInfo of lines) {
           if (
@@ -148,12 +167,32 @@ export default createRule("no-multiple-empty-lines", {
                 pluralizedLines: max === 1 ? "line" : "lines",
               },
               fix(fixer) {
-                return fixer.removeRange([first.range[0], last.range[1]]);
+                return fixer.removeRange(
+                  getRangeFromLines(first.line, last.line),
+                );
               },
             });
           }
         }
       },
     };
+
+    /**
+     * Get the range from the given line numbers (1-based)
+     */
+    function getRangeFromLines(
+      firstLine: number,
+      lastLine: number,
+    ): [number, number] {
+      return [
+        sourceCode.getIndexFromLoc({ line: firstLine, column: 1 }),
+        sourceCode.lines.length > lastLine
+          ? sourceCode.getIndexFromLoc({
+              line: lastLine + 1,
+              column: 1,
+            })
+          : sourceCode.text.length,
+      ];
+    }
   },
 });

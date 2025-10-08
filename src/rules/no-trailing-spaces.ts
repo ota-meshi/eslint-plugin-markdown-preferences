@@ -9,8 +9,6 @@ import type {
   Yaml,
 } from "../language/ast-types.ts";
 import type { Json, Toml } from "@eslint/markdown/types";
-import { getParsedLines } from "../utils/lines.ts";
-import { getSourceLocationFromRange } from "../utils/ast.ts";
 import { isWhitespace } from "../utils/unicode.ts";
 
 const htmlComment = /<!--.*?-->/su;
@@ -124,10 +122,10 @@ export default createRule("no-trailing-spaces", {
 
         context.report({
           node,
-          loc: getSourceLocationFromRange(sourceCode, node, [
-            range[0],
-            range[0] + extraSpaces,
-          ]),
+          loc: {
+            start: sourceCode.getLocFromIndex(range[0]),
+            end: sourceCode.getLocFromIndex(range[0] + extraSpaces),
+          },
           messageId: "trailingSpace",
           fix(fixer) {
             return fixer.removeRange([range[0], range[0] + extraSpaces]);
@@ -140,29 +138,29 @@ export default createRule("no-trailing-spaces", {
       "root:exit"() {
         const re = /[^\S\n\r]+$/u;
         const skipMatch = /^[^\S\n\r]*$/u;
-        const lines = getParsedLines(sourceCode);
         const commentLineNumbers = getCommentLineNumbers();
 
-        for (const lineInfo of lines) {
-          const matches = re.exec(lineInfo.text);
+        for (const [lineIndex, lineText] of sourceCode.lines.entries()) {
+          const lineNumber = lineIndex + 1;
+          const matches = re.exec(lineText);
 
           if (!matches) {
             continue;
           }
           const location = {
             start: {
-              line: lineInfo.line,
+              line: lineNumber,
               column: matches.index + 1,
             },
             end: {
-              line: lineInfo.line,
+              line: lineNumber,
               column: matches.index + 1 + matches[0].length,
             },
           };
 
           const range: [number, number] = [
-            lineInfo.range[0] + location.start.column - 1,
-            lineInfo.range[0] + location.end.column - 1,
+            sourceCode.getIndexFromLoc(location.start),
+            sourceCode.getIndexFromLoc(location.end),
           ];
 
           if (
@@ -176,11 +174,11 @@ export default createRule("no-trailing-spaces", {
 
           // If the line has only whitespace, and skipBlankLines
           // is true, don't report it
-          if (skipBlankLines && skipMatch.test(lineInfo.text)) {
+          if (skipBlankLines && skipMatch.test(lineText)) {
             continue;
           }
 
-          if (!ignoreComments || !commentLineNumbers.has(lineInfo.line)) {
+          if (!ignoreComments || !commentLineNumbers.has(lineNumber)) {
             report(location, range);
           }
         }

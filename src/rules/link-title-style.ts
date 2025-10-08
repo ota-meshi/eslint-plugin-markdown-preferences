@@ -4,7 +4,6 @@ import { parseImage } from "../utils/image.ts";
 import { createRule } from "../utils/index.ts";
 import { parseLinkDefinition } from "../utils/link-definition.ts";
 import { parseInlineLink } from "../utils/link.ts";
-import type { SourceLocation } from "estree";
 
 type Options = {
   style?: "double" | "single" | "parentheses";
@@ -76,7 +75,6 @@ export default createRule<[Options?]>("link-title-style", {
         type: "double-quoted" | "single-quoted" | "parenthesized";
         text: string;
         range: [number, number];
-        loc: SourceLocation;
       },
     ) {
       if (preferStyle.typeName === title.type) return;
@@ -87,7 +85,10 @@ export default createRule<[Options?]>("link-title-style", {
 
       context.report({
         node,
-        loc: title.loc,
+        loc: {
+          start: sourceCode.getLocFromIndex(title.range[0]),
+          end: sourceCode.getLocFromIndex(title.range[1]),
+        },
         messageId: preferStyle.messageId,
         *fix(fixer) {
           yield fixer.replaceTextRange(

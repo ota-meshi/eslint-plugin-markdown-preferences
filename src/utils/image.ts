@@ -1,34 +1,27 @@
-import type { SourceLocation } from "estree";
 import type { Image } from "../language/ast-types.ts";
 import { isAsciiControlCharacter } from "./unicode.ts";
-import { getSourceLocationFromRange } from "./ast.ts";
 import { BackwardCharacterCursor } from "./character-cursor.ts";
 import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 
 export type ParsedImage = {
   text: {
     range: [number, number];
-    loc: SourceLocation;
   };
   openingParen: {
     range: [number, number];
-    loc: SourceLocation;
   };
   destination: {
     type: "pointy-bracketed" | "bare";
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   };
   title: {
     type: "double-quoted" | "single-quoted" | "parenthesized";
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } | null;
   closingParen: {
     range: [number, number];
-    loc: SourceLocation;
   };
 };
 /**
@@ -61,17 +54,14 @@ export function parseImage(
   return {
     text: {
       range: textRange,
-      loc: getSourceLocationFromRange(sourceCode, node, textRange),
     },
     openingParen: {
       range: openingParenRange,
-      loc: getSourceLocationFromRange(sourceCode, node, openingParenRange),
     },
     destination: {
       type: parsed.destination.type,
       text: parsed.destination.text,
       range: destinationRange,
-      loc: getSourceLocationFromRange(sourceCode, node, destinationRange),
     },
     title: parsed.title
       ? {
@@ -81,15 +71,10 @@ export function parseImage(
             nodeRange[0] + parsed.title.range[0],
             nodeRange[0] + parsed.title.range[1],
           ],
-          loc: getSourceLocationFromRange(sourceCode, node, [
-            nodeRange[0] + parsed.title.range[0],
-            nodeRange[0] + parsed.title.range[1],
-          ]),
         }
       : null,
     closingParen: {
       range: closingParenRange,
-      loc: getSourceLocationFromRange(sourceCode, node, closingParenRange),
     },
   };
 }

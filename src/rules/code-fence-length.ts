@@ -94,7 +94,10 @@ export default createRule<[Options?]>("code-fence-length", {
       const expectedFence = getExpectedFence(parsed, length);
       context.report({
         node,
-        loc: parsed.openingFence.loc,
+        loc: {
+          start: sourceCode.getLocFromIndex(parsed.openingFence.range[0]),
+          end: sourceCode.getLocFromIndex(parsed.openingFence.range[1]),
+        },
         data: {
           expected: expectedFence,
           actual: parsed.openingFence.text,
@@ -177,7 +180,10 @@ export default createRule<[Options?]>("code-fence-length", {
 
       context.report({
         node,
-        loc: closingFence.loc,
+        loc: {
+          start: sourceCode.getLocFromIndex(closingFence.range[0]),
+          end: sourceCode.getLocFromIndex(closingFence.range[1]),
+        },
         messageId: "notMatch",
         fix(fixer) {
           return [

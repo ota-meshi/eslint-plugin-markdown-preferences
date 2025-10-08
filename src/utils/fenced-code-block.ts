@@ -1,29 +1,24 @@
-import type { SourceLocation } from "@eslint/core";
 import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 import type { Code } from "../language/ast-types.ts";
 import { isSpaceOrTab } from "./unicode.ts";
-import { getCodeBlockKind, getSourceLocationFromRange } from "./ast.ts";
+import { getCodeBlockKind } from "./ast.ts";
 
 export type ParsedFencedCodeBlock = {
   openingFence: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   };
   language: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } | null;
   meta: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } | null;
   closingFence: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } | null;
 };
 const RE_OPENING_FENCE = /^(`{3,}|~{3,})/u;
@@ -68,11 +63,9 @@ export function parseFencedCodeBlock(
   const openingFence: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } = {
     text: fenceText,
     range: openingFenceRange,
-    loc: getSourceLocationFromRange(sourceCode, node, openingFenceRange),
   };
   const languageRange: [number, number] | null = languageText
     ? [
@@ -85,13 +78,11 @@ export function parseFencedCodeBlock(
   const language: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } | null =
     languageText && languageRange
       ? {
           text: languageText,
           range: languageRange,
-          loc: getSourceLocationFromRange(sourceCode, node, languageRange),
         }
       : null;
   const metaRange: [number, number] | null =
@@ -104,13 +95,11 @@ export function parseFencedCodeBlock(
   const meta: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } | null =
     language && metaText && metaRange
       ? {
           text: metaText,
           range: metaRange,
-          loc: getSourceLocationFromRange(sourceCode, node, metaRange),
         }
       : null;
 
@@ -154,17 +143,6 @@ export function parseFencedCodeBlock(
         range[1] - trailingSpacesLength - closingFenceText.length,
         range[1] - trailingSpacesLength,
       ],
-      loc: {
-        start: {
-          line: loc.end.line,
-          column:
-            loc.end.column - trailingSpacesLength - closingFenceText.length,
-        },
-        end: {
-          line: loc.end.line,
-          column: loc.end.column - trailingSpacesLength,
-        },
-      },
     },
   };
 }

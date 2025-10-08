@@ -96,7 +96,7 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
         },
         text(node) {
           if (linkedNode) return;
-          for (const { word, loc, range } of iterateSearchWords({
+          for (const { word, range } of iterateSearchWords({
             sourceCode,
             node,
             words,
@@ -105,7 +105,10 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
             const link = links[word];
             context.report({
               node,
-              loc,
+              loc: {
+                start: sourceCode.getLocFromIndex(range[0]),
+                end: sourceCode.getLocFromIndex(range[1]),
+              },
               messageId: "requireLink",
               data: {
                 name: word,

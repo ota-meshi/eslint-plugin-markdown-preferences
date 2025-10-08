@@ -1,6 +1,4 @@
-import type { SourceLocation } from "estree";
 import type { ImageReference } from "../language/ast-types.ts";
-import { getSourceLocationFromRange } from "./ast.ts";
 import { BackwardCharacterCursor } from "./character-cursor.ts";
 import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 
@@ -8,19 +6,16 @@ export type ParsedImageReference = {
   text: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   };
   label:
     | {
         type: "full";
         text: string;
         range: [number, number];
-        loc: SourceLocation;
       }
     | {
         type: "collapsed";
         range: [number, number];
-        loc: SourceLocation;
       }
     | null;
 };
@@ -38,7 +33,6 @@ export function parseImageReference(
       text: {
         range: textRange,
         text: sourceCode.text.slice(...textRange),
-        loc: getSourceLocationFromRange(sourceCode, node, textRange),
       },
       label: null,
     };
@@ -50,12 +44,10 @@ export function parseImageReference(
       text: {
         range: textRange,
         text: sourceCode.text.slice(...textRange),
-        loc: getSourceLocationFromRange(sourceCode, node, textRange),
       },
       label: {
         type: "collapsed",
         range: labelRange,
-        loc: getSourceLocationFromRange(sourceCode, node, labelRange),
       },
     };
   }
@@ -73,13 +65,11 @@ export function parseImageReference(
     text: {
       range: textRange,
       text: parsed.text.text,
-      loc: getSourceLocationFromRange(sourceCode, node, textRange),
     },
     label: {
       type: "full",
       text: parsed.label.text,
       range: labelRange,
-      loc: getSourceLocationFromRange(sourceCode, node, labelRange),
     },
   };
 }
