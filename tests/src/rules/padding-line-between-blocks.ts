@@ -7,6 +7,7 @@ import { loadTestCases } from "../../utils/utils.ts";
 import { parseMarkdown } from "../../utils/markdown-parser/parser.ts";
 import assert from "node:assert";
 import plugin from "../../../src/index.ts";
+import eslintMarkdown from "@eslint/markdown";
 
 const syntaxMap: Record<
   Exclude<MarkdownBlockNode["type"], "json" | "toml">,
@@ -127,10 +128,14 @@ describe("requiresBlankLineBetween", () => {
 const tester = new SnapshotRuleTester({
   plugins: {
     "markdown-preferences": plugin,
+    markdown: eslintMarkdown,
   },
   language: "markdown-preferences/extended-syntax",
   languageOptions: {
     frontmatter: "yaml",
+  },
+  rules: {
+    "markdown/no-reversed-media-syntax": "error",
   },
 });
 

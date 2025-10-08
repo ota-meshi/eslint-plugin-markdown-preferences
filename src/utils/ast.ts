@@ -95,6 +95,8 @@ export type MDParent<N extends MDNode> = N extends Root
       : never
     : never;
 
+const RE_HTML_COMMENT = /<!--(.*?)-->/u;
+
 /**
  * Get the parent of a node.
  */
@@ -244,4 +246,19 @@ export function getThematicBreakMarker(
     hasSpaces: /\s/u.test(text),
     text,
   };
+}
+
+/**
+ * Check whether a node is an HTML comment.
+ */
+export function isHTMLComment(node: MDNode): node is Html {
+  return node.type === "html" && RE_HTML_COMMENT.test(node.value);
+}
+
+/**
+ * Get the value of an HTML comment.
+ */
+export function getHTMLCommentValue(node: MDNode): string | null {
+  if (!isHTMLComment(node)) return null;
+  return RE_HTML_COMMENT.exec(node.value)?.[1] ?? null;
 }
