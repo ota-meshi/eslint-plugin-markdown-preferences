@@ -1,5 +1,23 @@
 # eslint-plugin-markdown-preferences
 
+## 0.36.0
+
+### Minor Changes
+
+- [#177](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/177) [`c5f062f`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/c5f062f9fb6e711e41ba806892f5019b2888ad03) Thanks [@ota-meshi](https://github.com/ota-meshi)! - Refactor to use the API provided by [`@eslint/markdown`](https://github.com/eslint/markdown) (`@eslint/plugin-kit`>=0.4) instead of own logic.
+
+- [#177](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/177) [`c5f062f`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/c5f062f9fb6e711e41ba806892f5019b2888ad03) Thanks [@ota-meshi](https://github.com/ota-meshi)! - BREAKING!: drop support for [`@eslint/markdown`](https://github.com/eslint/markdown)<7.4.0 (Now only supports [`@eslint/markdown`](https://github.com/eslint/markdown)>=7.4.0)
+
+- [#182](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/182) [`85af47b`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/85af47bfde5f02ee68c786a0f24c1b9ec8fa52fa) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat([markdown-preferences/padding-line-between-blocks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/padding-line-between-blocks.html)): ignore padding following the disable-next-line directive
+
+### Patch Changes
+
+- [#180](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/180) [`24888a3`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/24888a32545b958bc3626208a3a3218680ddd05f) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix([markdown-preferences/heading-casing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/heading-casing.html)): false positives for "I"
+
+- [#180](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/180) [`24888a3`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/24888a32545b958bc3626208a3a3218680ddd05f) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix([markdown-preferences/table-header-casing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-header-casing.html)): false positives for "I"
+
+- [#179](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/179) [`ac45ff3`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/ac45ff357cac2d1c6674be0041d1d12a09c82979) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix([markdown-preferences/prefer-link-reference-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-link-reference-definitions.html)): wrong autofix for images
+
 ## 0.35.0
 
 ### Minor Changes
