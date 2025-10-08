@@ -27,13 +27,7 @@ import type {
   ThematicBreak,
 } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
-import type { ParsedLine } from "../utils/lines.ts";
-import { getParsedLines } from "../utils/lines.ts";
-import {
-  getCodeBlockKind,
-  getLinkKind,
-  getSourceLocationFromRange,
-} from "../utils/ast.ts";
+import { getCodeBlockKind, getLinkKind } from "../utils/ast.ts";
 import type {
   Position,
   RuleTextEdit,
@@ -338,14 +332,21 @@ export default createRule<[Options?]>("indent", {
           parsed.taskListItemMarker
         ) {
           const baseIndent = getWidth(
-            lineText.slice(0, parsed.taskListItemMarker.loc.end.column - 1),
+            lineText.slice(
+              0,
+              sourceCode.getLocFromIndex(parsed.taskListItemMarker.range[1])
+                .column - 1,
+            ),
           );
           return (this._expectedIndentForFirstLine =
             baseIndent + options.listItems.first);
         }
         // relative to markerEnd, or taskListMarkerEnd without task list marker
         const baseIndent = getWidth(
-          lineText.slice(0, parsed.marker.loc.end.column - 1),
+          lineText.slice(
+            0,
+            sourceCode.getLocFromIndex(parsed.marker.range[1]).column - 1,
+          ),
         );
         return (this._expectedIndentForFirstLine =
           baseIndent + options.listItems.first);
@@ -396,14 +397,21 @@ export default createRule<[Options?]>("indent", {
           parsed.taskListItemMarker
         ) {
           const baseIndent = getWidth(
-            lineText.slice(0, parsed.taskListItemMarker.loc.end.column - 1),
+            lineText.slice(
+              0,
+              sourceCode.getLocFromIndex(parsed.taskListItemMarker.range[1])
+                .column - 1,
+            ),
           );
           return (this._expectedIndentForOtherLines =
             baseIndent + options.listItems.other);
         }
         // relative to markerEnd, or taskListMarkerEnd without task list marker
         const baseIndent = getWidth(
-          lineText.slice(0, parsed.marker.loc.end.column - 1),
+          lineText.slice(
+            0,
+            sourceCode.getLocFromIndex(parsed.marker.range[1]).column - 1,
+          ),
         );
         return (this._expectedIndentForOtherLines =
           baseIndent + options.listItems.other);
@@ -417,17 +425,18 @@ export default createRule<[Options?]>("indent", {
           return (this._expectedIndentForOtherLines = actualFirstLineIndent);
         }
         const parsed = this.getParsedListItem();
-        const lineText = sourceCode.lines[parsed.marker.loc.end.line - 1];
-        return (
-          getWidth(lineText.slice(0, parsed.marker.loc.end.column - 1)) + 1
-        );
+        const markerEndLoc = sourceCode.getLocFromIndex(parsed.marker.range[1]);
+        const lineText = sourceCode.lines[markerEndLoc.line - 1];
+        return getWidth(lineText.slice(0, markerEndLoc.column - 1)) + 1;
       }
 
       private getActualFirstLineIndent({ withoutTaskListMarker = false } = {}) {
         const parsed = this.getParsedListItem();
-        const markerEndPos = withoutTaskListMarker
-          ? parsed.marker.loc.end
-          : (parsed.taskListItemMarker?.loc.end ?? parsed.marker.loc.end);
+        const markerEndPos = sourceCode.getLocFromIndex(
+          withoutTaskListMarker
+            ? parsed.marker.range[1]
+            : (parsed.taskListItemMarker?.range[1] ?? parsed.marker.range[1]),
+        );
         const lineText = sourceCode.lines[markerEndPos.line - 1];
         const afterMarkerText = lineText.slice(markerEndPos.column - 1);
         const trimmedAfterMarkerText = afterMarkerText.trimStart();
@@ -690,16 +699,14 @@ export default createRule<[Options?]>("indent", {
           if (lineNumber <= loc.start.line) {
             return baseIndent;
           }
-          if (lineNumber < parsed.label.loc.end.line) {
+          const labelEndLoc = sourceCode.getLocFromIndex(parsed.label.range[1]);
+          if (lineNumber < labelEndLoc.line) {
             return baseIndent + 2;
           }
-          if (lineNumber === parsed.label.loc.end.line) {
-            const line = getParsedLines(sourceCode).get(lineNumber);
-            if (!line) return baseIndent; // Unexpected, but just in case
-            const between = line.text.slice(
-              column - 1,
-              parsed.label.loc.end.column - 2,
-            );
+          if (lineNumber === labelEndLoc.line) {
+            const lineText = sourceCode.lines[lineNumber - 1];
+            if (lineText == null) return baseIndent; // Unexpected, but just in case
+            const between = lineText.slice(column - 1, labelEndLoc.column - 2);
             return !between || isWhitespace(between)
               ? // e.g. [
                 //   label
@@ -709,23 +716,27 @@ export default createRule<[Options?]>("indent", {
                 //   label]: ...
                 baseIndent + 2;
           }
-          if (lineNumber <= parsed.destination.loc.end.line) {
+          const destinationEndLoc = sourceCode.getLocFromIndex(
+            parsed.destination.range[1],
+          );
+          if (lineNumber <= destinationEndLoc.line) {
             return baseIndent + 4;
           }
           if (!parsed.title) return baseIndent; // Unexpected, but just in case
-          if (lineNumber <= parsed.title.loc.start.line) {
+          const titleStartLoc = sourceCode.getLocFromIndex(
+            parsed.title.range[0],
+          );
+          if (lineNumber <= titleStartLoc.line) {
             return baseIndent + 4;
           }
-          if (lineNumber < parsed.title.loc.end.line) {
+          const titleEndLoc = sourceCode.getLocFromIndex(parsed.title.range[1]);
+          if (lineNumber < titleEndLoc.line) {
             return baseIndent + 6;
           }
-          if (lineNumber === parsed.title.loc.end.line) {
-            const line = getParsedLines(sourceCode).get(lineNumber);
-            if (!line) return baseIndent; // Unexpected, but just in case
-            const between = line.text.slice(
-              column - 1,
-              parsed.title.loc.end.column - 2,
-            );
+          if (lineNumber === titleEndLoc.line) {
+            const lineText = sourceCode.lines[lineNumber - 1];
+            if (lineText == null) return baseIndent; // Unexpected, but just in case
+            const between = lineText.slice(column - 1, titleEndLoc.column - 2);
             return !between || isWhitespace(between)
               ? // e.g.
                 // [label]: #x "
@@ -822,20 +833,24 @@ export default createRule<[Options?]>("indent", {
          * Get a fix for a line.
          */
         function getFixForLine(lineNumber: number, actualIndentWidth: number) {
-          const line = getParsedLines(sourceCode).get(lineNumber);
+          const lineText = sourceCode.lines[lineNumber - 1];
+          const lineStartIndex = sourceCode.getIndexFromLoc({
+            line: lineNumber,
+            column: 1,
+          });
           if (info.expectedIndentWidth > actualIndentWidth) {
             // Add indentation
-            const before = sliceWidth(line.text, 0, actualIndentWidth);
+            const before = sliceWidth(lineText, 0, actualIndentWidth);
             const diffWidth = info.expectedIndentWidth - actualIndentWidth;
             return fixer.insertTextAfterRange(
-              [line.range[0], line.range[0] + before.length],
+              [lineStartIndex, lineStartIndex + before.length],
               " ".repeat(diffWidth),
             );
           }
           // Remove indentation
-          let before = sliceWidth(line.text, 0, info.expectedIndentWidth);
+          let before = sliceWidth(lineText, 0, info.expectedIndentWidth);
           let between = sliceWidth(
-            line.text,
+            lineText,
             info.expectedIndentWidth,
             actualIndentWidth,
           );
@@ -844,7 +859,7 @@ export default createRule<[Options?]>("indent", {
             between = between.slice(1);
           }
           return fixer.replaceTextRange(
-            [line.range[0], line.range[0] + before.length + between.length],
+            [lineStartIndex, lineStartIndex + before.length + between.length],
             before,
           );
         }
@@ -870,7 +885,9 @@ export default createRule<[Options?]>("indent", {
       const loc = sourceCode.getLoc(node);
       const endLineToBeChecked =
         parsed.closingSequence &&
-        inlineToBeChecked(parsed.closingSequence.loc.start);
+        inlineToBeChecked(
+          sourceCode.getLocFromIndex(parsed.closingSequence.range[0]),
+        );
       verifyLinesIndent(
         endLineToBeChecked ? [loc.start.line, loc.end.line] : [loc.start.line],
         (lineNumber) =>
@@ -956,17 +973,18 @@ export default createRule<[Options?]>("indent", {
         const lastChild = node.children.at(-1);
         if (
           lastChild &&
-          parsed.text.loc.start.line < parsed.text.loc.end.line
+          sourceCode.getLocFromIndex(parsed.text.range[0]).line <
+            sourceCode.getLocFromIndex(parsed.text.range[1]).line
         ) {
           const lastChildLoc = sourceCode.getLoc(lastChild);
           const lastChildEndLine =
             lastChild.type === "text" && lastChild.value.endsWith("\n")
               ? lastChildLoc.end.line - 1
               : lastChildLoc.end.line;
+          const textStartLoc = sourceCode.getLocFromIndex(parsed.text.range[0]);
           lines = lines.filter(
             (lineNumber) =>
-              lineNumber <= parsed.text.loc.start.line ||
-              lastChildEndLine < lineNumber,
+              lineNumber <= textStartLoc.line || lastChildEndLine < lineNumber,
           );
         }
         verifyLinesIndent(lines, (lineNumber, column) => {
@@ -980,29 +998,38 @@ export default createRule<[Options?]>("indent", {
           if (lineNumber <= loc.start.line) {
             return baseIndent;
           }
-          if (lineNumber < parsed.text.loc.end.line) {
+          if (
+            lineNumber < sourceCode.getLocFromIndex(parsed.text.range[1]).line
+          ) {
             return baseIndent + 2;
           }
-          if (lineNumber <= parsed.openingParen.loc.end.line) {
+
+          if (
+            lineNumber <=
+            sourceCode.getLocFromIndex(parsed.openingParen.range[1]).line
+          ) {
             return baseIndent;
           }
-          if (lineNumber <= parsed.destination.loc.end.line) {
+          if (
+            lineNumber <=
+            sourceCode.getLocFromIndex(parsed.destination.range[1]).line
+          ) {
             return baseIndent + 2;
           }
           if (!parsed.title) return baseIndent; // Closing parenthesis
-          if (lineNumber <= parsed.title.loc.start.line) {
+          if (
+            lineNumber <= sourceCode.getLocFromIndex(parsed.title.range[0]).line
+          ) {
             return baseIndent + 2;
           }
-          if (lineNumber < parsed.title.loc.end.line) {
+          const titleEndLoc = sourceCode.getLocFromIndex(parsed.title.range[1]);
+          if (lineNumber < titleEndLoc.line) {
             return baseIndent + 4;
           }
-          if (lineNumber === parsed.title.loc.end.line) {
-            const line = getParsedLines(sourceCode).get(lineNumber);
-            if (!line) return baseIndent; // Unexpected, but just in case
-            const between = line.text.slice(
-              column - 1,
-              parsed.title.loc.end.column - 2,
-            );
+          if (lineNumber === titleEndLoc.line) {
+            const lineText = sourceCode.lines[lineNumber - 1];
+            if (lineText == null) return baseIndent; // Unexpected, but just in case
+            const between = lineText.slice(column - 1, titleEndLoc.column - 2);
             return !between || isWhitespace(between)
               ? // e.g.
                 // [label](#x
@@ -1033,16 +1060,20 @@ export default createRule<[Options?]>("indent", {
         lines = lines.slice(1);
       }
       const lastChild = node.children.at(-1);
-      if (lastChild && parsed.text.loc.start.line < parsed.text.loc.end.line) {
+      if (
+        lastChild &&
+        sourceCode.getLocFromIndex(parsed.text.range[0]).line <
+          sourceCode.getLocFromIndex(parsed.text.range[1]).line
+      ) {
         const lastChildLoc = sourceCode.getLoc(lastChild);
         const lastChildEndLine =
           lastChild.type === "text" && lastChild.value.endsWith("\n")
             ? lastChildLoc.end.line - 1
             : lastChildLoc.end.line;
+        const textStartLoc = sourceCode.getLocFromIndex(parsed.text.range[0]);
         lines = lines.filter(
           (lineNumber) =>
-            lineNumber <= parsed.text.loc.start.line ||
-            lastChildEndLine < lineNumber,
+            lineNumber <= textStartLoc.line || lastChildEndLine < lineNumber,
         );
       }
 
@@ -1057,23 +1088,25 @@ export default createRule<[Options?]>("indent", {
         if (lineNumber <= loc.start.line) {
           return baseIndent;
         }
-        if (lineNumber < parsed.text.loc.end.line) {
+        if (
+          lineNumber < sourceCode.getLocFromIndex(parsed.text.range[1]).line
+        ) {
           return baseIndent + 2;
         }
         if (!parsed.label) return baseIndent; // Closing bracket
-        if (lineNumber <= parsed.label.loc.start.line) {
+        if (
+          lineNumber <= sourceCode.getLocFromIndex(parsed.label.range[0]).line
+        ) {
           return baseIndent;
         }
-        if (lineNumber < parsed.label.loc.end.line) {
+        const labelEndLoc = sourceCode.getLocFromIndex(parsed.label.range[1]);
+        if (lineNumber < labelEndLoc.line) {
           return baseIndent + 2;
         }
-        if (lineNumber === parsed.label.loc.end.line) {
-          const line = getParsedLines(sourceCode).get(lineNumber);
-          if (!line) return baseIndent; // Unexpected, but just in case
-          const between = line.text.slice(
-            column - 1,
-            parsed.label.loc.end.column - 2,
-          );
+        if (lineNumber === labelEndLoc.line) {
+          const lineText = sourceCode.lines[lineNumber - 1];
+          if (lineText == null) return baseIndent; // Unexpected, but just in case
+          const between = lineText.slice(column - 1, labelEndLoc.column - 2);
           return !between || isWhitespace(between)
             ? // e.g.
               // [text][
@@ -1112,16 +1145,14 @@ export default createRule<[Options?]>("indent", {
         if (lineNumber <= loc.start.line) {
           return baseIndent;
         }
-        if (lineNumber < parsed.text.loc.end.line) {
+        const textEndLoc = sourceCode.getLocFromIndex(parsed.text.range[1]);
+        if (lineNumber < textEndLoc.line) {
           return baseIndent + 2;
         }
-        if (lineNumber === parsed.text.loc.end.line) {
-          const line = getParsedLines(sourceCode).get(lineNumber);
-          if (!line) return baseIndent; // Unexpected, but just in case
-          const between = line.text.slice(
-            column - 1,
-            parsed.text.loc.end.column - 2,
-          );
+        if (lineNumber === textEndLoc.line) {
+          const lineText = sourceCode.lines[lineNumber - 1];
+          if (lineText == null) return baseIndent; // Unexpected, but just in case
+          const between = lineText.slice(column - 1, textEndLoc.column - 2);
           return !between || isWhitespace(between)
             ? // e.g. ![
               //   alt
@@ -1131,26 +1162,32 @@ export default createRule<[Options?]>("indent", {
               //   alt]: ...
               baseIndent + 2;
         }
-        if (lineNumber <= parsed.openingParen.loc.end.line) {
+        if (
+          lineNumber <=
+          sourceCode.getLocFromIndex(parsed.openingParen.range[1]).line
+        ) {
           return baseIndent;
         }
-        if (lineNumber <= parsed.destination.loc.end.line) {
+        if (
+          lineNumber <=
+          sourceCode.getLocFromIndex(parsed.destination.range[1]).line
+        ) {
           return baseIndent + 2;
         }
         if (!parsed.title) return baseIndent; // Closing parenthesis
-        if (lineNumber <= parsed.title.loc.start.line) {
+        if (
+          lineNumber <= sourceCode.getLocFromIndex(parsed.title.range[0]).line
+        ) {
           return baseIndent + 2;
         }
-        if (lineNumber < parsed.title.loc.end.line) {
+        const titleEndLoc = sourceCode.getLocFromIndex(parsed.title.range[1]);
+        if (lineNumber < titleEndLoc.line) {
           return baseIndent + 4;
         }
-        if (lineNumber === parsed.title.loc.end.line) {
-          const line = getParsedLines(sourceCode).get(lineNumber);
-          if (!line) return baseIndent; // Unexpected, but just in case
-          const between = line.text.slice(
-            column - 1,
-            parsed.title.loc.end.column - 2,
-          );
+        if (lineNumber === titleEndLoc.line) {
+          const lineText = sourceCode.lines[lineNumber - 1];
+          if (lineText == null) return baseIndent; // Unexpected, but just in case
+          const between = lineText.slice(column - 1, titleEndLoc.column - 2);
           return !between || isWhitespace(between)
             ? // e.g.
               // ![alt]:(/image.png
@@ -1190,16 +1227,14 @@ export default createRule<[Options?]>("indent", {
         if (lineNumber <= loc.start.line) {
           return baseIndent;
         }
-        if (lineNumber < parsed.text.loc.end.line) {
+        const textEndLoc = sourceCode.getLocFromIndex(parsed.text.range[1]);
+        if (lineNumber < textEndLoc.line) {
           return baseIndent + 2;
         }
-        if (lineNumber === parsed.text.loc.end.line) {
-          const line = getParsedLines(sourceCode).get(lineNumber);
-          if (!line) return baseIndent; // Unexpected, but just in case
-          const between = line.text.slice(
-            column - 1,
-            parsed.text.loc.end.column - 2,
-          );
+        if (lineNumber === textEndLoc.line) {
+          const lineText = sourceCode.lines[lineNumber - 1];
+          if (lineText == null) return baseIndent; // Unexpected, but just in case
+          const between = lineText.slice(column - 1, textEndLoc.column - 2);
           return !between || isWhitespace(between)
             ? // e.g. ![
               //   alt
@@ -1210,19 +1245,19 @@ export default createRule<[Options?]>("indent", {
               baseIndent + 2;
         }
         if (!parsed.label) return baseIndent; // Closing bracket
-        if (lineNumber <= parsed.label.loc.start.line) {
+        if (
+          lineNumber <= sourceCode.getLocFromIndex(parsed.label.range[0]).line
+        ) {
           return baseIndent;
         }
-        if (lineNumber < parsed.label.loc.end.line) {
+        const labelEndLoc = sourceCode.getLocFromIndex(parsed.label.range[1]);
+        if (lineNumber < labelEndLoc.line) {
           return baseIndent + 2;
         }
-        if (lineNumber === parsed.label.loc.end.line) {
-          const line = getParsedLines(sourceCode).get(lineNumber);
-          if (!line) return baseIndent; // Unexpected, but just in case
-          const between = line.text.slice(
-            column - 1,
-            parsed.label.loc.end.column - 2,
-          );
+        if (lineNumber === labelEndLoc.line) {
+          const lineText = sourceCode.lines[lineNumber - 1];
+          if (lineText == null) return baseIndent; // Unexpected, but just in case
+          const between = lineText.slice(column - 1, labelEndLoc.column - 2);
           return !between || isWhitespace(between)
             ? // e.g.
               // ![alt][
@@ -1279,7 +1314,9 @@ export default createRule<[Options?]>("indent", {
       if (listItem) {
         const parsed = listItem.getParsedListItem();
         const indentText = lineText.slice(
-          (parsed.taskListItemMarker?.loc ?? parsed.marker.loc).end.column - 1,
+          sourceCode.getLocFromIndex(
+            (parsed.taskListItemMarker ?? parsed.marker).range[1],
+          ).column - 1,
           position.column - 1,
         );
         if (indentText && !isSpaceOrTab(indentText)) {
@@ -1394,11 +1431,11 @@ export default createRule<[Options?]>("indent", {
         actualIndentWidth: number;
       }[] = [];
       for (const lineNumber of lineNumbers) {
-        const line = getParsedLines(sourceCode).get(lineNumber);
-        if (!line) return;
+        const lineText = sourceCode.lines[lineNumber - 1];
+        if (lineText == null) return;
         const listItem = blockStack.getCurrentListItemAtLine(lineNumber);
         if (!listItem) {
-          const indentText = /^\s*/u.exec(line.text)![0];
+          const indentText = /^\s*/u.exec(lineText)![0];
           const actualIndentWidth = getWidth(indentText);
           const expectedIndentWidth = expectedIndentWidthProvider(
             lineNumber,
@@ -1408,16 +1445,20 @@ export default createRule<[Options?]>("indent", {
           if (actualIndentWidth === expectedIndentWidth) continue;
           reports.push({
             loc: {
-              start: { line: line.line, column: 1 },
-              end: { line: line.line, column: indentText.length + 1 },
+              start: { line: lineNumber, column: 1 },
+              end: { line: lineNumber, column: indentText.length + 1 },
             },
             messageId: indentText.includes("\t")
               ? "wrongIndentationWithTab"
               : "wrongIndentation",
             data: { expected: expectedIndentWidth, actual: actualIndentWidth },
             fix(fixer) {
+              const lineStartIndex = sourceCode.getIndexFromLoc({
+                line: lineNumber,
+                column: 1,
+              });
               return fixer.replaceTextRange(
-                [line.range[0], line.range[0] + indentText.length],
+                [lineStartIndex, lineStartIndex + indentText.length],
                 " ".repeat(expectedIndentWidth),
               );
             },
@@ -1427,7 +1468,7 @@ export default createRule<[Options?]>("indent", {
           continue;
         }
         const report = verifyLineIndentFromListItemMarker(
-          line,
+          lineNumber,
           listItem,
           expectedIndentWidthProvider,
         );
@@ -1486,17 +1527,17 @@ export default createRule<[Options?]>("indent", {
       }[] = [];
       let cannotFix = false;
       for (const lineNumber of lineNumbers) {
-        const line = getParsedLines(sourceCode).get(lineNumber);
-        if (!line) return;
-        if (atWidth(line.text, blockquote.getMarkerIndent()) !== ">") {
+        const lineText = sourceCode.lines[lineNumber - 1];
+        if (lineText == null) return;
+        if (atWidth(lineText, blockquote.getMarkerIndent()) !== ">") {
           // Ignore if the line does not have the blockquote marker that same location
           cannotFix = true;
           continue;
         }
         const listItem = blockStack.getCurrentListItemAtLine(lineNumber);
         if (!listItem) {
-          const before = line.text.slice(0, blockquoteLoc.start.column);
-          const after = line.text.slice(blockquoteLoc.start.column);
+          const before = lineText.slice(0, blockquoteLoc.start.column);
+          const after = lineText.slice(blockquoteLoc.start.column);
           const indentText = /^\s*/u.exec(after)![0];
           const actualIndentWidth = getWidth(before + indentText);
           const expectedIndentWidth = expectedIndentWidthProvider(
@@ -1510,11 +1551,11 @@ export default createRule<[Options?]>("indent", {
           reports.push({
             loc: {
               start: {
-                line: line.line,
+                line: lineNumber,
                 column: blockquoteLoc.start.column + 1,
               },
               end: {
-                line: line.line,
+                line: lineNumber,
                 column: blockquoteLoc.start.column + 1 + indentText.length,
               },
             },
@@ -1526,10 +1567,14 @@ export default createRule<[Options?]>("indent", {
               actual: actualIndentWidth - linePrefixWidth,
             },
             fix(fixer) {
+              const lineStartIndex = sourceCode.getIndexFromLoc({
+                line: lineNumber,
+                column: 1,
+              });
               return fixer.replaceTextRange(
                 [
-                  line.range[0] + blockquoteLoc.start.column,
-                  line.range[0] +
+                  lineStartIndex + blockquoteLoc.start.column,
+                  lineStartIndex +
                     blockquoteLoc.start.column +
                     indentText.length,
                 ],
@@ -1542,7 +1587,7 @@ export default createRule<[Options?]>("indent", {
           continue;
         }
         const report = verifyLineIndentFromListItemMarker(
-          line,
+          lineNumber,
           listItem,
           expectedIndentWidthProvider,
         );
@@ -1572,7 +1617,7 @@ export default createRule<[Options?]>("indent", {
      * Verify the indentation of the line from the list item marker.
      */
     function verifyLineIndentFromListItemMarker(
-      line: ParsedLine,
+      lineNumber: number,
       listItem: ListItemStack,
       expectedIndentWidthProvider: (
         lineNumber: number,
@@ -1589,28 +1634,36 @@ export default createRule<[Options?]>("indent", {
       actualIndentWidth: number;
     } | null {
       const parsed = listItem.getParsedListItem();
-      const markerAfterColumn = (
-        parsed.taskListItemMarker?.loc ?? parsed.marker.loc
-      ).end.column;
-      const before = line.text.slice(0, markerAfterColumn - 1);
-      const after = line.text.slice(markerAfterColumn - 1);
+      const markerAfterColumn = sourceCode.getLocFromIndex(
+        parsed.taskListItemMarker?.range[1] ?? parsed.marker.range[1],
+      ).column;
+      const lineText = sourceCode.lines[lineNumber - 1];
+      const before = lineText.slice(0, markerAfterColumn - 1);
+      const after = lineText.slice(markerAfterColumn - 1);
       const indentText = /^\s*/u.exec(after)![0];
       const actualIndentWidth = getWidth(before + indentText);
       const expectedIndentWidth = expectedIndentWidthProvider(
-        line.line,
+        lineNumber,
         markerAfterColumn,
       );
       if (expectedIndentWidth === "ignore") return null;
       if (actualIndentWidth === expectedIndentWidth) return null;
 
       const linePrefixWidth = getWidth(before);
+      const lineStartIndex = sourceCode.getIndexFromLoc({
+        line: lineNumber,
+        column: 1,
+      });
       const range: [number, number] = [
-        line.range[0] + before.length,
-        line.range[0] + before.length + indentText.length,
+        lineStartIndex + before.length,
+        lineStartIndex + before.length + indentText.length,
       ];
 
       return {
-        loc: getSourceLocationFromRange(sourceCode, listItem.node, range),
+        loc: {
+          start: sourceCode.getLocFromIndex(range[0]),
+          end: sourceCode.getLocFromIndex(range[1]),
+        },
         messageId: indentText.includes("\t")
           ? "wrongIndentationFromListMarkerWithTab"
           : "wrongIndentationFromListMarker",
@@ -1650,32 +1703,40 @@ export default createRule<[Options?]>("indent", {
         lineNumber <= fixEndLine;
         lineNumber++
       ) {
-        const line = getParsedLines(sourceCode).get(lineNumber);
-        if (!line) continue;
+        const lineText = sourceCode.lines[lineNumber - 1];
+        if (lineText == null) continue;
         if (info.expectedIndentWidth > info.actualIndentWidth) {
           // Add indentation
-          const before = sliceWidth(line.text, 0, info.actualIndentWidth);
-          const after = sliceWidth(line.text, info.actualIndentWidth);
+          const before = sliceWidth(lineText, 0, info.actualIndentWidth);
+          const after = sliceWidth(lineText, info.actualIndentWidth);
           const diffWidth = info.expectedIndentWidth - info.actualIndentWidth;
+          const lineStartIndex = sourceCode.getIndexFromLoc({
+            line: lineNumber,
+            column: 1,
+          });
           yield fixer.replaceTextRange(
-            [line.range[0], line.range[0] + line.text.length],
+            [lineStartIndex, lineStartIndex + lineText.length],
             before + " ".repeat(diffWidth) + after,
           );
         } else {
           // Remove indentation
-          let before = sliceWidth(line.text, 0, info.expectedIndentWidth);
+          let before = sliceWidth(lineText, 0, info.expectedIndentWidth);
           let between = sliceWidth(
-            line.text,
+            lineText,
             info.expectedIndentWidth,
             info.actualIndentWidth,
           );
-          const after = sliceWidth(line.text, info.actualIndentWidth);
+          const after = sliceWidth(lineText, info.actualIndentWidth);
           while (between && !isSpaceOrTab(between)) {
             before += between[0];
             between = between.slice(1);
           }
+          const lineStartIndex = sourceCode.getIndexFromLoc({
+            line: lineNumber,
+            column: 1,
+          });
           yield fixer.replaceTextRange(
-            [line.range[0], line.range[0] + line.text.length],
+            [lineStartIndex, lineStartIndex + lineText.length],
             before + after,
           );
         }

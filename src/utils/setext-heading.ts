@@ -1,15 +1,11 @@
-import type { SourceLocation } from "@eslint/core";
 import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 import type { Heading } from "../language/ast-types.ts";
 import { getHeadingKind } from "./ast.ts";
-import type { ParsedLine } from "./lines.ts";
-import { getParsedLines } from "./lines.ts";
 
 export type ParsedSetextHeading = {
   contentLines: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
     raws: {
       prefix: string;
       spaceBefore: string;
@@ -19,7 +15,6 @@ export type ParsedSetextHeading = {
   underline: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
     marker: "=" | "-";
     raws: {
       prefix: string;
@@ -38,8 +33,6 @@ export function parseSetextHeading(
 ): ParsedSetextHeading | null {
   if (getHeadingKind(sourceCode, node) !== "setext") return null;
 
-  const lines = getParsedLines(sourceCode);
-
   const contentLines: ParsedSetextHeading["contentLines"] = [];
 
   const nodeLoc = sourceCode.getLoc(node);
@@ -48,11 +41,11 @@ export function parseSetextHeading(
     lineNumber < nodeLoc.end.line;
     lineNumber++
   ) {
-    const content = parseContent(lines.get(lineNumber));
+    const content = parseContent(sourceCode, lineNumber);
     contentLines.push(content);
   }
 
-  const underline = parseUnderline(lines.get(nodeLoc.end.line));
+  const underline = parseUnderline(sourceCode, nodeLoc.end.line);
   if (!underline) return null;
 
   return {
@@ -65,13 +58,15 @@ export function parseSetextHeading(
  * Parse the content line of a setext heading.
  */
 function parseContent(
-  line: ParsedLine,
+  sourceCode: ExtendedMarkdownSourceCode,
+  lineNumber: number,
 ): ParsedSetextHeading["contentLines"][number] {
+  const lineText = sourceCode.lines[lineNumber - 1];
   let prefix = "";
   let spaceBefore = "";
   let suffix = "";
-  for (let index = 0; index < line.text.length; index++) {
-    const c = line.text[index];
+  for (let index = 0; index < lineText.length; index++) {
+    const c = lineText[index];
     if (!c.trim()) {
       spaceBefore += c;
       continue;
@@ -81,28 +76,22 @@ function parseContent(
       spaceBefore = "";
       continue;
     }
-    suffix = line.text.slice(index);
+    suffix = lineText.slice(index);
     break;
   }
   const content = suffix.trimEnd();
   const spaceAfter = suffix.slice(content.length);
 
+  const lineStartIndex = sourceCode.getIndexFromLoc({
+    line: lineNumber,
+    column: 1,
+  });
   return {
     text: content,
     range: [
-      line.range[0] + prefix.length + spaceBefore.length,
-      line.range[1] - line.linebreak.length - spaceAfter.length,
+      lineStartIndex + prefix.length + spaceBefore.length,
+      lineStartIndex + lineText.length - spaceAfter.length,
     ],
-    loc: {
-      start: {
-        line: line.line,
-        column: prefix.length + spaceBefore.length + 1,
-      },
-      end: {
-        line: line.line,
-        column: prefix.length + spaceBefore.length + content.length + 1,
-      },
-    },
     raws: {
       prefix,
       spaceBefore,
@@ -115,15 +104,17 @@ function parseContent(
  * Parse the underline of a setext heading.
  */
 function parseUnderline(
-  line: ParsedLine,
+  sourceCode: ExtendedMarkdownSourceCode,
+  lineNumber: number,
 ): ParsedSetextHeading["underline"] | null {
+  const lineText = sourceCode.lines[lineNumber - 1];
   let marker: "=" | "-" | null = null;
   let underlineText = "";
   let prefix = "";
   let spaceBefore = "";
   let spaceAfter = "";
-  for (let index = line.text.length - 1; index >= 0; index--) {
-    const c = line.text[index];
+  for (let index = lineText.length - 1; index >= 0; index--) {
+    const c = lineText[index];
     if (!marker) {
       if (c === "=" || c === "-") {
         underlineText = c + underlineText;
@@ -142,30 +133,22 @@ function parseUnderline(
     } else if (!c.trim()) {
       spaceBefore = c + spaceBefore;
     } else {
-      prefix = line.text.slice(0, index + 1);
+      prefix = lineText.slice(0, index + 1);
       break;
     }
   }
   if (!marker) return null;
 
-  const underlineLoc: SourceLocation = {
-    start: {
-      line: line.line,
-      column: prefix.length + spaceBefore.length + 1,
-    },
-    end: {
-      line: line.line,
-      column: prefix.length + spaceBefore.length + underlineText.length + 1,
-    },
-  };
-
+  const lineStartIndex = sourceCode.getIndexFromLoc({
+    line: lineNumber,
+    column: 1,
+  });
   return {
     text: underlineText,
     range: [
-      line.range[0] + prefix.length + spaceBefore.length,
-      line.range[1] - line.linebreak.length - spaceAfter.length,
+      lineStartIndex + prefix.length + spaceBefore.length,
+      lineStartIndex + lineText.length - spaceAfter.length,
     ],
-    loc: underlineLoc,
     marker,
     raws: {
       prefix,

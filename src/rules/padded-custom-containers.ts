@@ -1,9 +1,6 @@
 import type { CustomContainer } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
-import { getSourceLocationFromRange } from "../utils/ast.ts";
 import { parseCustomContainer } from "../utils/custom-container.ts";
-import type { ParsedLine } from "../utils/lines.ts";
-import { getParsedLines } from "../utils/lines.ts";
 import { toRegExp } from "../utils/regexp.ts";
 
 type Options = {
@@ -147,9 +144,13 @@ export default createRule<[Options?]>("padded-custom-containers", {
         const lastChildLoc = sourceCode.getLoc(lastChild);
 
         const paddingAfterOpeningLines =
-          firstChildLoc.start.line - openingSequence.loc.end.line - 1;
+          firstChildLoc.start.line -
+          sourceCode.getLocFromIndex(openingSequence.range[1]).line -
+          1;
         const paddingBeforeClosingLines = closingSequence
-          ? closingSequence.loc.start.line - lastChildLoc.end.line - 1
+          ? sourceCode.getLocFromIndex(closingSequence.range[0]).line -
+            lastChildLoc.end.line -
+            1
           : null;
 
         if (padding === "always") {
@@ -161,7 +162,10 @@ export default createRule<[Options?]>("padded-custom-containers", {
             ];
             context.report({
               messageId: "expectedPaddingAfterOpeningMarker",
-              loc: getSourceLocationFromRange(sourceCode, node, reportRange),
+              loc: {
+                start: sourceCode.getLocFromIndex(reportRange[0]),
+                end: sourceCode.getLocFromIndex(reportRange[1]),
+              },
               fix(fixer) {
                 return fixer.insertTextAfterRange(reportRange, "\n");
               },
@@ -174,16 +178,16 @@ export default createRule<[Options?]>("padded-custom-containers", {
           ) {
             context.report({
               messageId: "expectedPaddingBeforeClosingMarker",
-              loc: getSourceLocationFromRange(
-                sourceCode,
-                node,
-                closingSequence.range,
-              ),
+              loc: {
+                start: sourceCode.getLocFromIndex(closingSequence.range[0]),
+                end: sourceCode.getLocFromIndex(closingSequence.range[1]),
+              },
               fix(fixer) {
                 return fixer.insertTextBeforeRange(
                   [
                     closingSequence.range[0] -
-                      closingSequence.loc.start.column +
+                      sourceCode.getLocFromIndex(closingSequence.range[0])
+                        .column +
                       1,
                     closingSequence.range[1],
                   ],
@@ -194,23 +198,30 @@ export default createRule<[Options?]>("padded-custom-containers", {
           }
         } else if (padding === "never") {
           if (paddingAfterOpeningLines > 0) {
-            const lines = getParsedLines(sourceCode);
-            const reportLines: ParsedLine[] = [];
-            for (
-              let lineNumber = openingSequence.loc.end.line + 1;
-              lineNumber < firstChildLoc.start.line;
-              lineNumber++
-            ) {
-              reportLines.push(lines.get(lineNumber));
-            }
-
+            const startLineNumber =
+              sourceCode.getLocFromIndex(openingSequence.range[1]).line + 1;
             const removeRange: [number, number] = [
-              reportLines[0].range[0],
-              reportLines[reportLines.length - 1].range[1],
+              sourceCode.getIndexFromLoc({
+                line: startLineNumber,
+                column: 1,
+              }),
+              sourceCode.getIndexFromLoc({
+                line: firstChildLoc.start.line,
+                column: 1,
+              }),
             ];
             context.report({
               messageId: "unexpectedPaddingAfterOpeningMarker",
-              loc: getSourceLocationFromRange(sourceCode, node, removeRange),
+              loc: {
+                start: {
+                  line: startLineNumber,
+                  column: 1,
+                },
+                end: {
+                  line: firstChildLoc.start.line,
+                  column: 1,
+                },
+              },
               fix(fixer) {
                 return fixer.removeRange(removeRange);
               },
@@ -221,22 +232,31 @@ export default createRule<[Options?]>("padded-custom-containers", {
             paddingBeforeClosingLines !== null &&
             paddingBeforeClosingLines > 0
           ) {
-            const lines = getParsedLines(sourceCode);
-            const reportLines: ParsedLine[] = [];
-            for (
-              let lineNumber = lastChildLoc.end.line + 1;
-              lineNumber < closingSequence.loc.start.line;
-              lineNumber++
-            ) {
-              reportLines.push(lines.get(lineNumber));
-            }
+            const closingSequenceStartLoc = sourceCode.getLocFromIndex(
+              closingSequence.range[0],
+            );
             const removeRange: [number, number] = [
-              reportLines[0].range[0],
-              reportLines[reportLines.length - 1].range[1],
+              sourceCode.getIndexFromLoc({
+                line: lastChildLoc.end.line + 1,
+                column: 1,
+              }),
+              sourceCode.getIndexFromLoc({
+                line: closingSequenceStartLoc.line,
+                column: 1,
+              }),
             ];
             context.report({
               messageId: "unexpectedPaddingBeforeClosingMarker",
-              loc: getSourceLocationFromRange(sourceCode, node, removeRange),
+              loc: {
+                start: {
+                  line: lastChildLoc.end.line + 1,
+                  column: 1,
+                },
+                end: {
+                  line: closingSequenceStartLoc.line,
+                  column: 1,
+                },
+              },
               fix(fixer) {
                 return fixer.removeRange(removeRange);
               },

@@ -74,8 +74,8 @@ export default createRule<[Option?]>("atx-heading-closing-sequence", {
           context.report({
             node,
             loc: {
-              start: parsed.content.loc.end,
-              end: parsed.closingSequence.loc.end,
+              start: sourceCode.getLocFromIndex(parsed.content.range[1]),
+              end: sourceCode.getLocFromIndex(parsed.closingSequence.range[1]),
             },
             messageId: "forbidClosing",
             *fix(fixer) {

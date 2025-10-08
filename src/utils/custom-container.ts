@@ -1,24 +1,19 @@
-import type { SourceLocation } from "@eslint/core";
 import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 import { isSpaceOrTab } from "./unicode.ts";
-import { getSourceLocationFromRange } from "./ast.ts";
 import type { CustomContainer } from "../language/ast-types.ts";
 
 export type ParsedCustomContainer = {
   openingSequence: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   };
   info: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   };
   closingSequence: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } | null;
 };
 const RE_OPENING_SEQUENCE = /^(:{3,})/u;
@@ -51,11 +46,9 @@ export function parseCustomContainer(
   const openingSequence: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } = {
     text: sequenceText,
     range: openingSequenceRange,
-    loc: getSourceLocationFromRange(sourceCode, node, openingSequenceRange),
   };
   const infoRange: [number, number] = [
     openingSequence.range[1] + spaceAfterOpeningSequenceLength,
@@ -66,11 +59,9 @@ export function parseCustomContainer(
   const info: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } = {
     text: infoText,
     range: infoRange,
-    loc: getSourceLocationFromRange(sourceCode, node, infoRange),
   };
 
   // parse closing sequence
@@ -112,7 +103,6 @@ export function parseCustomContainer(
     closingSequence: {
       text: closingSequenceText,
       range: closingSequenceRange,
-      loc: getSourceLocationFromRange(sourceCode, node, closingSequenceRange),
     },
   };
 }

@@ -6,7 +6,7 @@ import type {
   LinkReference,
 } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
-import { getLinkKind, getSourceLocationFromRange } from "../utils/ast.ts";
+import { getLinkKind } from "../utils/ast.ts";
 import { parseInlineLink } from "../utils/link.ts";
 import { parseLinkReference } from "../utils/link-reference.ts";
 import { parseImage } from "../utils/image.ts";
@@ -123,10 +123,10 @@ export default createRule<[Options?]>("link-bracket-newline", {
     ) {
       if (newline === "always") {
         if (spaceAfterOpeningBracket.includes("\n")) return;
-        const loc = getSourceLocationFromRange(sourceCode, node, [
-          openingBracketIndex,
-          openingBracketIndex + 1,
-        ]);
+        const loc = {
+          start: sourceCode.getLocFromIndex(openingBracketIndex),
+          end: sourceCode.getLocFromIndex(openingBracketIndex + 1),
+        };
         context.report({
           node,
           loc,
@@ -141,10 +141,12 @@ export default createRule<[Options?]>("link-bracket-newline", {
         if (!spaceAfterOpeningBracket.includes("\n")) return;
         context.report({
           node,
-          loc: getSourceLocationFromRange(sourceCode, node, [
-            openingBracketIndex + 1,
-            openingBracketIndex + 1 + spaceAfterOpeningBracket.length,
-          ]),
+          loc: {
+            start: sourceCode.getLocFromIndex(openingBracketIndex + 1),
+            end: sourceCode.getLocFromIndex(
+              openingBracketIndex + 1 + spaceAfterOpeningBracket.length,
+            ),
+          },
           messageId: "unexpectedNewlineAfterOpeningBracket",
           fix: (fixer) =>
             fixer.replaceTextRange(
@@ -179,20 +181,17 @@ export default createRule<[Options?]>("link-bracket-newline", {
         if (spaceBeforeClosingBracket.includes("\n")) return;
         context.report({
           node,
-          loc: getSourceLocationFromRange(sourceCode, node, [
-            closingBracketIndex,
-            closingBracketIndex + 1,
-          ]),
+          loc: {
+            start: sourceCode.getLocFromIndex(closingBracketIndex),
+            end: sourceCode.getLocFromIndex(closingBracketIndex + 1),
+          },
           messageId: "expectedNewlineBeforeClosingBracket",
           fix: (fixer) => {
-            const openingBracketLoc = getSourceLocationFromRange(
-              sourceCode,
-              node,
-              [openingBracketIndex, openingBracketIndex + 1],
-            );
+            const openingBracketStartLoc =
+              sourceCode.getLocFromIndex(openingBracketIndex);
             return fixer.insertTextBeforeRange(
               [closingBracketIndex, closingBracketIndex + 1],
-              `\n${" ".repeat(openingBracketLoc.start.column)}`,
+              `\n${" ".repeat(openingBracketStartLoc.column)}`,
             );
           },
         });
@@ -200,10 +199,12 @@ export default createRule<[Options?]>("link-bracket-newline", {
         if (!spaceBeforeClosingBracket.includes("\n")) return;
         context.report({
           node,
-          loc: getSourceLocationFromRange(sourceCode, node, [
-            closingBracketIndex - spaceBeforeClosingBracket.length,
-            closingBracketIndex,
-          ]),
+          loc: {
+            start: sourceCode.getLocFromIndex(
+              closingBracketIndex - spaceBeforeClosingBracket.length,
+            ),
+            end: sourceCode.getLocFromIndex(closingBracketIndex),
+          },
           messageId: "unexpectedNewlineBeforeClosingBracket",
           fix: (fixer) =>
             fixer.replaceTextRange(

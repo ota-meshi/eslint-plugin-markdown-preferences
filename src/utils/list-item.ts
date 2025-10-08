@@ -1,29 +1,25 @@
 import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
-import type { SourceLocation } from "estree";
 import type { ListItem } from "../language/ast-types.ts";
 import { isSpaceOrTab } from "./unicode.ts";
 import type { BulletListMarkerKind, OrderedListMarkerKind } from "./ast.ts";
-import { getListItemMarker, getSourceLocationFromRange } from "./ast.ts";
+import { getListItemMarker } from "./ast.ts";
 
 export type ParsedBulletListMarker = {
   kind: BulletListMarkerKind;
   text: string;
   range: [number, number];
-  loc: SourceLocation;
 };
 export type ParsedOrderedListMarker = {
   kind: OrderedListMarkerKind;
   text: string;
   value: number;
   range: [number, number];
-  loc: SourceLocation;
 };
 export type ParsedListItem = {
   marker: ParsedBulletListMarker | ParsedOrderedListMarker;
   taskListItemMarker: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } | null;
 };
 /**
@@ -46,13 +42,11 @@ export function parseListItem(
           text: marker.raw,
           value: marker.sequence.value,
           range: markerRange,
-          loc: getSourceLocationFromRange(sourceCode, node, markerRange),
         }
       : {
           kind: marker.kind,
           text: marker.raw,
           range: markerRange,
-          loc: getSourceLocationFromRange(sourceCode, node, markerRange),
         };
   if (node.checked == null) {
     return {
@@ -77,11 +71,6 @@ export function parseListItem(
       taskListItemMarker: {
         text: sourceCode.text.slice(...taskListItemMarkerRange),
         range: taskListItemMarkerRange,
-        loc: getSourceLocationFromRange(
-          sourceCode,
-          node,
-          taskListItemMarkerRange,
-        ),
       },
     };
   }

@@ -7,6 +7,8 @@ import markdownLinks from "eslint-plugin-markdown-links";
 import { fileURLToPath } from "url";
 import path from "path";
 
+// eslint-disable-next-line no-process-env -- Ignore
+if (process.env.HTTPS_PROXY) process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 let markdownPreferences = { rules: {} };
 try {
   markdownPreferences = await import("./src/index.ts");

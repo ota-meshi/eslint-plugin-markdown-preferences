@@ -6,7 +6,7 @@ import type {
   LinkReference,
 } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
-import { getLinkKind, getSourceLocationFromRange } from "../utils/ast.ts";
+import { getLinkKind } from "../utils/ast.ts";
 import { parseInlineLink } from "../utils/link.ts";
 import { parseImage } from "../utils/image.ts";
 import { isWhitespace } from "../utils/unicode.ts";
@@ -119,10 +119,10 @@ export default createRule<[Options?]>("link-paren-newline", {
     ) {
       if (newline === "always") {
         if (spaceAfterOpeningParen.includes("\n")) return;
-        const loc = getSourceLocationFromRange(sourceCode, node, [
-          openingParenIndex,
-          openingParenIndex + 1,
-        ]);
+        const loc = {
+          start: sourceCode.getLocFromIndex(openingParenIndex),
+          end: sourceCode.getLocFromIndex(openingParenIndex + 1),
+        };
         context.report({
           node,
           loc,
@@ -137,10 +137,12 @@ export default createRule<[Options?]>("link-paren-newline", {
         if (!spaceAfterOpeningParen.includes("\n")) return;
         context.report({
           node,
-          loc: getSourceLocationFromRange(sourceCode, node, [
-            openingParenIndex + 1,
-            openingParenIndex + 1 + spaceAfterOpeningParen.length,
-          ]),
+          loc: {
+            start: sourceCode.getLocFromIndex(openingParenIndex + 1),
+            end: sourceCode.getLocFromIndex(
+              openingParenIndex + 1 + spaceAfterOpeningParen.length,
+            ),
+          },
           messageId: "unexpectedNewlineAfterOpeningParen",
           fix: (fixer) =>
             fixer.replaceTextRange(
@@ -175,20 +177,17 @@ export default createRule<[Options?]>("link-paren-newline", {
         if (spaceBeforeClosingParen.includes("\n")) return;
         context.report({
           node,
-          loc: getSourceLocationFromRange(sourceCode, node, [
-            closingParenIndex,
-            closingParenIndex + 1,
-          ]),
+          loc: {
+            start: sourceCode.getLocFromIndex(closingParenIndex),
+            end: sourceCode.getLocFromIndex(closingParenIndex + 1),
+          },
           messageId: "expectedNewlineBeforeClosingParen",
           fix: (fixer) => {
-            const openingParenLoc = getSourceLocationFromRange(
-              sourceCode,
-              node,
-              [openingParenIndex, openingParenIndex + 1],
-            );
+            const openingParenStartLoc =
+              sourceCode.getLocFromIndex(openingParenIndex);
             return fixer.insertTextBeforeRange(
               [closingParenIndex, closingParenIndex + 1],
-              `\n${" ".repeat(openingParenLoc.start.column)}`,
+              `\n${" ".repeat(openingParenStartLoc.column)}`,
             );
           },
         });
@@ -196,10 +195,12 @@ export default createRule<[Options?]>("link-paren-newline", {
         if (!spaceBeforeClosingParen.includes("\n")) return;
         context.report({
           node,
-          loc: getSourceLocationFromRange(sourceCode, node, [
-            closingParenIndex - spaceBeforeClosingParen.length,
-            closingParenIndex,
-          ]),
+          loc: {
+            start: sourceCode.getLocFromIndex(
+              closingParenIndex - spaceBeforeClosingParen.length,
+            ),
+            end: sourceCode.getLocFromIndex(closingParenIndex),
+          },
           messageId: "unexpectedNewlineBeforeClosingParen",
           fix: (fixer) =>
             fixer.replaceTextRange(

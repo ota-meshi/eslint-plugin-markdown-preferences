@@ -1,29 +1,23 @@
-import type { SourceLocation } from "@eslint/core";
 import type { Math } from "../language/ast-types.ts";
 import { isSpaceOrTab, isWhitespace } from "./unicode.ts";
 import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
-import { getSourceLocationFromRange } from "./ast.ts";
 
 export type ParsedMathBlock = {
   openingSequence: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   };
   content: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   };
   closingSequence: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } | null;
   after: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } | null;
 };
 /**
@@ -45,11 +39,9 @@ export function parseMathBlock(
   const openingSequence: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } = {
     text: parsedOpening.openingSequence,
     range: openingSequenceRange,
-    loc: getSourceLocationFromRange(sourceCode, node, openingSequenceRange),
   };
   const parsedClosing = parseMathClosingSequenceFromText(text);
   if (
@@ -65,7 +57,6 @@ export function parseMathBlock(
       content: {
         text: text.slice(parsedOpening.after.length),
         range: contentRange,
-        loc: getSourceLocationFromRange(sourceCode, node, contentRange),
       },
       closingSequence: null,
       after: null,
@@ -78,11 +69,9 @@ export function parseMathBlock(
   const spaceAfterClosing: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } = {
     text: parsedClosing.after,
     range: spaceAfterClosingRange,
-    loc: getSourceLocationFromRange(sourceCode, node, spaceAfterClosingRange),
   };
   const closingSequenceRange: [number, number] = [
     spaceAfterClosing.range[0] - parsedClosing.closingSequence.length,
@@ -91,11 +80,9 @@ export function parseMathBlock(
   const closingSequence: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } = {
     text: parsedClosing.closingSequence,
     range: closingSequenceRange,
-    loc: getSourceLocationFromRange(sourceCode, node, closingSequenceRange),
   };
   const contentRange: [number, number] = [
     openingSequence.range[1] + parsedOpening.after.length,
@@ -107,7 +94,6 @@ export function parseMathBlock(
     content: {
       text: contentText,
       range: contentRange,
-      loc: getSourceLocationFromRange(sourceCode, node, contentRange),
     },
     closingSequence,
     after:

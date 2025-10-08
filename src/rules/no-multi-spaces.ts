@@ -15,7 +15,6 @@ import type {
   Table,
   Text,
 } from "../language/ast-types.ts";
-import { getSourceLocationFromRange } from "../utils/ast.ts";
 import { createRule } from "../utils/index.ts";
 import { isWhitespace } from "../utils/unicode.ts";
 import { parseLinkDefinition } from "../utils/link-definition.ts";
@@ -349,7 +348,10 @@ export default createRule("no-multi-spaces", {
         context.report({
           node,
           messageId: "multipleSpaces",
-          loc: getSourceLocationFromRange(sourceCode, node, range),
+          loc: {
+            start: sourceCode.getLocFromIndex(range[0]),
+            end: sourceCode.getLocFromIndex(range[1]),
+          },
           fix(fixer) {
             return fixer.replaceTextRange(range, " ");
           },

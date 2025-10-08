@@ -2,7 +2,6 @@ import { createRule } from "../utils/index.ts";
 import type { Blockquote } from "../language/ast-types.ts";
 import type { BlockquoteLevelInfo } from "../utils/blockquotes.ts";
 import { getBlockquoteLevelFromLine } from "../utils/blockquotes.ts";
-import { getParsedLines } from "../utils/lines.ts";
 
 export default createRule("no-laziness-blockquotes", {
   meta: {
@@ -59,7 +58,6 @@ export default createRule("no-laziness-blockquotes", {
         const first = group.lines[0];
         const last = group.lines.at(-1)!;
 
-        const lines = getParsedLines(sourceCode);
         context.report({
           loc: {
             start: {
@@ -68,7 +66,7 @@ export default createRule("no-laziness-blockquotes", {
             },
             end: {
               line: last.line,
-              column: lines.get(last.line).text.length + 1,
+              column: sourceCode.lines[last.line - 1].length + 1,
             },
           },
           messageId: "lazyBlockquoteLine",
@@ -84,11 +82,14 @@ export default createRule("no-laziness-blockquotes", {
               },
               *fix(fixer) {
                 for (const invalidLine of group.lines) {
-                  const parsedLine = lines.get(invalidLine.line);
+                  const lineStartIndex = sourceCode.getIndexFromLoc({
+                    line: invalidLine.line,
+                    column: 1,
+                  });
                   yield fixer.replaceTextRange(
                     [
-                      parsedLine.range[0],
-                      parsedLine.range[0] + invalidLine.prefix.length,
+                      lineStartIndex,
+                      lineStartIndex + invalidLine.prefix.length,
                     ],
                     base.prefix,
                   );
@@ -98,9 +99,12 @@ export default createRule("no-laziness-blockquotes", {
             {
               messageId: "addLineBreak",
               fix: (fixer) => {
-                const parsedLine = lines.get(first.line);
+                const lineStartIndex = sourceCode.getIndexFromLoc({
+                  line: first.line,
+                  column: 1,
+                });
                 return fixer.insertTextBeforeRange(
-                  [parsedLine.range[0], parsedLine.range[0]],
+                  [lineStartIndex, lineStartIndex],
                   `${first.prefix.trimEnd()}\n`,
                 );
               },

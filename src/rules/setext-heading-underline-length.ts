@@ -112,7 +112,10 @@ export default createRule<
       context.report({
         node,
         messageId,
-        loc: parsed.underline.loc,
+        loc: {
+          start: sourceCode.getLocFromIndex(parsed.underline.range[0]),
+          end: sourceCode.getLocFromIndex(parsed.underline.range[1]),
+        },
         data: {
           expectedLength: String(expectedLength),
         },
@@ -260,7 +263,8 @@ export default createRule<
               const parsed = getParsedSetextHeading(node);
               if (!parsed) continue;
               expectedLineLength = Math.max(
-                parsed.underline.loc.end.column - 1,
+                sourceCode.getLocFromIndex(parsed.underline.range[1]).column -
+                  1,
                 minimumRequiredLineLength,
               );
               break;
@@ -285,7 +289,8 @@ export default createRule<
               );
               expectedLineLength = Math.max(
                 expectedLineLength,
-                parsed.underline.loc.end.column - 1,
+                sourceCode.getLocFromIndex(parsed.underline.range[1]).column -
+                  1,
               );
             }
             if (expectedLineLength < maxLineWidth) {
@@ -294,10 +299,13 @@ export default createRule<
               for (const node of setextHeadings) {
                 const parsed = getParsedSetextHeading(node);
                 if (!parsed) continue;
-                if (maxLineWidth <= parsed.underline.loc.end.column - 1)
+                const underlineEndLoc = sourceCode.getLocFromIndex(
+                  parsed.underline.range[1],
+                );
+                if (maxLineWidth <= underlineEndLoc.column - 1)
                   expectedLineLength = Math.min(
                     expectedLineLength,
-                    parsed.underline.loc.end.column - 1,
+                    underlineEndLoc.column - 1,
                   );
               }
             }

@@ -7,7 +7,6 @@ import { parsePreserveWordsOption } from "../utils/preserve-words.ts";
 import type { WordAndOffset } from "../utils/words.ts";
 import { parseWordsFromText } from "../utils/words.ts";
 import { convertWordCasing } from "../utils/word-casing.ts";
-import { getSourceLocationFromRange } from "../utils/ast.ts";
 
 type WordType = "normal" | "minor" | "preserved";
 
@@ -220,7 +219,10 @@ export default createRule<
             actual: word,
             expected: expectedWord,
           },
-          loc: getSourceLocationFromRange(sourceCode, node, range),
+          loc: {
+            start: sourceCode.getLocFromIndex(range[0]),
+            end: sourceCode.getLocFromIndex(range[1]),
+          },
           fix(fixer) {
             // Replace only the specific word
             return fixer.replaceTextRange(range, expectedWord);

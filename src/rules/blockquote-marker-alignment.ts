@@ -1,6 +1,5 @@
 import type { Blockquote, Root } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
-import { getParsedLines } from "../utils/lines.ts";
 import { getBlockquoteLevelFromLine } from "../utils/blockquotes.ts";
 import { getWidth } from "../utils/width.ts";
 import { isWhitespace } from "../utils/unicode.ts";
@@ -90,20 +89,22 @@ export default createRule("blockquote-marker-alignment", {
             loc: marker.loc,
             messageId: "inconsistentAlignment",
             fix(fixer) {
-              const lines = getParsedLines(sourceCode);
-              const line = lines.get(lineNumber);
               if (indentWidth < baseIndentWidth) {
                 const addSpaces = " ".repeat(baseIndentWidth - indentWidth);
+                const lineStartIndex = sourceCode.getIndexFromLoc({
+                  line: lineNumber,
+                  column: 1,
+                });
                 return fixer.insertTextBeforeRange(
                   [
-                    line.range[0] + marker.loc.start.column - 1,
-                    line.range[0] + marker.loc.start.column - 1,
+                    lineStartIndex + marker.loc.start.column - 1,
+                    lineStartIndex + marker.loc.start.column - 1,
                   ],
                   addSpaces,
                 );
               }
 
-              const beforeMarker = line.text.slice(
+              const beforeMarker = sourceCode.lines[lineNumber - 1].slice(
                 0,
                 marker.loc.start.column - 1,
               );
@@ -126,8 +127,15 @@ export default createRule("blockquote-marker-alignment", {
                 !baseBeforeMarker.includes(">") ||
                 baseBeforeMarker === newBeforeMarker
               ) {
+                const lineStartIndex = sourceCode.getIndexFromLoc({
+                  line: lineNumber,
+                  column: 1,
+                });
                 return fixer.replaceTextRange(
-                  [line.range[0], line.range[0] + marker.loc.start.column - 1],
+                  [
+                    lineStartIndex,
+                    lineStartIndex + marker.loc.start.column - 1,
+                  ],
                   newBeforeMarker,
                 );
               }

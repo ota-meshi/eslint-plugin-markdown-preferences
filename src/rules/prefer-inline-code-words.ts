@@ -67,7 +67,7 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
           if (shortcutLinkReference === node) shortcutLinkReference = null;
         },
         text(node) {
-          for (const { word, loc, range } of iterateSearchWords({
+          for (const { word, range } of iterateSearchWords({
             sourceCode,
             node,
             words,
@@ -76,7 +76,10 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
             const shortcutLinkReferenceToReport = shortcutLinkReference;
             context.report({
               node,
-              loc,
+              loc: {
+                start: sourceCode.getLocFromIndex(range[0]),
+                end: sourceCode.getLocFromIndex(range[1]),
+              },
               messageId: "requireInlineCode",
               data: {
                 name: word,

@@ -1,4 +1,3 @@
-import { getSourceLocationFromRange } from "../utils/ast.ts";
 import { parseCustomContainer } from "../utils/custom-container.ts";
 import { createRule } from "../utils/index.ts";
 
@@ -50,7 +49,10 @@ export default createRule<[Options?]>("custom-container-marker-spacing", {
           if (hasSpace) return;
           context.report({
             node,
-            loc: getSourceLocationFromRange(sourceCode, node, info.range),
+            loc: {
+              start: sourceCode.getLocFromIndex(info.range[0]),
+              end: sourceCode.getLocFromIndex(info.range[1]),
+            },
             messageId: "expectedSpace",
             fix(fixer) {
               return fixer.insertTextAfterRange(openingSequence.range, " ");
@@ -60,10 +62,10 @@ export default createRule<[Options?]>("custom-container-marker-spacing", {
           if (!hasSpace) return;
           context.report({
             node,
-            loc: getSourceLocationFromRange(sourceCode, node, [
-              openingSequence.range[1],
-              info.range[0],
-            ]),
+            loc: {
+              start: sourceCode.getLocFromIndex(openingSequence.range[1]),
+              end: sourceCode.getLocFromIndex(info.range[0]),
+            },
             messageId: "unexpectedSpace",
             fix(fixer) {
               return fixer.removeRange([

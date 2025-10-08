@@ -2,7 +2,6 @@ import type { Heading } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import { getHeadingKind } from "../utils/ast.ts";
 import { parseSetextHeading } from "../utils/setext-heading.ts";
-import { getParsedLines } from "../utils/lines.ts";
 import { parseATXHeading } from "../utils/atx-heading.ts";
 import { getTextWidth } from "../utils/text-width.ts";
 
@@ -80,10 +79,21 @@ export default createRule<[Option?]>("level2-heading-style", {
               // Only fix single-line Setext headings
               const heading = parsed.contentLines[0];
               yield fixer.insertTextBeforeRange(heading.range, "## ");
-              const lines = getParsedLines(sourceCode);
-              yield fixer.removeRange(
-                lines.get(parsed.underline.loc.start.line).range,
-              );
+              const underlineLineNumber = sourceCode.getLocFromIndex(
+                parsed.underline.range[0],
+              ).line;
+              yield fixer.removeRange([
+                sourceCode.getIndexFromLoc({
+                  line: underlineLineNumber,
+                  column: 1,
+                }),
+                sourceCode.lines.length > underlineLineNumber
+                  ? sourceCode.getIndexFromLoc({
+                      line: underlineLineNumber + 1,
+                      column: 1,
+                    })
+                  : sourceCode.text.length,
+              ]);
             },
           });
         } else if (style === "setext") {
@@ -110,14 +120,16 @@ export default createRule<[Option?]>("level2-heading-style", {
                   parsed.after?.range[1] ?? parsed.closingSequence.range[1],
                 ]);
               }
-              const lines = getParsedLines(sourceCode);
 
               const underline = "-".repeat(
                 Math.max(getTextWidth(parsed.content.text), 3),
               );
-              const prefix = lines
-                .get(parsed.openingSequence.loc.start.line)
-                .text.slice(0, parsed.openingSequence.loc.start.column - 1);
+              const openingSequenceStartLoc = sourceCode.getLocFromIndex(
+                parsed.openingSequence.range[0],
+              );
+              const prefix = sourceCode.lines[
+                openingSequenceStartLoc.line - 1
+              ].slice(0, openingSequenceStartLoc.column - 1);
               const appendingText = `\n${prefix}${underline}`;
 
               yield fixer.insertTextAfter(node, appendingText);

@@ -1,4 +1,3 @@
-import type { SourceLocation } from "@eslint/core";
 import type { Heading } from "../language/ast-types.ts";
 import { getHeadingKind } from "./ast.ts";
 import { isSpaceOrTab } from "./unicode.ts";
@@ -8,22 +7,18 @@ export type BaseParsedATXHeading = {
   openingSequence: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   };
   content: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   };
   closingSequence: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } | null;
   after: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } | null;
 };
 export type ParsedATXHeadingWithClosingSequence = BaseParsedATXHeading & {
@@ -43,7 +38,6 @@ export function parseATXHeading(
   node: Heading,
 ): ParsedATXHeading | null {
   if (getHeadingKind(sourceCode, node) !== "atx") return null;
-  const loc = sourceCode.getLoc(node);
   const range = sourceCode.getRange(node);
   const text = sourceCode.text.slice(...range);
   const parsedOpening = parseATXHeadingOpeningSequenceFromText(text);
@@ -52,21 +46,9 @@ export function parseATXHeading(
   const openingSequence: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } = {
     text: parsedOpening.openingSequence,
     range: [range[0], range[0] + parsedOpening.openingSequence.length],
-    loc: {
-      start: loc.start,
-      end: {
-        line: loc.start.line,
-        column: loc.start.column + parsedOpening.openingSequence.length,
-      },
-    },
-  };
-  const contentLocStart = {
-    line: openingSequence.loc.end.line,
-    column: openingSequence.loc.end.column + parsedOpening.after.length,
   };
   const parsedClosing = parseATXHeadingClosingSequenceFromText(text);
   if (parsedClosing == null) {
@@ -81,34 +63,21 @@ export function parseATXHeading(
         parsedOpening.after.length +
         contentText.length,
     ];
-    const contentLocEnd = {
-      line: loc.end.line,
-      column: loc.end.column - (textAfterOpening.length - contentText.length),
-    };
     const after: {
       text: string;
       range: [number, number];
-      loc: SourceLocation;
     } | null =
       contentText === textAfterOpening
         ? null
         : {
             text: textAfterOpening.slice(contentText.length),
             range: [contentRange[1], range[1]],
-            loc: {
-              start: contentLocEnd,
-              end: loc.end,
-            },
           };
     return {
       openingSequence,
       content: {
         text: contentText,
         range: contentRange,
-        loc: {
-          start: contentLocStart,
-          end: contentLocEnd,
-        },
       },
       closingSequence: null,
       after,
@@ -117,37 +86,19 @@ export function parseATXHeading(
   const spaceAfterClosing: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } = {
     text: parsedClosing.after,
     range: [range[1] - parsedClosing.after.length, range[1]],
-    loc: {
-      start: {
-        line: loc.end.line,
-        column: loc.end.column - parsedClosing.after.length,
-      },
-      end: loc.end,
-    },
   };
   const closingSequence: {
     text: string;
     range: [number, number];
-    loc: SourceLocation;
   } = {
     text: parsedClosing.closingSequence,
     range: [
       spaceAfterClosing.range[0] - parsedClosing.closingSequence.length,
       spaceAfterClosing.range[0],
     ],
-    loc: {
-      start: {
-        line: spaceAfterClosing.loc.start.line,
-        column:
-          spaceAfterClosing.loc.start.column -
-          parsedClosing.closingSequence.length,
-      },
-      end: spaceAfterClosing.loc.start,
-    },
   };
   const contentRange: [number, number] = [
     openingSequence.range[1] + parsedOpening.after.length,
@@ -159,14 +110,6 @@ export function parseATXHeading(
     content: {
       text: contentText,
       range: contentRange,
-      loc: {
-        start: contentLocStart,
-        end: {
-          line: closingSequence.loc.start.line,
-          column:
-            closingSequence.loc.start.column - parsedClosing.before.length,
-        },
-      },
     },
     closingSequence,
     after:

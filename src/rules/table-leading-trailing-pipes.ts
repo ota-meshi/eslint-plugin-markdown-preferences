@@ -1,6 +1,5 @@
 import type { Table, TableRow } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
-import type { SourceLocation } from "estree";
 import { parseTableDelimiterRow } from "../utils/table.ts";
 import { isSpaceOrTab } from "../utils/unicode.ts";
 
@@ -74,7 +73,6 @@ export default createRule<[Option?]>("table-leading-trailing-pipes", {
       if (parsedDelimiterRow) {
         verifyTableLinePipes(
           parsedDelimiterRow.range,
-          parsedDelimiterRow.loc,
           parsedDelimiterRow.delimiters.length,
         );
       }
@@ -84,9 +82,8 @@ export default createRule<[Option?]>("table-leading-trailing-pipes", {
      * Verify the table row pipes
      */
     function verifyTableRowPipes(node: TableRow) {
-      const loc = sourceCode.getLoc(node);
       const range = sourceCode.getRange(node);
-      verifyTableLinePipes(range, loc, node.children.length);
+      verifyTableLinePipes(range, node.children.length);
     }
 
     /**
@@ -94,11 +91,10 @@ export default createRule<[Option?]>("table-leading-trailing-pipes", {
      */
     function verifyTableLinePipes(
       lineContentRange: [number, number],
-      lineLocation: SourceLocation,
       columnCount: number,
     ) {
-      verifyTableLeadingPipe(lineContentRange, lineLocation, columnCount);
-      verifyTableTrailingPipe(lineContentRange, lineLocation, columnCount);
+      verifyTableLeadingPipe(lineContentRange, columnCount);
+      verifyTableTrailingPipe(lineContentRange, columnCount);
     }
 
     /**
@@ -106,14 +102,13 @@ export default createRule<[Option?]>("table-leading-trailing-pipes", {
      */
     function verifyTableLeadingPipe(
       lineContentRange: [number, number],
-      lineLocation: SourceLocation,
       columnCount: number,
     ) {
       if (leadingOption === "always") {
         if (sourceCode.text.startsWith("|", lineContentRange[0])) return;
         context.report({
           messageId: "missingLeadingPipe",
-          loc: lineLocation.start,
+          loc: sourceCode.getLocFromIndex(lineContentRange[0]),
           fix(fixer) {
             return fixer.insertTextBeforeRange(lineContentRange, "| ");
           },
@@ -137,14 +132,14 @@ export default createRule<[Option?]>("table-leading-trailing-pipes", {
         ) {
           endIndex++;
         }
+        const startLoc = sourceCode.getLocFromIndex(lineContentRange[0]);
         context.report({
           messageId: "unexpectedLeadingPipe",
           loc: {
-            start: lineLocation.start,
+            start: startLoc,
             end: {
-              line: lineLocation.start.line,
-              column:
-                lineLocation.start.column + (endIndex - lineContentRange[0]),
+              line: startLoc.line,
+              column: startLoc.column + (endIndex - lineContentRange[0]),
             },
           },
           fix(fixer) {
@@ -159,14 +154,13 @@ export default createRule<[Option?]>("table-leading-trailing-pipes", {
      */
     function verifyTableTrailingPipe(
       lineContentRange: [number, number],
-      lineLocation: SourceLocation,
       columnCount: number,
     ) {
       if (trailingOption === "always") {
         if (sourceCode.text.endsWith("|", lineContentRange[1])) return;
         context.report({
           messageId: "missingTrailingPipe",
-          loc: lineLocation.end,
+          loc: sourceCode.getLocFromIndex(lineContentRange[1]),
           fix(fixer) {
             return fixer.insertTextAfterRange(lineContentRange, " |");
           },
@@ -190,15 +184,15 @@ export default createRule<[Option?]>("table-leading-trailing-pipes", {
         ) {
           startIndex--;
         }
+        const endLoc = sourceCode.getLocFromIndex(lineContentRange[1]);
         context.report({
           messageId: "unexpectedTrailingPipe",
           loc: {
             start: {
-              line: lineLocation.end.line,
-              column:
-                lineLocation.end.column - (lineContentRange[1] - startIndex),
+              line: endLoc.line,
+              column: endLoc.column - (lineContentRange[1] - startIndex),
             },
-            end: lineLocation.end,
+            end: endLoc,
           },
           fix(fixer) {
             return fixer.removeRange([startIndex, lineContentRange[1]]);

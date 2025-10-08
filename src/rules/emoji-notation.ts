@@ -1,4 +1,3 @@
-import { getSourceLocationFromRange } from "../utils/ast.ts";
 import { createRule } from "../utils/index.ts";
 import { toRegExp } from "../utils/regexp.ts";
 import { GH_EMOJI_MAP } from "../utils/resources/gh-emoji.ts";
@@ -130,7 +129,10 @@ export default createRule<[Options?]>("emoji-notation", {
             const colon = emojiData.emojiToColon[emoji];
             context.report({
               node,
-              loc: getSourceLocationFromRange(sourceCode, node, range),
+              loc: {
+                start: sourceCode.getLocFromIndex(range[0]),
+                end: sourceCode.getLocFromIndex(range[1]),
+              },
               messageId: colon ? "preferColon" : "preferUnknownColon",
               data: { unicode: emoji, colon: colon || ":smile:" },
               fix: colon
@@ -169,7 +171,10 @@ export default createRule<[Options?]>("emoji-notation", {
           const emoji = emojiData.colonToEmoji[colon];
           context.report({
             node,
-            loc: getSourceLocationFromRange(sourceCode, node, range),
+            loc: {
+              start: sourceCode.getLocFromIndex(range[0]),
+              end: sourceCode.getLocFromIndex(range[1]),
+            },
             messageId: emoji ? "preferUnicode" : "preferUnknownUnicode",
             data: { unicode: emoji || "😄", colon },
             fix: emoji

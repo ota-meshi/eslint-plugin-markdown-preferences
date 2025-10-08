@@ -4,7 +4,6 @@ import { createRule } from "../utils/index.ts";
 import { parseInlineLink } from "../utils/link.ts";
 import { parseImage } from "../utils/image.ts";
 import { parseLinkDefinition } from "../utils/link-definition.ts";
-import type { SourceLocation } from "estree";
 import { isAsciiControlCharacter, isWhitespace } from "../utils/unicode.ts";
 
 type Options = {
@@ -68,7 +67,6 @@ export default createRule<[Options?]>("link-destination-style", {
         type: "pointy-bracketed" | "bare";
         text: string;
         range: [number, number];
-        loc: SourceLocation;
       },
     ) {
       if (preferStyle.typeName === destination.type) return;
@@ -90,7 +88,10 @@ export default createRule<[Options?]>("link-destination-style", {
 
       context.report({
         node,
-        loc: destination.loc,
+        loc: {
+          start: sourceCode.getLocFromIndex(destination.range[0]),
+          end: sourceCode.getLocFromIndex(destination.range[1]),
+        },
         messageId: preferStyle.messageId,
         *fix(fixer) {
           if (

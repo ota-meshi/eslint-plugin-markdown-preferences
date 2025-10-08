@@ -35,14 +35,19 @@ export default createRule("no-implicit-block-closing", {
         if (parsed.closingFence) return;
         context.report({
           node,
-          loc: parsed.openingFence.loc,
+          loc: {
+            start: sourceCode.getLocFromIndex(parsed.openingFence.range[0]),
+            end: sourceCode.getLocFromIndex(parsed.openingFence.range[1]),
+          },
           messageId: "missingClosingFence",
           fix(fixer) {
             // Get the context prefix from the opening fence line
-            const openingLoc = parsed.openingFence.loc;
-            const openingLine = sourceCode.lines[openingLoc.start.line - 1];
+            const openingFenceStartLoc = sourceCode.getLocFromIndex(
+              parsed.openingFence.range[0],
+            );
+            const openingLine = sourceCode.lines[openingFenceStartLoc.line - 1];
             const prefix = openingLine
-              .slice(0, openingLoc.start.column - 1)
+              .slice(0, openingFenceStartLoc.column - 1)
               .replace(/[^\s>]/gu, " ");
             const closingFence = parsed.openingFence.text;
             return fixer.insertTextAfter(node, `\n${prefix}${closingFence}`);
@@ -56,14 +61,20 @@ export default createRule("no-implicit-block-closing", {
         if (parsed.closingSequence) return;
         context.report({
           node,
-          loc: parsed.openingSequence.loc,
+          loc: {
+            start: sourceCode.getLocFromIndex(parsed.openingSequence.range[0]),
+            end: sourceCode.getLocFromIndex(parsed.openingSequence.range[1]),
+          },
           messageId: "missingClosingMath",
           fix(fixer) {
             // Get the context prefix from the opening sequence line
-            const openingLoc = parsed.openingSequence.loc;
-            const openingLine = sourceCode.lines[openingLoc.start.line - 1];
+            const openingSequenceStartLoc = sourceCode.getLocFromIndex(
+              parsed.openingSequence.range[0],
+            );
+            const openingLine =
+              sourceCode.lines[openingSequenceStartLoc.line - 1];
             const prefix = openingLine
-              .slice(0, openingLoc.start.column - 1)
+              .slice(0, openingSequenceStartLoc.column - 1)
               .replace(/[^\s>]/gu, " ");
             const closingSequence = parsed.openingSequence.text;
             return fixer.insertTextAfter(node, `\n${prefix}${closingSequence}`);
@@ -77,7 +88,10 @@ export default createRule("no-implicit-block-closing", {
         if (parsed.closingSequence) return;
         context.report({
           node,
-          loc: parsed.openingSequence.loc,
+          loc: {
+            start: sourceCode.getLocFromIndex(parsed.openingSequence.range[0]),
+            end: sourceCode.getLocFromIndex(parsed.openingSequence.range[1]),
+          },
           messageId: "missingClosingContainer",
           fix(fixer) {
             if (
@@ -92,10 +106,13 @@ export default createRule("no-implicit-block-closing", {
               return null;
             }
             // Get the context prefix from the opening sequence line
-            const openingLoc = parsed.openingSequence.loc;
-            const openingLine = sourceCode.lines[openingLoc.start.line - 1];
+            const openingSequenceStartLoc = sourceCode.getLocFromIndex(
+              parsed.openingSequence.range[0],
+            );
+            const openingLine =
+              sourceCode.lines[openingSequenceStartLoc.line - 1];
             const prefix = openingLine
-              .slice(0, openingLoc.start.column - 1)
+              .slice(0, openingSequenceStartLoc.column - 1)
               .replace(/[^\s>]/gu, " ");
             const closingSequence = parsed.openingSequence.text;
             return fixer.insertTextAfter(node, `\n${prefix}${closingSequence}`);

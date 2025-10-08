@@ -1,8 +1,6 @@
 import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
-import type { SourceLocation } from "estree";
 import type { JSONSchema4 } from "json-schema";
 import type { Text } from "../language/ast-types.ts";
-import { getSourceLocationFromRange } from "./ast.ts";
 
 export const RE_BOUNDARY =
   /^[\s\p{Letter_Number}\p{Modifier_Letter}\p{Modifier_Symbol}\p{Nonspacing_Mark}\p{Other_Letter}\p{Other_Symbol}\p{Script=Han}!"#$%&'()*+,./:;<=>?\\{|}~\u{2ffc}-\u{303d}\u{30a0}-\u{30fb}\u{3192}-\u{32bf}\u{fe10}-\u{fe1f}\u{fe30}-\u{fe6f}\u{ff00}-\u{ffef}\u{2ebf0}-\u{2ee5d}]*$/u;
@@ -22,7 +20,6 @@ export function* iterateSearchWords({
   ignores: SearchWordsIgnoreContext;
 }): Generator<{
   word: string;
-  loc: SourceLocation;
   range: [number, number];
 }> {
   const text = sourceCode.getText(node);
@@ -48,7 +45,6 @@ export function* iterateSearchWords({
         nodeStart + index + word.length,
       ];
       yield {
-        loc: getSourceLocationFromRange(sourceCode, node, range),
         range,
         word,
       };

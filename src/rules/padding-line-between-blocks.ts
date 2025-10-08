@@ -15,8 +15,6 @@ import {
   type MDNode,
 } from "../utils/ast.ts";
 import { createRule } from "../utils/index.ts";
-import type { ParsedLine } from "../utils/lines.ts";
-import { getParsedLines } from "../utils/lines.ts";
 import { getBlockquoteLevelFromLine } from "../utils/blockquotes.ts";
 import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 import type { JSONSchema4 } from "json-schema";
@@ -430,16 +428,19 @@ export default createRule<Options>("padding-line-between-blocks", {
             }
             // if (expected.blankLine === "never")
 
-            const lines = getParsedLines(sourceCode);
-            const linesToRemove: ParsedLine[] = [];
-            for (
-              let line = prevLoc.end.line + 1;
-              line < nextLoc.start.line;
-              line++
-            ) {
-              linesToRemove.push(lines.get(line));
+            if (prevLoc.end.line + 1 < nextLoc.start.line) {
+              return fixer.removeRange([
+                sourceCode.getIndexFromLoc({
+                  line: prevLoc.end.line + 1,
+                  column: 1,
+                }),
+                sourceCode.getIndexFromLoc({
+                  line: nextLoc.start.line,
+                  column: 1,
+                }),
+              ]);
             }
-            return linesToRemove.map((line) => fixer.removeRange(line.range));
+            return null;
           },
         });
       }

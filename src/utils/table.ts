@@ -1,14 +1,11 @@
-import type { SourceLocation } from "estree";
 import type { Table, TableRow } from "../language/ast-types.ts";
 import { ForwardCharacterCursor } from "./character-cursor.ts";
 import { isSpaceOrTab } from "./unicode.ts";
-import { getSourceLocationFromRange } from "./ast.ts";
 import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 
 type Token = {
   text: string;
   range: [number, number];
-  loc: SourceLocation;
 };
 export type ParsedTableDelimiter = {
   leadingPipe: Token | null;
@@ -18,7 +15,6 @@ export type ParsedTableDelimiter = {
 };
 export type ParsedTableDelimiterRow = {
   range: [number, number];
-  loc: SourceLocation;
   delimiters: ParsedTableDelimiter[];
   trailingPipe: Token | null;
 };
@@ -26,12 +22,10 @@ export type ParsedTableCell = {
   leadingPipe: Token | null;
   cell: {
     range: [number, number];
-    loc: SourceLocation;
   } | null;
 };
 export type ParsedTableRow = {
   range: [number, number];
-  loc: SourceLocation;
   cells: ParsedTableCell[];
   trailingPipe: Token | null;
 };
@@ -94,11 +88,6 @@ export function parseTableDelimiterRow(
         leadingPipe = {
           text: d.leadingPipe.text,
           range: leadingPipeRange,
-          loc: getSourceLocationFromRange(
-            sourceCode,
-            headerRow,
-            leadingPipeRange,
-          ),
         };
       }
       const delimiterRange: [number, number] = [
@@ -117,11 +106,6 @@ export function parseTableDelimiterRow(
               ? "right"
               : "none",
           range: delimiterRange,
-          loc: getSourceLocationFromRange(
-            sourceCode,
-            headerRow,
-            delimiterRange,
-          ),
         },
       };
     });
@@ -135,7 +119,6 @@ export function parseTableDelimiterRow(
     trailingPipe = {
       text: parsed.trailingPipe.text,
       range: trailingPipeRange,
-      loc: getSourceLocationFromRange(sourceCode, headerRow, trailingPipeRange),
     };
   }
   const firstToken = delimiters[0].leadingPipe ?? delimiters[0].delimiter;
@@ -144,10 +127,6 @@ export function parseTableDelimiterRow(
     delimiters,
     trailingPipe,
     range: [firstToken.range[0], lastToken.range[1]],
-    loc: {
-      start: firstToken.loc.start,
-      end: lastToken.loc.end,
-    },
   };
 }
 
@@ -184,7 +163,6 @@ export function parseTableRow(
 
     let parsedCell: {
       range: [number, number];
-      loc: SourceLocation;
     } | null = null;
     if (cell.children.length > 0) {
       const firstChild = cell.children[0];
@@ -194,10 +172,6 @@ export function parseTableRow(
           sourceCode.getRange(firstChild)[0],
           sourceCode.getRange(lastChild)[1],
         ],
-        loc: {
-          start: sourceCode.getLoc(firstChild).start,
-          end: sourceCode.getLoc(lastChild).end,
-        },
       };
     }
     cells.push({
@@ -209,13 +183,6 @@ export function parseTableRow(
         ? {
             text: "|",
             range: [cellRange[1] - 1, cellRange[1]] as [number, number],
-            loc: {
-              start: {
-                line: cellLoc.end.line,
-                column: cellLoc.end.column - 1,
-              },
-              end: cellLoc.end,
-            },
           }
         : null;
   }
@@ -228,10 +195,6 @@ export function parseTableRow(
     cells,
     trailingPipe,
     range: [firstToken!.range[0], lastToken!.range[1]],
-    loc: {
-      start: firstToken!.loc.start,
-      end: lastToken!.loc.end,
-    },
   };
 }
 

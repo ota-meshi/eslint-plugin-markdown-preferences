@@ -6,13 +6,11 @@ import type {
   ParsedTableRow,
 } from "../utils/table.ts";
 import { parseTable } from "../utils/table.ts";
-import type { SourceLocation } from "estree";
 import { getTextWidth } from "../utils/text-width.ts";
 import { getCurrentTablePipeSpacingOption } from "./table-pipe-spacing.ts";
 
 type TokenData = {
   range: [number, number];
-  loc: SourceLocation;
 };
 type CellData = {
   type: "cell";
@@ -261,9 +259,11 @@ export default createRule<[Options]>("table-pipe-alignment", {
           const firstToken = firstCell.leadingPipe ?? firstCell.content;
           if (!firstToken) return null;
           return getTextWidth(
-            sourceCode.lines[firstToken.loc.start.line - 1],
+            sourceCode.lines[
+              sourceCode.getLocFromIndex(firstToken.range[0]).line - 1
+            ],
             0,
-            firstToken.loc.start.column - 1,
+            sourceCode.getLocFromIndex(firstToken.range[0]).column - 1,
           );
         }
         if (options.columnOption === "minimum") {
@@ -274,10 +274,13 @@ export default createRule<[Options]>("table-pipe-alignment", {
             if (row.cells.length <= columnIndex) continue;
             const cell = row.cells[columnIndex];
             if (cell.type === "delimiter" || !cell.trailingPipe) continue;
+            const trailingPipeStartLoc = sourceCode.getLocFromIndex(
+              cell.trailingPipe.range[0],
+            );
             const width = getTextWidth(
-              sourceCode.lines[cell.trailingPipe.loc.start.line - 1],
+              sourceCode.lines[trailingPipeStartLoc.line - 1],
               0,
-              cell.trailingPipe.loc.start.column - 1,
+              trailingPipeStartLoc.column - 1,
             );
             return Math.max(width, this.getMinimumPipePosition(pipeIndex) || 0);
           }
@@ -301,20 +304,26 @@ export default createRule<[Options]>("table-pipe-alignment", {
           const cell = row.cells[columnIndex];
           let width: number;
           if (cell.leadingPipe) {
+            const leadingPipeEndLoc = sourceCode.getLocFromIndex(
+              cell.leadingPipe.range[1],
+            );
             const leadingPipeEndOffset = getTextWidth(
-              sourceCode.lines[cell.leadingPipe.loc.end.line - 1],
+              sourceCode.lines[leadingPipeEndLoc.line - 1],
               0,
-              cell.leadingPipe.loc.end.column - 1,
+              leadingPipeEndLoc.column - 1,
             );
             let contentLength: number;
             if (cell.type === "delimiter") {
               contentLength = getMinimumDelimiterLength(cell.align);
             } else {
               if (!cell.content) continue;
+              const contentStartLoc = sourceCode.getLocFromIndex(
+                cell.content.range[0],
+              );
               contentLength = getTextWidth(
-                sourceCode.lines[cell.content.loc.start.line - 1],
-                cell.content.loc.start.column - 1,
-                cell.content.loc.end.column - 1,
+                sourceCode.lines[contentStartLoc.line - 1],
+                contentStartLoc.column - 1,
+                sourceCode.getLocFromIndex(cell.content.range[1]).column - 1,
               );
             }
             width =
@@ -325,18 +334,24 @@ export default createRule<[Options]>("table-pipe-alignment", {
             const minimumDelimiterLength = getMinimumDelimiterLength(
               cell.align,
             );
+            const delimiterStartLoc = sourceCode.getLocFromIndex(
+              cell.delimiter.range[0],
+            );
             width =
               getTextWidth(
-                sourceCode.lines[cell.delimiter.loc.start.line - 1],
+                sourceCode.lines[delimiterStartLoc.line - 1],
                 0,
-                cell.delimiter.loc.start.column - 1,
+                delimiterStartLoc.column - 1,
               ) + minimumDelimiterLength;
           } else {
             if (!cell.content) continue;
+            const contentEndLoc = sourceCode.getLocFromIndex(
+              cell.content.range[1],
+            );
             width = getTextWidth(
-              sourceCode.lines[cell.content.loc.end.line - 1],
+              sourceCode.lines[contentEndLoc.line - 1],
               0,
-              cell.content.loc.end.column - 1,
+              contentEndLoc.column - 1,
             );
           }
           if (needSpaceBeforePipe) {
@@ -446,15 +461,19 @@ export default createRule<[Options]>("table-pipe-alignment", {
     ): boolean {
       const expected = table.getExpectedPipePosition(pipeIndex);
       if (expected == null) return true;
+      const pipeStartLoc = sourceCode.getLocFromIndex(pipe.range[0]);
       const actual = getTextWidth(
-        sourceCode.lines[pipe.loc.start.line - 1],
+        sourceCode.lines[pipeStartLoc.line - 1],
         0,
-        pipe.loc.start.column - 1,
+        pipeStartLoc.column - 1,
       );
       const diff = expected - actual;
       if (diff === 0) return true;
       context.report({
-        loc: pipe.loc,
+        loc: {
+          start: sourceCode.getLocFromIndex(pipe.range[0]),
+          end: sourceCode.getLocFromIndex(pipe.range[1]),
+        },
         messageId: diff > 0 ? "addSpaces" : "removeSpaces",
         data: {
           expected: String(expected),
@@ -478,9 +497,12 @@ export default createRule<[Options]>("table-pipe-alignment", {
             return null;
           }
           // For delimiter cells
+          const delimiterStartLoc = sourceCode.getLocFromIndex(
+            cell.delimiter.range[0],
+          );
           const beforeDelimiter = sourceCode.lines[
-            cell.delimiter.loc.start.line - 1
-          ].slice(0, cell.delimiter.loc.start.column - 1);
+            delimiterStartLoc.line - 1
+          ].slice(0, delimiterStartLoc.column - 1);
           const widthBeforeDelimiter = getTextWidth(beforeDelimiter);
           const newLength = expected - widthBeforeDelimiter;
           const minimumDelimiterLength = getMinimumDelimiterLength(cell.align);
@@ -534,9 +556,9 @@ export default createRule<[Options]>("table-pipe-alignment", {
            * Fixer to remove spaces before the pipe
            */
           function fixRemoveSpaces() {
-            const beforePipe = sourceCode.lines[pipe.loc.start.line - 1].slice(
+            const beforePipe = sourceCode.lines[pipeStartLoc.line - 1].slice(
               0,
-              pipe.loc.start.column - 1,
+              pipeStartLoc.column - 1,
             );
             const trimmedBeforePipe = beforePipe.trimEnd();
             const spacesBeforePipeLength =
@@ -576,10 +598,13 @@ export default createRule<[Options]>("table-pipe-alignment", {
             const content =
               cell.type === "delimiter" ? cell.delimiter : cell.content;
             if (!content) return null;
+            const leadingPipeEndLoc = sourceCode.getLocFromIndex(
+              cell.leadingPipe.range[1],
+            );
             const leadingSpaceWidth = getTextWidth(
-              sourceCode.lines[cell.leadingPipe.loc.end.line - 1],
-              cell.leadingPipe.loc.end.column - 1,
-              content.loc.start.column - 1,
+              sourceCode.lines[leadingPipeEndLoc.line - 1],
+              leadingPipeEndLoc.column - 1,
+              sourceCode.getLocFromIndex(content.range[0]).column - 1,
             );
             const newSpacesLength = leadingSpaceWidth - removeSpaceLength;
             if (

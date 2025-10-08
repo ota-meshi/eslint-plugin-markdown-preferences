@@ -55,7 +55,10 @@ export default createRule("code-fence-style", {
 
         context.report({
           node,
-          loc: parsed.openingFence.loc,
+          loc: {
+            start: sourceCode.getLocFromIndex(parsed.openingFence.range[0]),
+            end: sourceCode.getLocFromIndex(parsed.openingFence.range[1]),
+          },
           data: {
             expected: expectedOpeningFence,
             actual: parsed.openingFence.text,

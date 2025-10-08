@@ -2,7 +2,6 @@ import { createRule } from "../utils/index.ts";
 import type { Heading } from "../language/ast-types.ts";
 import type { ParsedATXHeadingWithClosingSequence } from "../utils/atx-heading.ts";
 import { parseATXHeading } from "../utils/atx-heading.ts";
-import { getParsedLines } from "../utils/lines.ts";
 import { getTextWidth } from "../utils/text-width.ts";
 
 type Options = {
@@ -66,7 +65,10 @@ export default createRule<[Options?]>("atx-heading-closing-sequence-length", {
       if (expectedLength === actualLength) return;
       context.report({
         node: reportNode,
-        loc: parsed.closingSequence.loc,
+        loc: {
+          start: sourceCode.getLocFromIndex(parsed.closingSequence.range[0]),
+          end: sourceCode.getLocFromIndex(parsed.closingSequence.range[1]),
+        },
         messageId: "wrongClosingLength",
         data: {
           expected: String(expectedLength),
@@ -191,11 +193,16 @@ export default createRule<[Options?]>("atx-heading-closing-sequence-length", {
      * Get the content length of the heading.
      */
     function getContentLength(parsed: ParsedATXHeadingWithClosingSequence) {
-      const lines = getParsedLines(sourceCode);
-      const line = lines.get(parsed.closingSequence.loc.start.line);
+      const closingSequenceStartLine = sourceCode.getLocFromIndex(
+        parsed.closingSequence.range[0],
+      ).line;
+      const lineStartIndex = sourceCode.getIndexFromLoc({
+        line: closingSequenceStartLine,
+        column: 1,
+      });
       // Length before the closing sequence
       const beforeClosing = sourceCode.text.slice(
-        line.range[0],
+        lineStartIndex,
         parsed.closingSequence.range[0],
       );
       return getTextWidth(beforeClosing);
@@ -205,10 +212,16 @@ export default createRule<[Options?]>("atx-heading-closing-sequence-length", {
      * Get the line length of the heading.
      */
     function getLineLength(parsed: ParsedATXHeadingWithClosingSequence) {
-      const lines = getParsedLines(sourceCode);
-      const line = lines.get(parsed.closingSequence.loc.start.line);
+      // Get the text from the start of the line to the end of the closing sequence
+      const closingSequenceStartLine = sourceCode.getLocFromIndex(
+        parsed.closingSequence.range[0],
+      ).line;
+      const lineStartIndex = sourceCode.getIndexFromLoc({
+        line: closingSequenceStartLine,
+        column: 1,
+      });
       const lineText = sourceCode.text.slice(
-        line.range[0],
+        lineStartIndex,
         parsed.closingSequence.range[1],
       );
       return getTextWidth(lineText);
