@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.36.1
+
+### Patch Changes
+
+- [#184](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/184) [`b1acf87`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/b1acf87b90a7c77700e4e57a3bc0f07b7c117c50) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix([markdown-preferences/padding-line-between-blocks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/padding-line-between-blocks.html)): false negatives for disable-next-line directive with tags
+
 ## 0.36.0
 
 ### Minor Changes
