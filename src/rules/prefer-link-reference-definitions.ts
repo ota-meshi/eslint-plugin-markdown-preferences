@@ -121,8 +121,8 @@ export default createRule<[{ minLinks?: number }?]>(
                     }
                   }
 
-                  yield fixer.replaceText(
-                    link,
+                  yield fixer.replaceTextRange(
+                    [linkInfo.bracketsRange[0], sourceCode.getRange(link)[1]],
                     `${sourceCode.text.slice(...linkInfo.bracketsRange)}${identifier === linkInfo.label ? "" : `[${identifier}]`}`,
                   );
 
