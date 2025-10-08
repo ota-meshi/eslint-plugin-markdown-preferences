@@ -31,15 +31,15 @@ Output:
   2 |
   3 | ## Screenshots
   4 |
-  5 | [ESLint Logo]
-  6 | [ESLint Logo]
+  5 | ![ESLint Logo]
+  6 | ![ESLint Logo]
   7 |
   8 | [ESLint Logo]: https://eslint.org/img/logo.svg
   9 |
  10 | ## Icons
  11 |
- 12 | [GitHub]
- 13 | [GitHub]
+ 12 | ![GitHub]
+ 13 | ![GitHub]
  14 |
  15 | [GitHub]: https://github.com/favicon.ico
  16 |
@@ -80,10 +80,10 @@ Output:
   3 | ## Documentation
   4 |
   5 | Check out [ESLint] for linting.
-  6 | [ESLint Logo]
+  6 | ![ESLint Logo]
   7 |
   8 | Visit [ESLint] homepage.
-  9 | [ESLint Logo]
+  9 | ![ESLint Logo]
  10 |
  11 | [ESLint]: https://eslint.org
  12 |
