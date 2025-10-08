@@ -95,7 +95,7 @@ export type MDParent<N extends MDNode> = N extends Root
       : never
     : never;
 
-const RE_HTML_COMMENT = /<!--(.*?)-->/u;
+const RE_HTML_COMMENT = /<!--(.*?)-->/gu;
 
 /**
  * Get the parent of a node.
@@ -249,16 +249,25 @@ export function getThematicBreakMarker(
 }
 
 /**
- * Check whether a node is an HTML comment.
+ * Get all HTML comments in a node.
  */
-export function isHTMLComment(node: MDNode): node is Html {
-  return node.type === "html" && RE_HTML_COMMENT.test(node.value);
-}
+export function getHTMLComments(
+  sourceCode: ExtendedMarkdownSourceCode,
+  node: Html,
+): { value: string; range: [number, number] }[] {
+  const [startIndex] = sourceCode.getRange(node);
+  return [...iterate()];
 
-/**
- * Get the value of an HTML comment.
- */
-export function getHTMLCommentValue(node: MDNode): string | null {
-  if (!isHTMLComment(node)) return null;
-  return RE_HTML_COMMENT.exec(node.value)?.[1] ?? null;
+  /**
+   * An iterator which iterates HTML comments.
+   */
+  function* iterate() {
+    let match: RegExpExecArray | null;
+    while ((match = RE_HTML_COMMENT.exec(node.value))) {
+      const start = startIndex + match.index;
+      const end = start + match[0].length;
+      const value = match[1];
+      yield { value, range: [start, end] as [number, number] };
+    }
+  }
 }

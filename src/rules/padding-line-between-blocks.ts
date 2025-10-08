@@ -8,9 +8,8 @@ import type {
 } from "../language/ast-types.ts";
 import {
   getHeadingKind,
-  getHTMLCommentValue,
+  getHTMLComments,
   getThematicBreakMarker,
-  isHTMLComment,
   type MDBlock,
   type MDDefinition,
   type MDFrontmatter,
@@ -470,10 +469,15 @@ export default createRule<Options>("padding-line-between-blocks", {
     function isIgnore(
       prevBlock: MDBlockContainer["children"][number],
     ): boolean {
-      if (isHTMLComment(prevBlock)) {
-        const value = getHTMLCommentValue(prevBlock)!;
-        if (/^\s*(?:eslint|markdownlint)-disable-next-line\b/u.test(value)) {
-          return true;
+      if (prevBlock.type === "html") {
+        const comments = getHTMLComments(sourceCode, prevBlock);
+        const loc = sourceCode.getLoc(prevBlock);
+        for (const comment of comments) {
+          const value = comment.value;
+          if (!/^\s*(?:eslint|markdownlint)-disable-next-line\b/u.test(value))
+            continue;
+          const commentEndLoc = sourceCode.getLocFromIndex(comment.range[1]);
+          if (commentEndLoc.line === loc.end.line) return true;
         }
       }
       return false;

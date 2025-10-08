@@ -2,7 +2,7 @@
 Paragraph.
 ## Section
 | Table |
-|-------|
+| ----- |
 | Cell  |
 
 Content.
@@ -25,3 +25,8 @@ Content.
 [^footnote]: This is a footnote.
 
 [^footnote2]: This is a footnote.
+
+<pre>
+<!-- markdownlint-disable-next-line -->
+</pre>
+Foo

@@ -34,3 +34,11 @@ Content.
 
 <!-- markdownlint-disable-next-line -->
 Foo
+
+<pre>
+<!-- eslint-disable-next-line markdown/no-reversed-media-syntax --></pre>
+(x)[x]
+
+<pre>
+<!-- markdownlint-disable-next-line --></pre>
+Foo

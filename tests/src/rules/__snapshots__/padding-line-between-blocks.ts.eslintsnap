@@ -395,7 +395,7 @@ Code:
     | ^~~~~~~~~~ [2]
   4 | | Table |
     | ^~~~~~~~~ [3]
-  5 | |-------|
+  5 | | ----- |
   6 | | Cell  |
   7 |
   8 | Content.
@@ -423,6 +423,12 @@ Code:
  27 | [^footnote2]: This is a footnote.
     | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [7]
  28 |
+ 29 | <pre>
+ 30 | <!-- markdownlint-disable-next-line -->
+ 31 | </pre>
+ 32 | Foo
+    | ^~~ [8]
+ 33 |
 
 Output:
   1 | # Default Test
@@ -432,7 +438,7 @@ Output:
   5 | ## Section
   6 |
   7 | | Table |
-  8 | |-------|
+  8 | | ----- |
   9 | | Cell  |
  10 |
  11 | Content.
@@ -456,6 +462,12 @@ Output:
  29 | [^footnote]: This is a footnote.
  30 | [^footnote2]: This is a footnote.
  31 |
+ 32 | <pre>
+ 33 | <!-- markdownlint-disable-next-line -->
+ 34 | </pre>
+ 35 |
+ 36 | Foo
+ 37 |
 
 [1] Expected a blank line between heading and paragraph.
 [2] Expected a blank line between paragraph and heading.
@@ -464,6 +476,7 @@ Output:
 [5] Expected a blank line between code and heading.
 [6] Unexpected blank line between link-definition and link-definition.
 [7] Unexpected blank line between footnote-definition and footnote-definition.
+[8] Expected a blank line between html and paragraph.
 ---
 
 
