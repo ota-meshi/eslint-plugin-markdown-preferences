@@ -398,7 +398,6 @@ type MarkdownPreferencesLinkBracketSpacing = []|[{
 type MarkdownPreferencesLinkDestinationStyle = []|[{
   style?: ("bare" | "pointy-brackets")
   avoidEscape?: boolean
-  [k: string]: unknown | undefined
 }]
 // ----- markdown-preferences/link-paren-newline -----
 type MarkdownPreferencesLinkParenNewline = []|[{
@@ -413,7 +412,6 @@ type MarkdownPreferencesLinkParenSpacing = []|[{
 type MarkdownPreferencesLinkTitleStyle = []|[{
   style?: ("double" | "single" | "parentheses")
   avoidEscape?: boolean
-  [k: string]: unknown | undefined
 }]
 // ----- markdown-preferences/list-marker-alignment -----
 type MarkdownPreferencesListMarkerAlignment = []|[{
@@ -475,9 +473,7 @@ type MarkdownPreferencesPreferInlineCodeWords = []|[{
     node?: {
       [k: string]: unknown | undefined
     }
-    [k: string]: unknown | undefined
   }[]
-  [k: string]: unknown | undefined
 }]
 // ----- markdown-preferences/prefer-link-reference-definitions -----
 type MarkdownPreferencesPreferLinkReferenceDefinitions = []|[{
@@ -494,9 +490,7 @@ type MarkdownPreferencesPreferLinkedWords = []|[{
     node?: {
       [k: string]: unknown | undefined
     }
-    [k: string]: unknown | undefined
   }[]
-  [k: string]: unknown | undefined
 }]
 // ----- markdown-preferences/setext-heading-underline-length -----
 type MarkdownPreferencesSetextHeadingUnderlineLength = []|[{
