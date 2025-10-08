@@ -9,6 +9,7 @@ import type {
   RuleVisitor,
   SourceLocation,
 } from "@eslint/core";
+import type { MarkdownSourceCode } from "@eslint/markdown";
 import markdown from "@eslint/markdown";
 import type {
   MarkdownLanguageContext,
@@ -26,15 +27,24 @@ import type { CustomContainer } from "./ast-types.ts";
 import type { TextSourceCodeBase } from "@eslint/plugin-kit";
 import { parseExtendedMarkdown } from "./parser.ts";
 
-export type ExtendedMarkdownSourceCode = TextSourceCodeBase<{
-  LangOptions: MarkdownLanguageOptions;
-  RootNode: Root;
-  SyntaxElementWithLoc: Node;
-  ConfigNode: {
-    value: string;
-    position: SourceLocation;
-  };
-}>;
+export interface ExtendedMarkdownSourceCode
+  extends TextSourceCodeBase<{
+    LangOptions: MarkdownLanguageOptions;
+    RootNode: Root;
+    SyntaxElementWithLoc: Node;
+    ConfigNode: {
+      value: string;
+      position: SourceLocation;
+    };
+  }> {
+  getInlineConfigNodes(): ReturnType<
+    MarkdownSourceCode["getInlineConfigNodes"]
+  >;
+
+  getDisableDirectives(): ReturnType<
+    MarkdownSourceCode["getDisableDirectives"]
+  >;
+}
 
 export class ExtendedMarkdownLanguage implements Language {
   /**

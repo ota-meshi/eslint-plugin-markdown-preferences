@@ -5,7 +5,7 @@ Paragraph.
 ## Section
 
 | Table |
-|-------|
+| ----- |
 | Cell  |
 
 Content.
@@ -28,3 +28,9 @@ Content.
 
 [^footnote]: This is a footnote.
 [^footnote2]: This is a footnote.
+
+<!-- eslint-disable-next-line markdown/no-reversed-media-syntax -->
+(x)[x]
+
+<!-- markdownlint-disable-next-line -->
+Foo
