@@ -80,7 +80,7 @@ export const IGNORES_SCHEMA: JSONSchema4 = {
         type: "object",
       },
     },
-    additionalProperties: true,
+    additionalProperties: false,
   },
 };
 

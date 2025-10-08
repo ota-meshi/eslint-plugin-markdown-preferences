@@ -52,6 +52,7 @@ export default createRule<[Options?]>("link-title-style", {
             type: "boolean",
           },
         },
+        additionalProperties: false,
       },
     ],
     messages: {
