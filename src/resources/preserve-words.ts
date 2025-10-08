@@ -557,6 +557,13 @@ export const defaultPreserveWords = [
   "Redoc",
   "Stoplight",
 
+  // Licenses
+  "MIT",
+  "GPL",
+  "AGPL",
+  "LGPL",
+  "CC0",
+
   // Common Words and Phrases
   "FAQ",
 
