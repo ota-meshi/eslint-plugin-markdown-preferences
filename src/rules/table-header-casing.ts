@@ -131,6 +131,10 @@ export default createRule<
         if (wordAndOffset.punctuation) {
           continue;
         }
+        // Skip well-known words like "I"
+        if (wordAndOffset.wellknownWord) {
+          continue;
+        }
 
         if (
           ignorePatterns.some((pattern) => pattern.test(wordAndOffset.word))

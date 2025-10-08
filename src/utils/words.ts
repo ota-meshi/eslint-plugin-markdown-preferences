@@ -2,9 +2,12 @@ export type WordAndOffset = {
   word: string;
   offset: number;
   punctuation: boolean;
+  wellknownWord: boolean;
   first: boolean;
   last: boolean;
 };
+
+const WELLKNOWN_WORDS = new Set(["I"]);
 
 /**
  * Parse text into words with offsets
@@ -35,6 +38,7 @@ export function parseWordsFromText(
       word: token,
       offset: match.index,
       punctuation,
+      wellknownWord: WELLKNOWN_WORDS.has(token),
       first: false,
       last: false,
     });
