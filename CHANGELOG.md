@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.36.2
+
+### Patch Changes
+
+- [#175](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/175) [`38637c7`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/38637c747379136942cf55cfd0a0d96844ed3880) Thanks [@andreww2012](https://github.com/andreww2012)! - fix: disallow extra properties in rule options
+
 ## 0.36.1
 
 ### Patch Changes
