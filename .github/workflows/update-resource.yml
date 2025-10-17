@@ -9,6 +9,11 @@ permissions:
   contents: write
   pull-requests: write
 
+# Allow one concurrent deployment
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   update-resources:
     runs-on: ubuntu-latest
