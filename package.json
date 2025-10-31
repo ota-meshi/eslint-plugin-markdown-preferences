@@ -91,7 +91,7 @@
     "@types/json-schema": "^7.0.15",
     "@types/mdast": "^4.0.4",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^22.13.10",
+    "@types/node": "^24.0.0",
     "@types/semver": "^7.5.8",
     "assert": "^2.1.0",
     "c8": "^10.1.3",
