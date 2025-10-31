@@ -115,8 +115,7 @@ This rule does not enforce whether a closing sequence is present or absent. If a
   "markdown-preferences/atx-heading-closing-sequence-length": [
     "error",
     {
-      "mode": "match-opening",
-      "length": null
+      "mode": "match-opening"
     }
   ]
 }
