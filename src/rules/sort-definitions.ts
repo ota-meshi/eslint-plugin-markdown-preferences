@@ -68,7 +68,6 @@ export default createRule<[{ order?: OrderOption[] }?]>("sort-definitions", {
             uniqueItems: true,
             additionalItems: false,
           },
-          alphabetical: { type: "boolean" },
         },
         additionalProperties: false,
       },
