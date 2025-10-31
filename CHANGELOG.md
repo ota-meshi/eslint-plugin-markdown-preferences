@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.36.3
+
+### Patch Changes
+
+- [#197](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/197) [`7a4ae78`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/7a4ae78205f36bf24d9c2b6b4fc5338fb4cf1f5c) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix([markdown-preferences/sort-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/sort-definitions.html)): remove unnecessary 'alphabetical' property from option schema
+
 ## 0.36.2
 
 ### Patch Changes
