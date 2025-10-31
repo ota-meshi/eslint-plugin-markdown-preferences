@@ -193,9 +193,7 @@ Heading
   "markdown-preferences/setext-heading-underline-length": [
     "error",
     {
-      "mode": "exact",
-      "align": null,
-      "length": null
+      "mode": "exact"
     }
   ]
 }

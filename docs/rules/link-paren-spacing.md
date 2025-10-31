@@ -94,8 +94,7 @@ Consistent parentheses spacing:
   "markdown-preferences/link-paren-spacing": [
     "error",
     {
-      "space": "never",
-      "imagesInLinks": false
+      "space": "never"
     }
   ]
 }
