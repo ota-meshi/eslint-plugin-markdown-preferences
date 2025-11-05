@@ -8,5 +8,6 @@ export default defineConfig([
     entry: ["src/index.ts"],
     format: ["esm"],
     treeshake: true,
+    fixedExtension: false,
   },
 ]);
