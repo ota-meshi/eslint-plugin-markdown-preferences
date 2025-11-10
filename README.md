@@ -259,4 +259,4 @@ See the [LICENSE](./LICENSE) file for license rights and limitations (MIT).
 
 [documentation site]: https://ota-meshi.github.io/eslint-plugin-markdown-preferences/
 [npm-package]: https://www.npmjs.com/package/eslint-plugin-markdown-preferences
-[npmtrends]: http://www.npmtrends.com/eslint-plugin-markdown-preferences
+[npmtrends]: https://www.npmtrends.com/eslint-plugin-markdown-preferences
