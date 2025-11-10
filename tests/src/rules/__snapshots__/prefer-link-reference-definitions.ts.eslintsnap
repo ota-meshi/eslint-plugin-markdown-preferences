@@ -98,6 +98,46 @@ Output:
 
 
 Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/multiple-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Test
+  2 |
+  3 | ## Section1
+  4 |
+  5 | - [ESLint](https://eslint.org) is a JavaScript linter.
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  6 |
+  7 | ## Section2
+  8 |
+  9 | - [ESLint](https://eslint.org) helps maintain code quality.
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 10 |
+
+Output:
+  1 | # Test
+  2 |
+  3 | ## Section1
+  4 |
+  5 | - [ESLint] is a JavaScript linter.
+  6 |
+  7 | [ESLint]: https://eslint.org
+  8 |
+  9 | ## Section2
+ 10 |
+ 11 | - [ESLint] helps maintain code quality.
+ 12 |
+
+[1] Use link reference definitions instead of inline links.
+[2] Use link reference definitions instead of inline links.
+---
+
+
+Test: prefer-link-reference-definitions >> invalid
 Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/test01-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:

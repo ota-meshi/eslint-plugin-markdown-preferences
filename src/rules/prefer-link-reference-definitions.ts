@@ -89,6 +89,12 @@ export default createRule<[{ minLinks?: number }?]>(
             )
               continue;
 
+            nodes.links.sort(
+              (a, b) => sourceCode.getRange(a)[0] - sourceCode.getRange(b)[0],
+            );
+
+            const firstLink = nodes.links[0];
+            const lastLink = nodes.links[nodes.links.length - 1];
             for (const link of nodes.links) {
               const linkInfo = getLinkInfo(link);
               if (linkInfo.label === "") {
@@ -119,6 +125,15 @@ export default createRule<[{ minLinks?: number }?]>(
                         identifier = `${original}-${++seq}`;
                       }
                     }
+                  }
+
+                  if (firstLink !== link) {
+                    // Expand the range of the fixes to avoid adding duplicate definitions
+                    const firstLinkRange = sourceCode.getRange(firstLink);
+                    yield fixer.insertTextBeforeRange(
+                      [firstLinkRange[0], firstLinkRange[0]],
+                      "",
+                    );
                   }
 
                   yield fixer.replaceTextRange(
@@ -153,6 +168,15 @@ export default createRule<[{ minLinks?: number }?]>(
                           linkInfo.urlAndTitleRange[1] - 1,
                         )
                         .trim()}${nextSectionHeading ? "\n" : ""}`,
+                    );
+                  }
+
+                  if (lastLink !== link) {
+                    // Expand the range of the fixes to avoid adding duplicate definitions
+                    const lastLinkRange = sourceCode.getRange(lastLink);
+                    yield fixer.insertTextAfterRange(
+                      [lastLinkRange[1], lastLinkRange[1]],
+                      "",
                     );
                   }
                 },
