@@ -17,6 +17,10 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v6
+      - uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ hashFiles('package.json') }}-${{ github.ref }}
       - name: Install Packages
         run: npm install -f
       - name: Build
