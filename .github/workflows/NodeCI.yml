@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v6
-      - uses: actions/cache@v4
+      - uses: actions/cache/restore@v4
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ hashFiles('package.json') }}-${{ github.ref }}
@@ -27,6 +27,11 @@ jobs:
         run: npm run build
       - name: Lint
         run: npm run lint
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ hashFiles('package.json') }}-${{ github.ref }}
       - name: tsc
         run: npm run tsc
   test:
