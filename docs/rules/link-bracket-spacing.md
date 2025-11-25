@@ -11,7 +11,7 @@ since: "v0.22.0"
 > enforce consistent spacing inside link brackets
 
 - ⚙️ This rule is included in `plugin.configs.standard`.
-- 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
 
