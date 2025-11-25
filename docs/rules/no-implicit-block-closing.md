@@ -11,7 +11,7 @@ since: "v0.28.0"
 > disallow implicit block closing for fenced code blocks, math blocks, and custom containers
 
 - ⚙️ This rule is included in `plugin.configs.recommended` and `plugin.configs.standard`.
-- 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
 

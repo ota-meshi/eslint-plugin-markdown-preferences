@@ -10,7 +10,7 @@ since: "v0.4.0"
 
 > enforce the use of inline code for specific words.
 
-- 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
 

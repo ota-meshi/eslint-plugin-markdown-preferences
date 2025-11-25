@@ -10,7 +10,7 @@ since: "v0.7.0"
 
 > require link definitions and footnote definitions to be placed at the end of the document
 
-- 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 ## 📖 Rule Details
 
