@@ -43,6 +43,7 @@ export const rules: Linter.RulesRecord = {
   "markdown-preferences/no-laziness-blockquotes": "error",
   "markdown-preferences/no-multi-spaces": "error",
   "markdown-preferences/no-multiple-empty-lines": "error",
+  "markdown-preferences/no-tabs": "error",
   "markdown-preferences/no-text-backslash-linebreak": "error",
   "markdown-preferences/no-trailing-spaces": "error",
   "markdown-preferences/ordered-list-marker-sequence": "error",

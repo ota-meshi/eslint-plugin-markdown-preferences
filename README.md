@@ -188,6 +188,8 @@ The rules with the following 💄 are included in the `standard` config.
 
 - Rules related to whitespace styles in Markdown.
 
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+
 <!-- prettier-ignore-start -->
 
 | Rule ID                                                                                                                                                           | Description                                                                    | Fixable | Config |
@@ -203,12 +205,15 @@ The rules with the following 💄 are included in the `standard` config.
 | [markdown-preferences/list-marker-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/list-marker-alignment.html)                     | enforce consistent alignment of list markers                                   |   🔧    |  ⭐💄  |
 | [markdown-preferences/no-multi-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multi-spaces.html)                                 | disallow multiple spaces                                                       |   🔧    |   💄   |
 | [markdown-preferences/no-multiple-empty-lines](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multiple-empty-lines.html)                 | disallow multiple empty lines in Markdown files.                               |   🔧    |   💄   |
+| [markdown-preferences/no-tabs](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-tabs.html)                                                 | Disallow tab characters in Markdown files.                                     |   🔧    |   💄   |
 | [markdown-preferences/no-trailing-spaces](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-trailing-spaces.html)                           | disallow trailing whitespace at the end of lines in Markdown files.            |   🔧    |   💄   |
 | [markdown-preferences/padded-custom-containers](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/padded-custom-containers.html)               | disallow or require padding inside custom containers                           |   🔧    |   💄   |
 | [markdown-preferences/padding-line-between-blocks](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/padding-line-between-blocks.html)         | require or disallow padding lines between blocks                               |   🔧    |   💄   |
 | [markdown-preferences/table-pipe-spacing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-pipe-spacing.html)                           | enforce consistent spacing around table pipes                                  |   🔧    |   💄   |
 
 <!-- prettier-ignore-end -->
+
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
 
 ### Decorative Rules
 

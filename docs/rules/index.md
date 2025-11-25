@@ -75,6 +75,7 @@ The rules with the following 💄 are included in the `plugin.configs.standard` 
 | [markdown-preferences/list-marker-alignment](./list-marker-alignment.md)                     | enforce consistent alignment of list markers                                   |   🔧    |  ⭐💄  |
 | [markdown-preferences/no-multi-spaces](./no-multi-spaces.md)                                 | disallow multiple spaces                                                       |   🔧    |   💄   |
 | [markdown-preferences/no-multiple-empty-lines](./no-multiple-empty-lines.md)                 | disallow multiple empty lines in Markdown files.                               |   🔧    |   💄   |
+| [markdown-preferences/no-tabs](./no-tabs.md)                                                 | Disallow tab characters in Markdown files.                                     |   🔧    |   💄   |
 | [markdown-preferences/no-trailing-spaces](./no-trailing-spaces.md)                           | disallow trailing whitespace at the end of lines in Markdown files.            |   🔧    |   💄   |
 | [markdown-preferences/padded-custom-containers](./padded-custom-containers.md)               | disallow or require padding inside custom containers                           |   🔧    |   💄   |
 | [markdown-preferences/padding-line-between-blocks](./padding-line-between-blocks.md)         | require or disallow padding lines between blocks                               |   🔧    |   💄   |
