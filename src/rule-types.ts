@@ -160,6 +160,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/no-multiple-empty-lines'?: Linter.RuleEntry<MarkdownPreferencesNoMultipleEmptyLines>
   /**
+   * Disallow tab characters in Markdown files.
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-tabs.html
+   */
+  'markdown-preferences/no-tabs'?: Linter.RuleEntry<MarkdownPreferencesNoTabs>
+  /**
    * disallow text backslash at the end of a line.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-text-backslash-linebreak.html
    */
@@ -428,6 +433,12 @@ type MarkdownPreferencesNoMultipleEmptyLines = []|[{
   max?: number
   maxEOF?: number
   maxBOF?: number
+}]
+// ----- markdown-preferences/no-tabs -----
+type MarkdownPreferencesNoTabs = []|[{
+  checkTarget?: ("all" | "indentation" | "non-indentation")
+  ignoreCodeBlocks?: string[]
+  codeBlockTabWidth?: number
 }]
 // ----- markdown-preferences/no-trailing-spaces -----
 type MarkdownPreferencesNoTrailingSpaces = []|[{

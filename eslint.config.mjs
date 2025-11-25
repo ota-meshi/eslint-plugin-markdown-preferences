@@ -230,6 +230,7 @@ export default defineConfig([
         },
       ],
       "markdown-preferences/definitions-last": "off",
+      "markdown-preferences/no-tabs": ["error", { ignoreCodeBlocks: ["*"] }],
     },
   },
   {

@@ -30,6 +30,7 @@ import noImplicitBlockClosing from "../rules/no-implicit-block-closing.ts";
 import noLazinessBlockquotes from "../rules/no-laziness-blockquotes.ts";
 import noMultiSpaces from "../rules/no-multi-spaces.ts";
 import noMultipleEmptyLines from "../rules/no-multiple-empty-lines.ts";
+import noTabs from "../rules/no-tabs.ts";
 import noTextBackslashLinebreak from "../rules/no-text-backslash-linebreak.ts";
 import noTrailingSpaces from "../rules/no-trailing-spaces.ts";
 import orderedListMarkerSequence from "../rules/ordered-list-marker-sequence.ts";
@@ -82,6 +83,7 @@ export const rules = [
   noLazinessBlockquotes,
   noMultiSpaces,
   noMultipleEmptyLines,
+  noTabs,
   noTextBackslashLinebreak,
   noTrailingSpaces,
   orderedListMarkerSequence,
