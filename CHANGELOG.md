@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.37.0
+
+### Minor Changes
+
+- [#212](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/212) [`8a239f8`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/8a239f84a54f26c11117df699f03a383a32b5778) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/no-tabs`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-tabs.html) rule
+
 ## 0.36.3
 
 ### Patch Changes
