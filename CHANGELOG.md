@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.38.0
+
+### Minor Changes
+
+- [#215](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/215) [`82e0c36`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/82e0c36a269a77719906b6a1cac454e9f4ec193d) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add [`markdown-preferences/no-heading-trailing-punctuation`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-heading-trailing-punctuation.html) rule
+
 ## 0.37.0
 
 ### Minor Changes
