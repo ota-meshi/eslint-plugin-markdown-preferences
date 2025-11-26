@@ -6,10 +6,85 @@ import { createRule } from "../utils/index.ts";
 // Includes ASCII, fullwidth CJK, and halfwidth CJK punctuation marks
 const DEFAULT_PUNCTUATION = ".,;:!。、，；：！｡､";
 
+// Heading level range pattern (e.g., "1", "2-4", "1-3")
+const LEVEL_RANGE_PATTERN = /^([1-6])(?:-([1-6]))?$/u;
+
+type PunctuationOption =
+  | string
+  | {
+      default?: string;
+      [levelOrRange: string]: string | undefined;
+    };
+
+type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
+type PunctuationMap = Record<HeadingLevel, Set<string>>;
+
+/**
+ * Parse heading level ranges and build a map of level -> punctuation string
+ */
+function buildPunctuationMap(
+  option: PunctuationOption | undefined,
+  segmenter: Intl.Segmenter,
+): PunctuationMap {
+  // Handle string option or undefined (use default for all levels)
+  if (typeof option === "string" || option === undefined) {
+    const punctuation = option ?? DEFAULT_PUNCTUATION;
+    const chars = new Set(
+      [...segmenter.segment(punctuation)].map((s) => s.segment),
+    );
+    return {
+      1: chars,
+      2: chars,
+      3: chars,
+      4: chars,
+      5: chars,
+      6: chars,
+    };
+  }
+
+  // Handle object option
+  const defaultPunctuation = option.default ?? DEFAULT_PUNCTUATION;
+  const defaultChars = new Set(
+    [...segmenter.segment(defaultPunctuation)].map((s) => s.segment),
+  );
+
+  // Initialize all levels with default
+  const map: PunctuationMap = {
+    1: defaultChars,
+    2: defaultChars,
+    3: defaultChars,
+    4: defaultChars,
+    5: defaultChars,
+    6: defaultChars,
+  };
+
+  // Apply level-specific overrides
+  for (const [key, value] of Object.entries(option)) {
+    if (key === "default" || value == null) continue;
+
+    const match = LEVEL_RANGE_PATTERN.exec(key);
+    if (!match) continue;
+
+    const start = Number(match[1]) as HeadingLevel;
+    const end = (match[2] ? Number(match[2]) : start) as HeadingLevel;
+    const chars = new Set([...segmenter.segment(value)].map((s) => s.segment));
+
+    for (
+      let level = Math.min(start, end);
+      level <= Math.max(start, end);
+      level++
+    ) {
+      map[level as HeadingLevel] = chars;
+    }
+  }
+
+  return map;
+}
+
 export default createRule<
   [
     {
-      punctuation?: string;
+      punctuation?: PunctuationOption;
     }?,
   ]
 >("no-heading-trailing-punctuation", {
@@ -26,9 +101,31 @@ export default createRule<
         type: "object",
         properties: {
           punctuation: {
-            type: "string",
-            description:
-              "String of punctuation characters to disallow at the end of headings.",
+            oneOf: [
+              {
+                type: "string",
+                description:
+                  "String of punctuation characters to disallow at the end of headings.",
+              },
+              {
+                type: "object",
+                properties: {
+                  default: {
+                    type: "string",
+                    description:
+                      "Default punctuation characters for all heading levels.",
+                  },
+                },
+                patternProperties: {
+                  "^[1-6](-[1-6])?$": {
+                    type: "string",
+                    description:
+                      "Punctuation characters for specific heading level(s). Use '1-3' for a range.",
+                  },
+                },
+                additionalProperties: false,
+              },
+            ],
           },
         },
         additionalProperties: false,
@@ -43,18 +140,24 @@ export default createRule<
   create(context) {
     const sourceCode = context.sourceCode;
 
-    const punctuation = context.options[0]?.punctuation ?? DEFAULT_PUNCTUATION;
     const segmenter = new Intl.Segmenter("en", {
       granularity: "grapheme",
     });
-    const punctuationChars = new Set(
-      [...segmenter.segment(punctuation)].map((s) => s.segment),
+    const punctuationMap = buildPunctuationMap(
+      context.options[0]?.punctuation,
+      segmenter,
     );
 
     return {
       heading(node: Heading) {
         // Skip empty headings
         if (!node.children.length) {
+          return;
+        }
+
+        // Get punctuation set for this heading level
+        const punctuationChars = punctuationMap[node.depth];
+        if (punctuationChars.size === 0) {
           return;
         }
 

@@ -64,6 +64,28 @@ Adding punctuation at the end of headings can lead to inconsistent visual style,
 ## Important!
 ```
 
+#### With Level-specific `punctuation` Option
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/no-heading-trailing-punctuation: ['error', { punctuation: { default: '.,;:!', '4-6': '' } }] -->
+
+<!-- ✓ GOOD -->
+
+# This is a main heading
+
+#### This sub-heading can have punctuation.
+
+##### Another sub-heading with punctuation!
+
+<!-- ✗ BAD -->
+
+# This is a main heading.
+
+## This is a section.
+```
+
 ### When Not to Use
 
 - If your project uses headings that intentionally end with punctuation for stylistic reasons
@@ -82,7 +104,7 @@ Adding punctuation at the end of headings can lead to inconsistent visual style,
 }
 ```
 
-- `punctuation` (optional): A string of punctuation characters to disallow at the end of headings. Default: `".,;:!。、，；：！｡､"` (includes ASCII and CJK punctuation).
+- `punctuation` (optional): A string of punctuation characters to disallow at the end of headings, or an object with level-specific settings. Default: `".,;:!。、，；：！｡､"` (includes ASCII and CJK punctuation).
 
 ### `punctuation` (`string`)
 
@@ -107,6 +129,34 @@ Note: Question marks (`?` and `？`) are not included by default because they ar
 ```
 
 This configuration would only disallow periods (`.`), exclamation marks (`!`), and question marks (`?`) at the end of headings, while allowing colons (`:`), semicolons (`;`), and commas (`,`).
+
+### `punctuation` (`object`)
+
+An object that allows specifying different punctuation rules for different heading levels.
+
+**Properties:**
+
+- `default` (optional): The default punctuation characters for all heading levels. If not specified, uses `".,;:!。、，；：！｡､"`.
+- `1` to `6` (optional): Punctuation characters for a specific heading level.
+- `1-3`, `4-6`, etc. (optional): Punctuation characters for a range of heading levels.
+
+**Example:**
+
+```json
+{
+  "punctuation": {
+    "default": ".,;:!",
+    "4-6": ""
+  }
+}
+```
+
+This configuration would:
+
+- Check h1, h2, and h3 headings for `.`, `,`, `;`, `:`, `!` punctuation
+- Allow any punctuation for h4, h5, and h6 headings (empty string means no check)
+
+This is useful when using h4-h6 headings as emphasis-like elements where punctuation is intentional.
 
 ## 📚 Further Reading
 

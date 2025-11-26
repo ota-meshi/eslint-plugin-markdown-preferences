@@ -312,6 +312,77 @@ Code:
 
 
 Test: no-heading-trailing-punctuation >> invalid
+Filename: tests/fixtures/rules/no-heading-trailing-punctuation/invalid/level-specific/h1-h3-punctuation-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - punctuation:
+      default: .,;:!
+      4-6: ""
+Plugins: unable to serialize
+
+Code:
+  1 | # Invalid level-specific punctuation
+  2 |
+  3 | Tests that only h4-h6 are allowed to have punctuation.
+  4 |
+  5 | # This h1 has period.
+    |                     ^ [1]
+  6 |
+  7 | ## This h2 has comma,
+    |                     ^ [2]
+  8 |
+  9 | ### This h3 has exclamation!
+    |                            ^ [3]
+ 10 |
+
+[1] Headings should not end with punctuation '.'.
+    Suggestions:
+      - Remove trailing punctuation '.'.
+        Output:
+          1 | # Invalid level-specific punctuation
+          2 |
+          3 | Tests that only h4-h6 are allowed to have punctuation.
+          4 |
+          5 | # This h1 has period
+          6 |
+          7 | ## This h2 has comma,
+          8 |
+          9 | ### This h3 has exclamation!
+         10 |
+[2] Headings should not end with punctuation ','.
+    Suggestions:
+      - Remove trailing punctuation ','.
+        Output:
+          1 | # Invalid level-specific punctuation
+          2 |
+          3 | Tests that only h4-h6 are allowed to have punctuation.
+          4 |
+          5 | # This h1 has period.
+          6 |
+          7 | ## This h2 has comma
+          8 |
+          9 | ### This h3 has exclamation!
+         10 |
+[3] Headings should not end with punctuation '!'.
+    Suggestions:
+      - Remove trailing punctuation '!'.
+        Output:
+          1 | # Invalid level-specific punctuation
+          2 |
+          3 | Tests that only h4-h6 are allowed to have punctuation.
+          4 |
+          5 | # This h1 has period.
+          6 |
+          7 | ## This h2 has comma,
+          8 |
+          9 | ### This h3 has exclamation
+         10 |
+---
+
+
+Test: no-heading-trailing-punctuation >> invalid
 Filename: tests/fixtures/rules/no-heading-trailing-punctuation/invalid/period-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
