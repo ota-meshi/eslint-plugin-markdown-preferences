@@ -33,7 +33,7 @@ export default createRule<[UserOptions?]>("no-tabs", {
   meta: {
     type: "layout",
     docs: {
-      description: "Disallow tab characters in Markdown files.",
+      description: "disallow tab characters in Markdown files.",
       categories: ["standard"],
       listCategory: "Whitespace",
     },

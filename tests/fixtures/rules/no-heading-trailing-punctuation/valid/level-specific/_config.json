@@ -1,0 +1,10 @@
+{
+  "options": [
+    {
+      "punctuation": {
+        "default": ".,;:!",
+        "4-6": ""
+      }
+    }
+  ]
+}

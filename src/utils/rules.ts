@@ -26,6 +26,7 @@ import linkParenNewline from "../rules/link-paren-newline.ts";
 import linkParenSpacing from "../rules/link-paren-spacing.ts";
 import linkTitleStyle from "../rules/link-title-style.ts";
 import listMarkerAlignment from "../rules/list-marker-alignment.ts";
+import noHeadingTrailingPunctuation from "../rules/no-heading-trailing-punctuation.ts";
 import noImplicitBlockClosing from "../rules/no-implicit-block-closing.ts";
 import noLazinessBlockquotes from "../rules/no-laziness-blockquotes.ts";
 import noMultiSpaces from "../rules/no-multi-spaces.ts";
@@ -79,6 +80,7 @@ export const rules = [
   linkParenSpacing,
   linkTitleStyle,
   listMarkerAlignment,
+  noHeadingTrailingPunctuation,
   noImplicitBlockClosing,
   noLazinessBlockquotes,
   noMultiSpaces,

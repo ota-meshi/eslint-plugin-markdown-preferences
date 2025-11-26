@@ -140,6 +140,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/list-marker-alignment'?: Linter.RuleEntry<MarkdownPreferencesListMarkerAlignment>
   /**
+   * disallow trailing punctuation in headings.
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-heading-trailing-punctuation.html
+   */
+  'markdown-preferences/no-heading-trailing-punctuation'?: Linter.RuleEntry<MarkdownPreferencesNoHeadingTrailingPunctuation>
+  /**
    * disallow implicit block closing for fenced code blocks, math blocks, and custom containers
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-implicit-block-closing.html
    */
@@ -160,7 +165,7 @@ export interface RuleOptions {
    */
   'markdown-preferences/no-multiple-empty-lines'?: Linter.RuleEntry<MarkdownPreferencesNoMultipleEmptyLines>
   /**
-   * Disallow tab characters in Markdown files.
+   * disallow tab characters in Markdown files.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-tabs.html
    */
   'markdown-preferences/no-tabs'?: Linter.RuleEntry<MarkdownPreferencesNoTabs>
@@ -427,6 +432,55 @@ type MarkdownPreferencesLinkTitleStyle = []|[{
 // ----- markdown-preferences/list-marker-alignment -----
 type MarkdownPreferencesListMarkerAlignment = []|[{
   align?: ("left" | "right")
+}]
+// ----- markdown-preferences/no-heading-trailing-punctuation -----
+type MarkdownPreferencesNoHeadingTrailingPunctuation = []|[{
+  punctuation?: (string | {
+    
+    "1"?: string
+    
+    "2"?: string
+    
+    "3"?: string
+    
+    "4"?: string
+    
+    "5"?: string
+    
+    "6"?: string
+    
+    default?: string
+    
+    "1-2"?: string
+    
+    "1-3"?: string
+    
+    "1-4"?: string
+    
+    "1-5"?: string
+    
+    "1-6"?: string
+    
+    "2-3"?: string
+    
+    "2-4"?: string
+    
+    "2-5"?: string
+    
+    "2-6"?: string
+    
+    "3-4"?: string
+    
+    "3-5"?: string
+    
+    "3-6"?: string
+    
+    "4-5"?: string
+    
+    "4-6"?: string
+    
+    "5-6"?: string
+  })
 }]
 // ----- markdown-preferences/no-multiple-empty-lines -----
 type MarkdownPreferencesNoMultipleEmptyLines = []|[{

@@ -102,7 +102,7 @@ class DocFile {
     }
     if (hasSuggestions) {
       notes.push(
-        "- 💡 Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).",
+        "- 💡 Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/latest/use/core-concepts/#rule-suggestions).",
       );
     }
     if (!this.since) {

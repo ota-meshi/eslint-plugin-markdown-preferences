@@ -301,6 +301,7 @@ export default defineConfig([
       "markdown/no-empty-links": "off",
       "markdown/no-empty-images": "off",
       "markdown/no-empty-definitions": "off",
+      "markdown/heading-increment": "off",
       ...Object.fromEntries(
         rules.map((rule) => [rule.meta.docs.ruleId, "off"]),
       ),
