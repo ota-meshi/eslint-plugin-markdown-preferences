@@ -142,19 +142,24 @@ The rules with the following 💄 are included in the `standard` config.
 
 - Rules to unify the expression and description style of documents.
 
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+
 <!-- prettier-ignore-start -->
 
-| Rule ID                                                                                                                                                       | Description                                                | Fixable | Config |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------- | :-----: | :----: |
-| [markdown-preferences/canonical-code-block-language](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/canonical-code-block-language.html) | enforce canonical language names in code blocks            |   🔧    |        |
-| [markdown-preferences/emoji-notation](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/emoji-notation.html)                               | enforce consistent emoji notation style in Markdown files. |   🔧    |        |
-| [markdown-preferences/heading-casing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/heading-casing.html)                               | enforce consistent casing in headings.                     |   🔧    |        |
-| [markdown-preferences/ordered-list-marker-start](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-start.html)         | enforce that ordered list markers start with 1 or 0        |   🔧    |   💄   |
-| [markdown-preferences/prefer-inline-code-words](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-inline-code-words.html)           | enforce the use of inline code for specific words.         |   🔧    |        |
-| [markdown-preferences/prefer-linked-words](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html)                     | enforce the specified word to be a link.                   |   🔧    |        |
-| [markdown-preferences/table-header-casing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-header-casing.html)                     | enforce consistent casing in table header cells.           |   🔧    |        |
+| Rule ID                                                                                                                                                           | Description                                                | Fixable | Config |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------- | :-----: | :----: |
+| [markdown-preferences/canonical-code-block-language](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/canonical-code-block-language.html)     | enforce canonical language names in code blocks            |   🔧    |        |
+| [markdown-preferences/emoji-notation](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/emoji-notation.html)                                   | enforce consistent emoji notation style in Markdown files. |   🔧    |        |
+| [markdown-preferences/heading-casing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/heading-casing.html)                                   | enforce consistent casing in headings.                     |   🔧    |        |
+| [markdown-preferences/no-heading-trailing-punctuation](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-heading-trailing-punctuation.html) | disallow trailing punctuation in headings.                 |   🔧    |        |
+| [markdown-preferences/ordered-list-marker-start](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-start.html)             | enforce that ordered list markers start with 1 or 0        |   🔧    |   💄   |
+| [markdown-preferences/prefer-inline-code-words](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-inline-code-words.html)               | enforce the use of inline code for specific words.         |   🔧    |        |
+| [markdown-preferences/prefer-linked-words](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html)                         | enforce the specified word to be a link.                   |   🔧    |        |
+| [markdown-preferences/table-header-casing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-header-casing.html)                         | enforce consistent casing in table header cells.           |   🔧    |        |
 
 <!-- prettier-ignore-end -->
+
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
 
 ### Notation Rules
 

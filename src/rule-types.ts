@@ -140,6 +140,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/list-marker-alignment'?: Linter.RuleEntry<MarkdownPreferencesListMarkerAlignment>
   /**
+   * disallow trailing punctuation in headings.
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-heading-trailing-punctuation.html
+   */
+  'markdown-preferences/no-heading-trailing-punctuation'?: Linter.RuleEntry<MarkdownPreferencesNoHeadingTrailingPunctuation>
+  /**
    * disallow implicit block closing for fenced code blocks, math blocks, and custom containers
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-implicit-block-closing.html
    */
@@ -427,6 +432,11 @@ type MarkdownPreferencesLinkTitleStyle = []|[{
 // ----- markdown-preferences/list-marker-alignment -----
 type MarkdownPreferencesListMarkerAlignment = []|[{
   align?: ("left" | "right")
+}]
+// ----- markdown-preferences/no-heading-trailing-punctuation -----
+type MarkdownPreferencesNoHeadingTrailingPunctuation = []|[{
+  
+  punctuation?: string
 }]
 // ----- markdown-preferences/no-multiple-empty-lines -----
 type MarkdownPreferencesNoMultipleEmptyLines = []|[{

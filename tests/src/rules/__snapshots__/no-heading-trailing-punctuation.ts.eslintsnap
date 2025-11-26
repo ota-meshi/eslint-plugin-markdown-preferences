@@ -1,0 +1,419 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: no-heading-trailing-punctuation >> invalid
+Filename: tests/fixtures/rules/no-heading-trailing-punctuation/invalid/cjk-punctuation-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # 日本語の見出し。
+    |          ^ [1]
+  2 |
+  3 | ## 別の見出し！
+    |         ^ [2]
+  4 |
+
+[1] Headings should not end with punctuation '。'.
+    Suggestions:
+      - Remove trailing punctuation '。'.
+        Output:
+          1 | # 日本語の見出し
+          2 |
+          3 | ## 別の見出し！
+          4 |
+[2] Headings should not end with punctuation '！'.
+    Suggestions:
+      - Remove trailing punctuation '！'.
+        Output:
+          1 | # 日本語の見出し。
+          2 |
+          3 | ## 別の見出し
+          4 |
+---
+
+
+Test: no-heading-trailing-punctuation >> invalid
+Filename: tests/fixtures/rules/no-heading-trailing-punctuation/invalid/colon-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Example:
+    |          ^ [1]
+  2 |
+  3 | ## Usage:
+    |         ^ [2]
+  4 |
+
+[1] Headings should not end with punctuation ':'.
+    Suggestions:
+      - Remove trailing punctuation ':'.
+        Output:
+          1 | # Example
+          2 |
+          3 | ## Usage:
+          4 |
+[2] Headings should not end with punctuation ':'.
+    Suggestions:
+      - Remove trailing punctuation ':'.
+        Output:
+          1 | # Example:
+          2 |
+          3 | ## Usage
+          4 |
+---
+
+
+Test: no-heading-trailing-punctuation >> invalid
+Filename: tests/fixtures/rules/no-heading-trailing-punctuation/invalid/comma-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # First,
+    |        ^ [1]
+  2 |
+  3 | ## Second,
+    |          ^ [2]
+  4 |
+
+[1] Headings should not end with punctuation ','.
+    Suggestions:
+      - Remove trailing punctuation ','.
+        Output:
+          1 | # First
+          2 |
+          3 | ## Second,
+          4 |
+[2] Headings should not end with punctuation ','.
+    Suggestions:
+      - Remove trailing punctuation ','.
+        Output:
+          1 | # First,
+          2 |
+          3 | ## Second
+          4 |
+---
+
+
+Test: no-heading-trailing-punctuation >> invalid
+Filename: tests/fixtures/rules/no-heading-trailing-punctuation/invalid/custom-punctuation/disallowed-punctuation-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - punctuation: .!
+Plugins: unable to serialize
+
+Code:
+  1 | # Heading with period.
+    |                      ^ [1]
+  2 |
+  3 | ## Heading with exclamation!
+    |                            ^ [2]
+  4 |
+
+[1] Headings should not end with punctuation '.'.
+    Suggestions:
+      - Remove trailing punctuation '.'.
+        Output:
+          1 | # Heading with period
+          2 |
+          3 | ## Heading with exclamation!
+          4 |
+[2] Headings should not end with punctuation '!'.
+    Suggestions:
+      - Remove trailing punctuation '!'.
+        Output:
+          1 | # Heading with period.
+          2 |
+          3 | ## Heading with exclamation
+          4 |
+---
+
+
+Test: no-heading-trailing-punctuation >> invalid
+Filename: tests/fixtures/rules/no-heading-trailing-punctuation/invalid/emoji-punctuation/emoji-as-punctuation-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - punctuation: 🎉🚀
+Plugins: unable to serialize
+
+Code:
+  1 | # Heading ends with emoji🎉
+    |                          ^~ [1]
+  2 |
+  3 | ## Another heading🚀
+    |                   ^~ [2]
+  4 |
+
+[1] Headings should not end with punctuation '🎉'.
+    Suggestions:
+      - Remove trailing punctuation '🎉'.
+        Output:
+          1 | # Heading ends with emoji
+          2 |
+          3 | ## Another heading🚀
+          4 |
+[2] Headings should not end with punctuation '🚀'.
+    Suggestions:
+      - Remove trailing punctuation '🚀'.
+        Output:
+          1 | # Heading ends with emoji🎉
+          2 |
+          3 | ## Another heading
+          4 |
+---
+
+
+Test: no-heading-trailing-punctuation >> invalid
+Filename: tests/fixtures/rules/no-heading-trailing-punctuation/invalid/emphasis-punctuation-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Heading with *emphasis.*
+    |                         ^ [1]
+  2 |
+  3 | ## Heading with **strong!**
+    |                         ^ [2]
+  4 |
+
+[1] Headings should not end with punctuation '.'.
+    Suggestions:
+      - Remove trailing punctuation '.'.
+        Output:
+          1 | # Heading with *emphasis*
+          2 |
+          3 | ## Heading with **strong!**
+          4 |
+[2] Headings should not end with punctuation '!'.
+    Suggestions:
+      - Remove trailing punctuation '!'.
+        Output:
+          1 | # Heading with *emphasis.*
+          2 |
+          3 | ## Heading with **strong**
+          4 |
+---
+
+
+Test: no-heading-trailing-punctuation >> invalid
+Filename: tests/fixtures/rules/no-heading-trailing-punctuation/invalid/exclamation-mark-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Important!
+    |            ^ [1]
+  2 |
+  3 | ## Very important!
+    |                  ^ [2]
+  4 |
+
+[1] Headings should not end with punctuation '!'.
+    Suggestions:
+      - Remove trailing punctuation '!'.
+        Output:
+          1 | # Important
+          2 |
+          3 | ## Very important!
+          4 |
+[2] Headings should not end with punctuation '!'.
+    Suggestions:
+      - Remove trailing punctuation '!'.
+        Output:
+          1 | # Important!
+          2 |
+          3 | ## Very important
+          4 |
+---
+
+
+Test: no-heading-trailing-punctuation >> invalid
+Filename: tests/fixtures/rules/no-heading-trailing-punctuation/invalid/halfwidth-punctuation-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # 半角ｶﾅの見出し｡
+    |           ^ [1]
+  2 |
+  3 | ## 別の半角見出し､
+    |           ^ [2]
+  4 |
+
+[1] Headings should not end with punctuation '｡'.
+    Suggestions:
+      - Remove trailing punctuation '｡'.
+        Output:
+          1 | # 半角ｶﾅの見出し
+          2 |
+          3 | ## 別の半角見出し､
+          4 |
+[2] Headings should not end with punctuation '､'.
+    Suggestions:
+      - Remove trailing punctuation '､'.
+        Output:
+          1 | # 半角ｶﾅの見出し｡
+          2 |
+          3 | ## 別の半角見出し
+          4 |
+---
+
+
+Test: no-heading-trailing-punctuation >> invalid
+Filename: tests/fixtures/rules/no-heading-trailing-punctuation/invalid/japanese-comma-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # 日本語の読点で終わる見出し、
+    |                ^ [1]
+  2 |
+  3 | ## 読点のある見出し、
+    |            ^ [2]
+  4 |
+
+[1] Headings should not end with punctuation '、'.
+    Suggestions:
+      - Remove trailing punctuation '、'.
+        Output:
+          1 | # 日本語の読点で終わる見出し
+          2 |
+          3 | ## 読点のある見出し、
+          4 |
+[2] Headings should not end with punctuation '、'.
+    Suggestions:
+      - Remove trailing punctuation '、'.
+        Output:
+          1 | # 日本語の読点で終わる見出し、
+          2 |
+          3 | ## 読点のある見出し
+          4 |
+---
+
+
+Test: no-heading-trailing-punctuation >> invalid
+Filename: tests/fixtures/rules/no-heading-trailing-punctuation/invalid/period-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Heading with period.
+    |                      ^ [1]
+  2 |
+  3 | ## Another heading with period.
+    |                               ^ [2]
+  4 |
+
+[1] Headings should not end with punctuation '.'.
+    Suggestions:
+      - Remove trailing punctuation '.'.
+        Output:
+          1 | # Heading with period
+          2 |
+          3 | ## Another heading with period.
+          4 |
+[2] Headings should not end with punctuation '.'.
+    Suggestions:
+      - Remove trailing punctuation '.'.
+        Output:
+          1 | # Heading with period.
+          2 |
+          3 | ## Another heading with period
+          4 |
+---
+
+
+Test: no-heading-trailing-punctuation >> invalid
+Filename: tests/fixtures/rules/no-heading-trailing-punctuation/invalid/semicolon-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # First part;
+    |             ^ [1]
+  2 |
+  3 | ## Second part;
+    |               ^ [2]
+  4 |
+
+[1] Headings should not end with punctuation ';'.
+    Suggestions:
+      - Remove trailing punctuation ';'.
+        Output:
+          1 | # First part
+          2 |
+          3 | ## Second part;
+          4 |
+[2] Headings should not end with punctuation ';'.
+    Suggestions:
+      - Remove trailing punctuation ';'.
+        Output:
+          1 | # First part;
+          2 |
+          3 | ## Second part
+          4 |
+---
+
+
+Test: no-heading-trailing-punctuation >> invalid
+Filename: tests/fixtures/rules/no-heading-trailing-punctuation/invalid/setext-heading-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | Setext heading with period.
+    |                           ^ [1]
+  2 | ============================
+  3 |
+  4 | Another setext heading.
+    |                       ^ [2]
+  5 | -----------------------
+  6 |
+
+[1] Headings should not end with punctuation '.'.
+    Suggestions:
+      - Remove trailing punctuation '.'.
+        Output:
+          1 | Setext heading with period
+          2 | ============================
+          3 |
+          4 | Another setext heading.
+          5 | -----------------------
+          6 |
+[2] Headings should not end with punctuation '.'.
+    Suggestions:
+      - Remove trailing punctuation '.'.
+        Output:
+          1 | Setext heading with period.
+          2 | ============================
+          3 |
+          4 | Another setext heading
+          5 | -----------------------
+          6 |
+---
