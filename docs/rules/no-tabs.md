@@ -2,13 +2,13 @@
 pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/no-tabs"
-description: "Disallow tab characters in Markdown files."
+description: "disallow tab characters in Markdown files."
 since: "v0.37.0"
 ---
 
 # markdown-preferences/no-tabs
 
-> Disallow tab characters in Markdown files.
+> disallow tab characters in Markdown files.
 
 - ⚙️ This rule is included in `plugin.configs.standard`.
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.

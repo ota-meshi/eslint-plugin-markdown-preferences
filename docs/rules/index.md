@@ -21,7 +21,7 @@ The rules with the following 💄 are included in the `plugin.configs.standard` 
 | [markdown-preferences/canonical-code-block-language](./canonical-code-block-language.md)     | enforce canonical language names in code blocks            |   🔧    |        |
 | [markdown-preferences/emoji-notation](./emoji-notation.md)                                   | enforce consistent emoji notation style in Markdown files. |   🔧    |        |
 | [markdown-preferences/heading-casing](./heading-casing.md)                                   | enforce consistent casing in headings.                     |   🔧    |        |
-| [markdown-preferences/no-heading-trailing-punctuation](./no-heading-trailing-punctuation.md) | disallow trailing punctuation in headings.                 |   🔧    |        |
+| [markdown-preferences/no-heading-trailing-punctuation](./no-heading-trailing-punctuation.md) | disallow trailing punctuation in headings.                 |         |        |
 | [markdown-preferences/ordered-list-marker-start](./ordered-list-marker-start.md)             | enforce that ordered list markers start with 1 or 0        |   🔧    |   💄   |
 | [markdown-preferences/prefer-inline-code-words](./prefer-inline-code-words.md)               | enforce the use of inline code for specific words.         |   🔧    |        |
 | [markdown-preferences/prefer-linked-words](./prefer-linked-words.md)                         | enforce the specified word to be a link.                   |   🔧    |        |
@@ -76,7 +76,7 @@ The rules with the following 💄 are included in the `plugin.configs.standard` 
 | [markdown-preferences/list-marker-alignment](./list-marker-alignment.md)                     | enforce consistent alignment of list markers                                   |   🔧    |  ⭐💄  |
 | [markdown-preferences/no-multi-spaces](./no-multi-spaces.md)                                 | disallow multiple spaces                                                       |   🔧    |   💄   |
 | [markdown-preferences/no-multiple-empty-lines](./no-multiple-empty-lines.md)                 | disallow multiple empty lines in Markdown files.                               |   🔧    |   💄   |
-| [markdown-preferences/no-tabs](./no-tabs.md)                                                 | Disallow tab characters in Markdown files.                                     |   🔧    |   💄   |
+| [markdown-preferences/no-tabs](./no-tabs.md)                                                 | disallow tab characters in Markdown files.                                     |   🔧    |   💄   |
 | [markdown-preferences/no-trailing-spaces](./no-trailing-spaces.md)                           | disallow trailing whitespace at the end of lines in Markdown files.            |   🔧    |   💄   |
 | [markdown-preferences/padded-custom-containers](./padded-custom-containers.md)               | disallow or require padding inside custom containers                           |   🔧    |   💄   |
 | [markdown-preferences/padding-line-between-blocks](./padding-line-between-blocks.md)         | require or disallow padding lines between blocks                               |   🔧    |   💄   |

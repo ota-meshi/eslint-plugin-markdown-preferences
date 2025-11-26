@@ -6,17 +6,39 @@ import { createRule } from "../utils/index.ts";
 // Includes ASCII, fullwidth CJK, and halfwidth CJK punctuation marks
 const DEFAULT_PUNCTUATION = ".,;:!。、，；：！｡､";
 
-// Heading level range pattern (e.g., "1", "2-4", "1-3")
-const LEVEL_RANGE_PATTERN = /^([1-6])(?:-([1-6]))?$/u;
+// Mapping of heading level ranges to their numeric start and end levels
+const LEVEL_RANGE_MAP = {
+  "1": [1, 1],
+  "2": [2, 2],
+  "3": [3, 3],
+  "4": [4, 4],
+  "5": [5, 5],
+  "6": [6, 6],
+  "1-2": [1, 2],
+  "1-3": [1, 3],
+  "1-4": [1, 4],
+  "1-5": [1, 5],
+  "1-6": [1, 6],
+  "2-3": [2, 3],
+  "2-4": [2, 4],
+  "2-5": [2, 5],
+  "2-6": [2, 6],
+  "3-4": [3, 4],
+  "3-5": [3, 5],
+  "3-6": [3, 6],
+  "4-5": [4, 5],
+  "4-6": [4, 6],
+  "5-6": [5, 6],
+} as const;
 
+// All heading levels
+const HEADING_LEVELS = [1, 2, 3, 4, 5, 6] as const;
+
+type HeadingLevel = (typeof HEADING_LEVELS)[number];
 type PunctuationOption =
   | string
-  | {
-      default?: string;
-      [levelOrRange: string]: string | undefined;
-    };
+  | Partial<Record<"default" | keyof typeof LEVEL_RANGE_MAP, string>>;
 
-type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 type PunctuationMap = Record<HeadingLevel, Set<string>>;
 
 /**
@@ -32,14 +54,9 @@ function buildPunctuationMap(
     const chars = new Set(
       [...segmenter.segment(punctuation)].map((s) => s.segment),
     );
-    return {
-      1: chars,
-      2: chars,
-      3: chars,
-      4: chars,
-      5: chars,
-      6: chars,
-    };
+    return Object.fromEntries(
+      HEADING_LEVELS.map((level) => [level, chars]),
+    ) as PunctuationMap;
   }
 
   // Handle object option
@@ -49,32 +66,21 @@ function buildPunctuationMap(
   );
 
   // Initialize all levels with default
-  const map: PunctuationMap = {
-    1: defaultChars,
-    2: defaultChars,
-    3: defaultChars,
-    4: defaultChars,
-    5: defaultChars,
-    6: defaultChars,
-  };
+  const map = Object.fromEntries(
+    HEADING_LEVELS.map((level) => [level, defaultChars]),
+  ) as PunctuationMap;
 
   // Apply level-specific overrides
   for (const [key, value] of Object.entries(option)) {
     if (key === "default" || value == null) continue;
 
-    const match = LEVEL_RANGE_PATTERN.exec(key);
-    if (!match) continue;
+    const range = LEVEL_RANGE_MAP[key as keyof typeof LEVEL_RANGE_MAP];
+    if (!range) continue;
 
-    const start = Number(match[1]) as HeadingLevel;
-    const end = (match[2] ? Number(match[2]) : start) as HeadingLevel;
     const chars = new Set([...segmenter.segment(value)].map((s) => s.segment));
 
-    for (
-      let level = Math.min(start, end);
-      level <= Math.max(start, end);
-      level++
-    ) {
-      map[level as HeadingLevel] = chars;
+    for (let level = range[0]; level <= range[1]; level++) {
+      map[level] = chars;
     }
   }
 
@@ -115,13 +121,20 @@ export default createRule<
                     description:
                       "Default punctuation characters for all heading levels.",
                   },
-                },
-                patternProperties: {
-                  "^[1-6](-[1-6])?$": {
-                    type: "string",
-                    description:
-                      "Punctuation characters for specific heading level(s). Use '1-3' for a range.",
-                  },
+                  ...Object.fromEntries(
+                    Object.entries(LEVEL_RANGE_MAP).map(
+                      ([key, [start, end]]) => [
+                        key,
+                        {
+                          type: "string",
+                          description:
+                            start === end
+                              ? `Punctuation characters for heading level ${start}.`
+                              : `Punctuation characters for heading levels ${start} to ${end}.`,
+                        },
+                      ],
+                    ),
+                  ),
                 },
                 additionalProperties: false,
               },
