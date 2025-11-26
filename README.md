@@ -142,8 +142,6 @@ The rules with the following 💄 are included in the `standard` config.
 
 - Rules to unify the expression and description style of documents.
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
-
 <!-- prettier-ignore-start -->
 
 | Rule ID                                                                                                                                                           | Description                                                | Fixable | Config |
@@ -158,8 +156,6 @@ The rules with the following 💄 are included in the `standard` config.
 | [markdown-preferences/table-header-casing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-header-casing.html)                         | enforce consistent casing in table header cells.           |   🔧    |        |
 
 <!-- prettier-ignore-end -->
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
 
 ### Notation Rules
 
