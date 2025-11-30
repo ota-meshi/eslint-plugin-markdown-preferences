@@ -164,10 +164,6 @@ This is useful when using h4-h6 headings as emphasis-like elements where punctua
 
 ## 🔍 Implementation
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
-
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/src/rules/no-heading-trailing-punctuation.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/tests/src/rules/no-heading-trailing-punctuation.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/tree/main/tests/fixtures/rules/no-heading-trailing-punctuation)
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->

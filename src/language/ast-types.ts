@@ -39,8 +39,10 @@ export type InlineMath = math.InlineMath;
 export type Toml = eslint.Toml;
 export type Json = eslint.Json;
 
-export interface CustomContainer
-  extends ExtendChildren<mdast.Parent, CustomContainer | ImportCodeSnippet> {
+export interface CustomContainer extends ExtendChildren<
+  mdast.Parent,
+  CustomContainer | ImportCodeSnippet
+> {
   /**
    * Node type of mdast custom container.
    */
