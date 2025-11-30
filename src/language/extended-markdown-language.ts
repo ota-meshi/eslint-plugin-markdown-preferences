@@ -27,16 +27,15 @@ import type { CustomContainer } from "./ast-types.ts";
 import type { TextSourceCodeBase } from "@eslint/plugin-kit";
 import { parseExtendedMarkdown } from "./parser.ts";
 
-export interface ExtendedMarkdownSourceCode
-  extends TextSourceCodeBase<{
-    LangOptions: MarkdownLanguageOptions;
-    RootNode: Root;
-    SyntaxElementWithLoc: Node;
-    ConfigNode: {
-      value: string;
-      position: SourceLocation;
-    };
-  }> {
+export interface ExtendedMarkdownSourceCode extends TextSourceCodeBase<{
+  LangOptions: MarkdownLanguageOptions;
+  RootNode: Root;
+  SyntaxElementWithLoc: Node;
+  ConfigNode: {
+    value: string;
+    position: SourceLocation;
+  };
+}> {
   getInlineConfigNodes(): ReturnType<
     MarkdownSourceCode["getInlineConfigNodes"]
   >;
@@ -138,7 +137,8 @@ type WithExit<RuleVisitorType extends RuleVisitor> = {
     | `${Key & string}:exit`]: RuleVisitorType[Key];
 };
 export interface ExtendedMarkdownRuleVisitor
-  extends MarkdownRuleVisitor,
+  extends
+    MarkdownRuleVisitor,
     WithExit<{
       customContainer?(node: CustomContainer): void;
       math?(node: Math): void;
