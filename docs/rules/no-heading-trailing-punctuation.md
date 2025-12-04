@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/no-heading-trailing-punctuation"
 description: "disallow trailing punctuation in headings."
+since: "v0.38.0"
 ---
 
 # markdown-preferences/no-heading-trailing-punctuation
 
 > disallow trailing punctuation in headings.
 
-- ❗ <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - 💡 Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/latest/use/core-concepts/#rule-suggestions).
 
 ## 📖 Rule Details
@@ -161,6 +161,10 @@ This is useful when using h4-h6 headings as emphasis-like elements where punctua
 ## 📚 Further Reading
 
 - [markdownlint MD026 - Trailing punctuation in heading](https://github.com/DavidAnson/markdownlint/blob/main/doc/md026.md)
+
+## 🚀 Version
+
+This rule was introduced in eslint-plugin-markdown-preferences v0.38.0
 
 ## 🔍 Implementation
 
