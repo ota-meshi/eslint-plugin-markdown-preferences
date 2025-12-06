@@ -1,0 +1,12 @@
+{
+  "options": [
+    {
+      "heading": 80,
+      "paragraph": 120,
+      "blockquote": {
+        "heading": 50,
+        "paragraph": 60
+      }
+    }
+  ]
+}

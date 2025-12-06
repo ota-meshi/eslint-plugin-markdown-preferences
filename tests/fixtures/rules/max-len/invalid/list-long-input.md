@@ -1,0 +1,3 @@
+- This is a very long list item that definitely exceeds the default one hundred and twenty character maximum length limit and should be reported
+- Short item
+- Another very long list item that goes on and on and on and should definitely be caught by the rule as a violation of the maximum length

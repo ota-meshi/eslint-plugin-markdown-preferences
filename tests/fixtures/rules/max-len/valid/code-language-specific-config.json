@@ -1,0 +1,11 @@
+{
+  "options": [
+    {
+      "code": {
+        "javascript": 100,
+        "python": 80,
+        "shell": "ignore"
+      }
+    }
+  ]
+}

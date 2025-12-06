@@ -158,6 +158,7 @@ export default defineConfig([
       ...Object.fromEntries(
         rules.map((rule) => [rule.meta.docs.ruleId, "error"]),
       ),
+      "markdown-preferences/max-len": "off", // 今は無効化します
       "markdown-preferences/prefer-linked-words": [
         "error",
         {
@@ -197,7 +198,11 @@ export default defineConfig([
             "/^https:\\/\\/www\\.npmtrends\\.com\\//u",
           ],
           allowedAnchors: {
+            // https://eslint-online-playground.netlify.app/
             "/^https:\\/\\/eslint-online-playground\\.netlify\\.app\\//u":
+              "/.*/u",
+            // https://github.com/eslint/markdown/blob/main/docs/processors/markdown.md
+            "/^https:\\/\\/github\\.com\\/eslint\\/markdown\\/blob\\/main\\/docs\\/processors\\/markdown\\.md/u":
               "/.*/u",
           },
         },

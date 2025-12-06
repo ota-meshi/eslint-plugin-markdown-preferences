@@ -140,6 +140,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/list-marker-alignment'?: Linter.RuleEntry<MarkdownPreferencesListMarkerAlignment>
   /**
+   * enforce maximum length for various Markdown entities
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/max-len.html
+   */
+  'markdown-preferences/max-len'?: Linter.RuleEntry<MarkdownPreferencesMaxLen>
+  /**
    * disallow trailing punctuation in headings.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-heading-trailing-punctuation.html
    */
@@ -432,6 +437,60 @@ type MarkdownPreferencesLinkTitleStyle = []|[{
 // ----- markdown-preferences/list-marker-alignment -----
 type MarkdownPreferencesListMarkerAlignment = []|[{
   align?: ("left" | "right")
+}]
+// ----- markdown-preferences/max-len -----
+type MarkdownPreferencesMaxLen = []|[{
+  heading?: (number | "ignore")
+  paragraph?: (number | "ignore")
+  table?: (number | "ignore")
+  html?: (number | "ignore")
+  math?: (number | "ignore")
+  code?: ((number | "ignore") | {
+    [k: string]: (number | "ignore")
+  })
+  frontmatter?: ((number | "ignore") | {
+    [k: string]: (number | "ignore")
+  })
+  list?: ((number | "ignore") | {
+    heading?: (number | "ignore")
+    paragraph?: (number | "ignore")
+    table?: (number | "ignore")
+    html?: (number | "ignore")
+    math?: (number | "ignore")
+    code?: ((number | "ignore") | {
+      [k: string]: (number | "ignore")
+    })
+    frontmatter?: ((number | "ignore") | {
+      [k: string]: (number | "ignore")
+    })
+  })
+  blockquote?: ((number | "ignore") | {
+    heading?: (number | "ignore")
+    paragraph?: (number | "ignore")
+    table?: (number | "ignore")
+    html?: (number | "ignore")
+    math?: (number | "ignore")
+    code?: ((number | "ignore") | {
+      [k: string]: (number | "ignore")
+    })
+    frontmatter?: ((number | "ignore") | {
+      [k: string]: (number | "ignore")
+    })
+  })
+  footnoteDefinition?: ((number | "ignore") | {
+    heading?: (number | "ignore")
+    paragraph?: (number | "ignore")
+    table?: (number | "ignore")
+    html?: (number | "ignore")
+    math?: (number | "ignore")
+    code?: ((number | "ignore") | {
+      [k: string]: (number | "ignore")
+    })
+    frontmatter?: ((number | "ignore") | {
+      [k: string]: (number | "ignore")
+    })
+  })
+  ignoreUrls?: boolean
 }]
 // ----- markdown-preferences/no-heading-trailing-punctuation -----
 type MarkdownPreferencesNoHeadingTrailingPunctuation = []|[{
