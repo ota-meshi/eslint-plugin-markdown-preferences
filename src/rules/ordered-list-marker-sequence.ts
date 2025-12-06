@@ -16,7 +16,7 @@ type Options = {
   increment?: IncrementMode;
 };
 
-export default createRule("ordered-list-marker-sequence", {
+export default createRule<[Options?]>("ordered-list-marker-sequence", {
   meta: {
     type: "layout",
     docs: {
@@ -71,20 +71,18 @@ export default createRule("ordered-list-marker-sequence", {
     ): boolean {
       if (node.start == null || node.start <= 1) return true;
 
-      const expected =
-        incrementMode === "never"
-          ? [0, 1]
-          : scope.last != null &&
-              scope.last.sequence + 1 === node.start &&
-              marker.kind === scope.last.kind
-            ? null // Valid in "always" mode
-            : [0, 1].concat(
-                scope.last != null && marker.kind === scope.last.kind
-                  ? [scope.last.sequence + 1]
-                  : [],
-              );
-
-      if (expected === null) return true;
+      const expected = [0, 1];
+      if (incrementMode !== "never") {
+        if (
+          scope.last != null &&
+          scope.last.sequence + 1 === node.start &&
+          marker.kind === scope.last.kind
+        )
+          return true;
+        if (scope.last != null && marker.kind === scope.last.kind) {
+          expected.push(scope.last.sequence + 1);
+        }
+      }
 
       const suggest: SuggestedEdit[] = [];
       for (const n of [...expected].sort(
@@ -107,20 +105,15 @@ export default createRule("ordered-list-marker-sequence", {
         node: node.children[0] || node,
         messageId: "inconsistentStart",
         data: {
-          expected:
-            expected.length === 1
-              ? `'${expected[0]}'`
-              : new Intl.ListFormat("en-US", {
-                  type: "disjunction",
-                }).format(expected.map((n) => `'${n}'`)),
+          expected: new Intl.ListFormat("en-US", {
+            type: "disjunction",
+          }).format(expected.map((n) => `'${n}'`)),
           actual: marker.sequence.raw,
         },
         fix:
           scope.last == null || incrementMode === "never"
             ? (fixer) => {
-                // Use 1 for "always" mode when no previous list, or the first expected value for "never" mode
-                const fixValue = incrementMode === "never" ? expected[0] : 1;
-                const expectedMarker = `${fixValue}${marker.kind}`;
+                const expectedMarker = `1${marker.kind}`;
                 const range = sourceCode.getRange(node);
                 return fixer.replaceTextRange(
                   [range[0], range[0] + marker.raw.length],
@@ -197,17 +190,10 @@ export default createRule("ordered-list-marker-sequence", {
 
         verifyStartSequence(node, marker);
         verifyListItems(node);
-
-        if (incrementMode === "never") {
-          // In "never" mode, we don't track sequences
-          scope.last = null;
-        } else {
-          // In "always" mode, track the last sequence
-          scope.last = {
-            kind: marker.kind,
-            sequence: node.start + node.children.length - 1,
-          };
-        }
+        scope.last = {
+          kind: marker.kind,
+          sequence: node.start + node.children.length - 1,
+        };
       },
     };
   },
