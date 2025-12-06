@@ -2,13 +2,13 @@
 pageClass: "rule-details"
 sidebarDepth: 0
 title: "markdown-preferences/ordered-list-marker-sequence"
-description: "enforce that ordered list markers use sequential numbers"
+description: "enforce consistent ordered list marker numbering (sequential or flat)"
 since: "v0.12.0"
 ---
 
 # markdown-preferences/ordered-list-marker-sequence
 
-> enforce that ordered list markers use sequential numbers
+> enforce consistent ordered list marker numbering (sequential or flat)
 
 - ⚙️ This rule is included in `plugin.configs.standard`.
 - 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.

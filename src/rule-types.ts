@@ -180,10 +180,10 @@ export interface RuleOptions {
    */
   'markdown-preferences/no-trailing-spaces'?: Linter.RuleEntry<MarkdownPreferencesNoTrailingSpaces>
   /**
-   * enforce that ordered list markers use sequential numbers
+   * enforce consistent ordered list marker numbering (sequential or flat)
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-sequence.html
    */
-  'markdown-preferences/ordered-list-marker-sequence'?: Linter.RuleEntry<[]>
+  'markdown-preferences/ordered-list-marker-sequence'?: Linter.RuleEntry<MarkdownPreferencesOrderedListMarkerSequence>
   /**
    * enforce that ordered list markers start with 1 or 0
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-start.html
@@ -498,6 +498,10 @@ type MarkdownPreferencesNoTabs = []|[{
 type MarkdownPreferencesNoTrailingSpaces = []|[{
   skipBlankLines?: boolean
   ignoreComments?: boolean
+}]
+// ----- markdown-preferences/ordered-list-marker-sequence -----
+type MarkdownPreferencesOrderedListMarkerSequence = []|[{
+  increment?: ("always" | "never")
 }]
 // ----- markdown-preferences/ordered-list-marker-start -----
 type MarkdownPreferencesOrderedListMarkerStart = []|[{
