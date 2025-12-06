@@ -143,6 +143,7 @@ This option works similarly to [`@stylistic/eslint-plugin`'s `max-len` rule](htt
 If you need to enforce line length for code blocks in Markdown, you can:
 
 - Use the language-specific ESLint configuration for code blocks (recommended):
+
   ```js
   {
     files: ["**/*.md/*.js"],
@@ -151,14 +152,16 @@ If you need to enforce line length for code blocks in Markdown, you can:
     }
   }
   ```
+
   **However**, this feature is not currently available with this plugin. It may be possible in the future. The RFC is at: <https://github.com/eslint/rfcs/pull/105>
+
 - Set the `code` option to enforce a simple line length limit (not syntax-aware)
 
 For more information, see the [advanced configuration guide](https://github.com/eslint/markdown/blob/main/docs/processors/markdown.md#advanced-configuration).
 
 ## 📚 Further Reading
 
-- [Markdownlint MD013](https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md013) - Similar rule in markdownlint
+- [Markdownlint MD013](https://github.com/DavidAnson/markdownlint/blob/v0.38.0/doc/md013.md) - Similar rule in markdownlint
 - [@stylistic/eslint-plugin max-len](https://eslint.style/rules/max-len) - ESLint stylistic rule for code
 
 ## 👫 Related Rules

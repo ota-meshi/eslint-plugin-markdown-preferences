@@ -197,7 +197,11 @@ export default defineConfig([
             "/^https:\\/\\/www\\.npmtrends\\.com\\//u",
           ],
           allowedAnchors: {
+            // https://eslint-online-playground.netlify.app/
             "/^https:\\/\\/eslint-online-playground\\.netlify\\.app\\//u":
+              "/.*/u",
+            // https://github.com/eslint/markdown/blob/main/docs/processors/markdown.md
+            "/^https:\\/\\/github\\.com\\/eslint\\/markdown\\/blob\\/main\\/docs\\/processors\\/markdown\\.md/u":
               "/.*/u",
           },
         },
