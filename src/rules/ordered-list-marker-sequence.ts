@@ -11,6 +11,11 @@ import type {
   Root,
 } from "../language/ast-types.ts";
 
+type IncrementMode = "always" | "never";
+type Options = {
+  increment?: IncrementMode;
+};
+
 export default createRule("ordered-list-marker-sequence", {
   meta: {
     type: "layout",
@@ -21,7 +26,17 @@ export default createRule("ordered-list-marker-sequence", {
     },
     fixable: "code",
     hasSuggestions: true,
-    schema: [],
+    schema: [
+      {
+        type: "object",
+        properties: {
+          increment: {
+            enum: ["always", "never"],
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
     messages: {
       inconsistent:
         "Ordered list marker should be '{{expected}}' but found '{{actual}}'.",
@@ -32,6 +47,8 @@ export default createRule("ordered-list-marker-sequence", {
   },
   create(context) {
     const sourceCode = context.sourceCode;
+    const options: Options = context.options[0] || {};
+    const incrementMode: IncrementMode = options.increment ?? "always";
 
     type Scope = {
       node: Root | Blockquote | ListItem | FootnoteDefinition | CustomContainer;
@@ -51,6 +68,46 @@ export default createRule("ordered-list-marker-sequence", {
       node: List,
       marker: OrderedListMarker,
     ): boolean {
+      if (incrementMode === "never") {
+        // In "never" mode, all lists should start with 1
+        if (node.start == null || node.start <= 1) return true;
+
+        const suggest: SuggestedEdit[] = [
+          {
+            messageId: "suggestStartFromN",
+            data: { expected: "1" },
+            fix(fixer: RuleTextEditor) {
+              const expectedMarker = `1${marker.kind}`;
+              const range = sourceCode.getRange(node);
+              return fixer.replaceTextRange(
+                [range[0], range[0] + marker.raw.length],
+                expectedMarker,
+              );
+            },
+          },
+        ];
+
+        context.report({
+          node: node.children[0] || node,
+          messageId: "inconsistentStart",
+          data: {
+            expected: "'1'",
+            actual: marker.sequence.raw,
+          },
+          fix(fixer) {
+            const expectedMarker = `1${marker.kind}`;
+            const range = sourceCode.getRange(node);
+            return fixer.replaceTextRange(
+              [range[0], range[0] + marker.raw.length],
+              expectedMarker,
+            );
+          },
+          suggest,
+        });
+        return false;
+      }
+
+      // Original "always" mode logic
       if (node.start == null || node.start <= 1) return true;
       if (
         scope.last != null &&
@@ -110,6 +167,37 @@ export default createRule("ordered-list-marker-sequence", {
      */
     function verifyListItems(node: List) {
       if (node.start == null) return;
+
+      if (incrementMode === "never") {
+        // In "never" mode, all items should use "1"
+        for (const item of node.children) {
+          const marker = getListItemMarker(sourceCode, item);
+          if (marker.kind !== "." && marker.kind !== ")") {
+            continue;
+          }
+          if (marker.sequence.value !== 1) {
+            const expectedMarker = `1${marker.kind}`;
+            context.report({
+              node: item,
+              messageId: "inconsistent",
+              data: {
+                expected: expectedMarker,
+                actual: marker.raw,
+              },
+              fix(fixer) {
+                const range = sourceCode.getRange(item);
+                return fixer.replaceTextRange(
+                  [range[0], range[0] + marker.raw.length],
+                  expectedMarker,
+                );
+              },
+            });
+          }
+        }
+        return;
+      }
+
+      // Original "always" mode logic
       for (let i = 0; i < node.children.length; i++) {
         const item = node.children[i];
         const marker = getListItemMarker(sourceCode, item);
@@ -167,10 +255,17 @@ export default createRule("ordered-list-marker-sequence", {
 
         verifyStartSequence(node, marker);
         verifyListItems(node);
-        scope.last = {
-          kind: marker.kind,
-          sequence: node.start + node.children.length - 1,
-        };
+
+        if (incrementMode === "never") {
+          // In "never" mode, we don't track sequences
+          scope.last = null;
+        } else {
+          // In "always" mode, track the last sequence
+          scope.last = {
+            kind: marker.kind,
+            sequence: node.start + node.children.length - 1,
+          };
+        }
       },
     };
   },

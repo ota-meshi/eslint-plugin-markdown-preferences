@@ -70,6 +70,147 @@ Output:
 
 
 Test: ordered-list-marker-sequence >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/increment-never/mixed-markers-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - increment: never
+Plugins: unable to serialize
+
+Code:
+  1 | # Mixed markers (should be invalid with increment: never)
+  2 |
+  3 | 1. foo
+  4 | 1. bar
+  5 | 2. baz
+    | ^~~~~~ [1]
+  6 |
+
+Output:
+  1 | # Mixed markers (should be invalid with increment: never)
+  2 |
+  3 | 1. foo
+  4 | 1. bar
+  5 | 1. baz
+  6 |
+
+[1] Ordered list marker should be '1.' but found '2.'.
+---
+
+
+Test: ordered-list-marker-sequence >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/increment-never/nested-sequential-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - increment: never
+Plugins: unable to serialize
+
+Code:
+  1 | # Nested list with sequential markers (should be invalid with increment: never)
+  2 |
+  3 | 1. foo
+  4 | 1. bar
+  5 |    1. nested
+  6 |    2. nested2
+    |    ^~~~~~~~~~ [1]
+  7 | 1. baz
+  8 |
+
+Output:
+  1 | # Nested list with sequential markers (should be invalid with increment: never)
+  2 |
+  3 | 1. foo
+  4 | 1. bar
+  5 |    1. nested
+  6 |    1. nested2
+  7 | 1. baz
+  8 |
+
+[1] Ordered list marker should be '1.' but found '2.'.
+---
+
+
+Test: ordered-list-marker-sequence >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/increment-never/sequential-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - increment: never
+Plugins: unable to serialize
+
+Code:
+  1 | # Sequential markers (should be invalid with increment: never)
+  2 |
+  3 | 1. foo
+  4 | 2. bar
+    | ^~~~~~ [1]
+  5 | 3. baz
+    | ^~~~~~ [2]
+  6 |
+
+Output:
+  1 | # Sequential markers (should be invalid with increment: never)
+  2 |
+  3 | 1. foo
+  4 | 1. bar
+  5 | 1. baz
+  6 |
+
+[1] Ordered list marker should be '1.' but found '2.'.
+[2] Ordered list marker should be '1.' but found '3.'.
+---
+
+
+Test: ordered-list-marker-sequence >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/increment-never/start-from-two-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - increment: never
+Plugins: unable to serialize
+
+Code:
+  1 | # List starting from 2 (should be invalid with increment: never)
+  2 |
+  3 | 2. foo
+    | ^~~~~~ [1]
+    | ^~~~~~ [2]
+  4 | 2. bar
+    | ^~~~~~ [3]
+  5 | 2. baz
+    | ^~~~~~ [4]
+  6 |
+
+Output:
+  1 | # List starting from 2 (should be invalid with increment: never)
+  2 |
+  3 | 1. foo
+  4 | 1. bar
+  5 | 1. baz
+  6 |
+
+[1] Ordered list start should be '1' but found '2'.
+    Suggestions:
+      - Change list marker to start from '1'.
+        Output:
+          1 | # List starting from 2 (should be invalid with increment: never)
+          2 |
+          3 | 1. foo
+          4 | 2. bar
+          5 | 2. baz
+          6 |
+[2] Ordered list marker should be '1.' but found '2.'.
+[3] Ordered list marker should be '1.' but found '2.'.
+[4] Ordered list marker should be '1.' but found '2.'.
+---
+
+
+Test: ordered-list-marker-sequence >> invalid
 Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/jump-number-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:

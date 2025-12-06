@@ -16,21 +16,22 @@ since: "v0.12.0"
 
 ## 📖 Rule Details
 
-This rule enforces that ordered list markers in Markdown use strictly sequential numbers. If the numbering skips, decreases, or starts with an unexpected value, this rule will report an error. The rule can automatically format and correct list numbers to ensure consistency throughout your document.
+This rule enforces consistent numbering in ordered list markers. By default, it requires strictly sequential numbers (1, 2, 3, ...). Alternatively, you can configure it to enforce that all items use `1.` as the marker.
+
+Using `1.` for all items simplifies maintenance, makes diffs cleaner, and reduces the chance of renumbering errors when reordering or inserting new list items. All major Markdown parsers render the list with proper sequential numbers regardless of the actual marker values.
 
 Key features:
 
-- Ensures that ordered list markers always increase by one, regardless of how many lists are present in a document.
-- Handles lists that are separated by paragraphs or other block elements, so numbering can continue across disconnected lists if appropriate.
+- Default behavior (`increment: "always"`): Ensures that ordered list markers always increase by one, regardless of how many lists are present in a document.
+- Alternative behavior (`increment: "never"`): Enforces that all list items use `1.` (or `1)`) as the marker.
+- Handles lists that are separated by paragraphs or other block elements.
 - Prevents accidental mistakes such as duplicate, skipped, or reversed numbers, which can reduce readability and cause confusion in rendered Markdown.
 
 This rule is especially useful when:
 
 - Multiple people are editing Markdown documents and list numbering errors are likely to occur.
 - You want to enforce strict consistency and clarity in documentation or code review processes.
-- Some Markdown parsers or tools may render lists incorrectly if the numbering is not sequential.
-
-By enforcing sequential numbering, this rule helps maintain high-quality, easy-to-read Markdown documents and prevents subtle formatting issues.
+- You prefer simplified maintenance with `1.` markers that avoid renumbering when list items are reordered.
 
 <!-- prettier-ignore-start -->
 
@@ -106,7 +107,79 @@ paragraph
 
 ## 🔧 Options
 
-This rule has no options.
+This rule has an optional configuration object with the following property:
+
+- `increment` (default: `"always"`): Controls how list markers should be numbered.
+  - `"always"`: Requires sequential numbering (1, 2, 3, ...)
+  - `"never"`: Requires all items to use `1.` or `1)` as the marker
+
+### Default Configuration (`increment: "always"`)
+
+This is the default behavior when no options are specified.
+
+<!-- eslint-skip -->
+
+```json
+{
+  "markdown-preferences/ordered-list-marker-sequence": [
+    "error",
+    { "increment": "always" }
+  ]
+}
+```
+
+<!-- eslint-skip -->
+
+```md
+<!-- ✓ GOOD -->
+
+1. foo
+2. bar
+3. baz
+
+<!-- ✗ BAD -->
+
+1. foo
+1. bar
+1. baz
+```
+
+### Alternative Configuration (`increment: "never"`)
+
+When set to `"never"`, all list items must use `1.` (or `1)` if using parenthesis markers).
+
+<!-- eslint-skip -->
+
+```json
+{
+  "markdown-preferences/ordered-list-marker-sequence": [
+    "error",
+    { "increment": "never" }
+  ]
+}
+```
+
+<!-- eslint-skip -->
+
+```md
+<!-- ✓ GOOD -->
+
+1. foo
+1. bar
+1. baz
+
+<!-- Also valid with parenthesis markers -->
+
+1. foo
+1. bar
+1. baz
+
+<!-- ✗ BAD -->
+
+1. foo
+2. bar
+3. baz
+```
 
 ## 📚 Further Reading
 
