@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.39.0
+
+### Minor Changes
+
+- [#222](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/222) [`24995eb`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/24995ebe94f8e581b31d40e51ce46f1ecbcd8ce7) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - feat([`markdown-preferences/ordered-list-marker-sequence`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-sequence.html)): add `increment` option to enforce either sequential numbering or using `1.` for all items
+
 ## 0.38.0
 
 ### Minor Changes
