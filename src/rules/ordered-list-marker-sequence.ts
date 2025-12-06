@@ -20,7 +20,8 @@ export default createRule("ordered-list-marker-sequence", {
   meta: {
     type: "layout",
     docs: {
-      description: "enforce that ordered list markers use sequential numbers",
+      description:
+        "enforce consistent ordered list marker numbering (sequential or flat)",
       categories: ["standard"],
       listCategory: "Decorative",
     },

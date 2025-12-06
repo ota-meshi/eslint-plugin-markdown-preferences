@@ -170,9 +170,9 @@ When set to `"never"`, all list items must use `1.` (or `1)` if using parenthesi
 
 <!-- Also valid with parenthesis markers -->
 
-1. foo
-1. bar
-1. baz
+1) foo
+1) bar
+1) baz
 
 <!-- ✗ BAD -->
 
