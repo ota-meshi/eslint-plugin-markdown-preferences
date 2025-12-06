@@ -73,14 +73,12 @@ export default createRule<[Options?]>("ordered-list-marker-sequence", {
 
       const expected = [0, 1];
       if (incrementMode !== "never") {
-        if (
-          scope.last != null &&
-          scope.last.sequence + 1 === node.start &&
-          marker.kind === scope.last.kind
-        )
-          return true;
+        // In "always" mode, expect the last sequence + 1
         if (scope.last != null && marker.kind === scope.last.kind) {
-          expected.push(scope.last.sequence + 1);
+          if (scope.last.sequence + 1 === node.start) return true;
+          if (scope.last.sequence + 1 > 1) {
+            expected.push(scope.last.sequence + 1);
+          }
         }
       }
 
@@ -132,7 +130,7 @@ export default createRule<[Options?]>("ordered-list-marker-sequence", {
     function verifyListItems(node: List) {
       if (node.start == null) return;
 
-      for (let i = 0; i < node.children.length; i++) {
+      for (let i = 1; i < node.children.length; i++) {
         const item = node.children[i];
         const marker = getListItemMarker(sourceCode, item);
         if (marker.kind !== "." && marker.kind !== ")") {

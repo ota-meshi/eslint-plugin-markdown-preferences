@@ -165,9 +165,13 @@ When set to `"never"`, all list items must use the same constant marker througho
 }
 ```
 
+<!-- prettier-ignore-start -->
+
 <!-- eslint-skip -->
 
 ```md
+<!-- eslint markdown-preferences/ordered-list-marker-sequence: ['error', { increment: 'never' }] -->
+
 <!-- ✓ GOOD -->
 
 1. foo
@@ -192,6 +196,8 @@ When set to `"never"`, all list items must use the same constant marker througho
 2. bar
 3. baz
 ```
+
+<!-- prettier-ignore-end -->
 
 ## 📚 Further Reading
 
