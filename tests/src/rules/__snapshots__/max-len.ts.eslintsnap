@@ -27,7 +27,7 @@ Language: markdown-preferences/extended-syntax
 LanguageOptions:
   frontmatter: yaml
 Options:
-  - codeBlock: 60
+  - code: 60
 Plugins: unable to serialize
 
 Code:

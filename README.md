@@ -138,20 +138,6 @@ The rules with the following 💄 are included in the `standard` config.
 
 <!--RULES_TABLE_START-->
 
-### Layout & Formatting Rules
-
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
-
-<!-- prettier-ignore-start -->
-
-| Rule ID                                                                                                           | Description                                          | Fixable | Config |
-| :---------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------- | :-----: | :----: |
-| [markdown-preferences/max-len](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/max-len.html) | enforce maximum length for various Markdown entities |         |   💄   |
-
-<!-- prettier-ignore-end -->
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
-
 ### Preference Rules
 
 - Rules to unify the expression and description style of documents.
@@ -259,6 +245,20 @@ The rules with the following 💄 are included in the `standard` config.
 | [markdown-preferences/table-pipe-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-pipe-alignment.html)                               | enforce consistent alignment of table pipes                                               |   🔧    |   💄   |
 | [markdown-preferences/thematic-break-length](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-length.html)                             | enforce consistent length for thematic breaks (horizontal rules) in Markdown.             |   🔧    |   💄   |
 | [markdown-preferences/thematic-break-sequence-pattern](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-sequence-pattern.html)         | enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown. |   🔧    |   💄   |
+
+<!-- prettier-ignore-end -->
+
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
+
+### Undefined Rules
+
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+
+<!-- prettier-ignore-start -->
+
+| Rule ID                                                                                                           | Description                                          | Fixable | Config |
+| :---------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------- | :-----: | :----: |
+| [markdown-preferences/max-len](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/max-len.html) | enforce maximum length for various Markdown entities |         |        |
 
 <!-- prettier-ignore-end -->
 

@@ -159,10 +159,10 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 
 ## Rules Related to Documents
 
-| Description                   | [markdownlint] Rules                                                          | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules |
-| ----------------------------- | ----------------------------------------------------------------------------- | ------------------------ | ------------------------------------------ |
-| Enforce a maximum line length | [MD013] _line-length_<br>Line length                                          | --                       | --                                         |
-| Proper names                  | [MD044] _proper-names_<br>Proper names should have the correct capitalization | --                       | --                                         |
+| Description                   | [markdownlint] Rules                                                          | [@eslint/markdown] Rules | `eslint-plugin-markdown-preferences` Rules                                             |
+| ----------------------------- | ----------------------------------------------------------------------------- | ------------------------ | -------------------------------------------------------------------------------------- |
+| Enforce a maximum line length | [MD013] _line-length_<br>Line length                                          | --                       | [markdown-preferences/max-len]<br>enforce maximum length for various Markdown entities |
+| Proper names                  | [MD044] _proper-names_<br>Proper names should have the correct capitalization | --                       | --                                                                                     |
 
 ## Rules Related to Syntax
 
@@ -256,6 +256,7 @@ Please note that each OSS is constantly evolving, so this list is not exhaustive
 [markdown-preferences/link-paren-spacing]: ./../rules/link-paren-spacing.md
 [markdown-preferences/link-title-style]: ./../rules/link-title-style.md
 [markdown-preferences/list-marker-alignment]: ../rules/list-marker-alignment.md
+[markdown-preferences/max-len]: ./../rules/max-len.md
 [markdown-preferences/no-heading-trailing-punctuation]: ./../rules/no-heading-trailing-punctuation.md
 [markdown-preferences/no-implicit-block-closing]: ../rules/no-implicit-block-closing.md
 [markdown-preferences/no-laziness-blockquotes]: ../rules/no-laziness-blockquotes.md

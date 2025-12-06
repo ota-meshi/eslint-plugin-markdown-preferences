@@ -1,35 +1,88 @@
 import type {
   Blockquote,
   Code,
+  FootnoteDefinition,
   Heading,
-  ListItem,
+  Html,
+  List,
+  Math,
   Paragraph,
-  TableRow,
+  Table,
+  Toml,
+  Yaml,
 } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
 import { getTextWidth } from "../utils/text-width.ts";
 
+type IgnorableOption = number | "ignore";
+type NestedOptions = {
+  heading?: IgnorableOption;
+  paragraph?: IgnorableOption;
+};
+
 type OptionObject = {
-  heading?: number;
-  paragraph?: number;
-  listItem?: number;
-  blockquote?: number;
-  tableRow?: number;
-  codeBlock?: number | null;
+  heading?: IgnorableOption;
+  paragraph?: IgnorableOption;
+  list?: IgnorableOption | NestedOptions;
+  blockquote?: IgnorableOption | NestedOptions;
+  table?: IgnorableOption;
+  footnoteDefinition?: IgnorableOption | NestedOptions;
+  html?: IgnorableOption;
+  code?: IgnorableOption | Record<string, IgnorableOption>;
+  frontmatter?: IgnorableOption | Record<string, IgnorableOption>;
+  math?: IgnorableOption;
   ignoreUrls?: boolean;
 };
 type Option = OptionObject;
 
 const URL_PATTERN =
-  /https?:\/\/(?:w{3}\.)?[\w#%+\-.:=@~]{1,256}\.[()0-9A-Za-z]{1,6}\b[\w#%&()+\-./:=?@~]*/gu;
+  /https?:\/\/(?:w{3}\.)?[\w#%+.:=@~-]{1,256}\.[\w()]{1,6}\b[\w#%&()+./:=?@~-]*/gu;
+
+const ignorableSchema = {
+  oneOf: [
+    {
+      type: "integer",
+      minimum: 1,
+    },
+    {
+      enum: ["ignore"],
+    },
+  ],
+};
+
+const nestedOptionsSchema = {
+  oneOf: [
+    ignorableSchema,
+    {
+      type: "object",
+      properties: {
+        heading: ignorableSchema,
+        paragraph: ignorableSchema,
+      },
+      additionalProperties: false,
+    },
+  ],
+};
+
+const codeOrFrontmatterSchema = {
+  oneOf: [
+    ignorableSchema,
+    {
+      type: "object",
+      patternProperties: {
+        ".*": ignorableSchema,
+      },
+      additionalProperties: false,
+    },
+  ],
+};
 
 export default createRule<[Option?]>("max-len", {
   meta: {
     type: "layout",
     docs: {
       description: "enforce maximum length for various Markdown entities",
-      categories: ["standard"],
-      listCategory: "Layout & Formatting",
+      categories: [],
     },
     fixable: null,
     hasSuggestions: false,
@@ -37,37 +90,16 @@ export default createRule<[Option?]>("max-len", {
       {
         type: "object",
         properties: {
-          heading: {
-            type: "integer",
-            minimum: 1,
-          },
-          paragraph: {
-            type: "integer",
-            minimum: 1,
-          },
-          listItem: {
-            type: "integer",
-            minimum: 1,
-          },
-          blockquote: {
-            type: "integer",
-            minimum: 1,
-          },
-          tableRow: {
-            type: "integer",
-            minimum: 1,
-          },
-          codeBlock: {
-            oneOf: [
-              {
-                type: "integer",
-                minimum: 1,
-              },
-              {
-                type: "null",
-              },
-            ],
-          },
+          heading: ignorableSchema,
+          paragraph: ignorableSchema,
+          list: nestedOptionsSchema,
+          blockquote: nestedOptionsSchema,
+          table: ignorableSchema,
+          footnoteDefinition: nestedOptionsSchema,
+          html: ignorableSchema,
+          code: codeOrFrontmatterSchema,
+          frontmatter: codeOrFrontmatterSchema,
+          math: ignorableSchema,
           ignoreUrls: {
             type: "boolean",
           },
@@ -84,82 +116,88 @@ export default createRule<[Option?]>("max-len", {
     const sourceCode = context.sourceCode;
 
     const opt = context.options[0] || {};
-    const headingMax = opt.heading ?? 80;
-    const paragraphMax = opt.paragraph ?? 120;
-    const listItemMax = opt.listItem ?? 120;
-    const blockquoteMax = opt.blockquote ?? 120;
-    const tableRowMax = opt.tableRow ?? 120;
-    const codeBlockMax = opt.codeBlock ?? null; // null means ignore
     const ignoreUrls = opt.ignoreUrls ?? true;
 
-    // Track which ranges we've already checked to avoid double-checking
-    const checkedRanges = new Set<string>();
+    // Track which lines we've already checked to avoid double-checking
+    const checkedLines = new Set<number>();
+
+    // Track context for nested checks
+    const contextStack: { type: string; options: NestedOptions }[] = [];
 
     /**
-     * Check if a line contains a URL that takes up significant space
+     * Get the max length for a specific entity type
      */
-    function shouldIgnoreLine(text: string, maxLength: number): boolean {
-      if (!ignoreUrls) return false;
-
-      // Find all URLs in the text
-      const urls = [...text.matchAll(URL_PATTERN)];
-      if (urls.length === 0) return false;
-
-      // Calculate the longest URL length
-      const longestUrlLength = Math.max(
-        ...urls.map((match) => match[0].length),
-      );
-
-      // If the URL takes up a significant portion of the line, ignore it
-      // We consider it significant if the URL is longer than the max length
-      // or if the text without URLs would fit within the max length
-      if (longestUrlLength > maxLength) return true;
-
-      // Calculate length without URLs
-      let textWithoutUrls = text;
-      for (const match of urls) {
-        textWithoutUrls = textWithoutUrls.replace(match[0], "");
+    function getMaxLength(
+      entityType: "heading" | "paragraph",
+      defaultMax: number,
+    ): number | null {
+      // Check if we're in a nested context (blockquote, list, footnoteDefinition)
+      for (let i = contextStack.length - 1; i >= 0; i--) {
+        const ctx = contextStack[i];
+        if (ctx.options[entityType] !== undefined) {
+          const val = ctx.options[entityType];
+          if (val === "ignore") return null;
+          return val;
+        }
       }
 
-      const widthWithoutUrls = getTextWidth(textWithoutUrls);
-      return widthWithoutUrls <= maxLength;
+      // Use top-level option
+      const val = opt[entityType];
+      if (val === undefined) return defaultMax;
+      if (val === "ignore") return null;
+      return val;
     }
 
     /**
-     * Get the text content of a node by concatenating all its text children
+     * Check if a line contains a URL (following @stylistic/max-len behavior)
+     * URLs are identified by the URL_PATTERN
      */
-    function getNodeText(
-      node: Heading | Paragraph | ListItem | Blockquote | TableRow | Code,
-    ): string {
-      const range = sourceCode.getRange(node);
-      return sourceCode.text.slice(range[0], range[1]);
+    function containsUrl(line: string): boolean {
+      // Reset regex state
+      URL_PATTERN.lastIndex = 0;
+      return URL_PATTERN.test(line);
     }
 
     /**
      * Check lines in a node against a maximum length
      */
     function checkLines(
-      node: Heading | Paragraph | ListItem | Blockquote | TableRow | Code,
-      maxLength: number,
+      node:
+        | Heading
+        | Paragraph
+        | List
+        | Blockquote
+        | Table
+        | FootnoteDefinition
+        | Html
+        | Code
+        | Yaml
+        | Toml
+        | Math,
+      maxLength: number | "ignore" | null | undefined,
     ): void {
-      const text = getNodeText(node);
-      const lines = text.split(/\r?\n/);
-      const startLoc = sourceCode.getLocFromIndex(sourceCode.getRange(node)[0]);
+      if (
+        maxLength === "ignore" ||
+        maxLength === null ||
+        maxLength === undefined
+      )
+        return;
 
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
+      const nodeLoc = sourceCode.getLoc(node);
+      const startLine = nodeLoc.start.line;
+      const endLine = nodeLoc.end.line;
+
+      for (let lineNumber = startLine; lineNumber <= endLine; lineNumber++) {
+        // Skip if we've already checked this line
+        if (checkedLines.has(lineNumber)) {
+          continue;
+        }
+
+        const line = sourceCode.lines[lineNumber - 1];
         const width = getTextWidth(line);
 
         if (width > maxLength) {
-          if (shouldIgnoreLine(line, maxLength)) {
-            continue;
-          }
-
-          const lineNumber = startLoc.line + i;
-          const rangeKey = `${lineNumber}`;
-
-          // Skip if we've already checked this line
-          if (checkedRanges.has(rangeKey)) {
+          if (ignoreUrls && containsUrl(line)) {
             continue;
           }
 
@@ -176,31 +214,138 @@ export default createRule<[Option?]>("max-len", {
             },
           });
 
-          checkedRanges.add(rangeKey);
+          checkedLines.add(lineNumber);
         }
       }
     }
 
+    /**
+     * Get code/frontmatter max length by language
+     */
+    function getCodeMaxLength(lang: string | null | undefined): number | null {
+      const codeOpt = opt.code;
+      if (codeOpt === undefined) return null; // ignore by default
+      if (codeOpt === "ignore") return null;
+      if (typeof codeOpt === "number") return codeOpt;
+
+      // Language-specific configuration
+      if (lang && codeOpt[lang] !== undefined) {
+        const val = codeOpt[lang];
+        if (val === "ignore") return null;
+        return val;
+      }
+
+      return null; // ignore if no match
+    }
+
+    /**
+     * Get frontmatter max length by type
+     */
+    function getFrontmatterMaxLength(type: "yaml" | "toml"): number | null {
+      const frontmatterOpt = opt.frontmatter;
+      if (frontmatterOpt === undefined) return null; // ignore by default
+      if (frontmatterOpt === "ignore") return null;
+      if (typeof frontmatterOpt === "number") return frontmatterOpt;
+
+      // Type-specific configuration
+      if (frontmatterOpt[type] !== undefined) {
+        const val = frontmatterOpt[type];
+        if (val === "ignore") return null;
+        return val;
+      }
+
+      return null; // ignore if no match
+    }
+
     return {
       heading(node: Heading) {
-        checkLines(node, headingMax);
+        const maxLength = getMaxLength("heading", 80);
+        checkLines(node, maxLength, "heading");
       },
       paragraph(node: Paragraph) {
-        checkLines(node, paragraphMax);
+        const maxLength = getMaxLength("paragraph", 120);
+        checkLines(node, maxLength, "paragraph");
       },
-      listItem(node: ListItem) {
-        // Check the list item content
-        checkLines(node, listItemMax);
+      list(node: List) {
+        const listOpt = opt.list ?? 120;
+        if (listOpt === "ignore") return;
+
+        if (typeof listOpt === "object") {
+          // Nested configuration
+          contextStack.push({ type: "list", options: listOpt });
+        } else {
+          // Simple number
+          checkLines(node, listOpt, "list");
+        }
+      },
+      "list:exit"(_node: List) {
+        const listOpt = opt.list;
+        if (typeof listOpt === "object") {
+          contextStack.pop();
+        }
       },
       blockquote(node: Blockquote) {
-        checkLines(node, blockquoteMax);
+        const blockquoteOpt = opt.blockquote ?? 120;
+        if (blockquoteOpt === "ignore") return;
+
+        if (typeof blockquoteOpt === "object") {
+          // Nested configuration
+          contextStack.push({ type: "blockquote", options: blockquoteOpt });
+        } else {
+          // Simple number
+          checkLines(node, blockquoteOpt, "blockquote");
+        }
       },
-      tableRow(node: TableRow) {
-        checkLines(node, tableRowMax);
+      "blockquote:exit"(_node: Blockquote) {
+        const blockquoteOpt = opt.blockquote;
+        if (typeof blockquoteOpt === "object") {
+          contextStack.pop();
+        }
+      },
+      table(node: Table) {
+        const tableOpt = opt.table ?? 120;
+        checkLines(node, tableOpt, "table");
+      },
+      footnoteDefinition(node: FootnoteDefinition) {
+        const footnoteOpt = opt.footnoteDefinition ?? 120;
+        if (footnoteOpt === "ignore") return;
+
+        if (typeof footnoteOpt === "object") {
+          // Nested configuration
+          contextStack.push({
+            type: "footnoteDefinition",
+            options: footnoteOpt,
+          });
+        } else {
+          // Simple number
+          checkLines(node, footnoteOpt, "footnoteDefinition");
+        }
+      },
+      "footnoteDefinition:exit"(_node: FootnoteDefinition) {
+        const footnoteOpt = opt.footnoteDefinition;
+        if (typeof footnoteOpt === "object") {
+          contextStack.pop();
+        }
+      },
+      html(node: Html) {
+        const htmlOpt = opt.html ?? 120;
+        checkLines(node, htmlOpt, "html");
       },
       code(node: Code) {
-        if (codeBlockMax === null) return; // Ignore code blocks by default
-        checkLines(node, codeBlockMax);
+        const maxLength = getCodeMaxLength(node.lang);
+        checkLines(node, maxLength, "code");
+      },
+      yaml(node: Yaml) {
+        const maxLength = getFrontmatterMaxLength("yaml");
+        checkLines(node, maxLength, "frontmatter");
+      },
+      toml(node: Toml) {
+        const maxLength = getFrontmatterMaxLength("toml");
+        checkLines(node, maxLength, "frontmatter");
+      },
+      math(node: Math) {
+        const mathOpt = opt.math;
+        checkLines(node, mathOpt, "math");
       },
     };
   },

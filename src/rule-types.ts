@@ -440,12 +440,29 @@ type MarkdownPreferencesListMarkerAlignment = []|[{
 }]
 // ----- markdown-preferences/max-len -----
 type MarkdownPreferencesMaxLen = []|[{
-  heading?: number
-  paragraph?: number
-  listItem?: number
-  blockquote?: number
-  tableRow?: number
-  codeBlock?: (number | null)
+  heading?: (number | "ignore")
+  paragraph?: (number | "ignore")
+  list?: ((number | "ignore") | {
+    heading?: (number | "ignore")
+    paragraph?: (number | "ignore")
+  })
+  blockquote?: ((number | "ignore") | {
+    heading?: (number | "ignore")
+    paragraph?: (number | "ignore")
+  })
+  table?: (number | "ignore")
+  footnoteDefinition?: ((number | "ignore") | {
+    heading?: (number | "ignore")
+    paragraph?: (number | "ignore")
+  })
+  html?: (number | "ignore")
+  code?: ((number | "ignore") | {
+    [k: string]: (number | "ignore")
+  })
+  frontmatter?: ((number | "ignore") | {
+    [k: string]: (number | "ignore")
+  })
+  math?: (number | "ignore")
   ignoreUrls?: boolean
 }]
 // ----- markdown-preferences/no-heading-trailing-punctuation -----
