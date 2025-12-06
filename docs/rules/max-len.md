@@ -68,22 +68,29 @@ This rule accepts an object with the following properties:
 }
 ```
 
-### Entity-specific Options
+### Entity Options
+
+These options control the maximum line length for specific Markdown entity types:
 
 - `heading` (default: `80`): Maximum line length for headings. Set to `"ignore"` to skip checking.
 - `paragraph` (default: `120`): Maximum line length for paragraphs. Set to `"ignore"` to skip checking.
-- `list` (default: `120`): Maximum line length for lists. Set to `"ignore"` to skip checking.
-- `blockquote` (default: `120`): Maximum line length for blockquotes. Set to `"ignore"` to skip checking.
 - `table` (default: `120`): Maximum line length for tables. Set to `"ignore"` to skip checking.
-- `footnoteDefinition` (default: `120`): Maximum line length for footnote definitions. Set to `"ignore"` to skip checking.
 - `html` (default: `120`): Maximum line length for HTML blocks. Set to `"ignore"` to skip checking.
 - `code` (default: `"ignore"`): Maximum line length for code blocks. Set to `"ignore"` to skip checking (recommended). See [notes on code blocks](#notes-on-code-blocks) below.
 - `frontmatter` (default: `"ignore"`): Maximum line length for frontmatter. Set to `"ignore"` to skip checking (recommended).
 - `math` (default: `"ignore"`): Maximum line length for math blocks. Set to `"ignore"` to skip checking.
 
-### Nested Configuration for Containers
+### Container Options
 
-For `list`, `blockquote`, and `footnoteDefinition`, you can specify different limits for nested headings and paragraphs:
+These options control line length checking for entities within container elements. Containers can either have a simple numeric limit (applied to all nested content) or an object specifying different limits for different entity types within that container:
+
+- `list`: Override limits for content within lists. When not specified, nested content inherits from entity-level defaults.
+- `blockquote`: Override limits for content within blockquotes. When not specified, nested content inherits from entity-level defaults.
+- `footnoteDefinition`: Override limits for content within footnote definitions. When not specified, nested content inherits from entity-level defaults.
+
+#### Nested Configuration for Containers
+
+For `list`, `blockquote`, and `footnoteDefinition`, you can specify different limits for any entity types within these containers (including `heading`, `paragraph`, `table`, `html`, `math`, `code`, and `frontmatter`):
 
 ```json
 {
@@ -92,16 +99,21 @@ For `list`, `blockquote`, and `footnoteDefinition`, you can specify different li
     {
       "heading": 80,
       "paragraph": 120,
+      "table": 100,
       "blockquote": {
         "heading": 70,
-        "paragraph": 100
+        "paragraph": 100,
+        "table": 90
       }
     }
   ]
 }
 ```
 
-In this example, headings inside blockquotes are limited to 70 characters, while standalone headings are limited to 80 characters.
+In this example:
+- Standalone headings are limited to 80 characters, but headings inside blockquotes are limited to 70 characters
+- Standalone tables are limited to 100 characters, but tables inside blockquotes are limited to 90 characters
+- All entity types (`heading`, `paragraph`, `table`, `html`, `math`, `code`, `frontmatter`) can be configured within containers
 
 ### Language-specific Code Block Configuration
 

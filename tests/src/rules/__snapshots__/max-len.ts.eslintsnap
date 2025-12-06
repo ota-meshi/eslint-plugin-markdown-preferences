@@ -44,6 +44,40 @@ Code:
 
 
 Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/code-language-specific-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - code:
+      javascript: 60
+      python: 50
+Plugins: unable to serialize
+
+Code:
+  1 | Code blocks with language-specific limits:
+  2 |
+  3 | ```javascript
+  4 | const veryLongVariableName = "this line exceeds the 60 character limit for javascript";
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  5 | ```
+  6 |
+  7 | ```python
+  8 | very_long_variable_name = "this exceeds 50 chars for python"
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  9 | ```
+ 10 |
+ 11 | ```shell
+ 12 | echo "This shell script line is very long but shell is not configured so it's ignored"
+ 13 | ```
+ 14 |
+
+[1] Line length of 87 exceeds the maximum of 60.
+[2] Line length of 60 exceeds the maximum of 50.
+---
+
+
+Test: max-len >> invalid
 Filename: tests/fixtures/rules/max-len/invalid/custom-max-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
@@ -63,6 +97,52 @@ Code:
 
 [1] Line length of 43 exceeds the maximum of 40.
 [2] Line length of 48 exceeds the maximum of 40.
+---
+
+
+Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/footnote-definition-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - footnoteDefinition: 60
+Plugins: unable to serialize
+
+Code:
+  1 | Here is a reference to a footnote[^1].
+  2 |
+  3 | [^1]: This is a footnote definition with a very long line that exceeds sixty characters limit.
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  4 |
+
+[1] Line length of 94 exceeds the maximum of 60.
+---
+
+
+Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/frontmatter-yaml-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - frontmatter:
+      yaml: 50
+Plugins: unable to serialize
+
+Code:
+  1 | ---
+  2 | title: "This is a very long title that exceeds the 50 character limit"
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  3 | description: Short
+  4 | ---
+  5 |
+  6 | # Content
+  7 |
+  8 | This is the content.
+  9 |
+
+[1] Line length of 70 exceeds the maximum of 50.
 ---
 
 
@@ -87,6 +167,30 @@ Code:
 
 
 Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/html-block-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - html: 60
+Plugins: unable to serialize
+
+Code:
+  1 | # Document with HTML
+  2 |
+  3 | <div class="container-with-a-very-long-class-name-that-exceeds-sixty-characters">
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  4 |   Content here
+  5 | </div>
+  6 |
+  7 | Regular paragraph.
+  8 |
+
+[1] Line length of 81 exceeds the maximum of 60.
+---
+
+
+Test: max-len >> invalid
 Filename: tests/fixtures/rules/max-len/invalid/list-long-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
@@ -103,6 +207,60 @@ Code:
 
 [1] Line length of 144 exceeds the maximum of 120.
 [2] Line length of 137 exceeds the maximum of 120.
+---
+
+
+Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/math-block-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - math: 50
+Plugins: unable to serialize
+
+Code:
+  1 | Here is a math block:
+  2 |
+  3 | $$
+  4 | \text{This is a very long mathematical expression that exceeds the fifty character limit}
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  5 | $$
+  6 |
+  7 | Regular content.
+  8 |
+
+[1] Line length of 89 exceeds the maximum of 50.
+---
+
+
+Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/nested-blockquote-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - heading: 80
+    paragraph: 120
+    blockquote:
+      heading: 50
+      paragraph: 60
+Plugins: unable to serialize
+
+Code:
+  1 | # This standalone heading fits in the 80 character limit
+  2 |
+  3 | This standalone paragraph fits comfortably within the 120 character maximum length limit.
+  4 |
+  5 | > ## This blockquote heading exceeds the 50 character limit
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  6 | >
+  7 | > This blockquote paragraph is way too long and exceeds the 60 character limit set for blockquote content.
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  8 |
+
+[1] Line length of 59 exceeds the maximum of 50.
+[2] Line length of 106 exceeds the maximum of 60.
 ---
 
 
