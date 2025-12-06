@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.40.0
+
+### Minor Changes
+
+- [#224](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/224) [`5796931`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/57969315da3f8c5c94d3bfea95f8abe50546acf3) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - feat: add [`markdown-preferences/max-len`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/max-len.html) rule
+
 ## 0.39.0
 
 ### Minor Changes

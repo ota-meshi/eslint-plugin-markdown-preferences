@@ -216,8 +216,6 @@ The rules with the following 💄 are included in the `standard` config.
 
 - Rules related to visual or stylistic decorations in Markdown.
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
-
 <!-- prettier-ignore-start -->
 
 | Rule ID                                                                                                                                                                   | Description                                                                               | Fixable | Config |
@@ -236,8 +234,6 @@ The rules with the following 💄 are included in the `standard` config.
 | [markdown-preferences/thematic-break-sequence-pattern](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-sequence-pattern.html)         | enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown. |   🔧    |   💄   |
 
 <!-- prettier-ignore-end -->
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
 
 <!--RULES_TABLE_END-->
 
