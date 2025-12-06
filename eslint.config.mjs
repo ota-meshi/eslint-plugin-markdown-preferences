@@ -158,6 +158,7 @@ export default defineConfig([
       ...Object.fromEntries(
         rules.map((rule) => [rule.meta.docs.ruleId, "error"]),
       ),
+      "markdown-preferences/max-len": "off", // 今は無効化します
       "markdown-preferences/prefer-linked-words": [
         "error",
         {
