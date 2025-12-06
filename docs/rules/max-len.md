@@ -111,6 +111,7 @@ For `list`, `blockquote`, and `footnoteDefinition`, you can specify different li
 ```
 
 In this example:
+
 - Standalone headings are limited to 80 characters, but headings inside blockquotes are limited to 70 characters
 - Standalone tables are limited to 100 characters, but tables inside blockquotes are limited to 90 characters
 - All entity types (`heading`, `paragraph`, `table`, `html`, `math`, `code`, `frontmatter`) can be configured within containers
