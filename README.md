@@ -138,9 +138,25 @@ The rules with the following 💄 are included in the `standard` config.
 
 <!--RULES_TABLE_START-->
 
+### Layout & Formatting Rules
+
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
+
+<!-- prettier-ignore-start -->
+
+| Rule ID                                                                                                           | Description                                          | Fixable | Config |
+| :---------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------- | :-----: | :----: |
+| [markdown-preferences/max-len](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/max-len.html) | enforce maximum length for various Markdown entities |         |   💄   |
+
+<!-- prettier-ignore-end -->
+
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
+
 ### Preference Rules
 
 - Rules to unify the expression and description style of documents.
+
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
 
 <!-- prettier-ignore-start -->
 
@@ -157,9 +173,13 @@ The rules with the following 💄 are included in the `standard` config.
 
 <!-- prettier-ignore-end -->
 
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
+
 ### Notation Rules
 
 - Rules related to notation styles in Markdown.
+
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
 
 <!-- prettier-ignore-start -->
 
@@ -185,9 +205,13 @@ The rules with the following 💄 are included in the `standard` config.
 
 <!-- prettier-ignore-end -->
 
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
+
 ### Whitespace Rules
 
 - Rules related to whitespace styles in Markdown.
+
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
 
 <!-- prettier-ignore-start -->
 
@@ -212,9 +236,13 @@ The rules with the following 💄 are included in the `standard` config.
 
 <!-- prettier-ignore-end -->
 
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
+
 ### Decorative Rules
 
 - Rules related to visual or stylistic decorations in Markdown.
+
+<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
 
 <!-- prettier-ignore-start -->
 
@@ -233,6 +261,8 @@ The rules with the following 💄 are included in the `standard` config.
 | [markdown-preferences/thematic-break-sequence-pattern](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-sequence-pattern.html)         | enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown. |   🔧    |   💄   |
 
 <!-- prettier-ignore-end -->
+
+<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
 
 <!--RULES_TABLE_END-->
 

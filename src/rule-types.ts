@@ -140,6 +140,11 @@ export interface RuleOptions {
    */
   'markdown-preferences/list-marker-alignment'?: Linter.RuleEntry<MarkdownPreferencesListMarkerAlignment>
   /**
+   * enforce maximum length for various Markdown entities
+   * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/max-len.html
+   */
+  'markdown-preferences/max-len'?: Linter.RuleEntry<MarkdownPreferencesMaxLen>
+  /**
    * disallow trailing punctuation in headings.
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-heading-trailing-punctuation.html
    */
@@ -432,6 +437,16 @@ type MarkdownPreferencesLinkTitleStyle = []|[{
 // ----- markdown-preferences/list-marker-alignment -----
 type MarkdownPreferencesListMarkerAlignment = []|[{
   align?: ("left" | "right")
+}]
+// ----- markdown-preferences/max-len -----
+type MarkdownPreferencesMaxLen = []|[{
+  heading?: number
+  paragraph?: number
+  listItem?: number
+  blockquote?: number
+  tableRow?: number
+  codeBlock?: (number | null)
+  ignoreUrls?: boolean
 }]
 // ----- markdown-preferences/no-heading-trailing-punctuation -----
 type MarkdownPreferencesNoHeadingTrailingPunctuation = []|[{

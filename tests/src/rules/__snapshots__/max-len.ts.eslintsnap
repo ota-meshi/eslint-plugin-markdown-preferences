@@ -1,0 +1,146 @@
+# eslint-snapshot-rule-tester format: v1
+
+
+Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/blockquote-long-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | > This is a very long blockquote that definitely exceeds the default one hundred and twenty character maximum length limit and should be reported.
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  2 | > Short line.
+  3 | > Another very long blockquote line that goes on and on and on and should definitely be caught by the rule as a violation of the maximum length.
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  4 |
+
+[1] Line length of 146 exceeds the maximum of 120.
+[2] Line length of 144 exceeds the maximum of 120.
+---
+
+
+Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/code-block-checked-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - codeBlock: 60
+Plugins: unable to serialize
+
+Code:
+  1 | Code blocks should be checked when the option is set:
+  2 |
+  3 | ```js
+  4 | const veryLongVariableName = "this is a very long string that exceeds the maximum length limit of sixty characters";
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  5 | ```
+  6 |
+
+[1] Line length of 116 exceeds the maximum of 60.
+---
+
+
+Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/custom-max-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - heading: 40
+    paragraph: 40
+Plugins: unable to serialize
+
+Code:
+  1 | # This heading is longer than 40 characters
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  2 |
+  3 | This paragraph is too long for the custom limit.
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  4 |
+
+[1] Line length of 43 exceeds the maximum of 40.
+[2] Line length of 48 exceeds the maximum of 40.
+---
+
+
+Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/heading-long-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # This is a very long heading that definitely exceeds the default eighty character limit
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  2 |
+  3 | ## This is another heading that is way too long and should be reported as a violation
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  4 |
+
+[1] Line length of 88 exceeds the maximum of 80.
+[2] Line length of 85 exceeds the maximum of 80.
+---
+
+
+Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/list-long-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | - This is a very long list item that definitely exceeds the default one hundred and twenty character maximum length limit and should be reported
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  2 | - Short item
+  3 | - Another very long list item that goes on and on and on and should definitely be caught by the rule as a violation of the maximum length
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  4 |
+
+[1] Line length of 144 exceeds the maximum of 120.
+[2] Line length of 137 exceeds the maximum of 120.
+---
+
+
+Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/paragraph-long-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | This is a very long paragraph that definitely exceeds the default one hundred and twenty character maximum length limit and should be reported.
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  2 |
+  3 | Another paragraph with short text.
+  4 |
+  5 | This is yet another very long paragraph that goes on and on and on and should definitely be caught by the rule as a violation of the maximum length.
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  6 |
+
+[1] Line length of 143 exceeds the maximum of 120.
+[2] Line length of 148 exceeds the maximum of 120.
+---
+
+
+Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/url-not-ignored-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - ignoreUrls: false
+Plugins: unable to serialize
+
+Code:
+  1 | This line has a long URL that should be reported: https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/CONTRIBUTING.md
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  2 |
+
+[1] Line length of 139 exceeds the maximum of 120.
+---
