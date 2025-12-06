@@ -129,6 +129,24 @@ Code:
 
 
 Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/table-long-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | | Column 1 | This is a very long table row that definitely exceeds the default one hundred and twenty character maximum length limit |
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  2 | | --- | --- |
+  3 | | Short | Short |
+  4 |
+
+[1] Line length of 134 exceeds the maximum of 120.
+---
+
+
+Test: max-len >> invalid
 Filename: tests/fixtures/rules/max-len/invalid/url-not-ignored-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
