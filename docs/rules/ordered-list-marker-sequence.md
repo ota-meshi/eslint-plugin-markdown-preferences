@@ -23,8 +23,6 @@ Both options provide automatic formatting, so you don't have to manually manage 
 - With `increment: "always"` (default), the rule will automatically fix any incorrect sequences to be sequential (1, 2, 3, ...), even if you initially write them as 1, 1, 1.
 - With `increment: "never"`, the rule will automatically change all markers to `1.` regardless of what you write (1, 2, 3 becomes 1, 1, 1).
 
-Using `1.` for all items simplifies maintenance, makes diffs cleaner, and reduces the chance of renumbering errors when reordering or inserting new list items. All major Markdown parsers render the list with proper sequential numbers regardless of the actual marker values.
-
 Key features:
 
 - Default behavior (`increment: "always"`): Ensures that ordered list markers always increase by one, regardless of how many lists are present in a document.
