@@ -123,9 +123,8 @@ function parseOptions(
               : parent.type === "footnoteDefinition"
                 ? maxLengthForInFootnoteDefinition(node)
                 : null;
-        if (len == null) continue;
         if (len === "ignore") return "ignore";
-        if (maxLength == null || len < maxLength) {
+        if (len && (maxLength == null || len < maxLength)) {
           maxLength = len;
         }
 

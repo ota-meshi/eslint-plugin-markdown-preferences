@@ -442,27 +442,54 @@ type MarkdownPreferencesListMarkerAlignment = []|[{
 type MarkdownPreferencesMaxLen = []|[{
   heading?: (number | "ignore")
   paragraph?: (number | "ignore")
-  list?: ((number | "ignore") | {
-    heading?: (number | "ignore")
-    paragraph?: (number | "ignore")
-  })
-  blockquote?: ((number | "ignore") | {
-    heading?: (number | "ignore")
-    paragraph?: (number | "ignore")
-  })
   table?: (number | "ignore")
-  footnoteDefinition?: ((number | "ignore") | {
-    heading?: (number | "ignore")
-    paragraph?: (number | "ignore")
-  })
   html?: (number | "ignore")
+  math?: (number | "ignore")
   code?: ((number | "ignore") | {
     [k: string]: (number | "ignore")
   })
   frontmatter?: ((number | "ignore") | {
     [k: string]: (number | "ignore")
   })
-  math?: (number | "ignore")
+  list?: ((number | "ignore") | {
+    heading?: (number | "ignore")
+    paragraph?: (number | "ignore")
+    table?: (number | "ignore")
+    html?: (number | "ignore")
+    math?: (number | "ignore")
+    code?: ((number | "ignore") | {
+      [k: string]: (number | "ignore")
+    })
+    frontmatter?: ((number | "ignore") | {
+      [k: string]: (number | "ignore")
+    })
+  })
+  blockquote?: ((number | "ignore") | {
+    heading?: (number | "ignore")
+    paragraph?: (number | "ignore")
+    table?: (number | "ignore")
+    html?: (number | "ignore")
+    math?: (number | "ignore")
+    code?: ((number | "ignore") | {
+      [k: string]: (number | "ignore")
+    })
+    frontmatter?: ((number | "ignore") | {
+      [k: string]: (number | "ignore")
+    })
+  })
+  footnoteDefinition?: ((number | "ignore") | {
+    heading?: (number | "ignore")
+    paragraph?: (number | "ignore")
+    table?: (number | "ignore")
+    html?: (number | "ignore")
+    math?: (number | "ignore")
+    code?: ((number | "ignore") | {
+      [k: string]: (number | "ignore")
+    })
+    frontmatter?: ((number | "ignore") | {
+      [k: string]: (number | "ignore")
+    })
+  })
   ignoreUrls?: boolean
 }]
 // ----- markdown-preferences/no-heading-trailing-punctuation -----

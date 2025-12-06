@@ -142,8 +142,6 @@ The rules with the following 💄 are included in the `standard` config.
 
 - Rules to unify the expression and description style of documents.
 
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
-
 <!-- prettier-ignore-start -->
 
 | Rule ID                                                                                                                                                           | Description                                                | Fixable | Config |
@@ -159,13 +157,9 @@ The rules with the following 💄 are included in the `standard` config.
 
 <!-- prettier-ignore-end -->
 
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
-
 ### Notation Rules
 
 - Rules related to notation styles in Markdown.
-
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
 
 <!-- prettier-ignore-start -->
 
@@ -191,13 +185,9 @@ The rules with the following 💄 are included in the `standard` config.
 
 <!-- prettier-ignore-end -->
 
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
-
 ### Whitespace Rules
 
 - Rules related to whitespace styles in Markdown.
-
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
 
 <!-- prettier-ignore-start -->
 
@@ -222,8 +212,6 @@ The rules with the following 💄 are included in the `standard` config.
 
 <!-- prettier-ignore-end -->
 
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
-
 ### Decorative Rules
 
 - Rules related to visual or stylistic decorations in Markdown.
@@ -237,6 +225,7 @@ The rules with the following 💄 are included in the `standard` config.
 | [markdown-preferences/atx-heading-closing-sequence-length](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-heading-closing-sequence-length.html) | enforce consistent length for the closing sequence (trailing #s) in ATX headings.         |   🔧    |   💄   |
 | [markdown-preferences/atx-heading-closing-sequence](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/atx-heading-closing-sequence.html)               | enforce consistent use of closing sequence in ATX headings.                               |   🔧    |   💄   |
 | [markdown-preferences/code-fence-length](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/code-fence-length.html)                                     | enforce consistent code fence length in fenced code blocks.                               |   🔧    |   💄   |
+| [markdown-preferences/max-len](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/max-len.html)                                                         | enforce maximum length for various Markdown entities                                      |         |        |
 | [markdown-preferences/no-laziness-blockquotes](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-laziness-blockquotes.html)                         | disallow laziness in blockquotes                                                          |         |  ⭐💄  |
 | [markdown-preferences/ordered-list-marker-sequence](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/ordered-list-marker-sequence.html)               | enforce consistent ordered list marker numbering (sequential or flat)                     |   🔧    |   💄   |
 | [markdown-preferences/setext-heading-underline-length](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/setext-heading-underline-length.html)         | enforce setext heading underline length                                                   |   🔧    |   💄   |
@@ -245,20 +234,6 @@ The rules with the following 💄 are included in the `standard` config.
 | [markdown-preferences/table-pipe-alignment](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/table-pipe-alignment.html)                               | enforce consistent alignment of table pipes                                               |   🔧    |   💄   |
 | [markdown-preferences/thematic-break-length](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-length.html)                             | enforce consistent length for thematic breaks (horizontal rules) in Markdown.             |   🔧    |   💄   |
 | [markdown-preferences/thematic-break-sequence-pattern](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/thematic-break-sequence-pattern.html)         | enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown. |   🔧    |   💄   |
-
-<!-- prettier-ignore-end -->
-
-<!-- eslint-enable markdown-links/no-dead-urls -- Auto generated -->
-
-### Undefined Rules
-
-<!-- eslint-disable markdown-links/no-dead-urls -- Auto generated -->
-
-<!-- prettier-ignore-start -->
-
-| Rule ID                                                                                                           | Description                                          | Fixable | Config |
-| :---------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------- | :-----: | :----: |
-| [markdown-preferences/max-len](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/max-len.html) | enforce maximum length for various Markdown entities |         |        |
 
 <!-- prettier-ignore-end -->
 

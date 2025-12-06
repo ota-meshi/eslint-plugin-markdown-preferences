@@ -95,6 +95,7 @@ The rules with the following 💄 are included in the `plugin.configs.standard` 
 | [markdown-preferences/atx-heading-closing-sequence-length](./atx-heading-closing-sequence-length.md) | enforce consistent length for the closing sequence (trailing #s) in ATX headings.         |   🔧    |   💄   |
 | [markdown-preferences/atx-heading-closing-sequence](./atx-heading-closing-sequence.md)               | enforce consistent use of closing sequence in ATX headings.                               |   🔧    |   💄   |
 | [markdown-preferences/code-fence-length](./code-fence-length.md)                                     | enforce consistent code fence length in fenced code blocks.                               |   🔧    |   💄   |
+| [markdown-preferences/max-len](./max-len.md)                                                         | enforce maximum length for various Markdown entities                                      |         |        |
 | [markdown-preferences/no-laziness-blockquotes](./no-laziness-blockquotes.md)                         | disallow laziness in blockquotes                                                          |         |  ⭐💄  |
 | [markdown-preferences/ordered-list-marker-sequence](./ordered-list-marker-sequence.md)               | enforce consistent ordered list marker numbering (sequential or flat)                     |   🔧    |   💄   |
 | [markdown-preferences/setext-heading-underline-length](./setext-heading-underline-length.md)         | enforce setext heading underline length                                                   |   🔧    |   💄   |
@@ -103,15 +104,5 @@ The rules with the following 💄 are included in the `plugin.configs.standard` 
 | [markdown-preferences/table-pipe-alignment](./table-pipe-alignment.md)                               | enforce consistent alignment of table pipes                                               |   🔧    |   💄   |
 | [markdown-preferences/thematic-break-length](./thematic-break-length.md)                             | enforce consistent length for thematic breaks (horizontal rules) in Markdown.             |   🔧    |   💄   |
 | [markdown-preferences/thematic-break-sequence-pattern](./thematic-break-sequence-pattern.md)         | enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown. |   🔧    |   💄   |
-
-<!-- prettier-ignore-end -->
-
-## Undefined Rules
-
-<!-- prettier-ignore-start -->
-
-| Rule ID                                      | Description                                          | Fixable | Config |
-| :------------------------------------------- | :--------------------------------------------------- | :-----: | :----: |
-| [markdown-preferences/max-len](./max-len.md) | enforce maximum length for various Markdown entities |         |        |
 
 <!-- prettier-ignore-end -->
