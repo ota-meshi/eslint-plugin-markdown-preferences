@@ -69,57 +69,22 @@ export default createRule("ordered-list-marker-sequence", {
       node: List,
       marker: OrderedListMarker,
     ): boolean {
-      if (incrementMode === "never") {
-        // In "never" mode, all lists should start with 1
-        if (node.start == null || node.start <= 1) return true;
-
-        const suggest: SuggestedEdit[] = [
-          {
-            messageId: "suggestStartFromN",
-            data: { expected: "1" },
-            fix(fixer: RuleTextEditor) {
-              const expectedMarker = `1${marker.kind}`;
-              const range = sourceCode.getRange(node);
-              return fixer.replaceTextRange(
-                [range[0], range[0] + marker.raw.length],
-                expectedMarker,
-              );
-            },
-          },
-        ];
-
-        context.report({
-          node: node.children[0] || node,
-          messageId: "inconsistentStart",
-          data: {
-            expected: "'1'",
-            actual: marker.sequence.raw,
-          },
-          fix(fixer) {
-            const expectedMarker = `1${marker.kind}`;
-            const range = sourceCode.getRange(node);
-            return fixer.replaceTextRange(
-              [range[0], range[0] + marker.raw.length],
-              expectedMarker,
-            );
-          },
-          suggest,
-        });
-        return false;
-      }
-
-      // Original "always" mode logic
       if (node.start == null || node.start <= 1) return true;
-      if (
-        scope.last != null &&
-        scope.last.sequence + 1 === node.start &&
-        marker.kind === scope.last.kind
-      )
-        return true;
-      const expected = [0, 1];
-      if (scope.last != null && marker.kind === scope.last.kind) {
-        expected.push(scope.last.sequence + 1);
-      }
+
+      const expected =
+        incrementMode === "never"
+          ? [1]
+          : scope.last != null &&
+              scope.last.sequence + 1 === node.start &&
+              marker.kind === scope.last.kind
+            ? null // Valid in "always" mode
+            : [0, 1].concat(
+                scope.last != null && marker.kind === scope.last.kind
+                  ? [scope.last.sequence + 1]
+                  : [],
+              );
+
+      if (expected === null) return true;
 
       const suggest: SuggestedEdit[] = [];
       for (const n of [...expected].sort(
@@ -142,15 +107,20 @@ export default createRule("ordered-list-marker-sequence", {
         node: node.children[0] || node,
         messageId: "inconsistentStart",
         data: {
-          expected: new Intl.ListFormat("en-US", {
-            type: "disjunction",
-          }).format(expected.map((n) => `'${n}'`)),
+          expected:
+            expected.length === 1
+              ? `'${expected[0]}'`
+              : new Intl.ListFormat("en-US", {
+                  type: "disjunction",
+                }).format(expected.map((n) => `'${n}'`)),
           actual: marker.sequence.raw,
         },
         fix:
-          scope.last == null
+          scope.last == null || incrementMode === "never"
             ? (fixer) => {
-                const expectedMarker = `1${marker.kind}`;
+                // Use 1 for "always" mode when no previous list, or the first expected value for "never" mode
+                const fixValue = incrementMode === "never" ? expected[0] : 1;
+                const expectedMarker = `${fixValue}${marker.kind}`;
                 const range = sourceCode.getRange(node);
                 return fixer.replaceTextRange(
                   [range[0], range[0] + marker.raw.length],
@@ -169,43 +139,13 @@ export default createRule("ordered-list-marker-sequence", {
     function verifyListItems(node: List) {
       if (node.start == null) return;
 
-      if (incrementMode === "never") {
-        // In "never" mode, all items should use "1"
-        for (const item of node.children) {
-          const marker = getListItemMarker(sourceCode, item);
-          if (marker.kind !== "." && marker.kind !== ")") {
-            continue;
-          }
-          if (marker.sequence.value !== 1) {
-            const expectedMarker = `1${marker.kind}`;
-            context.report({
-              node: item,
-              messageId: "inconsistent",
-              data: {
-                expected: expectedMarker,
-                actual: marker.raw,
-              },
-              fix(fixer) {
-                const range = sourceCode.getRange(item);
-                return fixer.replaceTextRange(
-                  [range[0], range[0] + marker.raw.length],
-                  expectedMarker,
-                );
-              },
-            });
-          }
-        }
-        return;
-      }
-
-      // Original "always" mode logic
       for (let i = 0; i < node.children.length; i++) {
         const item = node.children[i];
         const marker = getListItemMarker(sourceCode, item);
         if (marker.kind !== "." && marker.kind !== ")") {
           continue;
         }
-        const expectedSequence = node.start + i;
+        const expectedSequence = incrementMode === "never" ? 1 : node.start + i;
         if (marker.sequence.value !== expectedSequence) {
           const expectedMarker = `${expectedSequence}${marker.kind}`;
           context.report({

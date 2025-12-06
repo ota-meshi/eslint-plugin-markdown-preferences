@@ -18,20 +18,28 @@ since: "v0.12.0"
 
 This rule enforces consistent numbering in ordered list markers. By default, it requires strictly sequential numbers (1, 2, 3, ...). Alternatively, you can configure it to enforce that all items use `1.` as the marker.
 
+Both options provide automatic formatting, so you don't have to manually manage numbering:
+
+- With `increment: "always"` (default), the rule will automatically fix any incorrect sequences to be sequential (1, 2, 3, ...), even if you initially write them as 1, 1, 1.
+- With `increment: "never"`, the rule will automatically change all markers to `1.` regardless of what you write (1, 2, 3 becomes 1, 1, 1).
+
 Using `1.` for all items simplifies maintenance, makes diffs cleaner, and reduces the chance of renumbering errors when reordering or inserting new list items. All major Markdown parsers render the list with proper sequential numbers regardless of the actual marker values.
 
 Key features:
 
 - Default behavior (`increment: "always"`): Ensures that ordered list markers always increase by one, regardless of how many lists are present in a document.
 - Alternative behavior (`increment: "never"`): Enforces that all list items use `1.` (or `1)`) as the marker.
-- Handles lists that are separated by paragraphs or other block elements.
+- Handles lists that are separated by paragraphs or other block elements, so numbering can continue across disconnected lists if appropriate.
 - Prevents accidental mistakes such as duplicate, skipped, or reversed numbers, which can reduce readability and cause confusion in rendered Markdown.
 
 This rule is especially useful when:
 
 - Multiple people are editing Markdown documents and list numbering errors are likely to occur.
 - You want to enforce strict consistency and clarity in documentation or code review processes.
+- Some Markdown parsers or tools may render lists incorrectly if the numbering is not sequential.
 - You prefer simplified maintenance with `1.` markers that avoid renumbering when list items are reordered.
+
+By enforcing consistent numbering, this rule helps maintain high-quality, easy-to-read Markdown documents and prevents subtle formatting issues.
 
 <!-- prettier-ignore-start -->
 
@@ -170,9 +178,9 @@ When set to `"never"`, all list items must use `1.` (or `1)` if using parenthesi
 
 <!-- Also valid with parenthesis markers -->
 
-1) foo
-1) bar
-1) baz
+1. foo
+1. bar
+1. baz
 
 <!-- ✗ BAD -->
 
