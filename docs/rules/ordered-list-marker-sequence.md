@@ -117,7 +117,7 @@ This rule has an optional configuration object with the following property:
 
 - `increment` (default: `"always"`): Controls how list markers should be numbered.
   - `"always"`: Requires sequential numbering (1, 2, 3, ...)
-  - `"never"`: Requires all items to use `1.` or `1)` as the marker
+  - `"never"`: Requires all items to use the same marker (either `0.`/`0)` or `1.`/`1)` for all items)
 
 ### Default Configuration (`increment: "always"`)
 
@@ -152,7 +152,7 @@ This is the default behavior when no options are specified.
 
 ### Alternative Configuration (`increment: "never"`)
 
-When set to `"never"`, all list items must use `1.` (or `1)` if using parenthesis markers).
+When set to `"never"`, all list items must use the same constant marker throughout the list.
 
 <!-- eslint-skip -->
 
@@ -174,11 +174,17 @@ When set to `"never"`, all list items must use `1.` (or `1)` if using parenthesi
 1. bar
 1. baz
 
+<!-- Also valid with 0 -->
+
+0. foo
+0. bar
+0. baz
+
 <!-- Also valid with parenthesis markers -->
 
-1. foo
-1. bar
-1. baz
+1) foo
+1) bar
+1) baz
 
 <!-- ✗ BAD -->
 

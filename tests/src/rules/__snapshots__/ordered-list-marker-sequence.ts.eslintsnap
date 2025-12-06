@@ -179,22 +179,19 @@ Code:
   2 |
   3 | 2. foo
     | ^~~~~~ [1]
-    | ^~~~~~ [2]
   4 | 2. bar
-    | ^~~~~~ [3]
   5 | 2. baz
-    | ^~~~~~ [4]
   6 |
 
 Output:
   1 | # List starting from 2 (should be invalid with increment: never)
   2 |
-  3 | 1. foo
-  4 | 1. bar
-  5 | 1. baz
+  3 | 0. foo
+  4 | 0. bar
+  5 | 0. baz
   6 |
 
-[1] Ordered list start should be '1' but found '2'.
+[1] Ordered list start should be '0' or '1' but found '2'.
     Suggestions:
       - Change list marker to start from '1'.
         Output:
@@ -204,9 +201,46 @@ Output:
           4 | 2. bar
           5 | 2. baz
           6 |
-[2] Ordered list marker should be '1.' but found '2.'.
-[3] Ordered list marker should be '1.' but found '2.'.
-[4] Ordered list marker should be '1.' but found '2.'.
+      - Change list marker to start from '0'.
+        Output:
+          1 | # List starting from 2 (should be invalid with increment: never)
+          2 |
+          3 | 0. foo
+          4 | 2. bar
+          5 | 2. baz
+          6 |
+---
+
+
+Test: ordered-list-marker-sequence >> invalid
+Filename: tests/fixtures/rules/ordered-list-marker-sequence/invalid/increment-never/start-from-zero-but-sequential-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - increment: never
+Plugins: unable to serialize
+
+Code:
+  1 | # List starting from 0 with sequential markers (should be invalid with increment: never)
+  2 |
+  3 | 0. foo
+  4 | 1. bar
+    | ^~~~~~ [1]
+  5 | 2. baz
+    | ^~~~~~ [2]
+  6 |
+
+Output:
+  1 | # List starting from 0 with sequential markers (should be invalid with increment: never)
+  2 |
+  3 | 0. foo
+  4 | 0. bar
+  5 | 0. baz
+  6 |
+
+[1] Ordered list marker should be '0.' but found '1.'.
+[2] Ordered list marker should be '0.' but found '2.'.
 ---
 
 

@@ -73,7 +73,7 @@ export default createRule("ordered-list-marker-sequence", {
 
       const expected =
         incrementMode === "never"
-          ? [1]
+          ? [0, 1]
           : scope.last != null &&
               scope.last.sequence + 1 === node.start &&
               marker.kind === scope.last.kind
@@ -145,7 +145,8 @@ export default createRule("ordered-list-marker-sequence", {
         if (marker.kind !== "." && marker.kind !== ")") {
           continue;
         }
-        const expectedSequence = incrementMode === "never" ? 1 : node.start + i;
+        const expectedSequence =
+          incrementMode === "never" ? node.start : node.start + i;
         if (marker.sequence.value !== expectedSequence) {
           const expectedMarker = `${expectedSequence}${marker.kind}`;
           context.report({
