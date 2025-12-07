@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.40.1
+
+### Patch Changes
+
+- [#228](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/228) [`4fcfb74`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/4fcfb74f4de48c53dc8c7e99eefda54047f5b9b4) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - fix([markdown-preferences/heading-casing](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/heading-casing.html)): prevent crash when heading contains sub-phrase from preserved words list
+
 ## 0.40.0
 
 ### Minor Changes
