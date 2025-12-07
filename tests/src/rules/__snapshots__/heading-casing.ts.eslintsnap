@@ -430,6 +430,91 @@ Output:
 
 
 Test: heading-casing >> invalid
+Filename: tests/fixtures/rules/heading-casing/invalid/preserve-words/test04-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: Title Case
+    preserveWords:
+      - Semantic UI React
+      - Semantic UI
+      - Material UI
+      - Ant Design
+Plugins: unable to serialize
+
+Code:
+  1 | # Using Semantic UI react in Your Project
+    |                     ^~~~~ [1]
+  2 |
+  3 | ## Getting Started With Semantic ui
+    |                                  ^~ [2]
+  4 |
+  5 | ### Building With material UI Components
+    |                   ^~~~~~~~ [3]
+  6 |
+  7 | #### Working With ant Design Elements
+    |                   ^~~ [4]
+  8 |
+
+Output:
+  1 | # Using Semantic UI React in Your Project
+  2 |
+  3 | ## Getting Started With Semantic UI
+  4 |
+  5 | ### Building With Material UI Components
+  6 |
+  7 | #### Working With Ant Design Elements
+  8 |
+
+[1] Expected "react" to be "React" (preserved word).
+[2] Expected "ui" to be "UI" (preserved word).
+[3] Expected "material" to be "Material" (preserved word).
+[4] Expected "ant" to be "Ant" (preserved word).
+---
+
+
+Test: heading-casing >> invalid
+Filename: tests/fixtures/rules/heading-casing/invalid/preserve-words/test05-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - style: Title Case
+    preserveWords:
+      - Semantic UI React
+      - Semantic UI
+      - Material UI
+Plugins: unable to serialize
+
+Code:
+  1 | # Semantic UI foobar
+    |               ^~~~~~ [1]
+  2 |
+  3 | ## Material UI example
+    |                ^~~~~~~ [2]
+  4 |
+  5 | ### Semantic UI react guide
+    |                 ^~~~~ ^~~~~
+    |                 [3]   [4]
+  6 |
+
+Output:
+  1 | # Semantic UI Foobar
+  2 |
+  3 | ## Material UI Example
+  4 |
+  5 | ### Semantic UI React Guide
+  6 |
+
+[1] Expected "foobar" to be "Foobar" (Title Case).
+[2] Expected "example" to be "Example" (Title Case).
+[3] Expected "react" to be "React" (preserved word).
+[4] Expected "guide" to be "Guide" (Title Case).
+---
+
+
+Test: heading-casing >> invalid
 Filename: tests/fixtures/rules/heading-casing/invalid/punctuation-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
