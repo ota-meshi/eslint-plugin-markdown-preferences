@@ -67,9 +67,7 @@ export class PreserveWordsContext {
 
       if (
         subWords.length >= phrase.length &&
-        subWords
-          .slice(0, phrase.length)
-          .every((word, i) => word.toLowerCase() === phrase[i].toLowerCase())
+        phrase.every((word, i) => subWords[i].toLowerCase() === word.toLowerCase())
       ) {
         let matchCount = 0;
         for (let i = 0; i < phrase.length; i++) {
