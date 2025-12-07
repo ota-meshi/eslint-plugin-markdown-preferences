@@ -61,17 +61,18 @@ export class PreserveWordsContext {
       if (firstLowerWord !== phrase[0].toLowerCase()) continue;
       while (subWords.length < phrase.length) {
         const word = words.next();
-        if (word.done) return null;
+        if (word.done) break;
         subWords.push(word.value);
       }
 
       if (
-        subWords.every(
-          (word, i) => word.toLowerCase() === phrase[i].toLowerCase(),
-        )
+        subWords.length >= phrase.length &&
+        subWords
+          .slice(0, phrase.length)
+          .every((word, i) => word.toLowerCase() === phrase[i].toLowerCase())
       ) {
         let matchCount = 0;
-        for (let i = 0; i < subWords.length; i++) {
+        for (let i = 0; i < phrase.length; i++) {
           const word = subWords[i];
           if (word === phrase[i]) {
             matchCount++;

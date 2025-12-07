@@ -1,0 +1,13 @@
+{
+  "options": [
+    {
+      "style": "Title Case",
+      "preserveWords": [
+        "Semantic UI React",
+        "Semantic UI",
+        "Material UI",
+        "Ant Design"
+      ]
+    }
+  ]
+}
