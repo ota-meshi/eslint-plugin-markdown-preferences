@@ -161,6 +161,15 @@ export default createRule<
       segmenter,
     );
 
+    // Non-text leaf nodes that represent content
+    const contentNodeTypes = new Set([
+      "inlineCode",
+      "image",
+      "imageReference",
+      "html",
+      "inlineMath",
+    ]);
+
     return {
       heading(node: Heading) {
         // Skip empty headings
@@ -243,6 +252,13 @@ export default createRule<
             return child;
           }
           continue;
+        }
+
+        // If we encounter a non-text leaf node that represents content
+        // (like inlineCode, image, etc.), the heading doesn't end with text,
+        // so we shouldn't check for trailing punctuation
+        if (contentNodeTypes.has(child.type)) {
+          return null;
         }
 
         if ("children" in child && Array.isArray(child.children)) {
