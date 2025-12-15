@@ -5,7 +5,6 @@ import type {
   Code,
   Html,
   InlineCode,
-  Text,
   Yaml,
 } from "../language/ast-types.ts";
 import type { Json, Toml } from "@eslint/markdown/types";
@@ -51,7 +50,7 @@ export default createRule("no-trailing-spaces", {
     const skipBlankLines = options.skipBlankLines || false;
     const ignoreComments = options.ignoreComments || false;
 
-    type IgnoreNode = Break | Code | Text | InlineCode | Yaml | Toml | Json;
+    type IgnoreNode = Break | Code | InlineCode | Yaml | Toml | Json;
     const comments: Html[] = [];
     const ignoreNodes: IgnoreNode[] = [];
 
@@ -132,7 +131,7 @@ export default createRule("no-trailing-spaces", {
           },
         });
       },
-      "code, inlineCode, text, yaml, toml, json"(node: IgnoreNode) {
+      "code, inlineCode, yaml, toml, json"(node: IgnoreNode) {
         ignoreNodes.push(node);
       },
       "root:exit"() {
