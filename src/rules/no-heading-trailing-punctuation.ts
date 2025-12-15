@@ -245,6 +245,21 @@ export default createRule<
           continue;
         }
 
+        // If we encounter a non-text leaf node that represents content
+        // (like inlineCode, image, etc.), the heading doesn't end with text,
+        // so we shouldn't check for trailing punctuation
+        if (
+          child.type === "inlineCode" ||
+          child.type === "image" ||
+          child.type === "imageReference" ||
+          child.type === "html" ||
+          child.type === "break" ||
+          child.type === "footnoteReference" ||
+          child.type === "inlineMath"
+        ) {
+          return null;
+        }
+
         if ("children" in child && Array.isArray(child.children)) {
           const nestedLast = findLastTextNode(child.children);
           if (nestedLast) {
