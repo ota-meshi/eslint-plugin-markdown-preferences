@@ -1,3 +1,3 @@
-# Heading with HTML <span>text</span>
+# Heading with HTML, <span>text</span>
 
-## Another heading <em>emphasis</em>
+## Another heading; <em>emphasis</em>
