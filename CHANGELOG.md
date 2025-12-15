@@ -1,5 +1,13 @@
 # eslint-plugin-markdown-preferences
 
+## 0.40.2
+
+### Patch Changes
+
+- [#235](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/235) [`4450217`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/44502172db30710df52bcd1a572588f57e26a14c) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - fix([`markdown-preferences/no-heading-trailing-punctuation`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-heading-trailing-punctuation.html)): correctly handle headings ending with inline code, images, and other non-text content
+
+- [#236](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/236) [`2fec2b5`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/2fec2b551930890241b4b45f688d33f62711e930) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - fix([`markdown-preferences/no-trailing-spaces`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-trailing-spaces.html)): report trailing spaces before non-empty lines
+
 ## 0.40.1
 
 ### Patch Changes
