@@ -167,7 +167,6 @@ export default createRule<
       "image",
       "imageReference",
       "html",
-      "break",
       "footnoteReference",
       "inlineMath",
     ]);
