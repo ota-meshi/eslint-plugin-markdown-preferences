@@ -9,6 +9,6 @@ export default defineConfig([
     format: ["esm"],
     treeshake: true,
     fixedExtension: false,
-    external: ["@eslint/plugin-kit", "@eslint/core"],
+    external: ["@eslint/plugin-kit", "@eslint/core", "unist", "mdast"],
   },
 ]);
