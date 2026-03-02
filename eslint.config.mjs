@@ -339,7 +339,7 @@ export default defineConfig([
       "docs/.vitepress/build-system/shim/",
       "docs/.vitepress/dist/",
       ".changeset/",
-      "playground/src/example.md",
+      "playground/**/*.*",
     ],
   },
 ]);

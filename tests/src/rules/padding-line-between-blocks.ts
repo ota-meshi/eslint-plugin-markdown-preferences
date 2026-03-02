@@ -128,7 +128,7 @@ describe("requiresBlankLineBetween", () => {
 const tester = new SnapshotRuleTester({
   plugins: {
     "markdown-preferences": plugin,
-    markdown: eslintMarkdown,
+    markdown: eslintMarkdown as never,
   },
   language: "markdown-preferences/extended-syntax",
   languageOptions: {
