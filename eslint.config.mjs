@@ -196,6 +196,7 @@ export default defineConfig([
           ignoreUrls: [
             "https://www.npmjs.com/package/eslint-plugin-markdown-preferences",
             "/^https:\\/\\/www\\.npmtrends\\.com\\//u",
+            "https://github.com/syntax-tree/mdast"
           ],
           allowedAnchors: {
             // https://eslint-online-playground.netlify.app/
