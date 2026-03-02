@@ -11,6 +11,7 @@ void generateGhEmoji();
  */
 async function generateGhEmoji() {
   const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" });
+  // eslint-disable-next-line n/no-unsupported-features/node-builtins -- It's tools code, so we can use fetch
   const response = await fetch("https://api.github.com/emojis");
   const data = await response.json();
   const emojiMap = Object.create(null);
