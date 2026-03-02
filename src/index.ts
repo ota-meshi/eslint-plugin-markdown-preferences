@@ -11,8 +11,8 @@ import { defaultMinorWords } from "./resources/minor-words.ts";
 import { ExtendedMarkdownLanguage } from "./language/extended-markdown-language.ts";
 
 const configs = {
-  recommended: recommended satisfies Linter.Config,
-  standard: standard satisfies Linter.Config,
+  recommended: recommended as Linter.Config,
+  standard: standard as Linter.Config,
 };
 
 const rules: Record<string, RuleDefinition> = ruleList.reduce(
