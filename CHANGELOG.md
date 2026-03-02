@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.40.3
+
+### Patch Changes
+
+- [#253](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/253) [`f11a2d5`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/f11a2d597161d8b9d627533e63b44c7405fa4455) Thanks [@renovate](https://github.com/apps/renovate)! - fix: improved type compatibility with ESLint v10
+
 ## 0.40.2
 
 ### Patch Changes
