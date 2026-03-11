@@ -94,7 +94,7 @@ export function customContainer(): Extension {
       openToken = effects.enter("customContainer", { _container: true });
       effects.enter("customContainerFence");
       effects.enter("customContainerFenceSequence");
-      return sequence;
+      return sequence(code);
     }
 
     /**
@@ -191,7 +191,7 @@ export function customContainer(): Extension {
       size = 0;
       effects.enter("customContainerFence");
       effects.enter("customContainerFenceSequence");
-      return sequence;
+      return sequence(code);
     }
 
     /**
@@ -264,12 +264,12 @@ export function customContainer(): Extension {
       if (code !== codes.colon) return ok(code);
       return effects.attempt(
         customContainerCloseConstruct,
-        () => {
+        (code_) => {
           self.containerState!._closeFlow = true;
-          return ok;
+          return ok(code_);
         },
         ok,
-      );
+      )(code);
     }
   }
 }
