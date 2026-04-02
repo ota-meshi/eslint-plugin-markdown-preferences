@@ -5,6 +5,7 @@ export default createRule<[{ style?: "backslash" | "spaces" }?]>(
   {
     meta: {
       type: "layout",
+      languages: ["markdown/*", "markdown-preferences/*"],
       docs: {
         description: "enforce consistent hard linebreak style.",
         categories: ["recommended", "standard"],

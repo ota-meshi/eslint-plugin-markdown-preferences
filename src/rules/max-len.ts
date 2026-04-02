@@ -238,6 +238,7 @@ function parseOptionsParNode<T extends MaxLengthParNodeOptions>(
 export default createRule<[Options?]>("max-len", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "enforce maximum length for various Markdown entities",
       categories: [],

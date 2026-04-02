@@ -14,6 +14,7 @@ type Option =
 export default createRule<[Option?]>("table-leading-trailing-pipes", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description:
         "enforce consistent use of leading and trailing pipes in tables.",

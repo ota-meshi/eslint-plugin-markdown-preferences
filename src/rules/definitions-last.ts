@@ -53,6 +53,7 @@ function parseOptions(options: Options | undefined) {
 export default createRule<[Options?]>("definitions-last", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description:
         "require link definitions and footnote definitions to be placed at the end of the document",

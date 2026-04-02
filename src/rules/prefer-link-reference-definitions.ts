@@ -14,6 +14,7 @@ export default createRule<[{ minLinks?: number }?]>(
   {
     meta: {
       type: "layout",
+      languages: ["markdown/*", "markdown-preferences/*"],
       docs: {
         description:
           "enforce using link reference definitions instead of inline links",

@@ -12,6 +12,7 @@ export default createRule<
 >("strikethrough-delimiters-style", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "enforce a consistent delimiter style for strikethrough",
       categories: ["standard"],

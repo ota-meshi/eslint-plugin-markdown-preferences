@@ -14,6 +14,7 @@ export default createRule<[{ align?: "left" | "right" }?]>(
   {
     meta: {
       type: "layout",
+      languages: ["markdown/*", "markdown-preferences/*"],
       docs: {
         description: "enforce consistent alignment of list markers",
         categories: ["recommended", "standard"],

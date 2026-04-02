@@ -122,6 +122,7 @@ function parseOptions(options: Options | undefined): ParsedOptions {
 export default createRule<[Options?]>("table-pipe-spacing", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "enforce consistent spacing around table pipes",
       categories: ["standard"],

@@ -14,6 +14,7 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
   {
     meta: {
       type: "suggestion",
+      languages: ["markdown/*", "markdown-preferences/*"],
       docs: {
         description: "enforce the use of inline code for specific words.",
         categories: [],

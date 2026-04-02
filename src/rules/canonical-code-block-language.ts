@@ -33,6 +33,7 @@ export default createRule<[{ languages?: LanguageMapping }?]>(
   {
     meta: {
       type: "suggestion",
+      languages: ["markdown/*", "markdown-preferences/*"],
       docs: {
         description: "enforce canonical language names in code blocks",
         categories: [],

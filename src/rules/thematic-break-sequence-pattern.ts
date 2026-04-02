@@ -11,6 +11,7 @@ export default createRule<[{ pattern?: string }?]>(
   {
     meta: {
       type: "layout",
+      languages: ["markdown/*", "markdown-preferences/*"],
       docs: {
         description:
           "enforce consistent repeating patterns for thematic breaks (horizontal rules) in Markdown.",

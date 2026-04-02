@@ -6,6 +6,7 @@ export default createRule<[{ style?: "-" | "*" | "_" }?]>(
   {
     meta: {
       type: "layout",
+      languages: ["markdown/*", "markdown-preferences/*"],
       docs: {
         description:
           "enforce consistent character style for thematic breaks (horizontal rules) in Markdown.",

@@ -70,6 +70,7 @@ function parseOptions(options: Options | undefined) {
 export default createRule<[Options?]>("indent", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "enforce consistent indentation in Markdown files",
       categories: ["standard"],

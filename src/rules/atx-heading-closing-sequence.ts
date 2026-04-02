@@ -13,6 +13,7 @@ type Option = OptionObject;
 export default createRule<[Option?]>("atx-heading-closing-sequence", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description:
         "enforce consistent use of closing sequence in ATX headings.",

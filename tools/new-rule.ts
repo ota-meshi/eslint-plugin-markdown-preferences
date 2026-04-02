@@ -48,6 +48,7 @@ export default createRule("${ruleId}", {
             categories: [],
             listCategory: "...",
         },
+        languages: ["markdown/*", "markdown-preferences/*"],
         fixable: null,
         hasSuggestions: null,
         schema: [],

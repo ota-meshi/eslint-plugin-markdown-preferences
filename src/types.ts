@@ -32,6 +32,13 @@ export type ListCategory =
   | "Notation"
   | "Decorative";
 
+export type MarkdownLanguage =
+  | "markdown/*"
+  | "markdown/gfm"
+  | "markdown/commonmark"
+  | "markdown-preferences/*"
+  | "markdown-preferences/extended-syntax";
+
 export interface RuleMetaData {
   docs: {
     description: string;
@@ -49,6 +56,11 @@ export interface RuleMetaData {
   deprecated?: boolean;
   replacedBy?: string[];
   type: "problem" | "suggestion" | "layout";
+  /**
+   * Languages supported by this rule in the format `"plugin/language"`.
+   * Use `"*"` for any language or `"plugin/*"` for any language from a specific plugin.
+   */
+  languages?: MarkdownLanguage[] | undefined;
 }
 
 export interface PartialRuleModule<
@@ -73,4 +85,9 @@ export interface PartialRuleMetaData {
   deprecated?: boolean;
   replacedBy?: string[];
   type: "problem" | "suggestion" | "layout";
+  /**
+   * Languages supported by this rule in the format `"plugin/language"`.
+   * Use `"*"` for any language or `"plugin/*"` for any language from a specific plugin.
+   */
+  languages: MarkdownLanguage[];
 }

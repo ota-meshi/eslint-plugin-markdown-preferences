@@ -15,6 +15,7 @@ const htmlComment = /<!--.*?-->/su;
 export default createRule("no-trailing-spaces", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description:
         "disallow trailing whitespace at the end of lines in Markdown files.",

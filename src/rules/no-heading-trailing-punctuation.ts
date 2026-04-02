@@ -96,6 +96,7 @@ export default createRule<
 >("no-heading-trailing-punctuation", {
   meta: {
     type: "suggestion",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "disallow trailing punctuation in headings.",
       categories: [],
