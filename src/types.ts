@@ -2,7 +2,7 @@ import type { RuleContext as CoreRuleContext } from "@eslint/core";
 import type {
   MarkdownLanguageOptions,
   MarkdownRuleDefinition,
-} from "@eslint/markdown/types";
+} from "@eslint/markdown";
 import type { JSONSchema4 } from "json-schema";
 import type { Node } from "./language/ast-types.ts";
 import type {

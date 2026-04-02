@@ -1,4 +1,4 @@
-import type { Json, Toml } from "@eslint/markdown/types";
+import type { Json, Toml } from "@eslint/markdown";
 import type {
   Blockquote,
   Break,
