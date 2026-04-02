@@ -46,6 +46,7 @@ export default createRule<[EmphasisDelimitersStyleOption?]>(
   {
     meta: {
       type: "layout",
+      languages: ["markdown/*", "markdown-preferences/*"],
       docs: {
         description:
           "enforce a consistent delimiter style for emphasis and strong emphasis",

@@ -19,6 +19,7 @@ type Options = {
 export default createRule<[Options?]>("ordered-list-marker-sequence", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description:
         "enforce consistent ordered list marker numbering (sequential or flat)",

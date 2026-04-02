@@ -25,6 +25,7 @@ const STYLES = {
 export default createRule<[Options?]>("link-destination-style", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "enforce a consistent style for link destinations",
       categories: ["standard"],

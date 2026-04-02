@@ -5,6 +5,7 @@ import { getLinkKind } from "../utils/ast.ts";
 export default createRule("prefer-autolinks", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "enforce the use of autolinks for URLs",
       categories: ["recommended", "standard"],

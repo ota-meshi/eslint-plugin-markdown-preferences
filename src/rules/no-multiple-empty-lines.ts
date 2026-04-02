@@ -5,6 +5,7 @@ import type { Toml, Json } from "@eslint/markdown/types";
 export default createRule("no-multiple-empty-lines", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "disallow multiple empty lines in Markdown files.",
       categories: ["standard"],

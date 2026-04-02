@@ -22,6 +22,7 @@ export default createRule<
 >("table-header-casing", {
   meta: {
     type: "suggestion",
+    languages: ["markdown/*", "markdown-preferences/*"],
     fixable: "code",
     docs: {
       description: "enforce consistent casing in table header cells.",

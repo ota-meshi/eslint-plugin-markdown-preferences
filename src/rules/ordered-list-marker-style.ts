@@ -100,6 +100,7 @@ function isOrderedListItemMarker(
 export default createRule("ordered-list-marker-style", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "enforce consistent ordered list marker style",
       categories: ["standard"],

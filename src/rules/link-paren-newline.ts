@@ -18,6 +18,7 @@ type Options = {
 export default createRule<[Options?]>("link-paren-newline", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description:
         "enforce linebreaks after opening and before closing link parentheses",

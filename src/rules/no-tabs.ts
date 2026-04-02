@@ -32,6 +32,7 @@ function parseOptions(options: UserOptions | undefined) {
 export default createRule<[UserOptions?]>("no-tabs", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "disallow tab characters in Markdown files.",
       categories: ["standard"],

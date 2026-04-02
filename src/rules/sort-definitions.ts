@@ -15,6 +15,7 @@ type OrderOption =
 export default createRule<[{ order?: OrderOption[] }?]>("sort-definitions", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description:
         "enforce a specific order for link definitions and footnote definitions",

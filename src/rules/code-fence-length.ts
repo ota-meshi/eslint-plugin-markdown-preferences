@@ -15,6 +15,7 @@ type Options = {
 export default createRule<[Options?]>("code-fence-length", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description:
         "enforce consistent code fence length in fenced code blocks.",

@@ -28,6 +28,7 @@ import { parseFencedCodeBlock } from "../utils/fenced-code-block.ts";
 export default createRule("no-multi-spaces", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "disallow multiple spaces",
       categories: ["standard"],

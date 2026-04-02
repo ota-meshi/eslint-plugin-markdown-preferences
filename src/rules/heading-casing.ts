@@ -23,6 +23,7 @@ export default createRule<
 >("heading-casing", {
   meta: {
     type: "suggestion",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "enforce consistent casing in headings.",
       categories: [],

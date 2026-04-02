@@ -21,6 +21,7 @@ type Options = {
 export default createRule<[Options?]>("link-bracket-newline", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description:
         "enforce linebreaks after opening and before closing link brackets",

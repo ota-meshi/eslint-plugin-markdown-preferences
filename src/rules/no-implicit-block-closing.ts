@@ -10,6 +10,7 @@ import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-l
 export default createRule("no-implicit-block-closing", {
   meta: {
     type: "suggestion",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description:
         "disallow implicit block closing for fenced code blocks, math blocks, and custom containers",

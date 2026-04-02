@@ -3,6 +3,7 @@ import { createRule } from "../utils/index.ts";
 export default createRule("no-text-backslash-linebreak", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "disallow text backslash at the end of a line.",
       categories: ["recommended", "standard"],

@@ -220,6 +220,7 @@ function getBlockType(node: MDNode): BlockType | null {
 export default createRule<Options>("padding-line-between-blocks", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "require or disallow padding lines between blocks",
       categories: ["standard"],

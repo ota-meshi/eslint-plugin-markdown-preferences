@@ -14,6 +14,7 @@ type Option = OptionObject;
 export default createRule<[Option?]>("level1-heading-style", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "enforce consistent style for level 1 headings",
       categories: ["standard"],

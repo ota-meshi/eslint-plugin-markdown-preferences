@@ -78,6 +78,7 @@ function parseOptions(option?: Options) {
 export default createRule<[Options?]>("link-bracket-spacing", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "enforce consistent spacing inside link brackets",
       categories: ["standard"],

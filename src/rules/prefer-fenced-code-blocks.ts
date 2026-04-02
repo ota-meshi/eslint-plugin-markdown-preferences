@@ -5,6 +5,7 @@ import { createRule } from "../utils/index.ts";
 export default createRule("prefer-fenced-code-blocks", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description:
         "enforce the use of fenced code blocks over indented code blocks",

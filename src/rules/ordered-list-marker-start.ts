@@ -18,6 +18,7 @@ type Option = {
 export default createRule<[Option?]>("ordered-list-marker-start", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "enforce that ordered list markers start with 1 or 0",
       categories: ["standard"],

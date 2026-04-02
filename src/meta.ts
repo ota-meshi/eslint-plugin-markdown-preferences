@@ -1,5 +1,3 @@
-// IMPORTANT!
-// This file has been automatically generated,
-// in order to update its content execute "npm run update"
-export const name = "eslint-plugin-markdown-preferences" as const;
-export const version = "0.40.3" as const;
+import pkg from "../package.json" with { type: "json" };
+export const name = pkg.name;
+export const version = pkg.version;
