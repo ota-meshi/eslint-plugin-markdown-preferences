@@ -1,6 +1,6 @@
-import "./update-rules";
-import "./update-rulesets";
-import "./update-docs";
-import "./update-readme";
-import "./update-docs-rules-index";
-import "./update-rule-types";
+import "./update-rules.js";
+import "./update-rulesets.js";
+import "./update-docs.js";
+import "./update-readme.js";
+import "./update-docs-rules-index.js";
+import "./update-rule-types.js";
