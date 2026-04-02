@@ -44,6 +44,7 @@ const emojiData = new EmojiData();
 export default createRule<[Options?]>("emoji-notation", {
   meta: {
     type: "suggestion",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "enforce consistent emoji notation style in Markdown files.",
       categories: [],

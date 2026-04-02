@@ -7,6 +7,7 @@ type Options = {
 export default createRule<[Options?]>("code-fence-spacing", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description:
         "require or disallow spacing between opening code fence and language identifier",

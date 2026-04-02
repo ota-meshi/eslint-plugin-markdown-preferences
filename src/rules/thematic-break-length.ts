@@ -10,6 +10,7 @@ import {
 export default createRule<[{ length?: number }?]>("thematic-break-length", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description:
         "enforce consistent length for thematic breaks (horizontal rules) in Markdown.",

@@ -103,6 +103,7 @@ function parseOptions(options: Options | undefined) {
 export default createRule<[Options]>("table-pipe-alignment", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "enforce consistent alignment of table pipes",
       categories: ["standard"],

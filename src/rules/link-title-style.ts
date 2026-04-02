@@ -34,6 +34,7 @@ const STYLES = {
 export default createRule<[Options?]>("link-title-style", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "enforce a consistent style for link titles",
       categories: ["standard"],

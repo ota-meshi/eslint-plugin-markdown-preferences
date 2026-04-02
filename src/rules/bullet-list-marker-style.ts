@@ -96,6 +96,7 @@ function parseOptions(options: Options): ParsedOptions {
 export default createRule<[Options?]>("bullet-list-marker-style", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description:
         "enforce consistent bullet list (unordered list) marker style",

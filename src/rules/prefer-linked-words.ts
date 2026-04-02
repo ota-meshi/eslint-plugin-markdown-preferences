@@ -51,6 +51,7 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
           additionalProperties: false,
         },
       ],
+      languages: ["markdown/*", "markdown-preferences/*"],
       messages: {
         requireLink: 'The word "{{name}}" should be a link.',
       },

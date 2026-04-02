@@ -108,6 +108,7 @@ export default createRule<[Options?]>("padded-custom-containers", {
         additionalProperties: false,
       },
     ],
+    languages: ["markdown/*", "markdown-preferences/*"],
     messages: {
       expectedPaddingAfterOpeningMarker:
         "Expected padding after opening marker.",

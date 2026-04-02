@@ -7,6 +7,7 @@ import { isWhitespace } from "../utils/unicode.ts";
 export default createRule("blockquote-marker-alignment", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "enforce consistent alignment of blockquote markers",
       categories: ["recommended", "standard"],

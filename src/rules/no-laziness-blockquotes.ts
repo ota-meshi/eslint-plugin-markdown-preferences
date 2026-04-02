@@ -6,6 +6,7 @@ import { getBlockquoteLevelFromLine } from "../utils/blockquotes.ts";
 export default createRule("no-laziness-blockquotes", {
   meta: {
     type: "problem",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "disallow laziness in blockquotes",
       categories: ["recommended", "standard"],

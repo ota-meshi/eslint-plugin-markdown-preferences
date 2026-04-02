@@ -7,6 +7,7 @@ type Options = {
 export default createRule<[Options?]>("custom-container-marker-spacing", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description:
         "require or disallow spacing between opening custom container marker and info",

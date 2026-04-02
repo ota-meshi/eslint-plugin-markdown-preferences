@@ -4,6 +4,7 @@ import { createRule } from "../utils/index.ts";
 export default createRule("code-fence-style", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description:
         "enforce a consistent code fence style (backtick or tilde) in Markdown fenced code blocks.",

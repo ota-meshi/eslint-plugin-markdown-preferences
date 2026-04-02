@@ -12,6 +12,7 @@ type Options = {
 export default createRule<[Options?]>("link-paren-spacing", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "enforce consistent spacing inside link parentheses",
       categories: ["standard"],

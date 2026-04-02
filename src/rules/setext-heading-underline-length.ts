@@ -16,6 +16,7 @@ export default createRule<
 >("setext-heading-underline-length", {
   meta: {
     type: "layout",
+    languages: ["markdown/*", "markdown-preferences/*"],
     docs: {
       description: "enforce setext heading underline length",
       categories: ["standard"],

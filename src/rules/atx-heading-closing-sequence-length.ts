@@ -23,6 +23,7 @@ export default createRule<[Options?]>("atx-heading-closing-sequence-length", {
       categories: ["standard"],
       listCategory: "Decorative",
     },
+    languages: ["markdown/*", "markdown-preferences/*"],
     fixable: "code",
     hasSuggestions: false,
     schema: [
