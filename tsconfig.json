@@ -20,7 +20,9 @@
     "allowImportingTsExtensions": true,
     "allowArbitraryExtensions": true,
 
-    "skipLibCheck": true
+    "skipLibCheck": true,
+
+    "types": ["node"]
   },
   "include": [
     "src/**/*",
