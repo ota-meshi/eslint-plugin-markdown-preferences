@@ -15,7 +15,7 @@ import type {
   MarkdownLanguageContext,
   MarkdownLanguageOptions,
   MarkdownRuleVisitor,
-} from "@eslint/markdown/types";
+} from "@eslint/markdown";
 import type {
   Root,
   Node,
@@ -140,8 +140,8 @@ export interface ExtendedMarkdownRuleVisitor
   extends
     MarkdownRuleVisitor,
     WithExit<{
-      customContainer?(node: CustomContainer): void;
-      math?(node: Math): void;
-      inlineMath?(node: InlineMath): void;
-      importCodeSnippet?(node: ImportCodeSnippet): void;
+      customContainer?(node: CustomContainer, parent?: mdast.Parent): void;
+      math?(node: Math, parent?: mdast.Parent): void;
+      inlineMath?(node: InlineMath, parent?: mdast.Parent): void;
+      importCodeSnippet?(node: ImportCodeSnippet, parent?: mdast.Parent): void;
     }> {}

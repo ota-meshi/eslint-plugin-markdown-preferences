@@ -1,4 +1,4 @@
-import type * as eslint from "@eslint/markdown/types";
+import type * as eslint from "@eslint/markdown";
 // eslint-disable-next-line no-restricted-imports -- OK
 import type * as mdast from "mdast";
 // eslint-disable-next-line no-restricted-imports -- OK

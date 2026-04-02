@@ -7,7 +7,7 @@ import type {
   InlineCode,
   Yaml,
 } from "../language/ast-types.ts";
-import type { Json, Toml } from "@eslint/markdown/types";
+import type { Json, Toml } from "@eslint/markdown";
 import { isWhitespace } from "../utils/unicode.ts";
 
 const htmlComment = /<!--.*?-->/su;

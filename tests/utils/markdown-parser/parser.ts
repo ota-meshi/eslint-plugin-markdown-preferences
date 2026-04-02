@@ -2,7 +2,7 @@ import { VFile } from "./vfile.ts";
 import type {
   MarkdownLanguageContext,
   MarkdownLanguageOptions,
-} from "@eslint/markdown/types";
+} from "@eslint/markdown";
 import {
   ExtendedMarkdownLanguage,
   type ExtendedMarkdownSourceCode,

@@ -1,6 +1,6 @@
 import { createRule } from "../utils/index.ts";
 import type { Code, Html, Yaml } from "../language/ast-types.ts";
-import type { Toml, Json } from "@eslint/markdown/types";
+import type { Toml, Json } from "@eslint/markdown";
 
 export default createRule("no-multiple-empty-lines", {
   meta: {
