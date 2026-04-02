@@ -13,12 +13,12 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",
     "esModuleInterop": true,
     "outDir": "lib",
     "resolveJsonModule": true,
     "noEmit": true,
     "allowImportingTsExtensions": true,
+    "allowArbitraryExtensions": true,
 
     "skipLibCheck": true
   },
