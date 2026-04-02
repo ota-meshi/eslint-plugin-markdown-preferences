@@ -1,5 +1,13 @@
 # eslint-plugin-markdown-preferences
 
+## 0.41.0
+
+### Minor Changes
+
+- [#277](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/277) [`3add30f`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/3add30f07464ec07c57bd59bbb58bb396246ae35) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - Add support for [`@eslint/markdown`](https://github.com/eslint/markdown) v8
+
+- [#279](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/279) [`7c1f2ce`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/7c1f2ce06caae5f215d3132a9f477d4b6d6870a2) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add meta.languages to rules
+
 ## 0.40.3
 
 ### Patch Changes
