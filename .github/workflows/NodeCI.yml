@@ -47,3 +47,18 @@ jobs:
         run: npm install -D eslint@${{ matrix.eslint-version }}
       - name: Test
         run: npm test
+  # 266
+  test-conditions-development:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Use Node.js (latest)
+        uses: actions/setup-node@v6
+        with:
+          node-version: latest
+      - name: Install Packages
+        run: npm install
+      - name: Test with `--conditions development`
+        run: npm test
+        env:
+          NODE_OPTIONS: --conditions development
