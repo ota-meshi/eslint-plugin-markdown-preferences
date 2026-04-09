@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.41.1
+
+### Patch Changes
+
+- [#267](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/267) [`0feded9`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/0feded9665654c6cd5c4cd72c3786740e3781ce8) Thanks [@andreww2012](https://github.com/andreww2012)! - fix: ensure all custom container characters are properly handled
+
 ## 0.41.0
 
 ### Minor Changes
