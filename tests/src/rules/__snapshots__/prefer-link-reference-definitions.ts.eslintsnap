@@ -2,6 +2,33 @@
 
 
 Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/case-insensitive-identifier-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | [Foo](/same) and [Foo](/same).
+    | ^~~~~~~~~~~~ [1] ^~~~~~~~~~~~ [2]
+  2 |
+  3 | [foo]: /other
+  4 |
+
+Output:
+  1 | [Foo][Foo-1] and [Foo][Foo-1].
+  2 |
+  3 | [foo]: /other
+  4 |
+  5 | [Foo-1]: /same
+  6 |
+
+[1] Use link reference definitions instead of inline links.
+[2] Use link reference definitions instead of inline links.
+---
+
+
+Test: prefer-link-reference-definitions >> invalid
 Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/image-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
