@@ -1,0 +1,9 @@
+{
+  "options": [
+    {
+      "words": {
+        "/([a-z]*)/u": "https://example.com/$1"
+      }
+    }
+  ]
+}

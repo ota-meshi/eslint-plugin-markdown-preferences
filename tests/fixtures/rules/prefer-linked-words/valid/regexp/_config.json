@@ -1,0 +1,9 @@
+{
+  "options": [
+    {
+      "words": {
+        "/([A-Z][a-z]+)\\.([a-z][A-Za-z]+)/u": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/$1/$2"
+      }
+    }
+  ]
+}

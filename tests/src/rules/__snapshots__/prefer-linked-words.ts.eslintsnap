@@ -235,6 +235,153 @@ Output:
 
 
 Test: prefer-linked-words >> invalid
+Filename: tests/fixtures/rules/prefer-linked-words/invalid/regexp/patterns-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - words:
+      /([A-Z][a-z]+)\.([a-z][A-Za-z]+)/u: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/$1/$2
+      /markdown-preferences\/([a-z]+(?:-[a-z]+)+)/u: https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/$1.html
+      /(optional)(?:-(value))?/u: https://example.com/$1/$2
+Plugins: unable to serialize
+
+Code:
+  1 | # Regular expression patterns
+  2 |
+  3 | Use Array.isArray and Object.keys. `Array.from` is also useful.
+    |     ^~~~~~~~~~~~~     ^~~~~~~~~~~  ^~~~~~~~~~~~
+    |     [1]               [2]          [3]
+  4 |
+  5 | See markdown-preferences/prefer-linked-words and optional.
+    |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4] ^~~~~~~~ [5]
+  6 |
+  7 | [Array.isArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray) is already linked.
+  8 |
+  9 | MyArray.isArrayish does not match a whole word.
+ 10 |
+
+Output:
+  1 | # Regular expression patterns
+  2 |
+  3 | Use [Array.isArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray) and [Object.keys](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys). [`Array.from`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from) is also useful.
+  4 |
+  5 | See [markdown-preferences/prefer-linked-words](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html) and [optional](https://example.com/optional/).
+  6 |
+  7 | [Array.isArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray) is already linked.
+  8 |
+  9 | MyArray.isArrayish does not match a whole word.
+ 10 |
+
+[1] The word "Array.isArray" should be a link.
+[2] The word "Object.keys" should be a link.
+[3] The word "Array.from" should be a link.
+[4] The word "markdown-preferences/prefer-linked-words" should be a link.
+[5] The word "optional" should be a link.
+---
+
+
+Test: prefer-linked-words >> invalid
+Filename: tests/fixtures/rules/prefer-linked-words/invalid/regexp-array/patterns-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - words:
+      - /(?:TODO|FIXME)-\d+/u
+Plugins: unable to serialize
+
+Code:
+  1 | # Regular expression patterns without links
+  2 |
+  3 | TODO-123 and `FIXME-456` need links.
+    | ^~~~~~~~ [1] ^~~~~~~~~~~ [2]
+  4 |
+
+Output: unchanged
+
+[1] The word "TODO-123" should be a link.
+[2] The word "FIXME-456" should be a link.
+---
+
+
+Test: prefer-linked-words >> invalid
+Filename: tests/fixtures/rules/prefer-linked-words/invalid/regexp-context/lookbehind-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - words:
+      /(?<=\.)(is)(Array)/u: https://example.com/$1-$2
+Plugins: unable to serialize
+
+Code:
+  1 | # Context-sensitive regular expression
+  2 |
+  3 | Array.isArray.
+    |       ^~~~~~~ [1]
+  4 |
+
+Output:
+  1 | # Context-sensitive regular expression
+  2 |
+  3 | Array.[isArray](https://example.com/is-Array).
+  4 |
+
+[1] The word "isArray" should be a link.
+---
+
+
+Test: prefer-linked-words >> invalid
+Filename: tests/fixtures/rules/prefer-linked-words/invalid/regexp-empty-match/inline-code-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - words:
+      /([a-z]*)/u: https://example.com/$1
+Plugins: unable to serialize
+
+Code:
+  1 | `foo`
+    | ^~~~~ [1]
+  2 |
+
+Output:
+  1 | [`foo`](https://example.com/foo)
+  2 |
+
+[1] The word "foo" should be a link.
+---
+
+
+Test: prefer-linked-words >> invalid
+Filename: tests/fixtures/rules/prefer-linked-words/invalid/regexp-inline-code-state/after-inline-code-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - words:
+      - /(?:TODO|FIXME)-\d+/u
+Plugins: unable to serialize
+
+Code:
+  1 | # Matches after inline code
+  2 |
+  3 | `TODO-123` TODO-456 and TODO-789.
+    | ^~~~~~~~~~ ^~~~~~~~     ^~~~~~~~
+    | [1]        [2]          [3]
+  4 |
+
+Output: unchanged
+
+[1] The word "TODO-123" should be a link.
+[2] The word "TODO-456" should be a link.
+[3] The word "TODO-789" should be a link.
+---
+
+
+Test: prefer-linked-words >> invalid
 Filename: tests/fixtures/rules/prefer-linked-words/invalid/test01-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:

@@ -197,6 +197,78 @@ Output:
 
 
 Test: prefer-inline-code-words >> invalid
+Filename: tests/fixtures/rules/prefer-inline-code-words/invalid/regexp/patterns-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - words:
+      - /[A-Z][a-z]+\.[a-z][A-Za-z]+/u
+      - /markdown-preferences\/[a-z]+(?:-[a-z]+)+/u
+      - /eslint/iu
+Plugins: unable to serialize
+
+Code:
+  1 | # Regular expression patterns
+  2 |
+  3 | Use Array.isArray and Object.keys with ESLint.
+    |     ^~~~~~~~~~~~~ [1] ^~~~~~~~~~~ [2]  ^~~~~~ [3]
+  4 |
+  5 | See markdown-preferences/prefer-inline-code-words.
+    |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+  6 |
+  7 | MyArray.isArrayish and TSESLint do not match whole words.
+  8 |
+
+Output:
+  1 | # Regular expression patterns
+  2 |
+  3 | Use `Array.isArray` and `Object.keys` with `ESLint`.
+  4 |
+  5 | See `markdown-preferences/prefer-inline-code-words`.
+  6 |
+  7 | MyArray.isArrayish and TSESLint do not match whole words.
+  8 |
+
+[1] The word "Array.isArray" should be in inline code.
+[2] The word "Object.keys" should be in inline code.
+[3] The word "ESLint" should be in inline code.
+[4] The word "markdown-preferences/prefer-inline-code-words" should be in inline code.
+---
+
+
+Test: prefer-inline-code-words >> invalid
+Filename: tests/fixtures/rules/prefer-inline-code-words/invalid/regexp-ignores/patterns-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - words:
+      - /[A-Z][a-z]+\.[a-z][A-Za-z]+/u
+    ignores:
+      - words: Array.isArray
+        node:
+          type: heading
+Plugins: unable to serialize
+
+Code:
+  1 | # Array.isArray is ignored here
+  2 |
+  3 | Array.isArray is reported here.
+    | ^~~~~~~~~~~~~ [1]
+  4 |
+
+Output:
+  1 | # Array.isArray is ignored here
+  2 |
+  3 | `Array.isArray` is reported here.
+  4 |
+
+[1] The word "Array.isArray" should be in inline code.
+---
+
+
+Test: prefer-inline-code-words >> invalid
 Filename: tests/fixtures/rules/prefer-inline-code-words/invalid/test01-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:

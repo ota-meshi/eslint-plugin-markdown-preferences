@@ -20,6 +20,7 @@ This rule enforces that specific words or phrases are always converted to links 
 - Ensuring technical terms link to their definitions
 - Maintaining consistent reference linking across documentation
 - Converting inline code references to their documentation pages
+- Linking words that match a regular expression to a generated destination
 
 ### Examples
 
@@ -77,6 +78,24 @@ Use the [`console.log`](https://developer.mozilla.org/en-US/docs/Web/API/Console
 Use the `console.log` method for debugging.
 ```
 
+#### Regular Expression Configuration
+
+Write a `words` key in `/pattern/flags` notation to match a regular expression. Capturing groups can be referenced from the link with `$1`, `$2`, and so on.
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/prefer-linked-words: ["error", { "words": { "/([A-Z][a-z]+)\\.([a-z][A-Za-z]+)/u": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/$1/$2" } }] -->
+
+<!-- ✓ GOOD -->
+
+Use [Array.isArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray).
+
+<!-- ✗ BAD -->
+
+Use Array.isArray.
+```
+
 #### Array Configuration (Detection Only)
 
 <!-- eslint-skip -->
@@ -124,7 +143,7 @@ TODO: Review this section
 }
 ```
 
-- `words` (required): An object or array of words that should be linked. If an object, keys are the words and values are the URLs.
+- `words` (required): An object or array of words or regular expression patterns that should be linked. If an object, keys are the words or patterns and values are the URLs.
 - `ignores` (optional): An array of objects that specify conditions under which the rule should not apply. Each object can have:
   - `words`: An array or string of words to ignore. If not specified, all words will be ignored.
   - `node`: An object specifying conditions for ignoring nodes.
@@ -152,9 +171,13 @@ The rule accepts a single object with a `words` property that can be configured 
 
 With object configuration:
 
-- **Keys**: The words or phrases to detect (case-sensitive)
+- **Keys**: The words, phrases, or regular expression patterns to detect
 - **Values**: The URLs to link to
 - **Auto-fix**: ✅ Available - words will be automatically converted to links
+
+Keys written in `/pattern/flags` notation are interpreted as JavaScript regular expressions. For example, `"/eslint/iu"` matches `ESLint` case-insensitively. Matches use the same whole-word boundary checks as literal words.
+
+For regular expression keys, `$1`, `$2`, and so on in the URL are replaced by the corresponding capturing groups. The matched text is used as the link label.
 
 ##### Value Format
 
@@ -178,7 +201,7 @@ With object configuration:
 
 With array configuration:
 
-- **Items**: The words or phrases to detect
+- **Items**: The words, phrases, or regular expression patterns to detect. Strings in `/pattern/flags` notation are interpreted as JavaScript regular expressions.
 - **Auto-fix**: ❌ Not available - only reports violations
 - **Use case**: Good for identifying words that should be links but don't have predetermined URLs
 
@@ -186,7 +209,7 @@ With array configuration:
 
 You can use the `ignores` option to exclude the rule application under specific conditions. Each ignore condition is an object with the following properties:
 
-- `words` (optional): Specifies the words to ignore. Can be specified as an array or string. If not specified, all words will be targeted.
+- `words` (optional): Specifies the matched words to ignore. Can be specified as an array or string. If not specified, all words will be targeted.
 - `node` (optional): Specifies the ignore conditions by node type or properties. Excludes nodes where the specified properties match. For example, to exclude all heading levels (`h1` to `h6`), specify `{"type": "heading"}`, and to exclude only level 1 headings (`h1`), specify `{"type": "heading", "depth": 1}`.
 
 #### Usage Examples
