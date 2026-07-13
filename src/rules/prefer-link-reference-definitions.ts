@@ -7,6 +7,7 @@ import type {
   LinkReference,
   Resource,
 } from "../language/ast-types.ts";
+import { normalizeIdentifier } from "micromark-util-normalize-identifier";
 import { createRule } from "../utils/index.ts";
 
 export default createRule<[{ minLinks?: number }?]>(
@@ -67,18 +68,27 @@ export default createRule<[{ minLinks?: number }?]>(
           string,
           Map<string | null, ResourceNodes>
         >();
+        const effectiveDefinitionByIdentifier = new Map<string, Definition>();
+        for (const definition of definitions) {
+          const identifier = normalizeIdentifier(definition.identifier);
+          // Markdown uses the first definition when normalized identifiers match,
+          // so do not overwrite it with a shadowed definition.
+          if (!effectiveDefinitionByIdentifier.has(identifier)) {
+            effectiveDefinitionByIdentifier.set(identifier, definition);
+          }
+        }
         for (const link of links) {
           getResourceNodes(link).links.push(link);
         }
         for (const reference of references) {
-          const definition = definitions.find(
-            (def) => def.identifier === reference.identifier,
+          const definition = effectiveDefinitionByIdentifier.get(
+            normalizeIdentifier(reference.identifier),
           );
           if (definition) {
             getResourceNodes(definition).references.push(reference);
           }
         }
-        for (const definition of definitions) {
+        for (const definition of effectiveDefinitionByIdentifier.values()) {
           getResourceNodes(definition).definitions.push(definition);
         }
 
@@ -114,14 +124,17 @@ export default createRule<[{ minLinks?: number }?]>(
                   } else {
                     identifier = linkInfo.label.replaceAll(/[[\]]/gu, "-");
                     if (
-                      definitions.some((def) => def.identifier === identifier)
+                      effectiveDefinitionByIdentifier.has(
+                        normalizeIdentifier(identifier),
+                      )
                     ) {
                       let seq = 1;
                       const original = identifier;
                       identifier = `${original}-${seq}`;
                       while (
-                        // eslint-disable-next-line no-loop-func -- OK
-                        definitions.some((def) => def.identifier === identifier)
+                        effectiveDefinitionByIdentifier.has(
+                          normalizeIdentifier(identifier),
+                        )
                       ) {
                         identifier = `${original}-${++seq}`;
                       }

@@ -2,6 +2,37 @@
 
 
 Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/case-insensitive-identifier-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Case-Insensitive Identifiers
+  2 |
+  3 | [Foo](/same) and [Foo](/same).
+    | ^~~~~~~~~~~~ [1] ^~~~~~~~~~~~ [2]
+  4 |
+  5 | [foo]: /other
+  6 |
+
+Output:
+  1 | # Case-Insensitive Identifiers
+  2 |
+  3 | [Foo][Foo-1] and [Foo][Foo-1].
+  4 |
+  5 | [foo]: /other
+  6 |
+  7 | [Foo-1]: /same
+  8 |
+
+[1] Use link reference definitions instead of inline links.
+[2] Use link reference definitions instead of inline links.
+---
+
+
+Test: prefer-link-reference-definitions >> invalid
 Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/image-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
@@ -131,6 +162,43 @@ Output:
  10 |
  11 | - [ESLint] helps maintain code quality.
  12 |
+
+[1] Use link reference definitions instead of inline links.
+[2] Use link reference definitions instead of inline links.
+---
+
+
+Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/shadowed-definition-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | <!-- eslint markdown/no-duplicate-definitions: "off" -->
+  2 |
+  3 | # Shadowed Definition
+  4 |
+  5 | [Foo](/same) and [Foo](/same).
+    | ^~~~~~~~~~~~ [1] ^~~~~~~~~~~~ [2]
+  6 |
+  7 | [foo]: /other
+  8 | [FOO]: /same
+  9 |
+
+Output:
+  1 | <!-- eslint markdown/no-duplicate-definitions: "off" -->
+  2 |
+  3 | # Shadowed Definition
+  4 |
+  5 | [Foo][Foo-1] and [Foo][Foo-1].
+  6 |
+  7 | [foo]: /other
+  8 | [FOO]: /same
+  9 |
+ 10 | [Foo-1]: /same
+ 11 |
 
 [1] Use link reference definitions instead of inline links.
 [2] Use link reference definitions instead of inline links.

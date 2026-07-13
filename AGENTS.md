@@ -1,4 +1,4 @@
-# Copilot Instructions for `eslint-plugin-markdown-preferences`
+# Repository Instructions for Coding Agents
 
 This document provides guidelines for AI coding agents to work efficiently in this repository.
 
@@ -26,6 +26,14 @@ If you are addressed in Japanese, please conduct the conversation in Japanese.
 - Please carefully check the existing rules in this plugin and do not propose rules that already exist.
 
 ## Development Workflow
+
+### General Quality Standard
+
+For every task, make a deliberate best effort to prevent mistakes.
+
+Before finalizing work, re-read the user's request and all applicable instructions, inspect the complete result in context, challenge your assumptions, and evaluate correctness, simplicity, consistency, edge cases, unintended effects, maintainability, and validation adequacy.
+
+Actively look for problems beyond explicit requirements, examples, checklists, tests, and automated checks. Do not treat any checklist or passing test suite as an exhaustive guarantee. Investigate remaining uncertainty and resolve every known concern before claiming completion.
 
 ### Adding a New Rule
 
@@ -170,4 +178,4 @@ Below are the main npm scripts useful for development:
 Refer to [`CONTRIBUTING.md`] for more details.
 
 [`@eslint/markdown`]: https://github.com/eslint/markdown
-[`CONTRIBUTING.md`]: ../CONTRIBUTING.md
+[`CONTRIBUTING.md`]: ./CONTRIBUTING.md
