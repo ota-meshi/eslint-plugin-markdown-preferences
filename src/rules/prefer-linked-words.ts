@@ -186,12 +186,8 @@ export default createRule<[{ words?: UserWordsOption; ignores?: Ignores }?]>(
             if (!word) continue;
             if (ignores.ignore(word)) continue;
             // Check if the entire range matches
-            const matches = [...word.matchAll(matcher)];
-            if (
-              matches.length !== 1 ||
-              matches[0].index !== 0 ||
-              matches[0][0] !== word
-            ) {
+            const [match] = word.matchAll(matcher);
+            if (match == null || match.index !== 0 || match[0] !== word) {
               continue;
             }
 

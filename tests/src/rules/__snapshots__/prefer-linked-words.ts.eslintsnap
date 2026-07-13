@@ -333,6 +333,29 @@ Output:
 
 
 Test: prefer-linked-words >> invalid
+Filename: tests/fixtures/rules/prefer-linked-words/invalid/regexp-empty-match/inline-code-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - words:
+      /([a-z]*)/u: https://example.com/$1
+Plugins: unable to serialize
+
+Code:
+  1 | `foo`
+    | ^~~~~ [1]
+  2 |
+
+Output:
+  1 | [`foo`](https://example.com/foo)
+  2 |
+
+[1] The word "foo" should be a link.
+---
+
+
+Test: prefer-linked-words >> invalid
 Filename: tests/fixtures/rules/prefer-linked-words/invalid/regexp-inline-code-state/after-inline-code-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
