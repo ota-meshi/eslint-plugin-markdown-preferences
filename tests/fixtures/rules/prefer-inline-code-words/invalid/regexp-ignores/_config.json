@@ -1,0 +1,13 @@
+{
+  "options": [
+    {
+      "words": ["/[A-Z][a-z]+\\.[a-z][A-Za-z]+/u"],
+      "ignores": [
+        {
+          "words": "Array.isArray",
+          "node": { "type": "heading" }
+        }
+      ]
+    }
+  ]
+}

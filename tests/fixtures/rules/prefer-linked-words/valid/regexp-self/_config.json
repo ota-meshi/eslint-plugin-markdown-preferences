@@ -1,0 +1,9 @@
+{
+  "options": [
+    {
+      "words": {
+        "/([a-z]+)-input/u": "./tests/fixtures/rules/prefer-linked-words/valid/regexp-self/$1-input.md"
+      }
+    }
+  ]
+}

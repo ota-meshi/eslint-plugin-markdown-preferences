@@ -1,0 +1,11 @@
+{
+  "options": [
+    {
+      "words": [
+        "/[A-Z][a-z]+\\.[a-z][A-Za-z]+/u",
+        "/markdown-preferences\\/[a-z]+(?:-[a-z]+)+/u",
+        "/eslint/iu"
+      ]
+    }
+  ]
+}

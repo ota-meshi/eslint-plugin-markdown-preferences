@@ -1,6 +1,7 @@
 import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 import type { JSONSchema4 } from "json-schema";
 import type { Text } from "../language/ast-types.ts";
+import type { RegExpMatcher } from "./regexp.ts";
 
 export const RE_BOUNDARY =
   /^[\s\p{Letter_Number}\p{Modifier_Letter}\p{Modifier_Symbol}\p{Nonspacing_Mark}\p{Other_Letter}\p{Other_Symbol}\p{Script=Han}!"#$%&'()*+,./:;<=>?\\{|}~\u{2ffc}-\u{303d}\u{30a0}-\u{30fb}\u{3192}-\u{32bf}\u{fe10}-\u{fe1f}\u{fe30}-\u{fe6f}\u{ff00}-\u{ffef}\u{2ebf0}-\u{2ee5d}]*$/u;
@@ -11,26 +12,24 @@ export const RE_BOUNDARY =
 export function* iterateSearchWords({
   sourceCode,
   node,
-  words,
+  wordMatchers,
   ignores,
 }: {
   sourceCode: ExtendedMarkdownSourceCode;
   node: Text;
-  words: string[];
+  wordMatchers: RegExpMatcher[];
   ignores: SearchWordsIgnoreContext;
 }): Generator<{
+  wordMatcher: RegExpMatcher;
   word: string;
   range: [number, number];
 }> {
   const text = sourceCode.getText(node);
-
-  for (const word of words) {
-    if (ignores.ignore(word)) continue;
-    let startPosition = 0;
-    while (true) {
-      const index = text.indexOf(word, startPosition);
-      if (index < 0) break;
-      startPosition = index + word.length;
+  for (const matcher of wordMatchers) {
+    for (const match of text.matchAll(matcher)) {
+      const word = match[0];
+      if (!word || ignores.ignore(word)) continue;
+      const index = match.index;
       if (
         !RE_BOUNDARY.test(text[index - 1] || "") ||
         !RE_BOUNDARY.test(text[index + word.length] || "")
@@ -45,6 +44,7 @@ export function* iterateSearchWords({
         nodeStart + index + word.length,
       ];
       yield {
+        wordMatcher: matcher,
         range,
         word,
       };

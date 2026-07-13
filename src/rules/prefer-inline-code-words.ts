@@ -6,6 +6,7 @@ import {
   IGNORES_SCHEMA,
   iterateSearchWords,
 } from "../utils/search-words.ts";
+import { toRegExpMatcher } from "../utils/regexp.ts";
 
 type Words = string[];
 
@@ -45,7 +46,9 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
     create(context) {
       const sourceCode = context.sourceCode;
 
-      const words = context.options[0]?.words || [];
+      const wordMatchers = (context.options[0]?.words || []).map(
+        toRegExpMatcher,
+      );
       const ignores = createSearchWordsIgnoreContext(
         context.options[0]?.ignores,
       );
@@ -71,7 +74,7 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
           for (const { word, range } of iterateSearchWords({
             sourceCode,
             node,
-            words,
+            wordMatchers,
             ignores,
           })) {
             const shortcutLinkReferenceToReport = shortcutLinkReference;

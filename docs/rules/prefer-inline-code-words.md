@@ -19,6 +19,7 @@ This rule enforces that specific words or phrases are always wrapped in inline c
 - Ensuring technical terms, API names, or function names are consistently formatted as code
 - Maintaining consistent styling for programming-related terminology
 - Automatically applying code formatting to specified words
+- Formatting words that match a regular expression
 
 <!-- eslint-skip -->
 
@@ -36,6 +37,22 @@ The `ESLint` configuration file should be in the root directory.
 Use ESLint with TypeScript for linting. Install it with npm.
 
 The ESLint configuration file should be in the root directory.
+```
+
+Regular expression patterns can be written in `/pattern/flags` notation:
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/prefer-inline-code-words: ["error", { "words": ["/[A-Z][a-z]+\\.[a-z][A-Za-z]+/u"] }] -->
+
+<!-- ✓ GOOD -->
+
+Use `Array.isArray` to check the value.
+
+<!-- ✗ BAD -->
+
+Use Array.isArray to check the value.
 ```
 
 ## 🔧 Options
@@ -66,16 +83,18 @@ This rule requires configuration of the words that should be wrapped in inline c
 }
 ```
 
-- `words` (required): An array of strings representing the words that should always be wrapped in inline code when they appear in Markdown text.
+- `words` (required): An array of strings representing the words or regular expression patterns that should always be wrapped in inline code when they appear in Markdown text.
 - `ignores` (optional): An array of objects that specify conditions under which the rule should not apply. Each object can have:
   - `words`: An array or string of words to ignore. If not specified, all words will be ignored.
   - `node`: An object specifying conditions for ignoring nodes.
+
+Strings in `/pattern/flags` notation are interpreted as JavaScript regular expressions. For example, `"/eslint/iu"` matches `ESLint` case-insensitively. Matches use the same whole-word boundary checks as literal words.
 
 ### `ignores`
 
 You can use the `ignores` option to exclude the rule application under specific conditions. Each ignore condition is an object with the following properties:
 
-- `words` (optional): Specifies the words to ignore. Can be specified as an array or string. If not specified, all words will be targeted.
+- `words` (optional): Specifies the matched words to ignore. Can be specified as an array or string. If not specified, all words will be targeted.
 - `node` (optional): Specifies the ignore conditions by node type or properties. Excludes nodes where the specified properties match. For example, to exclude all heading levels (`h1` to `h6`), specify `{"type": "heading"}`, and to exclude only level 1 headings (`h1`), specify `{"type": "heading", "depth": 1}`.
 
 #### Usage Examples
