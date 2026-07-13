@@ -1,4 +1,4 @@
-# Copilot Instructions for `eslint-plugin-markdown-preferences`
+# Repository Instructions for Coding Agents
 
 This document provides guidelines for AI coding agents to work efficiently in this repository.
 
@@ -170,4 +170,4 @@ Below are the main npm scripts useful for development:
 Refer to [`CONTRIBUTING.md`] for more details.
 
 [`@eslint/markdown`]: https://github.com/eslint/markdown
-[`CONTRIBUTING.md`]: ../CONTRIBUTING.md
+[`CONTRIBUTING.md`]: ./CONTRIBUTING.md
