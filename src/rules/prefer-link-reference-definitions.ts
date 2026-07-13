@@ -68,23 +68,27 @@ export default createRule<[{ minLinks?: number }?]>(
           string,
           Map<string | null, ResourceNodes>
         >();
-        const definitionIdentifiers = new Set(
-          definitions.map((definition) =>
-            normalizeIdentifier(definition.identifier),
-          ),
-        );
+        const definitionIdentifiers = new Set<string>();
+        const firstDefinitionByIdentifier = new Map<string, Definition>();
+        for (const definition of definitions) {
+          const identifier = normalizeIdentifier(definition.identifier);
+          definitionIdentifiers.add(identifier);
+          if (!firstDefinitionByIdentifier.has(identifier)) {
+            firstDefinitionByIdentifier.set(identifier, definition);
+          }
+        }
         for (const link of links) {
           getResourceNodes(link).links.push(link);
         }
         for (const reference of references) {
-          const definition = definitions.find(
-            (def) => def.identifier === reference.identifier,
+          const definition = firstDefinitionByIdentifier.get(
+            normalizeIdentifier(reference.identifier),
           );
           if (definition) {
             getResourceNodes(definition).references.push(reference);
           }
         }
-        for (const definition of definitions) {
+        for (const definition of firstDefinitionByIdentifier.values()) {
           getResourceNodes(definition).definitions.push(definition);
         }
 
