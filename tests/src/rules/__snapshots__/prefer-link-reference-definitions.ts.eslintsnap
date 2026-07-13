@@ -9,19 +9,23 @@ LanguageOptions:
 Plugins: unable to serialize
 
 Code:
-  1 | [Foo](/same) and [Foo](/same).
-    | ^~~~~~~~~~~~ [1] ^~~~~~~~~~~~ [2]
+  1 | # Case-Insensitive Identifiers
   2 |
-  3 | [foo]: /other
+  3 | [Foo](/same) and [Foo](/same).
+    | ^~~~~~~~~~~~ [1] ^~~~~~~~~~~~ [2]
   4 |
+  5 | [foo]: /other
+  6 |
 
 Output:
-  1 | [Foo][Foo-1] and [Foo][Foo-1].
+  1 | # Case-Insensitive Identifiers
   2 |
-  3 | [foo]: /other
+  3 | [Foo][Foo-1] and [Foo][Foo-1].
   4 |
-  5 | [Foo-1]: /same
+  5 | [foo]: /other
   6 |
+  7 | [Foo-1]: /same
+  8 |
 
 [1] Use link reference definitions instead of inline links.
 [2] Use link reference definitions instead of inline links.
