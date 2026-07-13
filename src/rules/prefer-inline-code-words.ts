@@ -6,7 +6,7 @@ import {
   IGNORES_SCHEMA,
   iterateSearchWords,
 } from "../utils/search-words.ts";
-import { toRegExpMatcher } from "../utils/regexp.ts";
+import { toGlobalRegExpMatcher } from "../utils/regexp.ts";
 
 type Words = string[];
 
@@ -47,7 +47,7 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
       const sourceCode = context.sourceCode;
 
       const wordMatchers = (context.options[0]?.words || []).map(
-        toRegExpMatcher,
+        toGlobalRegExpMatcher,
       );
       const ignores = createSearchWordsIgnoreContext(
         context.options[0]?.ignores,

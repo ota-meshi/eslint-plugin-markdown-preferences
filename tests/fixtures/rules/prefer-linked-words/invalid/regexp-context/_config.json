@@ -1,0 +1,9 @@
+{
+  "options": [
+    {
+      "words": {
+        "/(?<=\\.)(is)(Array)/u": "https://example.com/$1-$2"
+      }
+    }
+  ]
+}

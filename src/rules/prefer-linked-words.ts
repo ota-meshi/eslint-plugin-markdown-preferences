@@ -7,36 +7,77 @@ import {
   IGNORES_SCHEMA,
   iterateSearchWords,
 } from "../utils/search-words.ts";
-import type { RegExpMatcher } from "../utils/regexp.ts";
-import { toRegExpMatcher } from "../utils/regexp.ts";
+import type { GlobalRegExpMatcher } from "../utils/regexp.ts";
+import {
+  toGlobalRegExpMatcher,
+  toStickyRegExpMatcher,
+} from "../utils/regexp.ts";
 
 type WordsObject = Record<string, string | null>;
-type Words = WordsObject | string[];
+type UserWordsOption = WordsObject | string[];
 
-class WordToMatchers {
-  private readonly _patternToMatchers = new Map<string, RegExpMatcher>();
+class WordsOptions {
+  private readonly _patternToMatchers = new Map<string, GlobalRegExpMatcher>();
 
-  private readonly _matcherToPatterns = new Map<RegExpMatcher, string>();
+  private readonly _matcherToPatterns = new Map<GlobalRegExpMatcher, string>();
 
-  private readonly _matchers: RegExpMatcher[] = [];
+  private readonly _matchers: GlobalRegExpMatcher[] = [];
 
-  public get matchers(): RegExpMatcher[] {
+  private readonly _links: Record<string, string | undefined> =
+    Object.create(null);
+
+  public constructor(wordsOption: UserWordsOption) {
+    if (Array.isArray(wordsOption)) {
+      for (const word of wordsOption) {
+        this.addPattern(word);
+      }
+    } else {
+      for (const [word, link] of Object.entries(wordsOption)) {
+        if (link) {
+          this._links[word] = link;
+        }
+        this.addPattern(word);
+      }
+    }
+  }
+
+  public get globalMatchers(): GlobalRegExpMatcher[] {
     return this._matchers;
   }
 
   public addPattern(pattern: string): void {
-    const matcher = toRegExpMatcher(pattern);
+    const matcher = toGlobalRegExpMatcher(pattern);
     this._patternToMatchers.set(pattern, matcher);
     this._matcherToPatterns.set(matcher, pattern);
     this._matchers.push(matcher);
   }
 
-  public getPattern(matcher: RegExpMatcher) {
-    return this._matcherToPatterns.get(matcher);
+  public resolveNewLink(
+    source: {
+      text: string;
+      range: [number, number];
+    },
+    matcher: GlobalRegExpMatcher,
+  ) {
+    const pattern = this._matcherToPatterns.get(matcher);
+    if (!pattern) return undefined;
+    const link = this._links[pattern];
+    if (!link) return null;
+
+    const stickyMatcher = toStickyRegExpMatcher(pattern);
+    stickyMatcher.lastIndex = source.range[0];
+    const newText = source.text.replace(stickyMatcher, link);
+
+    const offsetFromEnd = source.text.length - source.range[1];
+    if (offsetFromEnd === 0) {
+      return newText.slice(source.range[0]);
+    }
+
+    return newText.slice(source.range[0], -offsetFromEnd);
   }
 }
 
-export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
+export default createRule<[{ words?: UserWordsOption; ignores?: Ignores }?]>(
   "prefer-linked-words",
   {
     meta: {
@@ -87,20 +128,7 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
       const ignores = createSearchWordsIgnoreContext(
         context.options[0]?.ignores,
       );
-      const links: Record<string, string | undefined> = Object.create(null);
-      const wordMatchers = new WordToMatchers();
-      if (Array.isArray(wordsOption)) {
-        for (const word of wordsOption) {
-          wordMatchers.addPattern(word);
-        }
-      } else {
-        for (const [word, link] of Object.entries(wordsOption)) {
-          if (link) {
-            links[word] = link;
-          }
-          wordMatchers.addPattern(word);
-        }
-      }
+      const words = new WordsOptions(wordsOption);
 
       type LinkedNode = Link | LinkReference;
       let linkedNode: LinkedNode | null = null;
@@ -120,17 +148,19 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
         },
         text(node) {
           if (linkedNode) return;
-          for (const { wordMatcher, word, range } of iterateSearchWords({
+          for (const {
+            wordMatcher,
+            word,
+            range,
+            fragment,
+          } of iterateSearchWords({
             sourceCode,
             node,
-            wordMatchers: wordMatchers.matchers,
+            wordMatchers: words.globalMatchers,
             ignores,
           })) {
-            const pattern = wordMatchers.getPattern(wordMatcher);
-
-            const link =
-              pattern && resolveLink(word, links[pattern], wordMatcher);
-            if (isSelfLink(link)) continue;
+            const link = resolveLink(fragment, wordMatcher);
+            if (link && isSelfLink(link)) continue;
             context.report({
               node,
               loc: {
@@ -151,19 +181,25 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
         },
         inlineCode(node) {
           if (linkedNode) return;
-          for (const matcher of wordMatchers.matchers) {
+          for (const matcher of words.globalMatchers) {
             const word = node.value;
             if (!word) continue;
             if (ignores.ignore(word)) continue;
             // Check if the entire range matches
-            const iterator = word.matchAll(matcher);
-            const match = iterator.next();
-            if (match.done) continue;
-            if (match.value[0] !== word) continue;
+            const matches = [...word.matchAll(matcher)];
+            if (
+              matches.length !== 1 ||
+              matches[0].index !== 0 ||
+              matches[0][0] !== word
+            ) {
+              continue;
+            }
 
-            const pattern = wordMatchers.getPattern(matcher);
-            const link = pattern && resolveLink(word, links[pattern], matcher);
-            if (isSelfLink(link)) continue;
+            const link = resolveLink(
+              { text: word, range: [0, word.length] },
+              matcher,
+            );
+            if (link && isSelfLink(link)) continue;
             context.report({
               node,
               messageId: "requireLink",
@@ -184,13 +220,14 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
        * Resolve a link template for a match.
        */
       function resolveLink(
-        text: string,
-        linkTemplate: string | undefined,
-        matcher: RegExpMatcher,
-      ): string | undefined {
-        if (!linkTemplate) return linkTemplate;
-        const newLink = text.replace(matcher, linkTemplate);
-
+        fragment: {
+          text: string;
+          range: [number, number];
+        },
+        matcher: GlobalRegExpMatcher,
+      ): string | null {
+        const newLink = words.resolveNewLink(fragment, matcher);
+        if (!newLink) return null;
         const adjustedLink = adjustLink(newLink);
         return adjustedLink;
       }
@@ -198,8 +235,8 @@ export default createRule<[{ words?: Words; ignores?: Ignores }?]>(
       /**
        * Check whether a link points to the file currently being checked.
        */
-      function isSelfLink(link: string | undefined): boolean {
-        return link === `./${path.basename(context.filename)}`;
+      function isSelfLink(link: string | null): boolean {
+        return link != null && link === `./${path.basename(context.filename)}`;
       }
 
       /**

@@ -9,8 +9,12 @@ declare global {
   }
 }
 
-export type RegExpMatcher = {
+export type GlobalRegExpMatcher = {
   [Symbol.matchAll](s: string): RegExpStringIterator<RegExpExecArray>;
+};
+
+export type StickyRegExpMatcher = {
+  lastIndex: number;
   [Symbol.replace](s: string, replacement: string): string;
 };
 
@@ -31,20 +35,35 @@ export function toRegExp(string: string): { test(s: string): boolean } {
 }
 
 /**
- * Convert a string to the `RegExpMatcher`.
- * Normal strings (e.g. `"foo"`) is converted to `/^foo$/` of `RegExpMatcher`.
- * Strings like `"/^foo/i"` are converted to `/^foo/i` of `RegExpMatcher`.
+ * Convert a string to the `GlobalRegExpMatcher` with global flag.
+ * Normal strings (e.g. `"foo"`) is converted to `/^foo$/g` of `GlobalRegExpMatcher`.
+ * Strings like `"/^foo/i"` are converted to `/^foo/ig` of `GlobalRegExpMatcher`.
  *
  * @param {string} string The string to convert.
- * @returns {RegExpMatcher} Returns the `RegExpMatcher`.
+ * @returns {GlobalRegExpMatcher} Returns the `GlobalRegExpMatcher`.
  */
-export function toRegExpMatcher(string: string): RegExpMatcher {
+export function toGlobalRegExpMatcher(string: string): GlobalRegExpMatcher {
   const parts = RE_REGEXP_STR.exec(string);
   if (parts) {
-    const regexp = new RegExp(parts[1], parts[2]);
-    return regexpToMatcher(regexp);
+    return regexpToGlobalMatcher(parts[1], parts[2]);
   }
-  return stringToMatcher(string);
+  return stringToGlobalMatcher(string);
+}
+
+/**
+ * Convert a string to the `RegExpMatcher` with sticky flag.
+ * Normal strings (e.g. `"foo"`) is converted to `/^foo$/y` of `RegExpMatcher`.
+ * Strings like `"/^foo/i"` are converted to `/^foo/iy` of `RegExpMatcher`.
+ *
+ * @param {string} string The string to convert.
+ * @returns {StickyRegExpMatcher} Returns the `StickyRegExpMatcher`.
+ */
+export function toStickyRegExpMatcher(string: string): StickyRegExpMatcher {
+  const parts = RE_REGEXP_STR.exec(string);
+  if (parts) {
+    return regexpToStickyMatcher(parts[1], parts[2]);
+  }
+  return stringToStickyMatcher(string);
 }
 
 /**
@@ -57,54 +76,73 @@ export function isRegExp(string: string): boolean {
 }
 
 /**
- * Convert a `RegExp` to the `RegExpMatcher`.
+ * Convert a `RegExp` to the `GlobalRegExpMatcher` with global flag.
  */
-function regexpToMatcher(regexp: RegExp): RegExpMatcher {
-  let regexpWithGlobal: RegExp | null = regexp.global ? regexp : null;
-  return {
-    [Symbol.matchAll](s): RegExpStringIterator<RegExpExecArray> {
-      if (!regexpWithGlobal) {
-        regexpWithGlobal = new RegExp(regexp.source, `${regexp.flags}g`);
-      }
-      return regexpWithGlobal[Symbol.matchAll](s);
-    },
-    [Symbol.replace](s: string, replacement: string): string {
-      return s.replace(regexp, replacement);
-    },
-  };
+function regexpToGlobalMatcher(
+  source: string,
+  flags: string,
+): GlobalRegExpMatcher {
+  const regexpWithGlobal = new RegExp(source, `${flags.replace(/[gy]/u, "")}g`);
+  return regexpWithGlobal;
 }
 
 /**
- * Convert a string to the `RegExpMatcher`.
+ * Convert a `RegExp` to the `StickyRegExpMatcher` with sticky flag.
  */
-function stringToMatcher(string: string): RegExpMatcher {
+function regexpToStickyMatcher(
+  source: string,
+  flags: string,
+): StickyRegExpMatcher {
+  const regexpWithSticky = new RegExp(source, `${flags.replace(/[gy]/u, "")}y`);
+  return regexpWithSticky;
+}
+
+/**
+ * Convert a string to the `GlobalRegExpMatcher` with global flag.
+ */
+function stringToGlobalMatcher(string: string): GlobalRegExpMatcher {
   return {
     [Symbol.matchAll](s): RegExpStringIterator<RegExpExecArray> {
-      return iterate(s);
-    },
-    [Symbol.replace](s: string, replacement: string): string {
-      let result = "";
-      let lastIndex = 0;
-      for (const match of iterate(s)) {
-        result += s.slice(lastIndex, match.index) + replacement;
-        lastIndex = match.index + string.length;
-      }
-      result += s.slice(lastIndex);
-      return result;
+      return iterateAll(s);
     },
   };
 
   /**
    * Iterate all matches of the string in the given string.
    */
-  function* iterate(s: string): RegExpStringIterator<RegExpExecArray> {
-    let index = s.indexOf(string);
-    while (index !== -1) {
+  function* iterateAll(s: string): RegExpStringIterator<RegExpExecArray> {
+    let index: number;
+    let startIndex = 0;
+    while ((index = s.indexOf(string, startIndex)) !== -1) {
       const array = [string] as unknown as RegExpExecArray;
       array.index = index;
       array.input = s;
+      startIndex = index + string.length;
       yield array;
-      index = s.indexOf(string, index + string.length);
     }
   }
+}
+
+/**
+ * Convert a string to the `StickyRegExpMatcher` with sticky flag.
+ */
+function stringToStickyMatcher(string: string): StickyRegExpMatcher {
+  let lastIndex = 0;
+  return {
+    get lastIndex() {
+      return lastIndex;
+    },
+    set lastIndex(value: number) {
+      lastIndex = value;
+    },
+    [Symbol.replace](s: string, replacement: string): string {
+      if (s.startsWith(string, lastIndex)) {
+        const before = s.slice(0, lastIndex);
+        const after = s.slice(lastIndex + string.length);
+        lastIndex += replacement.length;
+        return before + replacement + after;
+      }
+      return s;
+    },
+  };
 }

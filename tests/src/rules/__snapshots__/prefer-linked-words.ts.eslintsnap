@@ -306,6 +306,59 @@ Output: unchanged
 
 
 Test: prefer-linked-words >> invalid
+Filename: tests/fixtures/rules/prefer-linked-words/invalid/regexp-context/lookbehind-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - words:
+      /(?<=\.)(is)(Array)/u: https://example.com/$1-$2
+Plugins: unable to serialize
+
+Code:
+  1 | # Context-sensitive regular expression
+  2 |
+  3 | Array.isArray.
+    |       ^~~~~~~ [1]
+  4 |
+
+Output:
+  1 | # Context-sensitive regular expression
+  2 |
+  3 | Array.[isArray](https://example.com/is-Array).
+  4 |
+
+[1] The word "isArray" should be a link.
+---
+
+
+Test: prefer-linked-words >> invalid
+Filename: tests/fixtures/rules/prefer-linked-words/invalid/regexp-inline-code-state/after-inline-code-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - words:
+      - /(?:TODO|FIXME)-\d+/u
+Plugins: unable to serialize
+
+Code:
+  1 | # Matches after inline code
+  2 |
+  3 | `TODO-123` TODO-456 and TODO-789.
+    | ^~~~~~~~~~ ^~~~~~~~     ^~~~~~~~
+    | [1]        [2]          [3]
+  4 |
+
+Output: unchanged
+
+[1] The word "TODO-123" should be a link.
+[2] The word "TODO-456" should be a link.
+[3] The word "TODO-789" should be a link.
+---
+
+
+Test: prefer-linked-words >> invalid
 Filename: tests/fixtures/rules/prefer-linked-words/invalid/test01-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
