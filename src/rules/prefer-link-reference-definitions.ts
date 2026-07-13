@@ -68,25 +68,27 @@ export default createRule<[{ minLinks?: number }?]>(
           string,
           Map<string | null, ResourceNodes>
         >();
-        const firstDefinitionByIdentifier = new Map<string, Definition>();
+        const effectiveDefinitionByIdentifier = new Map<string, Definition>();
         for (const definition of definitions) {
           const identifier = normalizeIdentifier(definition.identifier);
-          if (!firstDefinitionByIdentifier.has(identifier)) {
-            firstDefinitionByIdentifier.set(identifier, definition);
+          // Markdown uses the first definition when normalized identifiers match,
+          // so do not overwrite it with a shadowed definition.
+          if (!effectiveDefinitionByIdentifier.has(identifier)) {
+            effectiveDefinitionByIdentifier.set(identifier, definition);
           }
         }
         for (const link of links) {
           getResourceNodes(link).links.push(link);
         }
         for (const reference of references) {
-          const definition = firstDefinitionByIdentifier.get(
+          const definition = effectiveDefinitionByIdentifier.get(
             normalizeIdentifier(reference.identifier),
           );
           if (definition) {
             getResourceNodes(definition).references.push(reference);
           }
         }
-        for (const definition of firstDefinitionByIdentifier.values()) {
+        for (const definition of effectiveDefinitionByIdentifier.values()) {
           getResourceNodes(definition).definitions.push(definition);
         }
 
@@ -122,7 +124,7 @@ export default createRule<[{ minLinks?: number }?]>(
                   } else {
                     identifier = linkInfo.label.replaceAll(/[[\]]/gu, "-");
                     if (
-                      firstDefinitionByIdentifier.has(
+                      effectiveDefinitionByIdentifier.has(
                         normalizeIdentifier(identifier),
                       )
                     ) {
@@ -130,7 +132,7 @@ export default createRule<[{ minLinks?: number }?]>(
                       const original = identifier;
                       identifier = `${original}-${seq}`;
                       while (
-                        firstDefinitionByIdentifier.has(
+                        effectiveDefinitionByIdentifier.has(
                           normalizeIdentifier(identifier),
                         )
                       ) {
