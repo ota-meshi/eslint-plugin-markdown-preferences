@@ -68,11 +68,9 @@ export default createRule<[{ minLinks?: number }?]>(
           string,
           Map<string | null, ResourceNodes>
         >();
-        const definitionIdentifiers = new Set<string>();
         const firstDefinitionByIdentifier = new Map<string, Definition>();
         for (const definition of definitions) {
           const identifier = normalizeIdentifier(definition.identifier);
-          definitionIdentifiers.add(identifier);
           if (!firstDefinitionByIdentifier.has(identifier)) {
             firstDefinitionByIdentifier.set(identifier, definition);
           }
@@ -124,13 +122,15 @@ export default createRule<[{ minLinks?: number }?]>(
                   } else {
                     identifier = linkInfo.label.replaceAll(/[[\]]/gu, "-");
                     if (
-                      definitionIdentifiers.has(normalizeIdentifier(identifier))
+                      firstDefinitionByIdentifier.has(
+                        normalizeIdentifier(identifier),
+                      )
                     ) {
                       let seq = 1;
                       const original = identifier;
                       identifier = `${original}-${seq}`;
                       while (
-                        definitionIdentifiers.has(
+                        firstDefinitionByIdentifier.has(
                           normalizeIdentifier(identifier),
                         )
                       ) {

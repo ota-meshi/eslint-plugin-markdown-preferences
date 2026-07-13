@@ -27,6 +27,14 @@ If you are addressed in Japanese, please conduct the conversation in Japanese.
 
 ## Development Workflow
 
+### General Quality Standard
+
+For every task, make a deliberate best effort to prevent mistakes.
+
+Before finalizing work, re-read the user's request and all applicable instructions, inspect the complete result in context, challenge your assumptions, and evaluate correctness, simplicity, consistency, edge cases, unintended effects, maintainability, and validation adequacy.
+
+Actively look for problems beyond explicit requirements, examples, checklists, tests, and automated checks. Do not treat any checklist or passing test suite as an exhaustive guarantee. Investigate remaining uncertainty and resolve every known concern before claiming completion.
+
 ### Adding a New Rule
 
 1. Use `npm run new -- <rule-name>` to generate a template for the new rule.
