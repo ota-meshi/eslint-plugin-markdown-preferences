@@ -29,7 +29,7 @@ export type StickyRegExpMatcher = {
 export function toRegExp(string: string): { test(s: string): boolean } {
   const parts = RE_REGEXP_STR.exec(string);
   if (parts) {
-    return new RegExp(parts[1], parts[2]);
+    return new RegExp(parts[1], parts[2].replace("g", "").replace("y", ""));
   }
   return { test: (s) => s === string };
 }
@@ -82,7 +82,10 @@ function regexpToGlobalMatcher(
   source: string,
   flags: string,
 ): GlobalRegExpMatcher {
-  const regexpWithGlobal = new RegExp(source, `${flags.replace(/[gy]/u, "")}g`);
+  const regexpWithGlobal = new RegExp(
+    source,
+    `${flags.replace("g", "").replace("y", "")}g`,
+  );
   return regexpWithGlobal;
 }
 
@@ -93,7 +96,10 @@ function regexpToStickyMatcher(
   source: string,
   flags: string,
 ): StickyRegExpMatcher {
-  const regexpWithSticky = new RegExp(source, `${flags.replace(/[gy]/u, "")}y`);
+  const regexpWithSticky = new RegExp(
+    source,
+    `${flags.replace("g", "").replace("y", "")}y`,
+  );
   return regexpWithSticky;
 }
 
