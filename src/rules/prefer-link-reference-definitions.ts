@@ -7,6 +7,7 @@ import type {
   LinkReference,
   Resource,
 } from "../language/ast-types.ts";
+import { normalizeIdentifier } from "micromark-util-normalize-identifier";
 import { createRule } from "../utils/index.ts";
 
 export default createRule<[{ minLinks?: number }?]>(
@@ -67,6 +68,11 @@ export default createRule<[{ minLinks?: number }?]>(
           string,
           Map<string | null, ResourceNodes>
         >();
+        const definitionIdentifiers = new Set(
+          definitions.map((definition) =>
+            normalizeIdentifier(definition.identifier),
+          ),
+        );
         for (const link of links) {
           getResourceNodes(link).links.push(link);
         }
@@ -114,14 +120,15 @@ export default createRule<[{ minLinks?: number }?]>(
                   } else {
                     identifier = linkInfo.label.replaceAll(/[[\]]/gu, "-");
                     if (
-                      definitions.some((def) => def.identifier === identifier)
+                      definitionIdentifiers.has(normalizeIdentifier(identifier))
                     ) {
                       let seq = 1;
                       const original = identifier;
                       identifier = `${original}-${seq}`;
                       while (
-                        // eslint-disable-next-line no-loop-func -- OK
-                        definitions.some((def) => def.identifier === identifier)
+                        definitionIdentifiers.has(
+                          normalizeIdentifier(identifier),
+                        )
                       ) {
                         identifier = `${original}-${++seq}`;
                       }
