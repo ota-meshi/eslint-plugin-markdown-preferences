@@ -38,20 +38,23 @@ The rule automatically converts inline links to reference links and adds the ref
 
 ## 🔧 Options
 
-You can configure the minimum number of links required to trigger this rule.
+You can configure the minimum number of links required to trigger this rule and
+ignore link destinations using ordered URL patterns.
 
 ```json
 {
   "markdown-preferences/prefer-link-reference-definitions": [
     "error",
     {
-      "minLinks": 2
+      "minLinks": 2,
+      "ignoreUrlPatterns": ["!/^https?:/iu"]
     }
   ]
 }
 ```
 
 - `minLinks`: The minimum number of links with the same URL to trigger the rule. Default is `2`.
+- `ignoreUrlPatterns`: An ordered list of URL patterns to ignore. Default is `[]`.
 
 ### `minLinks`
 
@@ -60,6 +63,51 @@ The minimum number of links with the same URL to trigger the rule. Default is `2
 - Must be a positive integer (minimum: 1)
 - When set to `1`, all inline links will be converted to reference definitions
 - When set to `2` or higher, only URLs that appear multiple times will be converted
+
+### `ignoreUrlPatterns`
+
+An ordered list of patterns for link and image URLs that the rule should ignore.
+Patterns are matched against the parsed URL, without the link label or title.
+Default is `[]`.
+
+- Plain strings match complete URLs exactly.
+- Regular expressions use the `/pattern/flags` format.
+- A pattern prefixed with `!` removes matching URLs from the ignored set.
+- Patterns are applied in order, so a later pattern can override an earlier one.
+- If the first pattern is prefixed with `!`, all URLs are initially ignored.
+
+For example, the following configuration ignores relative URLs and other
+non-HTTP(S) URLs while continuing to check HTTP(S) URLs:
+
+```json
+{
+  "markdown-preferences/prefer-link-reference-definitions": [
+    "error",
+    {
+      "ignoreUrlPatterns": ["!/^https?:/iu"]
+    }
+  ]
+}
+```
+
+Patterns can be layered to add and remove exceptions. The following
+configuration checks HTTP(S) URLs, ignores URLs on `internal.example.com`, and
+then checks its `/public` paths again:
+
+```json
+{
+  "markdown-preferences/prefer-link-reference-definitions": [
+    "error",
+    {
+      "ignoreUrlPatterns": [
+        "!/^https?:/iu",
+        "/^https?:[/]{2}internal[.]example[.]com(?::[0-9]+)?(?:[/]|[?#]|$)/iu",
+        "!/^https?:[/]{2}internal[.]example[.]com(?::[0-9]+)?[/]public(?:[/]|[?#]|$)/iu"
+      ]
+    }
+  ]
+}
+```
 
 ## 📚 Further Reading
 

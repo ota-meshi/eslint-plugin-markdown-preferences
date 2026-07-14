@@ -1,0 +1,8 @@
+{
+  "options": [
+    {
+      "minLinks": 2,
+      "ignoreUrlPatterns": ["!/^https?:/iu"]
+    }
+  ]
+}

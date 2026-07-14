@@ -33,6 +33,311 @@ Output:
 
 
 Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/documented-layered-boundaries-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - ignoreUrlPatterns:
+      - "!/^https?:/iu"
+      - /^https?:[/]{2}internal[.]example[.]com(?::[0-9]+)?(?:[/]|[?#]|$)/iu
+      - "!/^https?:[/]{2}internal[.]example[.]com(?::[0-9]+)?[/]public(?:[/]|[?\
+        #]|$)/iu"
+Plugins: unable to serialize
+
+Code:
+  1 | # Documented Layered Pattern Boundaries
+  2 |
+  3 | [Lookalike](https://internal.example.com.evil.test/private) and [Lookalike](https://internal.example.com.evil.test/private).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1] ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  4 |
+  5 | [No Boundary](https://internal.example.comevil.test/private) and [No Boundary](https://internal.example.comevil.test/private).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3] ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+  6 |
+
+Output:
+  1 | # Documented Layered Pattern Boundaries
+  2 |
+  3 | [Lookalike] and [Lookalike].
+  4 |
+  5 | [No Boundary] and [No Boundary].
+  6 |
+  7 | [Lookalike]: https://internal.example.com.evil.test/private
+  8 |
+  9 | [No Boundary]: https://internal.example.comevil.test/private
+ 10 |
+
+[1] Use link reference definitions instead of inline links.
+[2] Use link reference definitions instead of inline links.
+[3] Use link reference definitions instead of inline links.
+[4] Use link reference definitions instead of inline links.
+---
+
+
+Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/documented-layered-patterns-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - ignoreUrlPatterns:
+      - "!/^https?:/iu"
+      - /^https?:[/]{2}internal[.]example[.]com(?::[0-9]+)?(?:[/]|[?#]|$)/iu
+      - "!/^https?:[/]{2}internal[.]example[.]com(?::[0-9]+)?[/]public(?:[/]|[?\
+        #]|$)/iu"
+Plugins: unable to serialize
+
+Code:
+  1 | # Documented Layered Patterns
+  2 |
+  3 | [External](https://example.com) and [External](https://example.com).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1] ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  4 |
+  5 | ![External Logo](https://example.com/logo.svg) and ![External Logo](https://example.com/logo.svg).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3] ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+  6 |
+  7 | [Private](https://internal.example.com/private) and [Private](https://internal.example.com/private).
+  8 |
+  9 | ![Private Logo](https://internal.example.com/private/logo.svg) and ![Private Logo](https://internal.example.com/private/logo.svg).
+ 10 |
+ 11 | [Private Query](https://internal.example.com?view=private) and [Private Query](https://internal.example.com?view=private).
+ 12 |
+ 13 | [Private Fragment](https://internal.example.com#private) and [Private Fragment](https://internal.example.com#private).
+ 14 |
+ 15 | [Private Port](https://internal.example.com:8443/private) and [Private Port](https://internal.example.com:8443/private).
+ 16 |
+ 17 | [Publicity](https://internal.example.com/publicity) and [Publicity](https://internal.example.com/publicity).
+ 18 |
+ 19 | [Public](https://internal.example.com/public/guide) and [Public](https://internal.example.com/public/guide).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [5] ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [6]
+ 20 |
+ 21 | [Public HTTP](http://internal.example.com/public) and [Public HTTP](http://internal.example.com/public).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [7] ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [8]
+ 22 |
+ 23 | [Public Exact](https://internal.example.com/public) and [Public Exact](https://internal.example.com/public).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [9] ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [10]
+ 24 |
+ 25 | [Public Query](https://internal.example.com/public?view=all) and [Public Query](https://internal.example.com/public?view=all).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    | [11]                                                             [12]
+ 26 |
+ 27 | [Public Fragment](https://internal.example.com/public#guide) and [Public Fragment](https://internal.example.com/public#guide).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    | [13]                                                             [14]
+ 28 |
+ 29 | [Public Port](https://internal.example.com:8443/public/guide) and [Public Port](https://internal.example.com:8443/public/guide).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    | [15]                                                              [16]
+ 30 |
+ 31 | ![Public Logo](https://internal.example.com/public/logo.svg) and ![Public Logo](https://internal.example.com/public/logo.svg).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    | [17]                                                             [18]
+ 32 |
+ 33 | [Relative](./guide.md) and [Relative](./guide.md).
+ 34 |
+
+Output:
+  1 | # Documented Layered Patterns
+  2 |
+  3 | [External] and [External].
+  4 |
+  5 | ![External Logo] and ![External Logo].
+  6 |
+  7 | [Private](https://internal.example.com/private) and [Private](https://internal.example.com/private).
+  8 |
+  9 | ![Private Logo](https://internal.example.com/private/logo.svg) and ![Private Logo](https://internal.example.com/private/logo.svg).
+ 10 |
+ 11 | [Private Query](https://internal.example.com?view=private) and [Private Query](https://internal.example.com?view=private).
+ 12 |
+ 13 | [Private Fragment](https://internal.example.com#private) and [Private Fragment](https://internal.example.com#private).
+ 14 |
+ 15 | [Private Port](https://internal.example.com:8443/private) and [Private Port](https://internal.example.com:8443/private).
+ 16 |
+ 17 | [Publicity](https://internal.example.com/publicity) and [Publicity](https://internal.example.com/publicity).
+ 18 |
+ 19 | [Public] and [Public].
+ 20 |
+ 21 | [Public HTTP] and [Public HTTP].
+ 22 |
+ 23 | [Public Exact] and [Public Exact].
+ 24 |
+ 25 | [Public Query] and [Public Query].
+ 26 |
+ 27 | [Public Fragment] and [Public Fragment].
+ 28 |
+ 29 | [Public Port] and [Public Port].
+ 30 |
+ 31 | ![Public Logo] and ![Public Logo].
+ 32 |
+ 33 | [Relative](./guide.md) and [Relative](./guide.md).
+ 34 |
+ 35 | [External]: https://example.com
+ 36 |
+ 37 | [External Logo]: https://example.com/logo.svg
+ 38 |
+ 39 | [Public]: https://internal.example.com/public/guide
+ 40 |
+ 41 | [Public HTTP]: http://internal.example.com/public
+ 42 |
+ 43 | [Public Exact]: https://internal.example.com/public
+ 44 |
+ 45 | [Public Query]: https://internal.example.com/public?view=all
+ 46 |
+ 47 | [Public Fragment]: https://internal.example.com/public#guide
+ 48 |
+ 49 | [Public Port]: https://internal.example.com:8443/public/guide
+ 50 |
+ 51 | [Public Logo]: https://internal.example.com/public/logo.svg
+ 52 |
+
+[1] Use link reference definitions instead of inline links.
+[2] Use link reference definitions instead of inline links.
+[3] Use link reference definitions instead of inline links.
+[4] Use link reference definitions instead of inline links.
+[5] Use link reference definitions instead of inline links.
+[6] Use link reference definitions instead of inline links.
+[7] Use link reference definitions instead of inline links.
+[8] Use link reference definitions instead of inline links.
+[9] Use link reference definitions instead of inline links.
+[10] Use link reference definitions instead of inline links.
+[11] Use link reference definitions instead of inline links.
+[12] Use link reference definitions instead of inline links.
+[13] Use link reference definitions instead of inline links.
+[14] Use link reference definitions instead of inline links.
+[15] Use link reference definitions instead of inline links.
+[16] Use link reference definitions instead of inline links.
+[17] Use link reference definitions instead of inline links.
+[18] Use link reference definitions instead of inline links.
+---
+
+
+Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/documented-non-http-pattern-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - ignoreUrlPatterns:
+      - "!/^https?:/iu"
+Plugins: unable to serialize
+
+Code:
+  1 | # Documented Non-HTTP Pattern
+  2 |
+  3 | [HTTP](http://example.com) and [HTTP](http://example.com).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~ [1] ^~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  4 |
+  5 | [HTTPS](https://example.com) and [HTTPS](https://example.com).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3] ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+  6 |
+  7 | [Uppercase](HTTPS://EXAMPLE.COM/GUIDE) and [Uppercase](HTTPS://EXAMPLE.COM/GUIDE).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [5] ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [6]
+  8 |
+  9 | ![HTTP Image](http://example.com/logo.svg) and ![HTTP Image](http://example.com/logo.svg).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [7] ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [8]
+ 10 |
+
+Output:
+  1 | # Documented Non-HTTP Pattern
+  2 |
+  3 | [HTTP] and [HTTP].
+  4 |
+  5 | [HTTPS] and [HTTPS].
+  6 |
+  7 | [Uppercase] and [Uppercase].
+  8 |
+  9 | ![HTTP Image] and ![HTTP Image].
+ 10 |
+ 11 | [HTTP]: http://example.com
+ 12 |
+ 13 | [HTTPS]: https://example.com
+ 14 |
+ 15 | [Uppercase]: HTTPS://EXAMPLE.COM/GUIDE
+ 16 |
+ 17 | [HTTP Image]: http://example.com/logo.svg
+ 18 |
+
+[1] Use link reference definitions instead of inline links.
+[2] Use link reference definitions instead of inline links.
+[3] Use link reference definitions instead of inline links.
+[4] Use link reference definitions instead of inline links.
+[5] Use link reference definitions instead of inline links.
+[6] Use link reference definitions instead of inline links.
+[7] Use link reference definitions instead of inline links.
+[8] Use link reference definitions instead of inline links.
+---
+
+
+Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/documented-options-overview-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - minLinks: 2
+    ignoreUrlPatterns:
+      - "!/^https?:/iu"
+Plugins: unable to serialize
+
+Code:
+  1 | # Documented Options Overview
+  2 |
+  3 | [HTTP](http://example.com) and [HTTP](http://example.com).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~ [1] ^~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  4 |
+  5 | ![HTTPS](https://example.com/logo.svg) and ![HTTPS](https://example.com/logo.svg).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3] ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+  6 |
+
+Output:
+  1 | # Documented Options Overview
+  2 |
+  3 | [HTTP] and [HTTP].
+  4 |
+  5 | ![HTTPS] and ![HTTPS].
+  6 |
+  7 | [HTTP]: http://example.com
+  8 |
+  9 | [HTTPS]: https://example.com/logo.svg
+ 10 |
+
+[1] Use link reference definitions instead of inline links.
+[2] Use link reference definitions instead of inline links.
+[3] Use link reference definitions instead of inline links.
+[4] Use link reference definitions instead of inline links.
+---
+
+
+Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/empty-ignore-url-patterns-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - ignoreUrlPatterns: []
+Plugins: unable to serialize
+
+Code:
+  1 | # Empty Ignore URL Patterns
+  2 |
+  3 | [Relative](./guide.md) and [Relative](./guide.md).
+    | ^~~~~~~~~~~~~~~~~~~~~~ [1] ^~~~~~~~~~~~~~~~~~~~~~ [2]
+  4 |
+
+Output:
+  1 | # Empty Ignore URL Patterns
+  2 |
+  3 | [Relative] and [Relative].
+  4 |
+  5 | [Relative]: ./guide.md
+  6 |
+
+[1] Use link reference definitions instead of inline links.
+[2] Use link reference definitions instead of inline links.
+---
+
+
+Test: prefer-link-reference-definitions >> invalid
 Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/image-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
@@ -83,6 +388,96 @@ Output:
 
 
 Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/literal-url-pattern-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - ignoreUrlPatterns:
+      - ./guide.md
+Plugins: unable to serialize
+
+Code:
+  1 | # Literal URL Pattern
+  2 |
+  3 | [Ignored](./guide.md) and [Ignored](./guide.md).
+  4 |
+  5 | [Query](./guide.md?tab=api) and [Query](./guide.md?tab=api).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~ [1] ^~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  6 |
+  7 | [Parent](../guide.md) and [Parent](../guide.md).
+    | ^~~~~~~~~~~~~~~~~~~~~ [3] ^~~~~~~~~~~~~~~~~~~~~ [4]
+  8 |
+
+Output:
+  1 | # Literal URL Pattern
+  2 |
+  3 | [Ignored](./guide.md) and [Ignored](./guide.md).
+  4 |
+  5 | [Query] and [Query].
+  6 |
+  7 | [Parent] and [Parent].
+  8 |
+  9 | [Query]: ./guide.md?tab=api
+ 10 |
+ 11 | [Parent]: ../guide.md
+ 12 |
+
+[1] Use link reference definitions instead of inline links.
+[2] Use link reference definitions instead of inline links.
+[3] Use link reference definitions instead of inline links.
+[4] Use link reference definitions instead of inline links.
+---
+
+
+Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/min-links-one-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - minLinks: 1
+    ignoreUrlPatterns:
+      - ./guide.md
+      - ./logo.svg
+Plugins: unable to serialize
+
+Code:
+  1 | # Minimum Links One
+  2 |
+  3 | [Ignored](./guide.md "Guide").
+  4 |
+  5 | ![Ignored Logo](./logo.svg "Logo").
+  6 |
+  7 | [Checked](https://example.com).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  8 |
+  9 | ![Checked Logo](https://example.com/logo.svg).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 10 |
+
+Output:
+  1 | # Minimum Links One
+  2 |
+  3 | [Ignored](./guide.md "Guide").
+  4 |
+  5 | ![Ignored Logo](./logo.svg "Logo").
+  6 |
+  7 | [Checked].
+  8 |
+  9 | ![Checked Logo].
+ 10 |
+ 11 | [Checked]: https://example.com
+ 12 |
+ 13 | [Checked Logo]: https://example.com/logo.svg
+ 14 |
+
+[1] Use link reference definitions instead of inline links.
+[2] Use link reference definitions instead of inline links.
+---
+
+
+Test: prefer-link-reference-definitions >> invalid
 Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/mixed-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
@@ -129,6 +524,39 @@ Output:
 
 
 Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/multiple-identifier-collisions-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # Multiple Identifier Collisions
+  2 |
+  3 | [Foo](/same) and [Foo](/same).
+    | ^~~~~~~~~~~~ [1] ^~~~~~~~~~~~ [2]
+  4 |
+  5 | [foo]: /other
+  6 | [FOO-1]: /another
+  7 |
+
+Output:
+  1 | # Multiple Identifier Collisions
+  2 |
+  3 | [Foo][Foo-2] and [Foo][Foo-2].
+  4 |
+  5 | [foo]: /other
+  6 | [FOO-1]: /another
+  7 |
+  8 | [Foo-2]: /same
+  9 |
+
+[1] Use link reference definitions instead of inline links.
+[2] Use link reference definitions instead of inline links.
+---
+
+
+Test: prefer-link-reference-definitions >> invalid
 Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/multiple-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
@@ -162,6 +590,38 @@ Output:
  10 |
  11 | - [ESLint] helps maintain code quality.
  12 |
+
+[1] Use link reference definitions instead of inline links.
+[2] Use link reference definitions instead of inline links.
+---
+
+
+Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/reapplied-url-pattern-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - ignoreUrlPatterns:
+      - https://example.com
+      - "!https://example.com"
+      - https://example.com
+Plugins: unable to serialize
+
+Code:
+  1 | # Reapplied URL Pattern
+  2 |
+  3 | [Checked](https://other.example.com) and [Checked](https://other.example.com).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1] ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  4 |
+
+Output:
+  1 | # Reapplied URL Pattern
+  2 |
+  3 | [Checked] and [Checked].
+  4 |
+  5 | [Checked]: https://other.example.com
+  6 |
 
 [1] Use link reference definitions instead of inline links.
 [2] Use link reference definitions instead of inline links.
@@ -347,4 +807,60 @@ Output:
 
 [1] Use link reference definitions instead of inline links.
 [2] Use link reference definitions instead of inline links.
+---
+
+
+Test: prefer-link-reference-definitions >> invalid
+Filename: tests/fixtures/rules/prefer-link-reference-definitions/invalid/url-only-pattern-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - ignoreUrlPatterns:
+      - /ignored/u
+Plugins: unable to serialize
+
+Code:
+  1 | # URL-Only Pattern Matching
+  2 |
+  3 | [ignored label](https://example.com) and [ignored label](https://example.com).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1] ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  4 |
+  5 | [Title](https://title.example "ignored title") and [Title](https://title.example "ignored title").
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3] ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+  6 |
+  7 | [Ignored URL](https://ignored.example) and [Ignored URL](https://ignored.example).
+  8 |
+  9 | ![ignored alt](https://image.example/logo.svg) and ![ignored alt](https://image.example/logo.svg).
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [5] ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [6]
+ 10 |
+ 11 | ![Ignored URL](https://ignored.example/logo.svg) and ![Ignored URL](https://ignored.example/logo.svg).
+ 12 |
+
+Output:
+  1 | # URL-Only Pattern Matching
+  2 |
+  3 | [ignored label] and [ignored label].
+  4 |
+  5 | [Title] and [Title].
+  6 |
+  7 | [Ignored URL](https://ignored.example) and [Ignored URL](https://ignored.example).
+  8 |
+  9 | ![ignored alt] and ![ignored alt].
+ 10 |
+ 11 | ![Ignored URL](https://ignored.example/logo.svg) and ![Ignored URL](https://ignored.example/logo.svg).
+ 12 |
+ 13 | [ignored label]: https://example.com
+ 14 |
+ 15 | [Title]: https://title.example "ignored title"
+ 16 |
+ 17 | [ignored alt]: https://image.example/logo.svg
+ 18 |
+
+[1] Use link reference definitions instead of inline links.
+[2] Use link reference definitions instead of inline links.
+[3] Use link reference definitions instead of inline links.
+[4] Use link reference definitions instead of inline links.
+[5] Use link reference definitions instead of inline links.
+[6] Use link reference definitions instead of inline links.
 ---

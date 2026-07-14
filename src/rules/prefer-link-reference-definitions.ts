@@ -9,8 +9,14 @@ import type {
 } from "../language/ast-types.ts";
 import { normalizeIdentifier } from "micromark-util-normalize-identifier";
 import { createRule } from "../utils/index.ts";
+import { compilePatternMatcher } from "../utils/pattern-matcher.ts";
+import { toRegExp } from "../utils/regexp.ts";
 
-export default createRule<[{ minLinks?: number }?]>(
+type PreferLinkReferenceDefinitionsOptions = [
+  { minLinks?: number; ignoreUrlPatterns?: string[] }?,
+];
+
+export default createRule<PreferLinkReferenceDefinitionsOptions>(
   "prefer-link-reference-definitions",
   {
     meta: {
@@ -35,6 +41,15 @@ export default createRule<[{ minLinks?: number }?]>(
               default: 2,
               minimum: 1,
             },
+            ignoreUrlPatterns: {
+              type: "array",
+              items: {
+                type: "string",
+              },
+              description:
+                "ordered URL patterns to ignore, with `!` patterns restoring matching URLs",
+              default: [],
+            },
           },
           additionalProperties: false,
         },
@@ -48,6 +63,13 @@ export default createRule<[{ minLinks?: number }?]>(
       const sourceCode = context.sourceCode;
       const options = context.options[0] || {};
       const minLinks = options.minLinks ?? 2;
+      const ignoreUrl = compilePatternMatcher(
+        options.ignoreUrlPatterns ?? [],
+        (pattern) => {
+          const regexp = toRegExp(pattern);
+          return (url: string) => regexp.test(url);
+        },
+      );
 
       const definitions: Definition[] = [];
       const links: (Link | Image)[] = [];
@@ -227,12 +249,13 @@ export default createRule<[{ minLinks?: number }?]>(
 
       return {
         link(node) {
-          if (sourceCode.getText(node).startsWith("[")) {
-            // Ignore <link> and url links
-            links.push(node);
-          }
+          if (ignoreUrl(node.url)) return;
+          // Ignore <link> and url links
+          if (!sourceCode.getText(node).startsWith("[")) return;
+          links.push(node);
         },
         image(node) {
+          if (ignoreUrl(node.url)) return;
           links.push(node);
         },
         "linkReference, imageReference"(node) {

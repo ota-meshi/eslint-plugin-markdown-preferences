@@ -1,0 +1,11 @@
+{
+  "options": [
+    {
+      "ignoreUrlPatterns": [
+        "!/^https?:/iu",
+        "/^https?:[/]{2}internal[.]example[.]com(?::[0-9]+)?(?:[/]|[?#]|$)/iu",
+        "!/^https?:[/]{2}internal[.]example[.]com(?::[0-9]+)?[/]public(?:[/]|[?#]|$)/iu"
+      ]
+    }
+  ]
+}
