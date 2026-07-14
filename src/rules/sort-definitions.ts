@@ -1,6 +1,7 @@
 import type { Definition, FootnoteDefinition } from "../language/ast-types.ts";
 import { createRule } from "../utils/index.ts";
-import { toRegExp, isRegExp } from "../utils/regexp.ts";
+import { compilePatternMatcher } from "../utils/pattern-matcher.ts";
+import { isRegExp, toRegExp } from "../utils/regexp.ts";
 import { getParent, type MDNode } from "../utils/ast.ts";
 import { calcShortestEditScript } from "../utils/calc-shortest-edit-script.ts";
 import type { RuleTextEdit, RuleTextEditor } from "@eslint/core";
@@ -461,62 +462,28 @@ export default createRule<[{ order?: OrderOption[] }?]>("sort-definitions", {
     function compileMatcher(
       pattern: string[],
     ): (node: DefinitionNode) => boolean {
-      const rules: {
-        negative: boolean;
-        match: (node: DefinitionNode) => boolean;
-      }[] = [];
-      for (const p of pattern) {
-        let negative: boolean, patternStr: string;
-        if (p.startsWith("!")) {
-          // If there is `!` at the beginning, it will be parsed with a negative pattern.
-          negative = true;
-          patternStr = p.substring(1);
-        } else {
-          negative = false;
-          patternStr = p;
-        }
+      return compilePatternMatcher(pattern, (patternStr) => {
         const regex = toRegExp(patternStr);
         if (isRegExp(patternStr)) {
-          rules.push({
-            negative,
-            match: (node) => regex.test(getDefinitionText(node)),
-          });
-        } else {
-          rules.push({
-            negative,
-            match: (node) => {
-              if (node.label === patternStr || node.identifier === patternStr) {
+          return (node: DefinitionNode) => regex.test(getDefinitionText(node));
+        }
+        return (node: DefinitionNode) => {
+          if (node.label === patternStr || node.identifier === patternStr) {
+            return true;
+          }
+          if (node.type === "definition") {
+            if (node.url === patternStr) return true;
+            if (URL.canParse(patternStr) && URL.canParse(node.url)) {
+              const normalizedPattern = normalizedURL(patternStr);
+              const normalizedUrl = normalizedURL(node.url);
+              if (normalizedUrl.startsWith(normalizedPattern)) {
                 return true;
               }
-              if (node.type === "definition") {
-                if (node.url === patternStr) return true;
-                if (URL.canParse(patternStr) && URL.canParse(node.url)) {
-                  const normalizedPattern = normalizedURL(patternStr);
-                  const normalizedUrl = normalizedURL(node.url);
-                  if (normalizedUrl.startsWith(normalizedPattern)) {
-                    return true;
-                  }
-                }
-              }
-              return regex.test(getDefinitionText(node));
-            },
-          });
-        }
-      }
-      return (node) => {
-        // If the first rule is a negative pattern, they are considered to match if they do not match that pattern.
-        let result = Boolean(rules[0]?.negative);
-        for (const { negative, match } of rules) {
-          if (result === !negative) {
-            // Even if it matches, the result does not change, so skip it.
-            continue;
+            }
           }
-          if (match(node)) {
-            result = !negative;
-          }
-        }
-        return result;
-      };
+          return regex.test(getDefinitionText(node));
+        };
+      });
     }
   },
 });

@@ -1,0 +1,11 @@
+{
+  "options": [
+    {
+      "ignoreUrlPatterns": [
+        "https://example.com",
+        "!https://example.com",
+        "https://example.com"
+      ]
+    }
+  ]
+}

@@ -53,6 +53,13 @@ When editing files, please note the following:
 
 ### Rule Testing
 
+#### Fixture-first Rule Test Policy
+
+- Rule behavior tests must use fixtures under `tests/fixtures/rules/<rule-name>/` and load them through the repository's fixture-based test utilities.
+- Do not add inline `valid` or `invalid` rule test cases when the same case can be represented by a fixture.
+- Use a non-fixture testing approach only when the fixture infrastructure cannot express the test. In that exceptional case, add a comment explaining why a fixture cannot be used and keep the non-fixture test as small as possible.
+- Direct unit tests for extracted, general-purpose utilities are not rule behavior tests and may be written without rule fixtures.
+
 #### Creating Test Fixtures
 
 Test fixtures for rules should be organized as follows:
