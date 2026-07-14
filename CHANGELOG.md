@@ -1,5 +1,17 @@
 # eslint-plugin-markdown-preferences
 
+## 0.42.0
+
+### Minor Changes
+
+- [#302](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/302) [`155aeab`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/155aeab579919db4f52839a2e0ca5ddd7fcac35b) Thanks [@ota-meshi](https://github.com/ota-meshi)! - Add the `ignoreUrlPatterns` option to [`markdown-preferences/prefer-link-reference-definitions`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-link-reference-definitions.html) for excluding matching link and image URLs.
+
+- [#301](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/301) [`07e46a3`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/07e46a3ccfa56f512109f67ada904ad740391662) Thanks [@ota-meshi](https://github.com/ota-meshi)! - Add regular expression word patterns to [`markdown-preferences/prefer-linked-words`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-linked-words.html) and [`markdown-preferences/prefer-inline-code-words`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-inline-code-words.html).
+
+### Patch Changes
+
+- [#299](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/299) [`f1add13`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/f1add13cfc71e322d1b1ce59705ceafde29afaec) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix([markdown-preferences/prefer-link-reference-definitions](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/prefer-link-reference-definitions.html)): avoid case-insensitive reference identifier collisions
+
 ## 0.41.1
 
 ### Patch Changes

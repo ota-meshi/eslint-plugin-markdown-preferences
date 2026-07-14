@@ -613,6 +613,7 @@ type MarkdownPreferencesPreferInlineCodeWords = []|[{
 type MarkdownPreferencesPreferLinkReferenceDefinitions = []|[{
   
   minLinks?: number
+  
   ignoreUrlPatterns?: string[]
 }]
 // ----- markdown-preferences/prefer-linked-words -----
