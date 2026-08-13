@@ -79,7 +79,7 @@
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.0",
     "@changesets/cli": "^3.0.0",
-    "@changesets/get-release-plan": "^4.0.8",
+    "@changesets/get-release-plan": "^5.0.0",
     "@eslint-community/eslint-plugin-eslint-comments": "^4.3.0",
     "@eslint/core": "^1.1.1",
     "@eslint/markdown": "^8.0.1",
