@@ -45,11 +45,17 @@ import type { ParsedListItem } from "../utils/list-item.ts";
 import { parseListItem } from "../utils/list-item.ts";
 import { parseMathBlock } from "../utils/math-block.ts";
 
+type RelativeTo =
+  | "markerStart"
+  | "markerEnd"
+  | "taskListMarkerStart"
+  | "taskListMarkerEnd";
+
 type Options = {
   listItems?: {
     first?: number | "ignore";
     other?: number | "first" | "minimum";
-    relativeTo: "markerStart" | "markerEnd" | "taskListMarkerEnd";
+    relativeTo?: RelativeTo;
   };
 };
 
@@ -318,39 +324,72 @@ export default createRule<[Options?]>("indent", {
         }
         if (this._expectedIndentForFirstLine != null)
           return this._expectedIndentForFirstLine;
-        const loc = this.nodeLoc;
+        return (this._expectedIndentForFirstLine = Math.max(
+          this.getRelativeToIndent() + options.listItems.first,
+          // At least one space is required after the content anchor.
+          this.getContentAnchorIndent() + 1,
+        ));
+      }
+
+      /**
+       * Get the index of the position that the content of the list item is
+       * measured from. The content is whatever follows this position, after
+       * the indentation whitespace.
+       *
+       * The task list item marker is part of the content when the indentation
+       * is relative to the list marker, and part of the marker when the
+       * indentation is relative to the task list item marker.
+       */
+      public getContentAnchorIndex(): number {
         const parsed = this.getParsedListItem();
-        const lineText = sourceCode.lines[loc.start.line - 1];
-        if (options.listItems.relativeTo === "markerStart") {
-          const baseIndent = getWidth(lineText.slice(0, loc.start.column - 1));
-          return (this._expectedIndentForFirstLine = Math.max(
-            baseIndent + options.listItems.first,
-            baseIndent + parsed.marker.text.length + 1, // At least one space after the marker,
-          ));
-        }
         if (
-          options.listItems.relativeTo === "taskListMarkerEnd" &&
-          parsed.taskListItemMarker
+          options.listItems.relativeTo === "taskListMarkerStart" ||
+          options.listItems.relativeTo === "taskListMarkerEnd"
         ) {
-          const baseIndent = getWidth(
-            lineText.slice(
-              0,
-              sourceCode.getLocFromIndex(parsed.taskListItemMarker.range[1])
-                .column - 1,
-            ),
-          );
-          return (this._expectedIndentForFirstLine =
-            baseIndent + options.listItems.first);
+          return parsed.taskListItemMarker?.range[1] ?? parsed.marker.range[1];
         }
-        // relative to markerEnd, or taskListMarkerEnd without task list marker
-        const baseIndent = getWidth(
-          lineText.slice(
-            0,
-            sourceCode.getLocFromIndex(parsed.marker.range[1]).column - 1,
-          ),
+        return parsed.marker.range[1];
+      }
+
+      /**
+       * Get the indent width of the content anchor.
+       * See {@link ListItemStack.getContentAnchorIndex}.
+       */
+      private getContentAnchorIndent(): number {
+        return this.getIndentAtIndex(this.getContentAnchorIndex());
+      }
+
+      /**
+       * Get the indent width of the reference point configured by the
+       * `relativeTo` option.
+       */
+      private getRelativeToIndent(): number {
+        const parsed = this.getParsedListItem();
+        if (options.listItems.relativeTo === "markerStart") {
+          return this.getIndentAtIndex(parsed.marker.range[0]);
+        }
+        if (options.listItems.relativeTo === "taskListMarkerStart") {
+          return this.getIndentAtIndex(
+            parsed.taskListItemMarker?.range[0] ?? parsed.marker.range[1],
+          );
+        }
+        if (options.listItems.relativeTo === "taskListMarkerEnd") {
+          return this.getIndentAtIndex(
+            parsed.taskListItemMarker?.range[1] ?? parsed.marker.range[1],
+          );
+        }
+        // markerEnd
+        return this.getIndentAtIndex(parsed.marker.range[1]);
+      }
+
+      /**
+       * Get the width of the text that precedes the given index on its line.
+       */
+      private getIndentAtIndex(index: number): number {
+        const indexLoc = sourceCode.getLocFromIndex(index);
+        return getWidth(
+          sourceCode.lines[indexLoc.line - 1].slice(0, indexLoc.column - 1),
         );
-        return (this._expectedIndentForFirstLine =
-          baseIndent + options.listItems.first);
       }
 
       private getExpectedIndentAfterFirstLine() {
@@ -383,39 +422,18 @@ export default createRule<[Options?]>("indent", {
           return (this._expectedIndentForOtherLines =
             this.getMinimumLineIndent());
         }
-        const lineText = sourceCode.lines[loc.start.line - 1];
+        const baseIndent = this.getRelativeToIndent();
         if (options.listItems.relativeTo === "markerStart") {
-          const baseIndent = getWidth(lineText.slice(0, loc.start.column - 1));
-          const minimumLineIndent = this.getMinimumLineIndent();
           return (this._expectedIndentForOtherLines = Math.max(
             baseIndent + options.listItems.other,
-            minimumLineIndent,
+            this.getMinimumLineIndent(),
           ));
         }
-        const parsed = this.getParsedListItem();
-        if (
-          options.listItems.relativeTo === "taskListMarkerEnd" &&
-          parsed.taskListItemMarker
-        ) {
-          const baseIndent = getWidth(
-            lineText.slice(
-              0,
-              sourceCode.getLocFromIndex(parsed.taskListItemMarker.range[1])
-                .column - 1,
-            ),
-          );
-          return (this._expectedIndentForOtherLines =
-            baseIndent + options.listItems.other);
-        }
-        // relative to markerEnd, or taskListMarkerEnd without task list marker
-        const baseIndent = getWidth(
-          lineText.slice(
-            0,
-            sourceCode.getLocFromIndex(parsed.marker.range[1]).column - 1,
-          ),
-        );
-        return (this._expectedIndentForOtherLines =
-          baseIndent + options.listItems.other);
+        return (this._expectedIndentForOtherLines = Math.max(
+          baseIndent + options.listItems.other,
+          // At least one space is required after the content anchor.
+          this.getContentAnchorIndent() + 1,
+        ));
       }
 
       private getMinimumLineIndent() {
@@ -436,7 +454,7 @@ export default createRule<[Options?]>("indent", {
         const markerEndPos = sourceCode.getLocFromIndex(
           withoutTaskListMarker
             ? parsed.marker.range[1]
-            : (parsed.taskListItemMarker?.range[1] ?? parsed.marker.range[1]),
+            : this.getContentAnchorIndex(),
         );
         const lineText = sourceCode.lines[markerEndPos.line - 1];
         const afterMarkerText = lineText.slice(markerEndPos.column - 1);
@@ -1634,9 +1652,8 @@ export default createRule<[Options?]>("indent", {
       expectedIndentWidth: number;
       actualIndentWidth: number;
     } | null {
-      const parsed = listItem.getParsedListItem();
       const markerAfterColumn = sourceCode.getLocFromIndex(
-        parsed.taskListItemMarker?.range[1] ?? parsed.marker.range[1],
+        listItem.getContentAnchorIndex(),
       ).column;
       const lineText = sourceCode.lines[lineNumber - 1];
       const before = lineText.slice(0, markerAfterColumn - 1);
