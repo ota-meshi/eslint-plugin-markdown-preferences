@@ -605,7 +605,7 @@ type MarkdownPreferencesPreferInlineCodeWords = []|[{
   ignores?: {
     words?: (string | string[])
     node?: {
-      [k: string]: unknown | undefined
+      [k: string]: (string | number | boolean | null) | undefined
     }
   }[]
 }]
@@ -624,7 +624,7 @@ type MarkdownPreferencesPreferLinkedWords = []|[{
   ignores?: {
     words?: (string | string[])
     node?: {
-      [k: string]: unknown | undefined
+      [k: string]: (string | number | boolean | null) | undefined
     }
   }[]
 }]
