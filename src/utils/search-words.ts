@@ -62,7 +62,7 @@ export function* iterateSearchWords({
 
 export type Ignore = {
   words?: string[] | string;
-  node?: Record<string, unknown>;
+  node?: Record<string, string | number | boolean | null>;
 };
 export type Ignores = Ignore[];
 
@@ -86,6 +86,9 @@ export const IGNORES_SCHEMA: JSONSchema4 = {
       },
       node: {
         type: "object",
+        additionalProperties: {
+          type: ["string", "number", "boolean", "null"],
+        },
       },
     },
     additionalProperties: false,
