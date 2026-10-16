@@ -88,12 +88,24 @@ To control the alignment of list item markers and blockquote markers, use [markd
     - Integer value (`>= 2`): Sets the indentation to the specified number of spaces.
     - `"first"`: Sets the indentation to match the value of `first`.
     - `"minimum"`: Uses the minimum indentation required to maintain indentation.
-  - `relativeTo`: When using a numeric value for indentation, sets the reference point for the indentation. The following values can be used. The default is `"markerEnd"`:
-    - `"markerStart"`: Calculates indentation relative to the start position of the list marker.
+  - `relativeTo`: When using a numeric value for indentation, sets the reference point for the indentation. The following values can be used. The default is `"taskListMarkerEnd"`:
+    - `"markerStart"`: Calculates indentation relative to the start position of the list marker (e.g., the `-` of `- [ ] Foo`, or the `1` of `1. Foo`).
     - `"markerEnd"`: Calculates indentation relative to the end position of the list marker.
-    - `"taskListMarkerEnd"`: Calculates indentation relative to the end position of the task list marker. If the list item is a task list item (e.g., `- [ ]`), the indentation is calculated from the end of the task list marker. If it's a regular list item, it behaves like `"markerEnd"`.
+    - `"taskListMarkerStart"`: Calculates indentation relative to the start position of the task list marker (e.g., the `[` of `- [ ] Foo`). If it's a regular list item, it behaves like `"markerEnd"`.
+    - `"taskListMarkerEnd"`: Calculates indentation relative to the end position of the task list marker (e.g., the `]` of `- [ ] Foo`). If it's a regular list item, it behaves like `"markerEnd"`.
 
-Regardless of the option, if the calculated indentation does not fall within the range allowed by Markdown specifications, the indentation permitted by Markdown specifications will be applied.
+For `"markerStart"` and `"markerEnd"`, the task list marker is treated as part of the list item content, so the indentation that is checked is the one between the list marker and the task list marker. For `"taskListMarkerStart"` and `"taskListMarkerEnd"`, the task list marker is treated as part of the list marker, so the indentation that is checked is the one between the task list marker and the text that follows it.
+
+Regardless of the option, at least one space is always required before the content, and if the calculated indentation does not fall within the range allowed by Markdown specifications, the indentation permitted by Markdown specifications will be applied.
+
+The following table shows how each `relativeTo` value formats the same task list item when `first` is `4`:
+
+| `relativeTo`            | Result         |
+| :---------------------- | :------------- |
+| `"markerStart"`         | `-   [ ] Foo`  |
+| `"markerEnd"`           | `-    [ ] Foo` |
+| `"taskListMarkerStart"` | `- [ ] Foo`    |
+| `"taskListMarkerEnd"`   | `- [ ]    Foo` |
 
 ### Examples
 
@@ -131,6 +143,30 @@ Regardless of the option, if the calculated indentation does not fall within the
      text.
   2. Single line text.
 * Single line text.
+```
+
+<!-- prettier-ignore-end -->
+
+#### `listItems.relativeTo` With Task List Items
+
+<!-- prettier-ignore-start -->
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/indent: ["error", {"listItems": {"first": 4, "other": "first", "relativeTo": "taskListMarkerEnd"}}] -->
+
+<!-- ✓ GOOD -->
+
+- [ ]    Foo
+- [x]    Bar
+         Wrapped text.
+
+<!-- ✗ BAD -->
+
+- [ ] Foo
+- [x] Bar
+  Wrapped text.
 ```
 
 <!-- prettier-ignore-end -->
