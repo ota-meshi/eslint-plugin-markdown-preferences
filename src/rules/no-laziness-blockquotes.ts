@@ -1,3 +1,4 @@
+import type { RuleTextEditor } from "@eslint/core";
 import { createRule } from "../utils/index.ts";
 import type { Blockquote } from "../language/ast-types.ts";
 import type { BlockquoteLevelInfo } from "../utils/blockquotes.ts";
@@ -12,9 +13,20 @@ export default createRule("no-laziness-blockquotes", {
       categories: ["recommended", "standard"],
       listCategory: "Decorative",
     },
-    fixable: undefined,
+    fixable: "code",
     hasSuggestions: true,
-    schema: [],
+    schema: [
+      {
+        type: "object",
+        properties: {
+          autofix: {
+            type: "boolean",
+            default: false,
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
     messages: {
       lazyBlockquoteLine:
         "Expected {{level}} '>' marker(s), but found {{actualLevel}}. This line will be interpreted as part of level {{level}} blockquote.",
@@ -24,6 +36,7 @@ export default createRule("no-laziness-blockquotes", {
   },
   create(context) {
     const sourceCode = context.sourceCode;
+    const autofix = context.options[0]?.autofix ?? false;
     const checkedLines = new Set<number>();
 
     /**
@@ -59,6 +72,22 @@ export default createRule("no-laziness-blockquotes", {
         const first = group.lines[0];
         const last = group.lines.at(-1)!;
 
+        /**
+         * Fix by adding the missing '>' markers to each lazy line.
+         */
+        function* addMarkers(fixer: RuleTextEditor) {
+          for (const invalidLine of group.lines) {
+            const lineStartIndex = sourceCode.getIndexFromLoc({
+              line: invalidLine.line,
+              column: 1,
+            });
+            yield fixer.replaceTextRange(
+              [lineStartIndex, lineStartIndex + invalidLine.prefix.length],
+              base.prefix,
+            );
+          }
+        }
+
         context.report({
           loc: {
             start: {
@@ -75,27 +104,14 @@ export default createRule("no-laziness-blockquotes", {
             level: `${base.level}`,
             actualLevel: `${group.level}`,
           },
+          fix: autofix ? addMarkers : null,
           suggest: [
             {
               messageId: "addMarker",
               data: {
                 missingMarkers: `${base.level - group.level}`,
               },
-              *fix(fixer) {
-                for (const invalidLine of group.lines) {
-                  const lineStartIndex = sourceCode.getIndexFromLoc({
-                    line: invalidLine.line,
-                    column: 1,
-                  });
-                  yield fixer.replaceTextRange(
-                    [
-                      lineStartIndex,
-                      lineStartIndex + invalidLine.prefix.length,
-                    ],
-                    base.prefix,
-                  );
-                }
-              },
+              fix: addMarkers,
             },
             {
               messageId: "addLineBreak",
