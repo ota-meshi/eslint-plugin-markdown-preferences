@@ -11,6 +11,7 @@ since: "v0.10.0"
 > disallow laziness in blockquotes
 
 - ⚙️ This rule is included in `plugin.configs.recommended` and `plugin.configs.standard`.
+- 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 - 💡 Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/latest/use/core-concepts/#rule-suggestions).
 
 ## 📖 Rule Details
@@ -135,7 +136,46 @@ Use this rule when you want to:
 
 ## 🔧 Options
 
-This rule has no options.
+```json
+{
+  "markdown-preferences/no-laziness-blockquotes": [
+    "error",
+    {
+      "autofix": false
+    }
+  ]
+}
+```
+
+- `autofix` (optional): When `true`, the rule automatically fixes lazy lines by adding the missing `>` markers. Default is `false`.
+
+### `autofix` (Default: `false`)
+
+By default, this rule only provides editor suggestions, because it cannot know whether a lazy line was intended to be part of the blockquote or a separate paragraph.
+
+When `true`, the `--fix` option adds the missing `>` markers to lazy lines. This keeps the current rendering of the document, since lazy lines are already interpreted as part of the blockquote.
+
+<!-- prettier-ignore-start -->
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/no-laziness-blockquotes: ['error', { "autofix": true }] -->
+
+<!-- ✗ BAD -->
+
+> This is a blockquote
+with a lazy continuation line
+```
+
+<!-- prettier-ignore-end -->
+
+The above is fixed to:
+
+```md
+> This is a blockquote
+> with a lazy continuation line
+```
 
 ## 📚 Further Reading
 
