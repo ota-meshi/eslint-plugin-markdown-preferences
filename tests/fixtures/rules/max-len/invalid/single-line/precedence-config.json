@@ -1,0 +1,9 @@
+{
+  "options": [
+    {
+      "list": { "paragraph": 30 },
+      "blockquote": { "paragraph": "single-line" },
+      "footnoteDefinition": { "paragraph": "ignore" }
+    }
+  ]
+}

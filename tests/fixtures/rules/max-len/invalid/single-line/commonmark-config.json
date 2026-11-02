@@ -1,0 +1,4 @@
+{
+  "language": "markdown/commonmark",
+  "options": [{ "paragraph": "single-line" }]
+}

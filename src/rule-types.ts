@@ -441,7 +441,7 @@ type MarkdownPreferencesListMarkerAlignment = []|[{
 // ----- markdown-preferences/max-len -----
 type MarkdownPreferencesMaxLen = []|[{
   heading?: (number | "ignore")
-  paragraph?: (number | "ignore")
+  paragraph?: ((number | "ignore") | "single-line")
   table?: (number | "ignore")
   html?: (number | "ignore")
   math?: (number | "ignore")
@@ -453,7 +453,7 @@ type MarkdownPreferencesMaxLen = []|[{
   })
   list?: ((number | "ignore") | {
     heading?: (number | "ignore")
-    paragraph?: (number | "ignore")
+    paragraph?: ((number | "ignore") | "single-line")
     table?: (number | "ignore")
     html?: (number | "ignore")
     math?: (number | "ignore")
@@ -466,7 +466,7 @@ type MarkdownPreferencesMaxLen = []|[{
   })
   blockquote?: ((number | "ignore") | {
     heading?: (number | "ignore")
-    paragraph?: (number | "ignore")
+    paragraph?: ((number | "ignore") | "single-line")
     table?: (number | "ignore")
     html?: (number | "ignore")
     math?: (number | "ignore")
@@ -479,7 +479,7 @@ type MarkdownPreferencesMaxLen = []|[{
   })
   footnoteDefinition?: ((number | "ignore") | {
     heading?: (number | "ignore")
-    paragraph?: (number | "ignore")
+    paragraph?: ((number | "ignore") | "single-line")
     table?: (number | "ignore")
     html?: (number | "ignore")
     math?: (number | "ignore")

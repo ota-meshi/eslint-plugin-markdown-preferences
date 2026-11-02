@@ -13,12 +13,14 @@ import type { MDNode } from "../utils/ast.ts";
 import { getParent } from "../utils/ast.ts";
 import { createRule } from "../utils/index.ts";
 import { getTextWidth } from "../utils/text-width.ts";
+import { getSoftWrappedSegments } from "../utils/paragraph.ts";
 
 type MaxLengthOption = number | "ignore";
+type ParagraphLengthOption = MaxLengthOption | "single-line";
 type MaxLengthParLangOption = MaxLengthOption | Record<string, MaxLengthOption>;
 type MaxLengthParNodeOptions = {
   heading?: MaxLengthOption;
-  paragraph?: MaxLengthOption;
+  paragraph?: ParagraphLengthOption;
   table?: MaxLengthOption;
   html?: MaxLengthOption;
   math?: MaxLengthOption;
@@ -61,11 +63,14 @@ const maxLengthParLangSchema = {
     },
   ],
 };
+const paragraphLengthSchema = {
+  oneOf: [maxLengthSchema, { enum: ["single-line"] }],
+};
 const maxLengthParPhrasingNodeOptionsSchema = {
   type: "object",
   properties: {
     heading: maxLengthSchema,
-    paragraph: maxLengthSchema,
+    paragraph: paragraphLengthSchema,
     table: maxLengthSchema,
     html: maxLengthSchema,
     math: maxLengthSchema,
@@ -87,7 +92,7 @@ function parseOptions(
 ): {
   maxLength: (
     node: Heading | Paragraph | Table | Html | Code | Yaml | Toml | Math,
-  ) => number | "ignore";
+  ) => ParagraphLengthOption;
   ignoreUrls: boolean;
 } {
   const ignoreUrls = options.ignoreUrls ?? true;
@@ -112,7 +117,7 @@ function parseOptions(
 
   return {
     maxLength: (node) => {
-      let maxLength: number | null = null;
+      let maxLength: number | "single-line" | null = null;
       let parent: MDNode | null = getParent(sourceCode, node);
       while (parent) {
         const len =
@@ -124,7 +129,13 @@ function parseOptions(
                 ? maxLengthForInFootnoteDefinition(node)
                 : null;
         if (len === "ignore") return "ignore";
-        if (len && (maxLength == null || len < maxLength)) {
+        if (len === "single-line") {
+          maxLength = len;
+        } else if (
+          len &&
+          (maxLength == null ||
+            (typeof maxLength === "number" && len < maxLength))
+        ) {
           maxLength = len;
         }
 
@@ -178,7 +189,7 @@ function parseContainerOption(
   option: MaxLengthOptionForContainer,
 ): (
   node: Heading | Paragraph | Table | Html | Code | Yaml | Toml | Math,
-) => number | "ignore" | null {
+) => ParagraphLengthOption | null {
   if (typeof option === "number" || option === "ignore") {
     return () => option;
   }
@@ -193,7 +204,7 @@ function parseOptionsParNode<T extends MaxLengthParNodeOptions>(
 ): (
   node: Heading | Paragraph | Table | Html | Code | Yaml | Toml | Math,
 ) =>
-  | (number | "ignore")
+  | ParagraphLengthOption
   | (T extends Required<MaxLengthParNodeOptions> ? never : null) {
   const headingMax = option.heading;
   const paragraphMax = option.paragraph;
@@ -211,7 +222,7 @@ function parseOptionsParNode<T extends MaxLengthParNodeOptions>(
    */
   function getMaxLength(
     node: Heading | Paragraph | Table | Html | Code | Yaml | Toml | Math,
-  ): number | "ignore" | null {
+  ): ParagraphLengthOption | null {
     switch (node.type) {
       case "heading":
         return headingMax ?? null;
@@ -244,7 +255,7 @@ export default createRule<[Options?]>("max-len", {
       categories: [],
       listCategory: "Decorative",
     },
-    fixable: undefined,
+    fixable: "code",
     hasSuggestions: false,
     schema: [
       {
@@ -265,6 +276,8 @@ export default createRule<[Options?]>("max-len", {
     messages: {
       maxLenExceeded:
         "Line length of {{actual}} exceeds the maximum of {{max}}.",
+      softWrappedParagraph:
+        "Expected this paragraph segment to use a single source line.",
     },
   },
   create(context) {
@@ -293,6 +306,21 @@ export default createRule<[Options?]>("max-len", {
     ): void {
       const maxLength = options.maxLength(node);
       if (maxLength === "ignore") return;
+      if (maxLength === "single-line") {
+        if (node.type === "paragraph") {
+          for (const segment of getSoftWrappedSegments(sourceCode, node)) {
+            context.report({
+              node,
+              loc: segment.loc,
+              messageId: "softWrappedParagraph",
+              fix: segment.canFix
+                ? (fixer) => fixer.replaceTextRange(segment.range, segment.text)
+                : undefined,
+            });
+          }
+        }
+        return;
+      }
 
       const nodeLoc = sourceCode.getLoc(node);
       const startLine = nodeLoc.start.line;
