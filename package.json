@@ -83,7 +83,7 @@
     "@eslint-community/eslint-plugin-eslint-comments": "^4.3.0",
     "@eslint/core": "^1.1.1",
     "@eslint/markdown": "^8.0.1",
-    "@ota-meshi/eslint-plugin": "^0.20.0",
+    "@ota-meshi/eslint-plugin": "^0.21.0",
     "@oxc-node/core": "^1.0.0",
     "@shikijs/vitepress-twoslash": "^4.0.0",
     "@types/eslint": "^9.6.1",
