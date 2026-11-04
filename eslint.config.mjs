@@ -197,6 +197,7 @@ export default defineConfig([
             "https://www.npmjs.com/package/eslint-plugin-markdown-preferences",
             "/^https:\\/\\/www\\.npmtrends\\.com\\//u",
             "https://github.com/syntax-tree/mdast",
+            "/^https:\\/\\/google\\.github\\.io\\/styleguide\\/docguide\\/style\\.html(?:#|$)/u",
           ],
           allowedAnchors: {
             // https://eslint-online-playground.netlify.app/
