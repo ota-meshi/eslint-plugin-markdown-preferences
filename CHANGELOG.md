@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.43.0
+
+### Minor Changes
+
+- [#329](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/329) [`b4a2a68`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/b4a2a68a6059fdf691a8a5867d70cbdc718ec8e6) Thanks [@Shriraj1901](https://github.com/Shriraj1901)! - feat([`markdown-preferences/no-laziness-blockquotes`](https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-laziness-blockquotes.html)): add `autofix` option to automatically add the missing `>` markers to lazy lines
+
 ## 0.42.0
 
 ### Minor Changes
