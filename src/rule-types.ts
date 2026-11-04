@@ -158,7 +158,7 @@ export interface RuleOptions {
    * disallow laziness in blockquotes
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-laziness-blockquotes.html
    */
-  'markdown-preferences/no-laziness-blockquotes'?: Linter.RuleEntry<[]>
+  'markdown-preferences/no-laziness-blockquotes'?: Linter.RuleEntry<MarkdownPreferencesNoLazinessBlockquotes>
   /**
    * disallow multiple spaces
    * @see https://ota-meshi.github.io/eslint-plugin-markdown-preferences/rules/no-multi-spaces.html
@@ -540,6 +540,10 @@ type MarkdownPreferencesNoHeadingTrailingPunctuation = []|[{
     
     "5-6"?: string
   })
+}]
+// ----- markdown-preferences/no-laziness-blockquotes -----
+type MarkdownPreferencesNoLazinessBlockquotes = []|[{
+  autofix?: boolean
 }]
 // ----- markdown-preferences/no-multiple-empty-lines -----
 type MarkdownPreferencesNoMultipleEmptyLines = []|[{
