@@ -10,6 +10,8 @@ since: "v0.40.0"
 
 > enforce maximum length for various Markdown entities
 
+- 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
+
 ## 📖 Rule Details
 
 This rule enforces a configurable maximum length for different Markdown entities such as headings, paragraphs, lists, blockquotes, tables, code blocks, frontmatter, footnote definitions, HTML blocks, and math blocks.
@@ -72,7 +74,7 @@ This rule accepts an object with the following properties:
 These options control the maximum line length for specific Markdown entity types:
 
 - `heading` (default: `80`): Maximum line length for headings. Set to `"ignore"` to skip checking.
-- `paragraph` (default: `120`): Maximum line length for paragraphs. Set to `"ignore"` to skip checking.
+- `paragraph` (default: `120`): Maximum line length for paragraphs. Set to `"ignore"` to skip checking, or `"single-line"` to disallow soft-wrapped paragraphs without limiting their character length.
 - `table` (default: `120`): Maximum line length for tables. Set to `"ignore"` to skip checking.
 - `html` (default: `120`): Maximum line length for HTML blocks. Set to `"ignore"` to skip checking.
 - `code` (default: `"ignore"`): Maximum line length for code blocks. Set to `"ignore"` to skip checking (recommended). See [notes on code blocks](#notes-on-code-blocks) below.
@@ -115,6 +117,54 @@ In this example:
 - Standalone tables are limited to 100 characters, but tables inside blockquotes are limited to 90 characters
 - All entity types (`heading`, `paragraph`, `table`, `html`, `math`, `code`, `frontmatter`) can be configured within containers
 
+### Single-line Paragraphs
+
+Set `paragraph` to `"single-line"` to keep each paragraph on one source line, regardless of its character length:
+
+```json
+{
+  "markdown-preferences/max-len": [
+    "error",
+    {
+      "paragraph": "single-line",
+      "heading": 80
+    }
+  ]
+}
+```
+
+<!-- prettier-ignore-start -->
+
+<!-- eslint-skip -->
+
+```md
+<!-- eslint markdown-preferences/max-len: ['error', { paragraph: 'single-line' }] -->
+
+<!-- ✓ GOOD -->
+
+A paragraph on one source line can be as long as needed.
+
+An intentional hard break  
+keeps these lines separate.
+
+<!-- ✗ BAD -->
+
+A paragraph split
+across source lines.
+```
+
+<!-- prettier-ignore-end -->
+
+This mode also applies to paragraphs in lists, blockquotes, and footnote definitions. Intentional Markdown hard breaks (two or more trailing spaces or a backslash) and line-boundary HTML `<br>` tags are preserved. Each consecutive group of soft-wrapped lines is reported separately and can be joined into one line by an automatic fix. Container markers and indentation are removed from continuation lines, while inline Markdown syntax is preserved.
+
+Fixes are withheld for segments that cross multiline code spans, math spans, image syntax, HTML tags, or link destinations and titles, and for paragraphs containing ESLint directive comments. These paragraphs are still reported, allowing them to be reviewed manually without rewriting literal content or moving directives.
+
+Fixes are also withheld when container indentation would require splitting a tab between structural prefixes.
+
+You can also use `"single-line"` for the `paragraph` property inside a `list`, `blockquote`, or `footnoteDefinition` object. An explicit container policy overrides the entity-level fallback. When several enclosing containers supply policies, `"ignore"` takes precedence, then `"single-line"`, then the smallest numeric limit. Other entity options and scalar container options do not accept `"single-line"`.
+
+Numeric limits remain report-only: this rule does not automatically wrap or reflow text to fit a character limit. Defaults are unchanged.
+
 ### Language-specific Code Block Configuration
 
 For `code` and `frontmatter`, you can specify different limits per language:
@@ -140,7 +190,7 @@ For `code` and `frontmatter`, you can specify different limits per language:
 
 ### URL Handling
 
-- `ignoreUrls` (default: `true`): When enabled, lines containing URLs are ignored.
+- `ignoreUrls` (default: `true`): When enabled, lines containing URLs are ignored when checking numeric limits. This does not exempt soft-wrapped paragraphs in `"single-line"` mode.
 
 This option works similarly to [`@stylistic/eslint-plugin`'s `max-len` rule](https://eslint.style/rules/max-len#ignoreurls).
 

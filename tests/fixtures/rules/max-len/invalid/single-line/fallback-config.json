@@ -1,0 +1,10 @@
+{
+  "options": [
+    {
+      "paragraph": "single-line",
+      "blockquote": { "heading": 60 },
+      "list": { "paragraph": 40 },
+      "footnoteDefinition": { "paragraph": "single-line" }
+    }
+  ]
+}

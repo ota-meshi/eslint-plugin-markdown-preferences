@@ -1,0 +1,10 @@
+{
+  "options": [
+    {
+      "paragraph": "single-line",
+      "list": "ignore",
+      "blockquote": { "paragraph": "ignore" },
+      "footnoteDefinition": "ignore"
+    }
+  ]
+}

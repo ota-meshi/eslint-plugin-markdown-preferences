@@ -16,6 +16,8 @@ Code:
     | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
   4 |
 
+Output: unchanged
+
 [1] Line length of 146 exceeds the maximum of 120.
 [2] Line length of 144 exceeds the maximum of 120.
 ---
@@ -38,6 +40,8 @@ Code:
     | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   5 | ```
   6 |
+
+Output: unchanged
 
 [1] Line length of 116 exceeds the maximum of 60.
 ---
@@ -72,6 +76,8 @@ Code:
  13 | ```
  14 |
 
+Output: unchanged
+
 [1] Line length of 87 exceeds the maximum of 60.
 [2] Line length of 60 exceeds the maximum of 50.
 ---
@@ -95,6 +101,8 @@ Code:
     | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
   4 |
 
+Output: unchanged
+
 [1] Line length of 43 exceeds the maximum of 40.
 [2] Line length of 48 exceeds the maximum of 40.
 ---
@@ -115,6 +123,8 @@ Code:
   3 | [^1]: This is a footnote definition with a very long line that exceeds sixty characters limit.
     | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   4 |
+
+Output: unchanged
 
 [1] Line length of 94 exceeds the maximum of 60.
 ---
@@ -142,6 +152,8 @@ Code:
   8 | This is the content.
   9 |
 
+Output: unchanged
+
 [1] Line length of 70 exceeds the maximum of 50.
 ---
 
@@ -160,6 +172,8 @@ Code:
   3 | ## This is another heading that is way too long and should be reported as a violation
     | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
   4 |
+
+Output: unchanged
 
 [1] Line length of 88 exceeds the maximum of 80.
 [2] Line length of 85 exceeds the maximum of 80.
@@ -186,6 +200,8 @@ Code:
   7 | Regular paragraph.
   8 |
 
+Output: unchanged
+
 [1] Line length of 81 exceeds the maximum of 60.
 ---
 
@@ -204,6 +220,8 @@ Code:
   3 | - Another very long list item that goes on and on and on and should definitely be caught by the rule as a violation of the maximum length
     | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
   4 |
+
+Output: unchanged
 
 [1] Line length of 144 exceeds the maximum of 120.
 [2] Line length of 137 exceeds the maximum of 120.
@@ -229,6 +247,8 @@ Code:
   6 |
   7 | Regular content.
   8 |
+
+Output: unchanged
 
 [1] Line length of 89 exceeds the maximum of 50.
 ---
@@ -259,6 +279,8 @@ Code:
     | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
   8 |
 
+Output: unchanged
+
 [1] Line length of 59 exceeds the maximum of 50.
 [2] Line length of 106 exceeds the maximum of 60.
 ---
@@ -281,8 +303,742 @@ Code:
     | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
   6 |
 
+Output: unchanged
+
 [1] Line length of 143 exceeds the maximum of 120.
 [2] Line length of 148 exceeds the maximum of 120.
+---
+
+
+Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/single-line/breaks-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - paragraph: single-line
+Plugins: unable to serialize
+
+Code:
+  1 | # Intentional boundaries
+  2 |
+  3 | Soft line
+    | ^~~~~~~~~ [1]
+  4 | before a hard break  
+  5 | after a hard break
+    | ^~~~~~~~~~~~~~~~~~ [2]
+  6 | and its continuation.
+  7 |
+  8 | Soft line
+    | ^~~~~~~~~ [3]
+  9 | before a backslash\
+ 10 | after a backslash
+    | ^~~~~~~~~~~~~~~~~ [4]
+ 11 | and its continuation.
+ 12 |
+ 13 | Two backslashes \\
+    | ^~~~~~~~~~~~~~~~~~ [5]
+ 14 | are not a hard break.
+ 15 |
+ 16 | Three backslashes \\\
+ 17 | form a hard break
+    | ^~~~~~~~~~~~~~~~~ [6]
+ 18 | but this continuation does not.
+ 19 |
+ 20 | Soft line
+    | ^~~~~~~~~ [7]
+ 21 | before a break<br>
+ 22 | after a break
+    | ^~~~~~~~~~~~~ [8]
+ 23 | and its continuation.
+ 24 |
+ 25 | Soft line
+    | ^~~~~~~~~ [9]
+ 26 | before a break
+ 27 | <BR />after a break
+    | ^~~~~~~~~~~~~~~~~~~ [10]
+ 28 | and its continuation.
+ 29 |
+ 30 | > A quoted line
+    |   ^~~~~~~~~~~~~ [11]
+ 31 | > before a break  
+ 32 | > after a break
+    |   ^~~~~~~~~~~~~ [12]
+ 33 | > and its continuation.
+ 34 |
+ 35 | - A list line
+    |   ^~~~~~~~~~~ [13]
+ 36 |   before a break\
+ 37 |   after a break
+    |   ^~~~~~~~~~~~~ [14]
+ 38 |   and its continuation.
+ 39 |
+
+Output:
+  1 | # Intentional boundaries
+  2 |
+  3 | Soft line before a hard break  
+  4 | after a hard break and its continuation.
+  5 |
+  6 | Soft line before a backslash\
+  7 | after a backslash and its continuation.
+  8 |
+  9 | Two backslashes \\ are not a hard break.
+ 10 |
+ 11 | Three backslashes \\\
+ 12 | form a hard break but this continuation does not.
+ 13 |
+ 14 | Soft line before a break<br>
+ 15 | after a break and its continuation.
+ 16 |
+ 17 | Soft line before a break
+ 18 | <BR />after a break and its continuation.
+ 19 |
+ 20 | > A quoted line before a break  
+ 21 | > after a break and its continuation.
+ 22 |
+ 23 | - A list line before a break\
+ 24 |   after a break and its continuation.
+ 25 |
+
+[1] Expected this paragraph segment to use a single source line.
+[2] Expected this paragraph segment to use a single source line.
+[3] Expected this paragraph segment to use a single source line.
+[4] Expected this paragraph segment to use a single source line.
+[5] Expected this paragraph segment to use a single source line.
+[6] Expected this paragraph segment to use a single source line.
+[7] Expected this paragraph segment to use a single source line.
+[8] Expected this paragraph segment to use a single source line.
+[9] Expected this paragraph segment to use a single source line.
+[10] Expected this paragraph segment to use a single source line.
+[11] Expected this paragraph segment to use a single source line.
+[12] Expected this paragraph segment to use a single source line.
+[13] Expected this paragraph segment to use a single source line.
+[14] Expected this paragraph segment to use a single source line.
+---
+
+
+Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/single-line/commonmark-input.md
+Language: markdown/commonmark
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - paragraph: single-line
+Plugins: unable to serialize
+
+Code:
+  1 | # CommonMark
+  2 |
+  3 | A paragraph with
+    | ^~~~~~~~~~~~~~~~ [1]
+  4 | a soft break.
+  5 |
+  6 | > - A nested item
+    |     ^~~~~~~~~~~~~ [2]
+  7 | >   with a soft break.
+  8 |
+  9 | An escaped \<br>
+    | ^~~~~~~~~~~~~~~~ [3]
+ 10 | is not an HTML break.
+ 11 |
+ 12 | A [reference
+    | ^~~~~~~~~~~~ [4]
+ 13 | label][target] still resolves.
+ 14 |
+ 15 | [target]: https://example.com
+ 16 |
+
+Output:
+  1 | # CommonMark
+  2 |
+  3 | A paragraph with a soft break.
+  4 |
+  5 | > - A nested item with a soft break.
+  6 |
+  7 | An escaped \<br> is not an HTML break.
+  8 |
+  9 | A [reference label][target] still resolves.
+ 10 |
+ 11 | [target]: https://example.com
+ 12 |
+
+[1] Expected this paragraph segment to use a single source line.
+[2] Expected this paragraph segment to use a single source line.
+[3] Expected this paragraph segment to use a single source line.
+[4] Expected this paragraph segment to use a single source line.
+---
+
+
+Test: max-len >> invalid >>> "# Container prefixes\n\n- First line\n  second line.\n\n- [x] A task\n  continued here.\n\n123. An ordered item\n     continued here.\n\n- Outer item\n  - Nested item\n    continued here.\n\n> Quoted text\n> continued here.\n\n> > Nested quote\n> > continued here.\n\n- > A quote in a list\n  > continued here.\n\n> - A list in a quote\n>   continued here.\n\n123. > A deeply indented quote\n     > continued here.\n\n> Literal content\n>     > not another quote.\n\n> A lazy quote\ncontinued here.\n\n- A lazy item\ncontinued here.\n\n[^note]: A footnote\n    continued here.\n\n[^nested]:\n    > A quote in a footnote\n    > continued here.\n\n-\\u0009An item with a tab\n\\u0009continued here.\n\n   - Outer indented item\n        - > An indented nested quote\n          > continued here.\n\n- - > A quote after same-line list markers\n    > continued here.\n\n> - > A tab split between structural prefixes\n>\\u0009   > remains unchanged.\n"
+Filename: tests/fixtures/rules/max-len/invalid/single-line/containers-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - paragraph: single-line
+Plugins: unable to serialize
+
+Code:
+  1 | # Container prefixes
+  2 |
+  3 | - First line
+    |   ^~~~~~~~~~ [1]
+  4 |   second line.
+  5 |
+  6 | - [x] A task
+    |       ^~~~~~ [2]
+  7 |   continued here.
+  8 |
+  9 | 123. An ordered item
+    |      ^~~~~~~~~~~~~~~ [3]
+ 10 |      continued here.
+ 11 |
+ 12 | - Outer item
+ 13 |   - Nested item
+    |     ^~~~~~~~~~~ [4]
+ 14 |     continued here.
+ 15 |
+ 16 | > Quoted text
+    |   ^~~~~~~~~~~ [5]
+ 17 | > continued here.
+ 18 |
+ 19 | > > Nested quote
+    |     ^~~~~~~~~~~~ [6]
+ 20 | > > continued here.
+ 21 |
+ 22 | - > A quote in a list
+    |     ^~~~~~~~~~~~~~~~~ [7]
+ 23 |   > continued here.
+ 24 |
+ 25 | > - A list in a quote
+    |     ^~~~~~~~~~~~~~~~~ [8]
+ 26 | >   continued here.
+ 27 |
+ 28 | 123. > A deeply indented quote
+    |        ^~~~~~~~~~~~~~~~~~~~~~~ [9]
+ 29 |      > continued here.
+ 30 |
+ 31 | > Literal content
+    |   ^~~~~~~~~~~~~~~ [10]
+ 32 | >     > not another quote.
+ 33 |
+ 34 | > A lazy quote
+    |   ^~~~~~~~~~~~ [11]
+ 35 | continued here.
+ 36 |
+ 37 | - A lazy item
+    |   ^~~~~~~~~~~ [12]
+ 38 | continued here.
+ 39 |
+ 40 | [^note]: A footnote
+    |          ^~~~~~~~~~ [13]
+ 41 |     continued here.
+ 42 |
+ 43 | [^nested]:
+ 44 |     > A quote in a footnote
+    |       ^~~~~~~~~~~~~~~~~~~~~ [14]
+ 45 |     > continued here.
+ 46 |
+ 47 | -	An item with a tab
+    |   ^~~~~~~~~~~~~~~~~~ [15]
+ 48 | 	continued here.
+ 49 |
+ 50 |    - Outer indented item
+ 51 |         - > An indented nested quote
+    |             ^~~~~~~~~~~~~~~~~~~~~~~~ [16]
+ 52 |           > continued here.
+ 53 |
+ 54 | - - > A quote after same-line list markers
+    |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [17]
+ 55 |     > continued here.
+ 56 |
+ 57 | > - > A tab split between structural prefixes
+    |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [18]
+ 58 | >	   > remains unchanged.
+ 59 |
+
+Output:
+  1 | # Container prefixes
+  2 |
+  3 | - First line second line.
+  4 |
+  5 | - [x] A task continued here.
+  6 |
+  7 | 123. An ordered item continued here.
+  8 |
+  9 | - Outer item
+ 10 |   - Nested item continued here.
+ 11 |
+ 12 | > Quoted text continued here.
+ 13 |
+ 14 | > > Nested quote continued here.
+ 15 |
+ 16 | - > A quote in a list continued here.
+ 17 |
+ 18 | > - A list in a quote continued here.
+ 19 |
+ 20 | 123. > A deeply indented quote continued here.
+ 21 |
+ 22 | > Literal content > not another quote.
+ 23 |
+ 24 | > A lazy quote continued here.
+ 25 |
+ 26 | - A lazy item continued here.
+ 27 |
+ 28 | [^note]: A footnote continued here.
+ 29 |
+ 30 | [^nested]:
+ 31 |     > A quote in a footnote continued here.
+ 32 |
+ 33 | -	An item with a tab continued here.
+ 34 |
+ 35 |    - Outer indented item
+ 36 |         - > An indented nested quote continued here.
+ 37 |
+ 38 | - - > A quote after same-line list markers continued here.
+ 39 |
+ 40 | > - > A tab split between structural prefixes
+ 41 | >	   > remains unchanged.
+ 42 |
+
+[1] Expected this paragraph segment to use a single source line.
+[2] Expected this paragraph segment to use a single source line.
+[3] Expected this paragraph segment to use a single source line.
+[4] Expected this paragraph segment to use a single source line.
+[5] Expected this paragraph segment to use a single source line.
+[6] Expected this paragraph segment to use a single source line.
+[7] Expected this paragraph segment to use a single source line.
+[8] Expected this paragraph segment to use a single source line.
+[9] Expected this paragraph segment to use a single source line.
+[10] Expected this paragraph segment to use a single source line.
+[11] Expected this paragraph segment to use a single source line.
+[12] Expected this paragraph segment to use a single source line.
+[13] Expected this paragraph segment to use a single source line.
+[14] Expected this paragraph segment to use a single source line.
+[15] Expected this paragraph segment to use a single source line.
+[16] Expected this paragraph segment to use a single source line.
+[17] Expected this paragraph segment to use a single source line.
+[18] Expected this paragraph segment to use a single source line.
+---
+
+
+Test: max-len >> invalid >>> "# CRLF paragraphs\\u000d\n\\u000d\nA paragraph with\\u000d\nWindows line endings.\\u000d\n\\u000d\n> A quoted paragraph\\u000d\n> with Windows line endings.\\u000d\n\\u000d\n- A list paragraph\\u000d\n  with Windows line endings.\\u000d\n"
+Filename: tests/fixtures/rules/max-len/invalid/single-line/crlf-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - paragraph: single-line
+Plugins: unable to serialize
+
+Code:
+  1 | # CRLF paragraphs
+  2 |
+  3 | A paragraph with
+    | ^~~~~~~~~~~~~~~~ [1]
+  4 | Windows line endings.
+  5 |
+  6 | > A quoted paragraph
+    |   ^~~~~~~~~~~~~~~~~~ [2]
+  7 | > with Windows line endings.
+  8 |
+  9 | - A list paragraph
+    |   ^~~~~~~~~~~~~~~~ [3]
+ 10 |   with Windows line endings.
+ 11 |
+
+Output:
+  1 | # CRLF paragraphs
+  2 |
+  3 | A paragraph with Windows line endings.
+  4 |
+  5 | > A quoted paragraph with Windows line endings.
+  6 |
+  7 | - A list paragraph with Windows line endings.
+  8 |
+
+[1] Expected this paragraph segment to use a single source line.
+[2] Expected this paragraph segment to use a single source line.
+[3] Expected this paragraph segment to use a single source line.
+---
+
+
+Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/single-line/fallback-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - paragraph: single-line
+    blockquote:
+      heading: 60
+    list:
+      paragraph: 40
+    footnoteDefinition:
+      paragraph: single-line
+Plugins: unable to serialize
+
+Code:
+  1 | # Inherited paragraph policy
+  2 |
+  3 | > A quote with only a heading override
+    |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
+  4 | > inherits the root paragraph policy.
+  5 |
+  6 | - A list with an explicit numeric paragraph override is longer than forty characters.
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+  7 |   Its soft wrap is allowed.
+  8 |
+  9 | [^note]: A footnote
+    |          ^~~~~~~~~~ [3]
+ 10 |     uses its explicit single-line policy.
+ 11 |
+ 12 | > - A quote containing a list
+ 13 | >   uses the list's numeric override.
+ 14 |
+
+Output:
+  1 | # Inherited paragraph policy
+  2 |
+  3 | > A quote with only a heading override inherits the root paragraph policy.
+  4 |
+  5 | - A list with an explicit numeric paragraph override is longer than forty characters.
+  6 |   Its soft wrap is allowed.
+  7 |
+  8 | [^note]: A footnote uses its explicit single-line policy.
+  9 |
+ 10 | > - A quote containing a list
+ 11 | >   uses the list's numeric override.
+ 12 |
+
+[1] Expected this paragraph segment to use a single source line.
+[2] Line length of 85 exceeds the maximum of 40.
+[3] Expected this paragraph segment to use a single source line.
+---
+
+
+Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/single-line/gfm-input.md
+Language: markdown/gfm
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - paragraph: single-line
+Plugins: unable to serialize
+
+Code:
+  1 | # GFM
+  2 |
+  3 | - [ ] A task
+    |       ^~~~~~ [1]
+  4 |   with a continuation.
+  5 |
+  6 | A ~~deleted
+    | ^~~~~~~~~~~ [2]
+  7 | phrase~~ and https://example.com
+  8 | still need unwrapping.
+  9 |
+ 10 | | First | Second |
+ 11 | | ----- | ------ |
+ 12 | | Table | cell   |
+ 13 |
+
+Output:
+  1 | # GFM
+  2 |
+  3 | - [ ] A task with a continuation.
+  4 |
+  5 | A ~~deleted phrase~~ and https://example.com still need unwrapping.
+  6 |
+  7 | | First | Second |
+  8 | | ----- | ------ |
+  9 | | Table | cell   |
+ 10 |
+
+[1] Expected this paragraph segment to use a single source line.
+[2] Expected this paragraph segment to use a single source line.
+---
+
+
+Test: max-len >> invalid >>> "# Literal marker on a lazy continuation\n\n   -\\u0009> A tab-indented quote\n   \\u0009> a literal marker on a lazy continuation.\n"
+Filename: tests/fixtures/rules/max-len/invalid/single-line/lazy-tab-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - paragraph: single-line
+Plugins: unable to serialize
+
+Code:
+  1 | # Literal marker on a lazy continuation
+  2 |
+  3 |    -	> A tab-indented quote
+    |        ^~~~~~~~~~~~~~~~~~~~ [1]
+  4 |    	> a literal marker on a lazy continuation.
+  5 |
+
+Output:
+  1 | # Literal marker on a lazy continuation
+  2 |
+  3 |    -	> A tab-indented quote > a literal marker on a lazy continuation.
+  4 |
+
+[1] Expected this paragraph segment to use a single source line.
+---
+
+
+Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/single-line/literals-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - paragraph: single-line
+Plugins: unable to serialize
+
+Code:
+  1 | # Literal contents must not be rewritten
+  2 |
+  3 | A multiline `code
+    | ^~~~~~~~~~~~~~~~~ [1]
+  4 | span` stays unchanged.
+  5 |
+  6 | A multiline $math
+    | ^~~~~~~~~~~~~~~~~ [2]
+  7 | span$ stays unchanged.
+  8 |
+  9 | A [link](https://example.com
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ [3]
+ 10 | "multiline title") stays unchanged.
+ 11 |
+ 12 | A [link](https://example.com "a title
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [4]
+ 13 | with a newline") stays unchanged.
+ 14 |
+ 15 | An ![image
+    | ^~~~~~~~~~ [5]
+ 16 | description](image.png) stays unchanged.
+ 17 |
+ 18 | A <span title="a
+    | ^~~~~~~~~~~~~~~~ [6]
+ 19 | multiline attribute">tag</span> stays unchanged.
+ 20 |
+ 21 | Text <!-- eslint markdown-preferences/heading-casing: off -->
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [7]
+ 22 | must not move across a directive.
+ 23 |
+ 24 | A safe paragraph
+    | ^~~~~~~~~~~~~~~~ [8]
+ 25 | after the literals.
+ 26 |
+
+Output:
+  1 | # Literal contents must not be rewritten
+  2 |
+  3 | A multiline `code
+  4 | span` stays unchanged.
+  5 |
+  6 | A multiline $math
+  7 | span$ stays unchanged.
+  8 |
+  9 | A [link](https://example.com
+ 10 | "multiline title") stays unchanged.
+ 11 |
+ 12 | A [link](https://example.com "a title
+ 13 | with a newline") stays unchanged.
+ 14 |
+ 15 | An ![image
+ 16 | description](image.png) stays unchanged.
+ 17 |
+ 18 | A <span title="a
+ 19 | multiline attribute">tag</span> stays unchanged.
+ 20 |
+ 21 | Text <!-- eslint markdown-preferences/heading-casing: off -->
+ 22 | must not move across a directive.
+ 23 |
+ 24 | A safe paragraph after the literals.
+ 25 |
+
+[1] Expected this paragraph segment to use a single source line.
+[2] Expected this paragraph segment to use a single source line.
+[3] Expected this paragraph segment to use a single source line.
+[4] Expected this paragraph segment to use a single source line.
+[5] Expected this paragraph segment to use a single source line.
+[6] Expected this paragraph segment to use a single source line.
+[7] Expected this paragraph segment to use a single source line.
+[8] Expected this paragraph segment to use a single source line.
+---
+
+
+Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/single-line/overrides-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - paragraph: ignore
+    list:
+      paragraph: single-line
+    blockquote:
+      paragraph: 40
+    footnoteDefinition: ignore
+Plugins: unable to serialize
+
+Code:
+  1 | # Container overrides
+  2 |
+  3 | A root paragraph
+  4 | is ignored.
+  5 |
+  6 | - A list paragraph
+    |   ^~~~~~~~~~~~~~~~ [1]
+  7 |   must be joined.
+  8 |
+  9 | > A numeric quote that is intentionally longer than the configured limit.
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 10 |
+ 11 | - > A quote inside a list
+    |     ^~~~~~~~~~~~~~~~~~~~~ [3]
+ 12 |   > uses the single-line policy.
+ 13 |
+ 14 | [^note]: A footnote
+ 15 |     is ignored.
+ 16 |
+ 17 | - > [^nested]: Even a nested list and quote
+ 18 |     >     cannot override an ignored footnote.
+ 19 |
+
+Output:
+  1 | # Container overrides
+  2 |
+  3 | A root paragraph
+  4 | is ignored.
+  5 |
+  6 | - A list paragraph must be joined.
+  7 |
+  8 | > A numeric quote that is intentionally longer than the configured limit.
+  9 |
+ 10 | - > A quote inside a list uses the single-line policy.
+ 11 |
+ 12 | [^note]: A footnote
+ 13 |     is ignored.
+ 14 |
+ 15 | - > [^nested]: Even a nested list and quote
+ 16 |     >     cannot override an ignored footnote.
+ 17 |
+
+[1] Expected this paragraph segment to use a single source line.
+[2] Line length of 73 exceeds the maximum of 40.
+[3] Expected this paragraph segment to use a single source line.
+---
+
+
+Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/single-line/paragraphs-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - paragraph: single-line
+Plugins: unable to serialize
+
+Code:
+  1 | # Soft-wrapped paragraphs
+  2 |
+  3 | The first paragraph
+    | ^~~~~~~~~~~~~~~~~~~ [1]
+  4 | has three
+  5 | source lines.
+  6 |
+  7 | An *emphasized
+    | ^~~~~~~~~~~~~~ [2]
+  8 | phrase*, a **strong
+  9 | phrase**, and a [link
+ 10 | label](https://example.com) can be joined.
+ 11 |
+ 12 | A [reference
+    | ^~~~~~~~~~~~ [3]
+ 13 | label][example] and `inline code`
+ 14 | can be joined without changing their syntax.
+ 15 |
+ 16 | An escaped \<br>
+    | ^~~~~~~~~~~~~~~~ [4]
+ 17 | is ordinary prose.
+ 18 |
+ 19 | An inline `<br>`
+    | ^~~~~~~~~~~~~~~~ [5]
+ 20 | is not an HTML break.
+ 21 |
+ 22 | [example]: https://example.com
+ 23 |
+
+Output:
+  1 | # Soft-wrapped paragraphs
+  2 |
+  3 | The first paragraph has three source lines.
+  4 |
+  5 | An *emphasized phrase*, a **strong phrase**, and a [link label](https://example.com) can be joined.
+  6 |
+  7 | A [reference label][example] and `inline code` can be joined without changing their syntax.
+  8 |
+  9 | An escaped \<br> is ordinary prose.
+ 10 |
+ 11 | An inline `<br>` is not an HTML break.
+ 12 |
+ 13 | [example]: https://example.com
+ 14 |
+
+[1] Expected this paragraph segment to use a single source line.
+[2] Expected this paragraph segment to use a single source line.
+[3] Expected this paragraph segment to use a single source line.
+[4] Expected this paragraph segment to use a single source line.
+[5] Expected this paragraph segment to use a single source line.
+---
+
+
+Test: max-len >> invalid
+Filename: tests/fixtures/rules/max-len/invalid/single-line/precedence-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - list:
+      paragraph: 30
+    blockquote:
+      paragraph: single-line
+    footnoteDefinition:
+      paragraph: ignore
+Plugins: unable to serialize
+
+Code:
+  1 | # Nested policy precedence
+  2 |
+  3 | > - A list inside a quote
+    |     ^~~~~~~~~~~~~~~~~~~~~ [1]
+  4 | >   uses the single-line policy, not the list's numeric limit.
+  5 |
+  6 | > [^note]: An ignored footnote
+  7 | >     remains wrapped.
+  8 |
+  9 | > - > A multiply nested quote
+    |       ^~~~~~~~~~~~~~~~~~~~~~~ [2]
+ 10 | >   > still uses the single-line policy.
+ 11 |
+
+Output:
+  1 | # Nested policy precedence
+  2 |
+  3 | > - A list inside a quote uses the single-line policy, not the list's numeric limit.
+  4 |
+  5 | > [^note]: An ignored footnote
+  6 | >     remains wrapped.
+  7 |
+  8 | > - > A multiply nested quote still uses the single-line policy.
+  9 |
+
+[1] Expected this paragraph segment to use a single source line.
+[2] Expected this paragraph segment to use a single source line.
 ---
 
 
@@ -299,6 +1055,8 @@ Code:
   2 | | --- | --- |
   3 | | Short | Short |
   4 |
+
+Output: unchanged
 
 [1] Line length of 134 exceeds the maximum of 120.
 ---
@@ -317,6 +1075,8 @@ Code:
   1 | This line has a long URL that should be reported: https://github.com/ota-meshi/eslint-plugin-markdown-preferences/blob/main/CONTRIBUTING.md
     | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [1]
   2 |
+
+Output: unchanged
 
 [1] Line length of 139 exceeds the maximum of 120.
 ---
