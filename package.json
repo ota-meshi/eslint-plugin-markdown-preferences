@@ -74,7 +74,7 @@
     "micromark-util-character": "^2.1.1",
     "micromark-util-normalize-identifier": "^2.0.1",
     "micromark-util-symbol": "^2.0.1",
-    "string-width": "^8.0.0"
+    "string-width": "^9.0.0"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.0",
