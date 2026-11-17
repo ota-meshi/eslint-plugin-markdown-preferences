@@ -57,7 +57,7 @@
   },
   "homepage": "https://ota-meshi.github.io/eslint-plugin-markdown-preferences/",
   "peerDependencies": {
-    "@eslint/markdown": "^7.4.0 || ^8.0.0",
+    "@eslint/markdown": "^9.0.0",
     "eslint": ">=9.0.0"
   },
   "dependencies": {
@@ -82,7 +82,7 @@
     "@changesets/get-release-plan": "^5.0.0",
     "@eslint-community/eslint-plugin-eslint-comments": "^4.3.0",
     "@eslint/core": "^1.1.1",
-    "@eslint/markdown": "^8.0.1",
+    "@eslint/markdown": "^9.0.0",
     "@ota-meshi/eslint-plugin": "^0.21.0",
     "@oxc-node/core": "^1.0.0",
     "@shikijs/vitepress-twoslash": "^4.0.0",
