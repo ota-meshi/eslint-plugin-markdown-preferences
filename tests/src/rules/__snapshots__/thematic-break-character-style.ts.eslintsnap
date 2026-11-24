@@ -2,6 +2,76 @@
 
 
 Test: thematic-break-character-style >> invalid
+Filename: tests/fixtures/rules/thematic-break-character-style/invalid/after-blank-line-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # invalid: thematic break after a blank line is autofixed
+  2 |
+  3 | Some text
+  4 |
+  5 | ***
+    | ^~~ [1]
+  6 |
+
+Output:
+  1 | # invalid: thematic break after a blank line is autofixed
+  2 |
+  3 | Some text
+  4 |
+  5 | ---
+  6 |
+
+[1] Thematic break should use '-' but found '*'.
+---
+
+
+Test: thematic-break-character-style >> invalid
+Filename: tests/fixtures/rules/thematic-break-character-style/invalid/after-paragraph-in-blockquote-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # invalid: thematic break directly after a paragraph in a blockquote is not autofixed
+  2 |
+  3 | > Some text
+  4 | > ***
+    |   ^~~ [1]
+  5 |
+
+Output: unchanged
+
+[1] Thematic break should use '-' but found '*'.
+---
+
+
+Test: thematic-break-character-style >> invalid
+Filename: tests/fixtures/rules/thematic-break-character-style/invalid/after-paragraph-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # invalid: thematic break directly after a paragraph is not autofixed
+  2 |
+  3 | Some text
+  4 | ***
+    | ^~~ [1]
+  5 |
+
+Output: unchanged
+
+[1] Thematic break should use '-' but found '*'.
+---
+
+
+Test: thematic-break-character-style >> invalid
 Filename: tests/fixtures/rules/thematic-break-character-style/invalid/asterisk/with-dash-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
