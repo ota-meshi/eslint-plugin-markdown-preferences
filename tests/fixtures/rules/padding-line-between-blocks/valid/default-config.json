@@ -1,0 +1,6 @@
+{
+  "language": "markdown/gfm",
+  "rules": {
+    "markdown/no-reversed-media-syntax": "error"
+  }
+}

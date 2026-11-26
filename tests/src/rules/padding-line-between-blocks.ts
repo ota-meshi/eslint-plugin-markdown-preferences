@@ -134,9 +134,6 @@ const tester = new SnapshotRuleTester({
   languageOptions: {
     frontmatter: "yaml",
   },
-  rules: {
-    "markdown/no-reversed-media-syntax": "error",
-  },
 });
 
 tester.run(

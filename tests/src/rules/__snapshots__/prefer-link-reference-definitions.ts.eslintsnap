@@ -636,29 +636,25 @@ LanguageOptions:
 Plugins: unable to serialize
 
 Code:
-  1 | <!-- eslint markdown/no-duplicate-definitions: "off" -->
+  1 | # Shadowed Definition
   2 |
-  3 | # Shadowed Definition
-  4 |
-  5 | [Foo](/same) and [Foo](/same).
+  3 | [Foo](/same) and [Foo](/same).
     | ^~~~~~~~~~~~ [1] ^~~~~~~~~~~~ [2]
-  6 |
-  7 | [foo]: /other
-  8 | [FOO]: /same
-  9 |
+  4 |
+  5 | [foo]: /other
+  6 | [FOO]: /same
+  7 |
 
 Output:
-  1 | <!-- eslint markdown/no-duplicate-definitions: "off" -->
+  1 | # Shadowed Definition
   2 |
-  3 | # Shadowed Definition
+  3 | [Foo][Foo-1] and [Foo][Foo-1].
   4 |
-  5 | [Foo][Foo-1] and [Foo][Foo-1].
-  6 |
-  7 | [foo]: /other
-  8 | [FOO]: /same
+  5 | [foo]: /other
+  6 | [FOO]: /same
+  7 |
+  8 | [Foo-1]: /same
   9 |
- 10 | [Foo-1]: /same
- 11 |
 
 [1] Use link reference definitions instead of inline links.
 [2] Use link reference definitions instead of inline links.

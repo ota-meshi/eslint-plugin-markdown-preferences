@@ -309,6 +309,7 @@ export default defineConfig([
       "markdown/no-empty-images": "off",
       "markdown/no-empty-definitions": "off",
       "markdown/heading-increment": "off",
+      "markdown/no-duplicate-definitions": "off",
       ...Object.fromEntries(
         rules.map((rule) => [rule.meta.docs.ruleId, "off"]),
       ),
