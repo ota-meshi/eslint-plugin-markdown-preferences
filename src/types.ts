@@ -2,6 +2,7 @@ import type { RuleContext as CoreRuleContext } from "@eslint/core";
 import type {
   MarkdownLanguageOptions,
   MarkdownRuleDefinition,
+  MarkdownSourceCode,
 } from "@eslint/markdown";
 import type { JSONSchema4 } from "json-schema";
 import type { Node } from "./language/ast-types.ts";
@@ -10,6 +11,10 @@ import type {
   ExtendedMarkdownSourceCode,
 } from "./language/extended-markdown-language.ts";
 
+type InlineConfigComment = ReturnType<
+  MarkdownSourceCode["getInlineConfigNodes"]
+>[number];
+
 export type RuleContext<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- ignore
   O extends any[],
@@ -17,7 +22,7 @@ export type RuleContext<
   LangOptions: MarkdownLanguageOptions;
   Code: ExtendedMarkdownSourceCode;
   RuleOptions: O;
-  Node: Node;
+  Node: Node | InlineConfigComment;
   MessageIds: string;
 }>;
 
