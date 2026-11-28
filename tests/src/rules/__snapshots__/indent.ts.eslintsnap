@@ -3306,6 +3306,309 @@ Output:
 
 
 Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/task-list-relative-to/first-4-marker-end-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - listItems:
+      first: 4
+      other: first
+      relativeTo: markerEnd
+Plugins: unable to serialize
+
+Code:
+  1 | # Task list indentation
+  2 |
+  3 | - [ ] Foo
+    |  ^ [1]
+  4 | - [ ] Bar
+    |  ^ [2]
+  5 |
+  6 | * [x] Multi line
+    |  ^ [3]
+  7 |   text.
+    | ^~ [4]
+  8 |
+  9 | 1. [ ] Foo
+    |   ^ [5]
+ 10 |    1. [ ] FooBar
+    | ^~~  ^
+    | [6]  [7]
+ 11 |       Wrapped text.
+    | ^~~~~~ [8]
+ 12 |
+
+Output:
+  1 | # Task list indentation
+  2 |
+  3 | -    [ ] Foo
+  4 | -    [ ] Bar
+  5 |
+  6 | *    [x] Multi line
+  7 |      text.
+  8 |
+  9 | 1.    [ ] Foo
+ 10 |       1.    [ ] FooBar
+ 11 |             Wrapped text.
+ 12 |
+
+[1] Expected indentation of 4 from the list marker but found 1.
+[2] Expected indentation of 4 from the list marker but found 1.
+[3] Expected indentation of 4 from the list marker but found 1.
+[4] Expected indentation of 5 but found 2.
+[5] Expected indentation of 4 from the list marker but found 1.
+[6] Expected indentation of 6 but found 3.
+[7] Expected indentation of 4 from the list marker but found 1.
+[8] Expected indentation of 9 but found 6.
+---
+
+
+Test: indent >> invalid >>> "# Task list indentation\n\n- [ ] Foo\n- [ ] Bar\n\n* [x] Multi line\n  text.\n\n1. [ ] Foo\n   1. [ ] FooBar\n      Wrapped text.\n 2"
+Filename: tests/fixtures/rules/indent/invalid/task-list-relative-to/first-4-marker-start-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - listItems:
+      first: 4
+      other: first
+      relativeTo: markerStart
+Plugins: unable to serialize
+
+Code:
+  1 | # Task list indentation
+  2 |
+  3 | - [ ] Foo
+    |  ^ [1]
+  4 | - [ ] Bar
+    |  ^ [2]
+  5 |
+  6 | * [x] Multi line
+    |  ^ [3]
+  7 |   text.
+    | ^~ [4]
+  8 |
+  9 | 1. [ ] Foo
+    |   ^ [5]
+ 10 |    1. [ ] FooBar
+    | ^~~  ^
+    | [6]  [7]
+ 11 |       Wrapped text.
+    | ^~~~~~ [8]
+ 12 |
+
+Output:
+  1 | # Task list indentation
+  2 |
+  3 | -   [ ] Foo
+  4 | -   [ ] Bar
+  5 |
+  6 | *   [x] Multi line
+  7 |     text.
+  8 |
+  9 | 1.  [ ] Foo
+ 10 |     1.  [ ] FooBar
+ 11 |         Wrapped text.
+ 12 |
+
+[1] Expected indentation of 3 from the list marker but found 1.
+[2] Expected indentation of 3 from the list marker but found 1.
+[3] Expected indentation of 3 from the list marker but found 1.
+[4] Expected indentation of 4 but found 2.
+[5] Expected indentation of 2 from the list marker but found 1.
+[6] Expected indentation of 4 but found 3.
+[7] Expected indentation of 2 from the list marker but found 1.
+[8] Expected indentation of 7 but found 6.
+---
+
+
+Test: indent >> invalid >>> "# Task list indentation\n\n- [ ] Foo\n- [ ] Bar\n\n* [x] Multi line\n  text.\n\n1. [ ] Foo\n   1. [ ] FooBar\n      Wrapped text.\n 3"
+Filename: tests/fixtures/rules/indent/invalid/task-list-relative-to/first-4-task-list-marker-end-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - listItems:
+      first: 4
+      other: first
+      relativeTo: taskListMarkerEnd
+Plugins: unable to serialize
+
+Code:
+  1 | # Task list indentation
+  2 |
+  3 | - [ ] Foo
+    |      ^ [1]
+  4 | - [ ] Bar
+    |      ^ [2]
+  5 |
+  6 | * [x] Multi line
+    |      ^ [3]
+  7 |   text.
+    | ^~ [4]
+  8 |
+  9 | 1. [ ] Foo
+    |       ^ [5]
+ 10 |    1. [ ] FooBar
+    | ^~~ [6]  ^ [7]
+ 11 |       Wrapped text.
+    | ^~~~~~ [8]
+ 12 |
+
+Output:
+  1 | # Task list indentation
+  2 |
+  3 | - [ ]    Foo
+  4 | - [ ]    Bar
+  5 |
+  6 | * [x]    Multi line
+  7 |          text.
+  8 |
+  9 | 1. [ ]    Foo
+ 10 |       1. [ ]    FooBar
+ 11 |                 Wrapped text.
+ 12 |
+
+[1] Expected indentation of 4 from the list marker but found 1.
+[2] Expected indentation of 4 from the list marker but found 1.
+[3] Expected indentation of 4 from the list marker but found 1.
+[4] Expected indentation of 9 but found 2.
+[5] Expected indentation of 4 from the list marker but found 1.
+[6] Expected indentation of 6 but found 3.
+[7] Expected indentation of 4 from the list marker but found 1.
+[8] Expected indentation of 13 but found 6.
+---
+
+
+Test: indent >> invalid >>> "# Task list indentation\n\n- [ ] Foo\n- [ ] Bar\n\n* [x] Multi line\n  text.\n\n1. [ ] Foo\n   1. [ ] FooBar\n      Wrapped text.\n 4"
+Filename: tests/fixtures/rules/indent/invalid/task-list-relative-to/first-4-task-list-marker-start-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - listItems:
+      first: 4
+      other: first
+      relativeTo: taskListMarkerStart
+Plugins: unable to serialize
+
+Code:
+  1 | # Task list indentation
+  2 |
+  3 | - [ ] Foo
+  4 | - [ ] Bar
+  5 |
+  6 | * [x] Multi line
+  7 |   text.
+    | ^~ [1]
+  8 |
+  9 | 1. [ ] Foo
+ 10 |    1. [ ] FooBar
+    | ^~~ [2]
+ 11 |       Wrapped text.
+    | ^~~~~~ [3]
+ 12 |
+
+Output:
+  1 | # Task list indentation
+  2 |
+  3 | - [ ] Foo
+  4 | - [ ] Bar
+  5 |
+  6 | * [x] Multi line
+  7 |       text.
+  8 |
+  9 | 1. [ ] Foo
+ 10 |       1. [ ] FooBar
+ 11 |              Wrapped text.
+ 12 |
+
+[1] Expected indentation of 6 but found 2.
+[2] Expected indentation of 6 but found 3.
+[3] Expected indentation of 10 but found 6.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/task-list-relative-to/first-ignore-marker-end-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - listItems:
+      first: ignore
+      other: first
+      relativeTo: markerEnd
+Plugins: unable to serialize
+
+Code:
+  1 | # Task list indentation with an ignored first line
+  2 |
+  3 | -    [x] Multi line
+  4 |   text.
+    | ^~ [1]
+  5 |
+  6 | 1.   [ ] Multi line
+  7 |        text.
+    | ^~~~~~~ [2]
+  8 |
+
+Output:
+  1 | # Task list indentation with an ignored first line
+  2 |
+  3 | -    [x] Multi line
+  4 |      text.
+  5 |
+  6 | 1.   [ ] Multi line
+  7 |      text.
+  8 |
+
+[1] Expected indentation of 5 but found 2.
+[2] Expected indentation of 5 but found 7.
+---
+
+
+Test: indent >> invalid
+Filename: tests/fixtures/rules/indent/invalid/task-list-relative-to/other-4-task-list-marker-start-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Options:
+  - listItems:
+      first: 1
+      other: 4
+      relativeTo: taskListMarkerStart
+Plugins: unable to serialize
+
+Code:
+  1 | # Task list indentation for lines after the first
+  2 |
+  3 | - [ ] Multi line
+  4 |   text.
+    | ^~ [1]
+  5 |
+  6 | 1. [ ] Multi line
+  7 |    text.
+    | ^~~ [2]
+  8 |
+
+Output:
+  1 | # Task list indentation for lines after the first
+  2 |
+  3 | - [ ] Multi line
+  4 |       text.
+  5 |
+  6 | 1. [ ] Multi line
+  7 |        text.
+  8 |
+
+[1] Expected indentation of 6 but found 2.
+[2] Expected indentation of 7 but found 3.
+---
+
+
+Test: indent >> invalid
 Filename: tests/fixtures/rules/indent/invalid/thematic-breaks-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:

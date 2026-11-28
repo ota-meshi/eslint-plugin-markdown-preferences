@@ -1,0 +1,11 @@
+{
+  "options": [
+    {
+      "listItems": {
+        "first": "ignore",
+        "other": "first",
+        "relativeTo": "markerEnd"
+      }
+    }
+  ]
+}
