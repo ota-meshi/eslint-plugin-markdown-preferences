@@ -1,5 +1,11 @@
 # eslint-plugin-markdown-preferences
 
+## 0.44.0
+
+### Minor Changes
+
+- [#344](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/pull/344) [`1115ee2`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences/commit/1115ee2b5bbc7f6487a2207281bd5d5bc43a229f) Thanks [@dblock](https://github.com/dblock)! - Add support for [`@eslint/markdown`](https://github.com/eslint/markdown) v9 and raise the Node.js 22 floor to `^22.13.0` to match it.
+
 ## 0.43.0
 
 ### Minor Changes
