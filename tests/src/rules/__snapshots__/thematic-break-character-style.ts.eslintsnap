@@ -30,6 +30,60 @@ Output:
 
 
 Test: thematic-break-character-style >> invalid
+Filename: tests/fixtures/rules/thematic-break-character-style/invalid/after-blockquote-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # invalid: thematic break after a blockquote
+  2 |
+  3 | > Paragraph in a blockquote
+  4 | ***
+    | ^~~ [1]
+  5 |
+
+Output:
+  1 | # invalid: thematic break after a blockquote
+  2 |
+  3 | > Paragraph in a blockquote
+  4 | ---
+  5 |
+
+[1] Thematic break should use '-' but found '*'.
+---
+
+
+Test: thematic-break-character-style >> invalid
+Filename: tests/fixtures/rules/thematic-break-character-style/invalid/after-lazy-continuation-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # invalid: thematic break after a lazy continuation line
+  2 |
+  3 | > Paragraph in a blockquote
+  4 | lazy continuation line
+  5 | ***
+    | ^~~ [1]
+  6 |
+
+Output:
+  1 | # invalid: thematic break after a lazy continuation line
+  2 |
+  3 | > Paragraph in a blockquote
+  4 | lazy continuation line
+  5 | ---
+  6 |
+
+[1] Thematic break should use '-' but found '*'.
+---
+
+
+Test: thematic-break-character-style >> invalid
 Filename: tests/fixtures/rules/thematic-break-character-style/invalid/after-paragraph-in-blockquote-input.md
 Language: markdown-preferences/extended-syntax
 LanguageOptions:
@@ -37,14 +91,20 @@ LanguageOptions:
 Plugins: unable to serialize
 
 Code:
-  1 | # invalid: thematic break directly after a paragraph in a blockquote is not autofixed
+  1 | # invalid: thematic break directly after a paragraph in a blockquote is autofixed with a blank line
   2 |
   3 | > Some text
   4 | > ***
     |   ^~~ [1]
   5 |
 
-Output: unchanged
+Output:
+  1 | # invalid: thematic break directly after a paragraph in a blockquote is autofixed with a blank line
+  2 |
+  3 | > Some text
+  4 | >
+  5 | > ---
+  6 |
 
 [1] Thematic break should use '-' but found '*'.
 ---
@@ -58,14 +118,20 @@ LanguageOptions:
 Plugins: unable to serialize
 
 Code:
-  1 | # invalid: thematic break directly after a paragraph is not autofixed
+  1 | # invalid: thematic break directly after a paragraph is autofixed with a blank line
   2 |
   3 | Some text
   4 | ***
     | ^~~ [1]
   5 |
 
-Output: unchanged
+Output:
+  1 | # invalid: thematic break directly after a paragraph is autofixed with a blank line
+  2 |
+  3 | Some text
+  4 |
+  5 | ---
+  6 |
 
 [1] Thematic break should use '-' but found '*'.
 ---
@@ -210,6 +276,187 @@ Output:
 
 [1] Thematic break should use '-' but found '*'.
 [2] Thematic break should use '-' but found '_'.
+---
+
+
+Test: thematic-break-character-style >> invalid
+Filename: tests/fixtures/rules/thematic-break-character-style/invalid/in-blockquote-after-lazy-continuation-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # invalid: thematic break in a blockquote after a lazy continuation line
+  2 |
+  3 | > Paragraph in a blockquote
+  4 | lazy continuation line
+  5 | > ***
+    |   ^~~ [1]
+  6 |
+
+Output:
+  1 | # invalid: thematic break in a blockquote after a lazy continuation line
+  2 |
+  3 | > Paragraph in a blockquote
+  4 | lazy continuation line
+  5 | >
+  6 | > ---
+  7 |
+
+[1] Thematic break should use '-' but found '*'.
+---
+
+
+Test: thematic-break-character-style >> invalid
+Filename: tests/fixtures/rules/thematic-break-character-style/invalid/in-blockquote-in-list-item-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # invalid: thematic break after a paragraph in a blockquote in a list item
+  2 |
+  3 | - > Paragraph in a blockquote
+  4 |   > ***
+    |     ^~~ [1]
+  5 |
+
+Output:
+  1 | # invalid: thematic break after a paragraph in a blockquote in a list item
+  2 |
+  3 | - > Paragraph in a blockquote
+  4 |   >
+  5 |   > ---
+  6 |
+
+[1] Thematic break should use '-' but found '*'.
+---
+
+
+Test: thematic-break-character-style >> invalid
+Filename: tests/fixtures/rules/thematic-break-character-style/invalid/in-list-item-after-blank-line-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # invalid: thematic break after a blank line in a list item is autofixed
+  2 |
+  3 | - List item
+  4 |
+  5 |   ***
+    |   ^~~ [1]
+  6 |
+
+Output:
+  1 | # invalid: thematic break after a blank line in a list item is autofixed
+  2 |
+  3 | - List item
+  4 |
+  5 |   ---
+  6 |
+
+[1] Thematic break should use '-' but found '*'.
+---
+
+
+Test: thematic-break-character-style >> invalid
+Filename: tests/fixtures/rules/thematic-break-character-style/invalid/in-list-item-after-paragraph-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # invalid: thematic break after a paragraph in a list item is not autofixed
+  2 |
+  3 | - List item
+  4 |   ***
+    |   ^~~ [1]
+  5 |
+
+Output: unchanged
+
+[1] Thematic break should use '-' but found '*'.
+---
+
+
+Test: thematic-break-character-style >> invalid
+Filename: tests/fixtures/rules/thematic-break-character-style/invalid/in-loose-list-item-after-paragraph-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # invalid: thematic break after a paragraph in a loose list item is not autofixed
+  2 |
+  3 | - List item
+  4 |
+  5 |   Paragraph in a list item
+  6 |   ***
+    |   ^~~ [1]
+  7 |
+
+Output: unchanged
+
+[1] Thematic break should use '-' but found '*'.
+---
+
+
+Test: thematic-break-character-style >> invalid
+Filename: tests/fixtures/rules/thematic-break-character-style/invalid/in-nested-blockquote-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # invalid: thematic break after a paragraph in a nested blockquote
+  2 |
+  3 | > > Paragraph in a nested blockquote
+  4 | > > ***
+    |     ^~~ [1]
+  5 |
+
+Output:
+  1 | # invalid: thematic break after a paragraph in a nested blockquote
+  2 |
+  3 | > > Paragraph in a nested blockquote
+  4 | > >
+  5 | > > ---
+  6 |
+
+[1] Thematic break should use '-' but found '*'.
+---
+
+
+Test: thematic-break-character-style >> invalid
+Filename: tests/fixtures/rules/thematic-break-character-style/invalid/spaced-marker-after-paragraph-input.md
+Language: markdown-preferences/extended-syntax
+LanguageOptions:
+  frontmatter: yaml
+Plugins: unable to serialize
+
+Code:
+  1 | # invalid: spaced asterisks after a paragraph are fixed to spaced dashes without a blank line
+  2 |
+  3 | Some text
+  4 | * * *
+    | ^~~~~ [1]
+  5 |
+
+Output:
+  1 | # invalid: spaced asterisks after a paragraph are fixed to spaced dashes without a blank line
+  2 |
+  3 | Some text
+  4 | - - -
+  5 |
+
+[1] Thematic break should use '-' but found '*'.
 ---
 
 

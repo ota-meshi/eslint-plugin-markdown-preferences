@@ -1,5 +1,9 @@
 import { createRule } from "../utils/index.ts";
-import { getPrevSibling, getThematicBreakMarker } from "../utils/ast.ts";
+import {
+  getParent,
+  getPrevSibling,
+  getThematicBreakMarker,
+} from "../utils/ast.ts";
 import type { ThematicBreak } from "../language/ast-types.ts";
 import type { ExtendedMarkdownSourceCode } from "../language/extended-markdown-language.ts";
 
@@ -51,19 +55,43 @@ export default createRule<[{ style?: "-" | "*" | "_" }?]>(
                 actual: marker.kind,
               },
               fix(fixer) {
-                if (
-                  style === "-" &&
-                  isDirectlyAfterParagraph(context.sourceCode, node)
-                ) {
-                  // A `---` line right after a paragraph is parsed as a
-                  // setext heading underline instead of a thematic break,
-                  // so the autofix cannot be applied.
-                  return null;
-                }
-                const range = context.sourceCode.getRange(node);
-                const text = context.sourceCode.getText(node);
+                const sourceCode = context.sourceCode;
+                const range = sourceCode.getRange(node);
+                const text = sourceCode.getText(node);
                 // Replace all marker characters with the preferred style
                 const rep = text.replaceAll(marker.kind, style);
+                if (
+                  style === "-" &&
+                  !marker.hasSpaces &&
+                  isDirectlyAfterParagraph(sourceCode, node)
+                ) {
+                  if (getParent(sourceCode, node)?.type === "listItem") {
+                    // A blank line inside a list item would make the list
+                    // loose and change the rendered HTML, so the autofix
+                    // cannot be applied.
+                    return null;
+                  }
+                  // An unspaced `---` on the line directly after a
+                  // paragraph is parsed as a setext heading underline, so
+                  // insert a blank line before the break. The blank line
+                  // uses the break line's own prefix (e.g. `>`), since the
+                  // previous line may be a lazy continuation line without
+                  // container markers.
+                  const lineStartIndex = sourceCode.getIndexFromLoc({
+                    line: sourceCode.getLoc(node).start.line,
+                    column: 1,
+                  });
+                  const source = sourceCode.text;
+                  let rangeStart = lineStartIndex;
+                  if (source[rangeStart - 1] === "\n") rangeStart--;
+                  if (source[rangeStart - 1] === "\r") rangeStart--;
+                  const eol = source.slice(rangeStart, lineStartIndex) || "\n";
+                  const prefix = source.slice(lineStartIndex, range[0]);
+                  return fixer.replaceTextRange(
+                    [rangeStart, range[1]],
+                    `${eol}${prefix.replace(/[\t ]+$/u, "")}${eol}${prefix}${rep}`,
+                  );
+                }
                 return fixer.replaceTextRange(range, rep);
               },
             });
